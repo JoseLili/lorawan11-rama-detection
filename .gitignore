@@ -1,18 +1,11 @@
-data/raw/*
-!data/raw/.gitkeep
-
+data/raw/
+data/interim/
+data/processed/
+!data/samples/
 __pycache__/
 *.py[cod]
 .venv/
+.pytest_cache/
 .ipynb_checkpoints/
-
-# Datos crudos y derivados: no se versionan
-data/raw/*
-!data/raw/.gitkeep
-data/interim/*
-!data/interim/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-
-# Excepcion: muestras para revision
-!data/samples/
+.DS_Store
+.vscode/
