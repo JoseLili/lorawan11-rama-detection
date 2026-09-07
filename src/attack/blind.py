@@ -37,7 +37,7 @@ def _atacar_uno(ppb: int, bit: int, fcnt: int) -> int:
 
 def generar_dataset(
     serie: pd.DataFrame,
-    bit: int,
+    bit,
     tasa: float = 0.05,
     seed: int = 42,
 ) -> pd.DataFrame:
@@ -46,6 +46,15 @@ def generar_dataset(
     `serie` debe tener columnas: timestamp, value, y opcionalmente
     segment_id. Las filas con value nulo se conservan tal cual (no se
     atacan): un mensaje que no existe no puede ser manipulado.
+
+    `bit` acepta un entero o una lista de enteros. Con una lista, cada
+    mensaje atacado recibe un bit elegido uniformemente al azar entre los
+    disponibles: modela un adversario que no se limita a una posicion
+    fija, sino que opera dentro de un rango de magnitudes.
+
+    Los bits se eligen con un generador independiente para que el conjunto
+    de mensajes marcados sea identico con una lista o con un entero, y los
+    resultados sigan siendo comparables.
 
     Devuelve un DataFrame con:
         original_value   verdad de campo. NUNCA debe usarse como feature.
@@ -63,7 +72,13 @@ def generar_dataset(
     if not 0.0 <= tasa <= 1.0:
         raise ValueError("tasa debe estar en [0, 1]")
 
+    bits = [bit] if isinstance(bit, (int, np.integer)) else list(bit)
+    if not bits:
+        raise ValueError("bit no puede ser una lista vacia")
+
     rng = np.random.default_rng(seed)
+    rng_bits = np.random.default_rng(seed + 1)   # independiente
+
     df = serie.copy().reset_index(drop=True)
 
     validas = df["value"].notna()
@@ -72,11 +87,13 @@ def generar_dataset(
     df["original_value"] = df["value"]
     df["received_value"] = df["value"]
     df["atacado"] = marcados.astype(int)
-    df["bit"] = np.where(marcados, bit, -1)
+    df["bit"] = -1
 
     # FCnt incremental: cada mensaje usa un keystream distinto
     for i in df.index[marcados]:
-        df.loc[i, "received_value"] = _atacar_uno(df.loc[i, "value"], bit, i + 1)
+        b = int(rng_bits.choice(bits))
+        df.loc[i, "received_value"] = _atacar_uno(df.loc[i, "value"], b, i + 1)
+        df.loc[i, "bit"] = b
 
     # Metricas de daño, solo donde hay valor
     m = df["received_value"].notna() & df["original_value"].notna()
@@ -85,7 +102,6 @@ def generar_dataset(
     df["efecto"] = None
 
     if m.any():
-        real = df.loc[m, "original_value"]
         recv = df.loc[m, "received_value"]
         # banda_o3 rechaza negativos: el bit 15 produce lecturas imposibles
         neg = recv < 0
@@ -111,6 +127,7 @@ def generar_dataset(
         df["delta_t"] = df["timestamp"].diff().dt.total_seconds() / 3600
 
     return df.drop(columns=["value"])
+
 
 def guardar_csv(df: pd.DataFrame, ruta: str) -> None:
     """Exporta el dataset con las columnas ordenadas para revision manual.
