@@ -1,4 +1,4 @@
-estacion,n_horas,max_2025,p50_diario,p95_diario,>58,>90,>135,>175,vuln_bit5,dias_>140,dias_>154
+estacion,n_horas,max_2025,p50_diario,p95_diario,>58,>90,>135,>175,vuln_bit5,dias_>140,dias_>155
 AJM,7765,164,93,131,291,180,12,0,104,11,2
 CCA,8491,149,92,129,322,195,12,0,116,7,0
 BJU,4804,166,92,140,182,107,18,0,69,10,1
