@@ -62,3 +62,42 @@ ataque sobre texto cifrado ni implementa la contramedida.
 
 El ejercicio completo, incluyendo la guía de GNU poke y una celda Python
 ejecutable, está en [el notebook de inspección](01_inspeccion_payload.ipynb).
+
+## Continuación de los experimentos
+
+1. [Inspección del payload](01_inspeccion_payload.ipynb): entender el cambio 160 → 128.
+2. [Repartir el peso del bit 5](02_repartir_peso_bit5.ipynb): primera propuesta V1.
+3. [Distribución real de ppb](03_distribucion_real_ppb.ipynb): frecuencias y valores cerca del umbral.
+4. [Comparación sobre RAMA 2025](04_comparacion_pesos_rama.ipynb): actual, control de rango, V1 y V2; uno y dos flips sobre las 16 posiciones.
+
+El [resumen para la junta](avance_junta_04.md) explica el resultado del experimento
+04: V2 reduce cruces hacia arriba, pero aumenta los cruces hacia abajo entre las
+lecturas originalmente altas bajo selección uniforme de máscaras. Los rechazos
+se contabilizan aparte. No se ha validado una contramedida definitiva ni se ha
+evaluado esta propuesta junto con el LSTM.
+
+## Experimento 05: distribuciones A y B con los detectores del notebook 09
+
+[Abrir el notebook 05](05_distribuciones_A_B_red.ipynb).
+
+- **A:** contribución de 16 → dos bits de 8; contribución de 32 → dos de 16.
+- **B:** contribución de 16 → dos bits de 8; contribución de 32 → cuatro de 8.
+
+Se comparan con un control binario de igual dominio 0–255. Se evalúa un flip
+por mensaje sobre las 16 posiciones, incluidas las nuevas, conservando los
+pesos de 64 y 128. Se cuentan directamente cambios de banda y falsas
+excedencias que escapan a los detectores por estación, usando sus predicciones
+y p95 guardados; no se entrena ni recalibra. El análisis anual de ocultamientos
+se mantiene separado, sin extrapolar detección al año completo.
+
+La única celda ejecutable verifica las fuentes, valida 12 288 escenarios a
+través del cifrado y exige dos cálculos idénticos antes de guardar resultados
+en `resultados/05/`. No modifica las referencias del 09 ni los experimentos
+anteriores. El rango definitivo del formato, otros presupuestos de ataque y
+la validación en otro año siguen pendientes.
+
+Pruebas del cálculo:
+
+```bash
+.venv/bin/python -m pytest experiments/cayenne_mod/test_selectiva_red.py -q
+```
