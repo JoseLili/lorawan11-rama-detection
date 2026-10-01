@@ -9,3 +9,21 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 .vscode/
+
+# Instrucciones y estado locales de asistentes (no son documentación de tesis)
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+CODEX.md
+GEMINI.md
+.agents/
+.claude/
+.codex/
+.gemini/
+
+# Credenciales y configuración privada del entorno
+.aws/
+.env
+.env.*
+!.env.example
+!.env.sample
