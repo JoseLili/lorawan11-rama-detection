@@ -1,0 +1,22 @@
+{
+  "estacion": "ACO",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 13.772561073303223,
+  "n_train": 5630,
+  "n_test": 59,
+  "n_features": 66,
+  "epocas": 22,
+  "mae_ppb": 4.846146583557129,
+  "sesgo_ppb": -2.219935417175293,
+  "fp_limpio": 4,
+  "fpr_limpio_pct": 6.779661016949152,
+  "segundos": 12.019567598000322,
+  "sha256": {
+    "metricas_pareadas.csv": "0fbde2d3c6027dba9fa737aeac849cfd57c973d2e2c3da8879676ff5988c5da3",
+    "entrenamiento.csv": "91aaebe3f6770d6c02887582f824ce9c9663787fe443b9974e9b8404cf136c8f",
+    "umbral_p95.txt": "a9d9ad1347e4130098c420c240af973c948a5b8798fd4a56bc6bfe81489cc4c7",
+    "modelo.keras": "2e67d6dbf9cd4824379e58ded98993344f388dc9a2e4fa761dc38eb0172134da",
+    "predicciones.csv": "481f298cf2e1b6670810a2d5fe2a0bf74d08cb2c37bb0a1f669109435eca880d",
+    "preprocesamiento.npz": "ec25cc43abd0c2ceda8bef0273373629503f23085f2436586d0d220e50ce4bc0"
+  }
+}

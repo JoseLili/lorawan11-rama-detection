@@ -1,0 +1,22 @@
+{
+  "estacion": "LLA",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 15.829898834228516,
+  "n_train": 6202,
+  "n_test": 1563,
+  "n_features": 66,
+  "epocas": 21,
+  "mae_ppb": 8.764698028564453,
+  "sesgo_ppb": -4.9613423347473145,
+  "fp_limpio": 269,
+  "fpr_limpio_pct": 17.210492642354446,
+  "segundos": 14.424108517000604,
+  "sha256": {
+    "metricas_pareadas.csv": "e08dbdd892726885298c4c09a1a40597098ce8b425a37ea99226a8902bd2aa5b",
+    "entrenamiento.csv": "5dc5055b3ab0e8dc78a5c43d11d344f2499829bf48c7abd9c3e01836b6fc8993",
+    "umbral_p95.txt": "09cd9845a72bf12c0e76222ac6a51cf95c9627cd185b047ea46cf9128d269d80",
+    "modelo.keras": "47f19105bd750408f970ab1cfbdb9c18525bcfa14bd0804c310573f230ad2232",
+    "predicciones.csv": "db0163eb3e3ee50c62186169d163685c916b819bfbf05f9844cb6f994b8a2d77",
+    "preprocesamiento.npz": "b3f416b04077c6ecc24fda8678bda0b335017d1296db82a565c1d660b6fd6f61"
+  }
+}

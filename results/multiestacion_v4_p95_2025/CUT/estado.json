@@ -1,0 +1,22 @@
+{
+  "estacion": "CUT",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 15.628312110900879,
+  "n_train": 6445,
+  "n_test": 1604,
+  "n_features": 66,
+  "epocas": 22,
+  "mae_ppb": 8.14630126953125,
+  "sesgo_ppb": 3.2596018314361572,
+  "fp_limpio": 227,
+  "fpr_limpio_pct": 14.15211970074813,
+  "segundos": 13.685694864999277,
+  "sha256": {
+    "metricas_pareadas.csv": "36ae6113261063d7606c5066b732231213c99b977be11f8be475163f0c18ad85",
+    "entrenamiento.csv": "9ef62dd30e7714e61b2178401c09b165b23b775e38e65c7f76854b0a27af77ad",
+    "umbral_p95.txt": "f4178bb1c32d3f91d6d95358ecab4142d6cc3d20651fde882071e426e530676f",
+    "modelo.keras": "ef469815544375578cd4a1c8968f3a31a9b00e983bc0d7c6b5fa15eae1413365",
+    "predicciones.csv": "94730138de5a5eeb850aefee26b643d9baf1f6c7763be70c7baca3cb8db63f37",
+    "preprocesamiento.npz": "9841025c8886d321915d06beac32dfca96fcc035fc52f7e761a9725ee2a04778"
+  }
+}

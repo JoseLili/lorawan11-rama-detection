@@ -1,0 +1,22 @@
+{
+  "estacion": "MER",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 18.30265235900879,
+  "n_train": 5727,
+  "n_test": 1601,
+  "n_features": 66,
+  "epocas": 13,
+  "mae_ppb": 7.899258613586426,
+  "sesgo_ppb": 0.47960197925567627,
+  "fp_limpio": 178,
+  "fpr_limpio_pct": 11.118051217988757,
+  "segundos": 8.426659785999618,
+  "sha256": {
+    "metricas_pareadas.csv": "96b687d7f02680425c896dab638219293ec0b09fe1cb1dbdcb19bcd62ad7e9c0",
+    "entrenamiento.csv": "4b7222d32e6292c0f23a761d0aac97b8ba5282abfdb788ab9ef5f79235b6910a",
+    "umbral_p95.txt": "f7434ea7bfe0d178398bb3fd78d01ab260d08276511320e86f6d3ffd7568651b",
+    "modelo.keras": "b6b3d1f26122a28ce24a1d94d0a992cd997cd1a5347885a10e2330908e0e3c7e",
+    "predicciones.csv": "595b29874bbcae5f246802dec22033278975d57fbfaf00c6d7a7cd41e7584893",
+    "preprocesamiento.npz": "bc0680bcbc08fe6d9616b9c0175bf1d0007833be706d480fdf6686fbe940d9cf"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "estacion": "GAM",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 19.225990295410156,
+  "n_train": 5838,
+  "n_test": 561,
+  "n_features": 66,
+  "epocas": 14,
+  "mae_ppb": 12.31396198272705,
+  "sesgo_ppb": 10.089550018310547,
+  "fp_limpio": 126,
+  "fpr_limpio_pct": 22.459893048128343,
+  "segundos": 8.825723539999672,
+  "sha256": {
+    "metricas_pareadas.csv": "a4e50e85dfff32ad4d7c38491ee7a033d54c6274d4f1ffef223607bbb3ba2b1f",
+    "entrenamiento.csv": "c60288bfe30dd59d3ce46d1fddfe0c34a8b0a43b26f28cc7dfb6a6e3c52a5710",
+    "umbral_p95.txt": "ddb7b055e04b260c281a93e96f4416e5e67d556fc2479c32ebda0c9c4b60d719",
+    "modelo.keras": "86a58f361243e110677afc4e48e895e81eb9c7281b836091b290c4d3755505b7",
+    "predicciones.csv": "da42aaa0993f489f300470d88fe911666a613d104ab485bcb5e030668fee5fd3",
+    "preprocesamiento.npz": "6b84b6b770b65fe7499fd319dd377c44ee0fb753cac61c2075979f33cbc17a77"
+  }
+}

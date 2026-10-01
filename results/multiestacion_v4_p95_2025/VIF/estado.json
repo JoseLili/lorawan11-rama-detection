@@ -1,0 +1,22 @@
+{
+  "estacion": "VIF",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 14.58456802368164,
+  "n_train": 6040,
+  "n_test": 1568,
+  "n_features": 66,
+  "epocas": 19,
+  "mae_ppb": 8.52082633972168,
+  "sesgo_ppb": 0.818774938583374,
+  "fp_limpio": 294,
+  "fpr_limpio_pct": 18.75,
+  "segundos": 11.859561249000762,
+  "sha256": {
+    "metricas_pareadas.csv": "35df5a3a4f3a680085556a39dce1f6df6e8678525b32a9363e6475444ebc4546",
+    "entrenamiento.csv": "fc8b0e290bb80f6ff0199d0fb7a1b66b899ced5e76acbba7b3a66c9b3d312d53",
+    "umbral_p95.txt": "95b2dd59204298bf6226f18c0c7030801ceb4f903f1f47be78243747ae762d5b",
+    "modelo.keras": "d02bccb3ca8ebda351306d9008cc9c06070c5992c57ca9dc8a90a7b267c6cd00",
+    "predicciones.csv": "eaedd49e2d7297ac37b4176bf172870db624c10962db0a2d2c9a39b43daea194",
+    "preprocesamiento.npz": "99de87e5ba4b209e88b5e9ab9812e89109228ab8242407c7612535e125613270"
+  }
+}

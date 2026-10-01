@@ -1,0 +1,22 @@
+{
+  "estacion": "MGH",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 15.193194389343262,
+  "n_train": 6509,
+  "n_test": 1385,
+  "n_features": 66,
+  "epocas": 29,
+  "mae_ppb": 9.192317008972168,
+  "sesgo_ppb": 0.547562301158905,
+  "fp_limpio": 272,
+  "fpr_limpio_pct": 19.63898916967509,
+  "segundos": 18.021972898999593,
+  "sha256": {
+    "metricas_pareadas.csv": "bddb925ad79cd17b18de8cbc15ba5c1065e732ba783d12b45e1955c051c0e9a0",
+    "entrenamiento.csv": "4e3b6d40836abfe12a7c349d71c5f0aafef090a02f38b7678025a005dd9a3305",
+    "umbral_p95.txt": "61b697c6d95aeda2c84ec71c6a8463e16054addc07d0660f4000a0813ace5b42",
+    "modelo.keras": "a59d98e80fa5add9568aef7da1081ba8e85474dbdb8ad511d62ed4cc7c2a8ba6",
+    "predicciones.csv": "5f76c9d6eefc1bff33762f5f119669eb662db64aab810017790ba33c311e7576",
+    "preprocesamiento.npz": "bb77f29d5166e18c5c6ee7b2b162b4e07b2774bb421d95e2e3db033bdf3da8ad"
+  }
+}

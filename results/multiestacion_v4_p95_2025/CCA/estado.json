@@ -1,0 +1,22 @@
+{
+  "estacion": "CCA",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 14.7483549118042,
+  "n_train": 6764,
+  "n_test": 1684,
+  "n_features": 66,
+  "epocas": 30,
+  "mae_ppb": 10.253996849060059,
+  "sesgo_ppb": -1.9580918550491333,
+  "fp_limpio": 360,
+  "fpr_limpio_pct": 21.377672209026127,
+  "segundos": 18.69884900299985,
+  "sha256": {
+    "metricas_pareadas.csv": "c90a94e9f078625ec9a9982fdc8b20eff98feb6572b738c9b7b9f044ec5ef8f8",
+    "entrenamiento.csv": "e1b823c5f082dc80a302469a60abc63623a029d23b4e7ecdc021c99c0ea7b6da",
+    "umbral_p95.txt": "65beb855cbbda507e456acdd5ff58ab72c678c3af2dd9caaf84fe6ea8a7700cf",
+    "modelo.keras": "05c4442f91c4c82d1b14752fe5249924237fb090f6c73f59f2cc16a7ee39377c",
+    "predicciones.csv": "cf43fce41024c25178229299e9ff2dae8740f6edd4aaa8a4636eea82eee0e5b3",
+    "preprocesamiento.npz": "b9b0ee34c7a79dc0b5edfd0d3eec2aa60783f80fa3e75921927979a919dc3bce"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "estacion": "BJU",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 20.659671783447266,
+  "n_train": 4326,
+  "n_test": 478,
+  "n_features": 66,
+  "epocas": 18,
+  "mae_ppb": 12.280871391296387,
+  "sesgo_ppb": 9.656621932983398,
+  "fp_limpio": 80,
+  "fpr_limpio_pct": 16.736401673640167,
+  "segundos": 8.567069499999889,
+  "sha256": {
+    "metricas_pareadas.csv": "07f6d7af205f473c7b0ade0b0d03aac0d5b67b2127d2cc9035a0b3b714c481d7",
+    "entrenamiento.csv": "9bb69c3734a7ad641be772ee35a9ba0b5aca539d754ba6bfa52123c267d36525",
+    "umbral_p95.txt": "6cae674fbbf80626aaeece69bae78690d148e243d83cad865d695e4ecf4798fd",
+    "modelo.keras": "2eb1bb6df7c15c1610d782f4696ab4a12d49ba726934004dcb86a1709379fc63",
+    "predicciones.csv": "cbc34c95f379a96fbb3338dcc2fa4886a0f52d0735fa496d1fe9f8854a6baccc",
+    "preprocesamiento.npz": "b62cf2d7666ecd00cffd5359359a321d598521786562db725fd887ff99eaeb28"
+  }
+}

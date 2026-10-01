@@ -1,0 +1,22 @@
+{
+  "estacion": "CAM",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 17.370346069335938,
+  "n_train": 6222,
+  "n_test": 1656,
+  "n_features": 66,
+  "epocas": 18,
+  "mae_ppb": 7.932360649108887,
+  "sesgo_ppb": -0.5069270730018616,
+  "fp_limpio": 213,
+  "fpr_limpio_pct": 12.862318840579709,
+  "segundos": 11.523400175999996,
+  "sha256": {
+    "metricas_pareadas.csv": "20d17358565391681dafa086d5284aa52e5616c4ffe841ebe7e68fb16685734e",
+    "entrenamiento.csv": "c03e3f8983a5921f0325e58d3248014011547ad1bff30358bd1f6f69c735c878",
+    "umbral_p95.txt": "c8e26e5346741dc70b6fb0de45ce3563895401bd5f5b23def1bbfde30812578a",
+    "modelo.keras": "33403a339737fe1856803c22add29dfe6f76fce0dfdcb697289a9287b860ad88",
+    "predicciones.csv": "2c3a13349fa5219d90ec9384a76adfa22eff1c9b008b68d959653d451e6f569b",
+    "preprocesamiento.npz": "c4eef1771b0bebf9c15c48e1a4fe5443a9c38ece0bc208fe38d5a12e8bf4c21b"
+  }
+}

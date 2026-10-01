@@ -1,0 +1,22 @@
+{
+  "estacion": "TLI",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 17.458091735839844,
+  "n_train": 5957,
+  "n_test": 1664,
+  "n_features": 66,
+  "epocas": 14,
+  "mae_ppb": 8.907256126403809,
+  "sesgo_ppb": 2.6286916732788086,
+  "fp_limpio": 247,
+  "fpr_limpio_pct": 14.84375,
+  "segundos": 9.029345517000365,
+  "sha256": {
+    "metricas_pareadas.csv": "756a282ca29748a2db6baabe33b97ac970be23d5bb553a817a42125d7ad55c02",
+    "entrenamiento.csv": "3b341d2338ee9f5bc8db435e7af30f20de2b19094a28fe598475cad350e744d2",
+    "umbral_p95.txt": "1e379934fd4745b8bd41104319430830ef1d9e540c1c04e8bdb42492198f2a89",
+    "modelo.keras": "9c81010117a7e08ace0c4b482d7487b1b2d9a138b64ec64b7bd20a5b30019e00",
+    "predicciones.csv": "2bab43186f3401a556ed0aa3638418b8e113678a3816bf84e29666063e0fb5be",
+    "preprocesamiento.npz": "d26ed8e04d54a224e3c14b992bd1186a6f314da1d3d27ddaf90f6298fea28646"
+  }
+}

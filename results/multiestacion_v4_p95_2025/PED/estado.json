@@ -1,0 +1,22 @@
+{
+  "estacion": "PED",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 16.02446746826172,
+  "n_train": 6436,
+  "n_test": 1682,
+  "n_features": 66,
+  "epocas": 35,
+  "mae_ppb": 12.068475723266602,
+  "sesgo_ppb": 0.7360761165618896,
+  "fp_limpio": 443,
+  "fpr_limpio_pct": 26.337693222354343,
+  "segundos": 24.62928331100011,
+  "sha256": {
+    "metricas_pareadas.csv": "5e8258bd1c5b01b93b2ec6e4dc3168e132d8b90fb88c0868359edaa986d0517f",
+    "entrenamiento.csv": "37e98dc1a9c1377a3e5b660ba01dfbbb6443723c355067c287db20593ef79514",
+    "umbral_p95.txt": "2175cf58bbdb00c94a9ad9904f4adb5099d299bdbcfd25e1ef8a0bc0835ad2ad",
+    "modelo.keras": "711b9ea4d0356d7698561554d73383462d845445c745a6b528f24e562798e3d6",
+    "predicciones.csv": "3a842937efa531ca677ed094aeb9c007753524ca0e407c53d5339f6ca9277927",
+    "preprocesamiento.npz": "ee8ce334a65ff3352452978e177906eb0b8d8447c63673d98755a119920d3d4f"
+  }
+}

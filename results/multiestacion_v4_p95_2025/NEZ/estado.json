@@ -1,0 +1,22 @@
+{
+  "estacion": "NEZ",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 16.05935287475586,
+  "n_train": 5267,
+  "n_test": 1160,
+  "n_features": 66,
+  "epocas": 18,
+  "mae_ppb": 9.488716125488281,
+  "sesgo_ppb": 3.5774779319763184,
+  "fp_limpio": 225,
+  "fpr_limpio_pct": 19.396551724137932,
+  "segundos": 10.007744114999696,
+  "sha256": {
+    "metricas_pareadas.csv": "84fa2410ea21ffea746857bdfc3e9f8b4e818388ea6753379d02d315378088c4",
+    "entrenamiento.csv": "31fc004d5dcf564fa4700dd941ef533caee94873e88e00a6c32a2873f96bf756",
+    "umbral_p95.txt": "058ed7904b1a2a5648501413318c4c3510b05a960682440c42ec2cf0517c6573",
+    "modelo.keras": "10f277dabc0cbd969935bf752d63e937b6b2aaa8c0a627b74cf4b8009fc02b18",
+    "predicciones.csv": "6c735f3033a5b486ced9e00671d6c94c22b78c64b2e415f4dadc0612f697a87d",
+    "preprocesamiento.npz": "a8eab3812890c3876548f51397fab425474e96bc61e9bf6831d2f1bbaa1ca153"
+  }
+}

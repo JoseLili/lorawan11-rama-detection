@@ -1,0 +1,22 @@
+{
+  "estacion": "ATI",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 26.957855224609375,
+  "n_train": 5856,
+  "n_test": 1681,
+  "n_features": 66,
+  "epocas": 9,
+  "mae_ppb": 8.829327583312988,
+  "sesgo_ppb": 2.2427406311035156,
+  "fp_limpio": 61,
+  "fpr_limpio_pct": 3.6287923854848305,
+  "segundos": 6.540935967000223,
+  "sha256": {
+    "metricas_pareadas.csv": "867e35dae8cc799ce0ce89ac96f997b819f42ea5ee341b1fce5c50afc4cbfa20",
+    "entrenamiento.csv": "64cd8a663ee587168ebc5f955ad0c48405e47097c911dc4ca59ae758ef1e2951",
+    "umbral_p95.txt": "de5bcc5e5bb60bff6d64775a87a87b60e7adcd84e2d88eef550e6400c97fa93a",
+    "modelo.keras": "8d94ffbab5b693115f8be15a375c146e3d310e2780e24ee0e717b3198c8ef8a4",
+    "predicciones.csv": "77d0b3a163c655567a3885615b657754d62da055f024bf131a0b4e84d4eb0db8",
+    "preprocesamiento.npz": "2891c41d4b1af04a1de7471ac0a8fe36e5ed961dd6079189e236936bf71365b6"
+  }
+}

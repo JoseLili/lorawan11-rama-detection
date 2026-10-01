@@ -1,0 +1,22 @@
+{
+  "estacion": "TLA",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 16.62640380859375,
+  "n_train": 6362,
+  "n_test": 1675,
+  "n_features": 66,
+  "epocas": 15,
+  "mae_ppb": 9.897651672363281,
+  "sesgo_ppb": 5.576018333435059,
+  "fp_limpio": 323,
+  "fpr_limpio_pct": 19.28358208955224,
+  "segundos": 10.404752542000097,
+  "sha256": {
+    "metricas_pareadas.csv": "4daa00552f936527f05ce9662ef76023d6ab809822b51546fc20a512635f9e8a",
+    "entrenamiento.csv": "b02c4e8a593dc6a002c8d3dbde50f0126324a46416c4365f8a4c4522cb1ba2cc",
+    "umbral_p95.txt": "ff12c5e20b33153ed3344df3df9e113a03537316c68fb6e3b4d6a5a1f76b45f4",
+    "modelo.keras": "a68ff6617cda7963117a43108d9df3a649b0a46338f4e4df997849d66cd34761",
+    "predicciones.csv": "59128381dc9b336dbdffc11c4b416ef38c7eedc3436745f99138164b1284b9f3",
+    "preprocesamiento.npz": "ce26ace6c3ba56688afd16bbad133dbcf6e7eaf315a8fda66d93d8667f858dbf"
+  }
+}

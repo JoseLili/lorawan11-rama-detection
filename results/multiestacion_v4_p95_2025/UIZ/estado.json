@@ -1,0 +1,22 @@
+{
+  "estacion": "UIZ",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 27.24694061279297,
+  "n_train": 6338,
+  "n_test": 1334,
+  "n_features": 66,
+  "epocas": 10,
+  "mae_ppb": 8.574707984924316,
+  "sesgo_ppb": -0.7198612689971924,
+  "fp_limpio": 58,
+  "fpr_limpio_pct": 4.3478260869565215,
+  "segundos": 7.501582998000231,
+  "sha256": {
+    "metricas_pareadas.csv": "b131107df1381537da44a44a5c61e8fab631891d9479a0d766392e1f6c8d0905",
+    "entrenamiento.csv": "1500e33c4bfdb8bc981e7a42b5776324000e34a0fe6859cbe89de14ca0b08aa9",
+    "umbral_p95.txt": "2352f06bf6a7d6051f39ce2e91846d0274ae3f0cb41f1291b31d0fd63b96cec3",
+    "modelo.keras": "8660e4d939a7d5279c51556564ae4c02c61abc1a24324f451642a9ec200c3011",
+    "predicciones.csv": "0349f00617e9f44d070082371ff78d7bac8c67dd57366bb433b3f08730d1c1b2",
+    "preprocesamiento.npz": "3de3366298dcc00f547238871ae8ae12e0ac2cdc87d893a36c7a92da4cfb0e90"
+  }
+}

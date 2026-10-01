@@ -1,0 +1,22 @@
+{
+  "estacion": "FAC",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 16.845876693725586,
+  "n_train": 6518,
+  "n_test": 1004,
+  "n_features": 66,
+  "epocas": 17,
+  "mae_ppb": 9.70643138885498,
+  "sesgo_ppb": 1.6962769031524658,
+  "fp_limpio": 177,
+  "fpr_limpio_pct": 17.62948207171315,
+  "segundos": 11.369279800000186,
+  "sha256": {
+    "metricas_pareadas.csv": "6de13ac58f6bcb67a483cf82c21e9451edb4f6ac9282702c042cbe6d9009da48",
+    "entrenamiento.csv": "5cba7c1b5ea7cee3902b0c6d35b1ff19b29fe9a1f1464a1a1036b3544cba79aa",
+    "umbral_p95.txt": "666f45d99eb09e2d3cdc2f86ede964e5cf7c6bade990195470030cc890df51bc",
+    "modelo.keras": "1ba589bfdf31214e24309ab507679221b909d6f1a39a02c9baa816578d3c9181",
+    "predicciones.csv": "f035ce275e5dff264425478994b55ca88909edba886059fd2da0336573373690",
+    "preprocesamiento.npz": "7772b6697792e783e32424409fc9f4fd09fc9d1c4de828a8b98a35dcc8ff8563"
+  }
+}

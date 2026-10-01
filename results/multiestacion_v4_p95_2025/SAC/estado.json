@@ -1,0 +1,22 @@
+{
+  "estacion": "SAC",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 17.8196964263916,
+  "n_train": 3412,
+  "n_test": 1430,
+  "n_features": 66,
+  "epocas": 25,
+  "mae_ppb": 12.523508071899414,
+  "sesgo_ppb": 7.587423324584961,
+  "fp_limpio": 381,
+  "fpr_limpio_pct": 26.64335664335664,
+  "segundos": 9.513055354999779,
+  "sha256": {
+    "metricas_pareadas.csv": "0584068aa4733efabc1ef2d1d4fc524995dfa42648aa069d9d3321fa7f5a2f54",
+    "entrenamiento.csv": "c954d9f6712bc3f6e033f0dab3558a2b5c7209a98d1606916d65b03ca77758e7",
+    "umbral_p95.txt": "cfce67574a2c9137255b8daf88c9561419fab08509af4d3f8b3d8807d9d5d2fa",
+    "modelo.keras": "626edaabf2817a8e67107fbbb410e0c0812466339a02aa7bf305c5219ff74372",
+    "predicciones.csv": "0ad89f305ce7da91bb679f56659661118b1b840510fdf51c7ecbe4f60afd22d3",
+    "preprocesamiento.npz": "d16444e12218a1df40aabd74b8e9377996aea14561efb86952c8f162e7b007d6"
+  }
+}

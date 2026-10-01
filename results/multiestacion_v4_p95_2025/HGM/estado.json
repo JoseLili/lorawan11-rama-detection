@@ -1,0 +1,22 @@
+{
+  "estacion": "HGM",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 14.035392761230469,
+  "n_train": 6448,
+  "n_test": 1671,
+  "n_features": 66,
+  "epocas": 28,
+  "mae_ppb": 8.531940460205078,
+  "sesgo_ppb": 0.042206376791000366,
+  "fp_limpio": 307,
+  "fpr_limpio_pct": 18.372232196289648,
+  "segundos": 17.355488797000362,
+  "sha256": {
+    "metricas_pareadas.csv": "3894039ca06d934e6fbffb5bafc8e0282546b36e5e62fb02b732800a5c4ac770",
+    "entrenamiento.csv": "f4dd320cda6c4a4ef877896423f98bad2120bdada53296b6d0dbd98971f228df",
+    "umbral_p95.txt": "b8c3ccdd305dc2ed5db6c3ac41fd4c015911de7d9e45d15db0490241272c9f2c",
+    "modelo.keras": "ffe789ceacbac55a907659f95bfdb3c761dd36a7a74764a69848b23154b6a0a4",
+    "predicciones.csv": "64e0ebad952257530b2031a9febc9e016945761d454d2410df02d41a8d176810",
+    "preprocesamiento.npz": "f9c90bb2e5621cf3f09d0652c3d04c9390310ff73a15e6149d196a5a805ba650"
+  }
+}

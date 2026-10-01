@@ -1,0 +1,22 @@
+{
+  "estacion": "SAG",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 14.162506103515625,
+  "n_train": 6333,
+  "n_test": 1511,
+  "n_features": 66,
+  "epocas": 25,
+  "mae_ppb": 9.480399131774902,
+  "sesgo_ppb": -2.407815456390381,
+  "fp_limpio": 314,
+  "fpr_limpio_pct": 20.78093977498345,
+  "segundos": 15.701238083000135,
+  "sha256": {
+    "metricas_pareadas.csv": "b52b293f8a09cf59b6200976a7bb888a490f6691ce00f8e61f26260aab339123",
+    "entrenamiento.csv": "5ceddb4c48a91381869bd7d14763cdd579da7567ee0c188aad98e3decf7fc13a",
+    "umbral_p95.txt": "6e634d0ddd755502bebc9cbefed58a4cf5dfdff359c6f84c99cc70d1b373e653",
+    "modelo.keras": "6f5ce47338b9e326f431b0232fa868ccaf14e5e9e50b97fb8ed4fa97641070bc",
+    "predicciones.csv": "38ece91179150027557add37a6c6336ab6e82b763c4786b678e39dc389746cc7",
+    "preprocesamiento.npz": "27a9d8689a91b40c76cdff338cc93dd99969dfecb400ffe9533abda14647929d"
+  }
+}

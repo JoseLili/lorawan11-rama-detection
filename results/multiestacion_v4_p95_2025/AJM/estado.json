@@ -1,0 +1,22 @@
+{
+  "estacion": "AJM",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 22.157569885253906,
+  "n_train": 6049,
+  "n_test": 1671,
+  "n_features": 66,
+  "epocas": 14,
+  "mae_ppb": 12.059967994689941,
+  "sesgo_ppb": -1.9742015600204468,
+  "fp_limpio": 242,
+  "fpr_limpio_pct": 14.482345900658288,
+  "segundos": 10.48065849500017,
+  "sha256": {
+    "metricas_pareadas.csv": "682c6420fc93c217a05048228ff89de8c217ac72ba1c114add7847ec3ba7af1c",
+    "entrenamiento.csv": "663384d675988ed58cf1e485e04c1e24364d280c312675a3ac3bdf7929ac4c17",
+    "umbral_p95.txt": "7b04f15e531ec4d5e18822b0ec63c1bfa61f3701d948462bc1105e5a99c061f8",
+    "modelo.keras": "fa416cd4081e8f56c0293368b1fd46efbdec6727bf50609a5675c00b1bbe25df",
+    "predicciones.csv": "ac7370ff02143c48c9c7eedfed4b1b4958b32f765eaba38b1948c2455c99d2d0",
+    "preprocesamiento.npz": "df1d964a2e54f6a1e8181f5e28714550576ebd5533c379b467aadaa9b687b5a1"
+  }
+}

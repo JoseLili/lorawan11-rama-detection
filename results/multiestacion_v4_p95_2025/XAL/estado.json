@@ -1,0 +1,22 @@
+{
+  "estacion": "XAL",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 19.97602081298828,
+  "n_train": 4941,
+  "n_test": 371,
+  "n_features": 66,
+  "epocas": 12,
+  "mae_ppb": 9.173177719116211,
+  "sesgo_ppb": 6.776901721954346,
+  "fp_limpio": 43,
+  "fpr_limpio_pct": 11.590296495956872,
+  "segundos": 6.980341507999583,
+  "sha256": {
+    "metricas_pareadas.csv": "053ab2c338d600ee15c06c1876c98e48dafa84b1a0282a3d1d5fc9a475ac1d4f",
+    "entrenamiento.csv": "1463033394ca027e2a17b5aa7346f1396052158dffd817ec3bf815119cc3e0e4",
+    "umbral_p95.txt": "f658ff20086c924f0b3aedc98f49f0e7014d1f1a67878489bf9c2d8891780ea5",
+    "modelo.keras": "08a7c1b5bd9f4ee0c0e825729bc4143810095a28f30409ddf8b6685bbd7bf39a",
+    "predicciones.csv": "8acbcec7413eee7fc62c0db46a5d1cda36928a6fb583fbeca668ed8dfb88491a",
+    "preprocesamiento.npz": "e17136e024a5672db7a7e952cb2daf2eb8d544d05664d7808f4f6e9e993adbd3"
+  }
+}

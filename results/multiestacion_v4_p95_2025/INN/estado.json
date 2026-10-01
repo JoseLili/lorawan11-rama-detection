@@ -1,0 +1,22 @@
+{
+  "estacion": "INN",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 18.037071228027344,
+  "n_train": 6001,
+  "n_test": 1562,
+  "n_features": 66,
+  "epocas": 11,
+  "mae_ppb": 8.936744689941406,
+  "sesgo_ppb": -1.9199098348617554,
+  "fp_limpio": 179,
+  "fpr_limpio_pct": 11.45966709346991,
+  "segundos": 7.096752077000019,
+  "sha256": {
+    "metricas_pareadas.csv": "cfaacf1878ae3cb6a8e9bf86f1dd407b1fbc3e698018c761af94eef52fc54e7e",
+    "entrenamiento.csv": "de95774eb03ff1b95656f7088526561267d824d0d927731984711ab86af9c12b",
+    "umbral_p95.txt": "bb43f36e3a4d72256a76bb8aed8f0efb3934f822fd4e20c74b3424c6a802404b",
+    "modelo.keras": "0b88e044d4337dfd4d3ba25ba11e07229e45b2d109726a512295941702dcadad",
+    "predicciones.csv": "bf6de510ca3102b1276096d093fcbd118c9d31ff02dd41b8546124fcaed4e69b",
+    "preprocesamiento.npz": "eaaf77898d2e7f358244685c319b963565ba7ee7135bc1124f053c0013197301"
+  }
+}

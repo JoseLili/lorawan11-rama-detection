@@ -1,0 +1,22 @@
+{
+  "estacion": "LPR",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 15.626949310302734,
+  "n_train": 6058,
+  "n_test": 1661,
+  "n_features": 66,
+  "epocas": 15,
+  "mae_ppb": 8.355957984924316,
+  "sesgo_ppb": -0.2903916835784912,
+  "fp_limpio": 221,
+  "fpr_limpio_pct": 13.305237808549068,
+  "segundos": 9.712899894000657,
+  "sha256": {
+    "metricas_pareadas.csv": "62d30a8d7222cab7a49461ad1852846f948db926597cc22f32a795b7b6eafc22",
+    "entrenamiento.csv": "828b2adf2f60d0b6a157c2453506721c4d82de031b96deade66a333c12cc3255",
+    "umbral_p95.txt": "e9899ab060eee43a7d2b546d285498f5561b66b4f6ec57ccf5df6d325e8a2934",
+    "modelo.keras": "0b94e91d174bab5402f7ff8f3f14750420a68a54a7addbbd40f94ff14f49ef66",
+    "predicciones.csv": "5a9c84fea4124dca09397efe3fe235f59d8702630ab6ccc03b3b30c75e3361ff",
+    "preprocesamiento.npz": "217c1961318db86ab07b2788ffec9d7694bdd2eb1a8558fe323a314b9447acf9"
+  }
+}

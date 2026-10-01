@@ -1,0 +1,22 @@
+{
+  "estacion": "UAX",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 23.46874237060547,
+  "n_train": 5605,
+  "n_test": 1153,
+  "n_features": 66,
+  "epocas": 12,
+  "mae_ppb": 10.668457984924316,
+  "sesgo_ppb": 0.1888771802186966,
+  "fp_limpio": 122,
+  "fpr_limpio_pct": 10.581092801387685,
+  "segundos": 7.764210762999937,
+  "sha256": {
+    "metricas_pareadas.csv": "48e273e337afb88c40544bbd4402e3b4ab4c6201ebea9d6c6936fb50140f2053",
+    "entrenamiento.csv": "656b54a02f5fd99b5804b893efc358e2f6e889a8dc637e526eb0362a262657b3",
+    "umbral_p95.txt": "876474dd7d73a69520a3093d635439c43a149bea2c86ac8559b0ad8de518f6e1",
+    "modelo.keras": "6df4c8452fab0d111ab18c42db0b9dd0e9e3b6b4b02c0fd7cb7872b1be7a58c9",
+    "predicciones.csv": "f884d401b82304879da8d23377c932c1f1c7839fe30813392cbb53e57a4d154c",
+    "preprocesamiento.npz": "4570d12c1381fa4c720736d518137cc13ef5086af57a77ab38bc750b927cf411"
+  }
+}

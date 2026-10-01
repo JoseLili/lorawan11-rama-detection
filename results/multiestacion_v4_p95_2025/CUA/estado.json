@@ -1,0 +1,22 @@
+{
+  "estacion": "CUA",
+  "firma": "191557db48b6537f6d1d70d4c0f8e65ef8ac6f481e9983f679ffda0a336dcbc9",
+  "umbral_ppb": 29.444459915161133,
+  "n_train": 2784,
+  "n_test": 1553,
+  "n_features": 66,
+  "epocas": 11,
+  "mae_ppb": 11.1268310546875,
+  "sesgo_ppb": 1.8310158252716064,
+  "fp_limpio": 73,
+  "fpr_limpio_pct": 4.700579523502898,
+  "segundos": 4.697460309999769,
+  "sha256": {
+    "metricas_pareadas.csv": "606411215befc40af0baed87424cad0c715fb56fe3c5090f09adaa3e708268a9",
+    "entrenamiento.csv": "873c5e27b304bae9bec53760fe9ea773d07225f927dbdf7575d4dd04c781f57b",
+    "umbral_p95.txt": "a8f12817c352c14d87a2795045e5e6e355f397def9c67cb96c924cf5fedd5192",
+    "modelo.keras": "adc6a6702f43557b9629ae36c520e8d0081451cc4bccae1ca911dd950dc27df0",
+    "predicciones.csv": "abdffda2df2f4cc8516fbe90f0f3cd98671696720fe38284397543435a9dba52",
+    "preprocesamiento.npz": "8f351d7478aa9962d3de1ad4a5cfb2843812107f698f16954ce1f2845cb1270a"
+  }
+}
