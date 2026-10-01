@@ -1,0 +1,2 @@
+﻿timestamp_objetivo,estacion_objetivo,inicio_ventana,fin_ventana,perfil_adaptativo_ppb,lectura_real_cca_ppb,desviacion_real_y_ppb,lecturas_disponibles_perfil,particion,indice_muestra_en_Xte
+2025-10-21 12:00:00,CCA,2025-10-20 12:00:00,2025-10-21 11:00:00,63,69,6,14,prueba,12

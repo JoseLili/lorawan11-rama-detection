@@ -1,0 +1,5 @@
+{
+  "data/raw/2025O3.xls": "91c11b286ba44f8254ca74e0948e22f2a3ff46b12728ef9175141f1fb026a37f",
+  "results/preprocesamiento_modelo4_cca.npz": "81403b8e51f82964032264d26eab434e937c3d93f60b34b3e937f7e333aa990d",
+  "results/modelo4_lstm.keras": "1149d2e721cab9382a9a8152348bdead4029c0176ea11ae4749261ebef2ccd7b"
+}
