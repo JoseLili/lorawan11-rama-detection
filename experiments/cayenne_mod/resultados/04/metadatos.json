@@ -1,0 +1,138 @@
+{
+  "dataset": "data/raw/2025O3.xls",
+  "sha256_dataset": "91c11b286ba44f8254ca74e0948e22f2a3ff46b12728ef9175141f1fb026a37f",
+  "sha256_codigo": "71b4885818d5f58338a93edec89b6a676f4d4b2cc7c795802ac0c0d366a435cf",
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "pandas": "3.0.6",
+  "umbral_ppb": 155,
+  "condicion_alta": "valor >= umbral",
+  "dominio_originales": [
+    0,
+    255
+  ],
+  "n_validos": 218823,
+  "n_estaciones": 33,
+  "n_sobre_umbral": 25,
+  "pesos": {
+    "v1": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      16,
+      64,
+      128,
+      16
+    ],
+    "v2": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      16,
+      32,
+      32,
+      16,
+      32,
+      32,
+      32,
+      32
+    ]
+  },
+  "grupos": {
+    "v1": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5,
+        8
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ]
+    ],
+    "v2": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5,
+        8
+      ],
+      [
+        6,
+        9
+      ],
+      [
+        7,
+        10,
+        11,
+        12
+      ]
+    ]
+  },
+  "formatos": [
+    "actual",
+    "binario_8_control",
+    "v1",
+    "v2"
+  ],
+  "presupuestos": [
+    1,
+    2
+  ],
+  "posiciones_atacables": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "escenario": "un mensaje alterado; cruces locales, no eventos de red",
+  "politicas": "uniforme sobre mascaras fisicas; peor mascara fija global",
+  "control": "binario_8_control agrega rechazo fuera de 0..255 al formato actual",
+  "rechazos": "separados; no son datos corregidos ni ausencia de daño",
+  "alcance": "exploratorio 2025; sin cifrado, LSTM, interpolacion ni validacion externa"
+}
