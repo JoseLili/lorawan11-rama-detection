@@ -1,0 +1,3 @@
+detector,periodo,tasa_ataque,mensajes_validos,mensajes_evaluados,sin_ventana,ataques_reales,fp,tn,fpr_pct,umbral_p95_ppb,modelo_sha256
+LSTM V4 seed42,train,0.0,6788,6764,24,0,339,6425,5.0118273211117685,14.7483549118042,1149d2e721cab9382a9a8152348bdead4029c0176ea11ae4749261ebef2ccd7b
+LSTM V4 seed42,test,0.0,1703,1684,19,0,360,1324,21.377672209026127,14.7483549118042,1149d2e721cab9382a9a8152348bdead4029c0176ea11ae4749261ebef2ccd7b

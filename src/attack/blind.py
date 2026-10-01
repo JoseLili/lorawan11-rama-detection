@@ -22,6 +22,31 @@ DEVADDR = 0x26011BDA
 APPSKEY = bytes(range(16))      # clave fija: los experimentos deben ser reproducibles
 
 
+def atacar_serie(valores, bit, tasa=0.05, seed=42):
+    """Aplica bit flipping a una fraccion de las lecturas.
+
+    Migrada del notebook 07 sin cambiar el muestreo ni los contadores.
+    Los NaN NO consumen un numero aleatorio: esto conserva exactamente
+    los mensajes seleccionados por el experimento piloto de CCA.
+    No sustituir por generar_dataset, cuyo muestreo incluye las filas NaN.
+
+    Pasa por el cifrado real y devuelve (valores_atacados, etiquetas).
+    """
+    rng = np.random.default_rng(seed)
+    v = valores.copy()
+    etiq = np.zeros(len(v), dtype=int)
+
+    for i in range(len(v)):
+        if np.isnan(v[i]) or rng.random() >= tasa:
+            continue
+        trama = encrypt(encode_o3(int(v[i])), APPSKEY, DEVADDR, i + 1)
+        atacada = flip_bit(trama, bit)
+        v[i] = decode_o3(decrypt(atacada, APPSKEY, DEVADDR, i + 1))
+        etiq[i] = 1
+
+    return v, etiq
+
+
 def _atacar_uno(ppb: int, bit: int, fcnt: int) -> int:
     """Cadena completa: codificar, cifrar, voltear bit, descifrar, decodificar.
 

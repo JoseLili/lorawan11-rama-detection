@@ -9,9 +9,29 @@ durante el entrenamiento.
 
 from __future__ import annotations
 
+import random
+
 import numpy as np
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+
+
+def fijar_semilla(seed: int = 42):
+    """Llamar ANTES de construir el modelo y de cada entrenamiento.
+
+    Fija Python, NumPy, TensorFlow y los generadores de Keras (incluidos
+    inicializadores y Dropout). Solicita operaciones deterministas: no se
+    garantiza identidad numerica entre versiones o hardware distintos.
+    Si se limpia la sesion de Keras, hacerlo ANTES de llamar esta funcion.
+    Para inferencia reproducible, conservar tambien modelo, normalizacion
+    de entradas, perfil adaptativo, datos y umbral calibrado.
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.random.set_seed(seed)
+    keras.utils.set_random_seed(seed)
+    tf.config.experimental.enable_op_determinism()
 
 
 def construir_modelo(ventana: int, n_features: int, unidades: int = 64):
