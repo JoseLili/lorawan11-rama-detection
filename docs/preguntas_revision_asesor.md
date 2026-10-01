@@ -3,7 +3,75 @@
 Este documento registra las decisiones que deben confirmarse antes de cerrar la
 gráfica final y continuar con la contramedida de codificación.
 
-## Gráfica final
+## Estado al 2026-09-29
+
+- **J1:** repaso realizado con el tesista y [CSV de una ventana real exportados](../results/muestra_entrada_lstm_v4_cca/README.md).
+  Falta presentarlos al asesor y confirmar si pide también contexto contemporáneo.
+- **J2:** [revisión de figuras implementada](revision_graficas_2026-09-29.md), al final
+  del notebook 09: bits 0–7, no detección y tres curvas, leyendas breves. No se
+  reentrenó. El producto se conserva como indicador descriptivo, no como daño
+  conjunto observado; los conteos reales se reportan aparte. Revisión visual y
+  aceptación metodológica pendientes. El análisis anual sin LSTM separa falsas
+  activaciones y ocultamientos; no se extrapola la detección del test a todo 2025.
+
+## Actualización de seguimiento — 2026-09-28
+
+Fecha de registro de la transcripción, no fecha confirmada de la junta.
+El detalle, la evidencia y los criterios de cierre se centralizan en
+[progreso.md, tareas J1–J8](progreso.md#siguiente). La lista antigua se conserva
+abajo como historial; no todas sus preguntas siguen abiertas.
+
+### Respuestas ya verificadas para comunicar al asesor
+
+- **J1 — Entrada LSTM:** sí hay una columna por estación y alineación horaria.
+  Para CCA, ventanas de 24 horas × 66 características de sus 32 vecinas,
+  máscaras y hora. Se excluye CCA como canal, pero su pasado sí interviene
+  en el perfil adaptativo. No se usan etiquetas de ataque como entradas.
+- **J1 — Tiempo:** son las 24 horas anteriores de las vecinas, no sus
+  mediciones contemporáneas. El perfil de 14 días es un componente distinto.
+- **J2 — Alcance:** no basta transferir el recall de CCA a toda la red.
+  Ya hay 27 modelos evaluables de 33 candidatos y análisis mensaje por
+  mensaje; el test común de 72 días no incluye las contingencias de marzo–abril.
+- **J4 — Codificación existente:** V1/V2 usan grupos fijos, no la elección
+  aleatoria de posiciones de igual peso propuesta en esta junta.
+
+### Preguntas que sí debemos resolver ahora
+
+1. **J2 — Tres curvas:** la lectura del audio es oportunidad de daño,
+   porcentaje NO detectado y riesgo combinado. ¿La unidad común será día
+   o ataque? ¿Qué daño queremos priorizar? No mezclar días y mensajes al
+   multiplicar ni llamar cruce real a una franja que supone sumar siempre.
+2. **J3 — Pesos:** ¿confirmamos un grupo de **siete posiciones de 8 ppb**?
+   Bit 3 = 8, bit 4 = 2×8, bit 5 = 4×8. El audio también menciona 4 ppb,
+   pero siete posiciones de 4 no conservan el rango de esos tres bits.
+   Fijar además dominio, posiciones reservadas y política de rechazo.
+3. **J1 — Contexto:** ¿se solicita una variante que use vecinas de la misma
+   hora objetivo, además de comprobar el modelo temporal ya implementado?
+4. **J5 — Comparación:** ¿aceptamos número de flips físicos como eje X para
+   la contramedida, con desplazamientos resultantes aparte? Dos flips no
+   equivalen siempre a atacar un bit original de peso doble.
+5. **J7 — Detector:** documentar qué política se conserva en la comparación
+   combinada: piloto CCA a 22.6 ppb o red con p95 por estación. Son referencias
+   distintas, no un único umbral intercambiable.
+
+### Dirección recogida de la junta, pendiente de ejecutar
+
+- Corregir primero la figura base y sus nombres; no forzar cruces o máximos.
+- Evaluar la nueva distribución **sin LSTM primero**, en ambos sentidos del
+  daño; después combinarla con los detectores guardados.
+- El atacante conoce el formato; sus posibilidades no se restringen sólo
+  porque no vea el valor claro. Especificar las estrategias comparadas.
+- Dejar ataques sostenidos y permutación de pesos distintos como extensiones.
+  Obtener datos/fuentes antes de concluir sobre doce ataques consecutivos.
+
+---
+
+## Lista anterior — historial, no lista vigente
+
+Se preserva para seguir la evolución de las preguntas. Las respuestas y
+pendientes actuales son los de la sección anterior y J1–J8 de `progreso.md`.
+
+### Gráfica final
 
 1. ¿La vulnerabilidad debe definirse como:
    - cambio de banda NOM-172 en cualquier lectura horaria, o
@@ -35,7 +103,7 @@ gráfica final y continuar con la contramedida de codificación.
    200 ppb durante una hora, o basta presentar el cruce instantáneo como
    análisis exploratorio?
 
-## Estado actual de los datos
+### Estado de los datos cuando se redactó la lista anterior
 
 - El análisis de 08_proximidad_umbrales.ipynb usa el máximo diario de toda la
   red.
@@ -49,7 +117,7 @@ gráfica final y continuar con la contramedida de codificación.
 - La evaluación multiestación del LSTM usa un corte cronológico 80/20; por
   ello, las contingencias de marzo–abril quedan fuera del periodo de prueba.
 
-## Contramedida de codificación
+### Contramedida de codificación
 
 La propuesta discutida consiste en reemplazar el peso binario único de los bits
 de mayor impacto por varios fragmentos de igual peso o peso repartido. Antes de
@@ -67,6 +135,5 @@ implementarla deben confirmarse:
 7. ¿El objetivo principal es reducir el daño por flip, reducir la probabilidad
    de acertar el fragmento correcto, o ambas cosas?
 
-Estas preguntas deben resolverse con el asesor antes de presentar la gráfica
-como resultado definitivo o incorporar la codificación modificada como
-contramedida formal.
+Esta lista registraba las preguntas de esa etapa. Para no reabrir las ya
+resueltas ni perder las nuevas, consultar el seguimiento vigente J1–J8.

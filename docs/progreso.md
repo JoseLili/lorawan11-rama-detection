@@ -4,6 +4,12 @@ Registro cronológico del trabajo. Las decisiones y su fundamento están en
 `bitacora_decisiones.md`; los hallazgos del análisis exploratorio, en los
 notebooks; los resultados numéricos, en `results/`.
 
+**Seguimiento vigente:** ver [Siguiente: tareas de la última revisión](#siguiente)
+y [preguntas para el asesor](preguntas_revision_asesor.md). Las entradas fechadas
+conservan lo que se sabía en cada sesión; sus resultados no sustituyen las
+referencias posteriores. La estructura de capítulos al final es un registro
+anterior, no una verificación del estado actual del documento en Overleaf.
+
 ---
 
 ## 2026-08-22 — Fijación de la función de decisión y EDA
@@ -287,7 +293,282 @@ aprovecha la redundancia.
 
 ---
 
+## 2026-09-28 — Seguimiento de la última transcripción del asesor
+
+**Fecha de registro, no fecha confirmada de la junta.** Fuente: transcripción
+automática compartida por el tesista. Los minutos sirven para volver al audio;
+las cantidades contradictorias se registran como dudas, no como acuerdos.
+Esta actualización es documental: no cambia código, figuras ni modelos.
+
+### Estado experimental que debemos conservar como referencia
+
+- **Piloto CCA:** modelo reproducible de semilla 42; corte operativo **22.6 ppb**,
+  distinto del p95 calculado de 14.748354911804199 ppb. Ver
+  [bitácora](bitacora_decisiones.md) y
+  [métricas operativas](../results/metricas_operativas_cca_bits_1_7.csv).
+- **Experimento de red:** 27 modelos entrenados y guardados de 33 candidatos,
+  con p95 propio por estación. AJU, CHO, FAR, IZT, MON y TAH no tuvieron
+  ventanas de prueba. No confundir estos umbrales con el operativo de CCA.
+- **Alcance del test de red:** 72 días, 21/oct–31/dic/2025; 35,704 mensajes
+  observados y 249,928 escenarios aislados. Su máximo limpio es 152 ppb:
+  no permite evaluar la anulación de las contingencias de otros meses.
+- **Falsas alarmas:** 5642/35704 = 15.80 % en test limpio de la red; no
+  presentar aumento de recall como mejora global sin considerar este coste.
+- **Redistribución existente:** V1/V2 del experimento 04 son deterministas y
+  ya muestran un compromiso entre fabricar cruces y ocultar lecturas altas.
+  No son todavía la nueva propuesta de representación aleatoria.
+
+Evidencia: [notebook 09](../notebooks/09_deteccion_red.ipynb),
+[protocolo de red](experimento_red_v4_p95.md) y
+[avance de codificación 04](../experiments/cayenne_mod/avance_junta_04.md).
+
+### J1. ¿El LSTM realmente recibe las demás estaciones?
+
+**Pregunta del asesor (26:14–38:20):** comprobar si hay una columna por
+estación, con las mediciones alineadas por tiempo, o si sólo se está usando
+un CSV de una estación consigo misma.
+
+**Respuesta verificada:** sí se usa una matriz de **8,760 horas × 33 estaciones**.
+Se construye con `pivot(index='timestamp', columns='station', values='value')`.
+Para CCA se excluye su columna de las entradas: el tensor de test tiene forma
+**(1684, 24, 66)**. Cada paso contiene 32 valores normalizados, 32 máscaras y
+dos componentes de la hora. Máscara 1 = disponible, 0 = faltante. El cero
+de relleno no representa una medición de ozono cero. Las etiquetas de ataque
+no son entradas del modelo.
+
+**Matices que debemos explicar:**
+
+- Las «vecinas» son las otras 32 estaciones, no una selección geográfica de
+  las más cercanas. No se ha demostrado aquí cuáles utiliza más el modelo.
+- Se usan las **24 horas anteriores**, no las lecturas contemporáneas de la
+  misma hora objetivo. Ejemplo verificado: 20/oct/2025 00:00–23:00 como
+  entrada para estimar CCA el 21/oct a las 00:00.
+- La historia de CCA está excluida de los canales del LSTM, pero **sí participa
+  en su perfil adaptativo**. No afirmar que V4 ignora por completo su pasado.
+- La ventana del LSTM es de 24 horas; el perfil adaptativo abarca 14 días.
+  No son la misma ventana. Se predice la desviación respecto al perfil;
+  el error frente a la lectura recibida se calcula después para detectar.
+
+**Estado:** verificación cerrada; explicación al asesor pendiente.
+
+- [x] Comprobar matriz, exclusión del objetivo, tensor y máscaras.
+- [x] Preparar una vista pequeña de la matriz y una ventana con sus fechas
+  para mostrar la entrada real, no el CSV de resultados de ataques.
+  Exportación del 29/sep: [muestra CCA, 24 × 66](../results/muestra_entrada_lstm_v4_cca/README.md).
+- [ ] Preguntar si también desea probar vecinas del instante actual. Sería
+  otro experimento, no arreglar una matriz mal construida.
+
+**Evidencia:** [cargar_matriz](../src/detect/experimento_red.py),
+[construir_ventanas](../src/detect/windows.py),
+[perfil V4 de red](../src/detect/red.py).
+**Cierre:** mostrar la entrada comprobada y registrar la decisión sobre
+contexto pasado frente a contemporáneo; no reentrenar sólo por esta duda.
+
+### J2. Corregir la gráfica explicativa de los bits críticos
+
+**Indicación (00:00–00:59, 08:26–09:19, 13:28–14:04 y 17:13–18:04):**
+mostrar oportunidad de daño, **no detección** y riesgo combinado como tres
+curvas; mejorar los nombres y explicar las métricas al pie. La lectura más
+clara es invertir la curva verde mediante `100 - recall`, no invertir el eje
+ni cambiar la curva roja para forzar un cruce.
+
+**Qué falta resolver antes de editar:**
+
+- [ ] Elegir unidad y denominadores: días o ataques. Si se trabaja por
+  ataques, `P(daño y no detección) = P(daño) × P(no detección | daño)`.
+  Si se trabaja por días, definir los eventos diarios correspondientes;
+  no multiplicar porcentaje de días por recall de mensajes y presentarlo
+  como daño observado. La agregación directa del notebook 09 es reutilizable.
+- [ ] Acordar qué daño representa cada figura: falsa excedencia de 155 ppb,
+  ocultamiento, cambio de banda local o cambio de banda del máximo de red.
+  Mantener separados sus resultados.
+- [ ] Distinguir la franja ideal del notebook 08, que supone sumar, de los
+  cruces reales por flip, cuyo signo depende del estado previo del bit.
+- [ ] Usar el mismo conjunto de estaciones, fechas y política de umbrales.
+  No trasladar el recall de CCA a toda la red ni el test de 72 días a todo 2025.
+- [ ] Rotular denominadores y «sin ataques que produzcan este daño» cuando
+  no hay casos. La no detección también es indefinida si su denominador es
+  cero: no sustituirla por 0 ni por 100 %.
+- [ ] Mostrar la región candidata de bits 4–5 (3 como posible extensión),
+  sin imponer un máximo allí. Un cruce visual no prueba optimalidad.
+
+**Estado actualizado al 29/sep:** revisión implementada al final del notebook 09;
+pendiente de aceptación visual y metodológica con el usuario/asesor. La lista
+anterior registra los puntos de revisión, no todos son ya tareas sin implementar.
+Se conserva el producto como indicador descriptivo y se muestra aparte el conteo
+real: no se reinterpretó el recall de mensajes como una tasa diaria. Ver
+[decisiones, figuras y límites de esta revisión](revision_graficas_2026-09-29.md).
+**Cierre:** figura base con tres curvas definidas, tabla subyacente, alcance
+temporal y pie comprensibles. Primero sin contramedida. No requiere por sí
+mismo otro entrenamiento. La confirmación de usar contexto contemporáneo
+en J1 sí podría abrir un experimento nuevo.
+
+### J3. Confirmar los pesos y el tamaño de la nueva representación
+
+**Indicación (09:19–12:25 y 38:47–40:30):** concentrar la redistribución en
+bits 4–5 y aprovechar posiciones de igual peso con el bit 3. La transcripción
+mezcla pesos de 4/8 ppb y seis/siete fragmentos.
+
+**Propuesta coherente, aún no confirmada como especificación:**
+
+| Bit original, numeración desde 0 | Peso | Reparto |
+|---:|---:|---|
+| 3 | 8 ppb | 1 posición de 8 |
+| 4 | 16 ppb | 2 posiciones de 8 |
+| 5 | 32 ppb | 4 posiciones de 8 |
+
+Se obtiene un grupo de **7 posiciones de 8 ppb**: capacidad 56 ppb, igual
+a 8+16+32. En el dominio experimental 0–255, conservando los otros cinco
+bits, son 12 posiciones activas dentro del campo de 16 bits. Esto no define
+todavía qué hacer fuera de ese dominio ni con posiciones reservadas atacadas.
+
+Siete posiciones de 4 sólo cubren 28 ppb. Para cubrir 56 usando posiciones
+de 4 se necesitan 14; junto a las otras cinco serían 19, no 16.
+
+- [ ] Confirmar con el audio/asesor **7 × 8 ppb frente a fragmentos de 4**.
+- [ ] Fijar dominio, mapa de posiciones físicas, resolución, decodificación
+  y política de valores/palabras inválidas o bits reservados.
+- [ ] Registrar tamaño del payload. No inferir igualdad de energía total
+  sólo de conservar bytes: generación aleatoria y cómputo también tienen coste.
+
+**Estado:** aclaración imprescindible antes de implementar J4.
+**Cierre:** tabla de pesos inequívoca y reglas del formato por escrito.
+
+### J4. Implementar la selección aleatoria de posiciones
+
+**Indicación (15:00–16:05 y 39:59–40:30):** al representar una cantidad,
+elegir aleatoriamente qué posiciones de igual peso se encienden, no siempre
+las primeras. El receptor debe recuperar exactamente la lectura sin ataque.
+
+**Diferencia con lo existente:** `codificar` en el comparador 04 enciende
+grupos fijos para V1/V2; no implementa esta representación aleatoria.
+
+- [ ] Tras J3, crear una variante nueva sin sobrescribir V1/V2.
+- [ ] Para el grupo candidato de peso 8, si debe aportar 24, elegir tres
+  posiciones distintas entre siete. Conservar el resto de la lectura.
+- [ ] Especificar la distribución de elección y separar los generadores
+  aleatorios de codificación y ataque. Registrar semillas de experimentación.
+- [ ] Probar recuperación exacta de cada valor del dominio acordado,
+  conservación de longitud y comportamiento de palabras alteradas.
+
+**Estado:** pendiente. **Cierre:** codificador/decodificador aleatorios con
+pruebas; semilla experimental no equivale a una garantía de seguridad.
+
+### J5. Diseñar los ataques múltiples y su eje X
+
+**Discusión (12:54–16:05 y 40:30–48:21):** probar varios flips en el grupo
+redistribuido. Queda abierta la representación de combinaciones sobre el eje X.
+
+- [ ] Separar dos vistas: bit original para la motivación; **número de flips
+  físicos** para la contramedida. Probar k=1 y después k=2…7 si J3 confirma
+  el grupo de siete posiciones; elegir posiciones distintas por mensaje.
+- [ ] Mostrar la distribución del desplazamiento obtenido, no asumir que
+  k flips siempre suman k pesos. Con peso w, `delta = w × (k - 2r)`, donde
+  r es el número de posiciones atacadas que estaban encendidas.
+- [ ] No llamar «bit 4» a dos flips nuevos sin aclararlo: 1/2/4 flips de
+  peso 8 tienen desplazamientos máximos 8/16/32, pero pueden cancelarse.
+- [ ] Comparar el mismo presupuesto donde ambos formatos admitan máscaras.
+  Si k excede las posiciones del grupo original, declararlo no comparable
+  o acordar otro conjunto atacable; no inventar una equivalencia.
+- [ ] Evaluar elección uniforme y una máscara fija desfavorable al defensor;
+  explicitar qué información tiene el atacante. No conocer el mensaje no
+  obliga, por sí solo, a una estrategia uniforme.
+- [ ] Elegir enumeración exacta si es manejable; si se muestrea, registrar
+  repeticiones, semillas e incertidumbre. No seleccionar la mejor semilla.
+
+**Estado:** diseño pendiente, depende de J3–J4. **Cierre:** presupuestos,
+máscaras, ponderaciones y ejes definidos antes de producir comparaciones.
+
+### J6. Evaluar primero la contramedida SIN LSTM
+
+**Prioridad explícita (55:58–57:23):** demostrar si la nueva distribución
+reduce el daño por sí sola; después añadir el detector.
+
+- [ ] Comparar formato base y nueva variante sobre las mismas lecturas.
+  Se puede usar todo 2025 para el daño sin LSTM, sin atribuirle detección.
+- [ ] Separar cruces hacia arriba y ocultamiento hacia abajo; no esconder
+  un deterioro en lecturas altas dentro del promedio global.
+- [ ] Separar cruces locales de la decisión de red. Para máximos diarios,
+  sustituir sólo un mensaje y conservar los otros horarios, estaciones y
+  empates, como en el notebook 09.
+- [ ] Contar rechazos y pérdida de mensajes por separado: no son corrección
+  de la lectura ni daño cero. Mantener controles de rango comparables.
+- [ ] Graficar antes/después con zoom del daño y medir los costes del formato.
+  La curva más plana es una expectativa, no un resultado que se deba forzar.
+
+**Estado:** V1/V2 exploradas; nueva variante aleatoria pendiente.
+**Evidencia reutilizable:** [notebook 04 de codificación](../experiments/cayenne_mod/04_comparacion_pesos_rama.ipynb)
+y [su avance](../experiments/cayenne_mod/avance_junta_04.md).
+**Cierre:** tabla y figuras sin detector, ambos sentidos del daño, mismo
+dominio/presupuesto y una conclusión válida aunque la variante empeore.
+
+### J7. Medir la combinación codificación + detector
+
+**Indicación (18:19–19:15):** de lo que sigue pasando después de la
+contramedida, cuantificar qué detecta el LSTM y qué daño escapa a ambos.
+
+- [ ] Reutilizar modelos y umbrales guardados sobre el mismo test. No
+  reentrenar automáticamente para favorecer la nueva codificación.
+- [ ] Para cada escenario, registrar lectura original, representación,
+  máscara, lectura decodificada, daño y alerta. Separar detectados/no
+  detectados y dañinos/inocuos; usar denominadores explícitos.
+- [ ] Reportar precision, recall, F2, falsas alarmas y daño no detectado.
+  Reducir el desplazamiento puede reducir daño y también detección: el
+  balance se mide, no se deduce sólo del delta.
+- [ ] Reservar otra evaluación temporal para generalización. El test actual
+  ya se ha consultado y no contiene las contingencias reales de temporada cálida.
+
+**Estado:** posterior a J6. **Cierre:** comparación pareada con/sin codificación
+y con/sin detector, sin mezclar estaciones, periodos o políticas de umbral.
+
+### J8. Persistencia temporal y modelo de amenaza
+
+**Discusión a futuro (19:15–23:37 y 49:31–55:50):** ataques sostenidos,
+posible dataset de cinco minutos y alternativas de permutación de posiciones.
+
+- [ ] Consultar disponibilidad del dataset de cinco minutos mencionado por
+  el asesor y verificar su definición temporal. No consta que esté disponible
+  en este repo ni que exista autorización para usarlo.
+- [ ] Verificar la regla temporal de la decisión antes de simularla: datos
+  horarios no reconstruyen doce observaciones de cinco minutos. No afirmar
+  éxito casi imposible mediante `p**12` sin justificar independencia.
+- [ ] Formalizar la posición del adversario, qué puede alterar y qué conoce.
+  El formato es público; no agregar como hechos reinicios, claves conocidas
+  o un nodo malicioso sólo porque aparecen como alternativas en la conversación.
+- [ ] Mantener permutación de pesos distintos/metadatos de orden como una
+  línea separada y diferida. La prioridad acordada es redistribución y selección
+  aleatoria dentro de posiciones de igual peso, sin metadatos de orden nuevos.
+
+**Estado:** diferido; no bloquea la prueba de un mensaje de J6.
+**Cierre:** fuentes, datos y supuestos comprobados antes de extender conclusiones.
+
+---
+
 ## Siguiente
+
+Lista vigente; los detalles y criterios de cierre están en J1–J8 arriba.
+
+| Orden | ID | Entregable / asunto | Estado |
+|---:|---|---|---|
+| 1 | J1 | Mostrar al asesor matriz y ventana reales; aclarar pasado vs contemporáneo y perfil propio | Repasado y CSV exportados; presentación al asesor pendiente |
+| 2 | J2 | Figura base con oportunidad, no detección y riesgo; efectos anuales aparte | Revisión 29/sep implementada y verificada; aceptación pendiente |
+| 3 | J3 | Confirmar siete posiciones de 8 ppb y reglas del formato | Pendiente; bloquea implementación de la nueva variante |
+| 4 | J4 | Codificación aleatoria con recuperación exacta y pruebas | Pendiente de J3 |
+| 5 | J5 | Fijar presupuestos, estrategias de ataque y eje X | Pendiente de J3; cerrar antes de comparar |
+| 6 | J6 | Evaluar redistribución sola en ambos sentidos del daño | Prioridad experimental tras J3–J5 |
+| 7 | J7 | Medir daño que escapa a codificación y detector juntos | Después de J6 |
+| 8 | J8 | Datos de cinco minutos, persistencia y otras variantes | Diferido |
+
+**Para la próxima junta:** evidencia de J1, definición/figura de J2 y pregunta
+concreta de J3. Los experimentos de la nueva variante requieren primero fijar
+los pesos. No presentar decisiones propuestas como aprobadas por el asesor.
+
+### Cola anterior — conservada como historial de 2026-09-01
+
+No es la lista vigente: disponibilidad, máscaras y LSTM ya se abordaron.
+CNN-1D, barridos adicionales y redacción siguen abiertos, pero no desplazan
+la prioridad actual de las gráficas y la contramedida. Se conserva la lista
+original para no perder su contexto:
 
 1. **Verificar la disponibilidad conjunta de ventanas.** Con coberturas del 27%
    al 97%, la probabilidad de que todas las estaciones tengan dato simultáneo
