@@ -1,0 +1,5 @@
+bit,delta_ppb,pct_anuladas,pct_dano_detectado,pct_riesgo_no_detectado
+3,8,20.0,9.0,18.2
+4,16,20.0,20.5,15.9
+5,32,80.0,84.6,12.3
+6,64,0.0,98.7,0.0
