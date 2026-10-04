@@ -444,13 +444,18 @@ y después los objetivos elegibles con el mismo protocolo.
   CCA, `ejemplos_etapas/`.
 - [x] Generar cobertura y elegibilidad sin asignar resultados a objetivos ausentes.
   `cobertura_etapas.csv`: 28 principales, 3 baja representatividad, 2 fuera.
-- [ ] Implementar entrenamiento con validación externa y ajuste definitivo separado.
-- [ ] Seleccionar E por estación, reentrenar y guardar checkpoints nuevos.
-- [ ] Calibrar con 2023 y congelar umbrales.
-- [ ] Verificar reproducibilidad y carga desde disco antes de aceptar resultados.
-- [ ] Evaluar limpio y ataques pareados en 2024, 2025 y 2026 parcial por separado.
-- [ ] Completar barrido de daño con máximos de red y cobertura explícita.
-- [ ] Guardar tablas que sustentan todas las figuras y redactar límites/resultados.
+- [x] Implementar entrenamiento con validación externa y ajuste definitivo separado.
+  `src/detect/entrenamiento_multianual.py`, notebook 12.
+- [x] Seleccionar E por estación, reentrenar y guardar checkpoints nuevos.
+  31 objetivos (2026-10-03); `estado_objetivos.csv`.
+- [x] Calibrar con 2023 y congelar umbrales.
+- [x] Verificar reproducibilidad y carga desde disco antes de aceptar resultados.
+  CCA y TLI idénticos; evaluación de ataques recalculada idéntica.
+- [x] Evaluar limpio y ataques pareados en 2024, 2025 y 2026 parcial por separado.
+  Notebook 13 (2026-10-04).
+- [x] Completar barrido de daño con máximos de red y cobertura explícita.
+- [x] Guardar tablas que sustentan todas las figuras y redactar límites/resultados.
+  Notas del notebook 13 y `docs/progreso.md`.
 - [ ] Diseñar diagnóstico espacial sin usar test para seleccionar entradas.
 - [ ] Fijar arquitectura CNN-1D y ejecutar la comparación común en una etapa posterior.
 

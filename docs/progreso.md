@@ -544,6 +544,48 @@ posible dataset de cinco minutos y alternativas de permutación de posiciones.
 
 ---
 
+## 2026-10-03/04 — LSTM V4 multianual (2020–2026)
+
+Línea independiente de J1–J8: poner a prueba el detector V4 fuera de 2025.
+Protocolo fijado antes de entrenar: [protocolo_lstm_v4_multianual.md](protocolo_lstm_v4_multianual.md)
+(`v4_multianual_33_p95cal2023_v1`, revisión 1).
+
+### Hecho
+
+| Paso | Dónde | Resultado |
+|---|---|---|
+| Inventario RAMA 2020–2026 y ubicación de estaciones | [notebook 10](../notebooks/10_inventario_multianual.ipynb) | Formato estable (V5 cerrado); 2024 sin 2 renglones; 193 lecturas ≥155 en 47 días |
+| Separación temporal y auditoría | [notebook 11](../notebooks/11_protocolo_temporal_multianual.ipynb) | 2020–21 ajuste · 2022 validación · 2023 calibración · 2024/2025/2026 prueba; 27/27 comprobaciones |
+| Entrenamiento de 31 objetivos (tesista) | [notebook 12](../notebooks/12_entrenamiento_lstm_v4_multianual.ipynb) | E de 1 a 23; p95 de 18.9 a 32.5 ppb; HGM y XAL fuera; reproducible en CCA y TLI |
+| Evaluación limpia y con ataques (tesista) | [notebook 13](../notebooks/13_ataques_dano_v4_multianual.ipynb) | Recalculada en memoria: tablas idénticas |
+
+Todos los números provienen de los modelos **recién entrenados** de
+`results/lstm_v4_multianual_v1/estaciones/`, cargados de disco para calibrar y evaluar.
+Rastro completo en `results/lstm_v4_multianual_v1/bitacora_entrenamiento.csv`.
+
+### Hallazgos
+
+- **Calibración 2023:** el LSTM reduce el MAE frente al perfil en 29/30 (mediana −15.9 %);
+  AJM, de baja representatividad, no mejora. Subestima en la tarde (12–16 h, mediana
+  +3.0 ppb) y su error es mayor ahí (sigma ≈15 ppb).
+- **Limpio en prueba:** sigue mejorando al perfil en 26/30–30/31 estaciones por año, pero
+  la tasa de falsas alarmas sube a 6.6–7.2 % (5 % en 2023 por construcción).
+- **Ataques al 5 %:** recall ≈7 % en bits 0–2 (igual a la FPR: no detecta), ≈21 % bit 4,
+  ≈79–80 % bit 5, ≥99 % bits 6–7. Precisión máxima ≈42 %. Estable entre años.
+- **Daño no detectado** concentrado en bits 3–5, máximo en el bit 5: en 2024, 15 días con
+  una excedencia fabricable sin alerta y 85 días (23 %) con cambio de banda del máximo
+  de red sin alerta. Ocultar una excedencia con un solo mensaje casi nunca es posible.
+- **Estaciones sin detector** (HGM, XAL; ACO en 2024): con el bit 7 permiten fabricar una
+  excedencia en 306/366 días de 2024 sin evaluación posible.
+
+### Límites
+
+Oportunidad ≠ probabilidad de éxito de un atacante ciego; escenarios de un mensaje;
+precisión condicionada al 5 % de ataques; 2026 sólo ene–jul; excedencias del máximo
+observado, no contingencias declaradas.
+
+---
+
 ## Siguiente
 
 Lista vigente; los detalles y criterios de cierre están en J1–J8 arriba.
@@ -558,6 +600,10 @@ Lista vigente; los detalles y criterios de cierre están en J1–J8 arriba.
 | 6 | J6 | Evaluar redistribución sola en ambos sentidos del daño | Prioridad experimental tras J3–J5 |
 | 7 | J7 | Medir daño que escapa a codificación y detector juntos | Después de J6 |
 | 8 | J8 | Datos de cinco minutos, persistencia y otras variantes | Diferido |
+
+**Línea multianual:** evaluación terminada (sección del 2026-10-03/04). Para la
+junta: resultados del notebook 13 y decidir qué experimento nuevo abrir —cobertura de
+HGM/XAL, exceso de falsas alarmas o CNN-1D—, cada uno con su propio protocolo.
 
 **Para la próxima junta:** evidencia de J1, definición/figura de J2 y pregunta
 concreta de J3. Los experimentos de la nueva variante requieren primero fijar
