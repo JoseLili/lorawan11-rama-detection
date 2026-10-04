@@ -1,0 +1,7 @@
+formato,tipo,dias_campana,dias_unicos,dias_danados,media_por_campana,p05,p95,dias_sin_datos,solo_valores,solo_perdidas,sin_alerta_alguna,sin_alerta_en_alterados,persiste_restaurando_detectados,persiste_solo_silenciosos
+base,banda,7200,72,133,1.33,0.0,3.0,0,104,29,5,32,33,4
+base,falsa_excedencia,7200,72,57,0.57,0.0,2.0,0,57,0,0,0,0,0
+base,ocultamiento,7200,72,0,0.0,0.0,0.0,0,0,0,0,0,0,0
+B,banda,7200,72,366,3.66,1.0,6.0,0,340,26,5,29,31,5
+B,falsa_excedencia,7200,72,208,2.08,0.0,5.0,0,208,0,0,1,1,1
+B,ocultamiento,7200,72,0,0.0,0.0,0.0,0,0,0,0,0,0,0

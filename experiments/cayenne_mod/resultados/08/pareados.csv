@@ -1,0 +1,9 @@
+formato,metrica,diferencia_media_vs_base,p05,p95,semillas_menor,semillas_igual,semillas_mayor
+A,banda_local_sin_alerta,0.03,-1.0,1.0,6,85,9
+A,rechazos,-2.89,-6.0,-0.9500000000000028,95,5,0
+A,dias_cambio_banda_disponibles,0.84,-1.0,2.0,6,31,63
+A,dias_cambio_banda_solo_valores,0.85,-1.0,2.0,6,30,64
+B,banda_local_sin_alerta,0.06,-1.0,1.0,8,81,11
+B,rechazos,-7.91,-13.0,-4.0,100,0,0
+B,dias_cambio_banda_disponibles,2.33,0.0,5.0,0,12,88
+B,dias_cambio_banda_solo_valores,2.36,0.0,5.0,0,12,88

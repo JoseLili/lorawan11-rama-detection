@@ -1,0 +1,9 @@
+formato,tipo,fuente,dias_campana
+base,banda,solo_valores_suficientes,104
+base,banda,solo_perdidas_suficientes,29
+base,falsa_excedencia,solo_valores_suficientes,57
+B,banda,solo_valores_suficientes,339
+B,banda,solo_perdidas_suficientes,25
+B,banda,valores_y_perdidas_por_separado,1
+B,banda,interaccion,1
+B,falsa_excedencia,solo_valores_suficientes,208
