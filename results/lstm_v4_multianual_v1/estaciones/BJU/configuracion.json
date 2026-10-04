@@ -1,0 +1,35 @@
+{
+  "protocolo": "v4_multianual_33_p95cal2023_v1",
+  "objetivo": "BJU",
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 9,
+  "epocas_seleccion_ejecutadas": 17,
+  "val_loss_minimo": 161.14456176757812,
+  "n_ajuste_inicial": 16234,
+  "n_validacion": 7583,
+  "n_ajuste_definitivo": 23817,
+  "n_calibracion": 8030,
+  "umbral_p95_ppb": 22.868881968657174,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "f313b62cb652057f8bbbd0238f0f4b7cb550b9fadf3cb8f58ec981cbb5dfef9f",
+    "preprocesamiento": "4a388f2326504c07481d662ddb271f0be62b935a0673a786faafd42842a281eb"
+  }
+}

@@ -27,3 +27,9 @@ GEMINI.md
 .env.*
 !.env.example
 !.env.sample
+
+# Predicciones del protocolo V4 multianual: se regeneran exactamente desde cada modelo.keras
+results/lstm_v4_multianual_v1/estaciones/*/calibracion_2023.csv.gz
+results/lstm_v4_multianual_v1/estaciones/*/predicciones_*.csv.gz
+results/lstm_v4_multianual_v1/verificacion/*/calibracion_2023.csv.gz
+results/lstm_v4_multianual_v1/verificacion/*/predicciones_*.csv.gz
