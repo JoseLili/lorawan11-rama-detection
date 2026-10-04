@@ -1,0 +1,35 @@
+{
+  "protocolo": "v4_multianual_33_p95cal2023_v1",
+  "objetivo": "CCA",
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 2,
+  "epocas_seleccion_ejecutadas": 10,
+  "val_loss_minimo": 153.95716857910156,
+  "n_ajuste_inicial": 16184,
+  "n_validacion": 8342,
+  "n_ajuste_definitivo": 24526,
+  "n_calibracion": 8156,
+  "umbral_p95_ppb": 24.155933690922595,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "176eedcf86c5e3755fda8439ae2392f1644bc462e56a6f9e55060af4e00b7cb9",
+    "preprocesamiento": "a5fa5973a1d3bb7384fb1d53c71d717919ee8d625f9c403931b7a1a13f368311"
+  }
+}
