@@ -85,6 +85,29 @@ sobre series ambientales exige recalibración continua de su línea base.
 
 ---
 
+## Contramedida explorada: distribución del peso de los bits
+
+Se ensayaron variantes de codificación del campo de valor de CayenneLPP
+para repartir los pesos de los bits 4 y 5 y reducir el efecto de un flip.
+La comparación final de **Base + LSTM frente a la propuesta B + LSTM**,
+con predicciones y umbrales guardados de modelos ya entrenados, no mostró
+una mejora conjunta bajo el protocolo evaluado.
+
+En 27 estaciones, con 100 campañas por estación, probabilidad de ataque
+del 5 % por lectura y entre 1 y 16 flips aleatorios sobre el campo de valor
+de 16 bits, los cambios de banda por lectura sin alerta aumentaron de
+**255 en Base a 567 en B**, sobre **179 399 intentos por formato**.
+B rechazó menos mensajes, pero tuvo más escapes en 26 estaciones y empate
+en cero en una. La evaluación usa datos del 21 de octubre al 31 de diciembre
+de 2025; no cubre todo el año ni el ocultamiento de excedencias originales
+de 155 ppb, ausentes en ese conjunto.
+
+La propuesta B se cierra como **contramedida intentada sin éxito en este
+escenario**. Se conservan los experimentos y el resultado negativo como
+parte de las alternativas exploradas. Véanse las
+[notas de cierre y explicación de tablas](experiments/cayenne_mod/cierre_distribucion_pesos.md)
+y la [verificación en 27 estaciones](experiments/cayenne_mod/avance_junta_11.md).
+
 ## Alcance experimental
 
 **Datos reales, transporte simulado.** Las series provienen de la Red Automática
