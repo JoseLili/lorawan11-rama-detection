@@ -1,0 +1,34 @@
+estacion,n_train,n_test,evaluable,motivo
+ACO,5630,59,True,
+AJM,6049,1671,True,
+AJU,2398,0,False,sin ventanas de prueba
+ATI,5856,1681,True,
+BJU,4326,478,True,
+CAM,6222,1656,True,
+CCA,6764,1684,True,
+CHO,2984,0,False,sin ventanas de prueba
+CUA,2784,1553,True,
+CUT,6445,1604,True,
+FAC,6518,1004,True,
+FAR,6210,0,False,sin ventanas de prueba
+GAM,5838,561,True,
+HGM,6448,1671,True,
+INN,6001,1562,True,
+IZT,4638,0,False,sin ventanas de prueba
+LLA,6202,1563,True,
+LPR,6058,1661,True,
+MER,5727,1601,True,
+MGH,6509,1385,True,
+MON,5277,0,False,sin ventanas de prueba
+MPA,4966,762,True,
+NEZ,5267,1160,True,
+PED,6436,1682,True,
+SAC,3412,1430,True,
+SAG,6333,1511,True,
+TAH,5560,0,False,sin ventanas de prueba
+TLA,6362,1675,True,
+TLI,5957,1664,True,
+UAX,5605,1153,True,
+UIZ,6338,1334,True,
+VIF,6040,1568,True,
+XAL,4941,371,True,
