@@ -116,6 +116,11 @@ de Monitoreo Atmosférico de la Ciudad de México (SIMAT), ozono horario de 2025
 simulación: las lecturas se codifican en CayenneLPP y se cifran conforme a la
 especificación 1.1, y sobre ese flujo se aplican las alteraciones.
 
+Se incorporaron además las series RAMA de **2020 a 2026** (2026 hasta julio)
+para poner a prueba el LSTM fuera de 2025. Por ahora sólo están inventariadas
+y preparadas ([notebook 10](notebooks/10_inventario_multianual.ipynb)); los
+resultados de este README siguen correspondiendo a 2025.
+
 La decisión es deliberada. Sin verdad de referencia exacta por mensaje no es
 posible cuantificar el daño, y esa referencia no existe en una captura de
 tráfico real.
@@ -159,6 +164,7 @@ src/
 
 notebooks/              01 inspección · 02 ingesta · 03 decisión · 04 encoding
                         05 ataque · 06 detección · 07 multiestación · 08 proximidad
+                        09 detección en red · 10 inventario multianual 2020–2026
 docs/                   Notas metodológicas, registro de progreso, figuras
 results/                Métricas de detección, en CSV
 tests/                  Pruebas de ingesta, decisión y codificación
@@ -181,11 +187,38 @@ pytest -q
 
 ### Datos
 
-Los datos crudos **no están versionados**. Descárgalos del portal de datos
-abiertos de la Dirección de Monitoreo Atmosférico de la Ciudad de México y
-colócalos en `data/raw/`. Las sumas de verificación de los archivos empleados
-están en [`docs/checksums_2025.txt`](docs/checksums_2025.txt), de modo que
-cualquiera pueda confirmar que trabaja sobre los mismos archivos.
+Los datos crudos **no están versionados**: se descargan y se colocan en
+`data/raw/` (carpeta ignorada por git).
+
+**Series horarias RAMA/SIMAT, 2020–2026.** Un zip por año (`20RAMA.zip` …
+`26RAMA.zip`), cada uno con 9 `.xls` (O₃, NO₂, NO, NOx, CO, SO₂, PM10, PM2.5,
+PMCO) en formato `FECHA | HORA | estaciones`. 2026 está publicado hasta el
+31 de julio. Se obtienen en el portal de la Dirección de Monitoreo
+Atmosférico, [aire.cdmx.gob.mx](http://www.aire.cdmx.gob.mx/), sección
+*Bases de datos* → *Red Automática de Monitoreo Atmosférico (RAMA)*, formato
+Excel. El portal no ofrece una URL directa estable para cada zip; se
+identifican por su nombre y por su suma SHA-256.
+
+| Año | Archivo | Uso actual |
+|---|---|---|
+| 2020–2024 | `20RAMA.zip` … `24RAMA.zip` | inventario multianual (notebook 10) |
+| 2025 | `25RAMA.zip` (los `.xls` extraídos también en `data/raw/`) | entrenamiento y evaluación del LSTM |
+| 2026 | `26RAMA.zip` (ene–jul) | inventario multianual (notebook 10) |
+
+Sumas de verificación: [`docs/checksums_2025.txt`](docs/checksums_2025.txt)
+para los `.xls` de 2025 y [`docs/checksums_2020_2026.txt`](docs/checksums_2020_2026.txt)
+para cada zip y cada `.xls` interno de 2020–2026.
+
+**Catálogo de estaciones** (coordenadas, altitud): versionado en
+[`data/reference/cat_estacion_simat.csv`](data/reference/cat_estacion_simat.csv),
+descargado el 2026-10-03 de
+<http://datosabiertos.aire.cdmx.gob.mx:8080/opendata/catalogos/cat_estacion.csv>.
+Se usa sólo para describir la red; no es entrada del LSTM.
+
+El [notebook 10](notebooks/10_inventario_multianual.ipynb) verifica formato,
+centinela `-99`, cobertura, estaciones operativas, excedencias de 155 ppb y
+ubicación de cada estación, y genera O₃ preparado en `data/processed/`
+(tampoco versionado).
 
 `data/samples/` contiene un dataset atacado ya generado, suficiente para
 inspeccionar el formato sin descargar nada.

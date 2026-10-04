@@ -589,7 +589,7 @@ original para no perder su contexto:
 | ID | Descripción | Estado |
 |---|---|---|
 | V1 | Oscilación vs. deriva bajo flip repetido | **CERRADO** — verificado: el flip conmuta, el desplazamiento neto de un atacante ciego es cero |
-| V5 | Estabilidad del formato RAMA en años anteriores | Abierto |
+| V5 | Estabilidad del formato RAMA en años anteriores | **CERRADO 2020–2026** — mismo formato; 2024 sin 2 renglones horarios. Ver [notebook 10](../notebooks/10_inventario_multianual.ipynb) |
 | V8 | Efecto de la compleción horaria (≥45 min) | Diferido |
 | V9 | Tabla de conversión de la NADF-009-AIRE-2017 | Abierto — bloquea el Sistema B |
 | V10 | Mapeo de las 37 estaciones a las cinco zonas de la ZMVM | Abierto |
