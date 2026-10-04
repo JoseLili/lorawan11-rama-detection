@@ -1,0 +1,44 @@
+{
+  "datos": [
+    {
+      "zip": "20RAMA.zip",
+      "archivo": "2020O3.xls",
+      "sha256": "5b0175714c61a83bc679cc366da34a0dbe824369f778448dc1840b70eb378722"
+    },
+    {
+      "zip": "21RAMA.zip",
+      "archivo": "2021O3.xls",
+      "sha256": "63fecdd1f74d7a3bfc4e2cc17a168e26b504ba60c0f649fb9bf3a64b6ba87f0c"
+    },
+    {
+      "zip": "22RAMA.zip",
+      "archivo": "2022O3.xls",
+      "sha256": "994657201f8ffb46ba49e5d77a3a283f01d5441ad0022754fde36c24c0eb273a"
+    },
+    {
+      "zip": "23RAMA.zip",
+      "archivo": "2023O3.xls",
+      "sha256": "eb6b8568dff9d89069f98b94c359eec9a61b64910696cf48bf57124b286d6a08"
+    },
+    {
+      "zip": "24RAMA.zip",
+      "archivo": "2024O3.xls",
+      "sha256": "57e6011cc1d3909d220c3c6f1ecd716f0ef463fff718126a7ccd81e8744dcfc0"
+    },
+    {
+      "zip": "25RAMA.zip",
+      "archivo": "2025O3.xls",
+      "sha256": "91c11b286ba44f8254ca74e0948e22f2a3ff46b12728ef9175141f1fb026a37f"
+    },
+    {
+      "zip": "26RAMA.zip",
+      "archivo": "2026O3.xls",
+      "sha256": "5adc51ae739fd33491e9b8616c2cd37c7d68455d8c89783cc2092e301b8e92ab"
+    }
+  ],
+  "codigo": {
+    "src/detect/multianual.py": "83ee0c2ac8546be8905cca972c8753ecb8bd8c9cc5eee928315b26aa9bc98055",
+    "src/ingest/rama.py": "9680c8c77145b9759c3f7eee971009520c472d012487cd5844ac770c53241be9",
+    "docs/protocolo_lstm_v4_multianual.md": "b210793ef760641c3c343b53d149e1ce31f5acded7a19f5209b27740d8d83405"
+  }
+}

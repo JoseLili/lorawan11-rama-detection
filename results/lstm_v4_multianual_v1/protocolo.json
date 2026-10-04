@@ -1,0 +1,139 @@
+{
+  "protocolo": "v4_multianual_33_p95cal2023_v1",
+  "revision": 1,
+  "documento": "docs/protocolo_lstm_v4_multianual.md",
+  "rejilla": {
+    "inicio": "2020-01-01 00:00:00",
+    "fin": "2026-07-31 23:00:00",
+    "horas": 57696
+  },
+  "convencion_hora": "HORA=1 -> 00:00, HORA=24 -> 23:00 (provisional, sin confirmar con SIMAT)",
+  "estaciones": [
+    "ACO",
+    "AJM",
+    "AJU",
+    "ATI",
+    "BJU",
+    "CAM",
+    "CCA",
+    "CHO",
+    "CUA",
+    "CUT",
+    "FAC",
+    "FAR",
+    "GAM",
+    "HGM",
+    "INN",
+    "IZT",
+    "LLA",
+    "LPR",
+    "MER",
+    "MGH",
+    "MON",
+    "MPA",
+    "NEZ",
+    "PED",
+    "SAC",
+    "SAG",
+    "TAH",
+    "TLA",
+    "TLI",
+    "UAX",
+    "UIZ",
+    "VIF",
+    "XAL"
+  ],
+  "etapas": {
+    "ajuste_inicial": [
+      "2020-01-01",
+      "2021-12-31"
+    ],
+    "validacion": [
+      "2022-01-01",
+      "2022-12-31"
+    ],
+    "calibracion": [
+      "2023-01-01",
+      "2023-12-31"
+    ],
+    "prueba_2024": [
+      "2024-01-01",
+      "2024-12-31"
+    ],
+    "prueba_2025": [
+      "2025-01-01",
+      "2025-12-31"
+    ],
+    "prueba_2026_parcial": [
+      "2026-01-01",
+      "2026-07-31"
+    ]
+  },
+  "ajuste_definitivo": [
+    "ajuste_inicial",
+    "validacion"
+  ],
+  "etapas_obligatorias": [
+    "ajuste_inicial",
+    "validacion",
+    "calibracion"
+  ],
+  "elegibilidad": {
+    "min_ejemplos": 2000,
+    "min_meses": 6
+  },
+  "canales_inactivos": {
+    "fase_inicial": [
+      "XAL"
+    ],
+    "fase_definitiva": [
+      "XAL"
+    ]
+  },
+  "entrada": {
+    "ventana_h": 24,
+    "n_features": 66,
+    "orden": "32 valores, 32 mascaras, sin, cos",
+    "normalizacion": "media y desviacion (ddof=1) de las etapas de ajuste; 0 -> 1; relleno 0 tras normalizar"
+  },
+  "perfil": {
+    "dias": 14,
+    "respaldo": [
+      "14d",
+      "historico_hora",
+      "historico_global",
+      "sin_historia -> excluir"
+    ]
+  },
+  "entrenamiento": {
+    "semilla": 42,
+    "unidades": 64,
+    "dropout": 0.2,
+    "densa": 32,
+    "lr": 0.001,
+    "batch": 64,
+    "max_epocas": 60,
+    "early_stopping": {
+      "monitor": "val_loss",
+      "paciencia": 8,
+      "min_delta": 0,
+      "restaurar": true
+    },
+    "shuffle": true,
+    "epocas_definitivas": "E = primera epoca con menor val_loss en 2022, sin reescalar"
+  },
+  "calibracion": {
+    "etapa": "calibracion",
+    "percentil": 95,
+    "metodo": "linear",
+    "alerta": "residuo_abs > umbral"
+  },
+  "umbral_excedencia_ppb": 155,
+  "entorno": {
+    "python": "3.14.7",
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "plataforma": "Linux-6.16.8+kali-amd64-x86_64-with-glibc2.43"
+  },
+  "estado": "base temporal construida y auditada; sin entrenamiento"
+}

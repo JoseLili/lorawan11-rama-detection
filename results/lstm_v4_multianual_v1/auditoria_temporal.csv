@@ -1,0 +1,28 @@
+comprobacion,ok,detalle
+rejilla horaria continua 2020-01-01..2026-07-31,True,57696
+33 columnas en el orden de 2025,True,
+cada hora en exactamente una etapa,True,
+etapas consecutivas sin solape ni hueco,True,
+renglones ausentes de 2024 conservados como faltantes,True,66 celdas
+ningún valor interpolado: NaN solo donde el origen no es observado,True,
+canal inactivo definitivo = [XAL],True,['XAL']
+canal inactivo oculto en todas las etapas,True,
+XAL conserva lecturas para el máximo de red,True,19654
+normalización inmune a 2023–2026,True,
+perfil causal CCA @ 2022-01-01 00:00,True,
+perfil causal CCA @ 2023-01-01 00:00,True,
+perfil causal CCA @ 2024-01-01 00:00,True,
+perfil causal CCA @ 2024-05-15 15:00,True,
+perfil causal PED @ 2022-01-01 00:00,True,
+perfil causal PED @ 2023-01-01 00:00,True,
+perfil causal PED @ 2024-01-01 00:00,True,
+perfil causal PED @ 2024-05-15 15:00,True,
+perfil causal TLI @ 2022-01-01 00:00,True,
+perfil causal TLI @ 2023-01-01 00:00,True,
+perfil causal TLI @ 2024-01-01 00:00,True,
+perfil causal TLI @ 2024-05-15 15:00,True,
+"ventana CCA @ 2022-01-01 00:00:00 es t-24..t-1, 24×66, sin CCA",True,
+"ventana CCA @ 2024-04-06 23:00:00 es t-24..t-1, 24×66, sin CCA",True,
+"ventana CCA @ 2024-04-07 05:00:00 es t-24..t-1, 24×66, sin CCA",True,
+cobertura por estación y año == inventario (notebook 10),True,
+clasificación == tabla del §3.2 del protocolo,True,

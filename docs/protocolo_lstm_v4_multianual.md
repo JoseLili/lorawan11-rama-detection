@@ -436,10 +436,14 @@ y después los objetivos elegibles con el mismo protocolo.
 
 ### Lista de cierre
 
-- [ ] Guardar configuración y copia/hash de este protocolo antes de entrenar.
-- [ ] Construir matriz fija y comprobar causalidad, continuidad y faltantes.
-- [ ] Exportar un ejemplo real de ventana/base/objetivo de cada etapa para revisión.
-- [ ] Generar cobertura y elegibilidad sin asignar resultados a objetivos ausentes.
+- [x] Guardar configuración y copia/hash de este protocolo antes de entrenar.
+  `protocolo.json` y `fuentes_sha256.json` (notebook 11).
+- [x] Construir matriz fija y comprobar causalidad, continuidad y faltantes.
+  `auditoria_temporal.csv`: 27/27 comprobaciones; salidas idénticas en dos corridas.
+- [x] Exportar un ejemplo real de ventana/base/objetivo de cada etapa para revisión.
+  CCA, `ejemplos_etapas/`.
+- [x] Generar cobertura y elegibilidad sin asignar resultados a objetivos ausentes.
+  `cobertura_etapas.csv`: 28 principales, 3 baja representatividad, 2 fuera.
 - [ ] Implementar entrenamiento con validación externa y ajuste definitivo separado.
 - [ ] Seleccionar E por estación, reentrenar y guardar checkpoints nuevos.
 - [ ] Calibrar con 2023 y congelar umbrales.
