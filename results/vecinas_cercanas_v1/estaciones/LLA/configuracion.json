@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "LLA",
+  "vecinas": [
+    "SAG",
+    "LPR",
+    "VIF",
+    "FAR"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 11,
+  "epocas_seleccion_ejecutadas": 19,
+  "val_loss_minimo": 78.56708526611328,
+  "n_ajuste_inicial": 9407,
+  "n_validacion": 7601,
+  "n_ajuste_definitivo": 17008,
+  "n_calibracion": 7148,
+  "umbral_p95_ppb": 20.371063906805855,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "02632252321f8d399a827c5b4881426cd4723c2d79c7209b11a62911010141e7",
+    "preprocesamiento": "e82d88c5cbb8bfdd5d517de0cc1f46db38100e4e2874eef04a2a9197df0346e1"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

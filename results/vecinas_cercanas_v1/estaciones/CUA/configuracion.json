@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "CUA",
+  "vecinas": [
+    "PED",
+    "MGH",
+    "INN",
+    "CCA"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 6,
+  "epocas_seleccion_ejecutadas": 14,
+  "val_loss_minimo": 121.60260009765625,
+  "n_ajuste_inicial": 10079,
+  "n_validacion": 8149,
+  "n_ajuste_definitivo": 18228,
+  "n_calibracion": 8235,
+  "umbral_p95_ppb": 24.829466623264345,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "cb8120790eb7071d8e17eeea8fce7fbdc68e4731be79bd2094af8670607cec27",
+    "preprocesamiento": "22e3808cb79af496a4fb31d471ec0d01a3f831c8e9bc57dec6a06d6beb62d66d"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

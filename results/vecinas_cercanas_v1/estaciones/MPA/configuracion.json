@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "MPA",
+  "vecinas": [
+    "TAH",
+    "CHO",
+    "AJU",
+    "UAX"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 10,
+  "epocas_seleccion_ejecutadas": 18,
+  "val_loss_minimo": 133.5126953125,
+  "n_ajuste_inicial": 11404,
+  "n_validacion": 6245,
+  "n_ajuste_definitivo": 17649,
+  "n_calibracion": 7490,
+  "umbral_p95_ppb": 22.258848479815885,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "a3823154cbf23a197889e80f273b1519fbd03b33b23c0cc4b2fa61e81b56af4c",
+    "preprocesamiento": "a6c0e95e615d1c458699bcf40ad72ee85e1dfdee50f60c59e21373f23881826b"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

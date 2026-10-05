@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "IZT",
+  "vecinas": [
+    "MER",
+    "BJU",
+    "HGM",
+    "UIZ"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 6,
+  "epocas_seleccion_ejecutadas": 14,
+  "val_loss_minimo": 120.60932922363281,
+  "n_ajuste_inicial": 9916,
+  "n_validacion": 6326,
+  "n_ajuste_definitivo": 16242,
+  "n_calibracion": 7570,
+  "umbral_p95_ppb": 21.092692282547553,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "e08ef08d7511f1c86ee22b5b63e259a30d21b5caa2788f2b71064c7ce69d9365",
+    "preprocesamiento": "a2e4786b33f81084ee60aff87dc7dfb59217ace8c85ec900cf552fe1451debdb"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

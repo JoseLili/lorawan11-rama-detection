@@ -99,3 +99,13 @@ Predicciones y eventos quedan fuera de git (se regeneran desde los modelos).
 - Con k pequeño, los faltantes simultáneos de pocas vecinas dejan al modelo sin
   información (horas 00–02, rachas largas); el V4 tiene más redundancia.
 - La distancia es un sustituto imperfecto del «tipo de zona»; no se dispone de uso de suelo.
+
+## 8. Ejecución y resultado (2026-10-05)
+
+Ejecutado completo (interrumpido por apagado y reanudado sin borrar artefactos; FAC
+repitió su selección determinista). CCA (k = 4) reproducible. k elegido: 4 en 21
+estaciones, 8 en 7, 16 en 3, 32 en ninguna. Resultado **mixto**: MAE de calibración −3 %,
+recall de un mensaje +1.5 a +3.6 puntos en bits 4–5, robusto al atacante simultáneo,
+pero más días con cambio de banda de red sin alerta (2025, bit 5: 63 → 80). Se conserva
+el V4. Detalle: notebook 16 y `docs/progreso.md`.
+

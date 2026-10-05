@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "MON",
+  "vecinas": [
+    "NEZ",
+    "FAR",
+    "SAG",
+    "SAC"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 6,
+  "epocas_seleccion_ejecutadas": 14,
+  "val_loss_minimo": 116.73371124267578,
+  "n_ajuste_inicial": 13608,
+  "n_validacion": 6822,
+  "n_ajuste_definitivo": 20430,
+  "n_calibracion": 7371,
+  "umbral_p95_ppb": 22.160053968429565,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "75901068a3501da00d85dfe57972dbae113ec497fd6aa73bb62718b6a555f5c6",
+    "preprocesamiento": "cbad4ecb5beec98bbdb79104c6a10cc4affa6c60c8a3387281f703a9996582bf"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

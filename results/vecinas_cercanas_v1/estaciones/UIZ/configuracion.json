@@ -1,0 +1,64 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "UIZ",
+  "vecinas": [
+    "IZT",
+    "NEZ",
+    "SAC",
+    "UAX",
+    "MER",
+    "BJU",
+    "HGM",
+    "CCA",
+    "FAR",
+    "GAM",
+    "PED",
+    "MGH",
+    "TAH",
+    "CAM",
+    "AJM",
+    "SAG"
+  ],
+  "n_features": 34,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 2,
+  "epocas_seleccion_ejecutadas": 10,
+  "val_loss_minimo": 116.1961898803711,
+  "n_ajuste_inicial": 15050,
+  "n_validacion": 7682,
+  "n_ajuste_definitivo": 22732,
+  "n_calibracion": 6720,
+  "umbral_p95_ppb": 24.58620623520441,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "27b857179fcad3290fb5fd62d86e6f760c0461ca8e5ca64cb148565b5b690c6a",
+    "preprocesamiento": "d4c52e9acb43326afe5cae42d625cc3d9750ed56cb564709c619bdbb7baf1701"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 16,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "LPR",
+  "vecinas": [
+    "GAM",
+    "TLA",
+    "SAG",
+    "CAM"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 13,
+  "epocas_seleccion_ejecutadas": 21,
+  "val_loss_minimo": 91.32417297363281,
+  "n_ajuste_inicial": 13482,
+  "n_validacion": 7958,
+  "n_ajuste_definitivo": 21440,
+  "n_calibracion": 8402,
+  "umbral_p95_ppb": 21.037089545757343,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "56a0733d05a3d292a3ed018d0c3d8e4b4661c4d0ac8919a34632432748e23362",
+    "preprocesamiento": "e239fd702ce7e3b19e657c97c141449169d5509778e451af302876b0f1762291"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

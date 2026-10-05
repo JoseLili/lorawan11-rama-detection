@@ -1,0 +1,79 @@
+2026-10-04 23:09:09  === v4k_multianual_33_p95cal2023_v1: inicio (etapa: todas) ===
+2026-10-04 23:10:46  [entrenar] 01/31 ACO: k*=8 E=13 p95=19.80 (91 s) | k*=8; k=4: val=94.0; k=8: val=90.9; k=16: val=93.0; k=32: val=94.7
+2026-10-04 23:11:27  [entrenar] 02/31 AJM: k*=4 E=10 p95=25.67 (41 s) | k*=4; k=4: val=209.8; k=8: val=235.4; k=16: val=215.8; k=32: val=212.4
+2026-10-04 23:12:32  [entrenar] 03/31 AJU: k*=16 E=3 p95=26.74 (64 s) | k*=16; k=4: val=143.4; k=8: val=145.9; k=16: val=137.9; k=32: val=144.9
+2026-10-04 23:14:36  [entrenar] 04/31 ATI: k*=4 E=10 p95=19.09 (125 s) | k*=4; k=4: val=97.4; k=8: val=97.9; k=16: val=114.8; k=32: val=108.2
+2026-10-04 23:16:25  [entrenar] 05/31 BJU: k*=4 E=7 p95=19.16 (108 s) | k*=4; k=4: val=115.7; k=8: val=148.2; k=16: val=150.2; k=32: val=161.1
+2026-10-04 23:18:50  [entrenar] 06/31 CAM: k*=8 E=12 p95=21.48 (145 s) | k*=8; k=4: val=107.6; k=8: val=98.9; k=16: val=108.8; k=32: val=113.2
+2026-10-04 23:21:00  [entrenar] 07/31 CCA: k*=4 E=11 p95=22.21 (130 s) | k*=4; k=4: val=131.6; k=8: val=156.9; k=16: val=152.4; k=32: val=154.0
+2026-10-04 23:21:51  [entrenar] 08/31 CHO: k*=8 E=4 p95=19.12 (51 s) | k*=8; k=4: val=122.1; k=8: val=119.0; k=16: val=123.3; k=32: val=129.7
+2026-10-04 23:23:07  [entrenar] 09/31 CUA: k*=4 E=6 p95=24.83 (76 s) | k*=4; k=4: val=121.6; k=8: val=144.2; k=16: val=138.8; k=32: val=159.6
+2026-10-04 23:24:59  [entrenar] 10/31 CUT: k*=4 E=10 p95=20.61 (112 s) | k*=4; k=4: val=92.1; k=8: val=105.0; k=16: val=114.8; k=32: val=117.5
+2026-10-04 23:34:25  === v4k_multianual_33_p95cal2023_v1: inicio (etapa: todas) ===
+2026-10-04 23:34:31  [entrenar] 01/31 ACO: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 02/31 AJM: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 03/31 AJU: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 04/31 ATI: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 05/31 BJU: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 06/31 CAM: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 07/31 CCA: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 08/31 CHO: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 09/31 CUA: ya existe, se salta
+2026-10-04 23:34:31  [entrenar] 10/31 CUT: ya existe, se salta
+2026-10-04 23:36:59  [entrenar] 11/31 FAC: k*=4 E=10 p95=23.34 (149 s) | k*=4; k=4: val=82.3; k=8: val=84.3; k=16: val=97.5; k=32: val=103.8
+2026-10-04 23:38:33  [entrenar] 12/31 FAR: k*=4 E=6 p95=18.78 (94 s) | k*=4; k=4: val=78.6; k=8: val=87.7; k=16: val=102.5; k=32: val=110.6
+2026-10-04 23:40:26  [entrenar] 13/31 GAM: k*=4 E=9 p95=23.59 (112 s) | k*=4; k=4: val=78.3; k=8: val=94.9; k=16: val=119.0; k=32: val=115.0
+2026-10-04 23:41:52  [entrenar] 14/31 INN: k*=4 E=4 p95=17.43 (86 s) | k*=4; k=4: val=86.8; k=8: val=94.4; k=16: val=96.2; k=32: val=101.9
+2026-10-04 23:43:02  [entrenar] 15/31 IZT: k*=4 E=6 p95=21.09 (70 s) | k*=4; k=4: val=120.6; k=8: val=136.6; k=16: val=143.1; k=32: val=159.3
+2026-10-04 23:44:33  [entrenar] 16/31 LLA: k*=4 E=11 p95=20.37 (91 s) | k*=4; k=4: val=78.6; k=8: val=98.2; k=16: val=104.2; k=32: val=93.6
+2026-10-04 23:46:48  [entrenar] 17/31 LPR: k*=4 E=13 p95=21.04 (135 s) | k*=4; k=4: val=91.3; k=8: val=97.6; k=16: val=99.4; k=32: val=111.0
+2026-10-04 23:48:19  [entrenar] 18/31 MER: k*=8 E=2 p95=20.49 (91 s) | k*=8; k=4: val=113.4; k=8: val=106.0; k=16: val=106.5; k=32: val=127.4
+2026-10-04 23:50:18  [entrenar] 19/31 MGH: k*=8 E=7 p95=21.70 (120 s) | k*=8; k=4: val=121.0; k=8: val=108.8; k=16: val=115.5; k=32: val=138.3
+2026-10-04 23:51:46  [entrenar] 20/31 MON: k*=4 E=6 p95=22.16 (88 s) | k*=4; k=4: val=116.7; k=8: val=120.2; k=16: val=128.0; k=32: val=136.6
+2026-10-04 23:53:24  [entrenar] 21/31 MPA: k*=4 E=10 p95=22.26 (97 s) | k*=4; k=4: val=133.5; k=8: val=138.8; k=16: val=148.3; k=32: val=153.6
+2026-10-04 23:55:06  [entrenar] 22/31 NEZ: k*=16 E=5 p95=22.96 (102 s) | k*=16; k=4: val=100.5; k=8: val=102.9; k=16: val=96.1; k=32: val=115.7
+2026-10-04 23:57:52  [entrenar] 23/31 PED: k*=4 E=16 p95=22.86 (166 s) | k*=4; k=4: val=114.9; k=8: val=156.4; k=16: val=135.4; k=32: val=152.3
+2026-10-05 00:00:13  [entrenar] 24/31 SAC: k*=4 E=11 p95=24.62 (141 s) | k*=4; k=4: val=119.4; k=8: val=122.4; k=16: val=124.0; k=32: val=129.5
+2026-10-05 00:02:35  [entrenar] 25/31 SAG: k*=4 E=13 p95=20.98 (142 s) | k*=4; k=4: val=70.6; k=8: val=74.4; k=16: val=96.9; k=32: val=86.9
+2026-10-05 00:04:17  [entrenar] 26/31 TAH: k*=4 E=7 p95=20.29 (102 s) | k*=4; k=4: val=99.9; k=8: val=102.4; k=16: val=107.2; k=32: val=126.0
+2026-10-05 00:07:15  [entrenar] 27/31 TLA: k*=8 E=11 p95=21.23 (178 s) | k*=8; k=4: val=83.2; k=8: val=82.3; k=16: val=96.6; k=32: val=98.8
+2026-10-05 00:08:28  [entrenar] 28/31 TLI: k*=4 E=14 p95=19.91 (73 s) | k*=4; k=4: val=102.4; k=8: val=141.1; k=16: val=142.3; k=32: val=144.3
+2026-10-05 00:10:14  [entrenar] 29/31 UAX: k*=4 E=5 p95=23.05 (106 s) | k*=4; k=4: val=116.6; k=8: val=120.2; k=16: val=136.1; k=32: val=148.7
+2026-10-05 00:11:35  [entrenar] 30/31 UIZ: k*=16 E=2 p95=24.59 (80 s) | k*=16; k=4: val=117.5; k=8: val=133.2; k=16: val=116.2; k=32: val=140.7
+2026-10-05 00:12:40  [entrenar] 31/31 VIF: k*=8 E=1 p95=20.33 (66 s) | k*=8; k=4: val=95.7; k=8: val=95.7; k=16: val=96.8; k=32: val=101.1
+2026-10-05 00:13:39  [verificar] CCA (k=4): REPRODUCIBLE
+            comprobacion  identico                                  detalle
+                 epoca_E      True                                 11 vs 11
+         pesos idénticos      True                                 7 arrays
+     umbral p95 idéntico      True 22.206081492560248 vs 22.206081492560248
+ calibracion_2023.csv.gz      True                               8156 filas
+predicciones_2024.csv.gz      True                               8166 filas
+predicciones_2025.csv.gz      True                               8491 filas
+predicciones_2026.csv.gz      True                               4727 filas
+2026-10-05 00:15:18  [evaluar] listo (99 s)
+2026-10-05 00:15:29  [simultaneo] 2024 bit 0: 438 horas (11 s)
+2026-10-05 00:15:36  [simultaneo] 2024 bit 1: 438 horas (7 s)
+2026-10-05 00:15:42  [simultaneo] 2024 bit 2: 438 horas (6 s)
+2026-10-05 00:15:49  [simultaneo] 2024 bit 3: 438 horas (6 s)
+2026-10-05 00:15:55  [simultaneo] 2024 bit 4: 438 horas (6 s)
+2026-10-05 00:16:02  [simultaneo] 2024 bit 5: 438 horas (7 s)
+2026-10-05 00:16:08  [simultaneo] 2024 bit 6: 438 horas (6 s)
+2026-10-05 00:16:15  [simultaneo] 2024 bit 7: 438 horas (7 s)
+2026-10-05 00:16:21  [simultaneo] 2025 bit 0: 416 horas (6 s)
+2026-10-05 00:16:28  [simultaneo] 2025 bit 1: 416 horas (6 s)
+2026-10-05 00:16:34  [simultaneo] 2025 bit 2: 416 horas (7 s)
+2026-10-05 00:16:41  [simultaneo] 2025 bit 3: 416 horas (7 s)
+2026-10-05 00:16:47  [simultaneo] 2025 bit 4: 416 horas (6 s)
+2026-10-05 00:16:54  [simultaneo] 2025 bit 5: 416 horas (7 s)
+2026-10-05 00:17:00  [simultaneo] 2025 bit 6: 416 horas (6 s)
+2026-10-05 00:17:07  [simultaneo] 2025 bit 7: 416 horas (7 s)
+2026-10-05 00:17:12  [simultaneo] 2026 bit 0: 249 horas (5 s)
+2026-10-05 00:17:16  [simultaneo] 2026 bit 1: 249 horas (5 s)
+2026-10-05 00:17:21  [simultaneo] 2026 bit 2: 249 horas (5 s)
+2026-10-05 00:17:25  [simultaneo] 2026 bit 3: 249 horas (5 s)
+2026-10-05 00:17:30  [simultaneo] 2026 bit 4: 249 horas (5 s)
+2026-10-05 00:17:35  [simultaneo] 2026 bit 5: 249 horas (5 s)
+2026-10-05 00:17:40  [simultaneo] 2026 bit 6: 249 horas (5 s)
+2026-10-05 00:17:44  [simultaneo] 2026 bit 7: 249 horas (5 s)
+2026-10-05 00:17:44  [simultaneo] listo
+2026-10-05 00:17:44  === fin (43.3 min) ===

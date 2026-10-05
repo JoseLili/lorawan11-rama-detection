@@ -652,6 +652,39 @@ error y debilita al detector frente a un atacante que altera todas las estacione
 Se mantiene el V4. El lineal rinde peor que el V4: el LSTM aporta frente a una línea base
 simple. La exploración previa sobreestimó la ganancia por usar sólo horas completas.
 
+### Vecinas cercanas (idea del tesista) — 2026-10-05
+
+Protocolo [protocolo_vecinas_cercanas_v1.md](protocolo_vecinas_cercanas_v1.md), fijado antes
+de entrenar; resultados en el [notebook 16](../notebooks/16_vecinas_cercanas_resultados.ipynb)
+y `results/vecinas_cercanas_v1/`. Modelos **recién entrenados** comparados con el V4 cargado
+de disco; CCA reproducible.
+
+- **k elegido con 2022:** 4 en 21 estaciones, 8 en 7, 16 en 3, **32 en ninguna**. CCA:
+  `val_loss` 131.6 con k = 4 frente a 154.0 con las 32.
+- **Calibración 2023 (principales, mediana):** MAE V4 7.78 → knn 7.52 ppb (−3 %); umbral
+  22.65 → 21.36 ppb; 27 de 30 estaciones bajan su MAE; error en lecturas ≥90 ppb 17.8 →
+  16.0 ppb (sesgo +16.1 → +12.0). AJM: 12.51 → 9.73 ppb, ahora mejora al perfil (12.50).
+  Empeoran GAM, NEZ y AJU (+0.3 a +0.6 ppb).
+- **Limpio (FPR micro, principales):** 2024 7.02 → 6.71 %; 2025 7.22 → 7.12 %;
+  2026 6.62 → 7.01 %. Baja representatividad sube (2024 7.39 → 8.52 %).
+- **Un mensaje (principales):** bit 4 2024 20.9 → 22.4 %, 2025 22.3 → 23.9 %, 2026
+  19.8 → 23.0 %; bit 5 78.7 → 81.5 %, 80.0 → 83.6 %, 80.2 → 82.4 %.
+- **Daño (días con cambio de banda del máximo de red sin alerta):** 2024 bit 4 70 → 83,
+  bit 5 85 → 92; 2025 bit 5 63 → 80; 2026 bit 5 32 → 35. Excedencia fabricada sin alerta,
+  bit 5: 15 → 16 (2024), 7 → 9 (2025), 3 → 9 (2026). Desactivaciones sin alerta: 2/17,
+  2/6 y 2/9 frente a 2/17, 2/6 y 0/9 del V4.
+- **Detalle por evento (barrido, bit 5):** en 2024 knn deja pasar menos ataques dañinos
+  (590 frente a 669) pero repartidos en más días (92 frente a 85); en 2025 más (1038
+  frente a 933), sobre todo en PED (+51) y CCA (+34). El 99 % de los no detectados suben
+  la lectura.
+- **Atacante simultáneo (bit 5, principales):** knn 77.3 / 79.7 / 78.8 % frente a V4 74.2
+  / 76.2 / 77.3 % (2024/25/26): no se vuelve frágil (sigue usando sólo el pasado).
+
+**Conclusión:** resultado mixto. Mejor predicción y algo más de recall, robusto al atacante
+simultáneo, pero sin reducir el daño no detectado en decisiones (empeora en 2025). Se
+conserva el V4. Hallazgo para la tesis: el sesgo del V4 en lecturas altas protegía sin
+intención contra ataques que suben la lectura; predecir mejor no basta (interpretación).
+
 ---
 
 ## Siguiente
@@ -669,7 +702,8 @@ y planes de la junta anterior; sus estados históricos no sustituyen esta lista.
 **Realizado:** repaso de entradas/perfil/ventana y CSV para el asesor (J1), figuras
 base revisadas (J2), inventario, protocolo y primera evaluación multianual, y
 evaluación de las distribuciones probadas, y variante contemporánea (J1) evaluada:
-resultado negativo, se mantiene el V4. No reabrir entrenamientos por cambios
+resultado negativo, se mantiene el V4; vecinas cercanas evaluadas: resultado mixto,
+se mantiene el V4. No reabrir entrenamientos por cambios
 de redacción. Queda recoger la revisión del asesor sobre las figuras y el alcance.
 
 **Diferido o condicionado:** nuevas codificaciones J3–J7, persistencia y varios

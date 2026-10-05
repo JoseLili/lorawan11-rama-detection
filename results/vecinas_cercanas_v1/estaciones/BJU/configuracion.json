@@ -1,0 +1,52 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "BJU",
+  "vecinas": [
+    "HGM",
+    "IZT",
+    "CCA",
+    "MGH"
+  ],
+  "n_features": 10,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 7,
+  "epocas_seleccion_ejecutadas": 15,
+  "val_loss_minimo": 115.68872833251953,
+  "n_ajuste_inicial": 16234,
+  "n_validacion": 7583,
+  "n_ajuste_definitivo": 23817,
+  "n_calibracion": 8030,
+  "umbral_p95_ppb": 19.157955006190683,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "f5992ac277a0cb17892042448fbffd19913ec72d9d297145e9cb1e9f90406436",
+    "preprocesamiento": "d73398df2a2171206d18c28f39bd35a0b9e6ac642af827d46e0de9667c5785e5"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 4,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

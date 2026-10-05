@@ -1,0 +1,64 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "AJU",
+  "vecinas": [
+    "AJM",
+    "UAX",
+    "MPA",
+    "TAH",
+    "CCA",
+    "PED",
+    "BJU",
+    "UIZ",
+    "IZT",
+    "SAC",
+    "CUA",
+    "INN",
+    "MGH",
+    "HGM",
+    "NEZ",
+    "MER"
+  ],
+  "n_features": 34,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 3,
+  "epocas_seleccion_ejecutadas": 11,
+  "val_loss_minimo": 137.88531494140625,
+  "n_ajuste_inicial": 9849,
+  "n_validacion": 5166,
+  "n_ajuste_definitivo": 15015,
+  "n_calibracion": 8213,
+  "umbral_p95_ppb": 26.74055622855386,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "6caeb2395142ddc30f6511568b7ab01b68924f4980ad1f953afdcccf25361528",
+    "preprocesamiento": "acd8e4fb51ebdfeb16bbd34dd2a71c696663434941b1573b111423f87546f94a"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 16,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}

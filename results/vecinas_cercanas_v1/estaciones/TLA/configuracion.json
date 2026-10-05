@@ -1,0 +1,56 @@
+{
+  "protocolo": "v4k_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": false,
+  "objetivo": "TLA",
+  "vecinas": [
+    "FAC",
+    "ATI",
+    "CAM",
+    "TLI",
+    "LPR",
+    "GAM",
+    "MGH",
+    "HGM"
+  ],
+  "n_features": 18,
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 11,
+  "epocas_seleccion_ejecutadas": 19,
+  "val_loss_minimo": 82.28968811035156,
+  "n_ajuste_inicial": 16583,
+  "n_validacion": 7638,
+  "n_ajuste_definitivo": 24221,
+  "n_calibracion": 6953,
+  "umbral_p95_ppb": 21.2324064867837,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "d9b4eee963ab0882d530359cc20201b528fa9354de272ca9242bdd6dd798920c",
+    "preprocesamiento": "2665feb67f155183ee8a135e445ebd88ddd61b828131659747d8eabd490a7184"
+  },
+  "origen": "entrenado con las k vecinas más cercanas",
+  "k": 8,
+  "ks_probados": [
+    4,
+    8,
+    16,
+    32
+  ]
+}
