@@ -12,6 +12,7 @@ objetivo no está entre sus entradas y su perfil sólo usa el pasado (§7.2).
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -41,34 +42,39 @@ def regenerar_predicciones(ctx, objetivo, carpeta):
     from tensorflow import keras
     carpeta = Path(carpeta)
     modelo = keras.models.load_model(carpeta / 'modelo.keras', compile=False)
+    incluir_t = json.loads((carpeta / 'configuracion.json').read_text()).get('incluir_t', False)
     d = ctx['definitiva']
     perfil = m.perfil_causal(ctx['valores'][objetivo])
     umbral = float((carpeta / 'umbral_p95_cal2023.txt').read_text())
-    t = em.tensores(d['entradas'], ctx['valores'], objetivo, d['mu'], d['sigma'], perfil, ('calibracion',))
+    t = em.tensores(d['entradas'], ctx['valores'], objetivo, d['mu'], d['sigma'], perfil, ('calibracion',),
+                    incluir_t=incluir_t)
     cal = em.predecir(modelo, t)
     if em.umbral_p95(cal) != umbral:
         raise ValueError(f'{objetivo}: p95 recalculado distinto del guardado; entorno o datos cambiaron')
     cal.to_csv(carpeta / 'calibracion_2023.csv.gz', index=False)
     for anio, etapa in ANIOS.items():
-        t = em.tensores(d['entradas'], ctx['valores'], objetivo, d['mu'], d['sigma'], perfil, (etapa,))
+        t = em.tensores(d['entradas'], ctx['valores'], objetivo, d['mu'], d['sigma'], perfil, (etapa,),
+                        incluir_t=incluir_t)
         if len(t['y']):
             p = em.predecir(modelo, t)
             p.assign(alerta_limpia=np.abs(p['residuo_ppb']) > umbral).to_csv(
                 carpeta / f'predicciones_{anio}.csv.gz', index=False)
 
 
-def cargar_predicciones(estaciones, ctx=None) -> pd.DataFrame:
+def cargar_predicciones(estaciones, ctx=None, regenerar=None) -> pd.DataFrame:
     """Predicciones limpias de prueba de todos los objetivos entrenados, con su umbral.
 
-    Si faltan los CSV (no versionados) y se pasa `ctx`, se regeneran desde el modelo.
+    Si faltan los CSV (no versionados) y se pasa `ctx`, se regeneran desde el modelo
+    con `regenerar(ctx, objetivo, carpeta)` (por defecto, el del LSTM).
     """
+    regenerar = regenerar or regenerar_predicciones
     filas = []
     for obj in m.ESTACIONES:
         carpeta = Path(estaciones) / obj
-        if not (carpeta / 'modelo.keras').exists():
+        if not (carpeta / 'configuracion.json').exists():
             continue
         if ctx is not None and not (carpeta / 'calibracion_2023.csv.gz').exists():
-            regenerar_predicciones(ctx, obj, carpeta)
+            regenerar(ctx, obj, carpeta)
         umbral = float((carpeta / 'umbral_p95_cal2023.txt').read_text())
         for anio in ANIOS:
             f = carpeta / f'predicciones_{anio}.csv.gz'

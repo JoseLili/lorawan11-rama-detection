@@ -565,27 +565,35 @@ Rastro completo en `results/lstm_v4_multianual_v1/bitacora_entrenamiento.csv`.
 
 ### Hallazgos
 
-- **Calibración 2023:** el LSTM reduce el MAE frente al perfil en 29/30 (mediana −15.9 %);
+- **Calibración 2023:** el LSTM reduce el MAE frente al perfil en 30/31 (mediana de reducción 15.9 %);
   AJM, de baja representatividad, no mejora. Subestima en la tarde (12–16 h, mediana
   +3.0 ppb) y su error es mayor ahí (sigma ≈15 ppb).
-- **Limpio en prueba:** sigue mejorando al perfil en 26/30–30/31 estaciones por año, pero
-  la tasa de falsas alarmas sube a 6.6–7.2 % (5 % en 2023 por construcción).
-- **Ataques al 5 %:** recall ≈7 % en bits 0–2 (igual a la FPR: no detecta), ≈21 % bit 4,
-  ≈79–80 % bit 5, ≥99 % bits 6–7. Precisión máxima ≈42 %. Estable entre años.
+- **Limpio en prueba:** mejora al perfil en 26/30 estaciones (2024), 30/31 (2025) y
+  27/28 (2026 ene–jul). FPR micro incluyendo baja representatividad: 7.06 %, 7.28 %
+  y 6.57 %, respectivamente; el ≈5 % de calibración no se mantiene en prueba.
+- **Ataques al 5 % (grupo principal):** recall ≈7 % en bits 0–2, cercano a la FPR
+  (poca capacidad discriminativa, no identidad de alertas lectura por lectura);
+  ≈20–22 % en bit 4, ≈79–80 % en bit 5, >99 % en bit 6 y 100 % en bit 7 en los
+  escenarios evaluables registrados. Precisión máxima ≈42–44 %. Curvas agregadas
+  parecidas entre años; no se demuestra estabilidad universal ni por estación.
 - **Daño no detectado** concentrado en bits 3–5, con el pico en el bit 5 (2024) o en el
   bit 4 (2025 y 2026): en 2024, 15 días con una excedencia fabricable sin alerta y 85 días
-  (23 %) con cambio de banda del máximo de red sin alerta (bit 5). **Desactivaciones de
-  fase 1:** pocas oportunidades, pero sin alerta en 2 de 17 días con excedencia en 2024
-  (12 %) y 2 de 6 en 2025 (33 %), siempre en días con una sola lectura sobre 155.
-  *(Corregido el 2026-10-04: antes se describían como «casi imposibles» comparando contra
-  todos los días; el denominador justo son los días con excedencia.)*
-- **Frente a 2025:** la precisión mejoró (bit 5: 21.6 % → 36.8 %) y las falsas alarmas
-  bajaron (15.8 % → ~7 %), pero el recall en el punto ideal bajó (bit 4: 40.8 % → ~21 %;
-  bit 5: 86.7 % → ~80 %) porque la mediana del umbral subió de 17.4 a 22.4 ppb. Atribuirlo
-  a usar más años requiere un control: menos años, misma prueba. *(Corregido el 2026-10-04: antes decía «máximo en el bit 5»
-  sin distinguir años; ver notas del notebook 13.)*
-- **Estaciones sin detector** (HGM, XAL; ACO en 2024): con el bit 7 permiten fabricar una
-  excedencia en 306/366 días de 2024 sin evaluación posible.
+  (23 %) con cambio de banda del máximo de red sin alerta (bit 5). El bit 6 también
+  deja ese daño en 26, 24 y 15 días de 2024/2025/2026; no tiene detección perfecta.
+  **Ocultamiento de excedencias observadas:** sin alerta en 2/17 días con excedencia
+  en 2024 (11.8 %), 2/6 en 2025 (33.3 %) y 0/9 en 2026 parcial, con un solo mensaje
+  y una sola lectura ≥155 en los cuatro casos sin alerta.
+  Son máximos observados, no contingencias oficiales suspendidas. El porcentaje
+  sobre todos los días mide frecuencia; sobre días con excedencia mide vulnerabilidad
+  condicionada. Ambos son válidos si se explicita el denominador.
+- **Frente a la referencia histórica:** precisión bit 5 de 21.6 % frente a 36.8 %
+  en el grupo principal de 2024; FPR antigua 15.8 % frente a ≈7 % nueva. Recall
+  bit 4 de 40.8 % frente a ≈21 %; bit 5 de 86.7 % frente a ≈80 %.
+  No es una comparación controlada: cambiaron modelo, cobertura, periodo y umbral.
+  No se atribuye la diferencia sólo a más años ni sólo a la calibración.
+- **Estaciones sin detector:** HGM y XAL permiten fabricar una excedencia con bit 7
+  en 306/366 días de 2024, sin evaluación posible. ACO tiene modelo pero no lecturas
+  ese año: no origina ninguno de esos escenarios.
 
 ### Límites
 
@@ -593,37 +601,63 @@ Oportunidad ≠ probabilidad de éxito de un atacante ciego; escenarios de un me
 precisión condicionada al 5 % de ataques; 2026 sólo ene–jul; excedencias del máximo
 observado, no contingencias declaradas.
 
+### Cierre del resumen — 2026-10-04
+
+La lectura vigente se consolida en el
+[notebook 14](../notebooks/14_resumen_v4_multianual.ipynb). Se corrigieron textos,
+títulos y la ilustración de CCA 2023 (signo real del flip, no signo aleatorio),
+sin cambiar modelos, umbrales ni tablas experimentales. Las notas previas del
+notebook 13 conservan el historial; este cierre precisa sus generalizaciones.
+
+- El máximo observado en bits 4–5 se refiere a días con cambio de banda de red
+  sin alerta, no a un óptimo universal ni a todas las métricas de daño.
+- El ejemplo CCA 6/may/2024 muestra que 156 → 140 ppb por bit 4 acerca la lectura
+  a la predicción 121.15 ppb: el error baja de 34.85 a 18.85, bajo el umbral 24.16.
+  El máximo diario pasa de 156 a 153; la alteración oculta la excedencia sin alerta.
+- La reproducibilidad de entrenamiento se comprobó en CCA y TLI; no se afirma
+  que se hayan reentrenado dos veces los 31 objetivos.
+- La **distribución B** se cierra como candidata prioritaria bajo las campañas
+  estudiadas: 255 cambios de banda local sin alerta en Base frente a 567 en B,
+  con 26 estaciones peores y un empate. Son experimentos con la referencia
+  anterior, no una reevaluación B + LSTM multianual. Ver
+  [avance del experimento 11](../experiments/cayenne_mod/avance_junta_11.md).
+  Otras codificaciones y selección aleatoria no implementada quedan diferidas,
+  no falsamente marcadas como demostradas o refutadas por ese resultado.
+
 ---
 
 ## Siguiente
 
-Lista vigente; los detalles y criterios de cierre están en J1–J8 arriba.
+**Lista vigente al cierre del 2026-10-04.** J1–J8 arriba conservan las preguntas
+y planes de la junta anterior; sus estados históricos no sustituyen esta lista.
 
-| Orden | ID | Entregable / asunto | Estado |
-|---:|---|---|---|
-| 1 | J1 | Mostrar al asesor matriz y ventana reales; aclarar pasado vs contemporáneo y perfil propio | Repasado y CSV exportados; presentación al asesor pendiente |
-| 2 | J2 | Figura base con oportunidad, no detección y riesgo; efectos anuales aparte | Revisión 29/sep implementada y verificada; aceptación pendiente |
-| 3 | J3 | Confirmar siete posiciones de 8 ppb y reglas del formato | Pendiente; bloquea implementación de la nueva variante |
-| 4 | J4 | Codificación aleatoria con recuperación exacta y pruebas | Pendiente de J3 |
-| 5 | J5 | Fijar presupuestos, estrategias de ataque y eje X | Pendiente de J3; cerrar antes de comparar |
-| 6 | J6 | Evaluar redistribución sola en ambos sentidos del daño | Prioridad experimental tras J3–J5 |
-| 7 | J7 | Medir daño que escapa a codificación y detector juntos | Después de J6 |
-| 8 | J8 | Datos de cinco minutos, persistencia y otras variantes | Diferido |
+| Orden | Entregable / asunto | Estado |
+|---:|---|---|
+| 1 | Cerrar presentación multianual y resultado negativo de B | Resumen corregido; revisión del tesista y presentación al asesor pendientes |
+| 2 | Medir aportación de estaciones y contrastarla con distancia | Abierto; el repaso de la matriz no demuestra cuáles estaciones utiliza el modelo |
+| 3 | Comparar LSTM V4 con CNN-1D | Dataset/protocolo temporal disponibles; falta fijar arquitectura y ejecutar comparación pareada |
+| 4 | Redactar metodología, resultados y límites | En paralelo; incluir el resultado negativo de la codificación |
 
-**Línea multianual:** evaluación terminada (sección del 2026-10-03/04). Para la
-junta: resultados del notebook 13 y decidir qué experimento nuevo abrir —cobertura de
-HGM/XAL, exceso de falsas alarmas o CNN-1D—, cada uno con su propio protocolo.
+**Realizado:** repaso de entradas/perfil/ventana y CSV para el asesor (J1), figuras
+base revisadas (J2), inventario, protocolo y primera evaluación multianual, y
+evaluación de las distribuciones probadas. No reabrir entrenamientos por cambios
+de redacción. Queda recoger la revisión del asesor sobre las figuras y el alcance.
 
-**Para la próxima junta:** evidencia de J1, definición/figura de J2 y pregunta
-concreta de J3. Los experimentos de la nueva variante requieren primero fijar
-los pesos. No presentar decisiones propuestas como aprobadas por el asesor.
+**Diferido o condicionado:** nuevas codificaciones J3–J7, persistencia y varios
+nodos J8, datos de cinco minutos, variante con contexto contemporáneo, cobertura
+de HGM/XAL, otras semillas y análisis adicional de falsas alarmas. Un control
+con menos años y el mismo test es necesario si se quiere atribuir una mejora a
+más historia, pero no se presenta como ya ejecutado. SIMAT/HORA, V11 y V10 siguen
+abiertos. No son tareas automáticamente autorizadas por el cierre del resumen.
+
+**Para la próxima junta:** resumen corregido, ejemplo de ocultamiento y propuesta
+del análisis de aportación espacial; después, diseño de la comparación CNN-1D.
 
 ### Cola anterior — conservada como historial de 2026-09-01
 
 No es la lista vigente: disponibilidad, máscaras y LSTM ya se abordaron.
-CNN-1D, barridos adicionales y redacción siguen abiertos, pero no desplazan
-la prioridad actual de las gráficas y la contramedida. Se conserva la lista
-original para no perder su contexto:
+La prioridad de esta lista es histórica. La secuencia vigente es la de la tabla
+anterior; se conserva el texto original para no perder su contexto:
 
 1. **Verificar la disponibilidad conjunta de ventanas.** Con coberturas del 27%
    al 97%, la probabilidad de que todas las estaciones tengan dato simultáneo

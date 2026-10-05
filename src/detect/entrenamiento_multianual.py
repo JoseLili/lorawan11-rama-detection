@@ -45,16 +45,20 @@ def caracteristicas(entradas: pd.DataFrame, objetivo: str, mu, sigma) -> np.ndar
     return np.concatenate([valores, mascara, hora], axis=1)
 
 
-def tensores(entradas, valores, objetivo, mu, sigma, perfil, etapas, ventana=m.VENTANA):
+def tensores(entradas, valores, objetivo, mu, sigma, perfil, etapas, ventana=m.VENTANA, incluir_t=False):
     """Ejemplos cuyo OBJETIVO cae en `etapas`.
 
     Devuelve dict con X (n, 24, 66), y = original − base, base, original, ts.
     El contexto puede venir de la etapa anterior (pasado disponible).
+
+    `incluir_t=False` (V4): filas t−24 … t−1 de las vecinas.
+    `incluir_t=True` (variante contemporánea): filas t−23 … t; la última fila trae a las
+    vecinas a la MISMA hora del objetivo. El objetivo nunca está entre las entradas.
     """
     ok = m.ejemplos_validos(valores, objetivo, perfil, ventana).to_numpy()
     idx = np.flatnonzero(ok & m.mascara_etapas(valores.index, etapas))
     F = caracteristicas(entradas, objetivo, mu, sigma)
-    X = F[idx[:, None] + np.arange(-ventana, 0)[None, :]]
+    X = F[idx[:, None] + (np.arange(-ventana, 0) + int(incluir_t))[None, :]]
     original = valores[objetivo].to_numpy()[idx]
     base = perfil['base'].to_numpy()[idx]
     return dict(X=X, y=(original - base).astype(np.float32), base=base,
@@ -145,7 +149,7 @@ def contexto(raiz):
 
 
 def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG['max_epocas'],
-                      unidades=CONFIG['unidades'], verbose=0):
+                      unidades=CONFIG['unidades'], verbose=0, incluir_t=False, protocolo=m.PROTOCOLO):
     """Fases 1–4 para un objetivo; guarda todo en `carpeta`. Devuelve resumen."""
     import tensorflow as tf
     from tensorflow import keras
@@ -160,8 +164,10 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
     ini, dfn = ctx['inicial'], ctx['definitiva']
 
     # Fase 1 — selección de épocas
-    tr1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('ajuste_inicial',))
-    va1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('validacion',))
+    tr1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('ajuste_inicial',),
+                   incluir_t=incluir_t)
+    va1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('validacion',),
+                   incluir_t=incluir_t)
     modelo1 = nuevo_modelo(unidades=unidades)
     hist1 = entrenar_seleccion(modelo1, tr1, va1, max_epocas=max_epocas, verbose=verbose)
     E = seleccionar_epoca(hist1)
@@ -169,7 +175,8 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
     modelo1.save(carpeta / 'seleccion/modelo_seleccion.keras')
 
     # Fase 2 — ajuste definitivo desde cero
-    tr2 = tensores(dfn['entradas'], valores, objetivo, dfn['mu'], dfn['sigma'], perfil, m.AJUSTE_DEFINITIVO)
+    tr2 = tensores(dfn['entradas'], valores, objetivo, dfn['mu'], dfn['sigma'], perfil, m.AJUSTE_DEFINITIVO,
+                   incluir_t=incluir_t)
     modelo2 = nuevo_modelo(unidades=unidades)
     hist2 = entrenar_definitivo(modelo2, tr2, E, verbose=verbose)
     hist2.to_csv(carpeta / 'historia_definitiva.csv')
@@ -184,7 +191,8 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
     cargado = keras.models.load_model(carpeta / 'modelo.keras', compile=False)
     resultados = {}
     for etapa in ('calibracion', *ANIOS_PRUEBA):
-        t = tensores(dfn['entradas'], valores, objetivo, dfn['mu'], dfn['sigma'], perfil, (etapa,))
+        t = tensores(dfn['entradas'], valores, objetivo, dfn['mu'], dfn['sigma'], perfil, (etapa,),
+                     incluir_t=incluir_t)
         resultados[etapa] = predecir(cargado, t) if len(t['y']) else None
     cal = resultados['calibracion']
     p95 = umbral_p95(cal) if cal is not None and len(cal) else float('nan')
@@ -198,7 +206,8 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
             r.to_csv(carpeta / f'predicciones_{anio}.csv.gz', index=False)
 
     config = dict(
-        protocolo=m.PROTOCOLO, objetivo=objetivo, **CONFIG, unidades_usadas=unidades,
+        protocolo=protocolo, tipo='lstm', incluir_t=incluir_t, objetivo=objetivo, **CONFIG,
+        unidades_usadas=unidades,
         max_epocas_usadas=max_epocas, epoca_E=E, epocas_seleccion_ejecutadas=len(hist1),
         val_loss_minimo=float(hist1['val_loss'].min()),
         n_ajuste_inicial=len(tr1['y']), n_validacion=len(va1['y']), n_ajuste_definitivo=len(tr2['y']),
