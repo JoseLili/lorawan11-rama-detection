@@ -149,8 +149,13 @@ def contexto(raiz):
 
 
 def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG['max_epocas'],
-                      unidades=CONFIG['unidades'], verbose=0, incluir_t=False, protocolo=m.PROTOCOLO):
-    """Fases 1–4 para un objetivo; guarda todo en `carpeta`. Devuelve resumen."""
+                      unidades=CONFIG['unidades'], verbose=0, incluir_t=False, protocolo=m.PROTOCOLO,
+                      vecinas=None):
+    """Fases 1–4 para un objetivo; guarda todo en `carpeta`. Devuelve resumen.
+
+    `vecinas=None` (V4): las otras 32 estaciones. Una lista restringe las entradas a esas
+    estaciones (2·len + 2 características); el resto del protocolo no cambia.
+    """
     import tensorflow as tf
     from tensorflow import keras
 
@@ -161,14 +166,18 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
 
     valores = ctx['valores']
     perfil = m.perfil_causal(valores[objetivo])
-    ini, dfn = ctx['inicial'], ctx['definitiva']
+    ini, dfn = dict(ctx['inicial']), dict(ctx['definitiva'])
+    if vecinas is not None:
+        cols = [objetivo] + list(vecinas)
+        ini['entradas'], dfn['entradas'] = ini['entradas'][cols], dfn['entradas'][cols]
+    n_features = 2 * (ini['entradas'].shape[1] - 1) + 2
 
     # Fase 1 — selección de épocas
     tr1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('ajuste_inicial',),
                    incluir_t=incluir_t)
     va1 = tensores(ini['entradas'], valores, objetivo, ini['mu'], ini['sigma'], perfil, ('validacion',),
                    incluir_t=incluir_t)
-    modelo1 = nuevo_modelo(unidades=unidades)
+    modelo1 = nuevo_modelo(n_features, unidades=unidades)
     hist1 = entrenar_seleccion(modelo1, tr1, va1, max_epocas=max_epocas, verbose=verbose)
     E = seleccionar_epoca(hist1)
     hist1.to_csv(carpeta / 'seleccion/historia_seleccion.csv')
@@ -177,14 +186,14 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
     # Fase 2 — ajuste definitivo desde cero
     tr2 = tensores(dfn['entradas'], valores, objetivo, dfn['mu'], dfn['sigma'], perfil, m.AJUSTE_DEFINITIVO,
                    incluir_t=incluir_t)
-    modelo2 = nuevo_modelo(unidades=unidades)
+    modelo2 = nuevo_modelo(n_features, unidades=unidades)
     hist2 = entrenar_definitivo(modelo2, tr2, E, verbose=verbose)
     hist2.to_csv(carpeta / 'historia_definitiva.csv')
     modelo2.save(carpeta / 'modelo.keras')
-    vecinas = [c for c in valores.columns if c != objetivo]
+    usadas = [c for c in dfn['entradas'].columns if c != objetivo]
     np.savez_compressed(carpeta / 'preprocesamiento.npz',
-                        vecinas=np.array(vecinas), mu=dfn['mu'][vecinas].to_numpy(),
-                        sigma=dfn['sigma'][vecinas].to_numpy(),
+                        vecinas=np.array(usadas), mu=dfn['mu'][usadas].to_numpy(),
+                        sigma=dfn['sigma'][usadas].to_numpy(),
                         inactivos=np.array(dfn['inactivos'], dtype=str))
 
     # Fases 3–4 — se recarga el modelo guardado: calibrar y predecir NO entrenan
@@ -206,7 +215,8 @@ def entrenar_objetivo(ctx, objetivo, carpeta, sustituir=False, max_epocas=CONFIG
             r.to_csv(carpeta / f'predicciones_{anio}.csv.gz', index=False)
 
     config = dict(
-        protocolo=protocolo, tipo='lstm', incluir_t=incluir_t, objetivo=objetivo, **CONFIG,
+        protocolo=protocolo, tipo='lstm', incluir_t=incluir_t, objetivo=objetivo,
+        vecinas=None if vecinas is None else list(vecinas), n_features=n_features, **CONFIG,
         unidades_usadas=unidades,
         max_epocas_usadas=max_epocas, epoca_E=E, epocas_seleccion_ejecutadas=len(hist1),
         val_loss_minimo=float(hist1['val_loss'].min()),

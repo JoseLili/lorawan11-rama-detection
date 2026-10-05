@@ -41,3 +41,10 @@ results/contemporaneo_v1/*/estaciones/*/predicciones_*.csv.gz
 results/contemporaneo_v1/*/verificacion/*/calibracion_2023.csv.gz
 results/contemporaneo_v1/*/verificacion/*/predicciones_*.csv.gz
 results/contemporaneo_v1/*/eventos_dano/
+
+# Vecinas cercanas: predicciones y eventos se regeneran desde los modelos
+results/vecinas_cercanas_v1/estaciones/*/calibracion_2023.csv.gz
+results/vecinas_cercanas_v1/estaciones/*/predicciones_*.csv.gz
+results/vecinas_cercanas_v1/verificacion/*/calibracion_2023.csv.gz
+results/vecinas_cercanas_v1/verificacion/*/predicciones_*.csv.gz
+results/vecinas_cercanas_v1/eventos_dano/

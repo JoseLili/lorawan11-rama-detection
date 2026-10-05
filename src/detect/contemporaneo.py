@@ -100,6 +100,12 @@ def cargar_modelo(carpeta):
     return keras.models.load_model(carpeta / 'modelo.keras', compile=False), cfg.get('incluir_t', False)
 
 
+def entradas_de(carpeta, entradas, objetivo):
+    """Columnas de entrada que usa el modelo guardado (todas, o sus `vecinas`)."""
+    vec = json.loads((Path(carpeta) / 'configuracion.json').read_text()).get('vecinas')
+    return entradas if vec is None else entradas[[objetivo] + list(vec)]
+
+
 def regenerar(ctx, objetivo, carpeta, umbral_guardado=True):
     """Calibración y predicciones desde el modelo guardado (sin entrenar). Devuelve el p95.
 
@@ -107,7 +113,8 @@ def regenerar(ctx, objetivo, carpeta, umbral_guardado=True):
     """
     carpeta = Path(carpeta)
     modelo, incluir_t = cargar_modelo(carpeta)
-    d = ctx['definitiva']
+    d = dict(ctx['definitiva'])
+    d['entradas'] = entradas_de(carpeta, d['entradas'], objetivo)
     perfil = m.perfil_causal(ctx['valores'][objetivo])
     t = em.tensores(d['entradas'], ctx['valores'], objetivo, d['mu'], d['sigma'], perfil, ('calibracion',),
                     incluir_t=incluir_t)
@@ -223,7 +230,7 @@ def evaluar_simultaneo_bit(ctx, familias: dict, anio, bit, horas, modelos_cache=
             if (fam, obj) not in cache:
                 cache[(fam, obj)] = (*cargar_modelo(carpeta), float((carpeta / 'umbral_p95_cal2023.txt').read_text()))
             modelo, incluir_t, umbral = cache[(fam, obj)]
-            t = em.tensores(entradas, va, obj, d['mu'], d['sigma'], perfil, (etapa,), incluir_t=incluir_t)
+            t = em.tensores(entradas_de(carpeta, entradas, obj), va, obj, d['mu'], d['sigma'], perfil, (etapa,), incluir_t=incluir_t)
             if not len(t['y']):
                 continue
             p = em.predecir(modelo, t)
