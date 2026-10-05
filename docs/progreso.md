@@ -574,9 +574,15 @@ Rastro completo en `results/lstm_v4_multianual_v1/bitacora_entrenamiento.csv`.
   ≈79–80 % bit 5, ≥99 % bits 6–7. Precisión máxima ≈42 %. Estable entre años.
 - **Daño no detectado** concentrado en bits 3–5, con el pico en el bit 5 (2024) o en el
   bit 4 (2025 y 2026): en 2024, 15 días con una excedencia fabricable sin alerta y 85 días
-  (23 %) con cambio de banda del máximo de red sin alerta (bit 5). Ocultar una excedencia
-  con un solo mensaje casi nunca es posible: 2 días en 2024 y 2 en 2025, cuando sólo una
-  lectura superaba 155. *(Corregido el 2026-10-04: antes decía «máximo en el bit 5»
+  (23 %) con cambio de banda del máximo de red sin alerta (bit 5). **Desactivaciones de
+  fase 1:** pocas oportunidades, pero sin alerta en 2 de 17 días con excedencia en 2024
+  (12 %) y 2 de 6 en 2025 (33 %), siempre en días con una sola lectura sobre 155.
+  *(Corregido el 2026-10-04: antes se describían como «casi imposibles» comparando contra
+  todos los días; el denominador justo son los días con excedencia.)*
+- **Frente a 2025:** la precisión mejoró (bit 5: 21.6 % → 36.8 %) y las falsas alarmas
+  bajaron (15.8 % → ~7 %), pero el recall en el punto ideal bajó (bit 4: 40.8 % → ~21 %;
+  bit 5: 86.7 % → ~80 %) porque la mediana del umbral subió de 17.4 a 22.4 ppb. Atribuirlo
+  a usar más años requiere un control: menos años, misma prueba. *(Corregido el 2026-10-04: antes decía «máximo en el bit 5»
   sin distinguir años; ver notas del notebook 13.)*
 - **Estaciones sin detector** (HGM, XAL; ACO en 2024): con el bit 7 permiten fabricar una
   excedencia en 306/366 días de 2024 sin evaluación posible.
