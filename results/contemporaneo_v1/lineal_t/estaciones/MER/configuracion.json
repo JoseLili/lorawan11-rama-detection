@@ -1,0 +1,39 @@
+{
+  "protocolo": "v4c_multianual_33_p95cal2023_v1",
+  "tipo": "lineal",
+  "incluir_t": true,
+  "objetivo": "MER",
+  "alpha": 1000.0,
+  "alphas": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    300.0,
+    1000.0,
+    3000.0,
+    10000.0,
+    100000.0
+  ],
+  "epoca_E": null,
+  "epocas_seleccion_ejecutadas": 10,
+  "max_epocas": null,
+  "val_loss_minimo": 129.13804664272772,
+  "n_ajuste_inicial": 16652,
+  "n_validacion": 7885,
+  "n_ajuste_definitivo": 24537,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  },
+  "umbral_p95_ppb": 22.826386473092786,
+  "n_calibracion": 7537,
+  "sha256": {
+    "modelo": "ff2d8e0fa5abde8bf28f3e0e7f39ad2ae709c0d0c239f3adf5f257bfee2012e5"
+  }
+}

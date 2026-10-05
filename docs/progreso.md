@@ -624,6 +624,34 @@ notebook 13 conservan el historial; este cierre precisa sus generalizaciones.
   Otras codificaciones y selección aleatoria no implementada quedan diferidas,
   no falsamente marcadas como demostradas o refutadas por ese resultado.
 
+### Variante contemporánea (J1) — 2026-10-04
+
+Protocolo [protocolo_contemporaneo_v1.md](protocolo_contemporaneo_v1.md), fijado antes de
+entrenar; resultados en el [notebook 15](../notebooks/15_contemporaneo_resultados.ipynb) y
+`results/contemporaneo_v1/`. Modelos **recién entrenados** (`lstm_t`, `lineal_t`) y V4
+cargado de disco; reproducibilidad verificada en CCA para ambas variantes.
+
+- **Calibración 2023 (principales, mediana):** MAE V4 7.78 · `lstm_t` 7.62 (−2 %) ·
+  `lineal_t` 8.38 ppb; umbral p95 22.65 · 22.18 · 23.79 ppb. α elegido: 1000 en 22
+  estaciones, 3000 en 7 y 300 en 2 (ninguno en el borde de la rejilla ampliada). E de
+  `lstm_t`: 1–2 en 18 de 31.
+- **Limpio en prueba (FPR micro, principales):** 2024: V4 7.0 · `lstm_t` 7.2 ·
+  `lineal_t` 5.9 %; 2025: 7.2 · 7.4 · 6.6 %; 2026: 6.6 · 6.1 · 6.0 %.
+- **Un mensaje, muestra pareada (principales, 2024):** bit 4 → 20.9 · 23.3 · 19.3 %;
+  bit 5 → 78.7 · 80.6 · 77.8 %. 2025 y 2026 en la misma línea: `lstm_t` +1 a +3 puntos.
+- **Desactivaciones sin alerta / días con excedencia:** V4 2/17, 2/6, 0/9; `lstm_t` 2/17,
+  3/6, 1/9; `lineal_t` 2/17, 2/6, 1/9. Ninguna variante mejora.
+- **Atacante simultáneo (bit 5, principales):** V4 74.2 / 76.2 / 77.3 % (2024/25/26);
+  `lstm_t` 41.6 / 42.4 / 42.3 %; `lineal_t` 47.2 / 48.2 / 47.2 %. Bit 6: V4 98.5–99.2 %,
+  variantes 88.8–92.4 %. El V4 bajo ataque simultáneo eleva sus falsas alarmas con bits
+  grandes (11 % bit 6, 18 % bit 7 en 2024): las horas atacadas contaminan ventanas y
+  perfiles de horas posteriores.
+
+**Conclusión:** resultado negativo. Ver a las vecinas en la misma hora casi no reduce el
+error y debilita al detector frente a un atacante que altera todas las estaciones a la vez.
+Se mantiene el V4. El lineal rinde peor que el V4: el LSTM aporta frente a una línea base
+simple. La exploración previa sobreestimó la ganancia por usar sólo horas completas.
+
 ---
 
 ## Siguiente
@@ -640,11 +668,12 @@ y planes de la junta anterior; sus estados históricos no sustituyen esta lista.
 
 **Realizado:** repaso de entradas/perfil/ventana y CSV para el asesor (J1), figuras
 base revisadas (J2), inventario, protocolo y primera evaluación multianual, y
-evaluación de las distribuciones probadas. No reabrir entrenamientos por cambios
+evaluación de las distribuciones probadas, y variante contemporánea (J1) evaluada:
+resultado negativo, se mantiene el V4. No reabrir entrenamientos por cambios
 de redacción. Queda recoger la revisión del asesor sobre las figuras y el alcance.
 
 **Diferido o condicionado:** nuevas codificaciones J3–J7, persistencia y varios
-nodos J8, datos de cinco minutos, variante con contexto contemporáneo, cobertura
+nodos J8, datos de cinco minutos, cobertura
 de HGM/XAL, otras semillas y análisis adicional de falsas alarmas. Un control
 con menos años y el mismo test es necesario si se quiere atribuir una mejora a
 más historia, pero no se presenta como ya ejecutado. SIMAT/HORA, V11 y V10 siguen

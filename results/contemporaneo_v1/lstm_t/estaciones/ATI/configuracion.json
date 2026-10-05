@@ -1,0 +1,37 @@
+{
+  "protocolo": "v4c_multianual_33_p95cal2023_v1",
+  "tipo": "lstm",
+  "incluir_t": true,
+  "objetivo": "ATI",
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "percentil": 95,
+  "unidades_usadas": 64,
+  "max_epocas_usadas": 60,
+  "epoca_E": 2,
+  "epocas_seleccion_ejecutadas": 10,
+  "val_loss_minimo": 116.72216796875,
+  "n_ajuste_inicial": 15880,
+  "n_validacion": 7512,
+  "n_ajuste_definitivo": 23392,
+  "n_calibracion": 4992,
+  "umbral_p95_ppb": 20.4826518023407,
+  "canales_inactivos": [
+    "XAL"
+  ],
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  },
+  "sha256": {
+    "modelo": "0f904a95d2de0e248b7abad31c663ace9c45b5f0e06389b0a18970e9460fdf55",
+    "preprocesamiento": "eb3de39d44b23c422cd73e9ac233fc247ecc94429322b0dce3c95a7c84641ea3"
+  }
+}

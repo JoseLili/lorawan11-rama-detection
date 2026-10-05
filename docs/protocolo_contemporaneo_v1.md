@@ -130,3 +130,12 @@ Las predicciones y los eventos de daño quedan fuera de git (se regeneran desde 
   de esa hora (minutos).
 - Un atacante que comprometa estaciones de forma coordinada y elija signos no está
   cubierto por este protocolo.
+
+## 8. Ejecución y resultado (2026-10-04)
+
+Ejecutado completo el 2026-10-04 (27.9 min). Reproducibilidad de CCA verificada en
+`lstm_t` y `lineal_t`. Resultado: **negativo**. `lstm_t` reduce el MAE de calibración
+un 2 % y mejora la detección de un mensaje en 1–3 puntos, pero bajo el atacante
+simultáneo su recall en el bit 5 cae a ~42 % (V4: ~74–77 %). `lineal_t` rinde por debajo
+del V4. Se conserva el V4 como referencia. Detalle: notebook 15 y `docs/progreso.md`.
+

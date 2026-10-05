@@ -1,0 +1,48 @@
+{
+  "protocolo": "v4c_multianual_33_p95cal2023_v1",
+  "documento": "docs/protocolo_contemporaneo_v1.md",
+  "referencia": "v4_multianual_33_p95cal2023_v1",
+  "familias": [
+    "lstm_t",
+    "lineal_t"
+  ],
+  "alphas": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    300.0,
+    1000.0,
+    3000.0,
+    10000.0,
+    100000.0
+  ],
+  "entrenamiento": {
+    "semilla": 42,
+    "unidades": 64,
+    "batch": 64,
+    "max_epocas": 60,
+    "paciencia": 8,
+    "shuffle": true,
+    "percentil": 95
+  },
+  "anios_prueba": [
+    2024,
+    2025,
+    2026
+  ],
+  "bits": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "tasa": 0.05,
+  "semilla": 42,
+  "semilla_simultaneo": 777
+}
