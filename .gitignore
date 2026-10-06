@@ -48,3 +48,7 @@ results/vecinas_cercanas_v1/estaciones/*/predicciones_*.csv.gz
 results/vecinas_cercanas_v1/verificacion/*/calibracion_2023.csv.gz
 results/vecinas_cercanas_v1/verificacion/*/predicciones_*.csv.gz
 results/vecinas_cercanas_v1/eventos_dano/
+
+# Artículos y documentos con licencia (p. ej., descargados con la suscripción de UNAM):
+# sólo para uso local, nunca se redistribuyen en el repositorio.
+*.pdf

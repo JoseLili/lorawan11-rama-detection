@@ -744,27 +744,147 @@ ataque caracterizado igual que el primero: ¿lo encuentra el detector? ¿hasta d
   2024: 17 · 2025: 6 · 2026 (ene–jul): 9. El año con más casos es 2024; las cifras dichas
   en la junta (14–15 en 2022, 9 en 2023, 6 en 2024) no coinciden con estos datos.
 
-### Dudas por resolver
+### Dudas por resolver (resueltas el 2026-10-05)
 
-- **«Las 12 ventanas»:** en LoRaWAN clase A el nodo abre **2 ventanas de recepción**
-  (RX1 y RX2) tras cada envío. Confirmar si el asesor se refería a eso o a reintentos de
-  transmisión; define el modelo de energía.
-- **«El bit flipping ya está corregido en la versión…»:** frase cortada en la
-  transcripción. El README afirma que la vulnerabilidad afecta a 1.0.x y 1.1; confirmar
-  con el asesor y con la especificación antes de escribirlo en la tesis.
+- **«Las 12 ventanas» — resuelto:** error de transcripción. Se asume **clase A**, la
+  obligatoria y la típica de nodos con batería: **2 ventanas de recepción** (RX1 y RX2)
+  tras cada envío. Consecuencia para K5: en clase A el atacante no puede hacer que el
+  nodo abra más ventanas; el drenado tendría que venir de forzar reenvíos (bloquear
+  confirmaciones), alargar la escucha en una ventana o comandos de la red que obliguen a
+  gastar más. Cuál de estos es el ataque se fija en el protocolo.
+- **«El bit flipping ya está corregido en la versión…» — resuelto:** era una intuición
+  del asesor (que en versiones posteriores, como la 1.1, estaría corregido), que él mismo
+  descartó en la junta. La vulnerabilidad **sigue** en 1.1: la integridad (MIC) se
+  verifica en el Network Server y el payload cifrado llega al Application Server sin
+  integridad de extremo a extremo. Coincide con lo que afirma el README.
 - **Términos mal transcritos:** «2 55» = 155 ppb; «LCM», «LCTM», «síntesis» = LSTM.
+
+### K3: búsqueda de datasets y trabajo previo (2026-10-05)
+
+Búsqueda web; no exhaustiva. «No encontrado» no significa que no exista.
+
+**Lo más cercano al giro propuesto (afecta la novedad):**
+
+- [Semi-Synthetic LoRaWAN Dataset for Jamming and Battery-Depletion Attack Detection](https://zenodo.org/records/22044142)
+  (A. Pourghasem, Zenodo, 21/ago/2026, CC BY 4.0): 230 296 registros de 1 921 dispositivos,
+  etiquetados normal / jamming / drenado de batería. Parte de tráfico real (despliegue de
+  Brno) con ataques **añadidos de forma sintética**: jamming = RSSI anómalo; drenado =
+  caída acelerada de batería. Campos: RSSI, SNR, SF, altitud, batería, velocidad de caída.
+  **No** incluye ventanas de recepción, ACK ni reintentos.
+- Artículos que lo usan: [Multi-Attribute Physical-Layer Authentication Against Jamming and Battery-Depletion Attacks in LoRaWAN](https://doi.org/10.3390/fi18010038)
+  (Future Internet 18(1):38) y [su variante ligera](https://www.mdpi.com/1999-5903/18/9/462)
+  (18(9):462): clasificadores (MLP, Random Forest, XGBoost…) en el Network Server; la mejor
+  F1 reportada es ≈0.83.
+- [Detection and Mitigation of Jamming Attacks in LoRaWAN Using Machine Learning](https://ieeexplore.ieee.org/document/10978351/)
+  (IEEE, 2025): **detector LSTM de jamming**.
+- [Reactive Jamming Detection for LoRaWAN Based on Meta-Data Differencing](https://dl.acm.org/doi/fullHtml/10.1145/3538969.3543805) (ARES 2022).
+- [Energy attack in LoRaWAN: experimental validation](https://urn.fi/URN:NBN:fi-fe202001101701)
+  (Mikhaylov et al., ARES 2019): el ataque **fuerza reintentos**; sin claves, aumenta el
+  consumo de un evento de comunicación entre 36 % y 576 % según el SF.
+
+**Datasets reales con metadatos de recepción (sin etiqueta de ataque ni ventana):**
+[LoED](https://zenodo.org/record/4121430) (Bhatia et al. 2020, 9 gateways, captura pasiva,
+CC BY; campos por verificar en los CSV), [LoRaWAN Traffic Analysis Dataset](https://zenodo.org/records/8090619)
+(sniffer, CSV/PCAP, 1.2 GB), [propagación urbana](https://www.nature.com/articles/s41597-025-05802-2)
+(Scientific Data 2025, RSSI/SNR) y [RSSI en entorno industrial](https://pmc.ncbi.nlm.nih.gov/articles/PMC10859256/).
+
+**Herramientas:** [ChirpOTLE](https://arxiv.org/pdf/2005.11555) (banco de pruebas para
+evaluar seguridad de LoRaWAN en la práctica) y simuladores (ns-3, LoRaWANSim) que ya se
+usan para generar datos de ACK.
+
+**Implicación para K5:** detectar jamming y drenado con aprendizaje automático, incluso
+con LSTM, ya está publicado. Un aporte propio tendría que venir de lo que esos trabajos no
+cubren: el **mecanismo** (reintentos, ventanas RX1/RX2, ACK) en lugar de efectos
+sintéticos sobre RSSI o batería; un **modelo de energía** por evento; un **dataset medido**
+de recepción por ventana; y la caracterización de **qué se detecta y qué no** según el
+atacante (agresivo frente a intermitente), en la línea de la primera parte. Discutir con el
+asesor antes de escribir el protocolo.
+
+### Lectura del artículo principal: Di Pinto et al., IEEE WCNC 2025
+
+*Detection and Mitigation of Jamming Attacks in LoRaWAN Using Machine Learning* (Sapienza,
+DOI 10.1109/WCNC61545.2025.10978351). PDF local en `docs/`, **descargado con la licencia
+de UNAM: no se versiona ni se redistribuye** (`*.pdf` en `.gitignore`).
+
+- **Qué hace:** jamming ciego y jamming que escucha el canal, **sólo en ns-3** (250 nodos,
+  1 gateway, 1 jammer, 12 × 12 km, envíos cada 20 min, banda europea de 868 MHz). LSTM
+  sobre el **número de paquetes por intervalo de 30 min**, entrenado sólo con el jammer
+  ciego: exactitud 0.85, precisión 0.93, recall 0.81 en prueba. Mitigación en el gateway
+  (cambio de canal por comandos MAC); no funciona contra el jammer que escucha el canal.
+- **Qué deja pendiente, según su propio trabajo futuro:** pruebas en entornos reales,
+  RSSI/SNR, **evaluación del consumo de energía**, varios gateways y jammers, y
+  **detección centralizada en el Network Server**.
+- **Qué no hace:** drenado de batería por reintentos, modelo de energía, datos medidos,
+  caracterización de qué intensidad de ataque se escapa, detección por nodo.
+- **Código público:** [netlab-sapienza/LoRaWANjammer_ns3](https://github.com/netlab-sapienza/LoRaWANjammer_ns3),
+  posible base de simulación y línea base de comparación.
+
+### Propuesta para el Doc Jaime: metodología de daño no detectado (2026-10-05)
+
+**Propuesta:** en lugar de analizar ataques por separado, la tesis aporta una
+**metodología para cuantificar el daño que escapa a la detección en LoRaWAN**, aplicable a
+ataques cuyo efecto se mide como desviación de un comportamiento normal, y **validada en
+dos ataques de capas distintas**: bit flipping (integridad, ya hecho) y drenado de energía
+(disponibilidad, por hacer). No se afirma que sirva para «cualquier ataque»: dos casos
+muy distintos son el argumento de generalidad.
+
+| Paso | Bit flipping (hecho) | Drenado de energía (por hacer) |
+|---|---|---|
+| 1. Definir el daño operativo | Cambio de decisión NOM-172 o de excedencia de 155 ppb | Energía extra y vida de batería perdida |
+| 2. Modelar lo normal | Perfil de 14 días + LSTM con las vecinas | Pérdida natural de paquetes, reintentos y RSSI/SNR del canal |
+| 3. Detectar por desviación | Residuo > umbral p95 calibrado en otro año | Desviación de la telemetría normal en el Network Server |
+| 4. Variar la intensidad del atacante | Bits 0 a 7 | Porcentaje de ACK o transmisiones interferidas |
+| 5. Medir el daño que escapa | Bits 3–5 | Por descubrir |
+
+**Hipótesis común:** un ataque es indetectable cuando su efecto cae dentro de la
+variabilidad legítima del sistema. Confirmada en la parte 1 (variabilidad del ozono,
+±12–15 ppb); la parte 2 la prueba en otra capa (variabilidad del canal de radio).
+
+**Prioridades del tesista para la parte 2:**
+
+1. **Salir de la simulación:** banco de pruebas real (nodos, gateway, Network Server propio,
+   p. ej. ChirpStack). Confirmar el plan de frecuencias aplicable en México (rango
+   902–928 MHz; el artículo usa la banda europea de 868 MHz).
+2. **Energía cuantificable:** medir la corriente por estado (transmisión según SF, RX1/RX2,
+   reposo) y construir un modelo de energía por evento de comunicación.
+3. **Datos reales:** las lecturas RAMA como **contenido** de los mensajes del banco de
+   pruebas (radio real + datos reales); la medición real es la del radio y la energía.
+4. **Detección en el Network Server:** telemetría por nodo (contador de tramas, reintentos,
+   ACK, RSSI/SNR, tiempos entre llegadas).
+5. **Por definir:** caracterización de límites (intensidad del atacante frente a daño y
+   detección, como el punto ideal del atacante de la parte 1).
+
+**Entorno de los experimentos:** sala de señales blindada del IIMAS y laboratorio autorizado.
+El jammer, el nodo víctima y el gateway deben quedar dentro del entorno controlado; se
+documentan autorización y potencias en la metodología. La emulación del ataque desde el
+servidor (suprimir ACK) queda como complemento para repetir patrones exactos.
+
+**Cómo afectaría a la tesis:** título y objetivo general hacia la caracterización del daño no
+detectado de ataques a LoRaWAN en una red de monitoreo de calidad del aire; ajustar la
+sección 1.6 y los objetivos; capítulos 4 y 5 divididos en 4.1/5.1 (bit flipping) y 4.2/5.2
+(drenado), más una comparación final con la hipótesis común; Di Pinto et al. en el capítulo 3.
+**Vínculo opcional:** el drenado de las estaciones vecinas reduce el contexto del detector y la
+redundancia de la red, lo que podría facilitar el bit flipping. Se deja como discusión o
+trabajo futuro salvo que el asesor lo quiera dentro.
+
+**Decisión del tesista:** avanzar sin esperar aprobación formal, **informando** al asesor.
+Primero el trabajo útil con cualquier enfoque (banda de frecuencia, inventario de hardware,
+ChirpStack, línea base de consumo y pérdida natural, código de Di Pinto et al.); después lo
+costoso de deshacer (título y objetivos, compras grandes, detector de la parte 2).
 
 ### Pendientes
 
 | # | Pendiente | Estado |
 |---|---|---|
 | K1 | Llevar al asesor la explicación de la distribución B (primera aclaración) | Pendiente |
-| K2 | Aclarar «12 ventanas» y la frase sobre la versión corregida | Pendiente |
-| K3 | Buscar un dataset público de recepción por ventana o intento | Pendiente |
+| K2 | Aclarar «12 ventanas» y la frase sobre la versión corregida | **Resuelto 2026-10-05** (ver «Dudas por resolver») |
+| K3 | Buscar un dataset público de recepción por ventana o intento | **Revisado 2026-10-05:** no se encontró uno con ventana/ACK/reintento por mensaje; sí trabajo previo muy cercano (ver «K3: búsqueda de datasets y trabajo previo») |
 | K4 | Si no existe, diseñar el experimento con nodos reales (hardware, distancias, frecuencia) | Pendiente |
-| K5 | Protocolo del segundo ataque antes de programar: ataque, modelos de atacante, modelo de energía, datos y métricas | Pendiente |
+| K5 | Protocolo del segundo ataque antes de programar: ataque, modelos de atacante, modelo de energía, datos y métricas | Enfoque en borrador (ver «Propuesta para el Doc Jaime»); falta el protocolo |
 | K6 | Redactar la primera parte (bit flipping) con los resultados ya obtenidos | Pendiente |
 | K7 | Actualizar el README cuando el giro esté definido | Pendiente |
+| K8 | Informar al asesor la propuesta de metodología y el inicio del trabajo | Pendiente |
+| K9 | Trabajo inicial de la parte 2: banda de frecuencia, inventario de hardware, ChirpStack, línea base de consumo y pérdida natural | Pendiente |
 
 ---
 
