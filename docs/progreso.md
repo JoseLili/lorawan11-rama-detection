@@ -685,9 +685,95 @@ simultáneo, pero sin reducir el daño no detectado en decisiones (empeora en 20
 conserva el V4. Hallazgo para la tesis: el sesgo del V4 en lecturas altas protegía sin
 intención contra ataques que suben la lectura; predecir mejor no basta (interpretación).
 
+## 2026-10-05 — Junta con el asesor: giro hacia un segundo ataque
+
+Registro de la junta posterior a la evaluación multianual. Fuente: transcripción
+automática; lo que no pudo confirmarse queda como duda. El README se actualizará
+cuando el giro esté más definido.
+
+### Acuerdos
+
+| # | Acuerdo |
+|---|---|
+| K-A1 | El detector LSTM está **topado** para bit flipping: más años, vecinas de la misma hora y vecinas cercanas apenas mueven el resultado (notebooks 14–16). |
+| K-A2 | Lo hecho **no se desecha**: queda como primera parte de la tesis. Si existe bit flipping y se usa un detector LSTM, se detecta hasta cierto punto (bits 6–7 casi siempre; bits 3–5 concentran el daño que escapa). |
+| K-A3 | No se espera una contramedida mucho mejor para bit flipping; las distribuciones de pesos probadas no se proponen como estrategia. |
+| K-A4 | Lo deseable habría sido **mover el punto ideal del atacante** (subir la detección de los bits 4 y 5). Queda como objetivo sin plan concreto. |
+| K-A5 | 155 ppb se usa como **umbral experimental** sobre el máximo observado, igual en todos los años; no se presentan como contingencias reales (los umbrales oficiales cambiaron con el tiempo). |
+| K-A6 | Hipótesis del asesor sobre por qué el MIC no es de extremo a extremo: que el Application Server no dependa de LoRaWAN (abstracción por capas) y el costo de cómputo. |
+
+### Nueva dirección: un segundo ataque a LoRaWAN
+
+Ampliar la tesis de «bit flipping» a **ataques a LoRaWAN**, con al menos un segundo
+ataque caracterizado igual que el primero: ¿lo encuentra el detector? ¿hasta dónde?
+
+- **Ataque:** drenado de energía aprovechando las ventanas de recepción; por ejemplo,
+  interferencia (jamming) que obliga al nodo a usar sus ventanas o reintentos.
+- **Modelos de atacante:** agresivo (interfiere todo, debería ser fácil de detectar) y
+  uno más inteligente (interfiere a veces).
+- **Modelo de energía:** cada encendido del nodo gasta 1 unidad; se compara la vida
+  esperada con la real (p. ej., unidades que debían durar días agotadas en 12 horas).
+- **Transmisiones realistas:** la recepción no ocurre siempre en el primer intento; sin
+  ese azar, cualquier segundo intento delataría el ataque.
+- **Datos:** buscar un dataset público con la ventana o intento en que llegó cada
+  mensaje. Si no existe, **crearlo** con nodos reales (envíos frecuentes, p. ej. cada
+  minuto; registro de llegada y ventana; distintas distancias, 10 m, 20 m…). El asesor
+  señaló que ese dataset podría ser por sí mismo una contribución.
+- **Propuesta del tesista, aceptada:** reutilizar las lecturas RAMA como contenido y
+  agregar una máscara de llegada («llegó / no llegó» y con cuántas ventanas).
+- **Detector:** clasificar «hay ataque / no hay ataque»; equivocarse a veces es aceptable.
+
+### Aclaraciones a lo dicho en la junta (verificadas contra el repositorio)
+
+- **Duda del asesor sobre la distribución B** («no debería poder aumentar»). En CCA, con
+  los 420 ataques que **ambos** formatos aceptan, B tiene **menos** cambios de banda sin
+  alerta (6 frente a 13). El aumento total viene de los **791 ataques que sólo B acepta**
+  (+13). En la red, Base acepta 9 800 intentos y B 26 716 (B rechaza 16 916 menos). No es
+  un error metodológico: B abre posiciones que Base rechazaba. Ver
+  [cierre de la distribución de pesos](../experiments/cayenne_mod/cierre_distribucion_pesos.md)
+  y [avance 11](../experiments/cayenne_mod/avance_junta_11.md).
+- **Los bits 8–15 no los rechazaba el LSTM** sino el **decodificador** (posiciones
+  reservadas en Base). El LSTM sólo ve valores en ppb; reentrenarlo no recupera ese rechazo.
+- **La codificación de B usa grupos fijos;** lo aleatorio fue el ataque (qué lecturas,
+  cuántos bits y cuáles). Elegir al azar qué posiciones de igual peso encender (J4) **no
+  está implementado**.
+- **Frente a 2025, la precisión subió** (bit 5: 21.6 % → 36.8 %) y **el recall bajó**
+  (bit 4: 40.8 % → ~21 %; bit 5: 86.7 % → ~80 %); comparación no controlada.
+- **Los k de vecinas cercanas fueron 4, 8, 16 y 32.**
+- **Días con el máximo observado ≥155 ppb** (inventario, notebook 10): 2022: 7 · 2023: 4 ·
+  2024: 17 · 2025: 6 · 2026 (ene–jul): 9. El año con más casos es 2024; las cifras dichas
+  en la junta (14–15 en 2022, 9 en 2023, 6 en 2024) no coinciden con estos datos.
+
+### Dudas por resolver
+
+- **«Las 12 ventanas»:** en LoRaWAN clase A el nodo abre **2 ventanas de recepción**
+  (RX1 y RX2) tras cada envío. Confirmar si el asesor se refería a eso o a reintentos de
+  transmisión; define el modelo de energía.
+- **«El bit flipping ya está corregido en la versión…»:** frase cortada en la
+  transcripción. El README afirma que la vulnerabilidad afecta a 1.0.x y 1.1; confirmar
+  con el asesor y con la especificación antes de escribirlo en la tesis.
+- **Términos mal transcritos:** «2 55» = 155 ppb; «LCM», «LCTM», «síntesis» = LSTM.
+
+### Pendientes
+
+| # | Pendiente | Estado |
+|---|---|---|
+| K1 | Llevar al asesor la explicación de la distribución B (primera aclaración) | Pendiente |
+| K2 | Aclarar «12 ventanas» y la frase sobre la versión corregida | Pendiente |
+| K3 | Buscar un dataset público de recepción por ventana o intento | Pendiente |
+| K4 | Si no existe, diseñar el experimento con nodos reales (hardware, distancias, frecuencia) | Pendiente |
+| K5 | Protocolo del segundo ataque antes de programar: ataque, modelos de atacante, modelo de energía, datos y métricas | Pendiente |
+| K6 | Redactar la primera parte (bit flipping) con los resultados ya obtenidos | Pendiente |
+| K7 | Actualizar el README cuando el giro esté definido | Pendiente |
+
 ---
 
 ## Siguiente
+
+**Actualización 2026-10-05:** la junta del 2026-10-05 reorienta la tesis hacia un segundo
+ataque. Sus pendientes **K1–K7** (sección anterior) tienen prioridad sobre las filas 2–3
+de esta tabla, que quedan en pausa hasta definir el giro; la fila 4 (redacción) sigue,
+ahora como K6.
 
 **Lista vigente al cierre del 2026-10-04.** J1–J8 arriba conservan las preguntas
 y planes de la junta anterior; sus estados históricos no sustituyen esta lista.
