@@ -872,6 +872,33 @@ Primero el trabajo útil con cualquier enfoque (banda de frecuencia, inventario 
 ChirpStack, línea base de consumo y pérdida natural, código de Di Pinto et al.); después lo
 costoso de deshacer (título y objetivos, compras grandes, detector de la parte 2).
 
+### K9a: banda de frecuencia para México (2026-10-05)
+
+Fuente primaria: [LoRa Alliance RP002-1.0.3](https://lora-alliance.org/wp-content/uploads/2021/05/RP002-1.0.3-FINAL-1.pdf)
+(2021), sección 1.2, tabla de países. No se pudo descargar la 1.0.4 (403); por verificar si
+cambia algo.
+
+- **México (MX): 902–928 MHz, plan US902-928**, con la nota al pie 1: «AU915-928 also applies
+  to this band». Ambos planes son válidos; el sugerido en primer lugar es **US915**. La
+  columna de dispositivos certificados con homologación (*Regulatory Type Approval*) está
+  **vacía** para México: la homologación ante el IFT es aparte.
+- **Regulación local:** el IFT regula 902–928 MHz con la disposición técnica
+  **IFT-008-2015** (espectro disperso; sustituyó a la NOM-121-SCT1-2009). Los límites de
+  potencia y de tiempo de ocupación del canal en esa disposición están **por verificar**.
+  En la sala blindada la emisión queda confinada, pero se documenta igual (ver «Entorno de
+  los experimentos»).
+- **Parámetros de US915 que importan para el segundo ataque** (RP002-1.0.3, 2.5):
+  - Subida: 64 canales de 125 kHz (902.3–914.9 MHz) más 8 de 500 kHz.
+  - Bajada: 8 canales de 500 kHz (923.3–927.5 MHz).
+  - **RX1 abre 1 s después del envío y RX2 a los 2 s**; RX2 usa por omisión 923.3 MHz con DR8.
+  - Potencia máxima: +30 dBm; tiempo máximo en el aire por envío (*dwell time*): 400 ms.
+- **Diferencia con Di Pinto et al.:** ellos usan la banda europea de 868 MHz, con límite
+  de ciclo de trabajo (*duty cycle*). US915 no tiene ese límite pero sí el de 400 ms, que
+  impide usar SF11–SF12 en 125 kHz. Los factores de dispersión disponibles y el costo
+  de un reintento cambian; el modelo de energía debe hacerse con los parámetros de US915.
+- **Pendiente:** elegir la subbanda (grupo de 8 canales) del gateway. Depende del
+  hardware del inventario; ChirpStack se configura con la misma.
+
 ### Pendientes
 
 | # | Pendiente | Estado |
@@ -884,11 +911,259 @@ costoso de deshacer (título y objetivos, compras grandes, detector de la parte 
 | K6 | Redactar la primera parte (bit flipping) con los resultados ya obtenidos | Pendiente |
 | K7 | Actualizar el README cuando el giro esté definido | Pendiente |
 | K8 | Informar al asesor la propuesta de metodología y el inicio del trabajo | Pendiente |
-| K9 | Trabajo inicial de la parte 2: banda de frecuencia, inventario de hardware, ChirpStack, línea base de consumo y pérdida natural | Pendiente |
+| K9 | Trabajo inicial de la parte 2: banda de frecuencia, inventario de hardware, ChirpStack, línea base de consumo y pérdida natural | **Banda resuelta 2026-10-05** (US915; ver «K9a»). Inventario, ChirpStack y líneas base pendientes |
+
+---
+
+## 2026-10-12 — Junta con el asesor: anomalías a nivel de red
+
+Fuente: transcripción automática de mala calidad. Los hablantes se mezclan, así que la
+atribución de cada idea es aproximada. Se llevaron
+[dos propuestas](propuestas_reunion_2026-10-12.md) (consumo y detección; integridad y costo
+de protección). **Ninguna se adoptó.**
+
+### Contexto
+
+- El Dr. Orozco (UCLM) envió dos artículos. El primero es un IDS con aprendizaje federado
+  y supervisado, con F1 ≈ 99 %. El segundo es un *survey* de ataques. En ambos, los
+  ataques son **ruidosos** (DoS, jamming, inundaciones) y vienen bien etiquetados. Eso
+  explica las métricas altas y los aleja del bit flipping.
+- Sugerencia de Orozco, según la explica el asesor: dejar de ver el ataque a **un**
+  sensor y ver la **red como un todo**. Se supone un nodo ya malicioso o descompuesto, y
+  se usa la información de los demás para detectar que «hace cosas raras». Ejemplo del
+  asesor: todos los sensores marcan 28–29 °C y uno marca 50 °C.
+
+### Acuerdos
+
+| # | Acuerdo |
+|---|---|
+| L-A1 | El bit flipping **se conserva**: ya es una contribución (caracterización formal de qué bits producen daño y cuáles detecta el LSTM). |
+| L-A2 | El drenado de energía con banco real **no se sigue por ahora**. Implementarlo «nos va a hacer perder un chorro de tiempo», igual que pasó con el atacante interno en bit flipping. |
+| L-A3 | Nueva dirección: **detectar sensores anómalos a nivel de red**, por error de calibración, falla o nodo malicioso. La anomalía no tiene por qué ser maliciosa. |
+| L-A4 | Primer paso con datos existentes: las estaciones RAMA. Su lejanía entre sí es una limitación conocida que se acepta. |
+| L-A5 | Datos: matriz con **una fila por hora y una columna por estación**. |
+| L-A6 | Anomalía inicial: **error de calibración multiplicativo** (+10 % sobre el valor real). Dura un número aleatorio de **1 a 7 días** y se aplica a estaciones elegidas al azar, no siempre la misma. Se etiqueta como «anomalía». Puede haber episodios simultáneos en dos estaciones. |
+| L-A7 | Corridas por severidad: muy obvia (×2, ×3, ×4), 50 %, 20 %, 10 % y 5 %. Después, una versión aleatoria entre 10 y 50 %. |
+| L-A8 | Primera tarea: **anomalía / no anomalía, sin importar dónde**. Localizar el nodo viene después. |
+| L-A9 | División **por años completos**, no al azar (el LSTM necesita historia). Se reutiliza el esquema del protocolo V4: ajuste 2020–2021, validación 2022, ajuste definitivo 2020–2022, calibración 2023, prueba 2024 y complementarias 2025 y 2026. |
+| L-A10 | Modelos: del más simple (Random Forest) al más complejo (LSTM). Meta del asesor: una detección «decente», del 80–90 %. |
+| L-A11 | Por ahora no se tocan las estaciones sin datos. |
+| L-A12 | El asesor pide **investigar si esto ya se hizo**. Él cree que no, al menos con ozono y en este escenario. |
+
+**Descartado en la junta:** la «calculadora de severidad» de ataques (el asesor: «nos
+metemos con un montón de ataques»). La idea de poner varios nodos por estación para darle
+resiliencia se considera «lo mismo» que detectar el sensor anómalo.
+
+**Idea paralela del asesor, sin compromiso:** montar una red propia de 10–20 estaciones
+meteorológicas con celda solar en varios edificios. Guardarían datos durante 1–2 meses sin
+necesidad de LoRa; las anomalías se inyectarían después. Pendientes: permisos, una
+cotización de tarjeta y un equipo de prueba en camino. Mientras tanto se trabaja con RAMA.
+
+**Plazo:** el asesor señala que el semestre termina en mes y medio y que la meta es
+terminar durante la estancia en UCLM.
+
+### Verificaciones contra el repositorio (2026-10-12)
+
+- **Cobertura** (`data/processed/o3_2020_2026_ancho.parquet`, 36 columnas, 2020-01 a
+  2026-07): **COY y SJA nunca reportan** (en la junta se dijeron 3). SFE deja de reportar en
+  2023. Hay estaciones con años completos vacíos: ACO 2020 y 2024, XAL 2020–2022, HGM
+  2021–2022, CHO 2020 y 2026, AJM 2021 y FAR 2026. Sólo el **9.7 %** de las horas tiene
+  ≥30 estaciones con dato. La matriz «una columna por estación» tendrá huecos estructurales:
+  el conjunto de estaciones activas cambia entre años de ajuste y de prueba.
+- **Estimación exploratoria de la detectabilidad de un sesgo de calibración.** No es un
+  resultado aceptado. Usa las predicciones limpias **guardadas en disco** del LSTM V4 de
+  CCA (`results/lstm_v4_multianual_v1/estaciones/CCA/`, calibración 2023 y prueba 2024);
+  **no se entrenó ningún modelo**. Se suma k·valor real al residuo y se promedia por día o
+  ventana. El umbral es el p95 del residuo medio limpio de 2023.
+  - En 2024 el ozono medio de CCA es 33.8 ppb: un +10 % equivale a **3.4 ppb** en
+    promedio (6.5 ppb entre 12 y 18 h). El σ del residuo horario es de 11.8 ppb.
+  - Promediar no reduce el ruido tanto como se esperaría, porque el residuo está
+    autocorrelacionado: σ diario 6.8 ppb, σ en 7 días 5.1 ppb.
+
+    | Ventana | Limpio (FP) | +5 % | +10 % | +20 % | +50 % | +100 % |
+    |---|---:|---:|---:|---:|---:|---:|
+    | 1 día | 4.9 % | 9.2 % | 13.6 % | 24.6 % | 69.1 % | 94.5 % |
+    | 3 días | 4 % | 7 % | 12 % | 27 % | 75 % | — |
+    | 7 días | 5 % | 7 % | 12 % | 30 % | 87 % | — |
+
+  - Es una **cota optimista**. No considera que el perfil base adaptativo de 14 días se
+    calcula con los valores de la propia estación, así que un sesgo sostenido se
+    incorpora a la base (alrededor de la mitad tras 7 días) y el residuo se encoge.
+    Tampoco se probó un detector diseñado para sesgo multiplicativo (por ejemplo,
+    pendiente o razón frente a las vecinas). CCA es además la estación con mejor
+    cobertura (94 %).
+  - **Lectura:** con este detector, un error del 10 % cae dentro del error lento del
+    propio modelo. La meta del 80–90 % sólo parece alcanzable para sesgos del 50 % o más.
+    Es la misma hipótesis común de la parte 1: lo que cae dentro de la variabilidad
+    legítima no se detecta.
+
+### Aclaración del tesista sobre el método (2026-10-12)
+
+La estimación anterior **no evalúa el enfoque acordado**. Mide el detector de la parte 1:
+predecir el valor de una estación con las demás y alertar si el residuo pasa un umbral.
+El acuerdo de la junta es otro:
+
+- **Unidad de análisis: la red, no un nodo.** El modelo recibe la matriz de todas las
+  estaciones y decide si hay anomalía en la red. Localizar la estación viene después.
+- **Aprendizaje supervisado con datos etiquetados.** Ya no se estima el valor esperado: el
+  modelo aprende qué es el comportamiento estándar de la red a partir de ejemplos
+  etiquetados normal/anomalía. El LSTM de la parte 1, entrenado para predecir y sin
+  etiquetas, no aprendía a separar bien los casos.
+- **Anomalía, no necesariamente ataque:** una alteración de X % (calibración, falla o
+  nodo malicioso).
+- **Ejes del experimento:** severidad de la alteración (100 %, es decir el doble, y
+  menores), **número de estaciones afectadas (N)** y **duración (N tiempo)**.
+- **Entrenamiento por años completos** (ver L-A9), no con la división temporal dentro de
+  un año que se usó en bit flipping.
+
+La tabla de la estimación anterior queda, a lo sumo, como **línea base de comparación**
+del enfoque por residuo. No predice el desempeño del clasificador supervisado.
+
+### Decisiones del tesista sobre el diseño (2026-10-12)
+
+1. **Barrido de lo ruidoso a lo sutil.** Se empieza con alteraciones del 100 % (el doble),
+   sabiendo que son ruidosas, para encontrar hasta dónde se puede empujar el límite, igual
+   que con bit flipping. La alteración va desde una mala calibración hasta un ataque de
+   cualquier tipo; no necesariamente bit flipping.
+2. **Varios *runs*, un DS por severidad** (100 %, 50 %, 10 %…). Cada DS lleva alteraciones
+   en horas aleatorias y nodos aleatorios. La probabilidad de ataque se sortea por *run*
+   (como un *nonce*), dentro de un rango realista: la referencia es el 5 % por lectura de
+   la parte 1. Objetivo: que el modelo no aprenda la huella del script.
+3. **Exclusiones por ahora:** COY, SJA y SFE. **XAL** queda como experimento posterior
+   sobre qué pasa cuando una estación reporta y deja de reportar. Orden: primero lo más
+   importante, después lo específico o difícil.
+4. **Novedad:** comparar el bit flipping visto por nodo con las anomalías vistas en la
+   red, y mostrar que afirmar que un F1 «es exitoso» depende mucho de qué tan ruidoso es
+   el ataque y de la calidad del detector, desde modelos fáciles (Random Forest) hasta
+   complejos (LSTM). **La parte 1 se conserva:** el aporte es la comparación entre ataques.
+
+**Observaciones de revisión (Claude, 2026-10-12), por resolver en L2:**
+
+- **La probabilidad de ataque debe definirse por ejemplo, no por lectura.** Con 33
+  estaciones y 5 % por lectura, el 81.6 % de las horas-red tiene al menos una lectura
+  alterada, y casi el 100 % de las ventanas de 24 h. Con 0.5 % por lectura, el 15.2 % de
+  las horas y el 98.1 % de las ventanas de 24 h. Cálculo: 1 − (1 − p)^n, con n lecturas
+  por ejemplo.
+- **Diseño pareado entre severidades.** Si cada DS sortea su propia probabilidad, la
+  diferencia de F1 entre el 100 % y el 10 % mezcla severidad y prevalencia. El F1 depende
+  de la proporción de positivos. Propuesta: el mismo plan aleatorio (horas, nodos,
+  probabilidad) para todas las severidades de un *run*, cambiando sólo la magnitud. Los
+  distintos *runs* (semillas) dan la variabilidad. Reportar también recall con una tasa
+  fija de falsas alarmas, que no depende de la prevalencia.
+- **Reproducibilidad:** guardar la semilla y el plan de inyección de cada *run*
+  (CLAUDE.md).
+- Distinguir **alteraciones de horas sueltas** (comparables con bit flipping, por lectura)
+  de **episodios de 1–7 días** (calibración, L-A6). Son dos tipos de anomalía.
+- Para comparar con la parte 1 hace falta fijar algo común entre ambas: magnitud de la
+  alteración (ppb o %) y una métrica con tasa fija de falsas alarmas. Entre las dos partes
+  cambian a la vez el tipo de ataque, la unidad (nodo o red) y el aprendizaje
+  (predicción o supervisado).
+
+### Revisión rápida de novedad (2026-10-12)
+
+Búsqueda web, no exhaustiva; sólo resúmenes. **Hay antecedentes directos**, así que no
+puede afirmarse que «nadie lo ha hecho»:
+
+- Detección de niveles anormales de ozono en la red de estaciones de Alta Normandía
+  (Francia) con PCA-GLR, PCA-MEWMA y RBM + OCSVM (Harkat, Dairi y coautores).
+  [PCA-GLR](https://elmi.hbku.edu.qa/en/publications/detecting-abnormal-ozone-levels-using-pca-based-glr-hypothesis-te/),
+  [autores](https://univ-oran.academia.edu/AbdelkaderDairi).
+- Estimación de cada sensor a partir de sus vecinos para detectar deriva y *offset* en
+  redes ambientales (Jesus, Oliveira y Casimiro, LNEC).
+  [P 3231](https://repositorio.lnec.pt/bitstream/123456789/1014234/2/P_3231.pdf).
+- Revisión de algoritmos de calibración *in situ* en redes de sensores ambientales
+  (Delaine, Lebental y Rivano, IEEE Sensors J. 2019).
+  [HAL](https://hal.archives-ouvertes.fr/hal-02174938).
+- Detección de deriva con un *proxy* de sitios vecinos en una red de bajo costo
+  (Auckland). [Registro](https://researchspace.auckland.ac.nz/handle/2292/41596).
+- Control estadístico de procesos para sesgos de instrumentos de ozono (Bologna, 1997).
+  [WIT](https://witpress.com/elibrary/wit-transactions-on-ecology-and-the-environment/21/7448).
+
+Posibles diferenciadores, por verificar al leer los textos completos:
+
+- La **frontera de detección por severidad y duración**, medida con el daño operativo
+  (cambio de banda NOM-172 o excedencia de 155 ppb) y no con métricas genéricas.
+- Una red **dispersa** de referencia (RAMA) frente a las redes densas de bajo costo.
+- Tratar en un solo marco un nodo comprometido y un sensor descalibrado: producen la
+  misma señal, y eso limita la atribución.
+
+### Dudas para el asesor
+
+1. **Unidad de decisión:** ¿hora-red, día-red o día-estación? Si se inyectan episodios
+   «en todas las estaciones», casi toda hora-red tendría alguna anomalía y la etiqueta
+   binaria quedaría casi siempre en 1. Hace falta fijar la tasa de episodios por estación
+   y año.
+2. «Siempre lo vas a cortar en un horario en particular»: ¿el episodio empieza o termina a
+   una hora fija, como cuando llega el técnico a recalibrar?
+3. ¿El detector supervisado (Random Forest → LSTM) se compara contra el residuo del V4 como
+   línea base no supervisada? Las predicciones limpias ya existen para 31 estaciones.
+4. Si la estación anómala es también entrada de las demás, contamina el contexto de sus
+   vecinas. ¿Se acepta así o se controla?
+5. ¿Cómo se integra con el título y los objetivos de la tesis (LoRaWAN)? El asesor dijo
+   que encajar las dos partes «no es tanto problema», pero no quedó definido.
+
+### Estado de K1–K9 tras la junta
+
+K4, K5 y K9 (drenado de energía y banco de pruebas) quedan **en pausa** por L-A2. Lo hecho
+en K9a se conserva. K6 (redactar la parte 1) **sigue vigente**. K7 espera a que se defina
+el encaje. K1 y K8 quedan sin efecto con este giro, salvo que el asesor pida retomarlos.
+
+### Pendientes
+
+| # | Pendiente | Estado |
+|---|---|---|
+| L1 | Leer los antecedentes de la revisión de novedad y fijar el diferenciador | Pendiente — antes de programar |
+| L2 | Escribir el protocolo de inyección: unidad de decisión, tasa, duración, severidades e interacción con faltantes | **Escrito** (2026-10-12): [`protocolo_anomalias_red_v1.md`](protocolo_anomalias_red_v1.md). Ver «L2: protocolo de la parte 2». Quedan sus pendientes P1–P6 |
+| L3 | Línea base barata: residuo guardado del V4 por estación con ventanas de 1, 3 y 7 días | **Opcional** (aclaración 2026-10-12): sólo como comparación; no es el método acordado |
+| L4 | Clasificador supervisado a nivel de red (primero Random Forest) con la división por años del V4 | Pendiente — después de L2. **Es el método principal** (aclaración 2026-10-12) |
+| L5 | Redacción de la parte 1 (antes K6) | Pendiente |
+| L6 | Red propia de sensores: cotización, equipo de prueba y permisos | Idea paralela del asesor; sin compromiso |
+| L7 | Resolver las dudas para el asesor | Pendiente |
+
+### L2: protocolo de la parte 2 (2026-10-12)
+
+Escrito en [`protocolo_anomalias_red_v1.md`](protocolo_anomalias_red_v1.md) y fijado antes de
+programar. Reúne las decisiones del tesista y las recomendaciones de revisión que aceptó el
+mismo día. En corto:
+
+| Elemento | Decisión |
+|---|---|
+| Pregunta | ¿El detector alerta de una anomalía en la red, y con qué tamaño y duración de la anomalía? Sólo alerta, no corrige |
+| Estaciones | Matriz del V4 (33 columnas, con XAL inactivo). Se alteran los 31 objetivos del V4 |
+| Alteración | x·(1 + δ) con signo + o x/(1 + δ) con signo −; δ = 100, 50, 20, 10 y 5 %. El signo se sortea una vez por episodio |
+| Episodios | Días completos, de 1 a 7, desde las 00 h. Sólo se alteran horas con dato |
+| Tasa | Probabilidad por estación y día entre 0.10 y 0.30 % (base 0.15 %), sorteada en cada corrida: unos 17 episodios al año en la red y 1.5 % de horas con coincidencias |
+| Diseño | Un plan por corrida para todos los δ (pareado). 10 corridas en 2024 y un plan de entrenamiento en 2020–2022 |
+| Detectores | Random Forest (supervisado, 66 columnas de la hora t, un modelo por δ), IsolationForest y V4 cargado de disco. LSTM clasificador opcional |
+| Umbrales | Falsas alarmas por hora de red de 5 y 1 %, calibradas en 2023 limpio |
+| Métricas | Episodios detectados, horas hasta la primera alerta y daño antes de la alerta (bandas NOM-172 y 155 ppb), por δ y por signo. El F1 sólo como contraste |
+
+Las equivalencias de la tasa salen de una simulación (31 estaciones, 200 años, semilla 42) en
+la que no interviene ningún modelo.
+
+**Corrección (2026-10-12):** durante la revisión del protocolo se dijo que el 5 % de falsas
+alarmas por hora permitía comparar directamente con la parte 1. No es así: el 5 % por hora de
+red es mucho más estricto por estación que el p95 por lectura de la parte 1. Por eso el
+protocolo también reporta el V4 con su umbral original (§9).
+
+**Dudas para el asesor que resuelve el protocolo:**
+
+- **1. Unidad de decisión:** la hora de red, y en cada episodio sólo cuenta la primera
+  alerta.
+- **2. Horario de inicio:** días completos desde las 00 h, según lo que el asesor dijo en la
+  junta («en días completos durante ciertos días»).
+- **3. Línea base no supervisada:** sí, con el V4 y el IsolationForest.
+- **4. Contaminación del contexto:** se acepta y se declara.
+
+**Sigue abierta** la 5 (vínculo con LoRaWAN y título), que pasa a ser la P6 del protocolo.
 
 ---
 
 ## Siguiente
+
+**Actualización 2026-10-12:** la junta del 2026-10-12 sustituye el segundo ataque
+(drenado de energía) por la **detección de sensores anómalos a nivel de red**. La lista
+vigente es **L1–L7**. Las tablas K y de 2026-10-04 que siguen quedan como historial.
 
 **Actualización 2026-10-05:** la junta del 2026-10-05 reorienta la tesis hacia un segundo
 ataque. Sus pendientes **K1–K7** (sección anterior) tienen prioridad sobre las filas 2–3
