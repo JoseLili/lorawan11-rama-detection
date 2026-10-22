@@ -1,0 +1,21 @@
+referencia,resumen,dias_estacion,ruido_pct,fa_estacion_dia_pct,umbral_sigmas,deteccion_d5_pct,deteccion_d10_pct,deteccion_d20_pct
+propia,1 número: día completo,26096,24.9,5.0,2.19,5.3,6.1,9.2
+propia,1 número: día completo,26096,24.9,0.161,4.27,0.2,0.2,0.3
+propia,2 números: día y noche,25587,27.0,5.0,2.73,5.1,5.5,7.1
+propia,2 números: día y noche,25587,27.0,0.161,5.42,0.2,0.2,0.2
+propia,4 números: cuartos de 6 h,20979,31.1,5.0,3.28,5.0,5.3,6.0
+propia,4 números: cuartos de 6 h,20979,31.1,0.161,6.13,0.2,0.2,0.2
+propia,1 número: sólo la tarde 12–17 h,25980,29.1,5.0,2.33,5.1,5.5,7.3
+propia,1 número: sólo la tarde 12–17 h,25980,29.1,0.161,4.46,0.2,0.2,0.3
+propia,Una sola hora (15 h),26301,36.0,5.0,2.22,5.1,5.5,6.8
+propia,Una sola hora (15 h),26301,36.0,0.161,4.56,0.2,0.2,0.2
+vecinas,1 número: día completo,25368,8.3,5.0,2.38,7.3,14.6,47.2
+vecinas,1 número: día completo,25368,8.3,0.161,6.53,0.2,0.2,0.6
+vecinas,2 números: día y noche,24732,11.1,5.0,3.06,6.1,11.3,42.7
+vecinas,2 números: día y noche,24732,11.1,0.161,7.0,0.2,0.2,0.6
+vecinas,4 números: cuartos de 6 h,20014,13.8,5.0,3.81,5.6,8.1,27.2
+vecinas,4 números: cuartos de 6 h,20014,13.8,0.161,7.76,0.2,0.2,0.4
+vecinas,1 número: sólo la tarde 12–17 h,25215,6.6,5.0,2.44,8.1,20.1,60.2
+vecinas,1 número: sólo la tarde 12–17 h,25215,6.6,0.161,5.87,0.2,0.3,2.3
+vecinas,Una sola hora (15 h),25612,9.9,5.0,2.52,6.2,10.0,30.4
+vecinas,Una sola hora (15 h),25612,9.9,0.161,6.75,0.2,0.2,0.3

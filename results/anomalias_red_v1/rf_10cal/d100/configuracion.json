@@ -1,0 +1,53 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "detector": "random_forest",
+  "delta_pct": 100,
+  "origen": "recién entrenado",
+  "calendarios_entrenamiento": 10,
+  "fecha": "2026-10-16T10:13:00",
+  "sklearn": "1.9.1",
+  "hiperparametros": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": null,
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 100,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "sha256_matriz_entrenamiento": {
+    "entrenamiento_01_d100": "47fe54fd3981e26181caca63ae2c43efe69406b333e405f65cb0d6aeced4b7ad",
+    "entrenamiento_02_d100": "6878adae5085c6463a5c1b3f62d70bcb3d65174e5ac37d38033ddf329eb64ae9",
+    "entrenamiento_03_d100": "770668dd00bc8ab31b6feb000315a2ca912bc226389bcade11feb25ff1cf2b61",
+    "entrenamiento_04_d100": "4ed4ad7fc5b49a349047d1c50589433df77f3e847bb53b4029a782d6e6821060",
+    "entrenamiento_05_d100": "31f11c2bc2d091dc82204a61a99d44a775b7e112338ce8dac16d27355e59f9ac",
+    "entrenamiento_06_d100": "85ca34c620f42ae22b75eae60f2ed9b6f62a3647b559ab6add81eb1d4d724c8a",
+    "entrenamiento_07_d100": "bfd7f975a01e90d9a2357d2f1c2baa1465164cb05bdf2baab4fbea8e24c23142",
+    "entrenamiento_08_d100": "08698a2240af62d7dfc543d5a08b8dbb3c1a271f14680e7288d573730f4d4231",
+    "entrenamiento_09_d100": "3e2a486d27c4216018d4f30f3d7dfd98b9562440cf913becfb02425fe094838e",
+    "entrenamiento_10_d100": "77586d3537efa974147a7342f3d48884c29557a1c14aef8d54a7714990448da4"
+  },
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "horas_entrenamiento": 263040,
+  "horas_etiqueta_1": 45052,
+  "umbrales": {
+    "5": 0.64,
+    "1": 0.71
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 4.3493150684931505,
+    "1": 0.9246575342465754
+  },
+  "reproducibilidad": "dos entrenamientos con puntajes idénticos en 2023"
+}

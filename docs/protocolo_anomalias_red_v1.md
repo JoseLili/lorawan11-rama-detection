@@ -47,7 +47,7 @@ Detectores en cada parte:
 | Random Forest | Simple, supervisado | CCA 2025: valor y hora (notebook 06) | Red: 66 columnas de la hora t |
 | IsolationForest | Simple, no supervisado | CCA 2025: valor y hora (notebook 06) | Red: 66 columnas de la hora t |
 | LSTM V4 | Complejo, no supervisado | 31 estaciones, prueba 2024–2026 | El mismo modelo, con alerta de red |
-| LSTM clasificador | Complejo, supervisado | — | Opcional, si hay tiempo |
+| LSTM supervisado | Complejo, supervisado | — | Red: ventana de 24 horas × 66 columnas (revisión 6) |
 
 **Límite de la comparación.** Las celdas de Random Forest e IsolationForest de la parte 1 usan
 otro periodo y otra división (2025, con 80/20 cronológico dentro del año). Para que la
@@ -155,7 +155,7 @@ Todos producen un puntaje por hora de red, y su umbral se fija con 2023 limpio (
 | Random Forest | Supervisado, con el ajuste definitivo 2020–2022 y el plan de entrenamiento. Usa la etiqueta de red. Un modelo por δ, como en la parte 1 se entrenaba uno por bit. Hiperparámetros por omisión, `random_state=42`, sin ajuste | 66 columnas de la hora t: 32 valores normalizados, 32 máscaras, y seno y coseno de la hora |
 | IsolationForest | No supervisado, con 2020–2022 limpio | Las mismas 66 columnas |
 | LSTM V4 | Ya entrenado: se carga de disco y no se reentrena | La suya (24 × 66 por estación). Puntaje de red: el máximo entre estaciones de \|residuo\| / p95 |
-| LSTM clasificador | Opcional, supervisado | Por definir |
+| LSTM supervisado | **Principal desde la revisión 6.** Supervisado, con 10 calendarios de entrenamiento sobre 2020–2022 y la división del V4. Un modelo por δ | Las 66 columnas de las horas t−23…t |
 
 - La normalización usa la media y la desviación de 2020–2022, como el V4.
 - **La etiqueta nunca es entrada del modelo.** La etiqueta de red en la hora t vale 1 si al
@@ -249,3 +249,208 @@ resultados.
 | Revisión | Fecha | Cambio | Motivo |
 |---|---|---|---|
 | 0 | 2026-10-12 | Versión inicial | — |
+| 1 | 2026-10-13 | Aclaraciones de implementación del §5, §6 y §8 (abajo). No cambian el diseño | Surgieron al programar el generador, antes de entrenar o evaluar cualquier detector |
+| 2 | 2026-10-13 | Nivel de azar para la detección por episodio y detección por hora como métrica principal (§9) | Con falsas alarmas por hora, un episodio largo casi siempre recibe alguna alerta por azar. Se registró antes de evaluar cualquier detector |
+| 3 | 2026-10-16 | Aclaraciones de implementación del IsolationForest (§8) y desglose de la detección por hora según el tamaño del cambio (§9). No cambian el diseño | Surgieron al programarlo, antes de evaluarlo |
+| 4 | 2026-10-16 | Nivel de azar en el desglose por tamaño del cambio | Se agregó **después** de ver el IsolationForest con δ = 100 %. Sólo puede bajar la detección aparente; no cambia umbrales ni métricas principales |
+| 5 | 2026-10-16 | Aclaraciones de implementación del V4 (§8 y §9): cómo recibe la matriz alterada, puntaje y umbrales de red, control de reproducción y diagnóstico de ubicación. No cambian el diseño | Surgieron al programarlo, antes de evaluarlo |
+| 6 | 2026-10-16 | El LSTM supervisado pasa de opcional a detector principal (§2 y §8), con 10 calendarios de entrenamiento. Se agregan un Random Forest con los mismos calendarios y una prueba secundaria con hora de inicio al azar | Corrige el protocolo para que siga lo acordado el 2026-10-12 (método supervisado, del Random Forest al LSTM). Aprobado por el tesista antes de entrenar |
+| 7 | 2026-10-16 | Segundo intento supervisado: entradas relativas al perfil de 14 días y 20 calendarios de entrenamiento, para el LSTM supervisado y su Random Forest de control. La revisión 6 y sus resultados se conservan | Se registró **después** de ver la revisión 6 en 2024. El diseño se eligió sólo con la validación 2022, con una regla fijada antes de compararlo (`progreso.md`, 2026-10-16) |
+
+### Revisión 1 (2026-10-13)
+
+Implementación: `src/detect/anomalias_red.py`, `experiments/anomalias_red/generar_planes.py` y
+`tests/test_anomalias_red.py`.
+
+- **Redondeo (§5).** El valor alterado se redondea al ppb entero más cercano, con las mitades
+  hacia arriba, porque la RAMA reporta enteros. Sin redondeo, sólo las horas alteradas tendrían
+  decimales, y un detector supervisado podría aprender esa huella en lugar de la anomalía. Como
+  consecuencia, con δ chico las lecturas bajas pueden no cambiar: con δ = 5 %, ninguna lectura
+  menor que 10 ppb cambia, y en los datos el 24 % de las lecturas está por debajo de 10 ppb.
+- **Etiqueta (§8).** La «lectura alterada» es la que cambió de valor (recibido ≠ original). Una
+  hora del episodio que el redondeo deja igual no se etiqueta, para no enseñarle al modelo
+  supervisado filas idénticas a las normales con etiqueta 1.
+- **Episodio evaluable (§9).** Un episodio se evalúa si tiene al menos una hora con dato. El
+  criterio no depende de δ, así que el denominador de la detección es el mismo con todos los δ.
+  Los episodios sin dato se reportan aparte. ACO no tiene datos en 2024, así que sus episodios
+  de prueba nunca son evaluables.
+- **Semillas (§6).** Cada generador usa la clave de cinco enteros [42, año de inicio del
+  periodo, número de corrida, uso, índice de la estación en la matriz]. El uso 0 sortea la p de
+  la corrida y el uso 1 el plan de la estación. Los sorteos de cada día se hacen por adelantado,
+  así que el plan de una estación no cambia si se quitan otras.
+- **Promedio de p (§6).** La base de 0.15 % no es el promedio del rango: una p uniforme entre
+  0.10 y 0.30 % promedia 0.20 %. Las 10 corridas de 2024 sacaron p entre 0.101 y 0.286 %
+  (promedio 0.21 %), con 223 episodios en total, de los cuales 192 son evaluables. Son más que
+  los «unos 17 por corrida» del §6. El plan de entrenamiento usa la base: 61 episodios, de los
+  cuales 50 son evaluables. No se cambia el diseño: entrenar con una tasa y probar con otra
+  parecida es realista, y más episodios reducen el margen.
+
+### Revisión 2 (2026-10-13): nivel de azar y detección por hora
+
+Esta revisión se registró antes de evaluar cualquier detector. El error es de la versión 0, y
+lo cometió Claude al redactarla.
+
+**Problema.** Con falsas alarmas fijas por hora de red, un episodio de varias horas casi
+siempre tiene alguna alerta por puro azar. Si las alertas fueran independientes, un detector
+que alerta al azar «detectaría» la proporción 1 − (1 − α)^horas de los episodios:
+
+| α por hora de red | 1 día | 2 días | 4 días | 7 días |
+|---|---:|---:|---:|---:|
+| 5 % | 71 % | 91 % | 99 % | 100 % |
+| 1 % | 21 % | 38 % | 62 % | 82 % |
+
+Así, la regla «detectado si hay alguna alerta mientras dura» del §9 no distingue un buen
+detector de uno que alerta al azar.
+
+**Cambios en las métricas** (los umbrales del §9 no cambian):
+
+- **Nivel de azar.** Cada detección por episodio se reporta junto a la de las mismas ventanas
+  evaluadas con las alertas del mismo detector en 2024 limpio. Esta medida es empírica y
+  conserva la correlación temporal real de las alertas. Lo que aporta el detector es la
+  diferencia entre las dos. Las horas hasta la primera alerta llevan también su par al azar.
+- **Detección por hora como métrica principal.** Es el porcentaje de horas de red con etiqueta
+  1 que alertan, con las falsas alarmas fijas. No sufre el problema anterior y es la medida más
+  cercana al recall por lectura de la parte 1.
+- La detección por episodio y las horas hasta la alerta se conservan, siempre con su nivel de
+  azar al lado.
+
+### Revisión 3 (2026-10-16): IsolationForest
+
+Se registró antes de evaluar el IsolationForest. Implementación:
+`experiments/anomalias_red/entrenar_if.py`.
+
+- **Un solo modelo para todos los δ.** Se entrena con la matriz limpia de 2020–2022, que no
+  tiene anomalías. Por eso el modelo, sus puntajes en 2023 y 2024 limpios y sus umbrales son
+  los mismos con todos los δ; sólo cambia el examen. El Random Forest, en cambio, necesita un
+  modelo por δ porque aprende de las anomalías etiquetadas.
+- **Hiperparámetros.** Los de omisión de scikit-learn (100 árboles, 256 horas por árbol, todas
+  las columnas), con `random_state=42`. Son los de la parte 1, salvo `contamination`, que no se
+  usa (§8).
+- **Puntaje.** Es −`score_samples`: mayor puntaje, hora más anómala. No depende de
+  `contamination`.
+- **Desglose por tamaño del cambio.** La detección por hora se reporta también según el mayor
+  cambio en ppb de esa hora entre estaciones: 1–16, 16–32, 32–64 y ≥ 64 ppb. Es el mismo
+  desglose que se usó para diagnosticar el Random Forest. Es descriptivo y no cambia los
+  umbrales ni las métricas principales.
+
+### Revisión 4 (2026-10-16): nivel de azar por tamaño del cambio
+
+A diferencia de las anteriores, ésta se agregó **después** de ver un resultado: el del
+IsolationForest con δ = 100 %.
+
+**Problema.** El desglose de la revisión 3 mezcla dos cosas: cuánto reacciona el detector a la
+alteración y qué horas prefiere de por sí. Los cambios de 64 ppb o más sólo ocurren cuando el
+ozono ya es alto, es decir, por la tarde. Un detector que alerta mucho por la tarde «detecta»
+esas horas aunque no se hubieran alterado.
+
+**Cambio.** Cada tramo se reporta junto a la proporción de esas mismas horas que alertan en 2024
+limpio, con el mismo detector y el mismo umbral. Lo que aporta la alteración es la diferencia.
+Es la misma idea del nivel de azar de la revisión 2, aplicada a las horas en lugar de a los
+episodios. Esta medida sólo puede bajar la detección aparente, y no cambia los umbrales ni las
+métricas principales del §9.
+
+### Revisión 5 (2026-10-16): V4 sobre la matriz alterada
+
+Se registró antes de evaluar el V4. Implementación: `experiments/anomalias_red/evaluar_v4.py`.
+
+- **Cómo recibe la matriz alterada.** Se reconstruye la serie completa del V4 (2020-01-01 a
+  2026-07-31, 33 estaciones, leída de los zip con su SHA-256). Sólo se sustituyen las horas de
+  2024 de las 32 columnas de la matriz de red por las de la matriz de examen. El contexto de
+  24 horas y el perfil de 14 días usan el pasado limpio hasta 2023 y, dentro de 2024, los
+  valores alterados. XAL sigue como canal inactivo.
+- **Sin reentrenar ni recalibrar.** Se cargan de disco los 31 modelos y sus umbrales p95 de
+  2023, tal cual. Sólo se predice la etapa `prueba_2024`.
+- **Puntaje de red.** En cada hora es el máximo de |residuo| / p95 entre las estaciones con
+  predicción. Una hora sin ninguna predicción recibe 0 y no puede alertar.
+- **Umbrales de red.** Los de 5 y 1 % se calibran con los residuos de 2023 guardados en disco
+  (`calibracion_2023.csv.gz`). Además se reporta el nivel original del V4 (puntaje > 1, es
+  decir, alguna estación pasa su p95) con la tasa de alertas de red que produce (§9).
+- **Control de reproducción.** El 2024 limpio, pasado por esta misma vía, debe reproducir las
+  predicciones guardadas (`predicciones_2024.csv.gz`) de las 31 estaciones.
+- **Diagnóstico de ubicación.** Se guarda qué estación da el máximo en cada hora. Se reporta en
+  qué proporción de las horas anómalas con alerta esa estación es una de las alteradas. Es
+  descriptivo.
+
+### Revisión 6 (2026-10-16): LSTM supervisado de red
+
+Se registró antes de entrenarlo y la aprobó el tesista. Corrige un error de la versión 0, que
+cometió Claude al redactarla: el acuerdo del 2026-10-12 hace del clasificador supervisado el
+método principal (del Random Forest al LSTM), y el protocolo había dejado el LSTM como opcional.
+Implementación: `src/detect/lstm_red.py` y `experiments/anomalias_red/entrenar_lstm_sup.py`.
+
+- **Entrada:** las horas t−23…t de la matriz de red, con las 66 columnas de siempre (32
+  valores normalizados, 32 máscaras, seno y coseno de la hora). A diferencia del V4, la ventana
+  incluye la hora t y a la propia estación alterada. Para las primeras 23 horas de 2023 y de
+  2024, el contexto sale de la matriz limpia del año anterior.
+- **Salida:** la probabilidad de que la red tenga una anomalía a la hora t. Se aprende con la
+  etiqueta de red de la hora t, que nunca es entrada.
+- **Datos de entrenamiento:** 10 calendarios nuevos, `entrenamiento_01` a `entrenamiento_10`,
+  sobre 2020-01-01 a 2022-12-31. Cada uno tiene su p uniforme en el rango del §6, con la clave
+  [42, 2020, k, uso, índice] y k = 1…10. No chocan con el plan de entrenamiento original
+  (k = 0) ni con los de prueba (año 2024). Se aplican los mismos δ, el mismo redondeo y la
+  misma etiqueta.
+- **División, como el V4:**
+  - selección de épocas: se entrena con las horas t de 2020–2021 de los 10 calendarios y se
+    valida con las de 2022 (EarlyStopping sobre la pérdida de validación, paciencia 8, máximo
+    60 épocas); E es la primera época con la menor pérdida;
+  - modelo definitivo: un modelo nuevo con todas las horas de 2020–2022 y exactamente E épocas;
+  - umbrales de 5 y 1 % con 2023 limpio, y examen con los 10 calendarios de 2024.
+- **Arquitectura:**
+  - la del V4: LSTM de 64 unidades, Dropout 0.2, Dense 32 con ReLU y Dense 1, aquí con
+    sigmoide y entropía cruzada binaria;
+  - Adam con tasa 1e-3, lotes de 64 y barajado;
+  - sin ajuste de hiperparámetros ni pesos por clase;
+  - `fijar_semilla(42)` inmediatamente antes de construir cada modelo.
+- **Un modelo por δ,** como el Random Forest.
+- **Control de datos:** un Random Forest con los mismos 10 calendarios (por omisión,
+  `random_state=42`), entrenado con las 66 columnas de la hora t. Separa el efecto del modelo
+  del efecto de tener más episodios.
+- **Métricas:** las del §9 y las revisiones 2 a 4, con los mismos umbrales.
+- **Prueba secundaria: hora de inicio al azar.** Riesgo: todos los episodios empiezan a las
+  00 h, y un detector supervisado podría aprender ese salto en lugar de la anomalía. Diseño:
+  - se usan los mismos 10 calendarios de prueba, con las mismas estaciones, signos y días;
+  - cada episodio se recorre una hora h sorteada entre 0 y 23 con la clave
+    [42, 2024, k, 2, índice de la estación];
+  - el episodio dura lo mismo en horas (24 × días) y se corta al final de 2024;
+  - se evalúa con los modelos ya entrenados, sin reentrenar, en los tres detectores;
+  - se corre después de los resultados principales y no cambia los umbrales.
+- **Predicción de Claude, antes de entrenar** (δ = 100 %, nivel 5 %):
+  1. el LSTM supervisado detectará más horas anómalas que el V4 (26.1 %);
+  2. en las horas con cambio de 1–16 ppb alertará claramente más que esas mismas horas sin
+     alterar y más que el V4 (1.0 %), porque la ventana de 24 horas le deja recordar la tarde
+     anterior;
+  3. con δ ≤ 20 % quedará cerca del azar, como se espera del V4 (hipótesis del §1).
+
+### Revisión 7 (2026-10-16): segundo intento supervisado
+
+Se registró antes de entrenar estos modelos, pero **después** de ver los resultados de la
+revisión 6 en 2024. Por eso se reporta como segundo intento, junto al primero y sin sustituirlo.
+
+**Origen.** El LSTM supervisado de la revisión 6 memorizó los años de entrenamiento: AUC de 0.99
+en 2020–2021 y de 0.74 en 2022. El diseño nuevo se eligió entre ocho configuraciones, usando
+sólo la validación 2022 y la regla fijada antes de compararlas (`progreso.md`, 2026-10-16).
+Ganó por 2.1 puntos de detección, con un margen exigido de 2.
+
+**Cambios respecto a la revisión 6** (todo lo demás sigue igual: arquitectura, ventana,
+división, EarlyStopping sobre la pérdida de validación, umbrales y métricas):
+
+- **Entradas relativas:**
+  - en lugar del valor normalizado, cada estación entra como (valor − perfil causal de 14 días
+    a esa hora) / σ de 2020–2022;
+  - el perfil es la base del V4 (`perfil_causal`), con sus respaldos, y se calcula sobre la
+    serie que recibe el detector, alterada si es el caso;
+  - un hueco o una hora sin historia valen 0. Las máscaras y la hora no cambian;
+  - para 2023 y 2024, el perfil usa la historia limpia desde 2020.
+- **20 calendarios de entrenamiento** (`entrenamiento_01` a `_20`), con las mismas reglas y
+  claves [42, 2020, k, …]. Los 10 primeros no cambian.
+- **Random Forest de control:** la misma elección (entradas relativas de la hora t y 20
+  calendarios).
+- **Monitor en vivo** (`experiments/anomalias_red/en_vivo.py`): sólo registra las curvas para
+  verlas en el navegador y no cambia el entrenamiento.
+
+**Predicción de Claude, antes de entrenar** (δ = 100 %, 2024, nivel 5 %):
+1. el LSTM supervisado detectará más horas anómalas que en la revisión 6 (16.4 %) y menos que el
+   V4 (26.1 %);
+2. en las horas con cambio ≥ 64 ppb seguirá por debajo del V4 (96.5 %);
+3. el Random Forest de control detectará más horas que el de 10 calendarios con entradas crudas
+   (12.7 %).

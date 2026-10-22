@@ -1,0 +1,41 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "detector": "random_forest",
+  "delta_pct": 100,
+  "origen": "recién entrenado",
+  "fecha": "2026-10-13T11:05:57",
+  "sklearn": "1.9.1",
+  "hiperparametros": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": null,
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 100,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "sha256_matriz_entrenamiento": "8e0f4de1c08bf37b8d5e1736e4da6ecf7ebaecc82873ec867b66d3a21b141018",
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "horas_entrenamiento": 26304,
+  "horas_etiqueta_1": 4044,
+  "umbrales": {
+    "5": 0.42,
+    "1": 0.54
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 4.726027397260274,
+    "1": 0.8904109589041096
+  },
+  "reproducibilidad": "dos entrenamientos con puntajes idénticos en 2023"
+}

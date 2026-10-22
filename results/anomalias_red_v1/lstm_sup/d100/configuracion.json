@@ -1,0 +1,61 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 6,
+  "detector": "lstm_supervisado",
+  "delta_pct": 100,
+  "origen": "recién entrenado",
+  "fecha": "2026-10-16T10:10:47",
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "ventana": 24,
+  "epoca_E": 1,
+  "epocas_seleccion_ejecutadas": 9,
+  "val_loss_minimo": 0.635306715965271,
+  "ventanas_definitivo": 262810,
+  "etiqueta_1_definitivo_pct": 17.14242249727249,
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10"
+  ],
+  "sha256_matrices_entrenamiento": {
+    "entrenamiento_01": "47fe54fd3981e26181caca63ae2c43efe69406b333e405f65cb0d6aeced4b7ad",
+    "entrenamiento_02": "6878adae5085c6463a5c1b3f62d70bcb3d65174e5ac37d38033ddf329eb64ae9",
+    "entrenamiento_03": "770668dd00bc8ab31b6feb000315a2ca912bc226389bcade11feb25ff1cf2b61",
+    "entrenamiento_04": "4ed4ad7fc5b49a349047d1c50589433df77f3e847bb53b4029a782d6e6821060",
+    "entrenamiento_05": "31f11c2bc2d091dc82204a61a99d44a775b7e112338ce8dac16d27355e59f9ac",
+    "entrenamiento_06": "85ca34c620f42ae22b75eae60f2ed9b6f62a3647b559ab6add81eb1d4d724c8a",
+    "entrenamiento_07": "bfd7f975a01e90d9a2357d2f1c2baa1465164cb05bdf2baab4fbea8e24c23142",
+    "entrenamiento_08": "08698a2240af62d7dfc543d5a08b8dbb3c1a271f14680e7288d573730f4d4231",
+    "entrenamiento_09": "3e2a486d27c4216018d4f30f3d7dfd98b9562440cf913becfb02425fe094838e",
+    "entrenamiento_10": "77586d3537efa974147a7342f3d48884c29557a1c14aef8d54a7714990448da4"
+  },
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "umbrales": {
+    "5": 0.9650923013687134,
+    "1": 0.9924601912498474
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 5.0,
+    "1": 0.9931506849315069
+  },
+  "sha256_modelo": "fb6ed1605c41bac66e90d3891c28ee8d959506700129e67a8b66dcfff5f20d26",
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  }
+}

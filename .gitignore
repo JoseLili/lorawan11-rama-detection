@@ -49,6 +49,14 @@ results/vecinas_cercanas_v1/verificacion/*/calibracion_2023.csv.gz
 results/vecinas_cercanas_v1/verificacion/*/predicciones_*.csv.gz
 results/vecinas_cercanas_v1/eventos_dano/
 
+# Anomalías a nivel de red: las matrices se regeneran exactamente desde los planes
+results/anomalias_red_v1/matrices/
+results/anomalias_red_v1/rf/*/modelo.joblib
+results/anomalias_red_v1/if/modelo.joblib
+results/anomalias_red_v1/rf_10cal/*/modelo.joblib
+results/anomalias_red_v1/rf_*cal/*/modelo.joblib
+results/anomalias_red_v1/en_vivo/
+
 # Artículos y documentos con licencia (p. ej., descargados con la suscripción de UNAM):
 # sólo para uso local, nunca se redistribuyen en el repositorio.
 *.pdf
