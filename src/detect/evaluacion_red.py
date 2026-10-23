@@ -11,6 +11,8 @@ Métricas (§9 y revisión 2):
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import numpy as np
 import pandas as pd
 
@@ -70,19 +72,124 @@ def entradas_relativas(matriz: pd.DataFrame, sigma, previa: pd.DataFrame | None 
     return np.concatenate([rel, mascara, hora], axis=1)
 
 
-ENTRADAS = ('crudas', 'relativas')
+# ---------------------------------------------------------------- vecinas (revisión 8)
+
+K_VECINAS = 4
+SUAVE_PPB = 10.0         # forma (b): evita que el cociente se dispare de noche, con poco ozono
+DIAS_REFERENCIA = 14
+FORMAS = ('a14', 'afija', 'b14', 'bfija')
 
 
-def entradas_de(tipo: str, matriz: pd.DataFrame, mu, sigma) -> np.ndarray:
-    """Las 66 columnas de la hora t: `crudas` (§8) o `relativas` al perfil de 14 días (revisión 7).
+@dataclass(frozen=True)
+class Vecinas:
+    """Parámetros de la columna de vecinas de la revisión 8, ajustados con años limpios.
 
-    Con `relativas`, `matriz` debe traer la historia que necesita el perfil (las matrices
-    anteriores concatenadas); las columnas son puntuales, así que con `crudas` da lo mismo.
+    `forma`: (a) diferencia de desviaciones o (b) cociente, contra lo típico de los 14 días
+    anteriores (`a14`, `b14`) o de un valor fijo por estación y hora del día (`afija`, `bfija`).
+    """
+    forma: str
+    vecinas: dict
+    fija: pd.DataFrame | None        # hora del día × estación; sólo en las formas fijas
+    escala: pd.Series                # desviación de la columna en los años limpios de ajuste
+
+
+def vecinas_de(estaciones, geo: pd.DataFrame, k: int = K_VECINAS) -> dict[str, list[str]]:
+    """Las k columnas más cercanas de cada columna de la matriz, por distancia haversine.
+
+    Son las del experimento de vecinas cercanas de la parte 1: candidatas sólo entre las columnas
+    de la matriz (XAL, inactivo, no está), en orden de distancia y con empates por clave.
+    """
+    from src.detect.vecinas import distancias, vecinas_cercanas
+    fuera = [s for s in m.ESTACIONES if s not in set(estaciones)]
+    dist = distancias(geo)
+    return {s: vecinas_cercanas(dist, s, k, inactivos=fuera) for s in estaciones}
+
+
+def _valores(matriz: pd.DataFrame) -> pd.DataFrame:
+    est = estaciones_de(matriz)
+    return matriz[[f'{s}_valor' for s in est]].set_axis(est, axis=1)
+
+
+def _promedio_vecinas(x: pd.DataFrame, vecinas: dict):
+    """Promedio de las vecinas con dato y cuántas tienen dato, por columna y hora."""
+    prom = pd.DataFrame({s: x[vecinas[s]].mean(axis=1) for s in x.columns})
+    n = pd.DataFrame({s: x[vecinas[s]].notna().sum(axis=1) for s in x.columns})
+    return prom, n
+
+
+def _cociente(v: pd.DataFrame, vecinas: dict) -> pd.DataFrame:
+    """log((x + 10) / (promedio de las vecinas + 10)); NaN sin dato propio o con menos de 2 vecinas."""
+    prom, n = _promedio_vecinas(v, vecinas)
+    return np.log((v + SUAVE_PPB) / (prom + SUAVE_PPB)).where(v.notna() & (n >= 2))
+
+
+def _por_hora(fija: pd.DataFrame, index) -> pd.DataFrame:
+    return fija.reindex(index.hour).set_axis(index)
+
+
+def _sin_escala(matriz: pd.DataFrame, sigma, forma: str, vecinas: dict, fija) -> pd.DataFrame:
+    """Comparación de cada estación con sus vecinas, antes de escalar; NaN donde no se calcula."""
+    v = _valores(matriz)
+    if forma in ('a14', 'afija'):
+        base = relativas(matriz) if forma == 'a14' else v - _por_hora(fija, v.index)
+        d = base / sigma[v.columns]
+        prom, n = _promedio_vecinas(d, vecinas)
+        return (d - prom).where(d.notna() & (n >= 2))
+    q = _cociente(v, vecinas)
+    if forma == 'b14':                    # mediana de los 14 días anteriores a esa hora (causal)
+        ref = q.groupby(q.index.hour).transform(
+            lambda s: s.shift(1).rolling(DIAS_REFERENCIA, min_periods=1).median())
+    else:
+        ref = _por_hora(fija, q.index)
+    return q - ref
+
+
+def ajustar_vecinas(forma: str, limpia: pd.DataFrame, sigma, vecinas: dict) -> Vecinas:
+    """La referencia fija (si la forma la usa) y la escala, con la matriz limpia de los años de ajuste."""
+    if forma not in FORMAS:
+        raise ValueError(f'forma desconocida: {forma}')
+    v, fija = _valores(limpia), None
+    if forma == 'afija':
+        fija = v.groupby(v.index.hour).mean()
+    elif forma == 'bfija':
+        q = _cociente(v, vecinas)
+        fija = q.groupby(q.index.hour).median()
+    c = _sin_escala(limpia, sigma, forma, vecinas, fija)
+    return Vecinas(forma, vecinas, fija, c.std().replace(0, 1.0).fillna(1.0))
+
+
+def columnas_vecinas(matriz: pd.DataFrame, sigma, par: Vecinas) -> pd.DataFrame:
+    """La columna nueva de cada estación (revisión 8), ya escalada; NaN donde no se calcula.
+
+    Con la forma de 14 días, `matriz` debe traer la historia que necesita (como `relativas`).
+    """
+    return _sin_escala(matriz, sigma, par.forma, par.vecinas, par.fija) / par.escala
+
+
+def entradas_vecinas(matriz: pd.DataFrame, sigma, par: Vecinas) -> np.ndarray:
+    """Las 66 columnas de la revisión 7 y, al final, una por estación frente a sus vecinas (98)."""
+    nuevas = columnas_vecinas(matriz, sigma, par).fillna(0.0).to_numpy(np.float32)
+    return np.concatenate([entradas_relativas(matriz, sigma), nuevas], axis=1)
+
+
+ENTRADAS = ('crudas', 'relativas', 'vecinas')
+
+
+def entradas_de(tipo: str, matriz: pd.DataFrame, mu, sigma, vecinas: Vecinas | None = None) -> np.ndarray:
+    """Las columnas de la hora t: `crudas` (§8), `relativas` al perfil de 14 días (revisión 7) o
+    `vecinas` (revisión 8: las relativas más una columna por estación frente a sus vecinas).
+
+    Con `relativas` y `vecinas`, `matriz` debe traer la historia que necesita el perfil (las
+    matrices anteriores concatenadas); las columnas son puntuales, así que con `crudas` da lo mismo.
     """
     if tipo == 'crudas':
         return entradas(matriz, mu, sigma)
     if tipo == 'relativas':
         return entradas_relativas(matriz, sigma)
+    if tipo == 'vecinas':
+        if vecinas is None:
+            raise ValueError('las entradas de vecinas necesitan sus parámetros (ajustar_vecinas)')
+        return entradas_vecinas(matriz, sigma, vecinas)
     raise ValueError(f'entradas desconocidas: {tipo}')
 
 

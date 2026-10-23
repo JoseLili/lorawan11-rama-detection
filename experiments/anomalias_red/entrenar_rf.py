@@ -5,10 +5,12 @@ Uso (desde la raíz del repo, después de generar_matrices.py):
     .venv/bin/python experiments/anomalias_red/entrenar_rf.py --delta 100
     .venv/bin/python experiments/anomalias_red/entrenar_rf.py --delta 100 --calendarios 10
     .venv/bin/python experiments/anomalias_red/entrenar_rf.py --delta 100 --calendarios 20 --entradas relativas
+    .venv/bin/python experiments/anomalias_red/entrenar_rf.py --delta 100 --calendarios 20 --entradas vecinas --forma a14
 
 1. Entrena con matriz_entrenamiento_d<δ> (2020–2022) o, con --calendarios 10, con los 10
    calendarios de la revisión 6 juntos (control del LSTM supervisado); con --calendarios 20
-   --entradas relativas, el control de la revisión 7. Hiperparámetros por omisión,
+   --entradas relativas, el control de la revisión 7; con --entradas vecinas --forma <f>, el de la
+   revisión 8 (98 columnas de la hora t). Hiperparámetros por omisión,
    random_state=42. Lo hace dos veces y exige puntajes idénticos.
 2. Fija los umbrales de 5 y 1 % de falsas alarmas por hora de red con matriz_limpia_2023.
 3. Mide las falsas alarmas en matriz_limpia_2024.
@@ -16,7 +18,8 @@ Uso (desde la raíz del repo, después de generar_matrices.py):
    del cambio, cada una junto a su nivel de azar (las alertas de 2024 limpio).
 
 Salidas en results/anomalias_red_v1/rf/d<δ>/ (rf_10cal/ con --calendarios 10 y
-rf_<entradas>_<n>cal/ con otras opciones). Si ya existen, se detiene (usar --sustituir).
+rf_<entradas>_<n>cal/ con otras opciones; rf_vecinas_<forma>_<n>cal/ en la revisión 8). Si ya
+existen, se detiene (usar --sustituir).
 """
 from __future__ import annotations
 
@@ -39,6 +42,7 @@ from sklearn.ensemble import RandomForestClassifier  # noqa: E402
 from src.detect import anomalias_red as ar  # noqa: E402
 from src.detect import evaluacion_red as ev  # noqa: E402
 from src.detect.lstm import fijar_semilla  # noqa: E402
+from entrenar_lstm_sup import parametros_vecinas  # noqa: E402
 
 SAL = RAIZ / 'results/anomalias_red_v1'
 MATRICES, PLANES = SAL / 'matrices', SAL / 'planes'
@@ -58,9 +62,9 @@ def entrenar(X, y):
     return rf.fit(X, y).set_params(n_jobs=1)
 
 
-def puntaje(rf, previa, matriz, tipo, mu, sigma) -> pd.Series:
+def puntaje(rf, previa, matriz, tipo, mu, sigma, vec=None) -> pd.Series:
     """Puntaje de cada hora de `matriz`; `previa` es la historia limpia (para el perfil)."""
-    F = ev.entradas_de(tipo, ev.con_historia(previa, matriz), mu, sigma)[len(previa):]
+    F = ev.entradas_de(tipo, ev.con_historia(previa, matriz), mu, sigma, vec)[len(previa):]
     return pd.Series(rf.predict_proba(F)[:, 1], index=matriz.index)
 
 
@@ -69,11 +73,16 @@ def main():
     ap.add_argument('--delta', type=int, required=True, choices=[round(100 * d) for d in ar.DELTAS])
     ap.add_argument('--calendarios', type=int, choices=[1, 10, ar.CALENDARIOS_ENTRENAMIENTO], default=1)
     ap.add_argument('--entradas', choices=ev.ENTRADAS, default='crudas')
+    ap.add_argument('--forma', choices=ev.FORMAS, help='columna de vecinas (revisión 8), con --entradas vecinas')
     ap.add_argument('--sustituir', action='store_true')
     args = ap.parse_args()
-    d, tipo = args.delta, args.entradas
+    d, tipo, forma = args.delta, args.entradas, args.forma
+    if (tipo == 'vecinas') != (forma is not None):
+        raise SystemExit('--forma va con --entradas vecinas, y sólo con ellas')
     nombre = {(1, 'crudas'): 'rf', (10, 'crudas'): 'rf_10cal'}.get((args.calendarios, tipo),
                                                                    f'rf_{tipo}_{args.calendarios}cal')
+    if tipo == 'vecinas':
+        nombre = f'rf_vecinas_{forma}_{args.calendarios}cal'
     out = SAL / nombre / f'd{d}'
     if (out / 'metricas.csv').exists() and not args.sustituir:
         raise SystemExit(f'{out} ya tiene resultados; usar --sustituir para rehacerlos')
@@ -85,21 +94,22 @@ def main():
     v4 = pd.read_csv(V4_NORM, index_col='estacion')
     np.testing.assert_allclose(mu, v4.loc[mu.index, 'media_definitiva'], rtol=1e-9)
     np.testing.assert_allclose(sigma, v4.loc[sigma.index, 'desv_definitiva'], rtol=1e-9)
+    vec = parametros_vecinas(forma, limpia_tr, sigma) if tipo == 'vecinas' else None
 
     # 1. Entrenamiento, dos veces.
     nombres = ([f'entrenamiento_d{d}'] if args.calendarios == 1
                else [f'{c}_d{d}' for c in ar.calendarios_entrenamiento(n=args.calendarios).corrida])
     leidas = [leer(n) for n in nombres]
-    X = np.concatenate([ev.entradas_de(tipo, x, mu, sigma) for x, _ in leidas])
+    X = np.concatenate([ev.entradas_de(tipo, x, mu, sigma, vec) for x, _ in leidas])
     y = np.concatenate([x['anomalia_red'].to_numpy() for x, _ in leidas])
     sha_tr = leidas[0][1] if args.calendarios == 1 else {n: s for n, (_, s) in zip(nombres, leidas)}
     del leidas
     print(f'Entrenando RF δ = {d} %: {len(y)} horas, {y.sum()} con etiqueta 1 ({100 * y.mean():.1f} %)')
     rf = entrenar(X, y)
     cal, sha_cal = leer('limpia_2023')
-    s_cal = puntaje(rf, limpia_tr, cal, tipo, mu, sigma)
+    s_cal = puntaje(rf, limpia_tr, cal, tipo, mu, sigma, vec)
     rf2 = entrenar(X, y)
-    if not np.array_equal(s_cal.to_numpy(), puntaje(rf2, limpia_tr, cal, tipo, mu, sigma).to_numpy()):
+    if not np.array_equal(s_cal.to_numpy(), puntaje(rf2, limpia_tr, cal, tipo, mu, sigma, vec).to_numpy()):
         raise RuntimeError('dos entrenamientos con la misma semilla dieron puntajes distintos')
     del rf2
     joblib.dump(rf, out / 'modelo.joblib', compress=3)
@@ -111,7 +121,7 @@ def main():
     # 3. Falsas alarmas en 2024 limpio y 4. examen.
     limpia, _ = leer('limpia_2024')
     historia = ev.con_historia(limpia_tr, cal)                  # 2020–2023 limpio
-    s_limpia = puntaje(rf, historia, limpia, tipo, mu, sigma)
+    s_limpia = puntaje(rf, historia, limpia, tipo, mu, sigma, vec)
     puntajes = {'limpia_2023': s_cal, 'limpia_2024': s_limpia}
     metricas, episodios, tamanos = [], [], []
     for _, c in ar.corridas().iloc[1:].iterrows():
@@ -119,7 +129,7 @@ def main():
         plan = plan.assign(horas_con_dato=ev.horas_con_dato(plan, limpia))
         plan = plan[plan.horas_con_dato > 0]                     # episodios evaluables
         x, _ = leer(f'{c["corrida"]}_d{d}')
-        s = puntaje(rf, historia, x, tipo, mu, sigma)
+        s = puntaje(rf, historia, x, tipo, mu, sigma, vec)
         puntajes[c['corrida']] = s
         cambio = ev.cambio_maximo(x, limpia)
         for k, u in umbrales.items():
@@ -149,7 +159,8 @@ def main():
     pd.DataFrame(puntajes).rename_axis('timestamp').to_csv(out / 'puntajes.csv.gz', float_format='%.6g')
     (out / 'configuracion.json').write_text(json.dumps(dict(
         protocolo=ar.PROTOCOLO, detector='random_forest', delta_pct=d, origen='recién entrenado',
-        calendarios_entrenamiento=args.calendarios, entradas=tipo,
+        calendarios_entrenamiento=args.calendarios, entradas=tipo, forma_vecinas=forma,
+        vecinas=vec.vecinas if vec else None, columnas=int(X.shape[1]),
         fecha=datetime.now().isoformat(timespec='seconds'), sklearn=sklearn.__version__,
         hiperparametros={k: v for k, v in rf.get_params().items() if k != 'n_jobs'},
         sha256_matriz_entrenamiento=sha_tr, sha256_matriz_calibracion=sha_cal,

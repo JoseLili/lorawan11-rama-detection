@@ -130,3 +130,97 @@ def test_con_historia_y_entradas_de():
     np.testing.assert_array_equal(ev.entradas_de('relativas', x, mu, sigma), ev.entradas_relativas(x, sigma))
     with pytest.raises(ValueError):
         ev.entradas_de('otra', x, mu, sigma)
+
+
+# ---------------------------------------------------------------- vecinas (revisión 8)
+
+GEO = pd.read_csv('results/inventario_multianual/estaciones_geografia.csv', index_col='station')
+
+
+def _vecinas(x):
+    return ev.vecinas_de(ev.estaciones_de(x), GEO)
+
+
+def test_vecinas_de_son_las_4_mas_cercanas_entre_las_columnas():
+    x = _matriz()
+    vec = _vecinas(x)
+    est = ev.estaciones_de(x)
+    assert set(vec) == set(est) and 'XAL' not in est
+    assert vec['CCA'] == ['PED', 'BJU', 'AJM', 'UAX']           # el mismo orden de la parte 1
+    for s, vs in vec.items():
+        assert len(vs) == 4 and s not in vs and set(vs) <= set(est)
+
+
+@pytest.mark.parametrize('forma', ev.FORMAS)
+def test_columna_de_vecinas_vale_cero_si_todas_marcan_igual_y_ve_a_la_alterada(forma):
+    x = _matriz(dias=20, valor=40.0)
+    est = ev.estaciones_de(x)
+    sigma = pd.Series(1.0, index=est)
+    par = ev.ajustar_vecinas(forma, x, sigma, _vecinas(x))
+    t = pd.Timestamp('2024-01-18 15:00')
+    assert ev.columnas_vecinas(x, sigma, par).loc[t].abs().max() == pytest.approx(0.0, abs=1e-12)
+    y = x.copy()
+    y.loc[t, 'CCA_valor'] = 80.0                               # sólo CCA se aleja de sus vecinas
+    c = ev.columnas_vecinas(y, sigma, par)
+    assert c.loc[t, 'CCA'] > 0
+    assert all(c.loc[t, s] < 0 for s in par.vecinas['CCA'] if 'CCA' in par.vecinas[s])
+    lejanas = [s for s in est if s != 'CCA' and 'CCA' not in par.vecinas[s]]
+    assert c.loc[t, lejanas].abs().max() == pytest.approx(0.0, abs=1e-12)
+    assert c.loc[:t - pd.Timedelta(hours=1)].abs().max().max() == pytest.approx(0.0, abs=1e-12)  # causal
+
+
+def test_diferencia_de_desviaciones_cancela_un_cambio_comun_a_todas():
+    x = _matriz(dias=20, valor=40.0)
+    sigma = pd.Series(1.0, index=ev.estaciones_de(x))
+    par = ev.ajustar_vecinas('a14', x, sigma, _vecinas(x))
+    t = pd.Timestamp('2024-01-18 15:00')
+    y = x.copy()
+    y.loc[t, [c for c in y.columns if c.endswith('_valor')]] += 25.0     # un día de mucho sol para todas
+    assert ev.columnas_vecinas(y, sigma, par).loc[t].abs().max() == pytest.approx(0.0, abs=1e-12)
+
+
+def test_cociente_ve_un_error_de_ganancia_como_un_desplazamiento_de_log():
+    x = _matriz(dias=20, valor=60.0)
+    sigma = pd.Series(1.0, index=ev.estaciones_de(x))
+    sin_escala = ev.Vecinas('bfija', _vecinas(x), None, pd.Series(1.0, index=ev.estaciones_de(x)))
+    par = ev.ajustar_vecinas('bfija', x, sigma, sin_escala.vecinas)
+    par = ev.Vecinas(par.forma, par.vecinas, par.fija, sin_escala.escala)
+    t = pd.Timestamp('2024-01-18 15:00')
+    y = x.copy()
+    y.loc[t, 'CCA_valor'] = 66.0                               # +10 %
+    assert ev.columnas_vecinas(y, sigma, par).loc[t, 'CCA'] == pytest.approx(np.log(76 / 70))
+
+
+def test_columna_de_vecinas_sin_dato_o_con_menos_de_2_vecinas_es_nan_y_entra_como_cero():
+    x = _matriz(dias=20, valor=40.0)
+    est = ev.estaciones_de(x)
+    sigma = pd.Series(1.0, index=est)
+    vec = _vecinas(x)
+    par = ev.ajustar_vecinas('b14', x, sigma, vec)
+    t = pd.Timestamp('2024-01-18 15:00')
+    y = x.copy()
+    y.loc[t, 'CCA_valor'] = np.nan                             # sin dato propio
+    y.loc[t, [f'{s}_valor' for s in vec['PED'][:3]]] = np.nan  # PED se queda con 1 vecina con dato
+    c = ev.columnas_vecinas(y, sigma, par)
+    assert np.isnan(c.loc[t, 'CCA']) and np.isnan(c.loc[t, 'PED'])
+    X = ev.entradas_de('vecinas', y, None, sigma, par)
+    assert X.shape == (len(y), 98)
+    np.testing.assert_array_equal(X[:, :66], ev.entradas_relativas(y, sigma))
+    assert X[y.index.get_loc(t), 66 + est.index('CCA')] == 0.0
+
+
+def test_ajustar_vecinas_referencia_fija_y_escala():
+    x = _matriz(dias=20, valor=40.0)
+    x[[c for c in x.columns if c.endswith('_valor')]] += np.arange(len(x))[:, None] % 7   # algo de variación
+    sigma = pd.Series(1.0, index=ev.estaciones_de(x))
+    vec = _vecinas(x)
+    for forma in ev.FORMAS:
+        par = ev.ajustar_vecinas(forma, x, sigma, vec)
+        assert (par.escala > 0).all()
+        assert (par.fija is None) == forma.endswith('14')
+        if par.fija is not None:
+            assert par.fija.shape == (24, 32)
+    with pytest.raises(ValueError):
+        ev.ajustar_vecinas('c14', x, sigma, vec)
+    with pytest.raises(ValueError):
+        ev.entradas_de('vecinas', x, None, sigma)

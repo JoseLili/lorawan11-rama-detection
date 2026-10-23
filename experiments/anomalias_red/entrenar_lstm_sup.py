@@ -1,13 +1,17 @@
-"""LSTM supervisado de red del protocolo anomalias_red_v1, un δ a la vez (revisiones 6 y 7).
+"""LSTM supervisado de red del protocolo anomalias_red_v1, un δ a la vez (revisiones 6, 7 y 8).
 
 Uso (desde la raíz del repo, después de generar_matrices.py):
 
     .venv/bin/python experiments/anomalias_red/entrenar_lstm_sup.py --delta 100              # revisión 6
     .venv/bin/python experiments/anomalias_red/entrenar_lstm_sup.py --delta 100 \
         --entradas relativas --calendarios 20 --en-vivo                                      # revisión 7
+    .venv/bin/python experiments/anomalias_red/entrenar_lstm_sup.py --delta 100 \
+        --entradas vecinas --forma a14 --calendarios 20                                      # revisión 8
 
 1. Ventanas t−23…t de los calendarios de entrenamiento del δ (2020–2022), con la etiqueta de
-   red de la hora t. Entradas crudas (revisión 6) o relativas al perfil de 14 días (revisión 7).
+   red de la hora t. Entradas crudas (revisión 6), relativas al perfil de 14 días (revisión 7) o
+   relativas más una columna por estación frente a sus 4 vecinas (revisión 8, con la forma elegida
+   con 2022; su referencia fija y su escala se ajustan con 2020–2022 limpio, como la normalización).
 2. Selección: entrena con las horas de 2020–2021 y valida con las de 2022 (EarlyStopping,
    paciencia 8, máximo 60 épocas). E = primera época con la menor pérdida de validación.
 3. Definitivo: un modelo nuevo con 2020–2022 y exactamente E épocas. Se guarda y se recarga.
@@ -16,7 +20,8 @@ Uso (desde la raíz del repo, después de generar_matrices.py):
    detectores.
 
 fijar_semilla(42) inmediatamente antes de construir cada modelo. Salidas en
-results/anomalias_red_v1/lstm_sup/d<δ>/ (revisión 6) o lstm_sup_<entradas>_<n>cal/d<δ>/. Si ya
+results/anomalias_red_v1/lstm_sup/d<δ>/ (revisión 6), lstm_sup_<entradas>_<n>cal/d<δ>/ (revisión 7) o
+lstm_sup_vecinas_<forma>_<n>cal/d<δ>/ (revisión 8). Si ya
 existen, se detiene (usar --sustituir). Con --en-vivo, las curvas se ven en el navegador (ver
 en_vivo.py); el monitor no cambia el entrenamiento.
 """
@@ -44,6 +49,7 @@ from src.detect.lstm import fijar_semilla  # noqa: E402
 SAL = RAIZ / 'results/anomalias_red_v1'
 MATRICES, PLANES = SAL / 'matrices', SAL / 'planes'
 V4_NORM = RAIZ / 'results/lstm_v4_multianual_v1/normalizacion.csv'
+GEOGRAFIA = RAIZ / 'results/inventario_multianual/estaciones_geografia.csv'
 CONFIG = dict(semilla=42, unidades=64, batch=64, max_epocas=60, paciencia=8, shuffle=True)
 SELECCION = ('2020-01-01', '2021-12-31 23:00')
 VALIDACION = ('2022-01-01', '2022-12-31 23:00')
@@ -54,7 +60,7 @@ def leer(nombre):
     return ar.leer_matriz(path), hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def ejemplos(matriz, tipo, mu, sigma, desde=None, hasta=None):
+def ejemplos(matriz, tipo, mu, sigma, desde=None, hasta=None, vec=None):
     """Ventanas y etiquetas de las horas t entre `desde` y `hasta` con historia completa en la matriz."""
     t = matriz.index
     dentro = np.ones(len(t), bool)
@@ -62,26 +68,32 @@ def ejemplos(matriz, tipo, mu, sigma, desde=None, hasta=None):
         dentro &= (t >= pd.Timestamp(desde)) & (t <= pd.Timestamp(hasta))
     pos = np.flatnonzero(dentro)
     pos = pos[pos >= lr.VENTANA - 1]
-    X = lr.ventanas(ev.entradas_de(tipo, matriz, mu, sigma), pos)
+    X = lr.ventanas(ev.entradas_de(tipo, matriz, mu, sigma, vec), pos)
     return X, matriz['anomalia_red'].to_numpy(np.float32)[pos]
 
 
-def juntar(matrices, tipo, mu, sigma, desde=None, hasta=None):
-    partes = [ejemplos(x, tipo, mu, sigma, desde, hasta) for x in matrices]
+def juntar(matrices, tipo, mu, sigma, desde=None, hasta=None, vec=None):
+    partes = [ejemplos(x, tipo, mu, sigma, desde, hasta, vec) for x in matrices]
     return np.concatenate([p[0] for p in partes]), np.concatenate([p[1] for p in partes])
 
 
-def nuevo_modelo():
+def nuevo_modelo(n_features=66):
     from tensorflow import keras
     keras.backend.clear_session()
     fijar_semilla(CONFIG['semilla'])
-    return lr.construir_clasificador(unidades=CONFIG['unidades'])
+    return lr.construir_clasificador(n_features=n_features, unidades=CONFIG['unidades'])
 
 
-def puntaje(modelo, previa, matriz, tipo, mu, sigma) -> pd.Series:
+def parametros_vecinas(forma, limpia, sigma):
+    """La columna de vecinas de la revisión 8, ajustada con la matriz limpia `limpia`."""
+    vec = ev.vecinas_de(ev.estaciones_de(limpia), pd.read_csv(GEOGRAFIA, index_col='station'))
+    return ev.ajustar_vecinas(forma, limpia, sigma, vec)
+
+
+def puntaje(modelo, previa, matriz, tipo, mu, sigma, vec=None) -> pd.Series:
     """Puntaje de cada hora de `matriz`; `previa` es la historia limpia (contexto y perfil)."""
     x = ev.con_historia(previa, matriz)
-    X = lr.ventanas(ev.entradas_de(tipo, x, mu, sigma), np.arange(len(previa), len(x)))
+    X = lr.ventanas(ev.entradas_de(tipo, x, mu, sigma, vec), np.arange(len(previa), len(x)))
     return pd.Series(modelo.predict(X, batch_size=1024, verbose=0).ravel().astype(np.float64), index=matriz.index)
 
 
@@ -92,12 +104,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--delta', type=int, required=True, choices=[round(100 * d) for d in ar.DELTAS])
     ap.add_argument('--entradas', choices=ev.ENTRADAS, default='crudas')
+    ap.add_argument('--forma', choices=ev.FORMAS, help='columna de vecinas (revisión 8), con --entradas vecinas')
     ap.add_argument('--calendarios', type=int, choices=[10, ar.CALENDARIOS_ENTRENAMIENTO], default=10)
     ap.add_argument('--en-vivo', action='store_true', help='curvas en el navegador (en_vivo.py)')
     ap.add_argument('--sustituir', action='store_true')
     args = ap.parse_args()
-    d, tipo, n_cal = args.delta, args.entradas, args.calendarios
-    nombre = 'lstm_sup' if (tipo, n_cal) == ('crudas', 10) else f'lstm_sup_{tipo}_{n_cal}cal'
+    d, tipo, n_cal, forma = args.delta, args.entradas, args.calendarios, args.forma
+    if (tipo == 'vecinas') != (forma is not None):
+        raise SystemExit('--forma va con --entradas vecinas, y sólo con ellas')
+    nombre = ('lstm_sup' if (tipo, n_cal) == ('crudas', 10) else f'lstm_sup_vecinas_{forma}_{n_cal}cal'
+              if tipo == 'vecinas' else f'lstm_sup_{tipo}_{n_cal}cal')
+    revision = {'crudas': 6, 'relativas': 7, 'vecinas': 8}[tipo] if nombre != 'lstm_sup' else 6
     out = SAL / nombre / f'd{d}'
     if (out / 'metricas.csv').exists() and not args.sustituir:
         raise SystemExit(f'{out} ya tiene resultados; usar --sustituir para rehacerlos')
@@ -109,6 +126,7 @@ def main():
     v4 = pd.read_csv(V4_NORM, index_col='estacion')
     np.testing.assert_allclose(mu, v4.loc[mu.index, 'media_definitiva'], rtol=1e-9)
     np.testing.assert_allclose(sigma, v4.loc[sigma.index, 'desv_definitiva'], rtol=1e-9)
+    vec = parametros_vecinas(forma, limpia_tr, sigma) if tipo == 'vecinas' else None
 
     # 1. Los calendarios de entrenamiento del δ.
     calendarios = ar.calendarios_entrenamiento(n=n_cal)
@@ -116,8 +134,9 @@ def main():
     matrices, sha_tr = [x for x, _ in leidas], {c: s for c, (_, s) in zip(calendarios.corrida, leidas)}
 
     # 2. Selección de épocas.
-    Xtr, ytr = juntar(matrices, tipo, mu, sigma, *SELECCION)
-    Xva, yva = juntar(matrices, tipo, mu, sigma, *VALIDACION)
+    Xtr, ytr = juntar(matrices, tipo, mu, sigma, *SELECCION, vec=vec)
+    Xva, yva = juntar(matrices, tipo, mu, sigma, *VALIDACION, vec=vec)
+    n_features = Xtr.shape[2]
     print(f'Selección: {len(ytr)} ventanas de 2020–2021 ({100 * ytr.mean():.1f} % con etiqueta 1), '
           f'{len(yva)} de 2022 ({100 * yva.mean():.1f} %)', flush=True)
     vivo = []
@@ -125,7 +144,7 @@ def main():
         from en_vivo import EnVivo
         corrida = f'{nombre} · δ = {d} % · {datetime.now():%Y-%m-%d %H:%M}'
         vivo = [EnVivo(corrida, 'seleccion', val=(Xva, yva))]
-    modelo1 = nuevo_modelo()
+    modelo1 = nuevo_modelo(n_features)
     parada = keras.callbacks.EarlyStopping(monitor='val_loss', patience=CONFIG['paciencia'], min_delta=0,
                                            restore_best_weights=True)
     h = modelo1.fit(Xtr, ytr, validation_data=(Xva, yva), epochs=CONFIG['max_epocas'],
@@ -142,10 +161,10 @@ def main():
     del Xtr, ytr, Xva, yva, modelo1
 
     # 3. Modelo definitivo con 2020–2022 y exactamente E épocas.
-    X, y = juntar(matrices, tipo, mu, sigma)
+    X, y = juntar(matrices, tipo, mu, sigma, vec=vec)
     print(f'Definitivo: {len(y)} ventanas de 2020–2022 ({100 * y.mean():.1f} % con etiqueta 1), {E} épocas',
           flush=True)
-    modelo2 = nuevo_modelo()
+    modelo2 = nuevo_modelo(n_features)
     if vivo:
         vivo = [EnVivo(corrida, 'definitivo')]
     h = modelo2.fit(X, y, epochs=E, batch_size=CONFIG['batch'], shuffle=CONFIG['shuffle'], callbacks=vivo,
@@ -160,14 +179,14 @@ def main():
 
     # 4. Umbrales con 2023 limpio (contexto: final de 2022 limpio).
     cal, sha_cal = leer('limpia_2023')
-    s_cal = puntaje(modelo, limpia_tr, cal, tipo, mu, sigma)
+    s_cal = puntaje(modelo, limpia_tr, cal, tipo, mu, sigma, vec)
     umbrales = {f'{round(100 * a)}': ev.umbral_falsas_alarmas(s_cal, a) for a in ev.NIVELES_FA}
     lograda_2023 = {k: 100 * float((s_cal > u).mean()) for k, u in umbrales.items()}
 
     # Falsas alarmas en 2024 limpio y examen (contexto: final de 2023 limpio).
     limpia, _ = leer('limpia_2024')
     historia = ev.con_historia(limpia_tr, cal)                  # 2020–2023 limpio
-    s_limpia = puntaje(modelo, historia, limpia, tipo, mu, sigma)
+    s_limpia = puntaje(modelo, historia, limpia, tipo, mu, sigma, vec)
     puntajes = {'limpia_2023': s_cal, 'limpia_2024': s_limpia}
     metricas, episodios, tamanos = [], [], []
     for _, c in ar.corridas().iloc[1:].iterrows():
@@ -175,7 +194,7 @@ def main():
         plan = plan.assign(horas_con_dato=ev.horas_con_dato(plan, limpia))
         plan = plan[plan.horas_con_dato > 0]                     # episodios evaluables
         x, _ = leer(f'{c["corrida"]}_d{d}')
-        s = puntaje(modelo, historia, x, tipo, mu, sigma)
+        s = puntaje(modelo, historia, x, tipo, mu, sigma, vec)
         puntajes[c['corrida']] = s
         cambio = ev.cambio_maximo(x, limpia)
         for k, u in umbrales.items():
@@ -204,8 +223,9 @@ def main():
     tamanos.to_csv(out / 'por_tamano.csv', index=False)
     pd.DataFrame(puntajes).rename_axis('timestamp').to_csv(out / 'puntajes.csv.gz', float_format='%.6g')
     (out / 'configuracion.json').write_text(json.dumps(dict(
-        protocolo=ar.PROTOCOLO, revision=6 if nombre == 'lstm_sup' else 7, detector='lstm_supervisado',
-        entradas=tipo, delta_pct=d, origen='recién entrenado',
+        protocolo=ar.PROTOCOLO, revision=revision, detector='lstm_supervisado',
+        entradas=tipo, forma_vecinas=forma, vecinas=vec.vecinas if vec else None, columnas=n_features,
+        delta_pct=d, origen='recién entrenado',
         fecha=datetime.now().isoformat(timespec='seconds'), **CONFIG, ventana=lr.VENTANA,
         epoca_E=E, epocas_seleccion_ejecutadas=len(hist1), val_loss_minimo=float(hist1['val_loss'].min()),
         ventanas_definitivo=n_definitivo, etiqueta_1_definitivo_pct=100 * positivos,

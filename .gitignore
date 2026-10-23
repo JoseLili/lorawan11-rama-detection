@@ -60,3 +60,6 @@ results/anomalias_red_v1/en_vivo/
 # Artículos y documentos con licencia (p. ej., descargados con la suscripción de UNAM):
 # sólo para uso local, nunca se redistribuyen en el repositorio.
 *.pdf
+
+# Registros de corridas largas (revisión 8 en la PC)
+logs_revision8/

@@ -256,6 +256,7 @@ resultados.
 | 5 | 2026-10-16 | Aclaraciones de implementación del V4 (§8 y §9): cómo recibe la matriz alterada, puntaje y umbrales de red, control de reproducción y diagnóstico de ubicación. No cambian el diseño | Surgieron al programarlo, antes de evaluarlo |
 | 6 | 2026-10-16 | El LSTM supervisado pasa de opcional a detector principal (§2 y §8), con 10 calendarios de entrenamiento. Se agregan un Random Forest con los mismos calendarios y una prueba secundaria con hora de inicio al azar | Corrige el protocolo para que siga lo acordado el 2026-10-12 (método supervisado, del Random Forest al LSTM). Aprobado por el tesista antes de entrenar |
 | 7 | 2026-10-16 | Segundo intento supervisado: entradas relativas al perfil de 14 días y 20 calendarios de entrenamiento, para el LSTM supervisado y su Random Forest de control. La revisión 6 y sus resultados se conservan | Se registró **después** de ver la revisión 6 en 2024. El diseño se eligió sólo con la validación 2022, con una regla fijada antes de compararlo (`progreso.md`, 2026-10-16) |
+| 8 | 2026-10-22 | Tercer intento supervisado: las entradas de la revisión 7 más una columna por estación que la compara con sus 4 vecinas más cercanas, para el LSTM supervisado y su Random Forest de control. Se agrega un control sin entrenamiento (la comparación con vecinas, sin modelo). Las revisiones 6 y 7 se conservan | Propuesta del tesista, con la premisa del asesor del 2026-10-19 y la exploración de ese día con 2020–2022. Se registró **después** de ver las revisiones 6 y 7 en 2024 y **antes** de programarla. La forma de la columna nueva se elige sólo con 2022, con una regla fijada aquí |
 
 ### Revisión 1 (2026-10-13)
 
@@ -454,3 +455,135 @@ división, EarlyStopping sobre la pérdida de validación, umbrales y métricas)
 2. en las horas con cambio ≥ 64 ppb seguirá por debajo del V4 (96.5 %);
 3. el Random Forest de control detectará más horas que el de 10 calendarios con entradas crudas
    (12.7 %).
+
+### Revisión 8 (2026-10-22): vecinas cercanas en las entradas del LSTM supervisado
+
+Se registró **antes** de programarla, pero **después** de ver las revisiones 6 y 7 en 2024. Por
+eso se reporta como tercer intento supervisado, junto a los dos primeros y sin sustituirlos.
+
+**Origen.**
+- **La propuesta es del tesista (2026-10-22):** la revisión 7 con la información de las vecinas.
+- **La premisa es del asesor (2026-10-19):** «si tus vecinas marcan 100 y tú 150, hay algo raro».
+- **La exploración del 2026-10-19,** que sólo usó 2020–2022 y no entrenó modelos
+  (`experiments/exploracion_resumen_diario/`), encontró que comparar cada estación con sus
+  vecinas baja el ruido de un día normal de ~25–36 % a ~7–14 %.
+- **La revisión 7 compara cada estación sólo consigo misma,** con su perfil de 14 días. Aquí se
+  le agrega la comparación con sus vecinas.
+
+**Cambios respecto a la revisión 7.** Todo lo demás sigue igual: la arquitectura, la ventana
+t−23…t, los 20 calendarios de entrenamiento, la división, el EarlyStopping sobre la pérdida de
+validación, los umbrales y las métricas.
+- **Vecinas:** las 4 estaciones más cercanas de cada columna de la matriz de red, por distancia
+  haversine con las coordenadas del catálogo del SIMAT. Son las mismas del experimento de vecinas
+  cercanas de la parte 1 (`src/detect/vecinas.py`, `vecinas_cercanas(..., k=4)`). XAL, como canal
+  inactivo, no es vecina. HGM sí puede serlo, porque es una entrada. Las vecinas se fijan una vez
+  y no dependen de los datos.
+- **Columna nueva:** una por cada una de las 32 columnas de la matriz, que se suma a las 66 de la
+  revisión 7, para un total de 98 por hora. Si la estación no tiene dato, o tiene menos de 2
+  vecinas con dato, la columna vale 0.
+- **Forma de la columna.** Hay dos decisiones, que se eligen con 2022 (abajo):
+  - **cómo se compara:**
+    - (a) diferencia de desviaciones: la entrada relativa de la estación menos el promedio de las
+      entradas relativas de sus vecinas;
+    - (b) cociente: log((x + 10) / (promedio de las vecinas + 10)), con x en ppb. Los 10 ppb
+      evitan que el cociente se dispare de noche, cuando hay muy poco ozono. Es una constante
+      fija; no se ajusta;
+  - **contra qué se mide lo típico:**
+    - (14 d) adaptativo: el perfil causal de 14 días de la revisión 7 en (a), y la mediana del
+      cociente a esa hora en los 14 días anteriores en (b);
+    - (fija) un valor por estación y hora del día que no cambia: el promedio de x en (a) y la
+      mediana del cociente en (b). Se calcula con los años limpios de ajuste: 2020–2021 para la
+      elección y 2020–2022 para los modelos definitivos. No absorbe un error que dure varios días,
+      que es el punto ciego del perfil de 14 días.
+  - **Escala:** cada columna nueva se divide entre su desviación en los mismos años limpios de
+    ajuste.
+- **Random Forest de control:** la misma elección, con las 98 columnas de la hora t y 20
+  calendarios.
+- **Control sin entrenamiento («regla de vecinas»):**
+  - el puntaje de red de cada hora es el mayor |columna nueva| entre las estaciones, con la forma
+    elegida;
+  - no aprende de las anomalías: es un solo puntaje para todos los δ, y sus umbrales de 5 y 1 % se
+    calibran con 2023 limpio, como los del IsolationForest;
+  - si el LSTM no le gana, el modelo no aporta nada sobre la comparación directa.
+
+**Elección de la forma con 2022.** Se fija aquí, antes de programarla:
+- **Datos:** el entrenamiento usa las horas de 2020–2021 de los 20 calendarios. La validación
+  usa las horas de 2022 de los calendarios 01–10, la misma para todas las variantes. 2023 y 2024
+  no se tocan.
+- **Variantes:** las cuatro combinaciones (a, 14 d), (a, fija), (b, 14 d) y (b, fija). Además se
+  entrena, con los mismos datos, la revisión 7 sin vecinas, como referencia.
+- **Criterio principal:** la detección de las horas con etiqueta 1 de 2022, con un umbral que
+  deja 5 % de falsas alarmas en las horas con etiqueta 0 de esa misma validación, con
+  **δ = 20 %**. Es la zona donde se busca mejorar. Como en la revisión 7, el LSTM se entrena 10
+  épocas fijas y se toma la mejor.
+- **Criterio secundario:** la misma detección con δ = 100 %. Sólo se reporta; no decide.
+- **Contraste (agregado el 2026-10-22, antes de programarla):** para cada variante se reportan
+  también la precisión, el F1 y el AUC en esa misma validación, con el mismo umbral. Son la
+  tabla que el tesista pidió para la configuración 3 del diagnóstico de la curva de aprendizaje.
+  No deciden.
+- **Regla:**
+  - gana la variante con mayor detección;
+  - si su ventaja sobre la más sencilla, (a, 14 d), es menor que 2 puntos, se queda (a, 14 d);
+  - el Random Forest de control y la regla de vecinas reciben la misma forma;
+  - la comparación con la revisión 7 se reporta, pero no decide si se continúa: la revisión 8 se
+    corre completa de todos modos, porque la pregunta es si las vecinas ayudan en el examen.
+- **Después:** se anota la forma elegida en esta revisión antes de entrenar los modelos
+  definitivos.
+
+**Ejecución, como la revisión 7.**
+1. **Selección:** se elige E por δ con EarlyStopping: entrenamiento 2020–2021, validación 2022,
+   paciencia 8, máximo 60 épocas.
+2. **Modelo definitivo:** 2020–2022 durante E épocas, uno por δ.
+3. **Umbrales:** de 5 y 1 %, con 2023 limpio.
+4. **Examen:** 2024, con los 10 calendarios y los cinco δ.
+5. **Reproducibilidad:** cada detector se corre dos veces y debe dar salidas idénticas.
+
+Las métricas son las del §9 y las revisiones 2 a 4, con el resumen por hora contra las mismas
+horas sin alterar (`progreso.md`, 2026-10-18). Los años 2025–2026 quedan para después, para
+todos los detectores de la parte 2 a la vez.
+
+**Predicción de Claude, antes de programarla.** Para 2024 y el nivel de 5 %. La «señal» es el
+recall por hora menos el de esas mismas horas sin alterar.
+1. **Con δ = 100 %,** el LSTM de la revisión 8 detectará al menos tantas horas como el de la
+   revisión 7 (25.5 %).
+2. **Con δ = 20 %,** su señal quedará entre +1 y +5 puntos (la revisión 7 tuvo 0).
+3. **Con δ = 5 % y 10 %,** su señal quedará por debajo de 1 punto.
+4. **La memorización seguirá:** la mejor época será 1 o 2 en los cinco δ.
+5. **La regla de vecinas,** sin entrenamiento, quedará por debajo del LSTM de la revisión 8 con
+   δ = 100 % y cerca del azar con δ ≤ 20 %.
+6. **El Random Forest de control** quedará por debajo del LSTM de la revisión 8 con δ = 100 %.
+
+**Implementación (2026-10-22, antes de correrla).** No cambia el diseño.
+
+Archivos:
+- `src/detect/evaluacion_red.py`: `vecinas_de`, `ajustar_vecinas`, `columnas_vecinas`,
+  `entradas_vecinas` y `entradas_de('vecinas', …)`;
+- `tests/test_evaluacion_red.py`: pruebas de la columna nueva;
+- `experiments/anomalias_red/diagnostico_vecinas_2022.py`: la elección con 2022;
+- `entrenar_lstm_sup.py` y `entrenar_rf.py`, con `--entradas vecinas --forma <f>`;
+- `evaluar_regla_vecinas.py`: la regla;
+- `correr_revision8.sh`: la corrida completa.
+
+Detalles que se fijan al programarla:
+- **(b, 14 d):** la referencia es la mediana causal de los 14 días anteriores a esa hora, con al
+  menos un valor. Sin historia, la columna vale 0.
+- **Huecos:** sin dato propio, o con menos de 2 vecinas con dato, la columna vale 0. En las
+  matrices de entrenamiento pasa en ~25 % de las celdas, por los huecos de los datos.
+- **Años de ajuste:**
+  - en la elección con 2022, la referencia fija y la escala se ajustan con 2020–2021 limpio;
+  - en la corrida completa, con 2020–2022 limpio, tanto para elegir E como para el modelo
+    definitivo. Es lo mismo que se hace con μ y σ.
+- **Regla de vecinas:** el puntaje es el mayor |columna| entre las estaciones, con los huecos
+  como 0. Su referencia y su escala salen de 2020–2022 limpio, y para 2024 el contexto es
+  2020–2023 limpio.
+- **Salidas:** `vecinas_2022/` (la elección), `lstm_sup_vecinas_<forma>_20cal/`,
+  `rf_vecinas_<forma>_20cal/` y `regla_vecinas_<forma>/`.
+- **Dónde corre:** en la PC del tesista (Ryzen 7 7700X, sólo con el procesador), con las
+  versiones exactas de `requirements-lock.txt`. Se pasó ahí porque la lap se calentó con la
+  curva de aprendizaje.
+- **Prueba de equivalencia, antes de cualquier corrida en la PC:**
+  - la configuración 3 de la curva de aprendizaje, con δ = 100 %, debe dar en sus 10 épocas
+    exactamente lo mismo que en la lap;
+  - si no, se detiene, y el tesista decide si sigue en la PC (y entonces se repite ahí la
+    revisión 7 para comparar) o regresa a la lap;
+  - el procedimiento está en `docs/runbook_pc_revision8.md`.

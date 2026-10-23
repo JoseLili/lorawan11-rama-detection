@@ -2308,6 +2308,217 @@ fracción de los días alterados pasa el umbral.
 
 ---
 
+## 2026-10-22 — Revisión 8 registrada: vecinas en el LSTM supervisado
+
+Se registró antes de programar nada.
+
+**Antes:**
+- **Commit:** el tesista pidió revisar todo y subirlo. `f8e33aa` lleva a GitHub la parte 2 con
+  los cinco δ, la junta del 2026-10-19 y la ficha de la gráfica. Las 256 pruebas pasan.
+- **Lo que queda fuera de git:** las matrices (se regeneran), los modelos `.joblib`, la página en
+  vivo y las carpetas del NO y el NO2, que son de otro chat.
+- **La revisión de la gráfica con su ficha** se deja para el final, a pedido del tesista, para
+  repasarla con todo fresco.
+
+**Propuesta del tesista:** el LSTM supervisado de la revisión 7, más la información de sus
+vecinas, con toda la metodología (selección, modelo definitivo, calibración y examen).
+
+**Aclaraciones al discutirla:**
+- La revisión 7 ya no recibía ppb: recibía cuánto se aleja cada estación de su perfil de 14 días.
+  El que recibía ppb era la revisión 6.
+- El LSTM supervisado nunca predice ppb: da la probabilidad de anomalía de la hora. El que predice
+  ppb es el V4.
+- La exploración del 2026-10-19 sí comprimió el día, en 1, 2 o 4 promedios y en una sola hora.
+  Usó datos limpios de 2020–2022, con la alteración aplicada un día a la vez, no con los
+  calendarios.
+
+**Recomendaciones de Claude, aceptadas por el tesista:**
+- **Vecinas:** las 4 más cercanas por distancia.
+- **Información de las vecinas:** una columna nueva por estación, cuya forma se elige con 2022.
+- **Un control sin entrenamiento:** la regla de vecinas.
+- **Una sola cosa a la vez:** se mantiene la unidad por hora; el paso a días va aparte.
+- **2025–2026,** después y para todos los detectores.
+
+**El diseño, la regla de elección con 2022 y las predicciones** están en la revisión 8 del
+protocolo (§15).
+
+### Diagnóstico: ¿más años de entrenamiento ayudarían? (2026-10-22, registrado antes de correrlo)
+
+**Preguntas del tesista:**
+1. ¿El LSTM entiende que 2020 y 2021 son consecutivos, como el seno y el coseno le dicen que
+   después de las 23 h vienen las 00 h?
+2. ¿Más años le darían más variedad para no memorizar?
+
+**Respuesta a la 1, verificada en el código** (`entrenar_lstm_sup.py`, `evaluacion_red.py`):
+- Cada ejemplo son 24 horas seguidas de una serie continua de 2020 a 2022. El 31 de diciembre de
+  2020 a las 23 h va seguido del 1 de enero de 2021 a las 00 h.
+- El modelo no recibe el año ni el día del año, y cada ventana es independiente.
+- No hay un salto que pueda malinterpretar. El seno y el coseno hacen falta porque la hora sí es
+  una entrada.
+
+**Hipótesis de Claude sobre la memorización.** Es una cuenta, no algo comprobado:
+- Con 20 calendarios, cada hora real de 2020–2021 aparece 20 veces por época (17,521 ventanas ×
+  20 = 350,420).
+- Una época equivale a ver 20 veces el mismo ozono real, y eso explicaría que la mejor época
+  siempre sea la 1.
+- Matiz: con entradas relativas, 20 calendarios salieron mejor que 10 (2026-10-16).
+
+**Pregunta 2: diseño del diagnóstico.**
+- **Alcance:** fuera de la revisión 8 y sin cambiar el protocolo. Sólo usa 2020–2022 y no guarda
+  modelos.
+- **Modelo:** el LSTM supervisado de la revisión 7 tal cual: entradas relativas, arquitectura,
+  lotes de 64, barajado y `fijar_semilla(42)` antes de cada modelo.
+- **Épocas:** 10 fijas, una sola llamada a `fit`.
+- **Validación:** las horas de 2022 de los calendarios 01–10, la misma para todas.
+- **Severidades:** δ = 100 % y δ = 20 %, con modelos separados.
+
+| # | Entrena con las horas de | Calendarios | Ventanas | Para qué |
+|---|---|---|---:|---|
+| 1 | Sólo 2020 | 01–20 | ~175,000 | Un año: el de la pandemia |
+| 2 | Sólo 2021 | 01–20 | ~175,000 | Un año |
+| 3 | 2020 y 2021 | 01–20 | ~350,000 | Dos años: es la revisión 7 |
+| 4 | Sólo 2021 | 01–40 | ~350,000 | Tantos ejemplos como la 3, pero de un solo año: separa «más ejemplos» de «más años distintos» |
+
+Los calendarios 21–40 se generan en memoria con las mismas reglas (clave [42, 2020, k, …]). Como
+control, el calendario 01 regenerado debe ser igual a su matriz guardada.
+
+**Medida:**
+- **Principal:** la detección de las horas con etiqueta 1 de 2022, con un umbral que deja 5 % de
+  falsas alarmas en las horas con etiqueta 0 de esa validación. Es la misma del 2026-10-16.
+- **Se reporta:** la mejor de las 10 épocas, el promedio de las 10 y la pérdida de validación.
+
+**Regla de lectura, fijada antes de correrlo.** Con δ = 100 %, donde hay señal que medir; δ = 20 %
+sólo se reporta:
+- **«Dos años ayudan más que uno»** si la 3 supera a la mejor de la 1 y la 2 por 2 puntos o más.
+  Con menos de 2 puntos, no ayudan.
+- **«Lo que ayuda es la variedad de años»** si, además, la 3 supera a la 4 por 2 puntos o más. Si
+  la 4 queda a menos de 2 puntos de la 3, lo que ayuda es tener más ejemplos, no más años
+  distintos.
+- **«2020 enseña peor»** si la 1 queda 2 puntos o más por debajo de la 2.
+- **Con varias épocas:** las conclusiones se toman con la mejor época, y se confirman con el
+  promedio de las 10. Si los dos no coinciden, se reporta como dudoso.
+
+**Predicción de Claude, antes de correrlo** (δ = 100 %):
+1. La 3 supera a la mejor de la 1 y la 2 por 2 puntos o más.
+2. La 3 y la 4 quedan a menos de 2 puntos entre sí.
+3. La 1 y la 2 quedan a menos de 2 puntos entre sí.
+4. La mejor época sigue siendo la 1 o la 2 en las cuatro configuraciones.
+
+**Reproducibilidad:** se corre dos veces y los resultados deben salir idénticos. Salida en
+`results/anomalias_red_v1/curva_aprendizaje_2022/`.
+
+**Resultado.**
+- **Modelos:** recién entrenados y no guardados.
+- **Script:** `experiments/anomalias_red/diagnostico_curva_aprendizaje_2022.py`.
+- **Ejecución:** dos corridas de 38 minutos cada una, con `resultados.csv` y `resumen.csv`
+  idénticos.
+- **Controles:** el calendario 01 regenerado en memoria es igual a su matriz guardada. La
+  configuración 3 reproduce exactamente la «relativas, 20» de la elección del 2026-10-16 (30.2 %
+  en la época 1 y 27.5 % de promedio), aunque viene de otro script.
+
+Detección de las horas con etiqueta 1 de 2022, con 5 % de falsas alarmas en las de etiqueta 0
+(5 % es el azar):
+
+| # | Entrena con | Calendarios | δ = 100 %: mejor época | δ = 100 %: promedio de 10 | δ = 20 %: mejor época | δ = 20 %: promedio de 10 |
+|---|---|---:|---|---:|---|---:|
+| 1 | Sólo 2020 | 20 | 20.6 % (época 10) | 18.8 % | 6.4 % (época 1) | 5.1 % |
+| 2 | Sólo 2021 | 20 | 26.3 % (época 1) | 24.8 % | 8.3 % (época 10) | 6.5 % |
+| 3 | 2020 y 2021 | 20 | **30.2 %** (época 1) | **27.5 %** | 6.3 % (época 4) | 5.8 % |
+| 4 | Sólo 2021 | 40 | 28.6 % (época 1) | 25.1 % | 8.6 % (época 9) | 6.4 % |
+
+La pérdida de validación es mínima en la época 1 en las ocho corridas, salvo la configuración 4
+con δ = 20 % (época 4).
+
+**Aplicación de la regla** (δ = 100 %):
+- **Dos años ayudan más que uno:** sí. La 3 supera a la 2 por 3.9 puntos con la mejor época y por
+  2.7 con el promedio.
+- **Si lo que ayuda es la variedad de años:** **dudoso**. Con la mejor época, la 3 supera a la 4
+  por 1.6 puntos (menos de 2: no). Con el promedio, por 2.4 (sí). Como no coinciden, la regla
+  manda reportarlo como dudoso.
+- **2020 enseña peor:** sí. La 1 queda 5.7 puntos por debajo de la 2 con la mejor época, y 6.0
+  con el promedio.
+
+**Predicciones de Claude:**
+1. La 3 supera a la mejor de la 1 y la 2 por 2 puntos o más: **se cumplió** (3.9).
+2. La 3 y la 4 a menos de 2 puntos: **a medias**. Se cumplió con la mejor época (1.6), no con el
+   promedio (2.4).
+3. La 1 y la 2 a menos de 2 puntos: **no se cumplió**. 2020 enseña claramente peor.
+4. La mejor época, 1 o 2 en las cuatro: **no se cumplió** en la configuración 1, cuya mejor
+   detección cae en la época 10. Es una serie que oscila entre 16.9 y 20.6 %. En las otras tres
+   sí se cumplió.
+
+**Observaciones de Claude:**
+- **Con δ = 100 %, más datos ayudan.** Pasar de 20 a 40 calendarios de 2021 sube la mejor época de
+  26.3 a 28.6 %, pero casi no mueve el promedio (24.8 → 25.1). Pasar a dos años lo sube más
+  (30.2 % y 27.5 %). Parece que ayudan las dos cosas, la cantidad y la variedad, pero el margen no
+  alcanza para separarlas.
+- **Agregar 2020 ayudó, aunque 2020 enseña peor que 2021.** No se sabe por qué 2020 enseña peor.
+  - Los dos años tienen estaciones sin un solo dato (2020: ACO y CHO; 2021: AJM y HGM; XAL en
+    ambos), así que eso solo no lo explica.
+  - La pandemia es una posibilidad, pero no está comprobada.
+- **Con δ = 20 %, ninguna configuración sale del azar con claridad:** los promedios van de 5.1 a
+  6.5 %. Las dos de 2021 suben un poco con las épocas (hasta 8.3 y 8.6 % en las épocas 9–10).
+  Son unos 3 puntos y la regla no los evalúa, así que no se interpretan.
+- **Consecuencia para «más años»:** podrían mejorar los cambios grandes. No hay evidencia de que
+  ayuden con los chicos, que es donde está la pregunta de la tesis.
+
+**Recall, precisión, F1 y AUC de la configuración 3, pedidos por el tesista.**
+- **Qué configuración:** la 3 (entrena 2020–2021, con 20 calendarios), en la época 1, que es la
+  que el protocolo elegiría por la pérdida.
+- **Examen de práctica:** 2022, con los calendarios 01–10: 87,600 horas. Con δ = 100 %, 16,224
+  tienen anomalía; con δ = 20 %, 14,918.
+- **Cómo se calculó:** la precisión y el F1 salen del recall y de las falsas alarmas fijas (5 % de
+  las horas normales).
+
+| Métrica | δ = 100 % | δ = 20 % | Azar |
+|---|---:|---:|---|
+| Recall | 30.2 % | 5.3 % | 5 % |
+| Precisión | 57.9 % | 17.8 % | 18.5 % · 17.0 % |
+| F1 | 0.40 | 0.08 | 0.08 |
+| AUC | 0.74 | 0.53 | 0.50 |
+
+- **La exactitud no se usa:** 83.0 %, frente al 81.5 % de un modelo que diga siempre «normal».
+- **La precisión y el F1 dependen de cuántas anomalías hay.** Con la mitad de horas anómalas y el
+  mismo detector, la precisión bajaría a ~41 %.
+- **Plan acordado con el tesista:** esta configuración es el punto de partida y la referencia de
+  la elección de la revisión 8. Por eso se agregaron a la revisión 8 la precisión, el F1 y el AUC
+  como contraste.
+
+### Revisión 8 programada y preparada para la PC del tesista (2026-10-22)
+
+**Por qué la PC.**
+- El tesista decidió correr la revisión 8 en su PC de escritorio (Ryzen 7 7700X), porque la lap
+  se calentó con la curva de aprendizaje.
+- Se usa sólo el procesador. La tarjeta RX 7800 XT se descartó: TensorFlow con AMD necesita otras
+  versiones, y en tarjeta gráfica los resultados no se repiten exactos.
+- Colab también se descartó, por las versiones distintas y porque su tarjeta no es determinista.
+- Lo ejecutará otra instancia de Claude en la PC, siguiendo `docs/runbook_pc_revision8.md`.
+
+**Lo que quedó listo:**
+- **El código de la revisión 8** (archivos en la nota de implementación de la revisión 8 del
+  protocolo):
+  - las cuatro formas de la columna de vecinas;
+  - la elección con 2022;
+  - el LSTM y el Random Forest con `--entradas vecinas --forma`;
+  - la regla de vecinas;
+  - el script de la corrida completa.
+- **Pruebas:**
+  - 9 pruebas nuevas; pasan las 265 del proyecto;
+  - la elección corrió completa en modo `--prueba` (2 calendarios, 1 época, 1 de cada 50
+    ventanas). Sus números no significan nada; sólo comprueba que todo corre;
+  - con datos reales de 2020–2023, se revisaron las ventanas de 98 columnas, el modelo, el
+    puntaje del LSTM y el de la regla. **No se miró 2024:** la regla y el LSTM no se corrieron
+    en el examen antes de elegir la forma.
+- **`requirements-lock.txt`:** las 138 versiones exactas del entorno de la lap (Python 3.14.7,
+  TensorFlow 2.22.0rc0), para instalar las mismas en la PC.
+- **La prueba de equivalencia:** antes de cualquier corrida, la PC repite la configuración 3 de
+  la curva de aprendizaje con δ = 100 % (`--solo 3 --delta 100`). Sus 10 épocas deben ser
+  idénticas a las de la lap.
+- **Lo que el tesista copia a mano:** los 7 zips de `data/raw/` y `CLAUDE.md`. No están en git;
+  los zips se verifican con sus SHA-256.
+
+---
+
 ## Siguiente
 
 **Actualización 2026-10-12:** la junta del 2026-10-12 sustituye el segundo ataque
