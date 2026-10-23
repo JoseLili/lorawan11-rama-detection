@@ -594,3 +594,22 @@ Detalles que se fijan al programarla:
     equivalencia;
   - el cuaderno sólo calcula: el análisis y el registro los hace Claude en la lap, con los
     resultados descargados.
+- **Ejecución con el Colab CLI y resultado de la equivalencia (2026-10-23, antes de la elección).**
+  - Se usó el Colab CLI oficial en lugar del cuaderno: sesión `rev8`, sólo procesador (8 AMD EPYC
+    7B12, 50 GB), las mismas versiones, los 7 zips con su SHA-256 verificado, los planes y las
+    matrices idénticos al repo y las 265 pruebas pasando.
+  - **La prueba de equivalencia salió distinta.** En la época 1 la detección fue de 30.2 % en la
+    lap y 30.4 % en Colab. Las épocas siguientes se separan hasta 4.8 puntos; el promedio de las 10
+    fue 27.5 % y 24.7 %.
+  - En las dos máquinas la menor pérdida está en la época 1. La causa probable es que los dos
+    procesadores redondean distinto: la lap es Intel con AVX-512 y Colab es AMD sin ellas.
+- **Decisión del tesista (opción A).** Se sigue en Colab y **toda comparación de la revisión 8 se
+  hace dentro de Colab:**
+  - la elección con 2022 ya entrena ahí la revisión 7 como referencia;
+  - para el examen de 2024, la revisión 7 completa (LSTM y Random Forest) se repite en Colab, y la
+    revisión 8 se compara con esa, no con la de la lap;
+  - los resultados de la lap se conservan.
+- **Advertencia para la lectura:** sólo el cambio de máquina mueve hasta ~5 puntos las épocas
+  posteriores a la 1. Es más que el margen de 2 puntos de las reglas de elección cuando se usan
+  esas épocas, así que esas decisiones son frágiles. La época 1, que es la que elige el protocolo,
+  casi no cambió.

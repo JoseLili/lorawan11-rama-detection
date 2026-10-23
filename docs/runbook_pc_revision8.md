@@ -65,7 +65,7 @@ corre: usa WSL2.
    Si ya existe, usa `git pull`.
 3. **Verifica los zips contra sus SHA-256.** Todos deben decir «OK»:
    ```bash
-   grep 'RAMA.zip' docs/checksums_2020_2026.txt | (cd data/raw && sha256sum -c -)
+   grep -E '  [0-9]{2}RAMA\.zip$' docs/checksums_2020_2026.txt | (cd data/raw && sha256sum -c -)
    ```
 4. **El entorno, con las versiones exactas de la lap** (Python 3.14.7):
    ```bash
