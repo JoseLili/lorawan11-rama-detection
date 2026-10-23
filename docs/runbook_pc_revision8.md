@@ -4,6 +4,10 @@ Instrucciones para la instancia de Claude que corra la revisión 8 del protocolo
 `anomalias_red_v1` en la PC de escritorio del tesista (Ryzen 7 7700X). La prepararon el tesista y
 Claude el 2026-10-22, en la lap, y se pasó a la PC porque la lap se calentó con la última corrida.
 
+> **Nota (2026-10-23):** el tesista no tiene acceso a la PC, así que el cómputo se hace en Colab
+> con `notebooks/colab_revision8.ipynb`, que sigue los mismos pasos sin otra instancia de Claude.
+> Este runbook sigue valiendo para cuando se use la PC.
+
 **Antes de hacer nada, lee:**
 - `docs/protocolo_anomalias_red_v1.md`, sobre todo las revisiones 7 y 8 del §15;
 - la última sección de `docs/progreso.md` (2026-10-22);

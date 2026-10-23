@@ -2517,6 +2517,25 @@ con δ = 20 % (época 4).
 - **Lo que el tesista copia a mano:** los 7 zips de `data/raw/` y `CLAUDE.md`. No están en git;
   los zips se verifican con sus SHA-256.
 
+### Cambio a Colab Pro (2026-10-23)
+
+**Motivo:** el tesista está en la universidad, sin acceso remoto a su PC, y tiene Colab Pro.
+
+**`notebooks/colab_revision8.ipynb`:**
+- Sigue los pasos del runbook: versiones exactas, SHA-256 de los zips, planes y matrices
+  idénticos, las 265 pruebas, la prueba de equivalencia y la elección con 2022 dos veces.
+- Se detiene para traer los resultados.
+- La corrida completa sólo arranca con `APROBADO = True`.
+- Sólo usa el procesador: con la tarjeta gráfica, los números cambian y no se repiten exactos.
+
+**Cómo se reparte el trabajo:**
+- El cuaderno sólo calcula.
+- Los resultados se descargan como zip, también guardado en Drive, y Claude los revisa y los
+  registra en la lap.
+- Así Colab no necesita permiso para escribir en GitHub.
+
+**Lo que el tesista sube una vez a Drive:** los 7 zips, a `Mi unidad/tesis_rama/raw/`.
+
 ---
 
 ## Siguiente

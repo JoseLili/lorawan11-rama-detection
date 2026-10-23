@@ -587,3 +587,10 @@ Detalles que se fijan al programarla:
   - si no, se detiene, y el tesista decide si sigue en la PC (y entonces se repite ahí la
     revisión 7 para comparar) o regresa a la lap;
   - el procedimiento está en `docs/runbook_pc_revision8.md`.
+- **Cambio de máquina (2026-10-23, antes de correrla):**
+  - el tesista no tiene acceso a la PC, así que la corre en Colab Pro, sólo con el procesador,
+    con `notebooks/colab_revision8.ipynb`;
+  - son las mismas versiones (Python 3.14.7, `requirements-lock.txt`) y la misma prueba de
+    equivalencia;
+  - el cuaderno sólo calcula: el análisis y el registro los hace Claude en la lap, con los
+    resultados descargados.
