@@ -45,12 +45,32 @@ def entradas(matriz: pd.DataFrame, mu, sigma) -> np.ndarray:
     return np.concatenate([norm, mascara, hora], axis=1)
 
 
-def relativas(matriz: pd.DataFrame, previa: pd.DataFrame | None = None) -> pd.DataFrame:
+REFERENCIAS = ('media', 'mediana')
+
+
+def perfil_mediana(serie: pd.Series, dias: int = m.PERFIL_DIAS) -> pd.Series:
+    """Como `multianual.perfil_causal`, pero con medianas (revisión 10): la mediana de los `dias`
+    valores anteriores a esa misma hora; si no hay, la mediana histórica de esa hora y luego la
+    global, siempre con observaciones estrictamente anteriores. Sin historia → NaN.
+    """
+    if not serie.index.equals(pd.date_range(serie.index[0], serie.index[-1], freq='h')):
+        raise ValueError('perfil_mediana requiere rejilla horaria continua')
+    g = serie.groupby(serie.index.hour)
+    base = g.transform(lambda s: s.shift(1).rolling(dias, min_periods=1).median())
+    for respaldo in (g.transform(lambda s: s.shift(1).expanding().median()), serie.shift(1).expanding().median()):
+        base = base.fillna(respaldo)
+    return base
+
+
+def relativas(matriz: pd.DataFrame, previa: pd.DataFrame | None = None, referencia: str = 'media') -> pd.DataFrame:
     """Valor menos su perfil causal de 14 días a esa hora, por estación y en ppb (la base del V4).
 
     `previa`, contigua y anterior a `matriz`, da la historia del perfil al inicio de `matriz`.
-    Sin dato o sin historia → NaN.
+    Sin dato o sin historia → NaN. `referencia`: 'media' (el perfil del V4, revisiones 7 y 8) o
+    'mediana' (revisión 10, que no se mueve tanto cuando parte de los 14 días está alterada).
     """
+    if referencia not in REFERENCIAS:
+        raise ValueError(f'referencia desconocida: {referencia}')
     est = estaciones_de(matriz)
     v = matriz[[f'{s}_valor' for s in est]].set_axis(est, axis=1)
     serie = v
@@ -59,14 +79,16 @@ def relativas(matriz: pd.DataFrame, previa: pd.DataFrame | None = None) -> pd.Da
         if p.index[-1] + pd.Timedelta(hours=1) != v.index[0]:
             raise ValueError('la matriz previa no termina una hora antes de la matriz')
         serie = pd.concat([p, v])
-    base = pd.DataFrame({s: m.perfil_causal(serie[s])['base'] for s in est}).loc[v.index]
+    perfil = (lambda x: m.perfil_causal(x)['base']) if referencia == 'media' else perfil_mediana
+    base = pd.DataFrame({s: perfil(serie[s]) for s in est}).loc[v.index]
     return v - base
 
 
-def entradas_relativas(matriz: pd.DataFrame, sigma, previa: pd.DataFrame | None = None) -> np.ndarray:
+def entradas_relativas(matriz: pd.DataFrame, sigma, previa: pd.DataFrame | None = None,
+                       referencia: str = 'media') -> np.ndarray:
     """Como `entradas`, pero con (valor − perfil de 14 días) / σ en lugar del valor normalizado."""
     est = estaciones_de(matriz)
-    rel = (relativas(matriz, previa) / sigma[est]).fillna(0.0).to_numpy(np.float32)
+    rel = (relativas(matriz, previa, referencia) / sigma[est]).fillna(0.0).to_numpy(np.float32)
     mascara = matriz[[f'{s}_mascara' for s in est]].to_numpy(np.float32)
     hora = matriz[['hora_sin', 'hora_cos']].to_numpy(np.float32)
     return np.concatenate([rel, mascara, hora], axis=1)
@@ -91,6 +113,7 @@ class Vecinas:
     vecinas: dict
     fija: pd.DataFrame | None        # hora del día × estación; sólo en las formas fijas
     escala: pd.Series                # desviación de la columna en los años limpios de ajuste
+    referencia: str = 'media'        # perfil de 14 días de la forma a14 y de las relativas (revisión 10)
 
 
 def vecinas_de(estaciones, geo: pd.DataFrame, k: int = K_VECINAS) -> dict[str, list[str]]:
@@ -127,11 +150,11 @@ def _por_hora(fija: pd.DataFrame, index) -> pd.DataFrame:
     return fija.reindex(index.hour).set_axis(index)
 
 
-def _sin_escala(matriz: pd.DataFrame, sigma, forma: str, vecinas: dict, fija) -> pd.DataFrame:
+def _sin_escala(matriz: pd.DataFrame, sigma, forma: str, vecinas: dict, fija, referencia: str = 'media') -> pd.DataFrame:
     """Comparación de cada estación con sus vecinas, antes de escalar; NaN donde no se calcula."""
     v = _valores(matriz)
     if forma in ('a14', 'afija'):
-        base = relativas(matriz) if forma == 'a14' else v - _por_hora(fija, v.index)
+        base = relativas(matriz, referencia=referencia) if forma == 'a14' else v - _por_hora(fija, v.index)
         d = base / sigma[v.columns]
         prom, n = _promedio_vecinas(d, vecinas)
         return (d - prom).where(d.notna() & (n >= 2))
@@ -144,18 +167,23 @@ def _sin_escala(matriz: pd.DataFrame, sigma, forma: str, vecinas: dict, fija) ->
     return q - ref
 
 
-def ajustar_vecinas(forma: str, limpia: pd.DataFrame, sigma, vecinas: dict) -> Vecinas:
-    """La referencia fija (si la forma la usa) y la escala, con la matriz limpia de los años de ajuste."""
+def ajustar_vecinas(forma: str, limpia: pd.DataFrame, sigma, vecinas: dict, referencia: str = 'media') -> Vecinas:
+    """La referencia fija (si la forma la usa) y la escala, con la matriz limpia de los años de ajuste.
+
+    `referencia` = 'mediana' (revisión 10) sólo está definida para a14, la forma elegida en la revisión 8.
+    """
     if forma not in FORMAS:
         raise ValueError(f'forma desconocida: {forma}')
+    if referencia not in REFERENCIAS or (referencia != 'media' and forma != 'a14'):
+        raise ValueError(f'referencia {referencia} no definida para la forma {forma}')
     v, fija = _valores(limpia), None
     if forma == 'afija':
         fija = v.groupby(v.index.hour).mean()
     elif forma == 'bfija':
         q = _cociente(v, vecinas)
         fija = q.groupby(q.index.hour).median()
-    c = _sin_escala(limpia, sigma, forma, vecinas, fija)
-    return Vecinas(forma, vecinas, fija, c.std().replace(0, 1.0).fillna(1.0))
+    c = _sin_escala(limpia, sigma, forma, vecinas, fija, referencia)
+    return Vecinas(forma, vecinas, fija, c.std().replace(0, 1.0).fillna(1.0), referencia)
 
 
 def columnas_vecinas(matriz: pd.DataFrame, sigma, par: Vecinas) -> pd.DataFrame:
@@ -163,13 +191,13 @@ def columnas_vecinas(matriz: pd.DataFrame, sigma, par: Vecinas) -> pd.DataFrame:
 
     Con la forma de 14 días, `matriz` debe traer la historia que necesita (como `relativas`).
     """
-    return _sin_escala(matriz, sigma, par.forma, par.vecinas, par.fija) / par.escala
+    return _sin_escala(matriz, sigma, par.forma, par.vecinas, par.fija, par.referencia) / par.escala
 
 
 def entradas_vecinas(matriz: pd.DataFrame, sigma, par: Vecinas) -> np.ndarray:
     """Las 66 columnas de la revisión 7 y, al final, una por estación frente a sus vecinas (98)."""
     nuevas = columnas_vecinas(matriz, sigma, par).fillna(0.0).to_numpy(np.float32)
-    return np.concatenate([entradas_relativas(matriz, sigma), nuevas], axis=1)
+    return np.concatenate([entradas_relativas(matriz, sigma, referencia=par.referencia), nuevas], axis=1)
 
 
 ENTRADAS = ('crudas', 'relativas', 'vecinas')

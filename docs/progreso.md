@@ -3211,6 +3211,186 @@ de las de 2024 limpio (7.9 %). El resto del exceso es la diferencia entre 2023 y
   - el subtítulo aclara que el LSTM se entrenó con ataques de este tipo y que el V4 nunca vio
     ataques.
 
+### Búsqueda en la literatura antes de la revisión 10 (2026-10-23)
+
+Pedida por el tesista antes de decidir qué mejorar. Claude buscó en la web y leyó los resúmenes y,
+de PARAAD, el texto completo. No se descargó nada al repo.
+
+**1. PARAAD** (Allka, Ferrer-Cid, Barceló-Ordinas y García-Vidal, IEEE Trans. Network Science and
+Engineering 11(6), 2024, doi 10.1109/TNSE.2024.3454459; texto completo en UPCommons). Es el más
+parecido a nuestro problema.
+- **Datos:** O3 de 8 estaciones de referencia de Barcelona, 2014–2019.
+- **Método:** autoencoder no supervisado que mira **bloques de un día** (D = 24 h) de todas las
+  estaciones.
+- **Anomalías sintéticas:**
+  - sesgo: al 30 % de los sensores y al 30 % de sus días se les suma β desviaciones típicas a la
+    señal diaria estandarizada, con β ~ |N(0, σ²)| y σ = 2, es decir, ~1.6 desviaciones en
+    promedio, todo el día;
+  - deriva lenta.
+- **Resultados con datos reales:** TPR 0.81 y precisión 0.84 por estación-día, también
+  localizando la estación.
+- **Ablación:** con bloques de 1 hora la precisión baja (0.70 contra 0.84 en PARAAD-SA; 0.34
+  contra 0.79 en PARAAD-MH).
+- **Dicen explícitamente** que un sesgo pequeño es indistinguible de los datos normales.
+- **Lo que difiere de nosotros:**
+  - su sesgo (~1.6 desviaciones típicas, unas decenas de ppb todo el día) es mayor que nuestro
+    δ = 100 %, cuyo cambio típico es de 20 ppb;
+  - el umbral se optimiza por exactitud en una ventana de 30 días y luego se aplica al siguiente.
+    Según el texto parece usar etiquetas, lo que es más optimista que nuestro umbral fijo;
+  - mide por estación-día, no por hora de red.
+
+**2. STC-RAAD** (mismo grupo, IEEE Internet of Things Journal 11(19), 2024, doi
+10.1109/JIOT.2024.3416525). Autoencoder recurrente que usa explícitamente las estaciones vecinas
+para reconstruir cada sensor. Según el resumen, mejora 38 % la detección y 36 % la precisión
+frente a otros métodos.
+
+**3. Control de calidad meteorológico** (TITAN de MET Noruega: Båserud et al., Adv. Sci. Res. 17,
+2020; Lussana et al., QJRMS 2010).
+- El *buddy check* compara cada estación con sus vecinas: es lo que hace nuestra regla de vecinas.
+- El *spatial consistency test* estima el valor esperado con interpolación espacial en lugar de un
+  promedio simple.
+
+**4. Evaluación** (Kim et al., AAAI 2022, doi 10.1609/aaai.v36i7.20680).
+- Con el *point adjustment* (contar un evento como detectado si alguna alarma cae dentro), un
+  puntaje **al azar** saca F1 de 0.969 en SWaT.
+- Respalda nuestra decisión de comparar siempre con «sin ataque» y de no contar ataques
+  encontrados como medida principal.
+
+**5. Cambios pequeños y sostenidos:** la familia de detección secuencial (CUSUM y la detección más
+rápida en redes de sensores, por ejemplo arXiv 2012.13027) acumula evidencia en el tiempo. Detecta
+corrimientos pequeños y persistentes a cambio de retraso.
+
+**6. Referencia robusta:** la mediana y la MAD son el estimador estándar de la estadística robusta
+cuando parte de los datos está contaminada. Va en la línea de la opción C.
+
+**7. Manipulación real de datos de calidad del aire** (Turiel y Kaufmann, PLOS One). Según el
+resumen, en ciudades chinas las estaciones locales reportaban menos PM2.5 que las de la embajada de
+EE. UU. cuando la contaminación era alta. Es un indicio de que el ataque realista es **bajar** la
+lectura en días de alta contaminación, justo la dirección que peor se detecta aquí.
+
+**Lo que cambia para la revisión 10, según Claude:**
+- **La opción C (mediana) tiene respaldo** de la estadística robusta.
+- **La opción A (decidir por día completo) tiene más respaldo del que Claude le dio:** es lo que
+  hace el trabajo más parecido, con mejor precisión que por hora. Pero sus anomalías, como las
+  nuestras, duran días completos, así que es igual de favorable al diseño sintético.
+- **Ideas nuevas:**
+  - evaluar también por estación-día con localización, para compararnos con PARAAD;
+  - estimar el valor esperado con interpolación espacial (como el SCT) en vez del promedio de 4
+    vecinas;
+  - CUSUM para δ chicos.
+
+### Revisión 10 registrada y programada: referencia de 14 días con mediana (2026-10-23)
+
+**Decisión del tesista, tras la búsqueda en la literatura:**
+- seguir con la opción C (mediana) y con la decisión por estación-día;
+- descartar la opción B (un solo modelo con ataques grandes), porque le pareció forzar la detección.
+
+**Separación propuesta por Claude:**
+- **Revisión 10:** sólo la mediana.
+- **Revisión 11:** estación-día.
+- **Por qué:** el LSTM actual da una sola salida para toda la red y no dice qué estación. Decidir
+  por estación-día exige otra salida, otras etiquetas y otra evaluación. Si se cambian dos cosas a
+  la vez, no se sabe cuál ayudó.
+
+**Hecho:**
+- el diseño y las predicciones en el protocolo (revisión 10);
+- el código y las pruebas: 3 nuevas, 268 en total;
+- la elección con 2022, probada en modo `--prueba`.
+
+No se ha corrido nada con datos reales.
+
+**Siguiente:** con el visto bueno del tesista, la elección con 2022 en Colab (dos corridas, ~2 h).
+Si adopta la mediana, la corrida completa (~2 h más).
+
+**Referencias:** guardadas en `docs/referencias_literatura.md` y `docs/referencias.bib`, con
+marcas de «por verificar».
+
+### Revisión 10: elección con 2022 en Colab, no se adopta la mediana (2026-10-23)
+
+**Cómo se ejecutó.**
+- **Herramienta:** el Colab CLI, en la sesión `rev10`, de 21:34 a 23:36 (hora local).
+- **Máquina:** sólo procesador. Fue un Intel Xeon @ 2.20 GHz (Broadwell, 8 núcleos virtuales,
+  50 GB), no el AMD EPYC de la revisión 8.
+- **Código:** el repo en el commit 6d417a9 más los archivos de la revisión 10, sin commit, subidos
+  como tarball con su SHA-256 verificado.
+- **Igual que en la lap:**
+  - las versiones exactas;
+  - los 7 zips, con su SHA-256;
+  - los planes y las matrices, idénticos al repo;
+  - las 268 pruebas, pasando.
+- **Corridas:** dos de `diagnostico_referencia_2022.py` en paralelo. `resultados.csv`,
+  `resumen.csv` y `eleccion.json` salieron **idénticos**.
+  - Se descargaron a `results/anomalias_red_v1/referencia_2022/`, con el SHA-256 verificado.
+  - Los registros están en `logs_revision10/`.
+- **Modelos:** recién entrenados en Colab y no guardados.
+
+**Resultado** (F1 con 1 % en la época de menor pérdida de validación, que fue la 1 en las seis):
+
+| δ | Media | Mediana | Diferencia |
+|---:|---:|---:|---:|
+| 100 % | 0.263 | 0.208 | −0.055 |
+| 50 % | 0.099 | 0.126 | +0.027 |
+| **Promedio de 100 y 50 (decide)** | **0.181** | **0.167** | **−0.014** |
+| 20 % (sólo se reporta) | 0.042 | 0.041 | −0.002 |
+
+**Aplicación de la regla:**
+- la ventaja es −0.014, y hacía falta +0.02;
+- **queda la media, y la revisión 10 se cierra sin examinarse con 2024**;
+- la decisión no cambia con otra forma de resumir. Con el promedio de las 10 épocas es −0.007, con
+  la mejor época −0.001, con el F1 con 5 % −0.006 y con el PR-AUC +0.001.
+
+**Falsas alarmas con 1 % y δ = 100 %:**
+
+| Horas normales | Media | Mediana |
+|---|---:|---:|
+| De los 14 días posteriores a un ataque | 1.42 % | 1.18 % |
+| Las demás | 0.45 % | 0.76 % |
+
+- La mediana sí reparte mejor las falsas alarmas. Antes había 3.2 veces más falsas alarmas después
+  de un ataque que en las demás horas; con la mediana hay 1.6 veces.
+- **Pero el total queda en 1 % por construcción**, y el F1 no sube.
+
+**Predicciones:**
+- la 1 falló: las falsas alarmas tras un ataque bajaron 17 %, no a la mitad;
+- la 2 falló;
+- la 3 a la 6 eran de 2024 y no se evalúan.
+
+**Equivalencia con la revisión 8: salió distinta, por la máquina.**
+- **La diferencia:** la variante con media es la a14 de la revisión 8, con los mismos datos y la
+  misma configuración, pero no repite sus épocas.
+  - La pérdida de validación difiere hasta 0.14, por ejemplo 0.573 contra 0.552 en la época 1 con
+    δ = 100 %.
+  - El F1 con 5 % difiere hasta 0.033, y la detección con 5 % hasta 3.3 puntos.
+- **El código no es la causa:** en la lap se comprobó que las entradas con media del código de la
+  revisión 10 son idénticas bit a bit a las del commit 6d417a9 (sigma, vecinas, escala y las 98
+  columnas de dos calendarios).
+- **Consecuencia:**
+  - el procesador cambia la aritmética del entrenamiento, aunque los dos tengan AVX2 y 8 núcleos;
+  - la opción A («todo dentro de Colab») no basta;
+  - para comparar contra números de la revisión 8 hace falta el mismo procesador, o repetir la
+    revisión 8 en la misma sesión.
+  - Esta elección no se afecta, porque las dos variantes se entrenaron en la misma corrida.
+
+**Observaciones de Claude:**
+- **El efecto de la mediana es del tamaño del ruido.**
+  - Con δ = 100 %, el F1 con 1 % de la misma variante se mueve de una época a otra entre 0.23 y
+    0.26 con la media, y entre 0.20 y 0.25 con la mediana.
+  - Con 50 % se mueve entre 0.08 y 0.11, y entre 0.09 y 0.13.
+  - **No hay evidencia de que la mediana ayude**, ni de que dañe mucho.
+- **El límite del diseño de la regla** (lo diseñó Claude):
+  - **La diferencia:** la elección fija el umbral con las horas normales de la misma validación
+    2022 atacada. El examen lo fija con 2023 limpio.
+  - **Por qué importa:** las falsas alarmas tras un ataque castigan en los dos casos, pero por
+    caminos distintos. En la elección suben el umbral y bajan el recall; en el examen se suman a
+    las falsas alarmas y bajan la precisión. Así que la ganancia no tiene por qué ser del mismo
+    tamaño.
+  - **No se usa para reabrir la revisión 10:** la regla se fijó antes y se aplica tal cual.
+    Probarlo sería una revisión nueva, registrada antes de correrla y reportada junto a este
+    resultado negativo.
+- **Hipótesis, no comprobada:** la mediana de 14 valores es una referencia más ruidosa que la media
+  cuando los datos están limpios. Lo que gana en los días contaminados lo puede perder en todos los
+  demás.
+
 ---
 
 ## Siguiente

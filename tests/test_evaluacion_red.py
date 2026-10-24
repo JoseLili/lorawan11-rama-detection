@@ -224,3 +224,51 @@ def test_ajustar_vecinas_referencia_fija_y_escala():
         ev.ajustar_vecinas('c14', x, sigma, vec)
     with pytest.raises(ValueError):
         ev.entradas_de('vecinas', x, None, sigma)
+
+
+# ---------------------------------------------------------------- referencia con mediana (revisión 10)
+
+def test_perfil_mediana_resiste_dias_alterados_y_es_causal():
+    x = _matriz(dias=20, valor=40.0)
+    dias = pd.date_range('2024-01-12', periods=5, freq='D')
+    for d in dias:                                             # 5 de los 14 días previos al doble
+        x.loc[d:d + pd.Timedelta(hours=23), 'CCA_valor'] = 80.0
+    t = pd.Timestamp('2024-01-18 15:00')                       # el 18 ya no está alterado
+    media, mediana = ev.relativas(x).loc[t, 'CCA'], ev.relativas(x, referencia='mediana').loc[t, 'CCA']
+    assert media == pytest.approx(40 - (9 * 40 + 5 * 80) / 14)  # la media se infla: CCA parece baja
+    assert mediana == 0.0                                       # la mediana de 14 días sigue en 40
+    y = x.copy()
+    y.loc[t + pd.Timedelta(hours=1):, 'CCA_valor'] = 500.0     # el futuro no cambia el pasado
+    pd.testing.assert_series_equal(ev.relativas(y, referencia='mediana').loc[:t, 'CCA'],
+                                   ev.relativas(x, referencia='mediana').loc[:t, 'CCA'])
+
+
+def test_perfil_mediana_con_historia_previa_respaldo_y_errores():
+    x = _matriz(dias=30, valor=40.0)
+    previa, actual = x.iloc[:24 * 20], x.iloc[24 * 20:]
+    pd.testing.assert_frame_equal(ev.relativas(actual, previa, 'mediana'), ev.relativas(x, referencia='mediana').iloc[24 * 20:])
+    s = x['CCA_valor'].copy()
+    s.iloc[24 * 2:24 * 18] = np.nan                            # 16 días sin dato: sin 14 días, respaldo histórico
+    base = ev.perfil_mediana(s)
+    assert base.iloc[24 * 18] == 40.0 and np.isnan(base.iloc[0])
+    with pytest.raises(ValueError):
+        ev.relativas(x, referencia='moda')
+    with pytest.raises(ValueError):
+        ev.perfil_mediana(s.drop(s.index[5]))
+
+
+def test_referencia_por_defecto_no_cambia_y_mediana_viaja_en_vecinas():
+    x = _matriz(dias=20, valor=40.0)
+    x[[c for c in x.columns if c.endswith('_valor')]] += np.arange(len(x))[:, None] % 7
+    est = ev.estaciones_de(x)
+    sigma = pd.Series(1.0, index=est)
+    vec = _vecinas(x)
+    media = ev.ajustar_vecinas('a14', x, sigma, vec)
+    assert media.referencia == 'media'
+    np.testing.assert_array_equal(ev.entradas_relativas(x, sigma), ev.entradas_relativas(x, sigma, referencia='media'))
+    mediana = ev.ajustar_vecinas('a14', x, sigma, vec, referencia='mediana')
+    X = ev.entradas_de('vecinas', x, None, sigma, mediana)
+    assert X.shape == (len(x), 98) and mediana.referencia == 'mediana'
+    np.testing.assert_array_equal(X[:, :66], ev.entradas_relativas(x, sigma, referencia='mediana'))
+    with pytest.raises(ValueError):
+        ev.ajustar_vecinas('b14', x, sigma, vec, referencia='mediana')

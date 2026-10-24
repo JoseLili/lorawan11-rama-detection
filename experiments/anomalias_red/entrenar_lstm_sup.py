@@ -84,10 +84,10 @@ def nuevo_modelo(n_features=66):
     return lr.construir_clasificador(n_features=n_features, unidades=CONFIG['unidades'])
 
 
-def parametros_vecinas(forma, limpia, sigma):
-    """La columna de vecinas de la revisión 8, ajustada con la matriz limpia `limpia`."""
+def parametros_vecinas(forma, limpia, sigma, referencia='media'):
+    """La columna de vecinas de la revisión 8 (con 'mediana', la de la revisión 10), ajustada con `limpia`."""
     vec = ev.vecinas_de(ev.estaciones_de(limpia), pd.read_csv(GEOGRAFIA, index_col='station'))
-    return ev.ajustar_vecinas(forma, limpia, sigma, vec)
+    return ev.ajustar_vecinas(forma, limpia, sigma, vec, referencia)
 
 
 def puntaje(modelo, previa, matriz, tipo, mu, sigma, vec=None) -> pd.Series:
@@ -105,6 +105,8 @@ def main():
     ap.add_argument('--delta', type=int, required=True, choices=[round(100 * d) for d in ar.DELTAS])
     ap.add_argument('--entradas', choices=ev.ENTRADAS, default='crudas')
     ap.add_argument('--forma', choices=ev.FORMAS, help='columna de vecinas (revisión 8), con --entradas vecinas')
+    ap.add_argument('--referencia', choices=ev.REFERENCIAS, default='media',
+                    help='perfil de 14 días: media (revisiones 7 y 8) o mediana (revisión 10, con --entradas vecinas --forma a14)')
     ap.add_argument('--calendarios', type=int, choices=[10, ar.CALENDARIOS_ENTRENAMIENTO], default=10)
     ap.add_argument('--en-vivo', action='store_true', help='curvas en el navegador (en_vivo.py)')
     ap.add_argument('--sustituir', action='store_true')
@@ -112,9 +114,13 @@ def main():
     d, tipo, n_cal, forma = args.delta, args.entradas, args.calendarios, args.forma
     if (tipo == 'vecinas') != (forma is not None):
         raise SystemExit('--forma va con --entradas vecinas, y sólo con ellas')
-    nombre = ('lstm_sup' if (tipo, n_cal) == ('crudas', 10) else f'lstm_sup_vecinas_{forma}_{n_cal}cal'
+    referencia = args.referencia
+    if referencia == 'mediana' and (tipo, forma) != ('vecinas', 'a14'):
+        raise SystemExit('--referencia mediana sólo está definida con --entradas vecinas --forma a14 (revisión 10)')
+    sufijo = '_mediana' if referencia == 'mediana' else ''
+    nombre = ('lstm_sup' if (tipo, n_cal) == ('crudas', 10) else f'lstm_sup_vecinas_{forma}{sufijo}_{n_cal}cal'
               if tipo == 'vecinas' else f'lstm_sup_{tipo}_{n_cal}cal')
-    revision = {'crudas': 6, 'relativas': 7, 'vecinas': 8}[tipo] if nombre != 'lstm_sup' else 6
+    revision = 10 if referencia == 'mediana' else {'crudas': 6, 'relativas': 7, 'vecinas': 8}[tipo] if nombre != 'lstm_sup' else 6
     out = SAL / nombre / f'd{d}'
     if (out / 'metricas.csv').exists() and not args.sustituir:
         raise SystemExit(f'{out} ya tiene resultados; usar --sustituir para rehacerlos')
@@ -126,7 +132,7 @@ def main():
     v4 = pd.read_csv(V4_NORM, index_col='estacion')
     np.testing.assert_allclose(mu, v4.loc[mu.index, 'media_definitiva'], rtol=1e-9)
     np.testing.assert_allclose(sigma, v4.loc[sigma.index, 'desv_definitiva'], rtol=1e-9)
-    vec = parametros_vecinas(forma, limpia_tr, sigma) if tipo == 'vecinas' else None
+    vec = parametros_vecinas(forma, limpia_tr, sigma, referencia) if tipo == 'vecinas' else None
 
     # 1. Los calendarios de entrenamiento del δ.
     calendarios = ar.calendarios_entrenamiento(n=n_cal)
@@ -224,7 +230,7 @@ def main():
     pd.DataFrame(puntajes).rename_axis('timestamp').to_csv(out / 'puntajes.csv.gz', float_format='%.6g')
     (out / 'configuracion.json').write_text(json.dumps(dict(
         protocolo=ar.PROTOCOLO, revision=revision, detector='lstm_supervisado',
-        entradas=tipo, forma_vecinas=forma, vecinas=vec.vecinas if vec else None, columnas=n_features,
+        entradas=tipo, forma_vecinas=forma, referencia_14_dias=referencia, vecinas=vec.vecinas if vec else None, columnas=n_features,
         delta_pct=d, origen='recién entrenado',
         fecha=datetime.now().isoformat(timespec='seconds'), **CONFIG, ventana=lr.VENTANA,
         epoca_E=E, epocas_seleccion_ejecutadas=len(hist1), val_loss_minimo=float(hist1['val_loss'].min()),

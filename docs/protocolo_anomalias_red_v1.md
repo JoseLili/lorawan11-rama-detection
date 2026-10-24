@@ -258,6 +258,7 @@ resultados.
 | 7 | 2026-10-16 | Segundo intento supervisado: entradas relativas al perfil de 14 días y 20 calendarios de entrenamiento, para el LSTM supervisado y su Random Forest de control. La revisión 6 y sus resultados se conservan | Se registró **después** de ver la revisión 6 en 2024. El diseño se eligió sólo con la validación 2022, con una regla fijada antes de compararlo (`progreso.md`, 2026-10-16) |
 | 8 | 2026-10-22 | Tercer intento supervisado: las entradas de la revisión 7 más una columna por estación que la compara con sus 4 vecinas más cercanas, para el LSTM supervisado y su Random Forest de control. Se agrega un control sin entrenamiento (la comparación con vecinas, sin modelo). Las revisiones 6 y 7 se conservan | Propuesta del tesista, con la premisa del asesor del 2026-10-19 y la exploración de ese día con 2020–2022. Se registró **después** de ver las revisiones 6 y 7 en 2024 y **antes** de programarla. La forma de la columna nueva se elige sólo con 2022, con una regla fijada aquí |
 | 9 | 2026-10-23 | Métricas de presentación: el conjunto estándar completo (TP, FP, FN, TN, exactitud, precisión, recall, especificidad, tasa de falsas alarmas, F1, F2, MCC, ROC-AUC y PR-AUC), cada métrica con su valor «sin ataque» y una nota de lectura. Principal: F1 con 1 % de falsas alarmas; secundaria: F2, la de la parte 1. La señal por hora de la revisión 2 se conserva | Pedido del tesista, para comparar con la literatura y con la parte 1. Se registró **después** de ver la revisión 8 en 2024. No elige ni cambia ningún modelo, umbral o forma |
+| 10 | 2026-10-23 | Referencia robusta: el perfil de 14 días con la **mediana** en lugar de la media, en las entradas relativas y en la columna de vecinas (forma a14) del LSTM supervisado con vecinas y de la regla de vecinas. Se elige contra la revisión 8 sólo con 2022. Las revisiones 6 a 9 se conservan | El estudio de las falsas alarmas (`progreso.md`, 2026-10-23) mostró que la media de 14 días se contamina con los días atacados y provoca falsas alarmas durante los 14 días siguientes. La mediana es el estimador estándar con datos contaminados. Se registró **después** de ver la revisión 8 en 2024 y **antes** de correrla con datos reales. Aprobada en lo general por el tesista |
 
 ### Revisión 1 (2026-10-13)
 
@@ -670,3 +671,128 @@ cambia ningún modelo, umbral, forma ni calendario. Cálculo:
 umbral), no los valores. El F1 depende del problema, de la proporción de ataques y de cómo se
 elige el umbral.
 
+### Revisión 10 (2026-10-23): referencia de 14 días con mediana
+
+**Por qué.**
+- **El problema:** en la revisión 8, las entradas relativas y la columna de vecinas a14 comparan
+  cada lectura con la **media** de esa hora en los 14 días anteriores. Cuando una estación estuvo
+  atacada varios de esos días, la media queda inflada o desinflada, y la lectura ya normal se ve
+  anómala.
+- **Lo que mostró el estudio de las falsas alarmas:**
+  - el exceso dura casi exactamente 14 días;
+  - lo dispara la estación atacada;
+  - con δ = 100 % y 5 % llega a +16 puntos el primer día.
+- **La solución:** la mediana casi no se mueve si menos de la mitad de los 14 días está alterada.
+- **El techo:** sin esas horas, el F1 con 5 % de la revisión 8 pasaría de 0.48 a 0.60 con δ = 100 %.
+  Es un límite superior, no una predicción.
+
+**Qué cambia (y sólo eso):**
+- **El perfil de 14 días** (`evaluacion_red.perfil_mediana`, `relativas(..., referencia='mediana')`):
+  - en cada hora, la mediana de los 14 valores anteriores de esa misma hora;
+  - si no hay ninguno, la mediana histórica de esa hora y luego la global;
+  - siempre con observaciones estrictamente anteriores.
+- **Dónde se usa:** en las 32 entradas relativas y en la columna de vecinas a14 del LSTM supervisado
+  con vecinas y de la regla de vecinas.
+- **Lo que no cambia:**
+  - las 98 columnas, la arquitectura, la semilla, los 20 calendarios y la división de años;
+  - los umbrales de 1 y 5 % con 2023 limpio, las métricas de la revisión 9 y las vecinas;
+  - el valor por defecto (`'media'`), así que los detectores anteriores dan lo mismo.
+- **El Random Forest de control no se repite:** ya quedó por debajo del LSTM en las revisiones 7 y 8.
+
+**Elección con 2022, fijada antes de correrla**
+(`experiments/anomalias_red/diagnostico_referencia_2022.py`):
+- **Variantes:**
+  - a14 con media: es la revisión 8, y se reentrena en la misma corrida y la misma máquina;
+  - a14 con mediana.
+- **Datos:** como la elección de la revisión 8. Se entrena con 2020–2021 de los 20 calendarios y
+  se valida con 2022 de los calendarios 01–10. La escala de la columna se ajusta con 2020–2021
+  limpio. Son 10 épocas fijas.
+- **Severidades:** δ = 100 y 50 % deciden, porque ahí está la contaminación. δ = 20 % sólo se
+  reporta.
+- **Medida:**
+  - el F1 con un umbral que deja 1 % de falsas alarmas en las horas con etiqueta 0 de la
+    validación;
+  - en la época de **menor pérdida de validación**, la que elegiría el EarlyStopping del modelo
+    definitivo.
+- **Contraste:**
+  - el F1 con 5 %, el recall, la precisión, el PR-AUC, la mejor época y el promedio de las 10;
+  - las falsas alarmas con 1 % en las horas normales de los 14 días posteriores a un ataque y en
+    las demás.
+- **Regla:**
+  - se adopta la mediana si su F1 con 1 %, promediado entre δ = 100 y 50 %, supera al de la media
+    en **0.02 o más**;
+  - si no, se queda la media, la revisión 10 se cierra con ese resultado y **no se examina con
+    2024**.
+- **Reproducibilidad:** se corre dos veces y debe salir idéntica.
+
+**Ejecución si se adopta** (`experiments/anomalias_red/correr_revision10.sh`, en Colab):
+- **Qué corre:** el LSTM con vecinas y mediana, y la regla de vecinas con mediana, cada uno dos
+  veces y comparados, en los cinco δ.
+- **Cómo:** igual que la revisión 8: E por EarlyStopping con 2020–2021 contra 2022, modelo
+  definitivo con 2020–2022, umbrales con 2023 limpio y examen 2024.
+- **Comparación:** con la revisión 8 de Colab, con las métricas de la revisión 9 y su valor sin
+  ataque, y con el estudio de las falsas alarmas repetido.
+
+**Predicción de Claude, antes de correrla:**
+1. Con 2022 y δ = 100 %, la mediana baja al menos a la mitad las falsas alarmas con 1 % en las
+   horas normales de los 14 días posteriores a un ataque.
+2. La regla de elección adopta la mediana.
+3. En 2024 con δ = 100 %, el F1 del LSTM con vecinas sube a 0.46 o más con 1 % (revisión 8: 0.43)
+   y a 0.53 o más con 5 % (revisión 8: 0.48).
+4. En 2024 con δ ≤ 20 %, el F1 con 1 % cambia menos de 0.02 frente a la revisión 8.
+5. E = 1 en los cinco δ.
+6. La regla de vecinas con mediana sube su F1 con 1 % con δ = 100 % en 0.02 o más (revisión 8: 0.32).
+
+**Implementación (2026-10-23):**
+- **Código:** `src/detect/evaluacion_red.py` (con `REFERENCIAS`, `perfil_mediana` y
+  `referencia=`); `entrenar_lstm_sup.py` y `evaluar_regla_vecinas.py` (con `--referencia mediana`);
+  `diagnostico_referencia_2022.py`; `correr_revision10.sh`.
+- **Pruebas:** 3 nuevas, con 22 en total en `tests/test_evaluacion_red.py`:
+  - con 5 de 14 días al doble, la media hace parecer baja a la estación y la mediana no;
+  - la mediana es causal;
+  - el respaldo funciona tras 16 días sin dato;
+  - el valor por defecto no cambia.
+- **Modo `--prueba` de la elección:** corre completo.
+- **Salidas:** `results/anomalias_red_v1/referencia_2022/` (la elección),
+  `lstm_sup_vecinas_a14_mediana_20cal/` y `regla_vecinas_a14_mediana/`.
+
+**Referencia elegida con 2022 (2026-10-23): la media. La revisión 10 se cierra y no se examina con
+2024.**
+- **La regla:**
+  - se usa el F1 con 1 % en la época de menor pérdida de validación, que fue la 1 en las seis
+    corridas;
+  - promediado entre δ = 100 y 50 %, da 0.181 con la media y 0.167 con la mediana;
+  - la ventaja de la mediana es −0.014, y hacía falta +0.02.
+- **Por δ** (media y mediana):
+  - 0.263 y 0.208 con 100 %;
+  - 0.099 y 0.126 con 50 %;
+  - 0.042 y 0.041 con 20 %, que sólo se reporta.
+- **Contraste, que no decide:** ninguna otra forma de resumir llega a +0.02.
+  - El promedio de las 10 épocas da −0.007.
+  - La mejor época da −0.001.
+  - El F1 con 5 % da −0.006.
+  - El PR-AUC da +0.001.
+- **Falsas alarmas con 1 % y δ = 100 %:**
+  - en las horas normales de los 14 días posteriores a un ataque, bajaron de 1.42 % a 1.18 %;
+  - en las demás horas normales, subieron de 0.45 % a 0.76 %;
+  - el total queda en 1 % por construcción del umbral.
+- **Predicciones:**
+  - la 1 falló: las falsas alarmas tras un ataque bajaron 17 %, no a la mitad;
+  - la 2 también falló;
+  - la 3, la 4, la 5 y la 6 eran de 2024 y no se evalúan.
+- **Reproducibilidad:**
+  - las dos corridas en paralelo salieron idénticas;
+  - los modelos se entrenaron en la corrida, en Colab (sesión `rev10`), y no se guardaron.
+- **Máquina:**
+  - fue un Intel Xeon @ 2.20 GHz (Broadwell, 8 núcleos virtuales), no el AMD EPYC 7B12 de la
+    revisión 8;
+  - la variante con media no repite época por época la elección de la revisión 8: la pérdida de
+    validación difiere hasta 0.14 y el F1 con 5 % hasta 0.033;
+  - en la lap se comprobó que sus entradas son idénticas bit a bit a las del código del commit
+    6d417a9, así que la diferencia viene de la máquina;
+  - la regla no se afecta, porque compara las dos variantes en la misma corrida.
+- **Consecuencia para lo que sigue:**
+  - hacer las comparaciones «dentro de Colab» (opción A) no basta;
+  - para comparar contra números de la revisión 8 hace falta el mismo procesador, o repetir la
+    revisión 8 en la misma sesión.
+- **Detalle:** en `progreso.md` (2026-10-23) y en `results/anomalias_red_v1/referencia_2022/`.

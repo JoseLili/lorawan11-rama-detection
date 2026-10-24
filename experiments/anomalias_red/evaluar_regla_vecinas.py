@@ -12,8 +12,8 @@ Uso (desde la raíz del repo, después de generar_matrices.py y de elegir la for
 3. Umbrales de 5 y 1 % de falsas alarmas por hora de red con 2023 limpio, falsas alarmas en 2024
    limpio y examen con los 10 calendarios del δ: las mismas métricas que los otros detectores.
 
-Salidas en results/anomalias_red_v1/regla_vecinas_<forma>/d<δ>/. Si ya existen, se detiene (usar
---sustituir).
+Salidas en results/anomalias_red_v1/regla_vecinas_<forma>/d<δ>/ (con --referencia mediana, de la
+revisión 10: regla_vecinas_<forma>_mediana/). Si ya existen, se detiene (usar --sustituir).
 """
 from __future__ import annotations
 
@@ -56,10 +56,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--delta', type=int, required=True, choices=[round(100 * d) for d in ar.DELTAS])
     ap.add_argument('--forma', choices=ev.FORMAS, required=True)
+    ap.add_argument('--referencia', choices=ev.REFERENCIAS, default='media',
+                    help='perfil de 14 días: media (revisión 8) o mediana (revisión 10, sólo con a14)')
     ap.add_argument('--sustituir', action='store_true')
     args = ap.parse_args()
-    d, forma = args.delta, args.forma
-    out = SAL / f'regla_vecinas_{forma}' / f'd{d}'
+    d, forma, referencia = args.delta, args.forma, args.referencia
+    out = SAL / f"regla_vecinas_{forma}{'_mediana' if referencia == 'mediana' else ''}" / f'd{d}'
     if (out / 'metricas.csv').exists() and not args.sustituir:
         raise SystemExit(f'{out} ya tiene resultados; usar --sustituir para rehacerlos')
     out.mkdir(parents=True, exist_ok=True)
@@ -70,12 +72,12 @@ def main():
     v4 = pd.read_csv(V4_NORM, index_col='estacion')
     np.testing.assert_allclose(mu, v4.loc[mu.index, 'media_definitiva'], rtol=1e-9)
     np.testing.assert_allclose(sigma, v4.loc[sigma.index, 'desv_definitiva'], rtol=1e-9)
-    vec = parametros_vecinas(forma, limpia_tr, sigma)
+    vec = parametros_vecinas(forma, limpia_tr, sigma, referencia)
 
     # 1–2. Puntajes de 2023 limpio, dos veces, y umbrales.
     cal, sha_cal = leer('limpia_2023')
     s_cal = puntaje(limpia_tr, cal, sigma, vec)
-    otra_vez = puntaje(limpia_tr, cal, sigma, parametros_vecinas(forma, limpia_tr, sigma))
+    otra_vez = puntaje(limpia_tr, cal, sigma, parametros_vecinas(forma, limpia_tr, sigma, referencia))
     if not np.array_equal(s_cal.to_numpy(), otra_vez.to_numpy()):
         raise RuntimeError('dos cálculos de la regla dieron puntajes distintos')
     umbrales = {f'{round(100 * a)}': ev.umbral_falsas_alarmas(s_cal, a) for a in ev.NIVELES_FA}
@@ -121,7 +123,8 @@ def main():
     tamanos.to_csv(out / 'por_tamano.csv', index=False)
     pd.DataFrame(puntajes).rename_axis('timestamp').to_csv(out / 'puntajes.csv.gz', float_format='%.6g')
     (out / 'configuracion.json').write_text(json.dumps(dict(
-        protocolo=ar.PROTOCOLO, revision=8, detector='regla_vecinas', forma_vecinas=forma, delta_pct=d,
+        protocolo=ar.PROTOCOLO, revision=10 if referencia == 'mediana' else 8, detector='regla_vecinas',
+        forma_vecinas=forma, referencia_14_dias=referencia, delta_pct=d,
         origen='sin entrenamiento (referencia y escala con 2020–2022 limpio)',
         fecha=datetime.now().isoformat(timespec='seconds'), vecinas=vec.vecinas,
         escala=vec.escala.round(6).to_dict(), puntaje='máximo |columna de vecinas| entre estaciones',
@@ -130,7 +133,7 @@ def main():
         reproducibilidad='dos cálculos con puntajes idénticos en 2023'), indent=2, ensure_ascii=False))
 
     # Resumen agregado (todas las corridas juntas).
-    print(f'\nRegla de vecinas ({forma}) δ = {d} % (sin entrenamiento). Umbrales: {umbrales}')
+    print(f'\nRegla de vecinas ({forma}, {referencia}) δ = {d} % (sin entrenamiento). Umbrales: {umbrales}')
     for k in umbrales:
         e = episodios[episodios.nivel_fa_pct == int(k)]
         m_ = metricas[metricas.nivel_fa_pct == int(k)]
