@@ -3488,6 +3488,78 @@ la 2, la 3, la 4 y la 5. La 6 es de 2024.
 **Siguiente:** la fase 2, el examen 2024 por estación-día con la regla y el V4, en la lap. Falta
 programarla, y el V4 necesita repetir su inferencia para guardar el residuo por estación.
 
+**Commit:** cc0090a, con la revisión 11 aprobada y la fase 1.
+
+### Revisión 11, fase 2: examen 2024 por estación-día (2026-10-24)
+
+**Hecho:**
+- **El script** `experiments/anomalias_red/evaluar_estacion_dia.py`, con `--detector regla|v4`.
+- **Las corridas:** dos por detector, en la lap. Los resultados salieron **idénticos**: la regla
+  tarda segundos y el V4 unos 10 min por corrida.
+  - Están en `results/anomalias_red_v1/estacion_dia/{regla,v4}/`.
+  - Los registros están en `logs_revision11/`.
+- **Modelos:** la regla no se entrena; el V4 se cargó de disco y repitió su inferencia.
+- **Controles:**
+  - en los 52 conjuntos (2023 limpio, 2024 limpio y 50 exámenes), el puntaje de red que sale del
+    valor por estación reproduce el guardado antes por cada detector, con 6 cifras;
+  - el V4 reproduce sus predicciones de 2024 limpio (diferencia máxima 1.4 × 10⁻¹⁴ ppb) y repite
+    el primer calendario con residuos idénticos.
+- **El modo `--prueba`** de este script no imprime métricas; no se vio nada antes de la corrida
+  completa.
+
+**Resultado** (F1 con 1 % por estación-día, 10 calendarios de 2024 juntos; decide el promedio del
+día):
+
+| δ | Regla: promedio del día | Regla: peor hora | V4: promedio del día | V4: peor hora |
+|---:|---:|---:|---:|---:|
+| 100 % | **0.323** | 0.261 | 0.206 | 0.205 |
+| 50 % | **0.330** | 0.200 | 0.102 | 0.099 |
+| 20 % | **0.116** | 0.047 | 0.029 | 0.024 |
+| 10 % | 0.038 | 0.018 | 0.018 | 0.014 |
+| 5 % | 0.016 | 0.013 | 0.014 | 0.011 |
+| Sin ataque | 0.012 | 0.011 | 0.011 | 0.006 |
+
+**Regla de vecinas con el promedio del día:**
+- **Con δ = 50 %:** recall de 0.62 y precisión de 0.23.
+- **Con δ = 100 %:** recall de 0.85 y precisión de 0.20.
+- **PR-AUC:** 0.58, 0.40 y 0.050 con 100, 50 y 20 %.
+
+**Falsas alarmas con 1 % y δ = 100 %, regla con el promedio del día:**
+- contagio: 25 %, con una tasa de 24 %;
+- tras un ataque propio: 24 %, con una tasa de 25 %;
+- resto: 51 %, con una tasa de 1.4 %.
+
+**Predicciones:** la 6 se cumplió, porque con δ ≥ 50 % la regla supera al V4. En total se
+cumplieron 5 de 6.
+
+**Observaciones de Claude:**
+- **2024 confirma a 2022 en la regla.** El promedio del día gana en todos los δ, y con fuerza en
+  50 % (0.20 a 0.33) y 20 % (0.05 a 0.12).
+- **En el V4 casi no cambia,** con +0.003 a +0.005.
+  - **Hipótesis, no comprobada:** el residuo del V4 ya compara contra su predicción con las demás
+    estaciones, y la deriva del año pesa más en su promedio.
+  - Su falsa alarma en 2024 limpio sube a 2.9 % con el promedio del día, contra 2.3 % con la peor
+    hora.
+- **Cambio de año:** las falsas alarmas en 2024 limpio pasan del 1 % que se fijó con 2023.
+  - En la regla son 1.2 % con el promedio y 1.9 % con la peor hora.
+  - Es lo mismo que ya se vio por hora de red, con mayo de 2024 excepcional.
+- **Casi la mitad de las falsas alarmas de la regla** con δ = 100 % viene de los dos sesgos
+  sostenidos: el contagio y la referencia contaminada.
+  - Son los blancos naturales de una mejora de la propia regla, que costaría menos que un LSTM.
+  - Sería una revisión nueva.
+- **Sobre el techo:**
+  - las estación-días atacadas válidas son 0.78 %, así que el F1 con 1 % no pasaría de ~0.6;
+  - el 0.33 con δ = 50 % está a medio camino de ese techo;
+  - **no se compara uno a uno con el 0.15 por hora de red** de la regla con δ = 50 % (revisión 8),
+    porque son casos y proporciones distintos;
+  - sí se puede decir que, por estación-día, la regla además señala la estación correcta.
+- **Lo que no cambia:** con δ ≤ 10 % nada detecta de forma útil, igual que por hora de red.
+
+**Siguiente** (decisión del tesista):
+- (a) la fase 3, el LSTM por estación, que se diseña y registra aparte antes de programarlo;
+- (b) antes de eso, una revisión de la propia regla contra el contagio y la referencia contaminada;
+- (c) la gráfica de la semana con estos resultados.
+
 ---
 
 ## Siguiente

@@ -1006,3 +1006,41 @@ programarla.
   vio antes de la corrida completa. No se cambió nada, porque la regla y las predicciones estaban
   fijadas.
 - **Detalle:** en `progreso.md` (2026-10-24) y en `results/anomalias_red_v1/estacion_dia_2022/`.
+
+**Resultado de la fase 2 (2026-10-24): examen 2024 por estación-día.**
+- **Cómo se corrió:**
+  - en la lap, dos corridas por detector, con salidas idénticas;
+  - la regla no se entrena;
+  - el V4 se cargó de disco y repitió su inferencia.
+- **Controles:**
+  - en los 52 conjuntos de cada detector, el puntaje de red reproduce el guardado por
+    `evaluar_regla_vecinas.py` o `evaluar_v4.py`;
+  - el V4 reproduce sus predicciones de 2024 limpio (diferencia máxima 1.4 × 10⁻¹⁴ ppb) y repite
+    el primer calendario con residuos idénticos.
+- **F1 con 1 %, regla de vecinas** (promedio del día, que decide, y peor hora):
+  - 0.323 y 0.261 con 100 %;
+  - 0.330 y 0.200 con 50 %;
+  - 0.116 y 0.047 con 20 %;
+  - 0.038 y 0.018 con 10 %;
+  - 0.016 y 0.013 con 5 %.
+- **F1 con 1 %, V4** (promedio del día y peor hora):
+  - 0.206 y 0.205 con 100 %;
+  - 0.102 y 0.099 con 50 %;
+  - 0.029 y 0.024 con 20 %;
+  - 0.018 y 0.014 con 10 %;
+  - 0.014 y 0.011 con 5 %.
+- **Sin ataque,** con el mismo umbral, el F1 con 1 % va de 0.006 a 0.012.
+- **Falsas alarmas en 2024 limpio con el umbral de 1 % de 2023:**
+  - regla: 1.2 % con el promedio del día y 1.9 % con la peor hora;
+  - V4: 2.9 % y 2.3 %.
+- **Falsas alarmas con 1 % y δ = 100 %, regla con el promedio del día:**
+  - contagio: 25 %, con una tasa de 24 %;
+  - tras un ataque propio: 24 %, con una tasa de 25 %;
+  - resto: 51 %, con una tasa de 1.4 %.
+- **En el V4, el contagio pesa poco:** 4 % de sus falsas alarmas.
+- **Excluidas:** 21 % de las estación-días en la regla y 19 % en el V4. Incluye todo ACO, que no
+  tiene datos en 2024.
+- **Predicciones:** la 6 se cumplió, porque con δ ≥ 50 % la regla supera al V4. En total se
+  cumplieron 5 de 6.
+- **No se compara uno a uno con la hora de red.**
+- **Detalle:** en `progreso.md` (2026-10-24) y en `results/anomalias_red_v1/estacion_dia/`.
