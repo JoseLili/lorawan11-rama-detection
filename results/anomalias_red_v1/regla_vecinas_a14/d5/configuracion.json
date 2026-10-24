@@ -1,0 +1,249 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 8,
+  "detector": "regla_vecinas",
+  "forma_vecinas": "a14",
+  "delta_pct": 5,
+  "origen": "sin entrenamiento (referencia y escala con 2020–2022 limpio)",
+  "fecha": "2026-10-23T20:44:36",
+  "vecinas": {
+    "ACO": [
+      "LLA",
+      "SAG",
+      "MON",
+      "VIF"
+    ],
+    "AJM": [
+      "PED",
+      "CCA",
+      "UAX",
+      "BJU"
+    ],
+    "AJU": [
+      "AJM",
+      "UAX",
+      "MPA",
+      "TAH"
+    ],
+    "ATI": [
+      "TLA",
+      "TLI",
+      "FAC",
+      "CAM"
+    ],
+    "BJU": [
+      "HGM",
+      "IZT",
+      "CCA",
+      "MGH"
+    ],
+    "CAM": [
+      "HGM",
+      "MER",
+      "TLA",
+      "FAC"
+    ],
+    "CCA": [
+      "PED",
+      "BJU",
+      "AJM",
+      "UAX"
+    ],
+    "CHO": [
+      "TAH",
+      "MPA",
+      "SAC",
+      "NEZ"
+    ],
+    "CUA": [
+      "PED",
+      "MGH",
+      "INN",
+      "CCA"
+    ],
+    "CUT": [
+      "VIF",
+      "TLI",
+      "ATI",
+      "TLA"
+    ],
+    "FAC": [
+      "TLA",
+      "CAM",
+      "MGH",
+      "ATI"
+    ],
+    "FAR": [
+      "GAM",
+      "SAG",
+      "NEZ",
+      "MER"
+    ],
+    "GAM": [
+      "FAR",
+      "LPR",
+      "MER",
+      "CAM"
+    ],
+    "HGM": [
+      "MER",
+      "BJU",
+      "IZT",
+      "MGH"
+    ],
+    "INN": [
+      "CUA",
+      "AJM",
+      "PED",
+      "CCA"
+    ],
+    "IZT": [
+      "MER",
+      "BJU",
+      "HGM",
+      "UIZ"
+    ],
+    "LLA": [
+      "SAG",
+      "LPR",
+      "VIF",
+      "FAR"
+    ],
+    "LPR": [
+      "GAM",
+      "TLA",
+      "SAG",
+      "CAM"
+    ],
+    "MER": [
+      "HGM",
+      "IZT",
+      "GAM",
+      "CAM"
+    ],
+    "MGH": [
+      "HGM",
+      "BJU",
+      "CAM",
+      "PED"
+    ],
+    "MON": [
+      "NEZ",
+      "FAR",
+      "SAG",
+      "SAC"
+    ],
+    "MPA": [
+      "TAH",
+      "CHO",
+      "AJU",
+      "UAX"
+    ],
+    "NEZ": [
+      "SAC",
+      "UIZ",
+      "FAR",
+      "IZT"
+    ],
+    "PED": [
+      "CCA",
+      "AJM",
+      "BJU",
+      "MGH"
+    ],
+    "SAC": [
+      "NEZ",
+      "UIZ",
+      "UAX",
+      "TAH"
+    ],
+    "SAG": [
+      "LLA",
+      "FAR",
+      "GAM",
+      "LPR"
+    ],
+    "TAH": [
+      "MPA",
+      "SAC",
+      "UAX",
+      "CHO"
+    ],
+    "TLA": [
+      "FAC",
+      "ATI",
+      "CAM",
+      "TLI"
+    ],
+    "TLI": [
+      "ATI",
+      "TLA",
+      "LPR",
+      "VIF"
+    ],
+    "UAX": [
+      "UIZ",
+      "CCA",
+      "IZT",
+      "BJU"
+    ],
+    "UIZ": [
+      "IZT",
+      "NEZ",
+      "SAC",
+      "UAX"
+    ],
+    "VIF": [
+      "TLI",
+      "LLA",
+      "CUT",
+      "LPR"
+    ]
+  },
+  "escala": {
+    "ACO": 0.283779,
+    "AJM": 0.357811,
+    "AJU": 0.38133,
+    "ATI": 0.285154,
+    "BJU": 0.18182,
+    "CAM": 0.228832,
+    "CCA": 0.177414,
+    "CHO": 0.349162,
+    "CUA": 0.344847,
+    "CUT": 0.289844,
+    "FAC": 0.246481,
+    "FAR": 0.192968,
+    "GAM": 0.183021,
+    "HGM": 0.156567,
+    "INN": 0.520041,
+    "IZT": 0.162926,
+    "LLA": 0.226253,
+    "LPR": 0.289164,
+    "MER": 0.193871,
+    "MGH": 0.21772,
+    "MON": 0.293547,
+    "MPA": 0.406085,
+    "NEZ": 0.213206,
+    "PED": 0.230959,
+    "SAC": 0.26886,
+    "SAG": 0.234216,
+    "TAH": 0.264253,
+    "TLA": 0.213778,
+    "TLI": 0.252022,
+    "UAX": 0.23346,
+    "UIZ": 0.19849,
+    "VIF": 0.25219
+  },
+  "puntaje": "máximo |columna de vecinas| entre estaciones",
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "umbrales": {
+    "5": 4.457954811947523,
+    "1": 5.957340512482771
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 5.0,
+    "1": 0.9931506849315069
+  },
+  "reproducibilidad": "dos cálculos con puntajes idénticos en 2023"
+}

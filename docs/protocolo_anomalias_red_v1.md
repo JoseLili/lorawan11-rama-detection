@@ -257,6 +257,7 @@ resultados.
 | 6 | 2026-10-16 | El LSTM supervisado pasa de opcional a detector principal (§2 y §8), con 10 calendarios de entrenamiento. Se agregan un Random Forest con los mismos calendarios y una prueba secundaria con hora de inicio al azar | Corrige el protocolo para que siga lo acordado el 2026-10-12 (método supervisado, del Random Forest al LSTM). Aprobado por el tesista antes de entrenar |
 | 7 | 2026-10-16 | Segundo intento supervisado: entradas relativas al perfil de 14 días y 20 calendarios de entrenamiento, para el LSTM supervisado y su Random Forest de control. La revisión 6 y sus resultados se conservan | Se registró **después** de ver la revisión 6 en 2024. El diseño se eligió sólo con la validación 2022, con una regla fijada antes de compararlo (`progreso.md`, 2026-10-16) |
 | 8 | 2026-10-22 | Tercer intento supervisado: las entradas de la revisión 7 más una columna por estación que la compara con sus 4 vecinas más cercanas, para el LSTM supervisado y su Random Forest de control. Se agrega un control sin entrenamiento (la comparación con vecinas, sin modelo). Las revisiones 6 y 7 se conservan | Propuesta del tesista, con la premisa del asesor del 2026-10-19 y la exploración de ese día con 2020–2022. Se registró **después** de ver las revisiones 6 y 7 en 2024 y **antes** de programarla. La forma de la columna nueva se elige sólo con 2022, con una regla fijada aquí |
+| 9 | 2026-10-23 | Métricas de presentación: el conjunto estándar completo (TP, FP, FN, TN, exactitud, precisión, recall, especificidad, tasa de falsas alarmas, F1, F2, MCC, ROC-AUC y PR-AUC), cada métrica con su valor «sin ataque» y una nota de lectura. Principal: F1 con 1 % de falsas alarmas; secundaria: F2, la de la parte 1. La señal por hora de la revisión 2 se conserva | Pedido del tesista, para comparar con la literatura y con la parte 1. Se registró **después** de ver la revisión 8 en 2024. No elige ni cambia ningún modelo, umbral o forma |
 
 ### Revisión 1 (2026-10-13)
 
@@ -613,3 +614,59 @@ Detalles que se fijan al programarla:
   posteriores a la 1. Es más que el margen de 2 puntos de las reglas de elección cuando se usan
   esas épocas, así que esas decisiones son frágiles. La época 1, que es la que elige el protocolo,
   casi no cambió.
+
+**Forma elegida con 2022 (2026-10-23): a14.**
+- **Por qué:** con δ = 20 %, a14 tuvo la mayor detección en la mejor de sus 10 épocas (12.3 %, en
+  la época 2), así que su ventaja sobre a14 es 0.
+- **Las demás formas:** b14 10.6 %, bfija 9.9 % y afija 9.8 %.
+- **La revisión 7 sin vecinas,** entrenada en Colab con los mismos datos: 7.0 %.
+- **Con δ = 100 %** (sólo se reporta, no decide): b14 59.8 %, bfija 46.4 %, afija 37.0 %, a14
+  34.6 % y sin vecinas 30.4 %.
+- Las dos corridas salieron idénticas. El detalle está en `progreso.md` (2026-10-23) y en
+  `results/anomalias_red_v1/vecinas_2022/`.
+
+**V4 en las comparaciones (2026-10-23, decisión del tesista).**
+- **El problema:** en Colab, el V4 no pasa su control de reproducción (revisión 5). Difiere de las
+  predicciones guardadas en 7.6 × 10⁻⁶ ppb como máximo (2⁻¹⁷, una unidad de redondeo de float32),
+  y la tolerancia es 10⁻⁹. Por eso no calcula métricas allá.
+- **La decisión:** en las comparaciones de la revisión 8 se usa el V4 calculado en la lap. Es una
+  excepción a la opción A: es un modelo cargado de disco, sólo hace inferencia, y la diferencia es
+  de redondeo, no de entrenamiento.
+
+### Revisión 9 (2026-10-23): métricas de presentación
+
+Se registró después de ver la revisión 8 en 2024, a pedido del tesista, para presentar con las
+métricas que usa la literatura y que usó la parte 1 (F2, §7.3 de su protocolo). No elige ni
+cambia ningún modelo, umbral, forma ni calendario. Cálculo:
+`experiments/anomalias_red/metricas_estandar_revision8.py`.
+
+**Cómo se calculan:**
+- **Unidad:** la hora de red, con la clase positiva = hora atacada (`anomalia_red`).
+- **Calendarios:** se juntan los 10 del examen 2024.
+- **Umbrales:** los de siempre, con 1 % y 5 % de falsas alarmas en 2023 limpio.
+- **Valor «sin ataque»:** cada métrica se calcula también con los puntajes de 2024 limpio, en las
+  mismas horas y con las mismas etiquetas. Es lo que daría el detector aunque no viera el ataque.
+  Se reporta siempre al lado.
+- **Referencias sin detector:** «alertar siempre» y «nunca alertar».
+
+**Métrica principal: F1 con 1 %. Secundaria: F2 con 1 %.** También se reportan con 5 %.
+
+**Nota de lectura de cada métrica** (se reporta junto con ella):
+
+| Métrica | Qué mide | Nota |
+|---|---|---|
+| TP, FP, FN, TN | Conteos de horas | Siempre con sus denominadores, como en la parte 1 |
+| Exactitud | Horas bien clasificadas | Casi no informa: «nunca alertar» saca 0.84–0.88 porque la mayoría de las horas es normal. Sólo por completitud |
+| Precisión | De las alarmas, cuántas eran ataques | Depende de la proporción de horas atacadas (12–16 %). No se compara con otra proporción |
+| Recall | De las horas atacadas, cuántas alertaron | Se lee con su valor sin ataque |
+| Especificidad y tasa de falsas alarmas | Horas normales sin alarma y con alarma | El umbral apunta a 1 % o 5 % en 2023; en 2024 sale más (§ análisis de la revisión 8) |
+| F1 | Media armónica de precisión y recall, con el mismo peso | Premia alertar mucho: «alertar siempre» saca 0.22–0.28 |
+| F2 | Como el F1, pero el recall pesa más (β = 2) | Premia alertar todavía más: «alertar siempre» saca 0.42–0.49. Es la de la parte 1 |
+| MCC | Correlación entre alarma y ataque | 0 = azar, también para «alertar siempre». Es la menos engañosa con clases desbalanceadas |
+| ROC-AUC | Separación de puntajes, sin umbral | Sin ataque no da 0.5, sino 0.51–0.62, por el redondeo con δ chico (`progreso.md`, 2026-10-18) |
+| PR-AUC | Precisión promedio a lo largo de todos los umbrales | Su azar es la proporción de horas atacadas (0.12–0.16); sin ataque sale 0.12–0.18 |
+
+**Comparación con la literatura:** se iguala el método (definiciones, conteos y cómo se fijó el
+umbral), no los valores. El F1 depende del problema, de la proporción de ataques y de cómo se
+elige el umbral.
+

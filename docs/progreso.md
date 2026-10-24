@@ -2536,6 +2536,653 @@ con δ = 20 % (época 4).
 
 **Lo que el tesista sube una vez a Drive:** los 7 zips, a `Mi unidad/tesis_rama/raw/`.
 
+### Revisión 8 en Colab: equivalencia y elección de la forma con 2022 (2026-10-23)
+
+**Cómo se ejecutó.**
+- **Herramienta:** el Colab CLI oficial en lugar del cuaderno, en la sesión `rev8`.
+- **Máquina:** sólo procesador (8 AMD EPYC 7B12, 50 GB).
+- **Igual que en la lap:**
+  - las versiones exactas de `requirements-lock.txt`;
+  - los 7 zips, con su SHA-256 verificado;
+  - los planes y las matrices, idénticos al repo;
+  - las 265 pruebas, pasando.
+
+**Equivalencia: salió distinta.**
+- **La época 1** casi no cambia: 30.2 % en la lap y 30.4 % en Colab.
+- **Las épocas siguientes** se separan hasta 4.8 puntos.
+- **Decisión del tesista (opción A):** toda comparación de la revisión 8 se hace dentro de Colab.
+  - La revisión 7 y los controles se repiten allá con `correr_revision7_colab.sh`, en una copia
+    aparte del repo.
+  - El detalle está en la revisión 8 del protocolo.
+
+**Elección de la forma con 2022.**
+- **Script:** `experiments/anomalias_red/diagnostico_vecinas_2022.py`.
+- **Corridas:** dos, en paralelo, de 14:15 a 18:01 UTC.
+  - Compartieron la máquina con la revisión 7 repetida.
+  - `resultados.csv`, `resumen.csv` y `eleccion.json` salieron **idénticos**.
+  - Se descargaron a `results/anomalias_red_v1/vecinas_2022/`, con el SHA-256 verificado.
+- **Modelos:** recién entrenados y no guardados.
+- **Medida:**
+  - la detección de las horas con etiqueta 1 de 2022, calendarios 01–10;
+  - con un umbral que deja 5 % de falsas alarmas en las horas con etiqueta 0 de esa misma
+    validación, así que el azar es 5 %;
+  - la precisión, el F1 y el AUC son de la mejor época;
+  - «sin vecinas» es la revisión 7, entrenada en Colab con los mismos datos.
+
+δ = 20 % (decide):
+
+| Entrada | Mejor época | Detección: mejor | Detección: promedio de 10 | Rango en las 10 | Precisión | F1 | AUC |
+|---|---:|---:|---:|---|---:|---:|---:|
+| Sin vecinas | 10 | 7.0 % | 6.1 % | 4.9–7.0 % | 22.3 % | 0.11 | 0.55 |
+| **a14** | 2 | **12.3 %** | **10.7 %** | 10.0–12.3 % | 33.6 % | 0.18 | 0.61 |
+| afija | 1 | 9.8 % | 8.2 % | 7.3–9.8 % | 28.6 % | 0.15 | 0.60 |
+| b14 | 10 | 10.6 % | 9.8 % | 9.0–10.6 % | 30.3 % | 0.16 | 0.62 |
+| bfija | 3 | 9.9 % | 9.3 % | 8.6–9.9 % | 28.9 % | 0.15 | 0.61 |
+
+δ = 100 % (sólo se reporta):
+
+| Entrada | Mejor época | Detección: mejor | Detección: promedio de 10 | Rango en las 10 | Precisión | F1 | AUC |
+|---|---:|---:|---:|---|---:|---:|---:|
+| Sin vecinas | 1 | 30.4 % | 24.7 % | 21.7–30.4 % | 58.0 % | 0.40 | 0.74 |
+| a14 | 2 | 34.6 % | 32.5 % | 30.6–34.6 % | 61.1 % | 0.44 | 0.79 |
+| afija | 5 | 37.0 % | 33.3 % | 31.1–37.0 % | 62.7 % | 0.47 | 0.80 |
+| **b14** | 1 | **59.8 %** | **55.9 %** | 53.6–59.8 % | 73.1 % | 0.66 | 0.89 |
+| bfija | 5 | 46.4 % | 44.3 % | 41.2–46.4 % | 67.8 % | 0.55 | 0.86 |
+
+La pérdida de validación es mínima en la época 1 en las diez corridas.
+
+**Aplicación de la regla:**
+- La mayor detección con δ = 20 % es la de la propia a14, así que su ventaja es 0: **queda a14**.
+- La elección no cambia si se usa el promedio de las 10 épocas, ni sólo la época 1:
+  - con el promedio, la siguiente es b14, con 0.9 puntos menos;
+  - con la época 1, a14 tiene 10.7 % y la siguiente es afija, con 9.8 %.
+- Esa robustez vale dentro de Colab. El cambio de máquina movió hasta ~5 puntos las épocas
+  posteriores a la 1.
+
+**Comparación con la revisión 7 (no decide).** Con los dos δ, **cada una de las 10 épocas de las
+cuatro formas supera a la mejor época sin vecinas.**
+- **Con δ = 20 %,** a14 supera a la referencia por 5.3 puntos con la mejor época y por 4.6 con el
+  promedio.
+- **Con δ = 100 %,** la supera por 4.2 y 7.8.
+
+**Observaciones de Claude:**
+- **Con δ = 20 %, las cuatro formas quedan cerca:** entre 9.8 y 12.3 % con la mejor época. Es una
+  diferencia parecida a lo que se mueve una misma forma de una época a otra.
+- **Con δ = 100 %, la forma importa mucho:** b14 detecta 59.8 % y a14 34.6 %.
+  - **Hipótesis, no comprobada:** el cociente logarítmico (b) convierte la anomalía
+    multiplicativa en un corrimiento casi constante, sin importar el nivel de ozono. La diferencia
+    de desviaciones (a) depende del nivel.
+  - Con δ = 20 %, log(1.2) ≈ 0.18 quedaría cerca del ruido. Eso explicaría que la ventaja de b no
+    se vea ahí.
+- **Tensión con la regla:**
+  - la regla elige con δ = 20 %, la zona que se quiere mejorar, y ahí las formas casi empatan;
+  - con δ = 100 %, que no decide, gana b14 por 25 puntos;
+  - la regla se fijó antes y se aplica tal cual: **queda a14**.
+  - Agregar b14 a la corrida completa sería un cambio después de ver 2022, aunque antes de 2024.
+    Lo decide el tesista, y si se hace va como fila fechada en el §15.
+- **La memorización sigue:**
+  - la pérdida de validación es mínima en la época 1 en las diez corridas, y con vecinas crece más
+    rápido (a14 con δ = 20 %: 0.72 → 1.57);
+  - la detección no siempre cae: b14 con δ = 20 % y afija con δ = 100 % suben con las épocas;
+  - la corrida completa elige E con la pérdida, así que tenderá a E = 1.
+
+**Revisión 7 repetida en Colab, parcial** (δ = 100 y 50 %; sigue corriendo):
+- **LSTM:** idéntico entre sus dos corridas de Colab y distinto de la lap, como se esperaba.
+- **Random Forest:** idéntico a la lap.
+- **IsolationForest:**
+  - `git diff` lo marca distinto, pero sólo cambia el último decimal de su umbral de 1 %
+    (0.6291173013098955 frente a …956, una diferencia de 1e-16);
+  - todas sus detecciones y falsas alarmas son idénticas.
+
+### Resultado: revisión 8 (2026-10-23)
+
+**Decisión del tesista antes de lanzarla:** sólo a14, como manda la regla. b14 no se corre.
+- **Su razón:** a14 es la que permite juzgar el LSTM con vecinas tal como se registró.
+- **Lo que queda de b14:** su resultado de 2022 con δ = 100 % se conserva como observación de la
+  elección.
+
+**Ejecución.**
+- **Dónde:** en Colab (sesión `rev8`), en el clon principal, en el commit e70b15c. El código de la
+  revisión 8 es idéntico al de 19b3994: `git diff` de `src/` y de los cuatro scripts de la
+  revisión 8 da 0 líneas.
+- **Cómo:** `correr_revision8.sh a14` en tres corridas paralelas (100 y 5 %, 50 y 10 %, 20 %), de
+  18:52 a 20:43 UTC.
+- **Reproducibilidad:** todas las comparaciones salieron idénticas.
+  - LSTM, en los cinco δ: `metricas.csv`, `episodios.csv`, `por_tamano.csv`,
+    `historia_definitiva.csv` y puntajes.
+  - Regla, en los cinco δ: las mismas salidas.
+  - El Random Forest verifica dentro del script dos entrenamientos idénticos.
+- **Memoria:** nunca bajó de 19 GB libres.
+- **E = 1 en los cinco δ:** la selección corrió 9 épocas en cada uno.
+- **Origen de los números:**
+  - el LSTM y el Random Forest son recién entrenados (los `.keras` se guardan; los `.joblib` no
+    se bajaron);
+  - la regla no se entrena;
+  - el V4 está cargado de disco y calculado en la lap (ver abajo);
+  - el IsolationForest es idéntico en las dos máquinas.
+- **Salidas:**
+  - `results/anomalias_red_v1/lstm_sup_vecinas_a14_20cal/`, `rf_vecinas_a14_20cal/` y
+    `regla_vecinas_a14/`;
+  - registros en `logs_revision8/`, que no va a git.
+
+**Revisión 7 repetida en Colab (opción A).**
+- **Dónde:** `correr_revision7_colab.sh`, de 14:21 a 18:51 UTC, en la copia aparte
+  `/content/rev7_colab`, en el commit 19b3994.
+- **LSTM:** idéntico entre sus dos corridas de Colab en los cinco δ y distinto de la lap. E = 1,
+  salvo con δ = 5 % (E = 2).
+- **Random Forest:** idéntico a la lap en los cinco δ.
+- **IsolationForest:** idéntico a la lap, salvo el último decimal del umbral de 1 % (~1e-16).
+  Todas sus detecciones y falsas alarmas son iguales.
+- **Dónde quedó:** `results/anomalias_red_v1/colab_revision7/`, una carpeta nueva. Las salidas de
+  la lap no se tocaron.
+- **V4: no se pudo calcular en Colab.**
+  - **El primer intento** falló porque las predicciones de calibración 2023 y las de 2024 del V4
+    no están en git; se subieron a Colab.
+  - **El segundo** no pasa el control de la revisión 5: reproducir las predicciones guardadas con
+    10⁻⁹ ppb. La diferencia máxima es 7.6 × 10⁻⁶ ppb, exactamente 2⁻¹⁷, una unidad de redondeo de
+    float32 para valores de 64 a 128 ppb. El script se detiene antes de calcular métricas.
+  - **Corrección:** un comando auxiliar de Claude imprimió «v4 idéntico a la lap» en los cinco δ,
+    y era falso. Sin `pipefail` no detectó la falla, y comparó los archivos de la lap, que no se
+    habían tocado.
+  - **Decisión pendiente del tesista.** Claude recomienda usar el V4 de la lap: es un modelo
+    cargado de disco, sólo hace inferencia, y la diferencia es de una unidad de redondeo.
+
+**Señal = recall por hora menos el de esas mismas horas sin alterar** (examen 2024, 10
+calendarios). Entre paréntesis, el azar pareado.
+
+Nivel 5 %: recall por hora (azar pareado) y señal en puntos.
+
+| δ | LSTM con vecinas (a14) | LSTM sin vecinas (rev 7, Colab) | Regla de vecinas | RF con vecinas | RF sin vecinas (Colab) | V4 (lap) | IsolationForest |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 100 % | 52.4 (7.8) **+44.6** | 27.0 (5.9) **+21.1** | 34.7 (10.2) **+24.5** | 27.9 (8.3) **+19.6** | 16.4 (5.1) **+11.4** | 26.1 (8.9) **+17.3** | 6.7 (6.6) **+0.1** |
+| 50 % | 27.7 (8.1) **+19.6** | 9.9 (5.7) **+4.2** | 20.3 (10.2) **+10.0** | 15.3 (8.4) **+6.8** | 8.0 (5.6) **+2.4** | 14.2 (8.9) **+5.3** | 6.7 (6.6) **+0.1** |
+| 20 % | 8.3 (5.1) **+3.2** | 0.7 (0.5) **+0.2** | 12.2 (10.9) **+1.3** | 10.8 (9.6) **+1.2** | 7.3 (7.1) **+0.2** | 10.3 (9.6) **+0.7** | 7.2 (7.2) **+0.0** |
+| 10 % | 4.8 (4.4) **+0.5** | 0.6 (0.6) **+0.0** | 11.6 (11.4) **+0.2** | 10.7 (10.3) **+0.4** | 6.4 (6.5) **-0.1** | 10.3 (10.1) **+0.1** | 7.5 (7.5) **-0.0** |
+| 5 % | 2.6 (2.6) **+0.0** | 1.0 (0.9) **+0.1** | 12.6 (12.5) **+0.1** | 11.1 (11.1) **+0.1** | 7.4 (7.3) **+0.1** | 11.4 (11.3) **+0.1** | 8.2 (8.2) **+0.0** |
+
+Nivel 1 %: recall por hora (azar pareado) y señal en puntos.
+
+| δ | LSTM con vecinas (a14) | LSTM sin vecinas (rev 7, Colab) | Regla de vecinas | RF con vecinas | RF sin vecinas (Colab) | V4 (lap) | IsolationForest |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 100 % | 32.6 (1.6) **+31.0** | 10.3 (1.8) **+8.5** | 22.6 (3.3) **+19.3** | 16.9 (2.0) **+14.9** | 9.2 (1.7) **+7.5** | 13.8 (2.1) **+11.7** | 2.0 (2.0) **+0.0** |
+| 50 % | 9.2 (1.6) **+7.6** | 3.2 (1.8) **+1.3** | 9.0 (3.3) **+5.7** | 5.2 (2.0) **+3.1** | 1.9 (1.3) **+0.5** | 4.4 (2.1) **+2.4** | 2.0 (2.0) **+0.0** |
+| 20 % | 1.6 (0.8) **+0.8** | 0.1 (0.0) **+0.1** | 4.0 (3.5) **+0.5** | 2.6 (2.3) **+0.3** | 1.7 (1.6) **+0.1** | 2.5 (2.2) **+0.2** | 2.2 (2.2) **+0.0** |
+| 10 % | 0.8 (0.9) **-0.1** | 0.1 (0.1) **-0.0** | 3.8 (3.7) **+0.1** | 3.4 (3.1) **+0.3** | 1.4 (1.4) **+0.0** | 2.4 (2.4) **+0.0** | 2.3 (2.3) **+0.0** |
+| 5 % | 0.8 (0.7) **+0.0** | 0.0 (0.0) **+0.0** | 4.1 (4.1) **-0.0** | 2.1 (2.2) **-0.1** | 1.7 (1.7) **+0.0** | 2.6 (2.6) **+0.0** | 2.6 (2.6) **+0.0** |
+
+Contraste, nivel 5 %: LSTM con vecinas / LSTM sin vecinas (Colab) / regla de vecinas.
+
+| δ | Precisión | F1 | Falsas alarmas, horas normales del examen | Falsas alarmas, 2024 limpio | Episodios detectados (azar) | Calendarios con señal > 0 |
+|---|---|---|---|---|---|---|
+| 100 % | 44.3 % / 39.0 % / 38.8 % | 0.48 / 0.32 / 0.37 | 12.6 % / 8.0 % / 10.4 % | 7.9 % / 6.2 % / 8.8 % | 90.6 (50.5) / 78.6 (38.0) / 96.9 (89.6) | 10/10 / 10/10 / 10/10 |
+| 50 % | 36.4 % / 23.3 % / 30.4 % | 0.31 / 0.14 / 0.24 | 9.2 % / 6.2 % / 8.8 % | 7.9 % / 6.0 % / 8.8 % | 84.4 (60.4) / 50.5 (30.7) / 93.8 (89.6) | 10/10 / 9/10 / 10/10 |
+| 20 % | 23.4 % / 15.6 % / 20.0 % | 0.12 / 0.01 / 0.15 | 4.7 % / 0.7 % / 8.4 % | 4.5 % / 0.6 % / 8.8 % | 55.2 (41.7) / 8.9 (7.8) / 90.6 (89.6) | 9/10 / 5/10 / 9/10 |
+| 10 % | 18.2 % / 16.9 % / 18.4 % | 0.08 / 0.01 / 0.14 | 3.5 % / 0.5 % / 8.3 % | 3.6 % / 0.5 % / 8.8 % | 41.7 (37.0) / 12.0 (11.5) / 90.1 (89.6) | 8/10 / 3/10 / 6/10 |
+| 5 % | 22.8 % / 13.5 % / 17.9 % | 0.05 / 0.02 / 0.15 | 1.3 % / 0.9 % / 8.2 % | 1.4 % / 0.9 % / 8.8 % | 32.8 (31.8) / 16.7 (14.6) / 90.1 (89.6) | 6/10 / 3/10 / 7/10 |
+
+**La lap contra Colab, en la revisión 7** (LSTM, nivel 5 %):
+- la señal sale +21.0 / +21.1 con δ = 100 %, +6.4 / +4.2 con 50 % y −0.0 / +0.2 con 20 %;
+- el cambio de máquina mueve la señal hasta 2.2 puntos.
+
+Las ganancias de la revisión 8 frente a la 7 de Colab rebasan ese margen:
+- +23.5 puntos con δ = 100 %;
+- +15.4 con 50 %;
+- +3.0 con 20 %.
+
+**Las 6 predicciones de Claude** (2024, nivel 5 %):
+1. **Se cumplió.** Con δ = 100 %, la revisión 8 detecta al menos tanto como la 7: 52.4 % contra
+   25.5 % en la lap y 27.0 % en Colab.
+2. **Se cumplió.** Con δ = 20 %, la señal queda entre +1 y +5: salió +3.2.
+3. **Se cumplió.** Con δ = 5 % y 10 %, la señal queda debajo de 1 punto: salió 0.0 y +0.5.
+4. **Se cumplió.** La mejor época es 1 o 2 en los cinco δ: E = 1 en los cinco.
+5. **A medias.** La regla queda debajo del LSTM con δ = 100 % (+24.5 contra +44.6), pero no está
+   cerca del azar con δ = 20 %: tiene +1.3, por encima del punto que la predicción 3 usa como
+   límite. Con 10 % y 5 % sí lo está (+0.2 y +0.1).
+6. **Se cumplió.** El Random Forest queda debajo del LSTM con δ = 100 %: +19.6 contra +44.6.
+
+**Lectura de Claude:**
+- **Con δ = 100 % y 50 %, las vecinas ayudan claramente.**
+  - Con 50 %, la señal pasa de +4.2 a +19.6, y la precisión de 23.3 % a 36.4 %.
+  - Es positiva en los 10 calendarios.
+  - El límite de detección baja: δ = 50 % ya no es marginal.
+- **Con δ = 20 % hay señal por primera vez, pero pequeña.**
+  - +3.2 puntos, positiva en 9 de 10 calendarios. Uno quedó en −3.3.
+  - Con el nivel de 1 %, apenas +0.8.
+  - Por episodio, 55.2 % detectados, contra 41.7 % del azar.
+- **Con δ = 10 % y 5 % sigue en el azar.**
+- **Gran parte de la ganancia viene de comparar con las vecinas,** aun sin aprender:
+  - la regla sin entrenamiento supera al LSTM sin vecinas con δ = 100 % y 50 %;
+  - el LSTM con vecinas suma encima de la regla: +20.1 puntos con 100 %, +9.6 con 50 % y +1.9 con
+    20 %.
+- **Las falsas alarmas reales salen más que lo calibrado:**
+  - con δ = 100 %, el LSTM con vecinas da 7.9 % en 2024 limpio y 12.6 % en las horas normales del
+    examen alterado, cuando el umbral es de 5 % en 2023;
+  - la señal ya lo descuenta, porque compara con las mismas horas sin alterar, pero la precisión
+    lo incluye;
+  - **hipótesis, no comprobada:** el exceso en el examen alterado viene de los días posteriores a
+    cada episodio, cuando la referencia de 14 días todavía contiene los días alterados.
+- **El F1 no distingue a los detectores con δ ≤ 20 %:** depende del número de alertas, y el de un
+  detector al azar ronda 0.1. Por eso es sólo contraste.
+- **Límites:**
+  - los 10 calendarios son anomalías sintéticas sobre el mismo 2024 real, no 10 años distintos;
+  - 2025–2026 quedan pendientes, para todos los detectores a la vez;
+  - es una sola semilla y una sola máquina.
+
+### Análisis de la revisión 8 (2026-10-23, exploratorio, después de ver 2024)
+
+**Alcance:**
+- No cambia la revisión 8 ni sus modelos, y no se usa para elegir nada.
+- Lee los puntajes, umbrales, planes y matrices guardados: no entrena ni carga modelos.
+- **Script:** `experiments/anomalias_red/analisis_revision8.py`.
+- **Salidas:** `results/anomalias_red_v1/analisis_revision8/`.
+- **Qué compara:** el LSTM con vecinas, el LSTM sin vecinas (revisión 7, Colab) y la regla de
+  vecinas, con nivel de 5 % y δ = 100, 50 y 20 %.
+- **Control:** el recall por hora recalculado desde los puntajes guardados coincide con
+  `metricas.csv` (diferencia 0.000).
+- **Señal:** recall menos el de las mismas horas sin alterar, en puntos.
+
+**1. El tamaño del cambio en ppb explica casi todo.**
+
+| δ | Tramo del cambio | Horas | LSTM con vecinas | LSTM sin vecinas | Regla |
+|---|---|---:|---:|---:|---:|
+| 100 % | 1–16 ppb | 5,814 | +27.3 | +6.4 | +0.5 |
+| | 16–32 | 3,762 | +40.9 | +14.6 | +16.3 |
+| | 32–64 | 3,168 | +62.2 | +35.4 | +59.2 |
+| | ≥ 64 | 1,300 | +89.5 | +70.5 | +70.8 |
+| 50 % | 1–16 | 8,542 | +11.3 | +3.4 | +0.6 |
+| | 16–32 | 3,939 | +26.7 | +4.4 | +15.3 |
+| | 32–64 | 1,507 | +47.0 | +8.3 | +48.8 |
+| | ≥ 64 | 56 | +57.1 | +5.4 | +42.9 |
+| 20 % | 1–16 | 11,880 | +2.6 | +0.1 | +0.5 |
+| | 16–32 | 1,025 | +9.5 | +0.7 | +11.0 |
+| | 32–64 | 5 | n/d | n/d | n/d |
+
+- **Con δ = 20 %, el 92 % de las horas alteradas cambia menos de 16 ppb.** Es el tramo más difícil
+  para todos los detectores; por eso la señal total es chica.
+- **El tramo no lo explica todo.** El mismo tramo de 1–16 ppb se detecta mucho mejor con δ = 100 %
+  (+27.3) que con δ = 20 % (+2.6). Con δ = 100 %, esas horas de cambio chico son horas de ozono
+  bajo duplicado. El modelo también ve las demás horas del episodio dentro de su ventana de 24 h.
+- **La regla sólo ve cambios grandes** (casi nada con menos de 16 ppb). El LSTM con vecinas es el
+  único que saca señal de los cambios chicos.
+
+**2. El signo importa:** multiplicar se detecta mejor que dividir.
+
+| δ | x·(1+δ) | x/(1+δ) |
+|---|---:|---:|
+| 100 % | +64.9 | +25.4 |
+| 50 % | +27.8 | +11.5 |
+| 20 % | +4.5 | +1.0 |
+
+Son 95 episodios de multiplicar y 97 de dividir, en el LSTM con vecinas. Con el mismo δ, dividir
+mueve menos ppb: con 100 %, la mitad del valor contra el doble. Además lleva el valor hacia lo
+bajo, que se parece al ozono normal de la noche. Los otros dos detectores muestran la misma
+diferencia.
+
+**3. La duración del episodio casi no importa.** Con δ = 100 %, los episodios de 1–2 días dan
++37.4, contra +49.1 y +46.6 de los de 3–4 y 5–7 días. Con 50 % y 20 % no hay un patrón claro.
+
+**4. Las vecinas ayudan más cuando están cerca.**
+- Las estaciones se dividen en tres grupos según la distancia media a sus 4 vecinas: 4.6–7.5 km,
+  7.6–9.4 km y 10.4–17.8 km.
+- Con δ = 20 %, la señal del LSTM con vecinas es +5.7, +2.7 y +0.3. Con 50 %, +24.2, +19.2 y
+  +16.7. Con 100 % no es monótona (+50.8, +37.7 y +48.3).
+- Correlación de Spearman entre la distancia y la ganancia de cada estación (con vecinas menos sin
+  vecinas): −0.50 con δ = 20 %, −0.34 con 50 % y −0.16 con 100 %. Son 30 estaciones; ACO no tiene
+  episodios evaluables en 2024.
+- Ganan 29 de 30 estaciones con 100 % y 50 %, y 24 de 30 con 20 %.
+- Cada estación tiene unos 6 episodios, así que el detalle por estación es ruidoso: sólo se leen
+  los grupos.
+
+**5. El exceso de falsas alarmas viene de los días después de cada episodio.** Hipótesis
+confirmada. Con δ = 100 %, el LSTM con vecinas da, en las horas normales del examen:
+
+| Tiempo desde el fin del último episodio | Examen alterado | Esas horas en 2024 limpio |
+|---|---:|---:|
+| 0–1 día | 21.6 % | 5.7 % |
+| 1–3 días | 18.7 % | 8.1 % |
+| 3–7 días | 16.9 % | 7.0 % |
+| 7–14 días | 11.4 % | 8.0 % |
+| ≥ 14 días o ninguno | 8.5 % | 8.3 % |
+
+- **Dentro de los 14 días posteriores** a un episodio sobran falsas alarmas. Después, el examen
+  alterado y 2024 limpio coinciden.
+- **Es lo esperado:** la referencia de 14 días todavía contiene los días alterados.
+- **No es exclusivo de las vecinas:** el LSTM sin vecinas (10.4 % contra 5.4 % el primer día) y la
+  regla (14.6 % contra 8.4 %) muestran lo mismo, más débil.
+- **Con δ = 50 %** el efecto es menor, y con 20 % no aparece.
+- **Son dos efectos distintos:**
+  - el umbral de 2023 da ~8 % en 2024 limpio, no 5 %; es una deriva entre años que afecta a todos
+    los detectores;
+  - estas alertas posteriores a los episodios. Por definición son falsas alarmas, pero las provoca
+    el ataque.
+- **Idea para después, no se adopta:** una referencia que no se contamine, por ejemplo una mediana
+  o una que excluya las horas con alerta.
+
+**6. Subir contra bajar, con el mismo cambio en ppb** (pregunta del tesista; script
+`experiments/anomalias_red/analisis_signo_revision8.py`, también exploratorio).
+
+Las horas alteradas se agrupan por el cambio de su estación, |alterado − original|. Esto es el
+LSTM con vecinas: el % de horas que alertan, y entre paréntesis las que alertarían igual sin
+alterar.
+
+| δ | Cambio | Sube | Baja | Ozono original mediano (sube / baja) |
+|---|---|---:|---:|---|
+| 100 % | 8–16 ppb | 59.6 % (6.9) | 33.0 % (7.2) | 11 / 23 ppb |
+| | 16–32 ppb | 71.7 % (7.9) | 36.9 % (7.4) | 23 / 45 ppb |
+| | ≥ 32 ppb | 88.7 % (6.7) | 52.9 % (9.5) | 55 / 79 ppb |
+| 50 % | 8–16 ppb | 33.2 % (8.7) | 20.4 % (8.9) | 22 / 34 ppb |
+| | 16–32 ppb | 44.8 % (8.2) | 31.2 % (11.8) | 44 / 63 ppb |
+| 20 % | 8–16 ppb | 13.4 % (6.6) | 7.9 % (6.3) | 53 / 62 ppb |
+
+- **Subir se detecta mejor que bajar aun con el mismo cambio en ppb.** El LSTM sin vecinas
+  muestra lo mismo, más débil. La dirección importa por sí misma, no sólo el tamaño.
+- **Primera hipótesis de Claude, descartada:** que las estaciones queden naturalmente más seguido
+  por debajo de sus vecinas.
+  - En 2023 y 2024 limpios, quedan más de 10 ppb abajo de la mediana de sus 4 vecinas el 8.4 % de
+    las horas, y más de 10 ppb arriba el 9.2 %.
+  - Ya sin su diferencia habitual, en conjunto es simétrico.
+- **Lo que sí se encontró:** la asimetría depende del nivel de ozono. Separación natural de una
+  estación frente a la mediana de sus vecinas, según el ozono de las vecinas (2023–2024 limpios):
+
+| Ozono de las vecinas | Desviación | 10 % más bajo | 10 % más alto |
+|---|---:|---:|---:|
+| < 20 ppb | 7.3 | −5.5 | +10.5 |
+| 20–40 | 8.1 | −10.0 | +9.0 |
+| 40–60 | 8.3 | −11.0 | +8.5 |
+| 60–80 | 9.9 | −14.0 | +9.5 |
+| 80–100 | 12.8 | −19.5 | +11.0 |
+| ≥ 100 | 17.8 | −30.0 | +11.5 |
+
+- **Con mucho ozono es normal que una estación quede muy por debajo de sus vecinas,** hasta 30 ppb,
+  pero casi nunca más de ~11 ppb por encima.
+  - Con el mismo cambio en ppb, las bajadas caen en horas de más ozono que las subidas.
+  - Ahí se confunden con esas lecturas bajas naturales. Una subida, en cambio, sale de lo normal.
+- **La causa física no está comprobada.** Posibilidades: la pluma de ozono no cubre a todas las
+  estaciones por igual, o el consumo local de ozono por las emisiones del tráfico.
+
+**7. Métricas estándar, pedidas por el tesista** (2026-10-23, después de ver los resultados).
+- **Script:** `experiments/anomalias_red/metricas_estandar_revision8.py`.
+- **Salida:** `results/anomalias_red_v1/analisis_revision8/metricas_estandar.csv`.
+- **Qué calcula:** ROC-AUC, PR-AUC (precisión promedio), y precisión, recall, F1 y MCC con los
+  umbrales de 5 y 1 %. Junta los 10 calendarios.
+- **El azar pareado:** cada métrica se calcula también con los puntajes de 2024 limpio, en las
+  mismas horas y con las mismas etiquetas («sin ataque»).
+- **Alcance:** no cambia la métrica principal ni ninguna elección.
+
+| δ | PR-AUC: con vecinas / sin vecinas / regla (sin ataque) | F1 con 5 % | F1 con 1 % | MCC con 5 % |
+|---|---|---|---|---|
+| 100 % | 0.50 (0.16) / 0.32 (0.16) / 0.39 (0.18) | 0.48 (0.10) / 0.32 (0.09) / 0.37 (0.13) | 0.43 (0.03) / 0.17 (0.03) / 0.32 (0.06) | 0.37 / 0.22 / 0.26 |
+| 50 % | 0.31 (0.17) / 0.20 (0.16) / 0.25 (0.18) | 0.32 (0.11) / 0.14 (0.08) / 0.24 (0.13) | 0.15 (0.03) / 0.06 (0.03) / 0.15 (0.06) | 0.21 / 0.05 / 0.14 |
+| 20 % | 0.19 (0.16) / 0.17 (0.16) / 0.18 (0.17) | 0.12 (0.08) / 0.01 (0.01) / 0.15 (0.14) | 0.03 (0.02) / 0.00 (0.00) / 0.07 (0.06) | 0.06 / 0.00 / 0.05 |
+| 10 % | 0.16 (0.16) / 0.17 (0.17) / 0.17 (0.17) | 0.08 (0.07) / 0.01 (0.01) / 0.14 (0.14) | n/d | 0.02 / 0.01 / 0.04 |
+| 5 % | 0.17 (0.17) / 0.16 (0.16) / 0.16 (0.16) | 0.05 (0.05) / 0.02 (0.02) / 0.15 (0.15) | n/d | 0.04 / 0.00 / 0.05 |
+
+**Hallazgos:**
+- **Sin el azar pareado, las métricas estándar engañan aquí.**
+  - **El ROC-AUC «sin ataque» no es 0.5:** sale 0.55–0.62 con δ ≤ 20 % en todos los detectores, y
+    0.45 en el IsolationForest. Por eso un ROC-AUC de 0.62 con δ = 5 % no indica detección: sin
+    ataque sale 0.618.
+  - **La causa es la ya anotada el 2026-10-18:** con δ chico, el redondeo deja la etiqueta 1 sobre
+    todo en horas de ozono alto, que tienen otros puntajes aun sin alterar. La proporción de horas
+    atacadas baja de 16.0 % (δ = 100 %) a 12.4 % (δ = 5 %).
+- **El F1 premia alertar mucho.** Un detector que alertara siempre tendría F1 = 0.26 con
+  δ = 20 % (precisión 14.7 %, recall 100 %), más que cualquiera de los detectores. Y la regla
+  tiene F1 de 0.15 con δ = 5 % sólo por coincidencia: sin ataque saca 0.147.
+- **Con su versión sin ataque al lado, todas las métricas cuentan la misma historia** que la señal:
+  - con δ = 100 % y 50 %, el LSTM con vecinas es el mejor por mucho;
+  - con δ = 20 %, la mejora es pequeña;
+  - con δ ≤ 10 %, nada.
+  - El MCC sin ataque queda casi en 0 con δ ≥ 50 %, así que con δ grande se puede leer sin
+    corrección.
+- **Referencias** (verificar antes de citar):
+  - Youden (1950), índice J = TPR − FPR. La señal del protocolo es una J con la tasa de falsas
+    alarmas medida en las mismas horas.
+  - Saito y Rehmsmeier (2015, PLoS ONE): PR-AUC con clases desbalanceadas.
+  - Chicco y Jurman (2020, BMC Genomics): MCC frente al F1.
+  - Kim et al. (2022, AAAI): el F1 por evento infla la detección en series de tiempo.
+
+### Revisión 9 registrada: métricas de presentación (2026-10-23)
+
+**Qué decidió el tesista:**
+- presentar el conjunto estándar completo, cada métrica con su valor «sin ataque» y una nota;
+- **F1 con 1 %** como principal y **F2** (la de la parte 1) como secundaria;
+- la señal por hora se conserva.
+
+Se registró en el §15 del protocolo como revisión 9, después de ver los resultados. No cambia
+modelos ni umbrales. Lo calcula `experiments/anomalias_red/metricas_estandar_revision8.py`, que
+ahora incluye los conteos TP, FP, FN y TN, la exactitud, la especificidad, el F2 y las
+referencias «alertar siempre» y «nunca alertar».
+
+**Resultado con 1 %** (examen; entre paréntesis, sin ataque):
+
+| δ | Detector | TP | FP | FN | Precisión | Recall | F1 | F2 | MCC | PR-AUC |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 100 % | LSTM con vecinas | 4,578 | 2,754 | 9,466 | 0.62 (0.14) | 0.33 (0.02) | **0.43** (0.03) | 0.36 (0.02) | 0.38 | 0.50 (0.16) |
+| | LSTM sin vecinas | 1,446 | 1,599 | 12,598 | 0.47 (0.15) | 0.10 (0.02) | 0.17 (0.03) | 0.12 (0.02) | 0.16 | 0.32 (0.16) |
+| | Regla de vecinas | 3,169 | 2,781 | 10,875 | 0.53 (0.19) | 0.23 (0.03) | 0.32 (0.06) | 0.26 (0.04) | 0.27 | 0.38 (0.18) |
+| | V4 | 1,935 | 2,238 | 12,109 | 0.46 (0.14) | 0.14 (0.02) | 0.21 (0.04) | 0.16 (0.02) | 0.19 | 0.30 (0.17) |
+| 50 % | LSTM con vecinas | 1,295 | 1,509 | 12,749 | 0.46 (0.15) | 0.09 (0.02) | **0.15** (0.03) | 0.11 (0.02) | 0.15 | 0.31 (0.17) |
+| | LSTM sin vecinas | 446 | 1,285 | 13,598 | 0.26 (0.17) | 0.03 (0.02) | 0.06 (0.03) | 0.04 (0.02) | 0.04 | 0.20 (0.16) |
+| | Regla de vecinas | 1,264 | 2,041 | 12,780 | 0.38 (0.19) | 0.09 (0.03) | 0.15 (0.06) | 0.11 (0.04) | 0.12 | 0.25 (0.18) |
+| 20 % | LSTM con vecinas | 205 | 620 | 12,705 | 0.25 (0.14) | 0.02 (0.01) | 0.03 (0.01) | 0.02 (0.01) | 0.03 | 0.19 (0.16) |
+| | Regla de vecinas | 520 | 1,953 | 12,390 | 0.21 (0.19) | 0.04 (0.04) | 0.07 (0.06) | 0.05 (0.04) | 0.03 | 0.18 (0.17) |
+
+**Referencias** con δ = 100 %:
+- «alertar siempre» saca F1 0.28, F2 0.49, MCC 0 y exactitud 0.16;
+- «nunca alertar» saca exactitud 0.84, y el LSTM con vecinas 0.86.
+
+### Estudio de las falsas alarmas (2026-10-23, exploratorio, después de ver 2024)
+
+**Alcance:**
+- **Script:** `experiments/anomalias_red/falsas_alarmas_revision8.py`.
+- **Salidas:** `results/anomalias_red_v1/analisis_revision8/falsas_alarmas_*.csv` y
+  `contexto_2023_2024.csv`.
+- **No entrena ni carga modelos.** Sólo recalcula, sin aprender, las columnas de vecinas y las
+  entradas relativas.
+- **Control:** la regla recalculada coincide con su puntaje guardado (diferencia máxima 5e-5, por
+  las 6 cifras con que se guardan los puntajes).
+- **Definición:** una falsa alarma es una alarma en una hora con etiqueta de red 0, y se compara
+  con esas mismas horas en 2024 limpio.
+- **Detectores:** los dos LSTM, el RF con vecinas, la regla, el V4 y el IsolationForest, con
+  δ = 100, 50 y 20 %.
+
+**A. Las falsas alarmas de más duran casi exactamente 14 días después de cada ataque.**
+- Con δ = 100 % y 5 %, el LSTM con vecinas tiene +15.7 puntos el día 0 y +9 a +11 los días 2–5.
+  Baja a +2–3 los días 10–12 y llega a ~0 el día 13–14.
+- La regla (+6.1 el día 0) y el V4 (+3.1) siguen la misma curva, más baja.
+- El LSTM sin vecinas también, con +5.1 el día 0.
+- El RF con vecinas apenas (+1.4), y el IsolationForest nada (0.0).
+- Con δ = 50 % el efecto es de un tercio; con 20 % casi no existe.
+
+**B. El exceso depende del ataque anterior.** Lo provocan sobre todo los ataques largos que suben
+la lectura. Con δ = 100 % y 5 %, después de un ataque de 5–7 días que sube, el exceso en los 14
+días siguientes es:
+
+| Detector | Exceso |
+|---|---:|
+| LSTM con vecinas | +16.7 |
+| Regla | +9.1 |
+| V4 | +6.2 |
+
+Después de uno de 1–2 días que sube, el LSTM con vecinas tiene +6.4. Después de los que bajan, de
+cualquier duración, +5 a +6.
+
+**C. La estación que dispara la falsa alarma suele ser la que fue atacada.** Se puede ver con la
+regla (la estación con la mayor columna) y con el V4 (la estación con el mayor residuo). Con
+δ = 100 % y 1 %, de las falsas alarmas en los 14 días posteriores:
+- con la regla, el 30.6 % las dispara la estación atacada, contra 2.1 % en esas horas de 2024
+  limpio;
+- con el V4, el 31.6 %, contra 4.6 %;
+- con δ = 20 % no hay diferencia (2.1 % contra 2.1 %).
+
+**Mecanismo, con las entradas del LSTM** (δ = 100 %, estación atacada, examen − limpio):
+- **Después de un ataque que sube:** su entrada relativa queda −0.4 desviaciones típicas más baja,
+  y su columna de vecinas −1.6, durante 12 días. Se borra en el día 13–14.
+- **Después de uno que baja:** +0.2 y +0.7.
+- **La explicación:** el perfil de 14 días quedó inflado (o desinflado) por los días alterados, así
+  que la lectura real se ve anormal frente a sus vecinas.
+- **Por qué la asimetría:** duplicar mueve el promedio más que dividir entre dos.
+- **El IsolationForest no tiene el efecto** porque no usa el perfil de 14 días.
+
+**D. Por qué 2024 limpio da más falsas alarmas que 2023.** Con el umbral de 1 %, en 2024 limpio
+salen 1.9 % (LSTM con vecinas), 2.8 % (regla) y 2.3 % (V4). Hay dos causas visibles:
+- **Mayo de 2024 tuvo mucho más ozono:**
+  - el ozono medio fue de 53.5 ppb contra 37.7, y el máximo diario medio de la red, 148 ppb contra
+    112;
+  - en ese mes, las falsas alarmas con 5 % fueron 19.6 % en la regla (5.1 % en 2023), 18.8 % en el
+    V4 (4.0 %) y 19.1 % en el IsolationForest (9.8 %).
+- **Hubo más horas con pocas estaciones:**
+  - en 2024 hubo 398 horas con sólo 16–19 estaciones con dato, contra 96 en 2023;
+  - la cobertura de septiembre fue de 60 % y la de enero de 74 %, contra 74 % y 88 % en 2023;
+  - el LSTM con vecinas es el más sensible: con 5 % alerta en el 21.4 % de las horas con 16–19
+    estaciones y el 17.1 % con 20–23, contra 6.6 % con 24–27;
+  - en 2024 tuvo 25.3 % de falsas alarmas en septiembre y 12.5 % en enero.
+
+**E. Sin las horas normales de los 14 días posteriores a cada ataque** (sólo contraste; la medida
+oficial no cambia):
+
+| Detector, δ = 100 % | F1 con 1 % | F1 con 5 % |
+|---|---|---|
+| LSTM con vecinas | 0.43 → 0.47 | 0.48 → 0.60 |
+| Regla | 0.32 → 0.35 | 0.37 → 0.45 |
+| V4 | 0.21 → 0.23 | 0.29 → 0.36 |
+
+Con 5 %, las falsas alarmas del LSTM con vecinas en las horas normales que quedan son 8.9 %, cerca
+de las de 2024 limpio (7.9 %). El resto del exceso es la diferencia entre 2023 y 2024.
+
+**Lectura:**
+- **Las falsas alarmas de más tienen dos fuentes identificadas:**
+  - la contaminación de la referencia de 14 días después de cada ataque, que afecta a todos los
+    detectores que la usan, más al LSTM con vecinas;
+  - las diferencias de 2024: un mayo con ozono excepcional y más horas con pocas estaciones.
+- **Las del primer tipo no son azar:** las provoca la estación atacada.
+- **Idea para después, no se adopta:** una referencia que excluya las horas con alarma o use la
+  mediana. Para el LSTM, entrenar con la cobertura de datos de años con más huecos.
+
+### Generalización de los LSTM supervisados a otro δ (2026-10-23, registrado antes de ver el resultado)
+
+**Por qué:**
+- Los LSTM y los RF supervisados tienen un modelo por δ, y cada uno se examinó con su mismo δ. Es
+  como si supiera qué tamaño de ataque viene.
+- El V4, el IsolationForest y la regla tienen un solo puntaje para todos los δ.
+- Para compararlos en igualdad, el tesista pidió examinar cada modelo con los cinco δ.
+
+**Cómo:**
+- **Script:** `experiments/anomalias_red/generalizacion_delta_revision8.py`.
+- **Modelos:** se cargan de disco los cinco `modelo.keras` del LSTM con vecinas (revisión 8) y del
+  LSTM sin vecinas (revisión 7 en Colab). No se entrena nada.
+- **Umbrales:** se recalculan en la lap con 2023 limpio, como en `entrenar_lstm_sup.py`.
+- **Control:** la diagonal (δ de entrenamiento = δ del examen) se compara con los puntajes
+  guardados.
+- **Métricas:** las de la revisión 9 (F1 con 1 % como principal), cada una con su valor sin
+  ataque.
+- **Fuera:** los RF, porque los de la revisión 8 no se bajaron de Colab.
+
+**Predicción de Claude, antes de verlo** (LSTM con vecinas, F1 con 1 %):
+1. Con el examen de δ = 100 %, los modelos entrenados con δ = 50 % quedan a menos de 0.10 del F1
+   de la diagonal (0.43).
+2. Con ese mismo examen, los modelos entrenados con δ ≤ 10 % quedan al menos 0.15 por debajo de la
+   diagonal.
+3. Con el examen de δ = 20 %, ningún modelo supera en más de 0.03 el F1 de la diagonal (0.03).
+
+**Resultado.**
+- **Control:** los puntajes de la diagonal, calculados en la lap con los modelos de Colab,
+  coinciden con los guardados (diferencia máxima 6.4e-7, por las 6 cifras con que se guardan). Los
+  umbrales difieren en 6e-8.
+- **Origen:** modelos cargados de disco, entrenados en Colab.
+- F1 con 1 % del LSTM con vecinas (entre paréntesis, sin ataque). Filas = δ del examen; columnas =
+  δ del entrenamiento:
+
+| Examen \ Modelo | 100 | 50 | 20 | 10 | 5 |
+|---|---|---|---|---|---|
+| 100 % | **0.43** (0.03) | 0.29 (0.03) | 0.15 (0.01) | 0.14 (0.02) | 0.08 (0.01) |
+| 50 % | **0.21** (0.03) | 0.15 (0.03) | 0.08 (0.01) | 0.06 (0.02) | 0.03 (0.01) |
+| 20 % | 0.05 (0.03) | 0.05 (0.03) | 0.03 (0.01) | 0.02 (0.02) | 0.02 (0.01) |
+| 10 % | 0.03 (0.03) | 0.03 (0.03) | 0.02 (0.02) | 0.02 (0.02) | 0.01 (0.01) |
+| 5 % | 0.03 (0.03) | 0.03 (0.03) | 0.02 (0.02) | 0.02 (0.02) | 0.01 (0.01) |
+
+- **Entrenar con ataques grandes generaliza hacia abajo, y mejor que el modelo del propio δ.**
+  - Con el examen de 50 %, el modelo de δ = 100 % saca 0.21 contra 0.15 del de 50 %.
+  - Con 5 % de falsas alarmas y el examen de 20 %: 0.15 (0.10) y 0.16 (0.11) los de 100 y 50 %,
+    contra 0.12 (0.08) del de 20 %.
+- **Entrenar con ataques chicos no sirve,** ni siquiera para su propio δ.
+  - Los modelos de δ ≤ 20 % aprenden poco.
+  - En el LSTM sin vecinas casi no alertan: F1 de 0.00 a 0.03 en todos los exámenes.
+- **Hipótesis, no comprobada:**
+  - con δ chico, muchas horas con etiqueta 1 son indistinguibles (cambios de pocos ppb), así que la
+    etiqueta es casi ruido;
+  - con δ = 100 % el modelo aprende la forma de un ataque, sobre todo la separación de la estación
+    frente a sus vecinas, y eso le sirve también con δ menores.
+- **Consecuencia para la comparación:** el protocolo de un modelo por δ **no** favorece a los
+  supervisados.
+  - Un solo modelo, el de δ = 100 %, rinde igual o mejor en todos los exámenes.
+  - Elegir ése después de ver 2024 sería una elección *a posteriori*. Pero los modelos de 100 y de
+    50 % superan a la diagonal con δ menores, así que la conclusión no depende de esa elección.
+
+**Predicciones de Claude:**
+1. **No se cumplió.** El modelo de δ = 50 % en el examen de 100 % quedaría a menos de 0.10 de la
+   diagonal: queda 0.14 abajo (0.29 contra 0.43).
+2. **Se cumplió.** Los modelos de δ ≤ 10 % quedarían al menos 0.15 abajo: quedan 0.29 y 0.35 abajo.
+3. **Se cumplió, por poco.** Con el examen de 20 %, ninguno superaría la diagonal en más de 0.03:
+   el máximo es +0.02 (0.05 contra 0.03).
+
+### Comparación general: supervisados contra no supervisados (2026-10-23)
+
+- **Script:** `experiments/anomalias_red/comparacion_general_revision8.py`.
+- **Salida:** `results/anomalias_red_v1/analisis_revision8/comparacion_general.csv`.
+- **Qué compara:** examen 2024, métricas de la revisión 9. Los LSTM aparecen con el modelo de su δ
+  y con un solo modelo para todos los δ (el de δ = 100 %).
+- F1 con 1 % (entre paréntesis, sin ataque):
+
+| Detector | Familia | δ = 100 % | δ = 50 % | δ = 20 % | δ ≤ 10 % |
+|---|---|---|---|---|---|
+| LSTM con vecinas, un modelo | supervisado | **0.43** (0.03) | **0.21** (0.03) | 0.05 (0.03) | = azar |
+| LSTM con vecinas, modelo de su δ | supervisado | **0.43** (0.03) | 0.15 (0.03) | 0.03 (0.01) | = azar |
+| Regla de vecinas | sin entrenamiento | 0.32 (0.06) | 0.15 (0.06) | 0.07 (0.06) | = azar |
+| RF con vecinas, modelo de su δ | supervisado | 0.27 (0.04) | 0.09 (0.04) | 0.05 (0.04) | = azar |
+| V4 | no supervisado | 0.21 (0.04) | 0.08 (0.04) | 0.04 (0.04) | = azar |
+| LSTM sin vecinas, un modelo | supervisado | 0.17 (0.03) | 0.06 (0.03) | 0.03 (0.03) | = azar |
+| IsolationForest | no supervisado | 0.04 (0.04) | 0.04 (0.04) | 0.04 (0.04) | = azar |
+
+- **MCC con 1 %:**
+
+| Detector | δ = 100 % | δ = 50 % |
+|---|---|---|
+| LSTM con vecinas (un modelo) | 0.38 | 0.20 |
+| Regla | 0.27 | 0.12 |
+| RF con vecinas | 0.27 | 0.08 |
+| V4 | 0.19 | 0.04 |
+| LSTM sin vecinas | 0.16 | 0.04 |
+| IsolationForest | 0.01 | 0.01 |
+
+**Lectura de Claude:**
+1. **El mejor supervisado supera claramente al mejor no supervisado:** el LSTM con vecinas contra
+   el V4 da 0.43 contra 0.21 con δ = 100 %, y 0.21 contra 0.08 con 50 %. No depende de saber el δ.
+2. **Lo que más pesa es comparar con las vecinas, no el aprendizaje supervisado.**
+   - La regla, que no se entrena, es el segundo mejor detector.
+   - Supera al V4 y al LSTM supervisado sin vecinas.
+   - El LSTM supervisado **sin** vecinas queda por debajo del V4 no supervisado (0.17 contra 0.21
+     con δ = 100 %).
+   - Lo supervisado suma encima de las vecinas: 0.43 contra 0.32 de la regla.
+3. **El IsolationForest no detecta nada** en ningún δ: su F1 es igual sin ataque.
+4. **Con δ = 20 % ningún detector se separa del azar** de forma útil con 1 %.
+   - Lo más que se ve es +0.02 de F1, en el LSTM con vecinas.
+   - Con 5 %, +0.05 en el LSTM de un solo modelo, contra +0.01 de la regla y del V4.
+   - Con δ ≤ 10 %, nada.
+5. **Límites de la comparación:**
+   - **Los supervisados se entrenaron con el mismo tipo de ataque** del examen: multiplicativo, de
+     días completos desde las 00 h. Con otro tipo (deriva gradual, desplazamiento fijo, bit
+     flipping), no se sabe. Ahí un no supervisado podría generalizar mejor. Es la comparación
+     pendiente con la parte 1.
+   - **El LSTM con vecinas tiene más falsas alarmas tras los ataques** y es el más sensible a los
+     huecos de datos (estudio de falsas alarmas).
+   - **Es una sola semilla, un solo año real** (2024) y un solo umbral calibrado con 2023.
+
+**Decisión del tesista sobre el V4 (2026-10-23):**
+- en las comparaciones se usa el V4 de la lap (cargado de disco), porque el de Colab no pasa el
+  control de 10⁻⁹ ppb por una unidad de redondeo;
+- se anotó en la revisión 8 del protocolo.
+
 ---
 
 ## Siguiente

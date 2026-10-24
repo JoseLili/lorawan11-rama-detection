@@ -1,0 +1,260 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "detector": "random_forest",
+  "delta_pct": 50,
+  "origen": "recién entrenado",
+  "calendarios_entrenamiento": 20,
+  "entradas": "vecinas",
+  "forma_vecinas": "a14",
+  "vecinas": {
+    "ACO": [
+      "LLA",
+      "SAG",
+      "MON",
+      "VIF"
+    ],
+    "AJM": [
+      "PED",
+      "CCA",
+      "UAX",
+      "BJU"
+    ],
+    "AJU": [
+      "AJM",
+      "UAX",
+      "MPA",
+      "TAH"
+    ],
+    "ATI": [
+      "TLA",
+      "TLI",
+      "FAC",
+      "CAM"
+    ],
+    "BJU": [
+      "HGM",
+      "IZT",
+      "CCA",
+      "MGH"
+    ],
+    "CAM": [
+      "HGM",
+      "MER",
+      "TLA",
+      "FAC"
+    ],
+    "CCA": [
+      "PED",
+      "BJU",
+      "AJM",
+      "UAX"
+    ],
+    "CHO": [
+      "TAH",
+      "MPA",
+      "SAC",
+      "NEZ"
+    ],
+    "CUA": [
+      "PED",
+      "MGH",
+      "INN",
+      "CCA"
+    ],
+    "CUT": [
+      "VIF",
+      "TLI",
+      "ATI",
+      "TLA"
+    ],
+    "FAC": [
+      "TLA",
+      "CAM",
+      "MGH",
+      "ATI"
+    ],
+    "FAR": [
+      "GAM",
+      "SAG",
+      "NEZ",
+      "MER"
+    ],
+    "GAM": [
+      "FAR",
+      "LPR",
+      "MER",
+      "CAM"
+    ],
+    "HGM": [
+      "MER",
+      "BJU",
+      "IZT",
+      "MGH"
+    ],
+    "INN": [
+      "CUA",
+      "AJM",
+      "PED",
+      "CCA"
+    ],
+    "IZT": [
+      "MER",
+      "BJU",
+      "HGM",
+      "UIZ"
+    ],
+    "LLA": [
+      "SAG",
+      "LPR",
+      "VIF",
+      "FAR"
+    ],
+    "LPR": [
+      "GAM",
+      "TLA",
+      "SAG",
+      "CAM"
+    ],
+    "MER": [
+      "HGM",
+      "IZT",
+      "GAM",
+      "CAM"
+    ],
+    "MGH": [
+      "HGM",
+      "BJU",
+      "CAM",
+      "PED"
+    ],
+    "MON": [
+      "NEZ",
+      "FAR",
+      "SAG",
+      "SAC"
+    ],
+    "MPA": [
+      "TAH",
+      "CHO",
+      "AJU",
+      "UAX"
+    ],
+    "NEZ": [
+      "SAC",
+      "UIZ",
+      "FAR",
+      "IZT"
+    ],
+    "PED": [
+      "CCA",
+      "AJM",
+      "BJU",
+      "MGH"
+    ],
+    "SAC": [
+      "NEZ",
+      "UIZ",
+      "UAX",
+      "TAH"
+    ],
+    "SAG": [
+      "LLA",
+      "FAR",
+      "GAM",
+      "LPR"
+    ],
+    "TAH": [
+      "MPA",
+      "SAC",
+      "UAX",
+      "CHO"
+    ],
+    "TLA": [
+      "FAC",
+      "ATI",
+      "CAM",
+      "TLI"
+    ],
+    "TLI": [
+      "ATI",
+      "TLA",
+      "LPR",
+      "VIF"
+    ],
+    "UAX": [
+      "UIZ",
+      "CCA",
+      "IZT",
+      "BJU"
+    ],
+    "UIZ": [
+      "IZT",
+      "NEZ",
+      "SAC",
+      "UAX"
+    ],
+    "VIF": [
+      "TLI",
+      "LLA",
+      "CUT",
+      "LPR"
+    ]
+  },
+  "columnas": 98,
+  "fecha": "2026-10-23T19:55:51",
+  "sklearn": "1.9.1",
+  "hiperparametros": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": null,
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 100,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "sha256_matriz_entrenamiento": {
+    "entrenamiento_01_d50": "a3d4cb88257df205cefd5d944389f49da868012a6c515d1805c59abbf614e215",
+    "entrenamiento_02_d50": "f41a17b03c85060a9536c17696ed7f0bbd9bbaa57b1744c55331284faa6d2189",
+    "entrenamiento_03_d50": "71b80dedab5b711c3217a5b41f6927e64e48fd43af28c81cd002c2efdbcd917a",
+    "entrenamiento_04_d50": "31ac4f34d487ebbedcbfca7758ee31b2612be510e733f06c45a4544f29d6475c",
+    "entrenamiento_05_d50": "127fa0df9271349e91cd69fc1ef37c25a329758b4b9c22459b7e4d5933ffebf5",
+    "entrenamiento_06_d50": "2f9ab426556b2832754353e92438dd2b5aebc746df31220447842245a35d9cee",
+    "entrenamiento_07_d50": "491670af5ce64cbe1c8b04937ac739b35c8ed4faf24429ff0eec44b6ae1e1f8f",
+    "entrenamiento_08_d50": "4364f9e3e57421768918aec01ec0bef98f83ec03c25a156b7964baf3a2f1fb05",
+    "entrenamiento_09_d50": "b8a6bd7fe7f0dadbfd1911eb1e9a7d7322e1249c2d34760d419136b661b4520e",
+    "entrenamiento_10_d50": "e07348d859269ebb360ada641bb941a417a3a749d43cf4412003e28dc8fd94c1",
+    "entrenamiento_11_d50": "0dd07bb34a71c1d76e5168a9627a12daa3ac70326fa25bfa35d001b163d856a8",
+    "entrenamiento_12_d50": "0988d2e7aeb12ef3d773e60fdf384419dfc54f8a6cdcf5b2000607ef2f213d17",
+    "entrenamiento_13_d50": "808e985263749ebdb0280876d8978c7596a2363e3ac94c0ad83fb896f77e9c04",
+    "entrenamiento_14_d50": "8f9e0e8385a30969f11921d9ea932b661746f36a11aba333ffb865efe44d8fc0",
+    "entrenamiento_15_d50": "6210466e503f2f1c7f36042515df754021bfcf1746c3be219c70e62debef4c4f",
+    "entrenamiento_16_d50": "dd1a522f7613c96465457ca1a771c902fc77c18781cfbac84204b3653cd56222",
+    "entrenamiento_17_d50": "8a0114d7a3b0661699267da3deb7b8b1ff689881da190546600a573a1ccad6a3",
+    "entrenamiento_18_d50": "bb0538a8a023bec2bbc89ff82713196c4981789c2dddbd7c93892d27890f0c8d",
+    "entrenamiento_19_d50": "49989be6ab00b0f6c4d0962f79cbfc8a17bc4799bc2b69251aad9ca3a3e0c20b",
+    "entrenamiento_20_d50": "979aac7546bc80920560a477a803676be87fbc47a222b7e217c65b59837ffe95"
+  },
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "horas_entrenamiento": 526080,
+  "horas_etiqueta_1": 95935,
+  "umbrales": {
+    "5": 0.75,
+    "1": 0.81
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 3.9840182648401825,
+    "1": 0.9018264840182649
+  },
+  "reproducibilidad": "dos entrenamientos con puntajes idénticos en 2023"
+}

@@ -1,0 +1,278 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 8,
+  "detector": "lstm_supervisado",
+  "entradas": "vecinas",
+  "forma_vecinas": "a14",
+  "vecinas": {
+    "ACO": [
+      "LLA",
+      "SAG",
+      "MON",
+      "VIF"
+    ],
+    "AJM": [
+      "PED",
+      "CCA",
+      "UAX",
+      "BJU"
+    ],
+    "AJU": [
+      "AJM",
+      "UAX",
+      "MPA",
+      "TAH"
+    ],
+    "ATI": [
+      "TLA",
+      "TLI",
+      "FAC",
+      "CAM"
+    ],
+    "BJU": [
+      "HGM",
+      "IZT",
+      "CCA",
+      "MGH"
+    ],
+    "CAM": [
+      "HGM",
+      "MER",
+      "TLA",
+      "FAC"
+    ],
+    "CCA": [
+      "PED",
+      "BJU",
+      "AJM",
+      "UAX"
+    ],
+    "CHO": [
+      "TAH",
+      "MPA",
+      "SAC",
+      "NEZ"
+    ],
+    "CUA": [
+      "PED",
+      "MGH",
+      "INN",
+      "CCA"
+    ],
+    "CUT": [
+      "VIF",
+      "TLI",
+      "ATI",
+      "TLA"
+    ],
+    "FAC": [
+      "TLA",
+      "CAM",
+      "MGH",
+      "ATI"
+    ],
+    "FAR": [
+      "GAM",
+      "SAG",
+      "NEZ",
+      "MER"
+    ],
+    "GAM": [
+      "FAR",
+      "LPR",
+      "MER",
+      "CAM"
+    ],
+    "HGM": [
+      "MER",
+      "BJU",
+      "IZT",
+      "MGH"
+    ],
+    "INN": [
+      "CUA",
+      "AJM",
+      "PED",
+      "CCA"
+    ],
+    "IZT": [
+      "MER",
+      "BJU",
+      "HGM",
+      "UIZ"
+    ],
+    "LLA": [
+      "SAG",
+      "LPR",
+      "VIF",
+      "FAR"
+    ],
+    "LPR": [
+      "GAM",
+      "TLA",
+      "SAG",
+      "CAM"
+    ],
+    "MER": [
+      "HGM",
+      "IZT",
+      "GAM",
+      "CAM"
+    ],
+    "MGH": [
+      "HGM",
+      "BJU",
+      "CAM",
+      "PED"
+    ],
+    "MON": [
+      "NEZ",
+      "FAR",
+      "SAG",
+      "SAC"
+    ],
+    "MPA": [
+      "TAH",
+      "CHO",
+      "AJU",
+      "UAX"
+    ],
+    "NEZ": [
+      "SAC",
+      "UIZ",
+      "FAR",
+      "IZT"
+    ],
+    "PED": [
+      "CCA",
+      "AJM",
+      "BJU",
+      "MGH"
+    ],
+    "SAC": [
+      "NEZ",
+      "UIZ",
+      "UAX",
+      "TAH"
+    ],
+    "SAG": [
+      "LLA",
+      "FAR",
+      "GAM",
+      "LPR"
+    ],
+    "TAH": [
+      "MPA",
+      "SAC",
+      "UAX",
+      "CHO"
+    ],
+    "TLA": [
+      "FAC",
+      "ATI",
+      "CAM",
+      "TLI"
+    ],
+    "TLI": [
+      "ATI",
+      "TLA",
+      "LPR",
+      "VIF"
+    ],
+    "UAX": [
+      "UIZ",
+      "CCA",
+      "IZT",
+      "BJU"
+    ],
+    "UIZ": [
+      "IZT",
+      "NEZ",
+      "SAC",
+      "UAX"
+    ],
+    "VIF": [
+      "TLI",
+      "LLA",
+      "CUT",
+      "LPR"
+    ]
+  },
+  "columnas": 98,
+  "delta_pct": 20,
+  "origen": "recién entrenado",
+  "fecha": "2026-10-23T19:44:45",
+  "semilla": 42,
+  "unidades": 64,
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "shuffle": true,
+  "ventana": 24,
+  "epoca_E": 1,
+  "epocas_seleccion_ejecutadas": 9,
+  "val_loss_minimo": 0.7557488083839417,
+  "ventanas_definitivo": 525620,
+  "etiqueta_1_definitivo_pct": 16.704653203487396,
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10",
+    "entrenamiento_11",
+    "entrenamiento_12",
+    "entrenamiento_13",
+    "entrenamiento_14",
+    "entrenamiento_15",
+    "entrenamiento_16",
+    "entrenamiento_17",
+    "entrenamiento_18",
+    "entrenamiento_19",
+    "entrenamiento_20"
+  ],
+  "sha256_matrices_entrenamiento": {
+    "entrenamiento_01": "a643605b437b2b235b110993c2d523d0feea8d6e0d9ba94ad89653aa59401f3d",
+    "entrenamiento_02": "57e4f0b762cc73d7a07fcd659a740cc758a5f5acb90e5e51b545f82f1b900b8e",
+    "entrenamiento_03": "8ceb483014ab3e2a4a599512edba8253bc70d3ecd478f6d649a17dda73733550",
+    "entrenamiento_04": "be46c18d834ad6a84915355f63f4ad7bc0f5a34e801dd75968be09bea7fc62b6",
+    "entrenamiento_05": "cba6991553792203084137b660b7f7c67c31e5ae84ee488aacc66516943224ab",
+    "entrenamiento_06": "cdecdf9d762dc5e9b9f104394a1d9c50efca90677b80ea8fd1acd3a1613ea1a4",
+    "entrenamiento_07": "8de8639700be2d3de1f7abb429b72dbfae8204238f3b45447d3b54a96d0ce068",
+    "entrenamiento_08": "b17d9e6cb1ba9be65d91dddf9e57f6d5024c896ae470ecaa00c5f56de566b5ad",
+    "entrenamiento_09": "de82f0b4fa0596d9ea74fd947ea2d2d7c51de86f15cb74caf694bc0c3fe7c9eb",
+    "entrenamiento_10": "7d61e0938cffad51e5901b75e9a02f6850ac0424e455c84bcc0ab4b8d0f777dd",
+    "entrenamiento_11": "0ed728004177127bfa083f1659096394d28c956cf367f043a3cf2f5c998fa63f",
+    "entrenamiento_12": "96071af5c7be0940225efaefe054e9690bbd7a16de7fcb90fb9e71063bfd143a",
+    "entrenamiento_13": "aea793718ccec6bf7fcda8a12496735b5c9995702033ac95d975b992403b858d",
+    "entrenamiento_14": "aa89f92faeda144e7ac5e7cfbb8cbe7207d33691484444fd644dadb41540d16d",
+    "entrenamiento_15": "57b772e2bfe12d6c134267b5774cb7860de1af3be4e1ca65eb9f6e6f7cbdac8d",
+    "entrenamiento_16": "03a68beb155641097b8ba354612bdf3402c6bfe343e1bd3e4118abde7f9fc7c1",
+    "entrenamiento_17": "8529a89bbe9d16189e0d22e4c75c572273d2e47acd1b3b272933812e11e1ef81",
+    "entrenamiento_18": "31ad7c6fa25f50080fdcab4e7afe509e7c5dcbe6e89d02f89621511b5509b348",
+    "entrenamiento_19": "ccdd387002260d3a354606e8e45591e913fe914604719e73fdd91f827fc7992f",
+    "entrenamiento_20": "7a95babf73537fa96033f163d7371bbe6bd7d2c63fd775d5ae79448a5af4558d"
+  },
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "umbrales": {
+    "5": 0.979486346244812,
+    "1": 0.9977579712867737
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 5.0,
+    "1": 0.9931506849315069
+  },
+  "sha256_modelo": "7b0a39a2ae3ae83aedb083b1d0cfb47aaa5c944434fd110c6fef039ff7783fe8",
+  "versiones": {
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204"
+  }
+}

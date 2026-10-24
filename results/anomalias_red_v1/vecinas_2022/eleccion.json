@@ -1,0 +1,203 @@
+{
+  "regla": "gana la forma con mayor detección (δ = 20 %, mejor de 10 épocas); si su ventaja sobre a14 es menor que 2.0 puntos, se queda a14",
+  "mayor": "a14",
+  "ventaja_sobre_a14": 0.0,
+  "forma_elegida": "a14",
+  "deteccion_elegida_pct": 12.321,
+  "deteccion_revision7_pct": 7.005,
+  "prueba": false,
+  "vecinas": {
+    "ACO": [
+      "LLA",
+      "SAG",
+      "MON",
+      "VIF"
+    ],
+    "AJM": [
+      "PED",
+      "CCA",
+      "UAX",
+      "BJU"
+    ],
+    "AJU": [
+      "AJM",
+      "UAX",
+      "MPA",
+      "TAH"
+    ],
+    "ATI": [
+      "TLA",
+      "TLI",
+      "FAC",
+      "CAM"
+    ],
+    "BJU": [
+      "HGM",
+      "IZT",
+      "CCA",
+      "MGH"
+    ],
+    "CAM": [
+      "HGM",
+      "MER",
+      "TLA",
+      "FAC"
+    ],
+    "CCA": [
+      "PED",
+      "BJU",
+      "AJM",
+      "UAX"
+    ],
+    "CHO": [
+      "TAH",
+      "MPA",
+      "SAC",
+      "NEZ"
+    ],
+    "CUA": [
+      "PED",
+      "MGH",
+      "INN",
+      "CCA"
+    ],
+    "CUT": [
+      "VIF",
+      "TLI",
+      "ATI",
+      "TLA"
+    ],
+    "FAC": [
+      "TLA",
+      "CAM",
+      "MGH",
+      "ATI"
+    ],
+    "FAR": [
+      "GAM",
+      "SAG",
+      "NEZ",
+      "MER"
+    ],
+    "GAM": [
+      "FAR",
+      "LPR",
+      "MER",
+      "CAM"
+    ],
+    "HGM": [
+      "MER",
+      "BJU",
+      "IZT",
+      "MGH"
+    ],
+    "INN": [
+      "CUA",
+      "AJM",
+      "PED",
+      "CCA"
+    ],
+    "IZT": [
+      "MER",
+      "BJU",
+      "HGM",
+      "UIZ"
+    ],
+    "LLA": [
+      "SAG",
+      "LPR",
+      "VIF",
+      "FAR"
+    ],
+    "LPR": [
+      "GAM",
+      "TLA",
+      "SAG",
+      "CAM"
+    ],
+    "MER": [
+      "HGM",
+      "IZT",
+      "GAM",
+      "CAM"
+    ],
+    "MGH": [
+      "HGM",
+      "BJU",
+      "CAM",
+      "PED"
+    ],
+    "MON": [
+      "NEZ",
+      "FAR",
+      "SAG",
+      "SAC"
+    ],
+    "MPA": [
+      "TAH",
+      "CHO",
+      "AJU",
+      "UAX"
+    ],
+    "NEZ": [
+      "SAC",
+      "UIZ",
+      "FAR",
+      "IZT"
+    ],
+    "PED": [
+      "CCA",
+      "AJM",
+      "BJU",
+      "MGH"
+    ],
+    "SAC": [
+      "NEZ",
+      "UIZ",
+      "UAX",
+      "TAH"
+    ],
+    "SAG": [
+      "LLA",
+      "FAR",
+      "GAM",
+      "LPR"
+    ],
+    "TAH": [
+      "MPA",
+      "SAC",
+      "UAX",
+      "CHO"
+    ],
+    "TLA": [
+      "FAC",
+      "ATI",
+      "CAM",
+      "TLI"
+    ],
+    "TLI": [
+      "ATI",
+      "TLA",
+      "LPR",
+      "VIF"
+    ],
+    "UAX": [
+      "UIZ",
+      "CCA",
+      "IZT",
+      "BJU"
+    ],
+    "UIZ": [
+      "IZT",
+      "NEZ",
+      "SAC",
+      "UAX"
+    ],
+    "VIF": [
+      "TLI",
+      "LLA",
+      "CUT",
+      "LPR"
+    ]
+  }
+}

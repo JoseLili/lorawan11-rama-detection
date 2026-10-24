@@ -1,0 +1,31 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "detector": "isolation_forest",
+  "delta_pct": 10,
+  "origen": "recién entrenado",
+  "fecha": "2026-10-23T18:03:24",
+  "sklearn": "1.9.1",
+  "hiperparametros": {
+    "bootstrap": false,
+    "contamination": "auto",
+    "max_features": 1.0,
+    "max_samples": "auto",
+    "n_estimators": 100,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "puntaje": "-score_samples",
+  "sha256_matriz_entrenamiento": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "sha256_matriz_calibracion": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "horas_entrenamiento": 26304,
+  "umbrales": {
+    "5": 0.5957035678145728,
+    "1": 0.6291173013098956
+  },
+  "falsa_alarma_2023_pct": {
+    "5": 5.0,
+    "1": 0.9931506849315069
+  },
+  "reproducibilidad": "dos entrenamientos con puntajes idénticos en 2023, iguales a los del modelo guardado"
+}
