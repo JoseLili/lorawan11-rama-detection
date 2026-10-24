@@ -3183,6 +3183,34 @@ de las de 2024 limpio (7.9 %). El resto del exceso es la diferencia entre 2023 y
   control de 10⁻⁹ ppb por una unidad de redondeo;
 - se anotó en la revisión 8 del protocolo.
 
+### Gráfica de la semana: F1 según δ (2026-10-23)
+
+- **Qué es:** `docs/img/anomalias_red_v1/f1_por_delta.png`, con
+  `experiments/anomalias_red/graficar_f1_delta.py`. Su ficha está en `docs/fichas_graficas.md`.
+- **Qué muestra:**
+  - el F1 con 1 % del LSTM con vecinas (el modelo oficial de cada δ, decisión del tesista) y del V4
+    (de la lap);
+  - el F1 de cada uno sin ataque, en punteada;
+  - el rango entre los 10 calendarios.
+- **Por qué no lleva los bits de la parte 1:** son otro ataque, con otra unidad y otras falsas
+  alarmas. El tesista lo había propuesto, y Claude recomendó no mezclarlos.
+- **Colores:** el V4 conserva su naranja y el LSTM con vecinas toma el violeta. El azul queda para
+  el LSTM sin vecinas. El par pasa el validador de la skill de visualización, incluida la prueba de
+  daltonismo.
+- **Control:** los valores coinciden con `metricas_estandar.csv`.
+- **Lo que no se sobrescribe:** `recall_por_delta.png` ni `deteccion_por_delta.png`.
+- **Simplificada el mismo día, a pedido del tesista:** la primera versión era difícil de leer.
+  - El eje Y dice sólo «F1» y la ficha explica qué es un caso.
+  - Se quitaron las barras de rango entre calendarios; su conclusión va en la ficha.
+  - Las dos líneas punteadas sin ataque se cambiaron por una zona gris de azar.
+  - Las etiquetas van directo sobre las líneas, sin leyenda.
+  - El título dice la conclusión.
+- **Dos ajustes más, propuestos por Claude al revisarla y aprobados por el tesista:**
+  - el título dice «casi duplica el F1» en lugar de «detecta el doble», y «ninguno detecta de forma
+    útil» en lugar de «ninguno detecta»;
+  - el subtítulo aclara que el LSTM se entrenó con ataques de este tipo y que el V4 nunca vio
+    ataques.
+
 ---
 
 ## Siguiente

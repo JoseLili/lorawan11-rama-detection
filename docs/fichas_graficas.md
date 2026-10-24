@@ -105,3 +105,132 @@ Formato: recall / azar, en %. La gráfica muestra sólo las dos primeras filas d
 
 Con δ = 50 % y 100 % los dos detectores ven la alteración. Con δ = 20 % o menos, que incluye la
 descalibración realista de 5–10 %, alertan lo mismo que si no hubiera alteración.
+
+---
+
+## F1 según δ: LSTM supervisado con vecinas contra V4 (parte 2, 2026-10-23)
+
+![F1 según δ](img/anomalias_red_v1/f1_por_delta.png)
+
+**Archivo:** `docs/img/anomalias_red_v1/f1_por_delta.png`, hecho con
+`experiments/anomalias_red/graficar_f1_delta.py`. Es la gráfica de la semana. Usa la métrica
+principal de la revisión 9 del protocolo.
+
+### Qué pregunta responde
+
+En el mismo examen, ¿cuánto mejor detecta el LSTM supervisado con vecinas que el V4 no
+supervisado, según el tamaño del ataque?
+
+### Qué hay en cada eje
+
+| | |
+|---|---|
+| **Eje X** | **El tamaño del ataque (δ), igual para los dos detectores.** Las lecturas de la estación atacada se multiplican por (1 + δ) o se dividen entre (1 + δ) durante días completos. Con δ = 100 % la lectura se duplica o queda a la mitad; con δ = 5 % cambia un 5 %. |
+| **Eje Y** | **F1**, el de siempre: 0 = no detecta nada, 1 = detecta todo sin falsas alarmas. |
+
+### Qué es un «caso» en este F1
+
+Cada hora de 2024 es un caso. En cada hora, el detector dice **alarma o no alarma** para toda la
+red, y se compara con la realidad: **¿había alguna estación atacada en esa hora?**
+
+| | Había ataque | No había ataque |
+|---|---|---|
+| **Sonó la alarma** | acierto (TP) | falsa alarma (FP) |
+| **No sonó** | ataque que se escapó (FN) | bien (TN) |
+
+- precisión = TP / (TP + FP): de las alarmas, cuántas eran de verdad;
+- recall = TP / (TP + FN): de las horas atacadas, cuántas dieron alarma;
+- **F1 = 2 · precisión · recall / (precisión + recall).**
+
+No es una métrica compuesta ni inventada: es el F1 estándar, contando horas.
+
+### De dónde sale cada número
+
+- **El examen:** los 10 calendarios de 2024, con 192 ataques. Los dos detectores reciben
+  **exactamente los mismos datos alterados**, y se juntan los 10 calendarios.
+- **El umbral de alarma:** el que hace sonar la alarma en **1 de cada 100 horas** de 2023 sin
+  ataques. Se fijó antes del examen y no se movió.
+- **La zona gris («zona de azar»):**
+  - es el F1 que sacaría el detector **en esas mismas horas de 2024 sin ataque**, con el mismo
+    umbral;
+  - mide cuánto «acierta» sólo porque a veces su alarma coincide con una hora atacada;
+  - se dibuja el mayor de los dos detectores.
+  - **Sólo lo que queda arriba de la zona gris es detección.**
+- **Los detectores:**
+  - **LSTM con vecinas (revisión 8):** aprendió con ataques sintéticos del mismo tipo; un modelo
+    por δ, el oficial del protocolo, recién entrenado en Colab.
+  - **V4:** el modelo de la parte 1, cargado de disco. Nunca vio ataques: predice el ozono y alerta
+    cuando la lectura no se parece a lo predicho.
+- **Datos:** `results/anomalias_red_v1/<detector>/d<δ>/puntajes.csv.gz` y `metricas.csv` (el
+  umbral), más las matrices del examen. Coincide con
+  `results/anomalias_red_v1/analisis_revision8/metricas_estandar.csv`.
+
+### Qué NO es
+
+- **No es el F2 por lectura de la parte 1.** Esa parte mide otro ataque (bit flipping, una sola
+  lectura) con otra unidad. Por eso los bits no van en esta gráfica.
+- **No se compara con el F1 de otros artículos.** Depende del problema, de cuántas horas atacadas
+  hay (12 a 16 %) y de cómo se fija el umbral.
+
+### Cómo leerla
+
+- **Con δ = 100 %:** el LSTM con vecinas saca **0.43** y el V4, **0.21**. Por coincidencia sacarían
+  0.03 y 0.04. El supervisado con vecinas casi duplica el F1 del no supervisado. Ojo: lo que se
+  duplica es el F1, no el número de ataques encontrados.
+- **Con δ = 50 %:** **0.15** contra **0.08**.
+- **Con δ = 20 % o menos,** las dos líneas quedan sobre la zona gris: ninguno detecta de forma
+  útil. Lo más que hay es el LSTM con δ = 20 %, 0.03 contra 0.015 por coincidencia.
+- **¿Por qué el V4 queda arriba del LSTM con δ = 5 y 10 %?** No detecta más: suena más seguido en
+  general (con 1 %, en el 2.3 % de las horas de 2024 limpio, contra 1.9 % del LSTM de δ = 100 % y
+  menos los de δ chico), así que coincide más con horas atacadas. Su F1 sin ataque es igual de
+  alto.
+- **No depende de un calendario con suerte:** con δ = 50 % y 100 %, el peor de los 10 calendarios
+  del LSTM (0.12 y 0.32) supera al mejor del V4 (0.11 y 0.28). La gráfica no dibuja ese rango, para
+  no cargarla.
+
+### La tabla completa
+
+F1, con el valor sin ataque entre paréntesis:
+
+| Nivel 1 % | δ = 5 % | 10 % | 20 % | 50 % | 100 % |
+|---|---|---|---|---|---|
+| LSTM con vecinas | 0.01 (0.01) | 0.02 (0.02) | 0.03 (0.01) | 0.15 (0.03) | 0.43 (0.03) |
+| V4 | 0.04 (0.04) | 0.04 (0.04) | 0.04 (0.04) | 0.08 (0.04) | 0.21 (0.04) |
+
+| Nivel 5 % | δ = 5 % | 10 % | 20 % | 50 % | 100 % |
+|---|---|---|---|---|---|
+| LSTM con vecinas | 0.05 (0.05) | 0.08 (0.07) | 0.12 (0.08) | 0.31 (0.11) | 0.48 (0.10) |
+| V4 | 0.13 (0.13) | 0.12 (0.12) | 0.13 (0.12) | 0.17 (0.11) | 0.29 (0.11) |
+
+Precisión y recall con 1 %:
+
+| | δ = 20 % | δ = 50 % | δ = 100 % |
+|---|---|---|---|
+| LSTM con vecinas | 0.25 / 0.02 | 0.46 / 0.09 | 0.62 / 0.33 |
+| V4 | 0.15 / 0.02 | 0.25 / 0.04 | 0.46 / 0.14 |
+
+### Preguntas que puede hacer el asesor
+
+- **¿El supervisado hace trampa porque sabe qué δ viene?** No. Un solo modelo, el entrenado con
+  δ = 100 %, examinado con todos los δ, saca 0.43, 0.21 y 0.05 con δ = 100, 50 y 20 %: igual o
+  mejor que el oficial (`progreso.md`, generalización, 2026-10-23).
+- **¿Por qué 0.43 si en artículos de IDS se ve 0.98?** Allí se clasifica tráfico de red, con otra
+  proporción de ataques y muchas veces con el umbral elegido en el mismo examen. Aquí el ataque es
+  una lectura de ozono que se parece a un día normal, y el umbral se fijó antes, con 2023.
+- **¿Por qué el V4 si era para bit flipping?** Porque es el detector de la parte 1, sin reentrenar.
+  Aquí presenta el mismo examen que el LSTM.
+- **¿Y la regla de vecinas, que no aprende?** Saca 0.32, 0.15 y 0.07 con δ = 100, 50 y 20 %.
+  Comparar con las vecinas, aun sin entrenar, ya supera al V4. El aprendizaje supervisado suma
+  encima (`progreso.md`, comparación general).
+- **¿Por qué con 1 % y no con 5 %?** Es el umbral de operación de la revisión 9: con 5 %, la red
+  daría unas 700 horas de falsa alarma al año. La tabla de arriba trae también el 5 %.
+- **¿De dónde salen las falsas alarmas?** Sobre todo de los 14 días después de cada ataque, cuando
+  la referencia de 14 días está contaminada, y de un mayo de 2024 con ozono excepcional
+  (`progreso.md`, estudio de las falsas alarmas).
+
+### En una frase
+
+En el mismo examen, el LSTM supervisado con vecinas casi duplica el F1 del V4 con δ = 50 % y
+100 %; con δ de 20 % o menos, ninguno de los dos detecta de forma útil. El LSTM aprendió con
+ataques de este mismo tipo y el V4 nunca vio un ataque, así que la ventaja está demostrada para
+este tipo de ataque, no para cualquiera.
