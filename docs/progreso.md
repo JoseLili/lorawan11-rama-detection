@@ -3391,6 +3391,103 @@ marcas de «por verificar».
   cuando los datos están limpios. Lo que gana en los días contaminados lo puede perder en todos los
   demás.
 
+**Commit:** dc395f4, con la revisión 10 cerrada y las referencias.
+
+### Revisión 11 redactada y aprobada: decisión por estación-día (2026-10-24)
+
+**Pedido del tesista:** redactar el diseño para revisarlo antes de correr nada.
+
+**Origen:**
+- la opción A del 2026-10-23, decidir por día completo;
+- PARAAD, que decide por bloques de un día y localiza la estación;
+- la decisión del tesista de seguir con estación-día, aparte de la mediana.
+
+**Diseño:** en el protocolo, revisión 11.
+- **Caso:** una estación en un día. Se usan las estación-días con al menos 12 horas válidas.
+- **Dos formas de juntar el día:** la peor hora (control) y el promedio con signo del día
+  (propuesta).
+- **Umbral:** uno solo para las 31 estaciones, con 1 y 5 % de falsas alarmas en un año limpio.
+- **Fase 1:** sólo la regla de vecinas, con 2022, en la lap.
+  - Los umbrales salen de 2021 limpio, para imitar el examen.
+  - Si el promedio del día no supera a la peor hora en 0.02 o más de F1 con 1 % (promedio de
+    δ = 100, 50 y 20 %), se cierra sin 2024.
+- **Fase 2:** la regla y el V4 en 2024.
+- **Fase 3:** un LSTM por estación, sólo como esbozo.
+
+**Nota de lectura que salió al diseñarla:**
+- las estación-días atacadas son cerca de 0.8 %;
+- con 1 % de falsas alarmas, el F1 no pasa de ~0.62 aunque se detecte todo; con 5 %, de ~0.25;
+- por eso no se compara uno a uno con la hora de red ni con PARAAD, que altera ~9 %.
+
+**Aprobación:** el tesista la aprobó tal cual el 2026-10-24. Las fases 1 y 2 van en la lap: la regla
+no se entrena y el V4 no pasa su control en Colab.
+
+**Siguiente:** programar la fase 1 con sus pruebas y correrla dos veces en la lap.
+
+### Revisión 11, fase 1: el promedio del día le gana a la peor hora en 2022 (2026-10-24)
+
+**Hecho:**
+- **El módulo** `src/detect/estacion_dia.py`, con 5 pruebas en `tests/test_estacion_dia.py`.
+- **El script** `experiments/anomalias_red/diagnostico_estacion_dia_2022.py`.
+- **Las corridas:** dos en la lap, en paralelo, de ~1.5 min cada una. Los cinco archivos
+  salieron **idénticos**.
+  - Están en `results/anomalias_red_v1/estacion_dia_2022/`.
+  - Los registros están en `logs_revision11/`.
+  - No entrena ni carga modelos.
+- **Aviso:** el modo `--prueba` usa datos reales de 2 calendarios. Su salida, ya con «pasa», se vio
+  antes de la corrida completa. No se cambió nada.
+
+**Resultado** (regla de vecinas a14 con media; F1 con 1 % por estación-día, 10 calendarios
+juntos):
+
+| δ | Peor hora | Promedio del día | Diferencia |
+|---:|---:|---:|---:|
+| 100 % | 0.382 | 0.377 | −0.006 |
+| 50 % | 0.260 | 0.389 | +0.129 |
+| 20 % | 0.057 | 0.098 | +0.041 |
+| **Promedio de 100, 50 y 20 (decide)** | **0.233** | **0.288** | **+0.055** |
+| 10 % | 0.020 | 0.021 | +0.001 |
+| 5 % | 0.014 | 0.008 | −0.006 |
+
+- **Sin ataque,** el F1 con 1 % es 0.005 con la peor hora y 0.003 con el promedio del día.
+- **Aplicación de la regla:** la ventaja es +0.055, mayor que 0.02: **se pasa a la fase 2**.
+
+**Falsas alarmas con 1 % y δ = 100 %:**
+
+| Grupo | Peor hora: tasa | Peor hora: parte | Promedio del día: tasa | Promedio del día: parte |
+|---|---:|---:|---:|---:|
+| Contagio (una vecina atacada ese día) | 9.7 % | 24 % | 19.0 % | 30 % |
+| Tras un ataque propio (14 días) | 9.3 % | 19 % | 20.3 % | 26 % |
+| Resto | 0.8 % | 57 % | 1.0 % | 45 % |
+
+**Excluidas:**
+- 16 % de las estación-días y 18 % de las atacadas;
+- en 2022, el 90 % de las exclusiones es porque la propia estación tiene menos de 12 horas con
+  dato. Encabezan TLI, AJM y AJU, con 145–168 días cada una.
+
+**Predicciones:** la 1 falló, porque con δ = 100 % la peor hora queda apenas arriba. Se cumplieron
+la 2, la 3, la 4 y la 5. La 6 es de 2024.
+
+**Observaciones de Claude:**
+- **La ganancia está en δ = 50 y 20 %,** justo la zona que se quería mejorar. Con 50 % el F1 sube
+  de 0.26 a 0.39.
+- **Con δ = 100 % empatan.** El promedio del día detecta más (recall de 0.82 contra 0.61), pero
+  también amplifica los dos sesgos sostenidos:
+  - el contagio a las vecinas;
+  - el perfil de 14 días contaminado tras un ataque.
+  - Juntos son el 55 % de sus falsas alarmas.
+- **Con δ ≤ 10 % nada funciona,** igual que por hora de red.
+- **Hay techo:** con ~0.8 % de estación-días atacadas, el F1 con 1 % no pasaría de ~0.62.
+- **Ideas que esto apunta, fuera de esta revisión:**
+  - quedarse con la estación de mayor puntaje del vecindario, contra el contagio;
+  - la mediana de 14 días, contra la contaminación tras un ataque. Por hora de red no ayudó, pero
+    aquí el exceso tras un ataque propio pesa más.
+  - Cualquiera de las dos sería una revisión nueva, registrada antes.
+- **No se compara uno a uno con la hora de red.**
+
+**Siguiente:** la fase 2, el examen 2024 por estación-día con la regla y el V4, en la lap. Falta
+programarla, y el V4 necesita repetir su inferencia para guardar el residuo por estación.
+
 ---
 
 ## Siguiente

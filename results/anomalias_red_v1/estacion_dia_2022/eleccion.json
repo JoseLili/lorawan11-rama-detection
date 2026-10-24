@@ -1,0 +1,42 @@
+{
+  "regla": "se pasa a la fase 2 si el F1 con 1 % del promedio del día, promediado entre δ = 100, 50, 20 %, supera al de la peor hora en 0.02 o más",
+  "f1_peor_hora": 0.233,
+  "f1_promedio_dia": 0.2877,
+  "ventaja_promedio_dia": 0.0547,
+  "pasa_a_fase_2": true,
+  "f1_por_delta": {
+    "5": {
+      "peor_hora": 0.0136,
+      "promedio_dia": 0.0075
+    },
+    "10": {
+      "peor_hora": 0.0203,
+      "promedio_dia": 0.0211
+    },
+    "20": {
+      "peor_hora": 0.0568,
+      "promedio_dia": 0.0978
+    },
+    "50": {
+      "peor_hora": 0.26,
+      "promedio_dia": 0.3888
+    },
+    "100": {
+      "peor_hora": 0.3822,
+      "promedio_dia": 0.3766
+    }
+  },
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10"
+  ],
+  "prueba": false
+}

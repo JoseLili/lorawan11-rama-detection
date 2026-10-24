@@ -259,6 +259,7 @@ resultados.
 | 8 | 2026-10-22 | Tercer intento supervisado: las entradas de la revisión 7 más una columna por estación que la compara con sus 4 vecinas más cercanas, para el LSTM supervisado y su Random Forest de control. Se agrega un control sin entrenamiento (la comparación con vecinas, sin modelo). Las revisiones 6 y 7 se conservan | Propuesta del tesista, con la premisa del asesor del 2026-10-19 y la exploración de ese día con 2020–2022. Se registró **después** de ver las revisiones 6 y 7 en 2024 y **antes** de programarla. La forma de la columna nueva se elige sólo con 2022, con una regla fijada aquí |
 | 9 | 2026-10-23 | Métricas de presentación: el conjunto estándar completo (TP, FP, FN, TN, exactitud, precisión, recall, especificidad, tasa de falsas alarmas, F1, F2, MCC, ROC-AUC y PR-AUC), cada métrica con su valor «sin ataque» y una nota de lectura. Principal: F1 con 1 % de falsas alarmas; secundaria: F2, la de la parte 1. La señal por hora de la revisión 2 se conserva | Pedido del tesista, para comparar con la literatura y con la parte 1. Se registró **después** de ver la revisión 8 en 2024. No elige ni cambia ningún modelo, umbral o forma |
 | 10 | 2026-10-23 | Referencia robusta: el perfil de 14 días con la **mediana** en lugar de la media, en las entradas relativas y en la columna de vecinas (forma a14) del LSTM supervisado con vecinas y de la regla de vecinas. Se elige contra la revisión 8 sólo con 2022. Las revisiones 6 a 9 se conservan | El estudio de las falsas alarmas (`progreso.md`, 2026-10-23) mostró que la media de 14 días se contamina con los días atacados y provoca falsas alarmas durante los 14 días siguientes. La mediana es el estimador estándar con datos contaminados. Se registró **después** de ver la revisión 8 en 2024 y **antes** de correrla con datos reales. Aprobada en lo general por el tesista |
+| 11 | 2026-10-24 | Segunda unidad de evaluación: la **estación-día** (¿esta estación estuvo alterada este día?), con dos formas de juntar el día (peor hora contra promedio del día). Primero sólo con la regla de vecinas y 2022; después, si pasa, la regla y el V4 en 2024; un LSTM por estación queda como esbozo. La hora de red y las revisiones 6 a 10 se conservan y se reportan aparte | La opción A del 2026-10-23 (decidir por día completo) y PARAAD (Allka et al. 2024), que decide por bloques de un día y localiza la estación. Se registró **después** de ver las revisiones 8 y 10 y **antes** de programarla. Redactada por Claude a pedido del tesista y **aprobada por el tesista el 2026-10-24**, tal cual, antes de programarla |
 
 ### Revisión 1 (2026-10-13)
 
@@ -796,3 +797,212 @@ elige el umbral.
   - para comparar contra números de la revisión 8 hace falta el mismo procesador, o repetir la
     revisión 8 en la misma sesión.
 - **Detalle:** en `progreso.md` (2026-10-23) y en `results/anomalias_red_v1/referencia_2022/`.
+
+### Revisión 11 (2026-10-24): decisión por estación-día
+
+**Estado:**
+- la redactó Claude a pedido del tesista;
+- el tesista la aprobó tal cual el 2026-10-24, antes de programarla;
+- las fases 1 y 2 se calculan en la lap; Colab sólo haría falta para la fase 3.
+
+**Por qué.**
+- **La pregunta cambia:**
+  - hoy cada caso es una hora de red, y el detector sólo dice si en esa hora hay alguna estación
+    alterada, no cuál;
+  - aquí cada caso es **una estación en un día**, por ejemplo «CUT, 25 de abril de 2022», y la
+    pregunta es si esa estación estuvo alterada ese día.
+- **De dónde sale:**
+  - **la opción A del 2026-10-23,** decidir por día completo: los episodios duran días enteros,
+    así que el día junta 24 horas de evidencia;
+  - **PARAAD** (Allka et al. 2024), el trabajo más parecido al nuestro:
+    - decide por bloques de un día y reporta por estación-día, localizando la estación;
+    - en su ablación, con bloques de 1 hora la precisión baja de 0.84 a 0.70 (PARAAD-SA);
+  - **la decisión del tesista del 2026-10-23** de seguir con estación-día, aparte de la mediana.
+- **Para qué:**
+  - saber si juntar el día ayuda;
+  - decir qué estación es;
+  - poder comparar con PARAAD.
+
+**Qué cambia.**
+- **Unidad:** la estación-día, en los 31 objetivos. HGM no entra, porque nunca se altera.
+- **Etiqueta:**
+  - vale 1 si el día está dentro de un episodio de esa estación en el plan;
+  - como los episodios son días completos que empiezan a las 00 h, cada estación-día queda
+    entera dentro o entera fuera.
+- **Horas válidas:** las horas del día en que existe el valor de esa estación en el detector.
+  - Una estación-día se usa sólo si tiene **al menos 12 horas válidas**.
+  - Las demás se excluyen de la calibración, del examen y del «sin ataque». Se reporta cuántas
+    son, y cuántas de ellas estaban atacadas.
+  - El ataque no cambia qué horas tienen dato, así que las estación-días son las mismas con
+    ataque y sin él.
+- **Valor por hora y estación:** el que cada detector ya calcula antes de tomar el máximo de la
+  red.
+  - **En la regla de vecinas:** la columna a14 de la estación, ya escalada. Usa la media, porque
+    la revisión 10 se cerró sin adoptar la mediana.
+  - **En el V4:** el residuo de la estación, con signo, dividido entre su p95 de 2023, el mismo
+    del puntaje de red.
+- **Dos formas de juntar el día, fijadas aquí:**
+  - **peor hora (control):** el mayor |valor| entre las horas válidas. Es lo que haría un detector
+    por hora que señalara la estación;
+  - **promedio del día (propuesta):** |promedio con signo de las horas válidas|.
+    - Aprovecha que el signo del ataque es el mismo durante todo el episodio.
+    - El ruido de una hora a otra se cancela en parte; el corrimiento, no.
+- **Umbrales:**
+  - uno solo para las 31 estaciones, que deja 1 % y 5 % de falsas alarmas en las estación-días de
+    un año limpio;
+  - un umbral por estación sería inestable, porque con 365 días por estación el 1 % son 3 o 4
+    días;
+  - los valores ya vienen escalados por estación.
+- **Métricas:**
+  - las de la revisión 9, con la estación-día como caso: F1 con 1 % como principal, F2 como
+    secundaria y las demás;
+  - cada una con su valor «sin ataque»: las mismas estación-días del año sin alterar, con el
+    mismo umbral y las mismas etiquetas.
+- **Falsas alarmas, desglosadas.** Con 1 % y en los datos atacados, en tres grupos que no se
+  enciman, en este orden:
+  - **contagio:** alguna de las 4 vecinas de la estación está atacada ese día.
+    - Con la forma (a), la columna resta el promedio de las vecinas.
+    - Así, un ataque de +100 % en una vecina mueve la columna de la estación limpia como un ataque
+      de unos 25 % en sentido contrario.
+  - **tras un ataque propio:** dentro de los 14 días posteriores al fin de un episodio de la misma
+    estación;
+  - **resto.**
+
+**Qué no cambia.**
+- El modelo de anomalía, los planes, las matrices, los 31 objetivos y la división de años.
+- La regla de vecinas a14 con media, y el V4 cargado de disco, sin reentrenar.
+- Las revisiones 6 a 10 y sus métricas por hora de red. Se conservan y se reportan aparte.
+- **La estación-día no reemplaza a la hora de red, y sus números no se comparan uno a uno:**
+  son casos distintos, con proporciones de ataque distintas.
+
+**Nota de lectura: el techo del F1.**
+- **Las estación-días atacadas son pocas:** cerca de 0.8 %.
+  - Son 94 por calendario en la validación 2022 y 87 en el examen 2024.
+  - Ese conteo incluye días sin dato, así que es aproximado.
+- **El techo:**
+  - con 1 % de falsas alarmas, aun detectando todo, la precisión no pasaría de ~0.45 y el F1 de
+    ~0.62;
+  - con 5 %, no pasarían de ~0.14 y ~0.25.
+- **Cómo se lee:** el F1 por estación-día se lee contra ese techo.
+- **PARAAD no se compara directo:**
+  - altera cerca de 9 % de las estación-días (30 % de los sensores × 30 % de los días);
+  - elige su umbral de otra forma;
+  - así que su precisión de 0.84 no es comparable uno a uno.
+
+**Fase 1: elección con 2022, sólo con la regla de vecinas, en la lap.** Se fija aquí, antes de
+programarla.
+- **Por qué sólo la regla:**
+  - no se entrena;
+  - es aritmética determinista, así que no depende del procesador;
+  - 2022 no entra en nada que haya aprendido de los ataques;
+  - el V4, en cambio, se ajustó con 2020–2022, así que 2022 no le sirve de validación.
+- **Datos:**
+  - la escala de la columna se ajusta con 2020–2021 limpio, como en las elecciones de las
+    revisiones 8 y 10;
+  - los umbrales salen de las estación-días de **2021 limpio**;
+  - el examen usa las estación-días de 2022 de los calendarios 01–10;
+  - el «sin ataque» usa 2022 limpio.
+- **Por qué el umbral de 2021:**
+  - imita al examen: el umbral sale de un año limpio anterior y la prueba es el siguiente;
+  - corrige el límite que se vio en la elección de la revisión 10, donde el umbral salía de la
+    misma validación atacada;
+  - 2021 también entra en el ajuste de la escala. Se acepta, porque la escala es sólo una
+    desviación y no ve etiquetas.
+- **Severidades:** δ = 100, 50 y 20 % deciden; 10 y 5 % sólo se reportan.
+- **Regla:**
+  - se pasa a la fase 2 si el F1 con 1 % del promedio del día, promediado entre δ = 100, 50 y
+    20 %, supera al de la peor hora en **0.02 o más**;
+  - si no, la revisión 11 se cierra con ese resultado y **no se examina con 2024**.
+- **Contraste, que no decide:**
+  - el F1 con 5 %, el recall, la precisión, el PR-AUC y el MCC;
+  - las falsas alarmas desglosadas;
+  - las estación-días excluidas.
+- **Reproducibilidad:** se calcula dos veces y debe salir idéntica.
+
+**Fase 2: examen 2024, sólo si pasa la fase 1, en la lap.**
+- **Detectores:** la regla de vecinas y el V4, por estación-día.
+- **Formas de juntar el día:** las dos. Decide la que eligió la fase 1; la otra se reporta.
+- **Ajuste, como en la revisión 8:**
+  - la escala de la regla se ajusta con 2020–2022 limpio;
+  - el V4 se usa tal cual.
+- **Umbrales:** con las estación-días de 2023 limpio.
+- **Examen:** los 10 calendarios de 2024 juntos.
+- **«Sin ataque»:** 2024 limpio.
+- **El V4** repite la inferencia en la lap, con su control de reproducción de la revisión 5.
+
+**Fase 3: LSTM supervisado por estación (sólo un esbozo).**
+- **Cuándo:** sólo si la fase 2 muestra algo útil.
+- **Qué sería:**
+  - un LSTM con una salida por estación, con etiqueta por estación-hora y la forma de juntar el
+    día que se elija;
+  - entrenado en Colab con los 20 calendarios.
+- **Su diseño** se registra aparte, fechado, antes de programarlo.
+- **Sus comparaciones** con la regla y el V4 no dependen de la máquina: esos dos se calculan en la
+  lap y no se entrenan.
+
+**Lo que no entra, ideas para después:**
+- localizar quedándose con la estación de mayor puntaje del vecindario, para quitar el contagio;
+- la interpolación espacial del *spatial consistency test*;
+- el CUSUM.
+
+**Predicción de Claude, antes de correrla:**
+1. En 2022, el promedio del día supera a la peor hora en el F1 con 1 % en los tres δ que deciden.
+2. La regla pasa a la fase 2.
+3. Con δ = 20 % y el promedio del día, el F1 con 1 % queda por debajo de 0.30. Hay días naturales
+   raros, como los de CUT del 25 y 26 de abril, cerca de 17–20 % por debajo de sus vecinas sin
+   ataque.
+4. Con δ = 100 % y el promedio del día, al menos un cuarto de las falsas alarmas en los datos
+   atacados son de contagio.
+5. Con δ = 10 y 5 %, el F1 con 1 % queda por debajo de 0.10 con las dos formas de juntar el día.
+6. En 2024, si se llega, con δ ≥ 50 % la regla de vecinas supera al V4 en el F1 con 1 % por
+   estación-día, como pasó por hora de red.
+
+**Implementación prevista:**
+- **Módulo** `src/detect/estacion_dia.py`, con:
+  - las etiquetas por estación-día a partir del plan;
+  - las horas válidas;
+  - las dos formas de juntar el día;
+  - el desglose de las falsas alarmas.
+- **Scripts:** `experiments/anomalias_red/diagnostico_estacion_dia_2022.py` para la fase 1 y
+  `evaluar_estacion_dia.py` para la fase 2.
+- **Pruebas:**
+  - un episodio que cruza de un año a otro;
+  - la exclusión con menos de 12 horas;
+  - el promedio con signo contra la peor hora, en un ejemplo pequeño;
+  - el orden del desglose de las falsas alarmas.
+- **Salidas:** `results/anomalias_red_v1/estacion_dia_2022/` y
+  `results/anomalias_red_v1/estacion_dia/`.
+
+**Resultado de la fase 1 (2026-10-24): pasa a la fase 2.**
+- **Cómo se corrió:** en la lap, dos corridas en paralelo, con salidas idénticas. No entrena ni
+  carga modelos.
+- **La regla:**
+  - F1 con 1 %, promediado entre δ = 100, 50 y 20 %: 0.233 con la peor hora y 0.288 con el
+    promedio del día;
+  - la ventaja es +0.055, y se pedía +0.02.
+- **Por δ** (peor hora y promedio del día):
+  - 0.382 y 0.377 con 100 %;
+  - 0.260 y 0.389 con 50 %;
+  - 0.057 y 0.098 con 20 %;
+  - 0.020 y 0.021 con 10 %;
+  - 0.014 y 0.008 con 5 %.
+- **Sin ataque,** con el mismo umbral, el F1 con 1 % es 0.005 y 0.003.
+- **Contraste, que no decide:**
+  - el PR-AUC es 0.46 y 0.58 con 100 %, 0.19 y 0.33 con 50 %, y 0.020 y 0.043 con 20 %;
+  - el recall con 1 % y δ = 100 % es 0.61 y 0.82.
+- **Falsas alarmas con 1 % y δ = 100 %, promedio del día:**
+  - contagio: 30 % de las falsas alarmas, con una tasa de 19 % en esas estación-días;
+  - tras un ataque propio: 26 %, con una tasa de 20 %;
+  - resto: 45 %, con una tasa de 1.0 %.
+- **Estación-días excluidas:**
+  - 16 % de las estación-días (18 400 de 113 150) y 18 % de las atacadas (167 de 937);
+  - en 2022, el 90 % de las exclusiones es porque la propia estación tiene menos de 12 horas con
+    dato.
+- **Predicciones:**
+  - la 1 falló: con δ = 100 % la peor hora queda apenas arriba, 0.382 contra 0.377;
+  - la 2, la 3, la 4 y la 5 se cumplieron;
+  - la 6 es de 2024.
+- **Aviso:** el modo `--prueba` usa datos reales de 2 calendarios, y su salida, ya con «pasa», se
+  vio antes de la corrida completa. No se cambió nada, porque la regla y las predicciones estaban
+  fijadas.
+- **Detalle:** en `progreso.md` (2026-10-24) y en `results/anomalias_red_v1/estacion_dia_2022/`.
