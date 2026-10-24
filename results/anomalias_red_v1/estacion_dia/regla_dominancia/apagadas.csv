@@ -1,0 +1,11 @@
+detector,delta_pct,agregacion,atacadas_validas,apagadas
+regla_dominancia,100,peor_hora,701,104
+regla_dominancia,100,promedio_dia,701,62
+regla_dominancia,50,peor_hora,701,191
+regla_dominancia,50,promedio_dia,701,113
+regla_dominancia,20,peor_hora,701,399
+regla_dominancia,20,promedio_dia,701,291
+regla_dominancia,10,peor_hora,701,485
+regla_dominancia,10,promedio_dia,701,428
+regla_dominancia,5,peor_hora,701,522
+regla_dominancia,5,promedio_dia,701,508

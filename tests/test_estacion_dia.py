@@ -68,3 +68,14 @@ def test_grupos_de_falsa_alarma_en_orden():
     assert a.iat[15] == 'tras_ataque_propio' and a.iat[16] == 'resto'   # 14 días después del fin
     assert g['B'].iat[0] == 'contagio' and g['B'].iat[4] == ''
     assert set(g.to_numpy().ravel()) <= {'', *ed.GRUPOS_FA}
+
+
+def test_dominancia_apaga_a_la_vecina_menor():
+    dias = pd.date_range('2022-01-01', periods=3, freq='D')
+    s = pd.DataFrame({'A': [3.0, 1.0, np.nan], 'B': [1.0, 1.0, 2.0], 'C': [5.0, 0.5, 1.0]}, index=dias)
+    vecinas = {'A': ['B', 'HGM'], 'B': ['A'], 'C': ['B']}   # asimétricas; HGM no se evalúa
+    d = ed.dominancia(s, vecinas)
+    assert d['A'].tolist()[:2] == [3.0, 1.0] and np.isnan(d.at[dias[2], 'A'])   # sin puntaje sigue NaN
+    assert d['B'].tolist() == [0.0, 1.0, 2.0]               # día 1: A es mayor; día 2: empate; día 3: A sin dato
+    assert d['C'].tolist() == [5.0, 0.0, 0.0]               # C sólo se compara con B
+    assert ed.dominancia(s, {'A': ['HGM'], 'B': ['A'], 'C': ['B']})['A'].iloc[:2].tolist() == [3.0, 1.0]

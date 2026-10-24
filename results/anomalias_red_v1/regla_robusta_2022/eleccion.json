@@ -1,0 +1,60 @@
+{
+  "regla": "candidatas: F̄ ≥ F̄(R0) + 0.02; la de mayor F̄, salvo una candidata con menos cambios a menos de 0.02",
+  "f_barra": {
+    "R0": 0.2877,
+    "R1": 0.297,
+    "R2": 0.3239,
+    "R3": 0.344
+  },
+  "candidatas": [
+    "R2",
+    "R3"
+  ],
+  "variante_elegida": "R3",
+  "examinar_2024": true,
+  "f1_por_delta": {
+    "5": {
+      "R0": 0.0075,
+      "R1": 0.0051,
+      "R2": 0.0062,
+      "R3": 0.0039
+    },
+    "10": {
+      "R0": 0.0211,
+      "R1": 0.0151,
+      "R2": 0.0233,
+      "R3": 0.018
+    },
+    "20": {
+      "R0": 0.0978,
+      "R1": 0.0934,
+      "R2": 0.0962,
+      "R3": 0.097
+    },
+    "50": {
+      "R0": 0.3888,
+      "R1": 0.385,
+      "R2": 0.4143,
+      "R3": 0.4191
+    },
+    "100": {
+      "R0": 0.3766,
+      "R1": 0.4125,
+      "R2": 0.4612,
+      "R3": 0.5158
+    }
+  },
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10"
+  ],
+  "prueba": false
+}

@@ -1,0 +1,41 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 12,
+  "fase": 2,
+  "detector": "regla",
+  "referencia_14_dias": "mediana",
+  "dominancia": false,
+  "decide": "promedio_dia",
+  "origen": "sin entrenamiento (referencia y escala con 2020–2022 limpio)",
+  "valor_por_hora": "columna de vecinas a14 con media",
+  "fecha": "2026-10-24T01:29:20",
+  "calendarios": [
+    "prueba_2024_01",
+    "prueba_2024_02",
+    "prueba_2024_03",
+    "prueba_2024_04",
+    "prueba_2024_05",
+    "prueba_2024_06",
+    "prueba_2024_07",
+    "prueba_2024_08",
+    "prueba_2024_09",
+    "prueba_2024_10"
+  ],
+  "deltas_pct": [
+    100,
+    50,
+    20,
+    10,
+    5
+  ],
+  "min_horas": 12,
+  "umbrales": {
+    "peor_hora_5": 4.248080250554883,
+    "peor_hora_1": 5.627833734332135,
+    "promedio_dia_5": 0.9362091249772729,
+    "promedio_dia_1": 1.427418387978382
+  },
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "controles": "sin puntaje de red guardado con la mediana: no hay control contra el original",
+  "prueba": false
+}

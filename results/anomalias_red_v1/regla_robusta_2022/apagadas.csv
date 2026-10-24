@@ -1,0 +1,11 @@
+delta_pct,variante,frente_a,atacadas_validas,apagadas,alertas_verdaderas_perdidas
+100,R2,R0,770,52,22
+100,R3,R1,770,47,18
+50,R2,R0,770,88,8
+50,R3,R1,770,99,8
+20,R2,R0,770,294,6
+20,R3,R1,770,309,5
+10,R2,R0,770,467,0
+10,R3,R1,770,470,0
+5,R2,R0,770,563,1
+5,R3,R1,770,565,1

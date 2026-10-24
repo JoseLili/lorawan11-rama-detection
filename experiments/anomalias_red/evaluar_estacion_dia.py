@@ -20,8 +20,14 @@ Controles: el puntaje de red que sale de estos valores debe reproducir el guarda
 `evaluar_regla_vecinas.py` o `evaluar_v4.py` (6 cifras); el V4 además reproduce sus predicciones de
 2024 limpio y repite el primer calendario con valores idénticos.
 
-Salidas en results/anomalias_red_v1/estacion_dia/<detector>/ (o --salida). Con --prueba (1
-calendario, δ = 100 %) sólo comprueba que corre: no imprime métricas.
+Revisión 12, sólo con la regla: `--referencia mediana` (perfil de 14 días con la mediana) y
+`--dominancia` (`estacion_dia.dominancia`, contra el contagio). Con los valores por defecto da la
+revisión 11. Con la mediana no hay puntaje de red guardado contra el cual controlar; con la
+dominancia se reportan además las estación-días atacadas que apaga.
+
+Salidas en results/anomalias_red_v1/estacion_dia/<detector>/ (regla_mediana, regla_dominancia o
+regla_mediana_dominancia en la revisión 12; o --salida). Con --prueba (1 calendario, δ = 100 %)
+sólo comprueba que corre: no imprime métricas.
 """
 from __future__ import annotations
 
@@ -55,13 +61,13 @@ TOLERANCIA_RED = 1e-5                             # los puntajes de red se guard
 TOLERANCIA_PPB = 1e-9
 
 
-def normalizacion_y_vecinas():
+def normalizacion_y_vecinas(referencia='media'):
     limpia_tr, sha = leer('limpia_2020_2022')
     mu, sigma = ev.normalizacion(limpia_tr)
     v4 = pd.read_csv(V4_NORM, index_col='estacion')
     np.testing.assert_allclose(mu, v4.loc[mu.index, 'media_definitiva'], rtol=1e-9)
     np.testing.assert_allclose(sigma, v4.loc[sigma.index, 'desv_definitiva'], rtol=1e-9)
-    return limpia_tr, sha, sigma, parametros_vecinas('a14', limpia_tr, sigma)
+    return limpia_tr, sha, sigma, parametros_vecinas('a14', limpia_tr, sigma, referencia)
 
 
 def valores_regla(examen, limpia_tr, sigma, vec):
@@ -132,21 +138,31 @@ def main():
     ap.add_argument('--detector', choices=tuple(GUARDADOS), required=True)
     ap.add_argument('--salida', type=Path)
     ap.add_argument('--prueba', action='store_true')
+    ap.add_argument('--referencia', choices=ev.REFERENCIAS, default='media', help='revisión 12, sólo con la regla')
+    ap.add_argument('--dominancia', action='store_true', help='revisión 12, sólo con la regla')
     args = ap.parse_args()
-    detector, prueba = args.detector, args.prueba
-    salida = args.salida or SAL / 'estacion_dia' / detector
+    detector, prueba, referencia, dom = args.detector, args.prueba, args.referencia, args.dominancia
+    if detector != 'regla' and (referencia != 'media' or dom):
+        raise SystemExit('--referencia y --dominancia sólo se definen para la regla')
+    nombre_salida = detector if referencia == 'media' and not dom else (
+        f"regla{'_mediana' if referencia == 'mediana' else ''}{'_dominancia' if dom else ''}")
+    salida = args.salida or SAL / 'estacion_dia' / nombre_salida
     deltas, n_cal = ((100,), 1) if prueba else ([round(100 * d) for d in ar.DELTAS], ar.CORRIDAS_PRUEBA)
     salida.mkdir(parents=True, exist_ok=True)
 
-    limpia_tr, sha_tr, sigma, vec = normalizacion_y_vecinas()
+    limpia_tr, sha_tr, sigma, vec = normalizacion_y_vecinas(referencia)
     objetivos = alterables_v4()
     corridas = ar.corridas().corrida.iloc[1:1 + n_cal].tolist()
     examen = [f'{c}_d{d}' for d in deltas for c in corridas]
     fuente = valores_regla(examen, limpia_tr, sigma, vec) if detector == 'regla' else valores_v4(examen)
-    dia = {}
+    dia, sin_dominancia = {}, {}
     for nombre, valores, red in fuente:
-        control_red(detector, nombre, red)
+        if referencia == 'media':
+            control_red(detector, nombre, red)
         dia[nombre] = {a: ed.juntar_dia(valores[objetivos], a) for a in ed.AGREGACIONES}
+        if dom:
+            sin_dominancia[nombre] = dia[nombre]
+            dia[nombre] = {a: ed.dominancia(s, vec.vecinas) for a, s in dia[nombre].items()}
         print(f'  {nombre}: listo', flush=True)
 
     umbrales, filas_u = {}, []
@@ -160,7 +176,7 @@ def main():
     pd.DataFrame(filas_u).to_csv(salida / 'umbrales.csv', index=False)
 
     dias = dia['limpia_2024']['peor_hora'].index
-    filas, filas_fa, filas_ex = [], [], []
+    filas, filas_fa, filas_ex, filas_ap = [], [], [], []
     for d in deltas:
         Y, G = [], []
         for c in corridas:
@@ -188,6 +204,11 @@ def main():
                     filas.append(dict(detector=detector, delta_pct=d, agregacion=a, decide=a == DECIDE,
                                       nivel_fa_pct=nivel, version=version, umbral=u,
                                       **con_umbral(yv, puntaje > u), **auc))
+            if dom:                                    # lo que apaga la dominancia en los días atacados
+                sb = np.concatenate([sin_dominancia[f'{c}_d{d}'][a].to_numpy().ravel() for c in corridas])[ok]
+                apagada = yv & (sv == 0) & (sb > 0)
+                filas_ap.append(dict(detector=nombre_salida, delta_pct=d, agregacion=a, atacadas_validas=int(yv.sum()),
+                                     apagadas=int(apagada.sum())))
             alerta = sv > umbrales[a, 1]
             fp_total = int((alerta & ~yv).sum())
             for grupo in ed.GRUPOS_FA:
@@ -202,8 +223,11 @@ def main():
     r.to_csv(salida / 'resultados.csv', index=False)
     pd.DataFrame(filas_fa).to_csv(salida / 'falsas_alarmas.csv', index=False)
     pd.DataFrame(filas_ex).to_csv(salida / 'excluidas.csv', index=False)
+    if dom:
+        pd.DataFrame(filas_ap).to_csv(salida / 'apagadas.csv', index=False)
     (salida / 'configuracion.json').write_text(json.dumps(dict(
-        protocolo=ar.PROTOCOLO, revision=11, fase=2, detector=detector, decide=DECIDE,
+        protocolo=ar.PROTOCOLO, revision=11 if nombre_salida == detector else 12, fase=2, detector=detector,
+        referencia_14_dias=referencia, dominancia=dom, decide=DECIDE,
         origen=('sin entrenamiento (referencia y escala con 2020–2022 limpio)' if detector == 'regla'
                 else 'V4 cargado de disco, inferencia repetida en la lap'),
         valor_por_hora=('columna de vecinas a14 con media' if detector == 'regla'
@@ -211,7 +235,8 @@ def main():
         fecha=datetime.now().isoformat(timespec='seconds'), calendarios=corridas, deltas_pct=list(deltas),
         min_horas=ed.MIN_HORAS, umbrales={f'{a}_{n}': u for (a, n), u in umbrales.items()},
         sha256_matriz_ajuste=sha_tr,
-        controles=('puntaje de red igual al guardado por el script original (rtol 1e-5)'
+        controles=(('puntaje de red igual al guardado por el script original (rtol 1e-5)' if referencia == 'media'
+                    else 'sin puntaje de red guardado con la mediana: no hay control contra el original')
                    + ('' if detector == 'regla' else '; 2024 limpio reproduce predicciones_2024 (1e-9 ppb); '
                       'primer calendario repetido con residuos idénticos')),
         prueba=prueba), indent=2, ensure_ascii=False))

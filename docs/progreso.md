@@ -3560,6 +3560,105 @@ cumplieron 5 de 6.
 - (b) antes de eso, una revisión de la propia regla contra el contagio y la referencia contaminada;
 - (c) la gráfica de la semana con estos resultados.
 
+**Commit:** b957123, con la fase 2.
+
+### Revisión 12 registrada y programada: regla de vecinas robusta (2026-10-24)
+
+**Decisión del tesista:** la opción b, mejorar la regla antes de un LSTM por estación.
+
+**Diseño,** en el protocolo (revisión 12). Dos cambios, uno contra cada sesgo de la fase 2:
+- **la mediana de 14 días,** contra la referencia contaminada tras un ataque;
+- **la dominancia en el vecindario,** contra el contagio. Una estación-día sólo alerta si su puntaje
+  es el mayor entre ella y sus vecinas ese día.
+
+**Variantes y elección:**
+- R0 a R3, con los dos cambios por separado y juntos, todas con el promedio del día;
+- se eligen sólo con 2022, con el mismo esquema que la fase 1 de la revisión 11;
+- hay 7 predicciones registradas.
+- **Aclaración agregada al programar, antes de correr:** la variante más sencilla que se prefiera
+  también tiene que ser candidata.
+
+**Hecho:**
+- `estacion_dia.dominancia`, con una prueba nueva (274 en total);
+- el script `diagnostico_regla_robusta_2022.py`, con el control de que R0 reproduzca exactamente
+  la fase 1 de la revisión 11;
+- las opciones `--referencia` y `--dominancia` en `evaluar_estacion_dia.py`.
+  - **Comprobado:** con los valores por defecto, el script reproduce byte por byte los CSV de la
+    fase 2 de la revisión 11.
+- **El modo `--prueba`** de los dos scripts ya no imprime métricas, y su salida no se miró.
+- **No se ha visto ningún resultado de la revisión 12.**
+
+**Siguiente:** con el visto bueno del tesista, correr la elección con 2022 dos veces en la lap
+(~2 min). Si se elige una variante, sigue el examen 2024 (~1 min por variante).
+
+### Revisión 12: elección con 2022 y examen 2024 (2026-10-24)
+
+**Aprobada por el tesista** antes de correrla.
+
+**Cómo se corrió:**
+- en la lap, dos corridas de cada cosa, con salidas idénticas; no entrena ni carga modelos;
+- los registros están en `logs_revision11/`;
+- **un tropiezo al lanzarla:** la primera vez, las dos variantes con mediana no corrieron. zsh pasó
+  `--referencia mediana` como un solo argumento. Se relanzaron con los argumentos separados; no
+  cambió nada del código.
+
+**Controles:**
+- R0 reproduce exactamente la fase 1 de la revisión 11 con 2022;
+- con los valores por defecto, R0 reproduce byte por byte la fase 2 con 2024.
+
+**Elección con 2022** (F̄ = F1 con 1 %, promedio de δ = 100, 50 y 20 %):
+
+| Variante | F̄ | δ = 100 % | δ = 50 % | δ = 20 % |
+|---|---:|---:|---:|---:|
+| R0 (revisión 11) | 0.288 | 0.377 | 0.389 | 0.098 |
+| R1 (mediana) | 0.297 | 0.413 | 0.385 | 0.093 |
+| R2 (dominancia) | 0.324 | 0.461 | 0.414 | 0.096 |
+| **R3 (las dos)** | **0.344** | **0.516** | **0.419** | 0.097 |
+
+- **Candidatas:** R2 y R3.
+- **Queda R3,** porque R2 está a 0.0201 y la regla pide menos de 0.02.
+- **Es una decisión en el límite:** R3 gana por 0.0001.
+
+**Examen 2024** (F1 con 1 % por estación-día; decide R3 contra R0):
+
+| δ | R0 | R1 | R2 | **R3** | Sin ataque |
+|---:|---:|---:|---:|---:|---:|
+| 100 % | 0.323 | 0.365 | 0.379 | **0.425** | 0.013 |
+| 50 % | 0.330 | 0.344 | 0.331 | **0.347** | 0.013 |
+| 20 % | 0.116 | 0.108 | 0.109 | 0.109 | 0.013 |
+| 10 % | 0.038 | 0.034 | 0.037 | 0.035 | 0.013 |
+| 5 % | 0.016 | 0.021 | 0.019 | 0.021 | 0.013 |
+
+**R3 contra R0 con δ = 100 %:**
+- la precisión pasa de 0.20 a 0.29 y el recall de 0.85 a 0.83;
+- las falsas alarmas por contagio bajan de 598 a 36, y las de tras un ataque propio de 584 a 320;
+- el 75 % de las que quedan son «resto»: el cambio de año y los días naturales raros.
+
+**Predicciones:** se cumplieron 5 de 7.
+- La 1 falló: la mediana bajó la tasa tras un ataque propio a 11.4 %, no a menos de 10 %.
+- La 6 falló: con δ = 50 % en 2024, R3 llegó a 0.347, no a 0.38.
+
+**Observaciones de Claude:**
+- **La mejora está casi toda en los ataques grandes.** Con δ = 100 % sube +0.10 en 2024; con
+  50 % sube +0.017; con 20 % o menos no cambia.
+  - Tiene sentido: los dos sesgos que se quitaron crecen con δ.
+- **La dominancia hace lo que se esperaba.** El contagio casi desaparece y cuesta poco recall:
+  - las estación-días atacadas que apaga con δ chico casi nunca habrían alertado;
+  - en 2022 se perdieron 5–6 alertas verdaderas con 20 %.
+- **La mediana ayuda menos de lo que predije.** Con 100 % baja a la mitad las falsas alarmas tras un
+  ataque, pero quedan en 11–14 %.
+  - Su aporte en 2022 quedó en el límite de la regla.
+  - En 2024 se ve en el mismo sentido, como contraste que no decide: R3 queda por encima de R2,
+    con 0.425 contra 0.379 y 0.347 contra 0.331.
+- **El problema de fondo sigue igual:** con δ ≤ 20 % la regla no detecta de forma útil, aun por
+  estación-día. Lo que limita ahí es el «resto», no los dos sesgos.
+- **No se compara uno a uno con la hora de red.**
+
+**Siguiente** (decisión del tesista):
+- la gráfica de la semana con la estación-día;
+- la fase 3 (LSTM por estación);
+- redactar.
+
 ---
 
 ## Siguiente

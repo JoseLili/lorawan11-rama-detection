@@ -260,6 +260,7 @@ resultados.
 | 9 | 2026-10-23 | Métricas de presentación: el conjunto estándar completo (TP, FP, FN, TN, exactitud, precisión, recall, especificidad, tasa de falsas alarmas, F1, F2, MCC, ROC-AUC y PR-AUC), cada métrica con su valor «sin ataque» y una nota de lectura. Principal: F1 con 1 % de falsas alarmas; secundaria: F2, la de la parte 1. La señal por hora de la revisión 2 se conserva | Pedido del tesista, para comparar con la literatura y con la parte 1. Se registró **después** de ver la revisión 8 en 2024. No elige ni cambia ningún modelo, umbral o forma |
 | 10 | 2026-10-23 | Referencia robusta: el perfil de 14 días con la **mediana** en lugar de la media, en las entradas relativas y en la columna de vecinas (forma a14) del LSTM supervisado con vecinas y de la regla de vecinas. Se elige contra la revisión 8 sólo con 2022. Las revisiones 6 a 9 se conservan | El estudio de las falsas alarmas (`progreso.md`, 2026-10-23) mostró que la media de 14 días se contamina con los días atacados y provoca falsas alarmas durante los 14 días siguientes. La mediana es el estimador estándar con datos contaminados. Se registró **después** de ver la revisión 8 en 2024 y **antes** de correrla con datos reales. Aprobada en lo general por el tesista |
 | 11 | 2026-10-24 | Segunda unidad de evaluación: la **estación-día** (¿esta estación estuvo alterada este día?), con dos formas de juntar el día (peor hora contra promedio del día). Primero sólo con la regla de vecinas y 2022; después, si pasa, la regla y el V4 en 2024; un LSTM por estación queda como esbozo. La hora de red y las revisiones 6 a 10 se conservan y se reportan aparte | La opción A del 2026-10-23 (decidir por día completo) y PARAAD (Allka et al. 2024), que decide por bloques de un día y localiza la estación. Se registró **después** de ver las revisiones 8 y 10 y **antes** de programarla. Redactada por Claude a pedido del tesista y **aprobada por el tesista el 2026-10-24**, tal cual, antes de programarla |
+| 12 | 2026-10-24 | Regla de vecinas robusta, por estación-día: la mediana de 14 días (contra la referencia contaminada tras un ataque) y la **dominancia en el vecindario** (contra el contagio a las vecinas), por separado y juntas, con el promedio del día. Se eligen sólo con 2022, con una regla fijada aquí. La revisión 11 se conserva | La fase 2 de la revisión 11 (`progreso.md`, 2026-10-24): con δ = 100 %, el contagio y la referencia contaminada dan casi la mitad de las falsas alarmas de la regla. Pedida por el tesista (opción b). Se registró **después** de ver la fase 2 de la revisión 11 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, antes de correrla |
 
 ### Revisión 1 (2026-10-13)
 
@@ -1044,3 +1045,142 @@ programarla.
   cumplieron 5 de 6.
 - **No se compara uno a uno con la hora de red.**
 - **Detalle:** en `progreso.md` (2026-10-24) y en `results/anomalias_red_v1/estacion_dia/`.
+
+### Revisión 12 (2026-10-24): regla de vecinas robusta por estación-día
+
+**Estado:**
+- la registró Claude a pedido del tesista (opción b), antes de programarla;
+- el tesista la aprobó el 2026-10-24, antes de correrla con datos reales.
+
+**Por qué.** En la fase 2 de la revisión 11, con δ = 100 % y el promedio del día, casi la mitad de
+las falsas alarmas de la regla viene de dos sesgos sostenidos:
+- **el contagio:** una vecina atacada ese día. Es el 25 % de las falsas alarmas, con una tasa de
+  24 %. La columna (a) resta el promedio de las vecinas, así que un ataque en una de ellas mueve a
+  la estación limpia como ~1/4 del ataque, en sentido contrario.
+- **la referencia contaminada:** los 14 días siguientes a un ataque propio. Es el 24 %, con una
+  tasa de 25 %. El perfil de 14 días con la media absorbe los días atacados.
+
+**Qué cambia.** Dos cambios, uno contra cada sesgo:
+- **Cambio 1, la mediana de 14 días:**
+  - la columna a14 usa el perfil de 14 días con la mediana (`referencia='mediana'`, ya programado
+    y probado en la revisión 10);
+  - con episodios de 1 a 7 días, menos de la mitad de los 14 días queda atacada, así que la
+    mediana casi no se mueve;
+  - **nota honesta:** en la revisión 10, la mediana no pasó la elección del LSTM por hora de red.
+    Aquí la pregunta es otra, la regla por estación-día, donde el exceso tras un ataque propio es
+    mucho mayor (una tasa de 25 % contra 1.4 % en el resto).
+- **Cambio 2, la dominancia en el vecindario:**
+  - una estación-día sólo puede alertar si su puntaje del día es el mayor entre ella y sus vecinas
+    evaluadas ese día, dentro de los 31 objetivos; si alguna vecina tiene uno mayor, el suyo pasa a
+    0, y con empate se quedan las dos;
+  - **por qué funciona:** la estación atacada se mueve ~4 veces más que la vecina contagiada, así
+    que casi siempre gana;
+  - **el costo:** si dos vecinas están atacadas el mismo día, una puede apagarse. Se reporta
+    cuántas estación-días atacadas se apagan así;
+  - se aplica igual en la calibración, en el examen y en el «sin ataque».
+- **Variantes,** todas con el promedio del día de la revisión 11:
+  - R0: la regla de la revisión 11 (media, sin dominancia);
+  - R1: mediana;
+  - R2: dominancia;
+  - R3: mediana y dominancia.
+
+**Qué no cambia:**
+- la unidad, las etiquetas, el mínimo de 12 horas, el umbral común para las 31 estaciones, las
+  métricas de la revisión 9, los grupos de falsas alarmas y la división de años;
+- el V4 no entra: su contagio es chico (4 %), y su referencia no se puede cambiar sin reentrenarlo.
+
+**Elección con 2022, fijada antes de correrla:**
+- **Datos:** como la fase 1 de la revisión 11.
+  - La escala de la columna se ajusta con 2020–2021 limpio, con la referencia de cada variante.
+  - Los umbrales salen de las estación-días de 2021 limpio, con la misma transformación.
+  - El examen usa 2022 de los calendarios 01–10, y el «sin ataque», 2022 limpio.
+- **Severidades:** δ = 100, 50 y 20 % deciden; 10 y 5 % sólo se reportan.
+- **Medida:** F̄ es el F1 con 1 %, promediado entre los tres δ que deciden.
+- **Regla:**
+  1. son candidatas las variantes con F̄ de al menos el de R0 + 0.02; si no hay ninguna, la
+     revisión 12 se cierra y **no se examina con 2024**;
+  2. entre las candidatas, se elige la de mayor F̄;
+  3. si una candidata con menos cambios (R1 o R2 frente a R3) queda a menos de 0.02 de la
+     elegida, se elige esa; si las dos quedan, la de mayor F̄. Tiene que ser candidata, es decir,
+     cumplir también el paso 1. Esta aclaración se agregó al programarla, antes de correrla.
+- **Contraste, que no decide:**
+  - el F1 con 5 %, el PR-AUC, el recall y la precisión;
+  - las falsas alarmas por grupo;
+  - las estación-días atacadas que apaga la dominancia.
+- **Controles:**
+  - se corre dos veces y debe salir idéntica;
+  - R0 debe reproducir exactamente el promedio del día de la fase 1 de la revisión 11.
+
+**Examen 2024, sólo si se elige una variante** (en la lap, con `evaluar_estacion_dia.py`):
+- **Qué corre:** las cuatro variantes, como en la fase 2 de la revisión 11.
+- **Qué decide:** sólo la comparación entre la elegida y R0. Las otras dos se reportan como
+  contraste.
+- **Control:** R0 debe reproducir exactamente la regla de la fase 2 de la revisión 11.
+
+**Predicción de Claude, antes de correrla:**
+1. En 2022, con δ = 100 %, la mediana baja la tasa de falsas alarmas tras un ataque propio de ~20 %
+   a menos de 10 %.
+2. En 2022, con δ = 100 %, la dominancia baja la tasa de falsas alarmas por contagio de ~19 % a
+   menos de 5 %.
+3. Se elige R3.
+4. En 2022, el F̄ de R3 supera al de R0 en 0.05 o más.
+5. La ganancia es menor con δ = 20 % que con 100 y 50 %, porque los dos sesgos crecen con δ.
+6. En 2024, con δ = 50 %, la variante elegida llega a un F1 con 1 % de 0.38 o más (R0: 0.33).
+7. Con δ ≤ 10 %, ninguna variante cambia el F1 con 1 % en 0.02 o más.
+
+**Implementación prevista:**
+- **Función** `estacion_dia.dominancia`, con sus pruebas:
+  - las vecinas asimétricas;
+  - los empates;
+  - las vecinas sin puntaje.
+- **Script** `experiments/anomalias_red/diagnostico_regla_robusta_2022.py`, para la elección.
+- **Opciones** `--referencia` y `--dominancia` en `evaluar_estacion_dia.py`. Sus valores por
+  defecto deben reproducir la revisión 11 byte por byte.
+- **Salidas:**
+  - `results/anomalias_red_v1/regla_robusta_2022/`;
+  - `results/anomalias_red_v1/estacion_dia/regla_<variante>/`.
+
+**Elección con 2022 (2026-10-24): R3, mediana y dominancia.**
+- **Cómo se corrió:** en la lap, dos corridas idénticas. R0 reproduce exactamente el promedio del día
+  de la fase 1 de la revisión 11.
+- **F̄,** el F1 con 1 % promediado entre δ = 100, 50 y 20 %:
+  - R0: 0.288;
+  - R1: 0.297;
+  - R2: 0.324;
+  - R3: 0.344.
+- **Aplicación de la regla:**
+  - son candidatas R2 (+0.036) y R3 (+0.056). R1 queda fuera, con +0.009;
+  - la de mayor F̄ es R3;
+  - la candidata más sencilla, R2, queda a 0.0201 de R3, y la regla pide menos de 0.02, así que
+    **queda R3**;
+  - **es una decisión en el límite:** R3 gana por 0.0001.
+- **F1 con 1 % por δ** (R0, R1, R2, R3):
+  - 0.377, 0.413, 0.461 y 0.516 con 100 %;
+  - 0.389, 0.385, 0.414 y 0.419 con 50 %;
+  - 0.098, 0.093, 0.096 y 0.097 con 20 %.
+- **Falsas alarmas con δ = 100 % y 1 %:**
+  - la dominancia baja la tasa por contagio de 19.0 % a 0.9 %;
+  - la mediana baja la tasa tras un ataque propio de 20.3 % a 11.4 %.
+- **Lo que apaga la dominancia:** de 770 estación-días atacadas válidas, se apagan 47–52 con
+  δ = 100 % (18–22 alertas verdaderas perdidas) y 294–309 con 20 % (5–6 alertas perdidas).
+
+**Examen 2024 (2026-10-24).**
+- **Cómo se corrió:** en la lap, dos corridas por variante, idénticas. Con los valores por defecto,
+  R0 reproduce byte por byte la fase 2 de la revisión 11.
+- **F1 con 1 % por estación-día** (R0, R1, R2, **R3**):
+  - 0.323, 0.365, 0.379 y **0.425** con 100 %;
+  - 0.330, 0.344, 0.331 y **0.347** con 50 %;
+  - 0.116, 0.108, 0.109 y **0.109** con 20 %;
+  - 0.038, 0.034, 0.037 y 0.035 con 10 %;
+  - 0.016, 0.021, 0.019 y 0.021 con 5 %.
+- **Sin ataque,** el F1 con 1 % es de 0.012–0.013.
+- **R3 contra R0 con δ = 100 %:**
+  - la precisión pasa de 0.20 a 0.29, y el recall de 0.85 a 0.83;
+  - las falsas alarmas por contagio bajan de 598 a 36, y las de tras un ataque propio de 584 a 320.
+- **Predicciones:**
+  - se cumplieron la 2, la 3, la 4, la 5 y la 7;
+  - falló la 1: la tasa tras un ataque propio bajó a 11.4 %, no a menos de 10 %;
+  - falló la 6: con δ = 50 % llegó a 0.347, no a 0.38.
+  - En total se cumplieron 5 de 7.
+- **Detalle:** en `progreso.md` (2026-10-24), `results/anomalias_red_v1/regla_robusta_2022/` y
+  `results/anomalias_red_v1/estacion_dia/regla_*`.

@@ -9,6 +9,7 @@ vecinas de la regla, o el residuo / p95 del V4), con signo. Se junta el día de 
 
 Sólo cuentan las estación-días con al menos `MIN_HORAS` horas válidas (valor no NaN). La etiqueta
 sale del plan: como los episodios son días completos, cada estación-día queda entera dentro o fuera.
+La revisión 12 agrega la dominancia en el vecindario, contra el contagio a las vecinas.
 """
 from __future__ import annotations
 
@@ -41,6 +42,18 @@ def juntar_dia(valores: pd.DataFrame, agregacion: str, min_horas: int = MIN_HORA
     dia = valores.index.normalize()
     s = valores.abs().groupby(dia).max() if agregacion == 'peor_hora' else valores.groupby(dia).mean().abs()
     return s.where(validas >= min_horas)
+
+
+def dominancia(puntaje: pd.DataFrame, vecinas: dict) -> pd.DataFrame:
+    """Revisión 12: el puntaje de una estación-día pasa a 0 si una vecina evaluada tiene uno mayor ese día.
+
+    Sólo cuentan las vecinas que son columnas de `puntaje` y tienen puntaje (no NaN); con empate se
+    quedan las dos. Una estación-día sin puntaje sigue sin puntaje.
+    """
+    mayor = pd.DataFrame({s: puntaje[[v for v in vecinas[s] if v in puntaje.columns]].max(axis=1)
+                          if any(v in puntaje.columns for v in vecinas[s]) else np.nan
+                          for s in puntaje.columns}, index=puntaje.index)
+    return puntaje.where(~(mayor > puntaje), 0.0)
 
 
 def etiquetas(plan: pd.DataFrame, dias: pd.DatetimeIndex, estaciones) -> pd.DataFrame:
