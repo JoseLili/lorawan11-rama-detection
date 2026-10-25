@@ -21,9 +21,10 @@ def ventanas(F: np.ndarray, posiciones: np.ndarray, ventana: int = VENTANA) -> n
     return F[posiciones[:, None] + np.arange(-ventana + 1, 1)[None, :]]
 
 
-def construir_clasificador(ventana: int = VENTANA, n_features: int = 66, unidades: int = 64):
+def construir_clasificador(ventana: int = VENTANA, n_features: int = 66, unidades: int = 64, salidas: int = 1):
     """La arquitectura del V4 (`lstm.construir_modelo`) con salida de probabilidad.
 
+    `salidas` = 1: la etiqueta de red (revisiones 6–10); 31: una por estación (revisión 13).
     Llamar `fijar_semilla(42)` inmediatamente antes (CLAUDE.md).
     """
     from tensorflow import keras
@@ -33,7 +34,7 @@ def construir_clasificador(ventana: int = VENTANA, n_features: int = 66, unidade
         layers.LSTM(unidades),
         layers.Dropout(0.2),
         layers.Dense(32, activation='relu'),
-        layers.Dense(1, activation='sigmoid'),
+        layers.Dense(salidas, activation='sigmoid'),
     ])
     modelo.compile(optimizer=keras.optimizers.Adam(learning_rate=1e-3), loss='binary_crossentropy')
     return modelo

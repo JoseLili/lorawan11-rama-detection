@@ -79,3 +79,10 @@ def test_dominancia_apaga_a_la_vecina_menor():
     assert d['B'].tolist() == [0.0, 1.0, 2.0]               # día 1: A es mayor; día 2: empate; día 3: A sin dato
     assert d['C'].tolist() == [5.0, 0.0, 0.0]               # C sólo se compara con B
     assert ed.dominancia(s, {'A': ['HGM'], 'B': ['A'], 'C': ['B']})['A'].iloc[:2].tolist() == [3.0, 1.0]
+
+
+def test_etiquetas_por_hora_desde_estaciones_alteradas():
+    idx = _horas(1)
+    m = pd.DataFrame({'estaciones_alteradas': [''] * 22 + ['A', 'A;CC']}, index=idx)
+    y = ed.etiquetas_por_hora(m, ['A', 'C', 'CC'])
+    assert y['A'].sum() == 2 and not y['C'].any() and y['CC'].tolist()[-1] and y['CC'].sum() == 1

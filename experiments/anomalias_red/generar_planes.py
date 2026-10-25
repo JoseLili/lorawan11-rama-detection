@@ -8,9 +8,13 @@ Escribe results/anomalias_red_v1/planes/plan_<corrida>.csv (1 de entrenamiento, 
 prueba sobre 2024 y 20 calendarios de entrenamiento sobre 2020–2022: los 10 primeros de la
 revisión 6 y los 10 que agrega la revisión 7) y resumen_planes.csv. Cada plan se genera dos veces y debe salir igual.
 Si un plan ya existe y es distinto, se detiene en lugar de sobrescribirlo.
+
+Con --ampliados escribe sólo los calendarios entrenamiento_21…60 de la revisión 14 y su resumen en
+resumen_planes_revision14.csv; los planes y el resumen de siempre no cambian.
 """
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -67,19 +71,29 @@ def resumir(valores: pd.DataFrame, plan: pd.DataFrame, corrida: pd.Series) -> di
     return fila
 
 
+def corridas_de(ampliados: bool) -> pd.DataFrame:
+    """Las corridas de siempre, o con `ampliados` sólo entrenamiento_21…60 (revisión 14)."""
+    if ampliados:
+        return ar.calendarios_entrenamiento(n=ar.CALENDARIOS_AMPLIADOS).iloc[ar.CALENDARIOS_ENTRENAMIENTO:]
+    return pd.concat([ar.corridas(), ar.calendarios_entrenamiento()], ignore_index=True)
+
+
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--ampliados', action='store_true')
+    ampliados = ap.parse_args().ampliados
     ctx = em.contexto(RAIZ)
     valores = ctx['valores']
     alterables = alterables_v4()
     filas = []
-    for _, c in pd.concat([ar.corridas(), ar.calendarios_entrenamiento()], ignore_index=True).iterrows():
+    for _, c in corridas_de(ampliados).iterrows():
         plan = ar.plan_de(c, alterables)
         pd.testing.assert_frame_equal(plan, ar.plan_de(c, alterables))     # reproducibilidad
         estado = guardar_sin_pisar(plan)
         filas.append(resumir(valores, plan, c))
         print(f'{c["corrida"]:>16}  p = {100 * c["p"]:.3f} %  episodios = {len(plan):3d}  ({estado})')
     resumen = pd.DataFrame(filas)
-    resumen.to_csv(SAL / 'resumen_planes.csv', index=False)
+    resumen.to_csv(SAL / ('resumen_planes_revision14.csv' if ampliados else 'resumen_planes.csv'), index=False)
     print(resumen.drop(columns=['inicio', 'fin']).to_string(index=False))
 
 

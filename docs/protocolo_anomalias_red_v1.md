@@ -261,6 +261,8 @@ resultados.
 | 10 | 2026-10-23 | Referencia robusta: el perfil de 14 días con la **mediana** en lugar de la media, en las entradas relativas y en la columna de vecinas (forma a14) del LSTM supervisado con vecinas y de la regla de vecinas. Se elige contra la revisión 8 sólo con 2022. Las revisiones 6 a 9 se conservan | El estudio de las falsas alarmas (`progreso.md`, 2026-10-23) mostró que la media de 14 días se contamina con los días atacados y provoca falsas alarmas durante los 14 días siguientes. La mediana es el estimador estándar con datos contaminados. Se registró **después** de ver la revisión 8 en 2024 y **antes** de correrla con datos reales. Aprobada en lo general por el tesista |
 | 11 | 2026-10-24 | Segunda unidad de evaluación: la **estación-día** (¿esta estación estuvo alterada este día?), con dos formas de juntar el día (peor hora contra promedio del día). Primero sólo con la regla de vecinas y 2022; después, si pasa, la regla y el V4 en 2024; un LSTM por estación queda como esbozo. La hora de red y las revisiones 6 a 10 se conservan y se reportan aparte | La opción A del 2026-10-23 (decidir por día completo) y PARAAD (Allka et al. 2024), que decide por bloques de un día y localiza la estación. Se registró **después** de ver las revisiones 8 y 10 y **antes** de programarla. Redactada por Claude a pedido del tesista y **aprobada por el tesista el 2026-10-24**, tal cual, antes de programarla |
 | 12 | 2026-10-24 | Regla de vecinas robusta, por estación-día: la mediana de 14 días (contra la referencia contaminada tras un ataque) y la **dominancia en el vecindario** (contra el contagio a las vecinas), por separado y juntas, con el promedio del día. Se eligen sólo con 2022, con una regla fijada aquí. La revisión 11 se conserva | La fase 2 de la revisión 11 (`progreso.md`, 2026-10-24): con δ = 100 %, el contagio y la referencia contaminada dan casi la mitad de las falsas alarmas de la regla. Pedida por el tesista (opción b). Se registró **después** de ver la fase 2 de la revisión 11 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, antes de correrla |
+| 13 | 2026-10-24 | LSTM supervisado **por estación** (fase 3 de la revisión 11): la misma arquitectura con una salida por estación, etiqueta por estación-hora, y el día juntado como en la regla robusta (promedio del día y dominancia). Se elige sólo con 2022 y sólo pasa a 2024 si le gana a la regla robusta (R3) por 0.02 o más. Las revisiones 6 a 12 se conservan | Pedida por el tesista: llevar al LSTM las mejoras de las revisiones 11 y 12, que sólo se pueden aplicar si el modelo responde por estación. Se registró **después** de ver la revisión 12 en 2024 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, con el paso 2 tal cual |
+| 14 | 2026-10-24 | LSTM **local compartido** por estación: un solo modelo que mira una estación y sus 4 vecinas (17 columnas) y se aplica a las 31, con 20 o con 60 calendarios de entrenamiento (con el mismo número de ventanas). El día se junta como en R3. Se elige sólo con 2022 y sólo pasa a 2024 si le gana a R3 por 0.02 o más. Es el **último** intento supervisado por estación-día con 2022. Las revisiones 6 a 13 se conservan | La revisión 13 perdió contra R3 en 2022 (F̄ 0.203 contra 0.330). La exploración del 2026-10-24 con sus puntajes de 2022 mostró la causa: un ataque en cualquier parte de la red le sube las falsas alarmas a las estaciones lejanas. Pedida por el tesista (opción C). Se registró **después** de ver la revisión 13 en 2022 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, tal cual |
 
 ### Revisión 1 (2026-10-13)
 
@@ -1184,3 +1186,423 @@ las falsas alarmas de la regla viene de dos sesgos sostenidos:
   - En total se cumplieron 5 de 7.
 - **Detalle:** en `progreso.md` (2026-10-24), `results/anomalias_red_v1/regla_robusta_2022/` y
   `results/anomalias_red_v1/estacion_dia/regla_*`.
+
+### Revisión 13 (2026-10-24): LSTM supervisado por estación
+
+**Estado:**
+- la redactó Claude a pedido del tesista;
+- el tesista la aprobó el 2026-10-24, con el paso 2 tal cual;
+- se corrió la elección con 2022 el 2026-10-24: **no pasa el paso 2, se cierra sin 2024** (abajo).
+
+**Por qué.**
+- **Lo que ayudó en las revisiones 11 y 12 es la forma de responder,** no una entrada:
+  - juntar el día por estación;
+  - la dominancia entre vecinas.
+- **El LSTM de la revisión 8 no puede usar esas mejoras:** da una sola respuesta por hora para
+  toda la red.
+- **Esta revisión le cambia la salida:** una probabilidad por estación cada hora. Así recibe las
+  mismas mejoras que la regla y responde la misma pregunta.
+- **La pregunta:** ¿el LSTM supervisado por estación le gana a la regla robusta (R3), que no se
+  entrena?
+
+**Qué cambia.**
+- **Salida:** 31 salidas sigmoides, una por objetivo. HGM no tiene salida, porque nunca se altera.
+- **Etiqueta por estación-hora:** 1 si la lectura de esa estación fue alterada en esa hora; sale
+  de `estaciones_alteradas` de la matriz. La etiqueta nunca es entrada.
+- **Pérdida:** la entropía cruzada binaria promediada sobre las 31 salidas, sin pesos de clase.
+- **Valor por hora y estación:** la probabilidad de esa salida.
+  - Las horas válidas son las que tienen dato de la estación.
+  - El día se junta con el **promedio del día**, el promedio de las probabilidades de las horas
+    válidas. La peor hora se reporta como contraste.
+  - Hacen falta al menos 12 horas válidas.
+- **Dominancia:** la de la revisión 12, sobre los puntajes del día y con las mismas vecinas.
+
+**Qué no cambia:**
+- **Del LSTM de la revisión 8:**
+  - la ventana t−23…t con las 98 columnas;
+  - la arquitectura: LSTM de 64, dropout de 0.2 y una densa de 32, salvo la capa de salida;
+  - Adam con 1e-3, lotes de 64 y barajado;
+  - `fijar_semilla(42)` inmediatamente antes de construir;
+  - los 20 calendarios y un modelo por δ.
+- **De la estación-día:** las etiquetas por estación-día, el umbral común para las 31 estaciones,
+  las métricas de la revisión 9, los grupos de falsas alarmas y la división de años.
+
+**Configuraciones que se comparan** (2 entrenamientos × 2 lecturas del día):
+- **Entradas:** con la media de 14 días (las de la revisión 8) o con la mediana (las de la
+  revisión 10).
+- **Dominancia:** sin ella o con ella. Se aplica después de entrenar, así que no requiere otro
+  entrenamiento.
+- **De la más sencilla a la más compleja:** media sin dominancia; luego media con dominancia o
+  mediana sin dominancia; luego mediana con dominancia.
+
+**Elección con 2022, fijada antes de correrla** (en Colab, sólo procesador):
+- **Modelo de selección:** como la primera etapa de la revisión 8.
+  - Entrena con 2020–2021 de los 20 calendarios.
+  - Usa EarlyStopping con la pérdida de validación en 2022 de los calendarios 01–10, con
+    paciencia 8, máximo 60 épocas y los pesos de la mejor época.
+- **Umbral: con las estación-días de 2022 limpio,** con 1 y 5 % de falsas alarmas.
+  - No es el de 2021 que usaron las revisiones 11 y 12, porque el LSTM se entrenó con 2021 y su
+    umbral saldría optimista.
+  - Para comparar en igualdad, la regla R3 se recalcula con este mismo umbral.
+- **Examen:** 2022 de los calendarios 01–10.
+- **Severidades:** δ = 100, 50 y 20 % deciden. Con 10 y 5 % no se entrena modelo de selección.
+- **Medida:** F̄, el F1 con 1 % promediado entre los tres δ, en las estación-días válidas para el
+  LSTM y para la regla a la vez.
+- **Paso 1, la configuración del LSTM:**
+  - la más sencilla queda, salvo que otra la supere en 0.02 o más;
+  - si varias la superan, se elige la de mayor F̄;
+  - pero si una con menos cambios queda a menos de 0.02 de ella y también supera a la más
+    sencilla en 0.02, se elige esa.
+- **Paso 2, el LSTM contra la regla:**
+  - la configuración elegida pasa a 2024 sólo si su F̄ supera al de R3 en **0.02 o más**;
+  - si no, la revisión 13 se cierra, **no se examina con 2024**, y la regla robusta queda como el
+    detector por estación-día.
+- **Contraste, que no decide:**
+  - el F1 por δ, el F1 con 5 %, el PR-AUC, la peor hora y las falsas alarmas por grupo;
+  - las estación-días que apaga la dominancia y la época E de cada δ.
+- **Reproducibilidad:** dos corridas en paralelo en la misma sesión, que deben salir idénticas.
+- **Máquina:**
+  - en la misma sesión se recalcula la regla R3 con 2022, y debe reproducir la lap;
+  - si no la reproduce, la comparación usa la R3 recalculada en la sesión, y se anota.
+
+**Examen 2024, sólo si pasa el paso 2:**
+- **Cómo se entrena:** como la revisión 8, en los cinco δ.
+  - E sale del EarlyStopping con 2020–2021 contra 2022.
+  - El modelo definitivo se entrena con 2020–2022 y exactamente E épocas.
+  - Se entrena dos veces en la misma sesión y se compara.
+- **Umbrales:** con las estación-días de 2023 limpio. El examen usa los 10 calendarios de 2024 y
+  el «sin ataque», 2024 limpio.
+- **Comparación que decide:**
+  - el LSTM contra R3, en las estación-días válidas para los dos;
+  - R3 se recalcula en la misma sesión y debe reproducir la revisión 12.
+- **Contraste:** cada detector en sus propias estación-días válidas, y el V4 por estación-día.
+- **Se guardan** los modelos (`modelo.keras`) y las probabilidades por estación-hora, para el examen
+  final de 2025–2026.
+
+**Predicción de Claude, antes de correrla:**
+1. En 2022, la dominancia cambia el F̄ del LSTM en menos de 0.02. El LSTM ve a todas las
+   estaciones y aprende a no culpar a las vecinas.
+2. En 2022, las entradas con mediana cambian el F̄ en menos de 0.02, como en la revisión 10.
+3. Se elige la configuración más sencilla: media sin dominancia.
+4. En 2022, con δ = 100 %, el LSTM supera a R3 por 0.05 o más; con δ = 20 %, no la supera.
+5. El LSTM pasa el paso 2.
+6. En 2024, con δ = 100 %, el F1 con 1 % del LSTM por estación-día es de 0.50 o más (R3: 0.425).
+7. Con δ ≤ 10 %, el F1 con 1 % queda por debajo de 0.10.
+
+**Implementación prevista:**
+- **Funciones,** con sus pruebas:
+  - `lstm_red.construir_clasificador(..., salidas=1)`. Con 1 da la arquitectura actual, comprobado
+    por el número de parámetros; con 31 da 31 sigmoides;
+  - `estacion_dia.etiquetas_por_hora(matriz, estaciones)`, a partir de `estaciones_alteradas`.
+- **Script** `experiments/anomalias_red/entrenar_lstm_estacion.py`:
+  - la etapa de selección por δ y entradas;
+  - con `--definitivo`, la revisión 8 completa;
+  - guarda las probabilidades por estación-hora.
+- **Script** `experiments/anomalias_red/diagnostico_lstm_estacion_2022.py`, con los pasos 1 y 2.
+- **El examen 2024** con `evaluar_estacion_dia.py --detector lstm`, que lee las probabilidades
+  guardadas.
+- **Colab:** un guion como `correr_revision10.sh`, con los archivos subidos como tarball y su
+  SHA-256, y dos corridas por paso.
+- **Tiempo estimado:**
+  - la elección son 6 entrenamientos con EarlyStopping, ~2 h por corrida, y las dos van en
+    paralelo;
+  - el examen 2024 son 5 δ, ~3 h.
+- **Salidas:** `results/anomalias_red_v1/lstm_estacion_2022/` y `results/anomalias_red_v1/lstm_estacion/`.
+
+**Implementación (2026-10-24, antes de correrla).**
+- **Aclaraciones al programarla:**
+  - en la etapa de selección, la escala de la columna de vecinas se ajusta con 2020–2021 limpio,
+    como en las elecciones de las revisiones 8, 10 y 12. El modelo definitivo usa 2020–2022 limpio;
+  - **no se guardan las probabilidades por estación-hora:** pesan demasiado. Se guardan los
+    modelos (`modelo_seleccion.keras` y `modelo.keras`) y los puntajes por estación-día con las
+    dos formas de juntar el día. Las probabilidades por hora se regeneran con el modelo.
+- **Código:**
+  - `lstm_red.construir_clasificador(..., salidas=)`;
+  - `estacion_dia.etiquetas_por_hora`;
+  - `entrenar_lstm_estacion.py`;
+  - `diagnostico_lstm_estacion_2022.py`.
+- **Pruebas:** 2 nuevas, con 276 en total. Con una salida, el clasificador tiene exactamente los
+  parámetros de siempre.
+- **Control previo en la lap:** la R3 que recalcula `diagnostico_lstm_estacion_2022.py` reproduce
+  la revisión 12. Si en Colab no la reproduce, la diferencia es de la máquina.
+
+**Elección con 2022 (2026-10-24): queda C0, pierde contra R3. La revisión 13 se cierra y no se
+examina con 2024; R3 sigue como el detector por estación-día.**
+- **F1 con 1 %** (umbral de 2022 limpio, estación-días válidas para los dos):
+
+  | Configuración | F̄ | δ = 100 % | δ = 50 % | δ = 20 % |
+  |---|---:|---:|---:|---:|
+  | C0 (media, sin dominancia) | 0.203 | 0.321 | 0.250 | 0.038 |
+  | C1 (media, con dominancia) | 0.209 | 0.336 | 0.253 | 0.039 |
+  | C2 (mediana, sin dominancia) | 0.212 | 0.354 | 0.244 | 0.038 |
+  | C3 (mediana, con dominancia) | 0.219 | 0.382 | 0.240 | 0.035 |
+  | **R3 (regla robusta)** | **0.330** | **0.484** | **0.404** | **0.102** |
+
+- **Paso 1:** ninguna llega a F̄(C0) + 0.02 = 0.223; la más cercana es C3, con +0.016. Queda C0.
+- **Paso 2:** C0 queda 0.127 por debajo de R3, y hacía falta +0.02. Aun la mejor configuración, C3,
+  queda 0.111 por debajo.
+- **R3 con este umbral:** su F̄ es 0.330, contra 0.344 con el umbral de 2021 de la revisión 12. El
+  umbral de 2022 también es más estricto para la regla, así que la comparación es pareja.
+- **Contraste, que no decide:**
+  - **PR-AUC** (C0 y R3): 0.49 y 0.67 con 100 %; 0.18 y 0.34 con 50 %; 0.016 y 0.039 con 20 %.
+    El LSTM ordena peor en todos los umbrales, no sólo en el de 1 %.
+  - **ROC-AUC con 100 %:** 0.92 y 0.96.
+  - **Con 100 % y 1 %:** el recall es 0.66 y 0.83, y la precisión 0.21 y 0.34.
+  - **F1 con 5 % y 100 %:** 0.13 y 0.21.
+  - **Peor hora:** el diagnóstico no la calculó, aunque el diseño la pedía como contraste. Se
+    calculó después, en la lap, con los puntajes guardados (sin cargar modelos), con
+    `exploracion_revision13_2022.py`. Con 1 % da 0.342,
+    0.246 y 0.041 con la media y 0.374, 0.249 y 0.041 con la mediana. Queda igual de lejos de R3.
+- **Falsas alarmas con 100 % y 1 %** (C0, C3 y R3):
+  - **Contagio:** 212, 58 y 25.
+  - **Tras un ataque propio:** 361, 276 y 323.
+  - **Resto:** 1337, 1220 y 880. En los calendarios atacados, la tasa del resto es de 1.51 % con
+    C0 y de 1.00 % con R3; el umbral da 1 % en 2022 limpio.
+- **Lo que apaga la dominancia:** de 770 estación-días atacadas válidas, apaga 164 (C1) y 145 (C3)
+  con 100 %, y 555–612 con 20 %. Con R3 eran 47–52 con 100 %.
+- **Época E:** fue la 1 en las seis corridas, de 9 ejecutadas, como en la revisión 8.
+- **Predicciones:** de las 5 que se podían evaluar con 2022, se cumplieron 3.
+  - Se cumplieron la 1, la 2 y la 3. La dominancia cambia el F̄ en +0.006/+0.007, la mediana en
+    +0.009/+0.010, y queda C0.
+  - Falló la 4: con 100 %, el LSTM queda 0.16 por debajo de R3, no 0.05 por encima.
+  - Falló la 5: no pasa el paso 2.
+  - La 6 y la 7 eran de 2024 y no se evalúan.
+- **Reproducibilidad:**
+  - las dos corridas en paralelo salieron idénticas archivo por archivo: historias, puntajes,
+    configuraciones y los seis archivos de la elección;
+  - los números vienen de modelos **recién entrenados** en Colab (sesión `rev13`, AMD EPYC 7B12),
+    guardados como `modelo_seleccion.keras`.
+- **Máquina:** la R3 recalculada en la sesión reproduce la revisión 12 (TP, FP, FN y TN iguales).
+- **Detalle:** en `progreso.md` (2026-10-24), `results/anomalias_red_v1/lstm_estacion_2022/` y
+  `results/anomalias_red_v1/lstm_estacion/`.
+
+### Revisión 14 (2026-10-24): LSTM local compartido por estación
+
+**Estado:**
+- la redactó Claude a pedido del tesista (opción C);
+- el tesista la aprobó tal cual el 2026-10-24, con lo que haya que entrenar en Colab.
+- la elección con 2022 se corrió el 2026-10-25: **queda L0 y pasa el paso 2** (abajo); el examen 2024
+  espera la confirmación del tesista.
+
+**Por qué: lo que mostró la revisión 13 en 2022.**
+- **Un ataque lejano mueve a toda la red.** Lo mostró la exploración del 2026-10-24
+  (`exploracion_revision13_2022.py`), con los puntajes
+  guardados de 2022, en las estación-días normales del grupo «resto». Ahí no hay ninguna vecina
+  atacada y la estación no tuvo un ataque propio en los 14 días anteriores:
+  - con δ = 100 % y 1 %, la tasa de falsas alarmas del LSTM es de 1.24 % los días sin ataques en
+    la red y de **2.66 %** los días con un ataque en otra parte;
+  - la de R3 es de 1.00 % y 0.98 %;
+  - con 50 %, el LSTM pasa de 1.01 % a 1.44 %, y R3 de 1.00 % a 1.05 %.
+  - Es lo esperable: cada salida del LSTM ve las 98 columnas de las 32 estaciones; la regla sólo
+    mira 4 vecinas.
+- **Localiza mal.** La dominancia apaga 164 de 770 estación-días atacadas con 100 %; en R3 eran
+  47–52.
+- **Memoriza pronto.** La mejor época fue la 1 en los seis modelos. Con 20 calendarios, el modelo
+  se aprende esos ataques en particular.
+
+**Qué cambia frente a la revisión 13.**
+- **Modelo local compartido:** un solo LSTM que, para cada objetivo s y cada hora t, mira la ventana
+  t−23…t con **17 columnas**:
+  - de s, sus 3 columnas de la revisión 8: la relativa (valor menos el perfil de 14 días con media,
+    entre σ), la máscara y la columna de vecinas a14;
+  - las mismas 3 de cada una de sus 4 vecinas (las de R3), en orden de distancia;
+  - el seno y el coseno de la hora.
+- **Salida:** una sigmoide, ¿la lectura de s fue alterada en la hora t? La etiqueta es la de la
+  revisión 13, por estación-hora, y nunca es entrada.
+- **Se comparten los pesos:** el mismo modelo se aplica a las 31 estaciones, sin identificador de
+  estación. Así cada estación aporta ejemplos al mismo modelo, y el modelo sirve para cualquier
+  estación con 4 vecinas.
+- **Más calendarios:** se generan `entrenamiento_21` … `entrenamiento_60` con el mismo generador y
+  la misma regla de semillas. Los calendarios 01–20 no cambian, y se comprueba. Los nuevos sólo se
+  usan en esta revisión.
+- **Ventanas de entrenamiento:** dos ventanas de horas seguidas comparten 23 de sus 24 horas. Por
+  eso se toma una parte de las horas de cada calendario y estación, sin reemplazo y con una semilla
+  que se deriva de 42 y del par, sin `hash()`:
+  - con 20 calendarios, 1 de cada 8 horas;
+  - con 60, 1 de cada 24;
+  - en los dos casos son unas 1.36 millones de ventanas por época, así que la comparación aísla la
+    **variedad de ataques** con los mismos ejemplos y el mismo cómputo;
+  - la validación del EarlyStopping usa 1 de cada 8 horas de 2022 de los calendarios 01–10;
+  - los puntajes para la elección usan todas las horas.
+
+**Qué no cambia:**
+- **Del entrenamiento** de la revisión 13:
+  - la arquitectura: LSTM de 64, dropout de 0.2 y una densa de 32;
+  - Adam con 1e-3, lotes de 64 y barajado;
+  - `fijar_semilla(42)` inmediatamente antes de construir;
+  - un modelo por δ;
+  - la pérdida, que aquí es de una sola salida, sin pesos de clase;
+  - la referencia de las entradas: la media, que quedó en el paso 1 de la revisión 13.
+- **Cómo se junta el día:** el promedio del día con al menos 12 horas válidas, la dominancia, las
+  etiquetas por estación-día, el umbral común, las métricas de la revisión 9 y la división de años.
+
+**Configuraciones** (2 entrenamientos × 2 lecturas del día):
+- **L0:** local, 20 calendarios, sin dominancia. Es la más sencilla.
+- **L1:** local, 20 calendarios, con dominancia.
+- **L2:** local, 60 calendarios, sin dominancia.
+- **L3:** local, 60 calendarios, con dominancia.
+
+**Elección con 2022:** como la de la revisión 13, fijada antes de correrla.
+- **Modelo de selección:** se entrena con 2020–2021 y usa EarlyStopping con 2022 de los calendarios
+  01–10, con paciencia 8, máximo 60 épocas y los pesos de la mejor época.
+- **Umbral:** con 2022 limpio. R3 se recalcula con el mismo umbral, en las estación-días válidas
+  para los dos.
+- **Medida:** F̄, el F1 con 1 % promediado entre δ = 100, 50 y 20 %.
+- **Paso 1:** queda L0, salvo que otra la supere en 0.02 o más. Entre las candidatas, la de mayor
+  F̄, salvo una con menos cambios a menos de 0.02.
+- **Paso 2:** la elegida pasa a 2024 sólo si su F̄ supera al de R3 en 0.02 o más.
+- **Si no pasa:**
+  - la revisión 14 se cierra sin 2024;
+  - **se cierra la línea supervisada por estación-día**: no habrá otra elección con 2022 para ella;
+  - R3 queda como el detector por estación-día;
+  - las revisiones 13 y 14 se reportan como resultado negativo.
+- **Contraste, que no decide:**
+  - el F1 por δ, el F1 con 5 %, el PR-AUC y la peor hora. Esta vez el diagnóstico la calcula;
+  - las falsas alarmas por grupo, con el «resto» separado en días con y sin ataque en la red;
+  - lo que apaga la dominancia y la época E;
+  - el C0 de la revisión 13 con el mismo umbral, que ya está guardado.
+- **Reproducibilidad y máquina:** dos corridas en paralelo en Colab, que deben salir idénticas. R3 se
+  recalcula en la sesión y debe reproducir la revisión 12.
+
+**Examen 2024, sólo si pasa el paso 2:** como el previsto en la revisión 13.
+- Se entrena el modelo definitivo con 2020–2022 y E épocas, en los cinco δ. Los δ = 10 y 5 % llevan
+  antes su etapa de selección para obtener E.
+- El umbral sale de 2023 limpio.
+- Decide la comparación contra R3, recalculada en la misma sesión. El V4 va de contraste.
+- Se guardan los modelos para el examen final de 2025–2026.
+
+**Límites declarados:**
+- 2022 ya se usó para elegir en las revisiones 8, 10, 11, 12 y 13. Cada elección nueva con el mismo
+  año le resta confianza a la que gana; por eso ésta es la última para esta línea.
+- El diseño se basa en lo que se vio de la revisión 13 en 2022, el mismo año con el que se elige.
+- Los 60 calendarios comparten el mismo fondo limpio de 2020–2021. Ayudan contra la memoria de los
+  ataques, no contra la de los días naturales raros de esos años.
+
+**Predicción de Claude, antes de correrla.** En la revisión 13 fallé por optimista.
+1. L0 supera al C0 de la revisión 13 en 0.05 o más de F̄ (de 0.203 a 0.253 o más).
+2. Con L0, δ = 100 % y 1 %, la tasa del «resto» en días con un ataque en la red baja de 2.66 % a
+   menos de 1.5 %.
+3. La dominancia cambia el F̄ en menos de 0.02.
+4. Los 60 calendarios cambian el F̄ en menos de 0.02, así que queda L0.
+5. Con 20 calendarios, la época E es 2 o más en al menos dos de los tres δ.
+6. La elegida **no pasa el paso 2**, pero queda a menos de 0.05 de R3 (F̄ entre 0.280 y 0.350).
+
+**Implementación prevista:**
+- **Funciones,** con sus pruebas:
+  - las 17 columnas locales a partir de las 98;
+  - la muestra de ventanas por calendario y estación, reproducible.
+- **Script** `experiments/anomalias_red/entrenar_lstm_local.py`, con la etapa de selección y, con
+  `--definitivo`, la del examen.
+- **La elección** en `diagnostico_lstm_local_2022.py`, con los pasos 1 y 2.
+- **Los calendarios 21–60:** con una opción del generador de planes y matrices. El número por
+  defecto, 20, no cambia, para que las revisiones 7, 8 y 13 sigan iguales.
+- **Colab:** un guion como el de la revisión 13, con dos corridas en paralelo.
+- **Tiempo estimado:** unas 4 h si la mejor época sale pronto. Puede llegar a ~10 h si el modelo
+  sigue mejorando muchas épocas.
+- **Salidas:** `results/anomalias_red_v1/lstm_local/` y `results/anomalias_red_v1/lstm_local_2022/`.
+
+**Implementación (2026-10-24, antes de correrla).**
+- **Código:**
+  - `src/detect/lstm_local.py`, con `indices_locales`, `muestra` y `ventanas_locales`;
+  - la constante `anomalias_red.CALENDARIOS_AMPLIADOS = 60`;
+  - la opción `--ampliados` de `generar_planes.py` y `generar_matrices.py`: escribe sólo los
+    calendarios 21–60 y sus resúmenes (`resumen_planes_revision14.csv` y
+    `resumen_matrices_revision14.csv`); sin ella, todo sale igual que antes;
+  - `entrenar_lstm_local.py` y `diagnostico_lstm_local_2022.py`.
+- **Pruebas:** 3 nuevas, con 279 en total.
+  - Las 17 columnas salen de su lugar en las 98.
+  - La muestra es reproducible, sin reemplazo y distinta por par.
+  - Los calendarios 01–20 no cambian.
+  - El clasificador local tiene los parámetros esperados.
+- **Aclaraciones al programarla:**
+  - la semilla de la muestra es `default_rng([42, 14, uso, número del calendario, índice de la
+    estación])`, con uso 0 para la selección, 1 para la validación y 2 para el definitivo;
+  - el C0 de la revisión 13 se lee de sus puntajes guardados.
+- **Comprobaciones en la lap:**
+  - los 40 planes y las 200 matrices nuevas se generaron;
+  - los planes y resúmenes de siempre no cambiaron;
+  - el modo `--prueba` de los dos scripts corre completo, y no se miraron sus métricas.
+- **Colab:**
+  - la sesión `rev14` tocó un **Intel Xeon @ 2.20 GHz**, no el AMD EPYC de las revisiones 8 y 13;
+  - la elección no se afecta, porque compara todo dentro de la misma sesión, y R3 es aritmética;
+  - el guion comprueba que Colab genera los mismos planes y matrices nuevas que la lap, con el
+    SHA-256 de cada matriz.
+
+**Elección con 2022 (2026-10-25): queda L0 y le gana a R3 por +0.061. Pasa a 2024.**
+- **F1 con 1 %** (umbral de 2022 limpio, estación-días válidas para todos):
+
+  | Configuración | F̄ | δ = 100 % | δ = 50 % | δ = 20 % |
+  |---|---:|---:|---:|---:|
+  | **L0 (20 calendarios, sin dominancia)** | **0.391** | **0.508** | **0.472** | **0.193** |
+  | L1 (20 calendarios, con dominancia) | 0.398 | 0.515 | 0.479 | 0.198 |
+  | L2 (60 calendarios, sin dominancia) | 0.394 | 0.487 | 0.470 | 0.225 |
+  | L3 (60 calendarios, con dominancia) | 0.398 | 0.491 | 0.474 | 0.228 |
+  | R3 (regla robusta) | 0.330 | 0.484 | 0.404 | 0.102 |
+  | C0 de la revisión 13 (contraste) | 0.203 | 0.321 | 0.250 | 0.038 |
+
+- **Paso 1:** ninguna llega a F̄(L0) + 0.02 = 0.411; la más cercana es L3, con +0.007. Queda L0.
+- **Paso 2:** L0 supera a R3 por 0.061, y hacía falta 0.02. **Pasa a 2024.**
+- **El C0 de la revisión 13** sale igual que en su elección: 0.321, 0.250 y 0.038.
+- **Contraste, que no decide** (L0 y R3):
+  - **PR-AUC:** 0.84 y 0.67 con 100 %; 0.48 y 0.34 con 50 %; 0.10 y 0.04 con 20 %.
+  - **Con 1 %:** el recall es 0.96 y 0.83 con 100 %, 0.79 y 0.59 con 50 %, y 0.24 y 0.12 con 20 %.
+    La precisión es parecida o mejor: 0.35 y 0.34 con 100 %.
+  - **F1 con 5 %:** 0.214 y 0.214 con 100 %; 0.209 y 0.195 con 50 %; 0.148 y 0.091 con 20 %.
+  - **Peor hora de L0:** 0.516, 0.456 y 0.181. El promedio del día queda por encima con 50 y 20 %.
+  - **Sin ataque,** el F1 con 1 % es de 0.004–0.014 con L0 y de 0.001 con R3: nivel de azar.
+- **Falsas alarmas con 100 % y 1 %** (L0, C0 de la revisión 13 y R3):
+  - **Contagio:** 58, 212 y 25.
+  - **Tras un ataque propio:** 457, 361 y 323. **Es la debilidad que queda:** con las relativas a
+    la media, el perfil de 14 días se contamina tras el ataque. La tasa es de 18.4 % contra 13.0 %
+    de R3, que usa la mediana.
+  - **Resto en días con un ataque en la red:** 1.15 %, 2.66 % y 0.98 %. El contagio lejano casi
+    desaparece con el modelo local.
+- **Lo que apaga la dominancia:** de 770 estación-días atacadas, apaga 25 (L1) con 100 %, contra
+  164 en la revisión 13. Ahora el LSTM sí localiza la estación.
+- **Época E:** con 20 calendarios fue la 3 con 100 % y la 1 con 50 y 20 %; con 60 calendarios fue la
+  1 en los tres δ.
+- **Predicciones:** se cumplieron 4 de 6.
+  - Se cumplió la 1: L0 sube a 0.391 desde 0.203.
+  - Se cumplió la 2: el resto en días con ataque baja de 2.66 % a 1.15 %.
+  - Se cumplió la 3: la dominancia suma +0.007.
+  - Se cumplió la 4: los 60 calendarios suman +0.003, y queda L0.
+  - Falló la 5: E ≥ 2 sólo con 100 %.
+  - Falló la 6: predije que no pasaría el paso 2, y lo pasa por 0.061.
+- **Reproducibilidad:**
+  - las dos corridas en paralelo salieron idénticas archivo por archivo;
+  - los números vienen de modelos **recién entrenados** en Colab (sesión `rev14`, Intel Xeon
+    @ 2.20 GHz), guardados como `modelo_seleccion.keras`;
+  - una vista preliminar, pedida por el tesista con 5 de 6 modelos, se midió en la lap y coincide
+    con estos puntajes.
+- **Máquina:**
+  - la R3 recalculada en la sesión reproduce la revisión 12;
+  - Colab generó los 40 planes y las 200 matrices nuevas iguales a los de la lap.
+- **Cautela:**
+  - 2022 ya se usó para elegir en seis revisiones, y el EarlyStopping del LSTM también usa 2022;
+  - la ventaja tiene que confirmarse en 2024, con el examen ya registrado.
+- **Detalle:** en `progreso.md` (2026-10-25), `results/anomalias_red_v1/lstm_local_2022/` y
+  `results/anomalias_red_v1/lstm_local/`.
+
+**Examen 2024: implementación y predicciones (2026-10-25, aprobado por el tesista, antes de correrlo).**
+- **Entrenamiento:**
+  - `entrenar_lstm_local.py --calendarios 20 --definitivo` con los cinco δ;
+  - cada δ repite su etapa de selección (nueva con 10 y 5 %) y entrena el modelo definitivo con
+    2020–2022 y E épocas;
+  - las salidas van a `results/anomalias_red_v1/lstm_local_examen/`, para no pisar la elección;
+  - con δ = 100, 50 y 20 %, su selección debe salir idéntica a la de la elección.
+- **Evaluación:** `evaluar_lstm_local_2024.py`, en la misma sesión.
+  - Recalcula R3 como la fase 2 de la revisión 12, y debe reproducirla.
+  - Mide L0 y R3 en las estación-días válidas para los dos.
+  - Los umbrales de cada detector salen de 2023 limpio en esas estación-días.
+  - El contraste del V4 es su resultado guardado de la fase 2 de la revisión 11.
+  - Salidas en `results/anomalias_red_v1/lstm_local_2024/`.
+- **Reproducibilidad:** dos corridas en paralelo en la sesión `rev14`, la misma máquina de la
+  elección. Se comparan archivo por archivo.
+- **No se elige nada con 2024.** Se reporta L0 contra R3.
+- **Predicción de Claude, antes de correrlo** (F1 con 1 %, estación-días comunes):
+  1. Con δ = 50 y 20 %, L0 supera a R3.
+  2. La ventaja promedio de L0 en δ = 100, 50 y 20 % es positiva pero menor que la de 2022: entre
+     0 y +0.061.
+  3. Con δ = 100 %, la diferencia entre L0 y R3 es menor de 0.05, a favor de cualquiera.
+  4. Con δ = 10 y 5 %, los dos quedan por debajo de 0.10.
+  5. Con 100 %, L0 da más falsas alarmas que R3 tras un ataque propio.

@@ -1,0 +1,33 @@
+{
+  "regla_paso_1": "queda C0 salvo candidatas con F̄ ≥ F̄(C0) + 0.02; la de mayor F̄, salvo una candidata con menos cambios a menos de 0.02",
+  "regla_paso_2": "pasa a 2024 si F̄(elegida) ≥ F̄(R3) + 0.02",
+  "f_barra": {
+    "C0": 0.203,
+    "C1": 0.2093,
+    "C2": 0.2119,
+    "C3": 0.2192,
+    "R3": 0.33
+  },
+  "configuracion_elegida": "C0",
+  "ventaja_sobre_r3": -0.127,
+  "pasa_a_2024": false,
+  "r3_reproduce_revision_12": true,
+  "deltas_pct": [
+    100,
+    50,
+    20
+  ],
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10"
+  ],
+  "prueba": false
+}

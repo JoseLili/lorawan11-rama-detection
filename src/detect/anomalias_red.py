@@ -27,6 +27,7 @@ P_RANGO = (0.0010, 0.0030)
 DURACION_DIAS = (1, 7)
 CORRIDAS_PRUEBA = 10
 CALENDARIOS_ENTRENAMIENTO = 20    # calendarios generados; la revisión 6 usa los 10 primeros, la 7 los 20
+CALENDARIOS_AMPLIADOS = 60        # revisión 14: agrega entrenamiento_21…60, sólo para el LSTM local
 PERIODOS = {
     'entrenamiento': ('2020-01-01', '2022-12-31'),    # ajuste definitivo (§4)
     'prueba_2024': ('2024-01-01', '2024-12-31'),

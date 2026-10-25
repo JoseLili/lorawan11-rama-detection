@@ -3659,6 +3659,280 @@ cumplieron 5 de 6.
 - la fase 3 (LSTM por estación);
 - redactar.
 
+**Commit:** 364b687, con la revisión 12.
+
+### Revisión 13 redactada y aprobada: LSTM supervisado por estación (2026-10-24)
+
+**Pregunta del tesista:**
+- «el LSTM sigue dando el resultado que teníamos, ¿no podemos agregar las mejoras al LSTM?»;
+- el modelo debe servir para los años que vienen.
+
+**Respuesta de Claude:**
+- de las tres mejoras, sólo la mediana es una entrada, y no ayudó al LSTM por hora de red
+  (revisión 10);
+- las otras dos, juntar el día y la dominancia, son formas de responder;
+- para que el LSTM las use, tiene que responder por estación;
+- las dos herramientas sirven para años futuros: la regla, recalibrando su umbral cada año; el
+  LSTM, aplicado tal cual. Lo dirá el examen final de 2025–2026, que sigue sin tocarse.
+
+**Diseño,** en el protocolo (revisión 13):
+- **El modelo:** el LSTM de la revisión 8 con 31 salidas, etiqueta por estación-hora, y el día
+  juntado como en R3.
+- **Paso 1, con 2022:** se elige la configuración del LSTM entre las entradas (media o mediana) y
+  con o sin dominancia. Son 2 entrenamientos × 2 lecturas.
+- **Paso 2:** sólo pasa a 2024 si le gana a R3 por 0.02 o más en 2022.
+- **El umbral de 2022 sale de 2022 limpio,** no de 2021, porque el LSTM se entrena con 2021. R3 se
+  recalcula con el mismo umbral.
+- **En Colab,** con R3 recalculada en la misma sesión.
+- **Hay 7 predicciones registradas.**
+
+**Aprobación:** el tesista la aprobó tal cual el 2026-10-24, incluido el paso 2.
+
+**Siguiente:** programarla con sus pruebas, probarla en modo
+`--prueba` sin imprimir métricas, y lanzarla en Colab.
+
+### Revisión 13 programada y lanzada en Colab (2026-10-24)
+
+**Pregunta del tesista antes de lanzarla:** ¿vale la pena agregar más años?
+- **Respuesta de Claude:**
+  - el modelo definitivo ya entrena con 2020–2022;
+  - 2023 a 2026 no se pueden usar para entrenar: son la calibración, el examen y el examen final;
+  - el diagnóstico del 2026-10-22 mostró que más años ayudan con δ = 100 %, sin evidencia con
+    20 %, y que 2020 enseña peor.
+- **Recomendación:** primero la revisión 13 con 2020–2022. Más historia (por ejemplo 2017–2019)
+  sería una revisión aparte, con su control.
+
+**Hecho:**
+- **El código:** el clasificador con varias salidas, las etiquetas por estación-hora, el
+  entrenamiento por estación y la elección con 2022. Hay 2 pruebas nuevas, con 276 en total.
+- **El modo `--prueba`** de los dos scripts corre completo, y no se miraron sus métricas.
+- **Control en la lap:** la R3 recalculada por el script de la elección reproduce la revisión 12.
+
+**Lanzamiento:**
+- **Dónde:** en la sesión de Colab `rev13`, el 2026-10-24 a las 08:17 UTC.
+- **La máquina:** tocó un **AMD EPYC 7B12, el mismo procesador de la revisión 8**.
+- **El código:** el commit 364b687 más un tarball, con su SHA-256 verificado.
+- **Cómo corre:** dos corridas en paralelo. Cada una entrena 6 modelos (media y mediana × δ = 100,
+  50 y 20 %) con EarlyStopping y luego corre la elección.
+- **El guion** compara las dos corridas archivo por archivo.
+
+### Revisión 13: el LSTM por estación pierde contra la regla R3 en 2022 (2026-10-24)
+
+**Cómo se corrió:**
+- en Colab, sesión `rev13` (AMD EPYC 7B12), de 08:23 a 09:43 UTC;
+- antes de entrenar se comprobó todo:
+  - los zips coinciden con su SHA-256;
+  - los planes y matrices salieron idénticos a los del repo;
+  - pasaron las 276 pruebas;
+- las dos corridas en paralelo salieron idénticas archivo por archivo;
+- la R3 recalculada en la sesión reproduce la revisión 12;
+- los resultados se descargaron como tarball, con el SHA-256 verificado
+  (`9e535e7d…`), y la sesión se detuvo con 397.08 unidades;
+- los registros están en `logs_revision13/`;
+- los números vienen de modelos recién entrenados en esa sesión.
+
+**Elección con 2022** (F1 con 1 %, umbral de 2022 limpio):
+
+| Configuración | F̄ | δ = 100 % | δ = 50 % | δ = 20 % |
+|---|---:|---:|---:|---:|
+| C0 (media, sin dominancia) | **0.203** | 0.321 | 0.250 | 0.038 |
+| C1 (media, con dominancia) | 0.209 | 0.336 | 0.253 | 0.039 |
+| C2 (mediana, sin dominancia) | 0.212 | 0.354 | 0.244 | 0.038 |
+| C3 (mediana, con dominancia) | 0.219 | 0.382 | 0.240 | 0.035 |
+| R3 (regla robusta) | **0.330** | 0.484 | 0.404 | 0.102 |
+
+- **Paso 1:** queda C0. La mejor, C3, le gana por 0.016, y hacía falta 0.02.
+- **Paso 2:** C0 queda 0.127 por debajo de R3. **No pasa.** La revisión 13 se cierra sin examinar
+  2024, y R3 sigue como detector por estación-día.
+- **Predicciones:** de las 5 que se podían evaluar, se cumplieron 3 (la 1, la 2 y la 3).
+  - Fallaron la 4 y la 5: predije que el LSTM le ganaría a R3.
+  - La 6 y la 7 eran de 2024.
+
+**Un hueco del diagnóstico:**
+- el diseño pedía la peor hora como contraste, y el script no la calculó;
+- se calculó después en la lap con los puntajes guardados, sin cargar modelos
+  (`exploracion_revision13_2022.py`);
+- con 1 % da 0.342, 0.246 y 0.041 con la media, y 0.374, 0.249 y 0.041 con la mediana;
+- no cambia nada.
+
+**Observaciones de Claude** (lectura de los resultados; no deciden):
+- **No es un umbral desafortunado.** El PR-AUC, que no depende del umbral, también es peor:
+  - con 100 %, 0.49 contra 0.67;
+  - con 50 %, 0.18 contra 0.34.
+- **El LSTM localiza peor que la regla.**
+  - La dominancia apaga 164 de 770 estación-días atacadas con 100 %; en R3 eran 47–52.
+  - O sea, con frecuencia el LSTM le da más puntaje a una vecina que a la estación atacada.
+- **Las falsas alarmas que más pesan son «resto»,** lejos de cualquier ataque.
+  - En los calendarios atacados, su tasa es de 1.51 % con el LSTM y de 1.00 % con R3.
+  - **Hipótesis, sin verificar:** el LSTM ve las 32 estaciones a la vez, así que un ataque en
+    cualquier parte de la red mueve un poco las salidas de las demás. La regla sólo mira a 4
+    vecinas.
+- **Aprende y memoriza muy rápido.**
+  - La mejor época fue la 1 en los seis modelos; desde la 2, la pérdida en 2022 sube (con 100 %,
+    de 0.026 a 0.043).
+  - Con 20 calendarios de 2020–2021, el modelo se aprende esos ataques en concreto, más que una
+    regla que sirva para otro año. Pasó igual en la revisión 8.
+- **Lo que significa para la tesis:** es un resultado negativo claro y reportable. Con estos datos,
+  un LSTM supervisado por estación no supera a una regla física sin entrenamiento, que compara cada
+  estación con sus vecinas. Las mejoras de las revisiones 11 y 12 ayudan más que el aprendizaje.
+
+**Siguiente** (decisión del tesista):
+- la gráfica de la semana con la estación-día (R0 → R3, y el V4);
+- redactar;
+- otras opciones, que serían revisiones aparte:
+  - más historia (2017–2019);
+  - el examen final de 2025–2026 con R3.
+
+**Sin commit todavía.**
+
+### ¿Correr el LSTM por estación en 2024 de todos modos? Opción C (2026-10-24)
+
+**Pregunta del tesista:** «¿no crees que valga la pena entrenarlo?», pues no estamos seguros de que
+en verdad no mejore.
+
+**Respuesta de Claude:**
+- **Sí se entrenó:** 6 modelos en Colab. Lo que no se hizo fue el modelo definitivo y el examen
+  2024.
+- **No decidió la predicción, decidió el resultado.** De hecho, la predicción decía que le ganaría a
+  R3, y falló.
+- **Correrlo en 2024 por haber perdido en 2022** convertiría al examen en otra elección. Además, la
+  distancia (−0.127) es de seis veces el margen.
+- **Tres opciones:**
+  - A, cerrarla;
+  - B, 2024 como contraste que no decide;
+  - C, una revisión nueva que ataque las causas.
+- **Recomendación:** C antes que B, si se quiere darle al LSTM una oportunidad seria, y que sea el
+  último intento con 2022.
+
+**Decisión del tesista:** la opción C.
+
+**Exploración** (después de ver la revisión 13 en 2022; con sus puntajes guardados, sin cargar
+modelos):
+- Se tomaron las falsas alarmas del grupo «resto», con 1 %, y se separaron según si ese día había
+  algún objetivo atacado en la red.
+- Script: `experiments/anomalias_red/exploracion_revision13_2022.py`, que también calcula la peor
+  hora. Corrió dos veces, con el mismo resultado.
+
+| δ | Detector | Resto, día sin ataques en la red | Resto, día con un ataque lejano |
+|---:|---|---:|---:|
+| 100 % | LSTM C0 | 1.24 % (881 de 71 317) | **2.66 %** (456 de 17 115) |
+| 100 % | R3 | 1.00 % | 0.98 % |
+| 50 % | LSTM C0 | 1.01 % | 1.44 % |
+| 50 % | R3 | 1.00 % | 1.05 % |
+
+- **Se confirma la hipótesis de la revisión 13:** un ataque en cualquier parte de la red le sube las
+  falsas alarmas a las estaciones lejanas, porque cada salida del LSTM ve las 32 estaciones. A R3
+  no le pasa.
+
+**Revisión 14 redactada** en el protocolo: LSTM local compartido.
+- **El modelo:** uno solo, que mira la estación y sus 4 vecinas, 17 columnas por hora, y se aplica a
+  las 31.
+- **Las configuraciones:** con 20 o con 60 calendarios, a igual número de ventanas por época, y con
+  o sin dominancia.
+- **Los pasos 1 y 2:** como en la revisión 13.
+- **Es el último intento con 2022 para esta línea.**
+- **Hay 6 predicciones registradas.** La 6 dice que no pasa el paso 2, aunque se acerca a R3.
+
+**Aprobación:** el tesista la aprobó tal cual el 2026-10-24: «Sí, lo apruebo, hazlo, y si requieres
+entrenar algo mándalo a Colab».
+
+### Revisión 14 programada y lanzada en Colab (2026-10-24)
+
+**Hecho en la lap:**
+- **El código:** las columnas locales, la muestra de ventanas, el entrenamiento local y la
+  elección. Hay 3 pruebas nuevas, con 279 en total.
+- **Los calendarios 21–60:** 40 planes y 200 matrices, con `--ampliados`. Los 20 de siempre y sus
+  resúmenes no cambiaron.
+- **El modo `--prueba`** de los dos scripts corre completo, y no se miraron sus métricas.
+
+**Lanzamiento:**
+- **Dónde:** en la sesión de Colab `rev14`, el 2026-10-24 a las 21:20 UTC.
+- **La máquina:** tocó un Intel Xeon @ 2.20 GHz. No afecta la elección, que compara todo dentro de
+  la sesión.
+- **El código:** el commit 364b687 más un tarball, con su SHA-256 verificado. El tarball incluye los
+  planes nuevos y los puntajes de 2022 de la revisión 13 para el contraste.
+- **Cómo corre:**
+  - Colab regenera los planes y las matrices nuevas, y debe dar los mismos SHA-256 que la lap;
+  - dos corridas en paralelo, cada una con 6 modelos (20 y 60 calendarios × δ = 100, 50 y 20 %);
+  - después corre la elección, y el guion compara las dos corridas archivo por archivo.
+
+**Vista preliminar** (a pedido del tesista, 2026-10-25 02:45 UTC, con 5 de 6 modelos terminados):
+- **Qué es:** los puntajes de 2022 de la primera corrida, descargados y medidos en la lap con el
+  mismo esquema que la elección. No decide nada, y la regla ya estaba fijada.
+- **F1 con 1 %:**
+  - L0: 0.508, 0.472 y 0.193 con δ = 100, 50 y 20 %;
+  - R3: 0.484, 0.404 y 0.102, iguales a los de la revisión 13.
+  - Con 60 calendarios, L2 da 0.487 y 0.470 con 100 y 50 %; faltaba su δ = 20 %.
+- **La decisión es la de la elección completa en Colab.**
+
+### Revisión 14: el LSTM local le gana a R3 en 2022 y pasa a 2024 (2026-10-25)
+
+**Cómo se corrió:**
+- en Colab, sesión `rev14` (Intel Xeon @ 2.20 GHz), de 21:39 a 03:35 UTC;
+- las dos corridas en paralelo salieron idénticas archivo por archivo;
+- R3 reproduce la revisión 12, y los calendarios nuevos son iguales a los de la lap;
+- los resultados se descargaron con el SHA-256 verificado (`f37f0a5b…`);
+- los registros están en `logs_revision14/`;
+- los números vienen de modelos recién entrenados en esa sesión.
+
+**Elección con 2022** (F1 con 1 %, umbral de 2022 limpio):
+
+| Configuración | F̄ | δ = 100 % | δ = 50 % | δ = 20 % |
+|---|---:|---:|---:|---:|
+| **L0 (local, 20 calendarios)** | **0.391** | 0.508 | 0.472 | 0.193 |
+| L1 (L0 con dominancia) | 0.398 | 0.515 | 0.479 | 0.198 |
+| L2 (local, 60 calendarios) | 0.394 | 0.487 | 0.470 | 0.225 |
+| L3 (L2 con dominancia) | 0.398 | 0.491 | 0.474 | 0.228 |
+| R3 (regla) | 0.330 | 0.484 | 0.404 | 0.102 |
+| C0 de la revisión 13 | 0.203 | 0.321 | 0.250 | 0.038 |
+
+- **Paso 1:** queda L0, porque ninguna otra le gana por 0.02.
+- **Paso 2:** L0 le gana a R3 por **0.061**. **Pasa a 2024.**
+- **Predicciones:** se cumplieron 4 de 6. Fallaron la 5 (E) y la 6: predije que no pasaría.
+
+**Observaciones de Claude:**
+- **El modelo local corrigió las dos causas que se vieron en la revisión 13:**
+  - el contagio lejano bajó de 2.66 % a 1.15 %;
+  - la dominancia ya casi no le apaga estación-días atacadas: 25 contra 164.
+- **Su ventaja es sobre todo de recall:** encuentra más estación-días atacadas con la misma precisión.
+  Con 100 % es 0.96 contra 0.83, y con 50 % es 0.79 contra 0.59.
+- **Lo que queda débil son los 14 días después de un ataque propio:** 18 % de falsas alarmas, contra
+  13 % de R3. Usa las relativas a la media, que se contaminan.
+- **Los 60 calendarios no ayudaron,** a igual número de ventanas: memorizar los ataques no era el
+  problema.
+- **Cautela:** 2022 se ha usado mucho para elegir. La prueba de verdad es 2024.
+
+**Colab:** la sesión `rev14` sigue abierta, a 0.26 unidades por hora (395 de saldo), por si el
+tesista aprueba el examen 2024 en la misma máquina.
+
+**Siguiente:** confirmar con el tesista el examen 2024.
+- Antes hay que programar la evaluación por estación-día del LSTM local.
+- Luego, en Colab: los 5 δ con `--definitivo`, que llevan su etapa de selección; para δ = 10 y 5 %
+  es nueva.
+
+### Examen 2024 de la revisión 14: aprobado y lanzado (2026-10-25)
+
+**Pregunta del tesista antes de aprobarlo:** qué es L0 y qué mira.
+- **Respuesta:**
+  - un LSTM que, para cada estación, ve 24 horas de ella y de sus 4 vecinas, con 3 datos de cada
+    una más la hora;
+  - responde sólo sobre la estación del centro, y se aplica 31 veces;
+  - el «qué tanto se aparta» es su desviación de lo normal menos la de sus vecinas, no una
+    distancia; la distancia sólo escoge a las vecinas.
+
+**Aprobación:** «Va, lánzalo en Colab el examen 2024».
+
+**Hecho:**
+- `evaluar_lstm_local_2024.py`, probado en modo `--prueba` sin mirar métricas;
+- 5 predicciones registradas en el protocolo antes de correrlo;
+- lanzado en la sesión `rev14`, la misma de la elección: dos corridas en paralelo con los cinco δ.
+
+**Guiones de Colab en el repo:** los que se corrieron estaban sólo en el scratchpad de la sesión. Ya
+quedan en `experiments/anomalias_red/` como copias exactas:
+- `correr_revision13.sh`, la elección de la revisión 13;
+- `correr_revision14.sh`, la elección de la revisión 14;
+- `correr_revision14_examen.sh`, el examen 2024.
+
 ---
 
 ## Siguiente

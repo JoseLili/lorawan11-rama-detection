@@ -44,6 +44,12 @@ def juntar_dia(valores: pd.DataFrame, agregacion: str, min_horas: int = MIN_HORA
     return s.where(validas >= min_horas)
 
 
+def etiquetas_por_hora(matriz: pd.DataFrame, estaciones) -> pd.DataFrame:
+    """Revisión 13: hora × estación, True si la lectura de esa estación fue alterada (`estaciones_alteradas`)."""
+    alteradas = matriz['estaciones_alteradas'].fillna('').str.split(';')
+    return pd.DataFrame({s: alteradas.map(lambda e, s=s: s in e) for s in estaciones}, index=matriz.index)
+
+
 def dominancia(puntaje: pd.DataFrame, vecinas: dict) -> pd.DataFrame:
     """Revisión 12: el puntaje de una estación-día pasa a 0 si una vecina evaluada tiene uno mayor ese día.
 
