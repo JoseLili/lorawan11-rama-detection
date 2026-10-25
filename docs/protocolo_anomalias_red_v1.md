@@ -1381,8 +1381,8 @@ examina con 2024; R3 sigue como el detector por estación-día.**
 **Estado:**
 - la redactó Claude a pedido del tesista (opción C);
 - el tesista la aprobó tal cual el 2026-10-24, con lo que haya que entrenar en Colab.
-- la elección con 2022 se corrió el 2026-10-25: **queda L0 y pasa el paso 2** (abajo); el examen 2024
-  espera la confirmación del tesista.
+- la elección con 2022 se corrió el 2026-10-25: **queda L0 y pasa el paso 2** (abajo);
+- el examen 2024 se corrió el 2026-10-25 con la aprobación del tesista (abajo).
 
 **Por qué: lo que mostró la revisión 13 en 2022.**
 - **Un ataque lejano mueve a toda la red.** Lo mostró la exploración del 2026-10-24
@@ -1606,3 +1606,56 @@ examina con 2024; R3 sigue como el detector por estación-día.**
   3. Con δ = 100 %, la diferencia entre L0 y R3 es menor de 0.05, a favor de cualquiera.
   4. Con δ = 10 y 5 %, los dos quedan por debajo de 0.10.
   5. Con 100 %, L0 da más falsas alarmas que R3 tras un ataque propio.
+
+**Examen 2024 (2026-10-25): L0 iguala a R3 con δ = 100 % y le gana con 50 y 20 %.**
+- **F1 con 1 % por estación-día** (estación-días válidas para los dos; umbral de 2023 limpio):
+
+  | δ | **L0** | R3 | L0 − R3 | Sin ataque (L0 / R3) | V4, sus propias estación-días |
+  |---:|---:|---:|---:|---:|---:|
+  | 100 % | **0.427** | 0.425 | +0.002 | 0.013 / 0.013 | 0.206 |
+  | 50 % | **0.388** | 0.347 | +0.042 | 0.016 / 0.013 | 0.102 |
+  | 20 % | **0.158** | 0.109 | +0.049 | 0.017 / 0.013 | 0.029 |
+  | 10 % | 0.038 | 0.035 | +0.004 | 0.010 / 0.013 | 0.018 |
+  | 5 % | 0.008 | 0.021 | −0.013 | 0.009 / 0.013 | 0.014 |
+
+  - Promediado entre 100, 50 y 20 %: 0.324 contra 0.294, o sea **+0.031**. En 2022 era +0.061.
+  - En sus propias estación-días válidas, L0 da 0.433, 0.386, 0.159, 0.039 y 0.008. R3 da lo mismo
+    que en la revisión 12.
+- **Contraste, que no decide** (L0 y R3):
+  - **Con 100 % y 1 %:** el recall es 0.94 y 0.83, y la precisión 0.28 y 0.29. Encuentra 662
+    estación-días atacadas contra 579, con más falsas alarmas.
+  - **Con 50 %:** el recall es 0.80 y 0.60, y la precisión 0.26 y 0.24.
+  - **F2 con 1 %:** 0.636 y 0.600 con 100 %; 0.562 y 0.466 con 50 %; 0.177 y 0.133 con 20 %.
+  - **PR-AUC:** 0.85 y 0.69 con 100 %; 0.58 y 0.41 con 50 %; 0.083 y 0.046 con 20 %.
+  - **F1 con 5 %:** 0.183 y 0.166 con 100 %; 0.169 y 0.143 con 50 %; 0.120 y 0.076 con 20 %.
+  - **Peor hora de L0:** 0.430, 0.360 y 0.144.
+  - **Con 10 y 5 %,** los dos quedan casi en su valor sin ataque, es decir, en el azar.
+- **Falsas alarmas con 100 % y 1 %** (L0 y R3):
+  - **Contagio:** 81 y 36, con tasas de 3.2 % y 1.4 %.
+  - **Tras un ataque propio:** 536 y 320, con tasas de **22.7 %** y 13.6 %. Es la debilidad de L0, y
+    en 2024 es mayor que en 2022.
+  - **Resto en días con un ataque en la red:** 1.36 % y 1.49 %. El contagio lejano de la revisión
+    13 ya no aparece.
+- **Época E de los δ nuevos:** 2 con 10 % (de 10 épocas) y 6 con 5 % (de 14).
+- **Predicciones:** se cumplieron las 5.
+  - 1: L0 le gana a R3 con 50 y 20 %.
+  - 2: la ventaja promedio es positiva y menor que la de 2022.
+  - 3: con 100 % la diferencia es de 0.002.
+  - 4: con 10 y 5 % los dos quedan por debajo de 0.10.
+  - 5: L0 da más falsas alarmas tras un ataque propio.
+- **Reproducibilidad:**
+  - las dos corridas en paralelo salieron idénticas archivo por archivo: las historias, los
+    puntajes de 2022 y de 2024, las configuraciones y las cuatro salidas del examen;
+  - con 100, 50 y 20 %, la selección repite byte por byte la de la elección;
+  - los números vienen de modelos definitivos **recién entrenados** en Colab (sesión `rev14`, Intel
+    Xeon @ 2.20 GHz), guardados como `modelo.keras`.
+- **Máquina:** la R3 recalculada en la sesión reproduce la revisión 12.
+- **Límites para la lectura:**
+  - **una sola semilla y sin intervalos:** no se sabe todavía si +0.04 o +0.05 superan el ruido;
+  - **2024 no es del todo limpio para esta línea:** la revisión 12 se diseñó viendo 2024, y L0
+    hereda sus ideas;
+  - **falta la prueba con hora de inicio al azar** registrada en la revisión 6: todos los ataques
+    empiezan a las 00 h y duran días enteros, como la estación-día;
+  - **un modelo por δ:** cada modelo conoce el tamaño del ataque.
+- **Detalle:** en `progreso.md` (2026-10-25), `results/anomalias_red_v1/lstm_local_2024/` y
+  `results/anomalias_red_v1/lstm_local_examen/`.

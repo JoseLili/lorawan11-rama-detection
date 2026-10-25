@@ -1,0 +1,57 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 14,
+  "examen": 2024,
+  "origen_l0": "modelo definitivo recién entrenado",
+  "f1_1pct": {
+    "100": {
+      "L0": 0.4267,
+      "R3": 0.4251
+    },
+    "50": {
+      "L0": 0.3885,
+      "R3": 0.3469
+    },
+    "20": {
+      "L0": 0.1583,
+      "R3": 0.1093
+    },
+    "10": {
+      "L0": 0.0385,
+      "R3": 0.0345
+    },
+    "5": {
+      "L0": 0.008,
+      "R3": 0.0211
+    }
+  },
+  "diferencia_l0_menos_r3": {
+    "100": 0.0016,
+    "50": 0.0416,
+    "20": 0.049,
+    "10": 0.004,
+    "5": -0.0131
+  },
+  "r3_reproduce_revision_12": true,
+  "calendarios": [
+    "prueba_2024_01",
+    "prueba_2024_02",
+    "prueba_2024_03",
+    "prueba_2024_04",
+    "prueba_2024_05",
+    "prueba_2024_06",
+    "prueba_2024_07",
+    "prueba_2024_08",
+    "prueba_2024_09",
+    "prueba_2024_10"
+  ],
+  "deltas_pct": [
+    100,
+    50,
+    20,
+    10,
+    5
+  ],
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "prueba": false
+}

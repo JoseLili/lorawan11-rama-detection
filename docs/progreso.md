@@ -3933,6 +3933,48 @@ quedan en `experiments/anomalias_red/` como copias exactas:
 - `correr_revision14.sh`, la elección de la revisión 14;
 - `correr_revision14_examen.sh`, el examen 2024.
 
+### Examen 2024 de la revisión 14: resultado (2026-10-25)
+
+**Cómo se corrió:**
+- en Colab, sesión `rev14` (Intel Xeon), de 04:15 a 11:59 UTC;
+- las dos corridas salieron idénticas, y la selección repite la de la elección;
+- R3 reproduce la revisión 12;
+- se descargó con el SHA-256 verificado (`67edf2fe…`) y la sesión se detuvo, con 393.27 unidades;
+- los registros están en `logs_revision14/`;
+- los números vienen de modelos definitivos recién entrenados.
+
+**F1 con 1 % por estación-día en 2024** (estación-días comunes; umbral de 2023 limpio):
+
+| δ | L0 | R3 | L0 − R3 | V4 |
+|---:|---:|---:|---:|---:|
+| 100 % | **0.427** | 0.425 | +0.002 | 0.206 |
+| 50 % | **0.388** | 0.347 | +0.042 | 0.102 |
+| 20 % | **0.158** | 0.109 | +0.049 | 0.029 |
+| 10 % | 0.038 | 0.035 | +0.004 | 0.018 |
+| 5 % | 0.008 | 0.021 | −0.013 | 0.014 |
+
+- **Lectura:**
+  - con 100 % empatan;
+  - con 50 y 20 %, L0 gana: encuentra más estación-días atacadas, con una precisión igual o
+    mejor;
+  - con 10 y 5 % ninguno sirve, porque quedan en el azar.
+- **La ventaja promedio** (100, 50 y 20 %) es de +0.031, la mitad de la de 2022 (+0.061).
+- **El PR-AUC dice lo mismo:** 0.85 y 0.69, 0.58 y 0.41, 0.083 y 0.046.
+- **La debilidad de L0:** las falsas alarmas en los 14 días tras un ataque propio. Con 100 % su
+  tasa es de 22.7 %, contra 13.6 % de R3.
+- **Predicciones de Claude:** se cumplieron las 5.
+
+**Lo que falta antes de concluir** (lista del 2026-10-25, pendiente de decidir con el tesista y el
+asesor):
+- intervalos de confianza;
+- semillas;
+- la prueba con hora de inicio al azar de la revisión 6;
+- el modelo de un δ examinado con los demás;
+- P4 (bit flipping por los detectores de red);
+- el examen único de 2025–2026.
+
+**Sin commit todavía.**
+
 ---
 
 ## Siguiente
