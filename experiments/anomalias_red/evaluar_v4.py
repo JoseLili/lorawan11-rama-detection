@@ -61,13 +61,14 @@ def cargar_v4():
     return modelos, pd.Series(p95)
 
 
-def residuos(modelos, valores, definitiva, index) -> pd.DataFrame:
-    """Residuo (recibido − predicho) de cada estación en 2024; NaN donde no hay predicción."""
+def residuos(modelos, valores, definitiva, index, etapa=ETAPA) -> pd.DataFrame:
+    """Residuo (recibido − predicho) de cada estación en la etapa (2024; el examen final usa 2025 y
+    2026); NaN donde no hay predicción."""
     entradas = m.entradas_modelo(valores, definitiva['inactivos'])
     cols = {}
     for obj, modelo in modelos.items():
         perfil = m.perfil_causal(valores[obj])
-        t = em.tensores(entradas, valores, obj, definitiva['mu'], definitiva['sigma'], perfil, (ETAPA,))
+        t = em.tensores(entradas, valores, obj, definitiva['mu'], definitiva['sigma'], perfil, (etapa,))
         if not len(t['y']):                      # sin datos en 2024 (ACO): nunca alerta
             cols[obj] = pd.Series(dtype=float)
             continue

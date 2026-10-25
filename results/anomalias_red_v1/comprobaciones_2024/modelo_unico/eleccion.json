@@ -1,0 +1,23 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 16,
+  "comprobacion": "modelo único",
+  "eleccion_2022": {
+    "f1_medio_2022": {
+      "10": 0.17177814555649115,
+      "100": 0.34563816448471746,
+      "20": 0.2871977648923625,
+      "5": 0.10923530791828136,
+      "50": 0.35890433375372216
+    },
+    "modelo_unico": 50,
+    "regla": "mayor F1 con 1 % promediado en δ = (100, 50, 20); empate a menos de 0.005: el de mayor δ",
+    "control_diagonal_conteos": true,
+    "diferencia_maxima_puntajes_diagonal": 1.1102230246251565e-16
+  },
+  "examen_2024": {
+    "control_diagonal_conteos": true,
+    "diferencia_maxima_puntajes_diagonal": 1.1102230246251565e-16
+  },
+  "origen": "modelos cargados de disco (entrenados en Colab, rev14); inferencia en la lap"
+}

@@ -263,6 +263,9 @@ resultados.
 | 12 | 2026-10-24 | Regla de vecinas robusta, por estación-día: la mediana de 14 días (contra la referencia contaminada tras un ataque) y la **dominancia en el vecindario** (contra el contagio a las vecinas), por separado y juntas, con el promedio del día. Se eligen sólo con 2022, con una regla fijada aquí. La revisión 11 se conserva | La fase 2 de la revisión 11 (`progreso.md`, 2026-10-24): con δ = 100 %, el contagio y la referencia contaminada dan casi la mitad de las falsas alarmas de la regla. Pedida por el tesista (opción b). Se registró **después** de ver la fase 2 de la revisión 11 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, antes de correrla |
 | 13 | 2026-10-24 | LSTM supervisado **por estación** (fase 3 de la revisión 11): la misma arquitectura con una salida por estación, etiqueta por estación-hora, y el día juntado como en la regla robusta (promedio del día y dominancia). Se elige sólo con 2022 y sólo pasa a 2024 si le gana a la regla robusta (R3) por 0.02 o más. Las revisiones 6 a 12 se conservan | Pedida por el tesista: llevar al LSTM las mejoras de las revisiones 11 y 12, que sólo se pueden aplicar si el modelo responde por estación. Se registró **después** de ver la revisión 12 en 2024 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, con el paso 2 tal cual |
 | 14 | 2026-10-24 | LSTM **local compartido** por estación: un solo modelo que mira una estación y sus 4 vecinas (17 columnas) y se aplica a las 31, con 20 o con 60 calendarios de entrenamiento (con el mismo número de ventanas). El día se junta como en R3. Se elige sólo con 2022 y sólo pasa a 2024 si le gana a R3 por 0.02 o más. Es el **último** intento supervisado por estación-día con 2022. Las revisiones 6 a 13 se conservan | La revisión 13 perdió contra R3 en 2022 (F̄ 0.203 contra 0.330). La exploración del 2026-10-24 con sus puntajes de 2022 mostró la causa: un ataque en cualquier parte de la red le sube las falsas alarmas a las estaciones lejanas. Pedida por el tesista (opción C). Se registró **después** de ver la revisión 13 en 2022 y **antes** de programarla. **Aprobada por el tesista el 2026-10-24**, tal cual |
+| 15 | 2026-10-25 | Un segundo punto de operación para la estación-día: además del umbral p99 (1 % de falsas alarmas en 2023 limpio), el **p99.9** (0.1 %), y la curva de recall y precisión según el umbral, para L0, R3 y el V4 en 2024. No elige detector ni umbral, y no cambia nada de las revisiones 11 a 14 | Pedida por el tesista, para entender la balanza entre recall y precisión. Se registró **después** de ver el examen 2024 con p99 y una ilustración con p99.9 en 2022 (`exploracion_precision_umbral_2022.py`), y **antes** de calcular p99.9 en 2024. Por eso su número de 2024 es descriptivo; la prueba independiente es el examen final de 2025–2026. Aprobada por el tesista el 2026-10-25 |
+| 16 | 2026-10-25 | Tres comprobaciones antes del examen final, con p99 y p99.9: (1) intervalos de confianza de L0 − R3 en 2024 por bootstrap; (2) un solo modelo L0 para todos los δ, elegido con 2022 y examinado en 2024 con los cinco δ; (3) la prueba con hora de inicio al azar de la revisión 6, que nunca se corrió. No entrena nada. Sólo (2) elige algo: el modelo único que irá al examen final, con una regla sobre 2022 | Pedida por el tesista. Se registró **después** de ver el examen 2024 de la revisión 14 y la revisión 15, y **antes** de correr estas tres comprobaciones. Aprobada por el tesista el 2026-10-25 |
+| 17 | 2026-10-25 | **Examen final** de la estación-día con 2025 (enero a diciembre) y 2026 (enero a julio), una sola vez: detectores congelados (L0 por δ, el L0 único de la revisión 16, R3 y V4), umbrales p99 y p99.9 de 2023 limpio, 10 calendarios nuevos por año, con su versión de hora de inicio al azar, e intervalos de confianza. No se elige ni se ajusta nada | El paso 4 del plan del 2026-10-25. Se registró **antes** de generar cualquier calendario o matriz de 2025–2026 para la parte 2. **Aprobada por el tesista el 2026-10-25**, antes de la revisión con el asesor, por decisión suya |
 
 ### Revisión 1 (2026-10-13)
 
@@ -1659,3 +1662,365 @@ examina con 2024; R3 sigue como el detector por estación-día.**
   - **un modelo por δ:** cada modelo conoce el tamaño del ataque.
 - **Detalle:** en `progreso.md` (2026-10-25), `results/anomalias_red_v1/lstm_local_2024/` y
   `results/anomalias_red_v1/lstm_local_examen/`.
+
+### Revisión 15 (2026-10-25): dos puntos de operación, p99 y p99.9
+
+**Estado:** la pidió el tesista y la aprobó el 2026-10-25; registrada antes de calcular p99.9 en 2024. Calculada el 2026-10-25 (abajo).
+
+**Por qué.**
+- **Con 1 % de falsas alarmas, la precisión tiene un techo de ~0.44,** aunque el detector encuentre
+  todos los ataques. Es por la proporción de estación-días atacadas (0.8 %).
+- **Un umbral más estricto cambia recall por precisión.** La ilustración con 2022
+  (`progreso.md`, 2026-10-25) lo muestra: con δ = 100 % y 0.1 %, L0 da recall 0.74 y precisión 0.81.
+- **El punto de operación depende de cuántas falsas alarmas se toleren,** no de una métrica.
+  Conviene reportar más de uno, y la curva.
+
+**Qué se calcula** (sin entrenar; L0 y el V4 se cargan de disco, y R3 es aritmética):
+- **Detectores:**
+  - L0, el modelo definitivo de la revisión 14;
+  - R3, recalculada como en la fase 2 de la revisión 12;
+  - el V4 por estación-día, con la inferencia repetida como en la fase 2 de la revisión 11.
+- **Puntos de operación,** con umbrales sacados de las estación-días de 2023 limpio:
+  - **p99:** 1 % de falsas alarmas, el de siempre;
+  - **p99.9:** 0.1 %.
+- **Dónde se mide:**
+  - L0 y R3 en las estación-días válidas para los dos, como el examen de la revisión 14;
+  - el V4 en sus propias estación-días válidas, como en la revisión 11.
+- **Métricas:** las de la revisión 9, cada una con su valor sin ataque, en los cinco δ. Se agregan:
+  - cuántas estación-días de 2023 limpio quedan por encima del umbral;
+  - la tasa de falsas alarmas que resulta en 2024 limpio.
+- **Curva:** recall, precisión y tasa de falsas alarmas en 2024, con umbrales de 2023 limpio de 10,
+  5, 2, 1, 0.5, 0.2, 0.1 y 0.05 %.
+- **Controles:**
+  - con p99, L0 y R3 deben reproducir el examen de la revisión 14, y el V4 la fase 2 de la
+    revisión 11 (TP, FP, FN y TN iguales);
+  - se corre dos veces y debe salir igual.
+- **No se elige nada:** ni detector ni umbral. Lo que se reporta es la balanza.
+
+**Límites declarados:**
+- **El p99.9 se estima con ~10 estación-días de 2023 limpio,** así que la tasa real en otro año
+  puede variar mucho. Con p99, la tasa fijada en 1 % salió de 1.3–2 % en 2024.
+- **El número de 2024 es descriptivo,** porque ya se vio p99.9 en 2022 y p99 en 2024. El examen
+  final de 2025–2026 llevará los dos umbrales congelados desde antes.
+
+**Predicción de Claude, antes de calcularlo** (estación-días comunes de L0 y R3):
+1. Con p99.9, la tasa de falsas alarmas en 2024 limpio queda por encima de 0.1 %, entre 0.1 y 0.4 %,
+   para L0 y para R3.
+2. Con δ = 100 % y p99.9, L0 tiene precisión entre 0.5 y 0.85, y recall entre 0.6 y 0.85.
+3. Con δ = 100 %, la ventaja de recall de L0 sobre R3 es mayor con p99.9 que con p99, donde es de
+   0.12.
+4. Con δ = 50 % y p99.9, el recall de L0 queda por debajo de 0.35.
+5. Con δ ≤ 20 % y p99.9, el recall de los tres detectores queda por debajo de 0.10.
+
+**Implementación:**
+- el script `experiments/anomalias_red/puntos_operacion_2024.py`, en la lap;
+- salidas en `results/anomalias_red_v1/puntos_operacion_2024/`.
+
+**Resultado (2026-10-25).**
+- **Cómo se corrió:**
+  - en la lap, dos veces, con salidas idénticas;
+  - con 1 y 5 %, L0 y R3 reproducen el examen de la revisión 14, y el V4 la fase 2 de la revisión
+    11;
+  - el V4 se cargó de disco y reproduce sus predicciones de 2024 limpio;
+  - L0 son los puntajes guardados de su modelo definitivo, recién entrenado en Colab (`rev14`).
+- **Los umbrales:** con p99.9 quedan por encima 8 de las 8 802 estación-días de 2023 limpio (9 de
+  9 097 en el V4). Con p99 quedan 88 (90 en el V4).
+
+**Con δ = 100 %** (L0 y R3 en las estación-días comunes; el V4 en las suyas):
+
+| Punto | Detector | TP | FP | FN | Recall | Precisión | F1 | F2 | Falsas alarmas en 2024 limpio |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| p99 | L0 | 662 | 1 740 | 39 | 0.944 | 0.276 | 0.427 | 0.636 | 1.35 % |
+| p99 | R3 | 579 | 1 444 | 122 | 0.826 | 0.286 | 0.425 | 0.600 | 1.33 % |
+| p99 | V4 | 415 | 2 902 | 295 | 0.585 | 0.125 | 0.206 | 0.337 | 2.90 % |
+| p99.9 | **L0** | 555 | 251 | 146 | **0.792** | 0.689 | **0.737** | **0.769** | 0.16 % |
+| p99.9 | R3 | 392 | 97 | 309 | 0.559 | **0.802** | 0.659 | 0.595 | 0.03 % |
+| p99.9 | V4 | 310 | 709 | 400 | 0.437 | 0.304 | 0.359 | 0.402 | 0.61 % |
+
+**F1 con p99.9 en los demás δ** (L0, R3 y V4; entre paréntesis, el recall):
+- **50 %:** 0.531 (0.41), 0.339 (0.22) y 0.157 (0.16). La precisión es de 0.75, 0.77 y 0.16.
+- **20 %:** 0.044 (0.02), 0.027 (0.01) y 0.023 (0.02).
+- **10 y 5 %:** de 0.000 a 0.017; nada.
+- **Sin ataque:** de 0.000 a 0.014.
+
+**La curva** (`curva.csv`, umbrales de 10 a 0.05 %):
+- **Con 100 y 50 %, L0 queda por encima de R3 en casi todos los puntos:** más recall con la misma
+  precisión.
+  - Con precisión ~0.8 y δ = 100 %, L0 encuentra el 75 % de los ataques (umbral de 0.05 %) y R3 el
+    56 % (0.1 %).
+- **El V4 queda muy por debajo.**
+  - En 2024 su tasa de falsas alarmas sale de 2.9 % con p99 y de 0.6 % con p99.9: casi el triple y
+    el séxtuple de lo fijado.
+  - Es lo que ya se vio en la revisión 11, con mayo de 2024 excepcional.
+
+**Predicciones:** se cumplieron 3 de 5.
+- **Falló la 1:** con p99.9, la tasa en 2024 limpio quedó por debajo de 0.1 % en R3 (0.03 %) y en
+  L0 con 50 y 20 % (0.07 % y 0.06 %). Sólo L0 con 100 % cayó en el rango (0.16 %). El umbral es
+  inestable, pero hacia los dos lados.
+- **Se cumplió la 2:** con 100 % y p99.9, L0 tiene precisión 0.69 y recall 0.79.
+- **Se cumplió la 3:** la ventaja de recall de L0 sobre R3 sube de 0.12 a 0.23.
+- **Falló la 4:** con 50 %, el recall de L0 fue de 0.41, no menor de 0.35.
+- **Se cumplió la 5:** con δ ≤ 20 % el recall queda por debajo de 0.03.
+
+**Lectura:**
+- con un umbral estricto, la ventaja de L0 sobre R3 se hace más grande, no más chica;
+- en número de falsas alarmas, L0 con p99.9 da unas 25 al año en la red (251 en 10 calendarios),
+  y R3 unas 10.
+- **Es descriptivo:** el número que vale como prueba saldrá del examen final.
+- **Detalle:** en `results/anomalias_red_v1/puntos_operacion_2024/` y `progreso.md` (2026-10-25).
+
+### Revisión 16 (2026-10-25): tres comprobaciones antes del examen final
+
+**Estado:** la pidió el tesista y la aprobó el 2026-10-25, con p99 y p99.9. Registrada antes de
+correr nada. Corrida el 2026-10-25; resultado al final de esta sección.
+
+**Común a las tres:**
+- **Detectores y lugar de medición:**
+  - L0: los modelos definitivos de la revisión 14, cargados de disco;
+  - R3: recalculada como en la fase 2 de la revisión 12;
+  - L0 y R3 se miden en las estación-días válidas para los dos;
+  - el V4, cuando entra, en las suyas.
+- **Umbrales:** p99 y p99.9, con las estación-días de 2023 limpio de cada detector, como en la
+  revisión 15.
+- **Métricas:** F1, recall y precisión, con su valor sin ataque.
+- **Reproducibilidad:** todo corre dos veces en la lap y debe salir igual. No se entrena nada.
+
+**(1) Intervalos de confianza de la diferencia L0 − R3 en 2024.**
+- **Bootstrap por bloques.**
+  - Un bloque es una estación en un mes, con sus 10 calendarios juntos: 31 × 12 = 372 bloques.
+  - Así quedan juntos los días seguidos de un episodio, y los días normales que se repiten en los
+    10 calendarios.
+- **Cómo se calcula:**
+  - 2 000 remuestreos con reemplazo, con la semilla `default_rng([42, 16, 1])`;
+  - en cada uno se calculan el F1, el recall y la precisión de L0 y de R3, y su diferencia, con
+    los umbrales fijos;
+  - se reporta el intervalo del 2.5 al 97.5 %, para los cinco δ y los dos puntos.
+- **Regla de lectura:** la diferencia se sostiene si su intervalo del 95 % no incluye el 0.
+- **No cubre:**
+  - la incertidumbre del umbral de 2023;
+  - la semilla del entrenamiento: otra semilla requiere reentrenar.
+
+**(2) Un solo modelo L0 para todos los δ.**
+- **(2a) La elección, con 2022:**
+  - cada modelo de selección (`lstm_local_examen/c20/d<m>/seleccion/modelo_seleccion.keras`,
+    entrenado con 2020–2021) se examina con 2022 de los calendarios 01–10 y δ = 100, 50 y 20 %;
+  - el umbral sale de 2022 limpio, en las estación-días comunes con R3, como en la elección de la
+    revisión 14;
+  - **el modelo único es el de mayor F1 con 1 % promediado entre esos tres δ.** Si dos empatan a
+    menos de 0.005, gana el de mayor δ;
+  - control: la diagonal reproduce los puntajes guardados de la selección.
+- **(2b) El examen en 2024:**
+  - cada modelo definitivo se examina con los calendarios de los cinco δ, una tabla de 5 × 5, con
+    su propio umbral de 2023 limpio;
+  - control: la diagonal reproduce el examen de la revisión 14.
+- **Lo que decide:** sólo el modelo único que va al examen final, elegido en (2a). Los modelos por
+  δ se reportan también.
+
+**(3) Hora de inicio al azar: la prueba secundaria de la revisión 6.**
+- **Calendarios:** los mismos 10 de 2024, con las mismas estaciones, signos y duraciones.
+- **El recorrido:**
+  - cada episodio se recorre una hora h entre 0 y 23;
+  - hay **una h por calendario y estación**: la primera extracción de
+    `default_rng([42, 2024, k, 2, índice de la estación])`;
+  - todos los episodios de una estación se recorren igual, para que no se traslapen;
+  - el episodio dura lo mismo en horas y se corta al final de 2024.
+- **Etiqueta:**
+  - una estación-día está **atacada si 12 horas o más** caen dentro de un episodio;
+  - es **normal si ninguna**;
+  - las que tienen de 1 a 11 horas se excluyen de las métricas, y se reporta cuántas son.
+- **Detectores:**
+  - L0, cada modelo con su δ;
+  - el modelo único de (2a);
+  - R3 y el V4;
+  - todos con los umbrales de siempre, sin reentrenar.
+- **Regla de lectura:** la ventaja de L0 no depende del inicio a medianoche si, con hora al azar y
+  p99, L0 sigue por encima de R3 en F1 con δ = 50 y 20 %. Se reporta además cuánto baja cada uno.
+
+**Predicción de Claude, antes de correrlas:**
+1. Con p99, el intervalo de L0 − R3 excluye el 0 con δ = 50 y 20 %, y lo incluye con 100 %.
+2. Con p99.9, el intervalo excluye el 0 con δ = 100 y 50 %.
+3. Con p99 y δ = 50 %, el intervalo de L0 − R3 mide entre 0.02 y 0.08 de ancho.
+4. El modelo único que sale de 2022 es el de δ = 100 o el de 50 %.
+5. En 2024, con p99, el modelo único queda a menos de 0.03 del modelo de su propio δ, o por
+   encima, con δ = 50 y 20 %.
+6. En 2024, con p99 y δ = 50 %, el modelo único le gana a R3.
+7. Con hora al azar, δ = 100 % y p99, los tres detectores bajan su F1.
+8. Con hora al azar, p99 y δ = 50 %, L0 sigue por encima de R3.
+9. Con hora al azar, δ = 100 % y p99, L0 baja menos de 0.10 de F1.
+
+**Implementación:**
+- **Funciones,** con sus pruebas:
+  - `anomalias_red.recorrer_plan(plan, k)`;
+  - `anomalias_red.aplicar_horas`, como `aplicar` pero sin exigir días completos.
+- **Scripts:** `intervalos_2024.py`, `modelo_unico_delta.py` y `hora_azar_2024.py`.
+- **Salidas:** en `results/anomalias_red_v1/comprobaciones_2024/`.
+
+**Resultado (2026-10-25).**
+- **Cómo se corrió:**
+  - (1) en la lap; (2) y (3) en Colab (`rev16`, AMD EPYC 7B12; `correr_revision16.sh`);
+  - todo dos veces, con salidas idénticas;
+  - no se entrenó nada: L0 y el V4 se cargaron de disco;
+  - (3) se detuvo dos veces por controles antes de correr completa:
+    - faltaban los residuos guardados del V4, que no están en git;
+    - el V4 en otra CPU difiere 7.6e-6 ppb de sus predicciones guardadas, así que se agregó
+      `--tolerancia-v4` (1e-4 ppb).
+- **(1) Intervalos del 95 % de L0 − R3 (F1):**
+  - con p99: +0.002 (−0.049 a +0.052) con 100 %; +0.042 (−0.005 a +0.088) con 50 %; **+0.049
+    (+0.014 a +0.091) con 20 %**;
+  - con p99.9: **+0.078 (+0.005 a +0.141) con 100 %**; **+0.192 (+0.125 a +0.261) con 50 %**;
+  - con 10 y 5 % no hay diferencias útiles. Con 5 % y p99, R3 queda por encima (−0.013, de −0.026 a
+    −0.001), pero los dos están en el azar.
+- **(2) Modelo único:**
+  - **(2a) La elección con 2022:** F1 medio de 0.359 con el de 50 %, 0.346 con el de 100 %, 0.287 con
+    el de 20 %, 0.172 con el de 10 % y 0.109 con el de 5 %. **El modelo único es el de δ = 50 %.**
+  - **Controles:** la diagonal reproduce los conteos de la elección de la revisión 14 y de su examen
+    2024, con una diferencia de puntajes de 1.1e-16.
+  - **(2b) En 2024, F1 con p99 del L0 único:** 0.377, 0.388, 0.137, 0.030 y 0.023 con δ = 100, 50, 20,
+    10 y 5 %. R3 da 0.425, 0.347, 0.109, 0.035 y 0.021.
+  - **Con p99.9:** 0.637 y 0.531 con 100 y 50 %; R3, 0.659 y 0.339.
+  - **El modelo de 100 % no generaliza hacia abajo en L0:** 0.077 con δ = 20 %, por debajo de R3. Con
+    el LSTM de la revisión 8 había sido al revés.
+- **(3) Hora de inicio al azar** (F1 con p99, medianoche → hora al azar):
+  - **L0:** 0.427 → 0.433 con 100 %, 0.388 → 0.396 con 50 %, 0.158 → 0.162 con 20 %;
+  - **R3:** 0.425 → 0.419, 0.347 → 0.329, 0.109 → 0.099;
+  - **V4:** 0.206 → 0.195, 0.102 → 0.096, 0.029 → 0.028;
+  - con p99.9, L0 queda igual (0.737 → 0.738, 0.531 → 0.530);
+  - de las estación-días atacadas, 169 quedan con 1 a 11 horas y se excluyen;
+  - **L0 no depende del inicio a medianoche.** Su ventaja sobre R3 se mantiene, y crece un poco.
+- **Predicciones:** se cumplieron 6 de 9.
+  - Falló la 1: con p99 y 50 %, el intervalo incluye el 0 por 0.005.
+  - Falló la 3: ese intervalo mide 0.093, no menos de 0.08.
+  - Falló la 7: con hora al azar L0 no bajó, subió 0.006.
+- **Lo que cambia para el examen final:** nada. El modelo único (δ = 50 %) y la hora al azar ya
+  estaban en su borrador.
+- **Detalle:** en `results/anomalias_red_v1/comprobaciones_2024/` y `progreso.md` (2026-10-25).
+
+### Revisión 17 (2026-10-25): examen final con 2025 y 2026
+
+**Estado:**
+- borrador de Claude, a pedido del tesista;
+- **aprobada por el tesista el 2026-10-25** («Sí, apruebo»), después de ver las comprobaciones (2) y
+  (3) de la revisión 16 y con las 9 predicciones ya escritas;
+- **por decisión del tesista se corre antes de la revisión con el asesor** del lunes 2026-10-26.
+  - Sus razones: llegar con resultados fijos. P4 no aplica, porque la parte 2 es otra pregunta:
+    detección supervisada de anomalías a nivel de red, no detección de bit flipping a nivel de nodo.
+  - Los dos puntos de operación bastan.
+- Hasta que se apruebe, no se genera nada de 2025–2026 para la parte 2.
+
+**Por qué una sola vez:**
+- 2022 y 2024 ya se usaron para elegir y para diseñar;
+- 2025–2026 es el único periodo que la parte 2 no ha visto;
+- lo que aquí no quede fijado antes de correr, no puede cambiarse después.
+
+**Lo que se congela:**
+- **Detectores,** todos cargados de disco o sin entrenamiento; sus SHA-256 se registran antes de
+  correr:
+  - **L0 por δ:** los 5 `modelo.keras` de `results/anomalias_red_v1/lstm_local_examen/c20/`
+    (revisión 14). Es la comparación principal, la misma del examen 2024;
+  - **L0 único:** el modelo que eligió la regla de la revisión 16 con 2022, para todos los δ. Es el
+    caso realista, cuando no se sabe el tamaño del ataque;
+  - **R3**, como en la fase 2 de la revisión 12;
+  - **el V4**, con la inferencia repetida, como en la revisión 11.
+- **Umbrales:**
+  - p99 y p99.9, con las estación-días de 2023 limpio de cada detector;
+  - L0 y R3 en las estación-días válidas para los dos;
+  - son exactamente los del examen 2024, y se comprueba.
+- **Contexto de las entradas:**
+  - para 2025, la historia limpia de 2020 a 2024;
+  - para 2026, la de 2020 a 2025;
+  - lo mismo para R3 y para el perfil de 14 días.
+
+**Los datos nuevos:**
+- **Calendarios:** 10 por año, `final_2025_01…10` y `final_2026_01…10`.
+  - El mismo generador y las mismas reglas que los de 2024: los 31 objetivos, p uniforme en
+    0.10–0.30 % por día y episodios de 1 a 7 días desde las 00 h, cortados al final del periodo.
+  - Las semillas salen de 42 y del año, sin `hash()`: `[42, año, k, uso, estación]`.
+- **Matrices:** los 5 δ, más 2025 limpio y 2026 limpio.
+- **Hora de inicio al azar:**
+  - la misma versión recorrida de cada calendario, con `recorrer_plan` (una h por calendario y
+    estación);
+  - la etiqueta de la revisión 16: 12 horas o más es atacada, ninguna es normal, y en medio se
+    excluye.
+
+**Qué se reporta, por año** (2025 y 2026 por separado, y los dos juntos como contraste):
+- **Principal:** el F1 con p99 y con p99.9 de L0 por δ contra R3, en las estación-días comunes,
+  con el intervalo del 95 % de la diferencia.
+  - El bootstrap es por bloques de estación × mes, con 2 000 remuestreos y la semilla
+    `[42, 17, año]`.
+- **Secundario:**
+  - el L0 único contra R3;
+  - el V4;
+  - la versión con hora al azar;
+  - el recall, la precisión, el F2, el MCC, el PR-AUC y las falsas alarmas por grupo y por año;
+  - cada métrica con su valor sin ataque (el año limpio).
+- **No se elige nada.** No hay margen ni paso de selección: es la medición final.
+
+**Controles:**
+- se corre dos veces, y debe salir igual;
+- los umbrales son idénticos a los del examen 2024;
+- los SHA-256 de los modelos son los registrados;
+- los planes y las matrices se generan dos veces y deben salir iguales;
+- la inferencia del V4 en el año limpio sale de sus mismos modelos de la parte 1.
+  - Si corre en otra máquina, el control contra sus predicciones guardadas usa una tolerancia de
+    1e-4 ppb en lugar de 1e-9: la inferencia float32 difiere ~1e-5 ppb entre CPUs (revisión 16).
+
+**Límites declarados:**
+- **2026 sólo tiene enero a julio.**
+- **La parte 1 ya evaluó al V4 con 2025–2026** (bit flipping), así que el año limpio no es nuevo
+  para el V4. Sí lo es para L0 y para R3, y ningún ataque de la parte 2 se ha generado en esos
+  años.
+- **Los umbrales de 2023 pueden desviarse** dos y tres años después. Eso es parte de lo que se mide.
+- **Una sola semilla de L0.**
+
+**Predicción de Claude, antes de generar nada de 2025–2026** (escrita después de las comprobaciones
+(2) y (3) de la revisión 16; F1, estación-días comunes salvo el V4):
+1. En 2025, con p99, L0 por δ le gana a R3 con δ = 50 y 20 %.
+2. En 2025, con p99 y δ = 100 %, L0 y R3 quedan a menos de 0.05 entre sí.
+3. Con p99.9 y los dos años juntos, L0 le gana a R3 con δ = 100 y 50 %, y el intervalo del 95 % de
+   la diferencia excluye el 0 con δ = 50 %.
+4. Con δ ≤ 10 %, los cuatro detectores quedan por debajo de 0.10 en los dos años.
+5. En 2025 limpio, con p99, la tasa real de falsas alarmas de L0 y de R3 queda entre 0.8 y 2.0 %.
+6. Con p99 y δ ≥ 20 %, el V4 tiene el F1 más bajo de los cuatro en 2025.
+7. En 2025, con p99 y δ = 50 %, el L0 único le gana a R3.
+8. En 2025, con p99 y δ = 50 %, el F1 de L0 con hora al azar cambia menos de 0.03 frente al de
+   medianoche.
+9. En 2026 (enero a julio), con p99 y δ = 50 %, el orden es L0 > R3 > V4, como en 2025.
+
+**Implementación (2026-10-25, antes de generar nada de 2025–2026):**
+- **Código:**
+  - `anomalias_red.corridas_finales()`: `final_2025_01…10` y `final_2026_01…10`, con p de
+    `[42, año, k, 0]`;
+  - `evaluar_v4.residuos(..., etapa)`, con `prueba_2025` y `prueba_2026_parcial` (las etapas del V4);
+  - la opción `--final` de `generar_planes.py` y `generar_matrices.py` (`limpia_2025`, `limpia_2026`
+    y 100 matrices);
+  - `examen_final.py`; con `--solo-generar` hace las 100 matrices de hora al azar.
+- **Detectores congelados:** los SHA-256 de los 5 `modelo.keras` de L0 quedan en
+  `results/anomalias_red_v1/examen_final_modelos_congelados.json`.
+  - El script se detiene si no coinciden.
+  - El V4 se verifica contra los SHA-256 de su `configuracion.json`.
+  - SHA-256 de L0:
+    - d100: `9a2ec7c9…`
+    - d50: `cfbdf84f…`
+    - d20: `f7f25190…`
+    - d10: `3e0ec801…`
+    - d5: `dec9ca56…`
+- **Detalles fijados al programarlo:**
+  - L0 por δ usa, para cada δ, su propio modelo; el L0 único usa el de δ = 50 % con todos los δ;
+  - los umbrales de L0, L0 único y R3 salen de las estación-días de 2023 limpio válidas para L0 y R3;
+    los del V4, de las suyas;
+  - el bootstrap de los dos años juntos usa bloques estación × mes de cada año y la semilla
+    `[42, 17, 0]`;
+  - las falsas alarmas por grupo se reportan para L0, L0 único y R3.
+  - la curva de recall y precisión con los umbrales de 2023 de 10 a 0.05 % (como la revisión 15), con
+    inicio a medianoche, para la gráfica G2.
+- **Prueba del código:**
+  - el modo `--prueba` corre todo con 2024, 1 calendario y δ = 100 %, en la lap, sin tocar 2025–2026;
+  - los SHA-256 coinciden;
+  - los umbrales igualan a los del examen 2024 (diferencia relativa 4.8e-8, por la inferencia en otra
+    máquina);
+  - el V4 reproduce sus predicciones de 2024 (1.4e-14 ppb).
+- **Dónde:** en Colab, en la misma sesión `rev16` (AMD EPYC 7B12), con `correr_revision17.sh`:
+  1. los planes y las matrices de 2025–2026;
+  2. las matrices de hora al azar, dos veces, la segunda sólo comprueba;
+  3. dos corridas del examen en paralelo, con `--tolerancia-v4 1e-4`, que deben salir idénticas.
+- **Salidas:** en `results/anomalias_red_v1/examen_final/`.

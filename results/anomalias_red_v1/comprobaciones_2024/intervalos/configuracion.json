@@ -1,0 +1,19 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 16,
+  "comprobacion": "intervalos",
+  "remuestreos": 2000,
+  "bloques": 372,
+  "bloque": "estación × mes, con los 10 calendarios juntos",
+  "semilla": [
+    42,
+    16,
+    1
+  ],
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "control_p99_igual_al_examen": true,
+  "origen_l0": "puntajes guardados del modelo definitivo (revisión 14)"
+}

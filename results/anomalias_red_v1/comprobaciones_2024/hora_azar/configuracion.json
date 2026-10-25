@@ -1,0 +1,17 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 16,
+  "comprobacion": "hora de inicio al azar",
+  "modelo_unico": 50,
+  "etiqueta": "atacada con 12 horas o más en un episodio; normal con ninguna; en medio se excluye",
+  "origen": {
+    "L0": "modelos definitivos cargados de disco (Colab, rev14); inferencia en la lap",
+    "V4": "cargado de disco, inferencia repetida",
+    "R3": "sin entrenamiento"
+  },
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "tolerancia_control_v4_ppb": 0.0001
+}

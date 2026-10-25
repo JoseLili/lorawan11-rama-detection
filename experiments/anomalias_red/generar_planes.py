@@ -10,7 +10,8 @@ revisión 6 y los 10 que agrega la revisión 7) y resumen_planes.csv. Cada plan 
 Si un plan ya existe y es distinto, se detiene en lugar de sobrescribirlo.
 
 Con --ampliados escribe sólo los calendarios entrenamiento_21…60 de la revisión 14 y su resumen en
-resumen_planes_revision14.csv; los planes y el resumen de siempre no cambian.
+resumen_planes_revision14.csv; los planes y el resumen de siempre no cambian. Con --final, sólo los
+calendarios del examen final (revisión 17), final_2025_01…10 y final_2026_01…10, y resumen_planes_final.csv.
 """
 from __future__ import annotations
 
@@ -71,29 +72,42 @@ def resumir(valores: pd.DataFrame, plan: pd.DataFrame, corrida: pd.Series) -> di
     return fila
 
 
-def corridas_de(ampliados: bool) -> pd.DataFrame:
-    """Las corridas de siempre, o con `ampliados` sólo entrenamiento_21…60 (revisión 14)."""
-    if ampliados:
+RESUMEN = {'siempre': 'resumen_planes.csv', 'ampliados': 'resumen_planes_revision14.csv', 'final': 'resumen_planes_final.csv'}
+
+
+def corridas_de(modo: str = 'siempre') -> pd.DataFrame:
+    """Las corridas de siempre; `ampliados`: sólo entrenamiento_21…60 (revisión 14); `final`: las del
+    examen final (revisión 17)."""
+    if modo == 'ampliados':
         return ar.calendarios_entrenamiento(n=ar.CALENDARIOS_AMPLIADOS).iloc[ar.CALENDARIOS_ENTRENAMIENTO:]
+    if modo == 'final':
+        return ar.corridas_finales()
     return pd.concat([ar.corridas(), ar.calendarios_entrenamiento()], ignore_index=True)
 
 
-def main():
+def modo_de_argumentos() -> str:
     ap = argparse.ArgumentParser()
-    ap.add_argument('--ampliados', action='store_true')
-    ampliados = ap.parse_args().ampliados
+    g = ap.add_mutually_exclusive_group()
+    g.add_argument('--ampliados', action='store_true')
+    g.add_argument('--final', action='store_true')
+    a = ap.parse_args()
+    return 'ampliados' if a.ampliados else 'final' if a.final else 'siempre'
+
+
+def main():
+    modo = modo_de_argumentos()
     ctx = em.contexto(RAIZ)
     valores = ctx['valores']
     alterables = alterables_v4()
     filas = []
-    for _, c in corridas_de(ampliados).iterrows():
+    for _, c in corridas_de(modo).iterrows():
         plan = ar.plan_de(c, alterables)
         pd.testing.assert_frame_equal(plan, ar.plan_de(c, alterables))     # reproducibilidad
         estado = guardar_sin_pisar(plan)
         filas.append(resumir(valores, plan, c))
         print(f'{c["corrida"]:>16}  p = {100 * c["p"]:.3f} %  episodios = {len(plan):3d}  ({estado})')
     resumen = pd.DataFrame(filas)
-    resumen.to_csv(SAL / ('resumen_planes_revision14.csv' if ampliados else 'resumen_planes.csv'), index=False)
+    resumen.to_csv(SAL / RESUMEN[modo], index=False)
     print(resumen.drop(columns=['inicio', 'fin']).to_string(index=False))
 
 

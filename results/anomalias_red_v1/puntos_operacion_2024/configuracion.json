@@ -1,0 +1,50 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 15,
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "curva_fa": [
+    0.1,
+    0.05,
+    0.02,
+    0.01,
+    0.005,
+    0.002,
+    0.001,
+    0.0005
+  ],
+  "agregacion": "promedio_dia",
+  "origen": {
+    "L0": "modelo definitivo de la revisión 14, puntajes guardados (recién entrenado en Colab, rev14)",
+    "R3": "sin entrenamiento",
+    "V4": "cargado de disco, inferencia repetida en la lap"
+  },
+  "controles_reproducen": {
+    "L0": true,
+    "R3": true,
+    "V4": true
+  },
+  "calendarios": [
+    "prueba_2024_01",
+    "prueba_2024_02",
+    "prueba_2024_03",
+    "prueba_2024_04",
+    "prueba_2024_05",
+    "prueba_2024_06",
+    "prueba_2024_07",
+    "prueba_2024_08",
+    "prueba_2024_09",
+    "prueba_2024_10"
+  ],
+  "deltas_pct": [
+    100,
+    50,
+    20,
+    10,
+    5
+  ],
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "fecha": "2026-10-25T12:14:22"
+}

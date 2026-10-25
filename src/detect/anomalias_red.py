@@ -31,8 +31,11 @@ CALENDARIOS_AMPLIADOS = 60        # revisión 14: agrega entrenamiento_21…60, 
 PERIODOS = {
     'entrenamiento': ('2020-01-01', '2022-12-31'),    # ajuste definitivo (§4)
     'prueba_2024': ('2024-01-01', '2024-12-31'),
+    'final_2025': ('2025-01-01', '2025-12-31'),       # examen final (revisión 17)
+    'final_2026': ('2026-01-01', '2026-07-31'),
 }
 USO_TASA, USO_ESTACION = 0, 1
+USO_HORA = 2                      # revisión 16: la hora de inicio al azar de la revisión 6
 COLUMNAS_PLAN = ['corrida', 'episodio', 'estacion', 'inicio', 'fin', 'dias_sorteados', 'dias', 'signo', 'p']
 
 
@@ -73,6 +76,21 @@ def calendarios_entrenamiento(semilla=SEMILLA, n=CALENDARIOS_ENTRENAMIENTO) -> p
         rng = np.random.default_rng(clave(semilla, ini, k, USO_TASA))
         filas.append(dict(corrida=f'entrenamiento_{k:02d}', inicio=ini, fin=fin, numero=k,
                           p=float(rng.uniform(*P_RANGO))))
+    return pd.DataFrame(filas)
+
+
+def corridas_finales(semilla=SEMILLA, n=CORRIDAS_PRUEBA) -> pd.DataFrame:
+    """Revisión 17: los calendarios del examen final, `final_2025_01…` y `final_2026_01…`.
+
+    Como los de 2024: p uniforme en `P_RANGO` con la clave del año, así que no chocan con ningún otro.
+    """
+    filas = []
+    for periodo in ('final_2025', 'final_2026'):
+        ini, fin = PERIODOS[periodo]
+        for k in range(1, n + 1):
+            rng = np.random.default_rng(clave(semilla, ini, k, USO_TASA))
+            filas.append(dict(corrida=f'{periodo}_{k:02d}', inicio=ini, fin=fin, numero=k,
+                              p=float(rng.uniform(*P_RANGO))))
     return pd.DataFrame(filas)
 
 
@@ -127,9 +145,12 @@ def plan_de(corrida: pd.Series | dict, alterables, semilla=SEMILLA) -> pd.DataFr
     return plan_episodios(c['inicio'], c['fin'], c['p'], alterables, c['corrida'], c['numero'], semilla)
 
 
-def validar_plan(plan: pd.DataFrame) -> None:
-    """Sin traslapes por estación, inicio a las 00 h, fin a las 23 h y signo ±1."""
-    if not plan['inicio'].dt.hour.eq(0).all() or not plan['fin'].dt.hour.eq(23).all():
+def validar_plan(plan: pd.DataFrame, dias_completos: bool = True) -> None:
+    """Sin traslapes por estación, inicio a las 00 h, fin a las 23 h y signo ±1.
+
+    Con `dias_completos=False` (episodios recorridos, revisión 16) no se exige el horario.
+    """
+    if dias_completos and (not plan['inicio'].dt.hour.eq(0).all() or not plan['fin'].dt.hour.eq(23).all()):
         raise ValueError('los episodios deben ser días completos (00 h a 23 h)')
     if not plan['signo'].isin([1, -1]).all():
         raise ValueError('signo distinto de ±1')
@@ -176,7 +197,30 @@ def factores(plan: pd.DataFrame, index, delta: float, columnas=m.ESTACIONES) -> 
     return f
 
 
-def aplicar(valores: pd.DataFrame, plan: pd.DataFrame, delta: float):
+def recorrer_plan(plan: pd.DataFrame, numero: int, inicio, fin, semilla=SEMILLA) -> pd.DataFrame:
+    """Revisión 16 (prueba secundaria de la revisión 6): el plan con cada episodio recorrido h horas.
+
+    Una h entre 0 y 23 por estación, la primera extracción de `default_rng([semilla, año de inicio,
+    numero, USO_HORA, índice de la estación])`, igual para todos sus episodios para que no se
+    traslapen. El episodio dura lo mismo en horas (24 × días) y se corta al final de `fin` (23 h).
+    """
+    h = {e: int(np.random.default_rng(clave(semilla, inicio, numero, USO_HORA, m.ESTACIONES.index(e))).integers(0, 24))
+         for e in plan['estacion'].unique()}
+    tope = pd.Timestamp(fin) + pd.Timedelta(hours=23)
+    p = plan.copy()
+    p['hora'] = p['estacion'].map(h).astype(int)
+    p['inicio'] = p['inicio'] + pd.to_timedelta(p['hora'], unit='h')
+    p['fin'] = (p['inicio'] + pd.to_timedelta(24 * p['dias'], unit='h') - pd.Timedelta(hours=1)).clip(upper=tope)
+    validar_plan(p, dias_completos=False)
+    return p
+
+
+def aplicar_horas(valores: pd.DataFrame, plan: pd.DataFrame, delta: float):
+    """Revisión 16: como `aplicar`, para episodios recorridos que no empiezan a las 00 h."""
+    return aplicar(valores, plan, delta, dias_completos=False)
+
+
+def aplicar(valores: pd.DataFrame, plan: pd.DataFrame, delta: float, dias_completos: bool = True):
     """Matriz recibida y lecturas cambiadas con el plan y un δ.
 
     La RAMA reporta ppb enteros: el valor alterado se redondea al entero más cercano
@@ -184,7 +228,7 @@ def aplicar(valores: pd.DataFrame, plan: pd.DataFrame, delta: float):
     un detector supervisado podría aprender esa huella en lugar de la anomalía.
     Las horas sin dato siguen sin dato. `cambiadas` = recibido ≠ original.
     """
-    validar_plan(plan)
+    validar_plan(plan, dias_completos)
     f = factores(plan, valores.index, delta, valores.columns)
     alterado = np.floor(valores * f + 0.5)
     recibidos = valores.where(f.eq(1.0), alterado)

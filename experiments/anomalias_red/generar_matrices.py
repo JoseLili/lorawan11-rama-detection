@@ -21,11 +21,12 @@ resumen de episodios y la misma matriz al generarla dos veces. Si un archivo ya 
 distinto, se detiene en lugar de sobrescribirlo.
 
 Con --ampliados (después de generar_planes.py --ampliados) escribe sólo las 200 matrices de
-entrenamiento_21…60 × 5 δ de la revisión 14 y su resumen en resumen_matrices_revision14.csv.
+entrenamiento_21…60 × 5 δ de la revisión 14 y su resumen en resumen_matrices_revision14.csv. Con
+--final (después de generar_planes.py --final), sólo las del examen final (revisión 17): limpia_2025,
+limpia_2026 y final_<año>_<k>_d<δ> (20 calendarios × 5 δ), con resumen_matrices_final.csv.
 """
 from __future__ import annotations
 
-import argparse
 import gzip
 import hashlib
 import sys
@@ -44,13 +45,19 @@ SAL = RAIZ / 'results/anomalias_red_v1'
 PLANES = SAL / 'planes'
 MATRICES = SAL / 'matrices'
 sys.path.insert(0, str(Path(__file__).parent))
-from generar_planes import alterables_v4, corridas_de  # noqa: E402
+from generar_planes import alterables_v4, corridas_de, modo_de_argumentos  # noqa: E402
 
 LIMPIAS = {
     'limpia_2020_2022': (('2020-01-01', '2022-12-31'), 'entrenamiento IsolationForest'),
     'limpia_2023': (('2023-01-01', '2023-12-31'), 'calibración del umbral'),
     'limpia_2024': (('2024-01-01', '2024-12-31'), 'falsas alarmas'),
 }
+LIMPIAS_FINAL = {
+    'limpia_2025': (('2025-01-01', '2025-12-31'), 'examen final: sin ataque e historia'),
+    'limpia_2026': (('2026-01-01', '2026-07-31'), 'examen final: sin ataque'),
+}
+RESUMEN = {'siempre': 'resumen_matrices.csv', 'ampliados': 'resumen_matrices_revision14.csv',
+           'final': 'resumen_matrices_final.csv'}
 
 
 def periodo(valores, ini, fin):
@@ -93,9 +100,7 @@ def comprobar_alterada(x: pd.DataFrame, limpia: pd.DataFrame, cam: pd.DataFrame,
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--ampliados', action='store_true')
-    ampliados = ap.parse_args().ampliados
+    modo = modo_de_argumentos()
     ctx = em.contexto(RAIZ)
     valores = ctx['valores']
     inactivos = ctx['definitiva']['inactivos']
@@ -106,13 +111,14 @@ def main():
     MATRICES.mkdir(parents=True, exist_ok=True)
 
     trabajos = []    # (nombre, uso, corrida, δ, inicio, fin, plan)
-    for nombre, ((ini, fin), uso) in ({} if ampliados else LIMPIAS).items():
+    for nombre, ((ini, fin), uso) in {'siempre': LIMPIAS, 'ampliados': {}, 'final': LIMPIAS_FINAL}[modo].items():
         trabajos.append((nombre, uso, '', np.nan, ini, fin, None))
-    for _, c in corridas_de(ampliados).iterrows():
+    for _, c in corridas_de(modo).iterrows():
         plan = ar.leer_plan(PLANES / f'plan_{c["corrida"]}.csv')
         pd.testing.assert_frame_equal(plan, ar.plan_de(c, alterables), check_dtype=False)
         uso = ('entrenamiento Random Forest' if c['corrida'] == 'entrenamiento'
-               else 'entrenamiento del LSTM local (revisión 14)' if ampliados
+               else 'entrenamiento del LSTM local (revisión 14)' if modo == 'ampliados'
+               else 'examen final (revisión 17)' if modo == 'final'
                else 'entrenamiento supervisado (revisión 6)' if c['corrida'].startswith('entrenamiento_')
                else 'examen')
         for d in ar.DELTAS:
@@ -146,8 +152,7 @@ def main():
             horas_anomalia_red_pct=round(100 * x['anomalia_red'].mean(), 1),
             sha256_csv=sha))
         print(f'{nombre:>26}  {len(x):6d} horas  anomalía de red {filas[-1]["horas_anomalia_red_pct"]:5.1f} %  ({estado})')
-    pd.DataFrame(filas).to_csv(SAL / ('resumen_matrices_revision14.csv' if ampliados else 'resumen_matrices.csv'),
-                               index=False)
+    pd.DataFrame(filas).to_csv(SAL / RESUMEN[modo], index=False)
 
 
 if __name__ == '__main__':

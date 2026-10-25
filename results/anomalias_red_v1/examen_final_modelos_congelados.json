@@ -1,0 +1,11 @@
+{
+  "L0": {
+    "L0_d100": "9a2ec7c95f051ea2dbb70d9f84a92c5032aa2f2ffe5732de96d7945356d4f477",
+    "L0_d50": "cfbdf84f17de4087a2836721dbcc606c849167edc9635446d46e36a182ca35fe",
+    "L0_d20": "f7f25190ac2244ac37d56946aab6a920fb5b7f16c0231bfcb79dd51e8a1df66f",
+    "L0_d10": "3e0ec801bca337684a4308e382869c9ef26b573c986b738bee51eb7cfd38a0d4",
+    "L0_d5": "dec9ca564057e7958d6c6aabb89a86a3e2c92798cb7b186c4d055f68db18cebd"
+  },
+  "nota": "Revisión 17: SHA-256 de los modelos definitivos de L0 (revisión 14, Colab rev14), registrados antes del examen final. El V4 se verifica con los SHA-256 de su configuracion.json.",
+  "modelo_unico": "L0_d50"
+}

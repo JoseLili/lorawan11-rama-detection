@@ -3973,6 +3973,219 @@ asesor):
 - P4 (bit flipping por los detectores de red);
 - el examen único de 2025–2026.
 
+**Exploración: ¿se puede subir la precisión?** (2026-10-25, a pedido del tesista; no decide nada)
+- **Qué se hizo:** precisión y recall de L0 y R3 con umbrales más estrictos que el 1 %, con 2022 y no
+  con 2024, para no ajustar nada mirando el examen.
+- **Script:** `exploracion_precision_umbral_2022.py`. Usa los puntajes guardados y no carga modelos.
+- **Con δ = 100 %:**
+  - L0 pasa de precisión 0.35 y recall 0.96 con 1 % a precisión 0.81 y recall 0.74 con 0.1 %
+    (F1 0.77);
+  - R3, con 0.1 %, da precisión 0.76 y recall 0.44.
+- **Con δ = 50 % y 0.1 %:** L0 da precisión 0.64 y recall 0.22.
+- **Lectura:**
+  - la precisión baja con 1 % viene de la proporción de días atacados (0.8 %), no de un defecto
+    del detector;
+  - cambiar el punto de operación sería una decisión nueva: habría que registrarla antes y
+    probarla en 2025–2026.
+
+### Revisión 15 registrada: dos puntos de operación, p99 y p99.9 (2026-10-25)
+
+**Lo que entendió el tesista:**
+- la precisión baja viene de la rareza de los ataques;
+- un umbral más estricto (p99.9) pierde recall y gana precisión.
+
+**Precisiones de Claude:**
+- con p99.9 el detector es el mismo, sólo cambia el umbral;
+- no siempre conviene: con δ = 50 % el recall cae mucho;
+- el p99.9 se estima con ~10 días de 2023, así que es inestable.
+
+**El orden acordado** (paso 1 aprobado: «Sí, haz paso 1»):
+1. la revisión 15: p99 y p99.9 y la curva en 2024, sólo descriptivos;
+2. las comprobaciones pendientes: intervalos, hora de inicio al azar, el modelo de un δ con los demás;
+3. revisarlo con el asesor, incluido P4;
+4. el protocolo del examen final, congelado;
+5. el examen final 2025–2026, una sola vez;
+6. redactar.
+
+**Registro:** la revisión 15 quedó en el protocolo, con 5 predicciones, antes de calcular p99.9 en
+2024.
+
+### Revisión 15: resultado (2026-10-25)
+
+**Cómo se corrió:**
+- `puntos_operacion_2024.py`, en la lap, dos veces, con salidas idénticas;
+- con 1 y 5 %, L0 y R3 reproducen el examen de la revisión 14, y el V4 la revisión 11;
+- no se entrenó nada: L0 son los puntajes de su modelo definitivo, el V4 se cargó de disco y R3 es
+  aritmética.
+
+**Con δ = 100 %:**
+
+| Punto | Detector | Recall | Precisión | F1 | Falsas alarmas en la red, por año |
+|---|---|---:|---:|---:|---:|
+| p99 | L0 | 0.944 | 0.276 | 0.427 | ~174 |
+| p99 | R3 | 0.826 | 0.286 | 0.425 | ~144 |
+| p99.9 | **L0** | **0.792** | 0.689 | **0.737** | ~25 |
+| p99.9 | R3 | 0.559 | **0.802** | 0.659 | ~10 |
+| p99.9 | V4 | 0.437 | 0.304 | 0.359 | ~71 |
+
+**Con δ = 50 % y p99.9:**
+- L0: recall 0.41, precisión 0.75, F1 0.531;
+- R3: recall 0.22, precisión 0.77, F1 0.339.
+
+**Con δ ≤ 20 % y p99.9,** casi nada se detecta.
+
+**Predicciones de Claude:** se cumplieron 3 de 5.
+- Falló la 1: el p99.9 de 2023 dio menos falsas alarmas de lo esperado en 2024 limpio, en R3 y en
+  L0 con 50 y 20 %.
+- Falló la 4: con 50 %, el recall de L0 fue de 0.41, no menor de 0.35.
+
+**Lectura de Claude:**
+- con el umbral estricto, la ventaja de L0 se agranda;
+- con la misma precisión, L0 encuentra bastante más;
+- es descriptivo: la prueba es el examen final.
+
+### Revisión 16 registrada: las tres comprobaciones (2026-10-25)
+
+**Explicación al tesista, antes de aprobarla:**
+- **los intervalos** responden «¿la diferencia es real o suerte del sorteo?»;
+- **la hora al azar** responde «¿L0 detecta ataques o el inicio a medianoche del simulador?». Se
+  registró en la revisión 6 y nunca se corrió;
+- **el modelo único** responde «¿sirve si no se sabe el tamaño del ataque?».
+
+**Aprobación:** «Ya entendí, sí, hazlos, tanto para el p99 y p99.9».
+
+**Registro:** quedó en el protocolo, con sus reglas y 9 predicciones, antes de correr nada. Sólo
+(2a) elige algo: el modelo único para el examen final, con 2022.
+
+**Cómo se está corriendo:**
+- **(1) Intervalos:** en la lap, dos veces, idénticos. El control reproduce el examen de la
+  revisión 14.
+- **(2) y (3): pasaron a Colab a pedido del tesista,** para no tener la lap al 100 %.
+  - Es la sesión `rev16`, con un AMD EPYC 7B12, lanzada a las 19:13 UTC con `correr_revision16.sh`.
+  - La primera corrida de (2) en la lap se detuvo a la mitad. Ya había hecho la elección con 2022
+    (modelo único: δ = 50 %, F1 medio 0.359 contra 0.346 del de 100 %) y su control de la
+    diagonal salió bien.
+  - Colab repite todo desde cero, dos veces.
+  - **(2) en Colab:** dos corridas idénticas. El control de la diagonal reproduce la elección de la
+    revisión 14 y su examen 2024 (diferencia máxima de puntajes 1.1e-16).
+  - **(3) falló la primera vez en Colab:** los residuos guardados del V4 (`calibracion_2023` y
+    `predicciones_202x`) están en `.gitignore` y no estaban en el clon.
+    - Se subieron aparte (`v4_residuos.tgz`), y (3) se relanzó a las 21:23 UTC con `todo_b.sh`,
+      anexado a `correr_revision16.sh`.
+    - Las 50 matrices de hora al azar ya se habían generado; las dos corridas nuevas comprueban que
+      salen iguales.
+  - **(3) se detuvo otra vez, en el control del V4.** Su inferencia de 2024 limpio en el AMD de
+    Colab difiere de las predicciones guardadas en hasta 7.6e-6 ppb, y la tolerancia del control
+    era 1e-9 ppb.
+    - Es la precisión float32 de otra CPU, seis órdenes de magnitud por debajo de los residuos
+      (~10 ppb). En la lap el control da 1.4e-14.
+    - Se agregó a `hora_azar_2024.py` la opción `--tolerancia-v4`; por omisión sigue en 1e-9. Se
+      corrió con 1e-4 ppb a las 21:28 UTC (`todo_c.sh`), y la tolerancia queda en su
+      `configuracion.json`.
+    - **Aplica también al examen final** si el V4 corre en Colab.
+
+### Paso 4 en curso: el protocolo del examen final (2026-10-25)
+
+**Decisión del tesista:** correr los pasos 4 y 5 hoy, domingo, antes de la revisión con el asesor
+del lunes, para llegar con resultados fijos.
+- P4 no aplica: la parte 2 es otra pregunta.
+- Se quedan los dos umbrales, p99 y p99.9.
+- Entra la hora al azar como prueba secundaria.
+
+**El modelo único:** el tesista prefiere el de δ = 50 %. El de 100 % estaría «ciego» con ataques
+menores, y la meta es mejorar con δ = 20 %.
+- **Se verificó en el protocolo:** la revisión 8 dice que δ = 20 % «es la zona donde se busca
+  mejorar», y el §1 busca empujar el límite de detección de lo evidente a lo sutil.
+- **La regla de la revisión 16, con 2022, ya eligió el de 50 %:** F1 medio de 0.359 contra 0.346
+  del de 100 %, en la corrida detenida en la lap. Colab la repite.
+- **Matiz de Claude:**
+  - lo de «ciego» no está demostrado: en la revisión 8, el modelo de 100 % generalizaba hacia abajo
+    mejor que los específicos;
+  - la diferencia en 2022 es chica;
+  - lo que importa es que lo decidió la regla con 2022 y no cambia con lo que salga en 2024.
+
+**Revisión 16, resultado de (3) hora al azar** (Colab, dos corridas idénticas; 2024, p99):
+- L0: 0.427 → 0.433, 0.388 → 0.396 y 0.158 → 0.162 con δ = 100, 50 y 20 %;
+- R3: 0.425 → 0.419, 0.347 → 0.329 y 0.109 → 0.099;
+- **L0 no aprendió el salto de medianoche.** Las predicciones de la revisión 16 se cumplieron 6 de
+  9; el detalle está en el protocolo.
+- Los resultados se descargaron con el SHA-256 verificado (`27d63213…`); los registros están en
+  `logs_revision16/`.
+
+**Revisión 17:** aprobada por el tesista el 2026-10-25 («Sí, apruebo»), con sus 9 predicciones
+registradas antes de generar nada de 2025–2026. Se lanza en Colab al terminar la hora al azar.
+
+**Material para la junta del 2026-10-26:**
+- el documento de notas, https://claude.ai/artifact/S7pPvKFDauKTC212ZCv9Td, lleno con lo
+  verificado;
+- la presentación, https://claude.ai/artifact/NyW3oYBXCGyHjmqJjhgMmT, con 18 diapositivas;
+- quedan pendientes las tablas y gráficas del examen final.
+
+**Pregunta del tesista: ¿cuánto mueve un ataque de δ = 20 %?** (descriptivo; con las matrices de
+2024 y 2024 limpio, sin detectores)
+- **Por lectura:**
+  - con signo +, ×1.2: +6.6 ppb en promedio, con mediana de +5;
+  - con signo −, ÷1.2: −5.7 ppb, con mediana de −5;
+  - el nivel medio de las lecturas alteradas es de ~34 ppb;
+  - el 10.8 % de las lecturas no cambia por el redondeo a ppb enteros.
+- **Por hora:** de 2–3 ppb de noche a ~13 ppb a las 13–14 h.
+- **Por estación-día atacada:** el promedio del día se mueve +6.6 ppb (p10–p90: 3.2 a 10.7) o
+  −5.7 ppb (−9.1 a −2.8).
+- **Variabilidad natural** en 2024 limpio, con el promedio del día menos la mediana de los 14 días
+  anteriores:
+  - sola, 5.5 ppb de mediana y 14.5 en el p90;
+  - menos la de sus 4 vecinas, 2.5 ppb de mediana y 7.9 en el p90.
+- **Lectura:**
+  - un ataque de 20 % mueve el día lo mismo que un día normal raro;
+  - comparar con las vecinas reduce el ruido a la mitad, y por eso se detecta algo;
+  - es lo que plantea la hipótesis del §1.
+
+**Comparación con la parte 1: ¿se empujó el límite?** (2026-10-25, a pedido del tesista;
+descriptiva)
+- **Script:** `comparacion_parte1_2024.py`.
+- **Qué se compara:** el recall con la misma tasa nominal de falsas alarmas (p95 de 2023), en 2024,
+  ordenado por el tamaño del cambio en ppb. Se usó recall y no F1, porque la proporción de ataques
+  es distinta: 5 % de lecturas contra 0.8 % de estación-días.
+- **Parte 1:** el V4 por lectura, grupo principal, con 7.0 % de falsas alarmas en 2024.
+  - bit 3 (8 ppb): 10.1 %;
+  - bit 4 (16 ppb): 20.9 %;
+  - bit 5 (32 ppb): 78.7 %;
+  - bit 6 (64 ppb): 99.5 %;
+  - la frontera está entre los bits 4 y 5, como ya se había anotado.
+- **Parte 2,** por estación-día, recall de L0 / R3 / V4:
+  - δ = 10 % (~3.2 ppb): 20.4 / 17.1 / 12.7 %;
+  - δ = 20 % (~6.2 ppb): 53.9 / 37.7 / 18.0 %;
+  - δ = 50 % (~14.3 ppb): 92.7 / 75.5 / 44.8 %;
+  - δ = 100 % (~25.5 ppb): 97.4 / 89.3 / 69.9 %;
+  - las falsas alarmas reales son de ~6–7 % para L0 y R3, y de ~10 % para el V4.
+- **Lectura:**
+  - el ~50 % de recall pasa de entre 16 y 32 ppb (parte 1) a ~6 ppb (L0);
+  - L0 con δ = 10 % (~3 ppb) supera al azar lo mismo que el V4 con el bit 4 (16 ppb): +14 puntos;
+  - el mismo V4 juntado por día ya mejora, y las vecinas con el LSTM local agregan el resto.
+- **No es controlada:** cambian la unidad, la duración, la forma y la información.
+
+**Exploración: ¿dónde detecta L0 y dónde no?** (2026-10-25, a pedido del tesista; 2024, p99;
+`exploracion_sesgos_2024.py`)
+
+Recall de L0 / R3:
+
+| | δ = 100 % | δ = 50 % | δ = 20 % |
+|---|---|---|---|
+| Signo + (sube) | 98.7 / 95.1 | 86.0 / 74.4 | 24.8 / 20.5 |
+| Signo − (baja) | 89.7 / 68.5 | 73.0 / 44.5 | 13.0 / 10.0 |
+| Episodio de 1 día | 93.1 / 82.8 | **65.5 / 72.4** | **13.8 / 24.1** |
+| 2–3 días | 97.4 / 86.0 | 80.7 / 62.3 | 18.4 / 16.7 |
+| 4–7 días | 93.9 / 81.9 | 80.5 / 59.3 | 19.7 / 14.9 |
+
+- **La ventaja de L0 está en los episodios de varios días.** Con episodios de un solo día, R3 es
+  mejor con δ = 50 y 20 %.
+  - Parece que L0 aprovecha la persistencia que aprendió del simulador: episodios de 1 a 7 días,
+    y su ventana de 24 horas.
+- **Bajar la lectura se detecta peor que subirla,** y ahí es donde L0 más le gana a R3 (73 contra
+  44 % con 50 %). Según Turiel y Kaufmann, bajar es la manipulación realista.
+- **Por estación,** con δ = 50 %, el recall de L0 va de 43 % (LPR) a 100 %, con mediana de 85 %.
+  Baja un poco con la distancia a las vecinas: Spearman de −0.15 a −0.37.
+
 **Sin commit todavía.**
 
 ---

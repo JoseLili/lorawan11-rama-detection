@@ -50,6 +50,20 @@ def etiquetas_por_hora(matriz: pd.DataFrame, estaciones) -> pd.DataFrame:
     return pd.DataFrame({s: alteradas.map(lambda e, s=s: s in e) for s in estaciones}, index=matriz.index)
 
 
+def etiquetas_recorridas(plan: pd.DataFrame, index: pd.DatetimeIndex, estaciones,
+                         min_horas: int = MIN_HORAS) -> pd.DataFrame:
+    """Revisión 16: día × estación con episodios que no empiezan a las 00 h.
+
+    1.0 si `min_horas` o más horas del día caen en un episodio, 0.0 si ninguna y NaN (se excluye) en
+    medio.
+    """
+    from src.detect.anomalias_red import en_episodio
+    _dias_completos(index)
+    horas = en_episodio(plan, index, estaciones).groupby(index.normalize()).sum()
+    return pd.DataFrame(np.where(horas >= min_horas, 1.0, np.where(horas == 0, 0.0, np.nan)),
+                        index=horas.index, columns=list(estaciones))
+
+
 def dominancia(puntaje: pd.DataFrame, vecinas: dict) -> pd.DataFrame:
     """Revisión 12: el puntaje de una estación-día pasa a 0 si una vecina evaluada tiene uno mayor ese día.
 
