@@ -1,0 +1,81 @@
+anio,version,delta_pct,detector,atacadas,normales,excluidas
+2025,medianoche,100,L0,634,85696,0
+2025,medianoche,100,L0_unico,634,85696,0
+2025,medianoche,100,R3,634,85696,0
+2025,medianoche,100,V4,651,87569,0
+2025,hora al azar,100,L0,646,85535,149
+2025,hora al azar,100,L0_unico,646,85535,149
+2025,hora al azar,100,R3,646,85535,149
+2025,hora al azar,100,V4,662,87405,153
+2025,medianoche,50,L0,634,85696,0
+2025,medianoche,50,L0_unico,634,85696,0
+2025,medianoche,50,R3,634,85696,0
+2025,medianoche,50,V4,651,87569,0
+2025,hora al azar,50,L0,646,85535,149
+2025,hora al azar,50,L0_unico,646,85535,149
+2025,hora al azar,50,R3,646,85535,149
+2025,hora al azar,50,V4,662,87405,153
+2025,medianoche,20,L0,634,85696,0
+2025,medianoche,20,L0_unico,634,85696,0
+2025,medianoche,20,R3,634,85696,0
+2025,medianoche,20,V4,651,87569,0
+2025,hora al azar,20,L0,646,85535,149
+2025,hora al azar,20,L0_unico,646,85535,149
+2025,hora al azar,20,R3,646,85535,149
+2025,hora al azar,20,V4,662,87405,153
+2025,medianoche,10,L0,634,85696,0
+2025,medianoche,10,L0_unico,634,85696,0
+2025,medianoche,10,R3,634,85696,0
+2025,medianoche,10,V4,651,87569,0
+2025,hora al azar,10,L0,646,85535,149
+2025,hora al azar,10,L0_unico,646,85535,149
+2025,hora al azar,10,R3,646,85535,149
+2025,hora al azar,10,V4,662,87405,153
+2025,medianoche,5,L0,634,85696,0
+2025,medianoche,5,L0_unico,634,85696,0
+2025,medianoche,5,R3,634,85696,0
+2025,medianoche,5,V4,651,87569,0
+2025,hora al azar,5,L0,646,85535,149
+2025,hora al azar,5,L0_unico,646,85535,149
+2025,hora al azar,5,R3,646,85535,149
+2025,hora al azar,5,V4,662,87405,153
+2026,medianoche,100,L0,406,48174,0
+2026,medianoche,100,L0_unico,406,48174,0
+2026,medianoche,100,R3,406,48174,0
+2026,medianoche,100,V4,416,49904,0
+2026,hora al azar,100,L0,417,48078,85
+2026,hora al azar,100,L0_unico,417,48078,85
+2026,hora al azar,100,R3,417,48078,85
+2026,hora al azar,100,V4,427,49804,89
+2026,medianoche,50,L0,406,48174,0
+2026,medianoche,50,L0_unico,406,48174,0
+2026,medianoche,50,R3,406,48174,0
+2026,medianoche,50,V4,416,49904,0
+2026,hora al azar,50,L0,417,48078,85
+2026,hora al azar,50,L0_unico,417,48078,85
+2026,hora al azar,50,R3,417,48078,85
+2026,hora al azar,50,V4,427,49804,89
+2026,medianoche,20,L0,406,48174,0
+2026,medianoche,20,L0_unico,406,48174,0
+2026,medianoche,20,R3,406,48174,0
+2026,medianoche,20,V4,416,49904,0
+2026,hora al azar,20,L0,417,48078,85
+2026,hora al azar,20,L0_unico,417,48078,85
+2026,hora al azar,20,R3,417,48078,85
+2026,hora al azar,20,V4,427,49804,89
+2026,medianoche,10,L0,406,48174,0
+2026,medianoche,10,L0_unico,406,48174,0
+2026,medianoche,10,R3,406,48174,0
+2026,medianoche,10,V4,416,49904,0
+2026,hora al azar,10,L0,417,48078,85
+2026,hora al azar,10,L0_unico,417,48078,85
+2026,hora al azar,10,R3,417,48078,85
+2026,hora al azar,10,V4,427,49804,89
+2026,medianoche,5,L0,406,48174,0
+2026,medianoche,5,L0_unico,406,48174,0
+2026,medianoche,5,R3,406,48174,0
+2026,medianoche,5,V4,416,49904,0
+2026,hora al azar,5,L0,417,48078,85
+2026,hora al azar,5,L0_unico,417,48078,85
+2026,hora al azar,5,R3,417,48078,85
+2026,hora al azar,5,V4,427,49804,89

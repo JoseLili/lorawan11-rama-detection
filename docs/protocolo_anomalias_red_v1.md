@@ -2024,3 +2024,57 @@ correr nada. Corrida el 2026-10-25; resultado al final de esta sección.
   2. las matrices de hora al azar, dos veces, la segunda sólo comprueba;
   3. dos corridas del examen en paralelo, con `--tolerancia-v4 1e-4`, que deben salir idénticas.
 - **Salidas:** en `results/anomalias_red_v1/examen_final/`.
+
+**Resultado del examen final (2026-10-25).**
+- **Cómo se corrió:**
+  - en Colab, sesión `rev16` (AMD EPYC 7B12), de 22:17 a 23:57 UTC, con `correr_revision17.sh`;
+  - las dos corridas salieron idénticas en los seis archivos de resultados;
+  - las 100 matrices de hora al azar se generaron dos veces, iguales;
+  - los SHA-256 de los 5 modelos L0 coinciden con los registrados;
+  - los umbrales son los del examen 2024 (diferencia relativa 4.2e-15);
+  - el V4 reproduce sus predicciones de 2025 y 2026 a 7.6e-6 ppb, dentro de la tolerancia de 1e-4;
+  - los resultados se descargaron con el SHA-256 verificado (`623a3487…`);
+  - no se entrenó nada.
+- **F1 por estación-día, L0 / R3 / V4** (L0 y R3 en las estación-días comunes; el V4 en las suyas):
+
+  | Año | Umbral | δ = 100 % | δ = 50 % | δ = 20 % | δ = 10 % | δ = 5 % |
+  |---|---|---|---|---|---|---|
+  | 2025 | p99 | 0.457 / 0.475 / 0.177 | **0.445** / 0.391 / 0.106 | **0.249** / 0.120 / 0.032 | 0.070 / 0.026 / 0.016 | 0.011 / 0.014 / 0.011 |
+  | 2025 | p99.9 | **0.756** / 0.632 / 0.329 | **0.573** / 0.364 / 0.153 | **0.087** / 0.019 / 0.024 | 0.009 / 0.000 / 0.008 | 0.005 / 0.000 / 0.007 |
+  | 2026 | p99 | 0.540 / 0.476 / 0.315 | **0.502** / 0.390 / 0.199 | **0.242** / 0.092 / 0.062 | 0.045 / 0.020 / 0.031 | 0.014 / 0.010 / 0.019 |
+  | 2026 | p99.9 | **0.821** / 0.647 / 0.471 | **0.561** / 0.300 / 0.264 | **0.054** / 0.005 / 0.035 | 0.005 / 0.000 / 0.016 | 0.000 / 0.000 / 0.008 |
+
+  - Sin ataque, el F1 queda entre 0.000 y 0.016.
+  - En negritas, donde el intervalo del 95 % de L0 − R3 excluye el 0 con los dos años juntos.
+- **Intervalos de L0 − R3, con los dos años juntos:**
+  - **p99:** +0.012 (−0.037 a +0.061) con 100 %, un empate; **+0.075 (+0.027 a +0.129)** con 50 %;
+    **+0.138 (+0.096 a +0.181)** con 20 %;
+  - **p99.9:** **+0.143 (+0.086 a +0.201)** con 100 %; **+0.228 (+0.176 a +0.279)** con 50 %;
+    **+0.060 (+0.034 a +0.089)** con 20 %;
+  - por año, con p99 y 50 %: +0.054 (−0.008 a +0.118) en 2025 y +0.112 (+0.035 a +0.195) en 2026.
+- **L0 único** (δ = 50 %, para cualquier tamaño):
+  - con p99, F1 de 0.404, 0.445 y 0.176 en 2025 con δ = 100, 50 y 20 %;
+  - contra R3 con los dos años juntos: −0.054 (−0.098 a −0.009) con 100 %, +0.075 con 50 % y
+    **+0.086 (+0.052 a +0.123)** con 20 %;
+  - es decir, pierde un poco con los ataques grandes y gana con los medianos.
+- **Recall y precisión con p99, 2025** (L0 / R3 / V4):
+  - con 100 %, recall 0.94 / 0.84 / 0.57 y precisión 0.30 / 0.33 / 0.10;
+  - con 50 %, 0.82 / 0.60 / 0.31 y 0.30 / 0.29 / 0.06;
+  - con 20 %, 0.29 / 0.15 / 0.09 y 0.22 / 0.10 / 0.02.
+- **Falsas alarmas reales en el año limpio** (L0 / R3 / V4):
+  - 2025: 1.04 / 0.95 / 3.36 % con p99 y 0.16 / 0.09 / 0.87 % con p99.9;
+  - 2026: 0.87 / 1.18 / 1.48 % con p99 y 0.10 / 0.04 / 0.18 % con p99.9.
+- **Hora de inicio al azar** (F1 con p99, medianoche → hora al azar, 2025):
+  - L0: 0.457 → 0.475, 0.445 → 0.459 y 0.249 → 0.254;
+  - R3: 0.475 → 0.463, 0.391 → 0.381 y 0.120 → 0.112;
+  - en 2026, igual: L0 cambia de −0.025 a +0.017.
+- **Predicciones:** se cumplieron las 9.
+- **Lectura:**
+  - en los dos años nuevos, L0 le gana a R3 con δ = 50 y 20 % con los dos umbrales, y con 100 %
+    con p99.9;
+  - con 100 % y p99 empatan;
+  - con 20 % la ventaja es más clara que en 2024 (0.249 contra 0.120 en 2025);
+  - con 10 y 5 % ninguno sirve;
+  - el V4 queda último, y su umbral de 2023 se desvía a 3.4 % en 2025.
+- **Detalle:** en `results/anomalias_red_v1/examen_final/`, `logs_revision17/` y `progreso.md`
+  (2026-10-25).

@@ -1,0 +1,41 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 17,
+  "anios": [
+    2025,
+    2026
+  ],
+  "prueba": false,
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "modelo_unico": "L0_d50",
+  "origen": {
+    "L0": "modelos definitivos de la revisión 14 cargados de disco",
+    "V4": "cargado de disco",
+    "R3": "sin entrenamiento"
+  },
+  "sha256_modelos_l0": {
+    "L0_d100": "9a2ec7c95f051ea2dbb70d9f84a92c5032aa2f2ffe5732de96d7945356d4f477",
+    "L0_d50": "cfbdf84f17de4087a2836721dbcc606c849167edc9635446d46e36a182ca35fe",
+    "L0_d20": "f7f25190ac2244ac37d56946aab6a920fb5b7f16c0231bfcb79dd51e8a1df66f",
+    "L0_d10": "3e0ec801bca337684a4308e382869c9ef26b573c986b738bee51eb7cfd38a0d4",
+    "L0_d5": "dec9ca564057e7958d6c6aabb89a86a3e2c92798cb7b186c4d055f68db18cebd"
+  },
+  "sha256_coinciden": {
+    "L0_d100": true,
+    "L0_d50": true,
+    "L0_d20": true,
+    "L0_d10": true,
+    "L0_d5": true
+  },
+  "umbrales_diferencia_relativa_max_frente_a_2024": 4.2396395376093386e-15,
+  "v4_diferencia_max_ppb_frente_a_guardadas": {
+    "2025": 7.62939453125e-06,
+    "2026": 7.62939453125e-06
+  },
+  "tolerancia_control_v4_ppb": 0.0001,
+  "remuestreos": 2000,
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f"
+}

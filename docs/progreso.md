@@ -4115,6 +4115,17 @@ menores, y la meta es mejorar con δ = 20 %.
 **Revisión 17:** aprobada por el tesista el 2026-10-25 («Sí, apruebo»), con sus 9 predicciones
 registradas antes de generar nada de 2025–2026. Se lanza en Colab al terminar la hora al azar.
 
+**Examen final (revisión 17): resultado** (Colab, 22:17–23:57 UTC; dos corridas idénticas; todos los
+controles pasan; 9 de 9 predicciones). F1 con p99, L0 / R3:
+- **2025:** 0.457 / 0.475 con 100 %, **0.445 / 0.391** con 50 %, **0.249 / 0.120** con 20 %;
+- **2026:** 0.540 / 0.476, **0.502 / 0.390**, **0.242 / 0.092**;
+- **con p99.9 y 2025:** 0.756 / 0.632, 0.573 / 0.364 y 0.087 / 0.019;
+- **intervalos con los dos años juntos:** L0 gana con 50 y 20 % (p99) y con 100, 50 y 20 % (p99.9);
+  con 100 % y p99, empate;
+- **el L0 único** pierde un poco con 100 % (−0.054) y gana con 50 y 20 %;
+- **la hora al azar** no mueve a L0;
+- **el detalle** está en el protocolo (revisión 17) y en `results/anomalias_red_v1/examen_final/`.
+
 **Material para la junta del 2026-10-26:**
 - el documento de notas, https://claude.ai/artifact/S7pPvKFDauKTC212ZCv9Td, lleno con lo
   verificado;
