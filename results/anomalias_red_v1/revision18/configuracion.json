@@ -1,0 +1,75 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": "18 y 18b",
+  "anios": [
+    2024,
+    2025,
+    2026
+  ],
+  "prueba": false,
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "detectores": [
+    "L0_unico",
+    "V4S_compartido",
+    "V4S_estacion",
+    "R3",
+    "V4"
+  ],
+  "principal": [
+    "L0_unico",
+    "V4S_compartido"
+  ],
+  "contraste": [
+    "L0_unico",
+    "V4S_estacion"
+  ],
+  "origen": {
+    "L0_unico": "modelo definitivo de δ = 50 % de la revisión 14, cargado de disco",
+    "V4S_compartido": "modelo definitivo de la revisión 18b, cargado de disco",
+    "V4S_estacion": "modelos definitivos de la revisión 18, cargados de disco",
+    "V4": "cargado de disco",
+    "R3": "sin entrenamiento"
+  },
+  "sha256_l0_unico": "cfbdf84f17de4087a2836721dbcc606c849167edc9635446d46e36a182ca35fe",
+  "sha256_v4s_compartido": "45fed923621a3f89077800980198145060d97ec12e88073cc5ce16ee738065dd",
+  "sha256_v4s_estacion": {
+    "ACO": "ce5a3288be68b41fca4797411c962b794b3571100b9b1d9223dc0825232936f3",
+    "AJM": "4eb6f100d7a36d9349b689b3524ed25a12a250a83d2423552d8aba62a15cca31",
+    "AJU": "7e56f89b0529a94a13996a5d61ff232687901825b680d11438a90a65b83b1473",
+    "ATI": "004471f4edd39d6c05ee942aeb9ba10360cf3c1bdf682bf93401177d249ad381",
+    "BJU": "4dff9f8f6a2edad7badd6822c50edf85fa40904c6a26d94a45a1249d6be85daf",
+    "CAM": "11d8dea0e04f445730773906a74ace9ce3e3439e764e1ffa8637597e8db686ba",
+    "CCA": "86c4bc6b956f154d71745a721c7c077296556f42c01b9323db0b5a4a1a85f6af",
+    "CHO": "e5c4e8493f46e3354e3f550593ea4aaee06aa79fff7eee602a01225bffbf1d8d",
+    "CUA": "f22dbcd8a20793338b6ee6111836ffeb693bfb6837fa8c42cfdd72d454860395",
+    "CUT": "a779061bdc813a8014483eab5bb87e2d4e1018c995820dad242a8dcc58e68752",
+    "FAC": "3aa30b000f6036ef93de711d1c7ae8d5bac14f4fe0eef9b561adf65b49945ae0",
+    "FAR": "0305c6abe16b80af2bdbccc831e56fca439b0cd99e112f2589e79fa34f73a854",
+    "GAM": "6cb5b850eb324e94265fd338f05d5b8fb3b59c9c232c8839a13d3654043736a0",
+    "INN": "d98369717e5d91da2f6bf96a173274b2e4c648530276bb46f9bd3f8bde030985",
+    "IZT": "6144968cf37d355b2992468332719343aa17cc6701ac32e443825acf9d80031d",
+    "LLA": "b4fbf880d8550c476d2e634c37ddcf3411a3199d58fdaaaec2369c1c2959246a",
+    "LPR": "534941f487949c68e05571b0c8b88745fdb4c501f39fc664ff84ce87098679e6",
+    "MER": "43d1ab924acf2618318edde37816916888592db4bbeef10e11b868b82dd67d02",
+    "MGH": "199b9ee5fc6bf694d7be4899acc8be80c01702133d7e3a95f190d6db883bf253",
+    "MON": "7f5e277ce8d24768d892715aaf17dcfd1a331f23472efbdecb805bb8664bd97a",
+    "MPA": "fd4f463be00a737744597abcfe5c67d21cde7229bea1653c49b653faaee35f3b",
+    "NEZ": "6bd244c52f8e204cf1053e230c0823ee65979ae4dc826755fd34d9197cf9271d",
+    "PED": "19b31220ccc5f73bed1caa4005a591b7e3b0000cff1a288ac3cd8f82b1850393",
+    "SAC": "48a559d1f0e52275277f7476f025917b60592f0d62c269364c9e264fcd2fe6b1",
+    "SAG": "29f8746f9da073ffc8257aa590566378b69080960ffcd238d62d90b76deebd3b",
+    "TAH": "4fd244eb25fa43e80b764c000847c402bdace791d6c7b886f554d6729f789477",
+    "TLA": "ae23175cd63e2f5067537a1fb0cb867433e0a14b074bef1848e383a9826e727e",
+    "TLI": "01311f3f4975695a15a34ac87c9f7f31f25fa9f9646a4d0614f9849ad31e2392",
+    "UAX": "a44b8f60e758e247d21941863d87f48818de6dde481b37075385d7c347ead154",
+    "UIZ": "535fbeb9d1c21eaafd0f899e293820e0a9cf3f683919ac9608bbb49dc015bc07",
+    "VIF": "c422d8090588c5c430a4acbc72abccdff1c3b942f9b1e8664eca5a86eda661e6"
+  },
+  "remuestreos": 2000,
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "control_revision17_igual": true,
+  "tolerancia_control_v4_ppb": 1e-09
+}

@@ -4199,6 +4199,235 @@ Recall de L0 / R3:
 
 **Sin commit todavía.**
 
+## 2026-10-26 — Junta con el asesor: comparaciones justas («peras con peras»)
+
+**Fuente:** una transcripción automática con mucho ruido (los primeros minutos son otra plática) y
+lo que el tesista aclaró después. Lo marcado como «interpretación» se confirmó con el tesista el
+2026-10-27.
+
+### Lo que el asesor aceptó
+
+- **Las dos tablas del examen final (p99 y p99.9) se quedan como están:** «ya son resultados
+  correctos», con los mismos calendarios para todos.
+- **Se quedan los dos umbrales.** La elección depende del usuario: si puede verificar las falsas
+  alarmas, p99; si no, p99.9.
+- **«No está truqueado»** y «no están tan malos los resultados». Lo más importante es seguir
+  avanzando.
+
+### Lo que pidió
+
+| # | Pedido | Estado |
+|---|---|---|
+| A1 | Mostrar siempre las diapositivas desde el inicio de la junta | Regla para las próximas juntas |
+| A2 | Renombrar L0 como «LSTM + reglas»: usa los cálculos de la regla como datos | Paso 2 |
+| A3 | Quitar la comparación contra el bit flipping por ppb: lectura contra día, instante contra ataque sostenido, y la media esconde la forma (+100 % convierte 50 en 100, pero 2 en 4) | Paso 2; la sustituye la gráfica de la revisión 18 |
+| A4 | Comparar supervisado contra supervisado: L0 contra un V4 con etiquetas | Revisiones 18 y 18b (paso 1) |
+| A5 | Escalón de complejidad: primero una sola estación atacada a la vez; muchas estaciones a la vez, al final | Paso 3 |
+| A6 | Error fijo en ppb (±10, ±20) en lugar de porcentual: «un sensor se equivoca por una cantidad» | Paso 5, después de lo demás |
+| A7 | PARAAD (el grupo de Barcelona) en la misma tabla y en el mismo escenario | Paso 4, de importancia alta |
+| A8 | Probar TINTO (tabular → imagen; Castillo-Cara, Talla-Chumpitaz, García-Castro y Orozco-Barbosa, 2023), la idea M-6 del 2026-10-19 | Aparte, en otro chat o con Codex: `docs/inicio_exploracion_tinto.md` |
+
+**Una corrección de Claude:** primero interpretó «tinto» como un color de la gráfica, con el
+supuesto de un detector supervisado con sólo la propia estación. El tesista aclaró que era TINTO. Esa
+interpretación se descartó.
+
+### Aclaraciones verificadas contra el repositorio
+
+- **¿El V4 de la parte 1 era supervisado?** No. Predice la estación con las 24 horas previas de
+  las otras 32, se entrenó sólo con datos limpios, y su tensor «no contiene […] etiquetas de
+  ataque» (§4.1 de su protocolo). Tenía razón el tesista.
+  - Sí hubo LSTM supervisados a los que les fue mal: las revisiones 6 a 8 (por hora de red) y la
+    13 (por estación, viendo toda la red). Probablemente eso recordaba el asesor.
+  - El V4 tampoco «sólo se toma en cuenta a sí mismo»: usa a las otras 32 estaciones.
+- **¿Cuántas veces se atacan varias estaciones a la vez?** Medido en los calendarios:
+  - 2024: 873 estación-días atacadas; el 26 % tiene otra estación atacada ese día y el **4.6 %**,
+    una de sus 4 vecinas; como máximo 3 a la vez;
+  - 2025–2026: 1 465; 25 % y **5.1 %**; como máximo 4;
+  - para L0 y R3, que sólo miran 5 estaciones, el escenario actual ya es casi siempre «una sola
+    estación». Lo que sí sería más difícil son ataques coordinados a vecinas.
+- **«El F1 se me hace bajo»** (con δ = 100 % y p99):
+  - el techo depende de la prevalencia: con 0.7 % de estación-días atacadas y 1 % de falsas
+    alarmas, un detector perfecto llega a F1 ≈ 0.59;
+  - con las falsas alarmas reales de L0 en 2025 (1.6 %), el techo es ≈ 0.47 y L0 tiene 0.457
+    (recall 94 %, precisión 30 %);
+  - con p99.9 el techo sube a ≈ 0.93 y L0 llega a 0.756.
+- **Un desliz en la junta:** «el 50 o el 20 % son 3 ppb». En realidad 20 % ≈ 6 ppb y 10 % ≈ 3 ppb.
+
+### Decisiones del tesista (2026-10-27)
+
+- **Orden:**
+  1. V4 ajustado;
+  2. lo que no entrena;
+  3. una sola estación (para L0 y el V4);
+  4. PARAAD;
+  5. error fijo;
+  6. TINTO, que después se separó a otro chat.
+- **Regla «peras con peras»** para todo lo que sale de la junta (`CLAUDE.md` y revisión 18).
+- **Volver a usar 2025–2026** sólo con detectores registrados antes de entrenar, una sola vez, sin
+  tocar los números de la revisión 17 (revisión 18).
+
+### Revisión 18 registrada y aprobada: comparación justa con el V4 (2026-10-27)
+
+- **Origen:** la junta con el asesor del 2026-10-26. El registro completo de la junta es el paso 2
+  del plan y va aparte.
+- **Plan del tesista tras la junta:**
+  1. el V4 ajustado (revisión 18);
+  2. lo que no entrena: renombrar L0, retirar la gráfica contra el bit flipping y registrar la junta;
+  3. una sola estación atacada a la vez, para L0 y el V4;
+  4. PARAAD;
+  5. error fijo en ppb;
+  6. TINTO (Castillo-Cara, Talla-Chumpitaz, García-Castro y Orozco-Barbosa, SoftwareX 2023).
+- **Regla del tesista («peras con peras»):** todo lo que sale de la junta compara detectores del
+  mismo tipo, en el mismo escenario, con los mismos calendarios y las mismas estación-días. Lo
+  demás sólo va como referencia.
+- **Revisión 18** (§15 del protocolo):
+  - (a) el V4 en las mismas estación-días que los demás;
+  - (b) el V4 supervisado (V4S): las 66 entradas del V4 con filas t−23…t más 2 columnas de la
+    propia estación, un modelo por estación, los 20 calendarios y las etiquetas de L0, sólo
+    δ = 50 % como modelo único;
+  - (c) una gráfica del V4S contra el L0 único, sin el V4;
+  - evaluación en 2024 y una sola vez en 2025–2026, sin tocar las tablas de la revisión 17.
+- **Aprobación:** el tesista aprobó el 2026-10-27 las dos decisiones (sólo δ = 50 % y un modelo
+  por estación) y cambió la gráfica: V4S en lugar de V4. Se registró **antes** de programar o
+  entrenar nada.
+
+### Revisión 18: V4S entrenado y comprobación con 2022 (2026-10-27)
+
+- **Entrenamiento:**
+  - en Colab, sesión rev18, AMD EPYC 7B12, con `correr_revision18.sh`;
+  - las 31 estaciones en 3 procesos, en 31 minutos;
+  - modelos **recién entrenados**, en `results/anomalias_red_v1/v4_supervisado/d50/`;
+  - el SHA-256 de cada modelo coincide al bajarlos a la lap.
+- **Control:** la selección de ACO entrenada dos veces da la misma historia y los mismos pesos.
+- **Épocas:** 11 de 31 estaciones eligieron E = 1, es decir, la pérdida de 2022 ya no mejora
+  después de la primera época (`epocas.csv`).
+- **Comprobación de funcionamiento con 2022** (`comprobacion_v4s_2022.py`; no elige nada; no mira
+  2023–2026):
+  - se usaron los modelos de **selección**, cargados de disco, sobre todas las horas de 2022 de los
+    calendarios 01–10 con δ = 50 %;
+  - **por hora:** ROC-AUC de 0.626 con todas las estaciones juntas;
+  - **por estación:** de 0.418 (AJU) a 0.816 (UAX). Las 11 con E = 1 promedian 0.505, es decir, no
+    aprendieron; las otras 20 promedian 0.631;
+  - **por estación-día, en las mismas estación-días:** ROC-AUC de 0.648 del V4S contra 0.976 de L0;
+    PR-AUC de 0.122 contra 0.474, con azar de 0.008.
+- **No es un error del código:**
+  - las estaciones que entrenaron varias épocas sí separan (BJU, FAC, UAX y VIF, de 0.77 a 0.82);
+  - en PED el modelo aprendió sólo los ataques que suben la lectura: ROC-AUC de 0.841 con signo +
+    y de 0.297 con signo −;
+  - los AUC menores de 0.5 en estaciones con E = 1 caben en el ruido: son pocos episodios, con
+    horas muy correlacionadas.
+- **Causa probable:** la desventaja declarada antes de entrenar. Cada modelo ve sólo los ataques de
+  su estación, unas 300 ventanas atacadas, y deja de mejorar casi de inmediato. L0, compartido, ve
+  31 veces más.
+- **Estado:** la evaluación (2024 y 2025–2026) **no se ha corrido**. Se espera la decisión del
+  tesista, porque el examen 2025–2026 es de un solo uso.
+
+### Revisión 18b registrada, aprobada y lanzada: V4S compartido (2026-10-27)
+
+- **La duda del tesista:** «no sé cómo hacerlo sin que se vea truqueado, para que al final L0 salga
+  victorioso». También preguntó por qué el V4 original no se hizo así.
+- **Respuesta de Claude:**
+  - la debilidad se declaró antes de entrenar y 2022 sólo la confirmó;
+  - no se ha visto 2024–2026 para ningún V4S;
+  - el cambio fortalece al rival de L0;
+  - **no hay elección:** los dos V4S van al examen.
+- **Por qué el V4 era por estación:** era un pronosticador sin etiquetas, con unas 14 000 horas
+  normales por estación. La escasez de ejemplos atacados aparece sólo al supervisar.
+- **Aprobación:** el tesista aprobó el 2026-10-27 («Va. Hazlo»). Se registró como la revisión 18b
+  del protocolo **antes** de programar el compartido, con 3 predicciones más.
+- **Código:**
+  - `v4_supervisado.orden_por_distancia` y `tensores(..., orden=)`;
+  - `entrenar_v4_supervisado.py --compartido`, que cuenta primero y llena arreglos del tamaño exacto
+    para no duplicar memoria;
+  - `evaluar_revision18.py`, con los cinco detectores;
+  - pruebas: 5 de 5.
+- **Colab:**
+  - la sesión rev18 se cerró sola por inactividad mientras se esperaba la decisión. No se perdió
+    nada: los modelos ya estaban en la lap;
+  - sesión nueva rev18b con `correr_revision18b.sh`, que prepara todo y entrena el compartido dos
+    veces completo, en paralelo.
+
+### Revisión 18b: V4S compartido entrenado y comprobación con 2022 (2026-10-27)
+
+- **Entrenamiento:**
+  - en Colab, en 47 minutos;
+  - 1 033 120 ventanas de 2020–2021 (0.81 % atacadas), 281 570 de 2022 y 1 596 620 en el
+    definitivo;
+  - **E = 3** de 11 épocas: desde la época 4 la pérdida de 2022 sube mientras la de entrenamiento
+    sigue bajando;
+  - modelo **recién entrenado**, en `results/anomalias_red_v1/v4_supervisado_compartido/d50/`, con
+    su SHA-256 verificado en la lap.
+- **Control:**
+  - la segunda corrida en paralelo se quedó sin memoria (código 137) al armar el definitivo, porque
+    eran dos procesos de unos 25 GB cada uno;
+  - antes de eso, su selección salió idéntica a la principal, época por época;
+  - se relanzó sola (`correr_revision18b_control.sh`), con los mismos hilos, para comparar también
+    el definitivo;
+  - **resultado:** historia de selección, historia del definitivo y pesos del definitivo
+    **idénticos** a los de la corrida principal.
+- **Evaluación lanzada:** 2026-10-27, 13:26 UTC, con `correr_revision18_eval.sh` en la sesión
+  rev18b, dos veces en paralelo. El SHA-256 de `evaluar_revision18.py` coincide con el de la lap.
+  - Los umbrales de 2023 en sus propias estación-días reproducen los de la revisión 17: L0 único
+    0.1063 / 0.461, R3 1.3776 / 2.5593 y V4 0.7372 / 0.9464.
+
+### Revisiones 18 y 18b: resultado del examen del V4S (2026-10-27)
+
+- **Corrida:**
+  - 2 h 7 min en Colab, dos veces en paralelo, con todos los archivos idénticos;
+  - el control contra la revisión 17 es verdadero: L0 único, R3 y V4 en sus propias estación-días
+    dan los mismos TP, FP, FN y TN;
+  - 2025–2026 queda usado una vez para los V4S;
+  - resultados en `results/anomalias_red_v1/revision18/` y registros en `logs_revision18/`.
+- **Origen:**
+  - V4S por estación y compartido, recién entrenados (revisiones 18 y 18b) y cargados de disco;
+  - L0 único y V4, cargados de disco;
+  - R3, sin entrenamiento.
+- **Peras con peras: L0 único contra V4S compartido,** F1 con 2025 y 2026 juntos e intervalo del
+  95 %:
+
+  | δ | p99 | p99.9 |
+  |---|---|---|
+  | 100 % | 0.421 vs 0.352: **+0.069** (+0.014 a +0.128) | 0.600 vs 0.354: **+0.246** (+0.189 a +0.303) |
+  | 50 % | 0.466 vs 0.225: **+0.241** (+0.183 a +0.302) | 0.569 vs 0.115: **+0.454** (+0.397 a +0.511) |
+  | 20 % | 0.195 vs 0.041: **+0.153** (+0.112 a +0.197) | 0.076 vs 0.014: **+0.062** (+0.033 a +0.092) |
+  | 10 y 5 % | nadie supera el azar | nadie supera el azar |
+
+  - Excepción por año: 2026 con 100 % y p99, V4S compartido 0.502 contra L0 0.452. Es un empate
+    (−0.050, de −0.133 a +0.040).
+- **Recall y precisión, 2025, p99** (L0 único / V4S compartido / V4):
+  - con 100 %: recall 0.91 / 0.60 / 0.58 y precisión 0.26 / 0.20 / 0.10;
+  - con 50 %: 0.82 / 0.32 / 0.33 y 0.31 / 0.12 / 0.07;
+  - falsas alarmas reales en 2025 limpio: 1.0 / 1.6 / 3.4 %.
+- **Supervisar con las entradas del V4 casi no cambia el orden de los puntajes:** PR-AUC en 2025 con
+  100 / 50 / 20 %, V4S compartido 0.355 / 0.110 / 0.015 contra V4 0.387 / 0.095 / 0.012. Mejora la
+  precisión con p99, pero con p99.9 detecta menos que el V4.
+- **El V4S por estación queda último:** F1 de 0.032 con 50 % y p99 en 2025.
+- **Predicciones:** 5 de 6. Falla la 2: el V4S por estación no le gana al V4.
+- **Respuesta a la crítica del asesor:**
+  - L0 le gana a un V4 supervisado entrenado igual, con los mismos calendarios, etiquetas, ventanas
+    y modelo único;
+  - la ventaja viene sobre todo de las entradas de L0 (su perfil y sus vecinas), no de tener
+    etiquetas;
+  - con ataques de 100 % y p99, la ventaja es pequeña: +0.069, y empate en 2026.
+- **Hipótesis, no comprobada:** con valores absolutos de 32 estaciones, el V4S memoriza los
+  calendarios (E = 3, con la pérdida de 2022 subiendo desde la época 4).
+- **Comprobación con 2022** (`comprobacion_v4s_2022.py --compartido`; no elige nada):
+
+  | | V4S por estación | V4S compartido | L0 |
+  |---|---|---|---|
+  | ROC-AUC por hora, todas | 0.626 | **0.811** | — |
+  | ROC-AUC por hora, signo + / signo − | 0.662 / 0.593 | 0.777 / 0.843 | — |
+  | Estaciones con ROC-AUC < 0.55 | 13 de 31 | **0 de 31** (mínimo 0.686) | — |
+  | ROC-AUC por estación-día (comunes) | 0.648 | **0.873** | 0.976 |
+  | PR-AUC por estación-día (azar 0.008) | 0.122 | 0.245 | 0.474 |
+
+- **Lectura:**
+  - el compartido sí aprende en las 31 estaciones y en los dos signos. Se cumple la predicción 4;
+  - la causa del fallo del V4S por estación era la escasez de ejemplos por modelo, no las entradas
+    del V4;
+  - en 2022, L0 sigue arriba del V4S compartido. Es optimista para los dos, porque 2022 se usó para
+    el EarlyStopping, así que no sustituye al examen.
+
 ---
 
 ## Siguiente

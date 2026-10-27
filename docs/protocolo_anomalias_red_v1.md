@@ -266,6 +266,8 @@ resultados.
 | 15 | 2026-10-25 | Un segundo punto de operación para la estación-día: además del umbral p99 (1 % de falsas alarmas en 2023 limpio), el **p99.9** (0.1 %), y la curva de recall y precisión según el umbral, para L0, R3 y el V4 en 2024. No elige detector ni umbral, y no cambia nada de las revisiones 11 a 14 | Pedida por el tesista, para entender la balanza entre recall y precisión. Se registró **después** de ver el examen 2024 con p99 y una ilustración con p99.9 en 2022 (`exploracion_precision_umbral_2022.py`), y **antes** de calcular p99.9 en 2024. Por eso su número de 2024 es descriptivo; la prueba independiente es el examen final de 2025–2026. Aprobada por el tesista el 2026-10-25 |
 | 16 | 2026-10-25 | Tres comprobaciones antes del examen final, con p99 y p99.9: (1) intervalos de confianza de L0 − R3 en 2024 por bootstrap; (2) un solo modelo L0 para todos los δ, elegido con 2022 y examinado en 2024 con los cinco δ; (3) la prueba con hora de inicio al azar de la revisión 6, que nunca se corrió. No entrena nada. Sólo (2) elige algo: el modelo único que irá al examen final, con una regla sobre 2022 | Pedida por el tesista. Se registró **después** de ver el examen 2024 de la revisión 14 y la revisión 15, y **antes** de correr estas tres comprobaciones. Aprobada por el tesista el 2026-10-25 |
 | 17 | 2026-10-25 | **Examen final** de la estación-día con 2025 (enero a diciembre) y 2026 (enero a julio), una sola vez: detectores congelados (L0 por δ, el L0 único de la revisión 16, R3 y V4), umbrales p99 y p99.9 de 2023 limpio, 10 calendarios nuevos por año, con su versión de hora de inicio al azar, e intervalos de confianza. No se elige ni se ajusta nada | El paso 4 del plan del 2026-10-25. Se registró **antes** de generar cualquier calendario o matriz de 2025–2026 para la parte 2. **Aprobada por el tesista el 2026-10-25**, antes de la revisión con el asesor, por decisión suya |
+| 18 | 2026-10-26 | Comparación justa con el V4 tras la junta con el asesor: (a) el V4 calificado en las mismas estación-días que L0 y R3; (b) un **V4 supervisado** (V4S): las entradas y la arquitectura del V4 más la propia estación, entrenado con los calendarios y las etiquetas de L0; (c) una gráfica del V4S contra el L0 único en el mismo escenario de δ, que sustituye a la comparación con el bit flipping. Se evalúa en 2024 y una sola vez en 2025–2026. Las tablas del examen final no se tocan | El asesor (2026-10-26) señaló que comparar L0 (supervisado) contra el V4 (no supervisado) es injusto, y que la gráfica contra el bit flipping compara alteraciones distintas. Se registró **después** de ver el examen final y **antes** de programar o entrenar nada. Borrador de Claude a pedido del tesista, **aprobado por el tesista el 2026-10-27** con la regla «peras con peras» |
+| 18b | 2026-10-27 | Un segundo V4S, **compartido**: un solo modelo para las 31 estaciones, como L0, con las mismas entradas del V4 pero las otras 32 estaciones ordenadas por distancia. Los dos V4S van al examen, sin elegir entre ellos. La comparación principal, fijada por principio y no por resultados, es L0 único contra el V4S compartido; el V4S por estación queda como contraste | La comprobación con 2022 del V4S por estación (`progreso.md`, 2026-10-27): 11 de 31 modelos no aprendieron (ROC-AUC de 0.505), la desventaja declarada en la revisión 18 antes de entrenar. El cambio fortalece al rival de L0. Se registró **después** de ver el V4S por estación en 2022 y **antes** de programar el compartido o de evaluar cualquier V4S en 2023–2026. **Aprobada por el tesista el 2026-10-27** («Va. Hazlo») |
 
 ### Revisión 1 (2026-10-13)
 
@@ -2078,3 +2080,206 @@ correr nada. Corrida el 2026-10-25; resultado al final de esta sección.
   - el V4 queda último, y su umbral de 2023 se desvía a 3.4 % en 2025.
 - **Detalle:** en `results/anomalias_red_v1/examen_final/`, `logs_revision17/` y `progreso.md`
   (2026-10-25).
+
+### Revisión 18 (2026-10-26): comparación justa con el V4
+
+**Estado:**
+- borrador de Claude, a pedido del tesista, después de la junta con el asesor del 2026-10-26;
+- **aprobado por el tesista el 2026-10-27**, antes de programar o entrenar nada:
+  - entrenar sólo δ = 50 %, como modelo único: aprobado;
+  - un modelo por estación, como el V4: aprobado;
+  - cambio del tesista en (c): la gráfica no lleva al V4, sino al V4S;
+- **regla del tesista para todo lo que sale de la junta («peras con peras»):**
+  - cada comparación pone frente a frente detectores del mismo tipo: supervisado contra
+    supervisado, el mismo modelo único contra modelo único, en el mismo escenario, con los mismos
+    calendarios y las mismas estación-días;
+  - lo que no sea del mismo tipo puede ir en una tabla como referencia, nunca como la
+    comparación principal;
+- es el paso 1 del plan del tesista tras la junta:
+  1. el V4 ajustado (esta revisión);
+  2. lo que no entrena: renombrar L0, retirar la gráfica contra el bit flipping y registrar la junta;
+  3. una sola estación atacada a la vez;
+  4. PARAAD;
+  5. error fijo en ppb;
+  6. TINTO.
+
+  Los pasos 3 a 6 tendrán su propia revisión antes de programarse.
+
+**Por qué:**
+- **Supervisado contra no supervisado:** L0 aprende con etiquetas y el V4 nunca las vio (§4.1 de
+  su protocolo). Parte de la ventaja de L0 puede venir sólo de eso.
+- **La gráfica contra la parte 1 no es justa:** compara una lectura con un día, un instante con un
+  ataque sostenido y un cambio fijo de ±2^k ppb con uno proporcional. El promedio en ppb esconde
+  la forma: con +100 %, 50 ppb pasa a 100, pero 2 ppb pasa a 4.
+- **Días distintos:** en el examen final, el V4 se calificó en sus propias estación-días válidas
+  (88 220 en 2025 con δ = 50 %, 651 atacadas) y L0 y R3 en las comunes (86 330, 634 atacadas).
+
+**(a) El V4 en los mismos días:**
+- se califica en las estación-días válidas para los cuatro detectores (L0, R3, V4 y V4S);
+- los umbrales p99 y p99.9 salen de 2023 limpio en esas mismas estación-días;
+- no entrena ni carga nada nuevo: el V4 sigue cargado de disco, con la inferencia repetida.
+
+**(b) El V4 supervisado (V4S):**
+- **Entradas (24 × 68):**
+  - las 66 del V4: las otras 32 estaciones normalizadas con la μ y la σ del V4, sus máscaras, y el
+    seno y el coseno de la hora; XAL sigue inactivo;
+  - con las filas t−23…t (la variante `incluir_t=True` que ya existe), porque se juzga la hora t;
+  - más 2 columnas de la estación objetivo: (lectura − base) / σ, con la base del V4 (perfil causal
+    de 14 días con media), y su máscara;
+  - el V4 nunca ve la lectura de su estación, porque es un pronosticador. Un clasificador sin esas
+    2 columnas no podría ver el ataque.
+- **Salida:** una probabilidad (sigmoide), con entropía cruzada binaria y sin pesos de clase.
+- **Lo que no cambia del V4:**
+  - LSTM de 64, dropout de 0.2 y densa de 32;
+  - Adam con 1e-3, lotes de 64 y barajado;
+  - **un modelo por estación** (31);
+  - sólo las horas en que la estación tiene dato y base.
+- **Lo que no cambia de L0:**
+  - los mismos 20 calendarios de 2020–2022;
+  - la misma etiqueta por estación-hora, que nunca es entrada;
+  - 1 de cada 8 horas por calendario y estación, con semilla `[42, 18, uso, calendario, estación]`;
+  - selección con 2020–2021 y EarlyStopping sobre 2022 de los calendarios 01–10 (paciencia 8,
+    máximo 60 épocas, pesos de la mejor);
+  - definitivo con 2020–2022 y exactamente E épocas, la E de cada estación;
+  - `fijar_semilla(42)` inmediatamente antes de construir cada modelo.
+- **Sólo δ = 50 %:** un modelo único para los cinco δ, como el L0 único de la revisión 16. Se compara
+  contra el L0 único. Cuesta la quinta parte que un modelo por δ.
+- **El día:** promedio de las probabilidades de las horas válidas (mínimo 12), sin dominancia, como
+  L0.
+- **Desventaja declarada antes de entrenar:**
+  - cada modelo del V4S ve sólo las ventanas de su estación;
+  - L0, al ser compartido, ve las de las 31, con unas 31 veces más ejemplos atacados;
+  - si el V4S pierde, ésta es una causa posible y no se podrá separar de las entradas.
+
+**(c) La gráfica («peras con peras»):**
+- recall y F1 por δ del **V4S contra el L0 único**, con p99 y p99.9: los dos supervisados, los dos
+  un modelo único entrenado con δ = 50 %, con los mismos calendarios y las mismas etiquetas;
+- en las estación-días comunes de 2025, con 2026 como complemento;
+- el V4 y R3 no van en la gráfica: quedan como referencia en la tabla de (a);
+- la comparación descriptiva con la parte 1 por ppb (`comparacion_parte1_*.csv`) se conserva en
+  disco, pero deja de presentarse como comparación.
+
+**Evaluación:**
+- 2024 (los 10 calendarios) y el examen final 2025–2026 (los 20), con los detectores congelados;
+- **regla para volver a usar 2025–2026:**
+  - sólo para detectores registrados aquí antes de entrenarse, diseñados sin mirar 2024–2026;
+  - se evalúan **una sola vez**;
+  - los números de L0, R3 y V4 de la revisión 17 no se modifican: (a) y (c) son tablas nuevas;
+  - en la tesis se declara que el V4S y la tabla común se agregaron después de la junta del
+    2026-10-26.
+- Las métricas, el bootstrap y las falsas alarmas por grupo, como en la revisión 17.
+
+**Controles:**
+- se entrena dos veces el V4S de la primera estación (la selección), y los pesos deben salir iguales;
+- la evaluación se corre dos veces, y debe salir igual;
+- el V4 en sus propias estación-días debe reproducir la revisión 17.
+
+**Predicciones (Claude), escritas antes de entrenar:**
+1. el F1 del V4 en las estación-días comunes cambia menos de 0.02 respecto a la revisión 17;
+2. con δ = 50 % y p99 en 2025, el V4S le gana al V4 en F1;
+3. con δ = 50 % y p99 en 2025, el L0 único le gana al V4S en F1.
+
+### Revisión 18b (2026-10-27): V4S compartido
+
+**Estado:**
+- borrador de Claude a pedido del tesista;
+- **aprobada por el tesista el 2026-10-27** («Va. Hazlo»), antes de programar o de entrenar el V4S
+  compartido;
+- ningún V4S se ha evaluado en 2023–2026.
+
+**Por qué:**
+- **Lo que mostró 2022.** El V4S por estación de la revisión 18 se entrenó en Colab. La comprobación
+  de funcionamiento con 2022, que no elige nada, mostró que:
+  - 11 de 31 modelos eligieron E = 1 y no aprendieron: su ROC-AUC por hora promedia 0.505;
+  - por estación-día, el V4S tiene ROC-AUC de 0.648 y L0 de 0.976.
+- **No es un error del código.** Los modelos que entrenaron varias épocas sí separan, de 0.77 a
+  0.82.
+- **Es la desventaja declarada antes de entrenar:** cada modelo ve sólo unas 300 ventanas
+  atacadas de su estación. L0 ve 31 veces más.
+- **Por qué no es truqueado:**
+  - la causa se escribió antes de entrenar y 2022 sólo la confirmó;
+  - no se ha visto 2024–2026 para ningún V4S;
+  - el cambio **fortalece al rival** de L0;
+  - **no hay elección:** los dos V4S van al examen y se reportan los dos;
+  - la comparación principal se fija ahora por el principio «peras con peras»: el V4S compartido
+    entrena como L0. No depende de ningún resultado.
+- **Por qué el V4 de la parte 1 era por estación:**
+  - era un pronosticador sin etiquetas, que aprendía con todas las horas normales (unas 14 000 por
+    estación), así que no le faltaban datos;
+  - la escasez aparece sólo al supervisar, con ataques en el 0.8 % de las horas.
+
+**Qué es el V4S compartido:**
+- **Entradas (24 × 68):** las mismas del V4S por estación, pero con las otras 32 estaciones (sus
+  valores y sus máscaras) **ordenadas por distancia** al objetivo. La primera es la más cercana,
+  con empates por clave (`vecinas.vecinas_cercanas` con k = 32). XAL, inactiva, queda en su lugar
+  por distancia y siempre vale 0. Al final van el seno, el coseno y las 2 columnas del objetivo.
+- **Un solo modelo para las 31 estaciones,** sin identificador de estación, como L0.
+- **Las mismas ventanas que el V4S por estación:** la misma muestra de 1 de cada 8 horas por
+  calendario y estación, con la misma semilla, juntadas para las 31.
+- **Todo lo demás, idéntico al V4S por estación:**
+  - arquitectura, salida sigmoide y pérdida;
+  - normalización inicial en la selección y definitiva en el modelo final;
+  - EarlyStopping con 2022 de los calendarios 01–10;
+  - E épocas en el definitivo;
+  - sólo δ = 50 %;
+  - el día con el promedio de las horas válidas.
+
+**Evaluación** (la de la revisión 18, con cinco detectores):
+- L0 único, V4S compartido, V4S por estación, R3 y V4, en las estación-días válidas para los
+  cinco;
+- **principal:** L0 único − V4S compartido;
+- **contraste:** L0 único − V4S por estación;
+- intervalos por bootstrap como en la revisión 18;
+- la gráfica de (c) lleva al L0 único y al V4S compartido.
+
+**Controles:**
+- el V4S compartido se entrena **dos veces completo** (selección y definitivo), en paralelo, y
+  los pesos deben salir iguales;
+- la comprobación de funcionamiento con 2022 se repite para el compartido, también sin elegir
+  nada.
+
+**Predicciones (Claude), escritas antes de entrenar el compartido:**
+4. en 2022 (comprobación), el V4S compartido tiene un ROC-AUC por estación-día mayor que el del
+   V4S por estación (0.648);
+5. con δ = 50 % y p99 en 2025, el V4S compartido le gana en F1 al V4S por estación y al V4;
+6. con δ = 50 % y p99 en 2025, el L0 único le gana en F1 al V4S compartido.
+
+**Resultado de las revisiones 18 y 18b** (2026-10-27; examen del V4S corrido una sola vez):
+- **Origen de los modelos:**
+  - V4S por estación y V4S compartido **recién entrenados** en Colab y luego cargados de disco
+    para evaluar;
+  - L0 único y V4 cargados de disco; R3 sin entrenamiento.
+- **Controles:**
+  - las dos corridas de la evaluación salieron idénticas en todos los archivos;
+  - en sus propias estación-días, L0 único, R3 y V4 reproducen la revisión 17 (TP, FP, FN y TN);
+  - los umbrales de 2023 son los de la revisión 17;
+  - el V4S compartido entrenado dos veces da los mismos pesos.
+- **Mismas estación-días:** son las de L0 y R3, que ya estaban dentro de las del V4. Los números de
+  L0 único y R3 son los de la revisión 17; el F1 del V4 cambia como mucho 0.012.
+- **F1 en 2025 con δ = 100 / 50 / 20 %** (L0 único / V4S compartido / V4S por estación / V4):
+  - p99: 0.404 / 0.295 / 0.126 / 0.176; 0.445 / 0.179 / 0.032 / 0.108; 0.176 / 0.036 / 0.007 / 0.033;
+  - p99.9: 0.588 / 0.325 / 0.049 / 0.339; 0.573 / 0.111 / 0.000 / 0.157; 0.074 / 0.021 / 0.000 / 0.024.
+- **Principal, L0 único − V4S compartido, con 2025 y 2026 juntos** (intervalo del 95 %):
+  - p99: **+0.069** (+0.014 a +0.128) con 100 %; **+0.241** (+0.183 a +0.302) con 50 %;
+    **+0.153** (+0.112 a +0.197) con 20 %;
+  - p99.9: **+0.246** (+0.189 a +0.303); **+0.454** (+0.397 a +0.511); **+0.062** (+0.033 a +0.092);
+  - con 10 y 5 % nadie supera el azar; el F1 sin ataque llega hasta 0.016;
+  - por año, la única excepción es 2026 con 100 % y p99: el V4S compartido tiene 0.502 y L0 0.452.
+    La diferencia es −0.050, con intervalo de −0.133 a +0.040, es decir, empate.
+- **V4S compartido contra V4:** la supervisión con las entradas del V4 casi no mejora el orden de
+  los puntajes. Con 2025 y δ = 100 / 50 / 20 %:
+  - PR-AUC: 0.355 / 0.110 / 0.015 del V4S compartido contra 0.387 / 0.095 / 0.012 del V4;
+  - con p99 gana el V4S compartido, sobre todo por la precisión, porque su umbral de 2023 se
+    sostiene mejor: falsas alarmas reales de 1.6 % contra 3.4 % del V4 en 2025;
+  - con p99.9 detecta menos que el V4: recall de 0.080 contra 0.180 con 50 %.
+- **Predicciones:** se cumplen 5 de 6. Falla la 2: el V4S por estación no le gana al V4 (0.032
+  contra 0.108).
+- **Lectura:**
+  - L0 le gana al V4 supervisado entrenado exactamente igual, con los mismos calendarios,
+    etiquetas, ventanas y modelo único;
+  - la ventaja de L0 no viene principalmente de la supervisión, sino de sus entradas: la lectura
+    contra su perfil de 14 días y la comparación con sus 4 vecinas, que son los ingredientes de R3;
+  - **hipótesis, no comprobada:** con valores absolutos de 32 estaciones, el V4S memoriza los
+    calendarios de entrenamiento (E = 3) en lugar del patrón relativo.
+- **Detalle:** en `results/anomalias_red_v1/revision18/`, `logs_revision18/` y `progreso.md`
+  (2026-10-27).

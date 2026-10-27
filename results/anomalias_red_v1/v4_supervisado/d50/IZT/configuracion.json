@@ -1,0 +1,64 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 18,
+  "detector": "v4_supervisado",
+  "estacion": "IZT",
+  "delta_pct": 50,
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10",
+    "entrenamiento_11",
+    "entrenamiento_12",
+    "entrenamiento_13",
+    "entrenamiento_14",
+    "entrenamiento_15",
+    "entrenamiento_16",
+    "entrenamiento_17",
+    "entrenamiento_18",
+    "entrenamiento_19",
+    "entrenamiento_20"
+  ],
+  "origen": "recién entrenado",
+  "entradas": "las 66 del V4 con filas t−23…t y 2 de la propia estación (68 columnas)",
+  "arquitectura": {
+    "unidades": 64,
+    "dropout": 0.2,
+    "densa": 32,
+    "salidas": 1
+  },
+  "entrenamiento": {
+    "semilla": 42,
+    "batch": 64,
+    "max_epocas": 60,
+    "paciencia": 8,
+    "shuffle": true
+  },
+  "una_de_cada": 8,
+  "seleccion": {
+    "E": 1,
+    "epocas_ejecutadas": 9,
+    "val_loss_min": 0.03746655210852623,
+    "ventanas_entrenamiento": 24780,
+    "ventanas_validacion": 7900,
+    "positivas_pct": 0.8192090317606926
+  },
+  "fecha": "2026-10-27T06:48:33",
+  "maquina": "x86_64",
+  "prueba": false,
+  "definitivo": {
+    "ventanas": 40600,
+    "positivas_pct": 0.9975369088351727,
+    "epocas": 1
+  },
+  "sha256": {
+    "modelo": "6144968cf37d355b2992468332719343aa17cc6701ac32e443825acf9d80031d"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 18,
+  "detector": "v4_supervisado",
+  "estacion": "SAG",
+  "delta_pct": 50,
+  "calendarios": [
+    "entrenamiento_01",
+    "entrenamiento_02",
+    "entrenamiento_03",
+    "entrenamiento_04",
+    "entrenamiento_05",
+    "entrenamiento_06",
+    "entrenamiento_07",
+    "entrenamiento_08",
+    "entrenamiento_09",
+    "entrenamiento_10",
+    "entrenamiento_11",
+    "entrenamiento_12",
+    "entrenamiento_13",
+    "entrenamiento_14",
+    "entrenamiento_15",
+    "entrenamiento_16",
+    "entrenamiento_17",
+    "entrenamiento_18",
+    "entrenamiento_19",
+    "entrenamiento_20"
+  ],
+  "origen": "recién entrenado",
+  "entradas": "las 66 del V4 con filas t−23…t y 2 de la propia estación (68 columnas)",
+  "arquitectura": {
+    "unidades": 64,
+    "dropout": 0.2,
+    "densa": 32,
+    "salidas": 1
+  },
+  "entrenamiento": {
+    "semilla": 42,
+    "batch": 64,
+    "max_epocas": 60,
+    "paciencia": 8,
+    "shuffle": true
+  },
+  "una_de_cada": 8,
+  "seleccion": {
+    "E": 3,
+    "epocas_ejecutadas": 11,
+    "val_loss_min": 0.026027504354715347,
+    "ventanas_entrenamiento": 36300,
+    "ventanas_validacion": 10420,
+    "positivas_pct": 1.0082644410431385
+  },
+  "fecha": "2026-10-27T06:42:38",
+  "maquina": "x86_64",
+  "prueba": false,
+  "definitivo": {
+    "ventanas": 57160,
+    "positivas_pct": 0.8117564953863621,
+    "epocas": 3
+  },
+  "sha256": {
+    "modelo": "29f8746f9da073ffc8257aa590566378b69080960ffcd238d62d90b76deebd3b"
+  }
+}
