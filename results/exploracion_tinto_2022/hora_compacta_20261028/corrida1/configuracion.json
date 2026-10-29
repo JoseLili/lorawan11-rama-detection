@@ -1,0 +1,32 @@
+{
+  "resoluciones": [
+    32,
+    64,
+    128,
+    256
+  ],
+  "algoritmo": "PCA",
+  "semilla": 42,
+  "blur": false,
+  "zoom": 1,
+  "escalado": "MinMax por columna, una vez por tabla de ajuste; clip=False; flotantes float64",
+  "ajuste_L0": "Las 19 840 ventanas auditadas de 2020–2021; NO todo Xtr; sin validación",
+  "perturbacion": "Una columna por vez: +/-0.125 escalado; máscaras binarias se invierten",
+  "criterio": "Menor resolución sin colisiones de columnas no constantes y sin perturbaciones ocultas",
+  "detector": "ninguno; solo transformación recién ajustada",
+  "cambio": "Eliminar 46 columnas horarias de desfases 23..1; conservar las 360 columnas de sensores y hora final sin/cos",
+  "mapas": "PCA ajustado de nuevo por variante; coordenadas constantes entre resoluciones de la misma variante",
+  "sha256_fuentes": {
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/X_muestra.npy": "81381688bd28d1accc8a5b7a44f715ea388534650bdc046e37d19700661a7c6b",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/manifiesto_muestra.csv": "4caa9fae70165c21afa12b4eabd8f928086cb9fbf43d4be214a6a0fb025975e1",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/diccionario_408.csv": "c6d51857174e77adb4221fa45dae3a8b1ff5500a9e5566d13e89e1b525e6a603"
+  },
+  "sha256_codigo": "31673d0f24de265bb99f3fc63a4b014644973409f192da195acde6ed78937bd2",
+  "versiones": {
+    "TINTOlib": "1.3.1",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.10.9+dfsg1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "fase": "entrenamiento",
+  "epoca": 10,
+  "lote": 512,
+  "lotes_total": 21216,
+  "segundos": 2075.712364008
+}

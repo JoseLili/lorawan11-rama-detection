@@ -1,0 +1,10 @@
+{
+  "prueba": true,
+  "origen": "CNN recién entrenada; recarga verificada",
+  "E": 2,
+  "epocas": 2,
+  "parametros": 34081,
+  "pesos_sha256": "8ce26274f6554e1e4fcb26dbb99a4ee028fc69c604efb0b591b5424bc9504d2d",
+  "recarga_identica": true,
+  "alcance": "Solo selección; sin p99/p99.9, sin F1 ni examen. --prueba no es un resultado científico."
+}

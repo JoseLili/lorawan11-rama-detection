@@ -1,0 +1,7 @@
+{
+  "evaluacion_2022": true,
+  "modelos_entrenados": false,
+  "dias_comunes": 9661,
+  "bootstrap": 2000,
+  "limite": "Validaci\u00f3n reutilizada y parada manual; no examen independiente ni prueba confirmatoria."
+}

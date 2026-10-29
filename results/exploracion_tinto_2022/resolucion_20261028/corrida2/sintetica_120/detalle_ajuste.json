@@ -1,0 +1,11 @@
+{
+  "filas_ajuste": 128,
+  "base_id": "normal inventada",
+  "columnas_constantes": [],
+  "base_fuera_0_1": 1,
+  "rango_ajuste": [
+    0.0,
+    1.0000000000000004
+  ],
+  "mapa_continuo_igual_entre_resoluciones": true
+}

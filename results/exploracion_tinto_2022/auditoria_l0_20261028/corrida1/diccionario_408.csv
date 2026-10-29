@@ -1,0 +1,409 @@
+columna,nombre,desfase_horas,rol,tipo,escala
+0,lag23_obj_rel,-23,obj,rel,adimensional; escala histórica L0
+1,lag23_obj_mascara,-23,obj,mascara,binaria 0/1
+2,lag23_obj_vecinas,-23,obj,vecinas,adimensional; escala histórica L0
+3,lag23_v1_rel,-23,v1,rel,adimensional; escala histórica L0
+4,lag23_v1_mascara,-23,v1,mascara,binaria 0/1
+5,lag23_v1_vecinas,-23,v1,vecinas,adimensional; escala histórica L0
+6,lag23_v2_rel,-23,v2,rel,adimensional; escala histórica L0
+7,lag23_v2_mascara,-23,v2,mascara,binaria 0/1
+8,lag23_v2_vecinas,-23,v2,vecinas,adimensional; escala histórica L0
+9,lag23_v3_rel,-23,v3,rel,adimensional; escala histórica L0
+10,lag23_v3_mascara,-23,v3,mascara,binaria 0/1
+11,lag23_v3_vecinas,-23,v3,vecinas,adimensional; escala histórica L0
+12,lag23_v4_rel,-23,v4,rel,adimensional; escala histórica L0
+13,lag23_v4_mascara,-23,v4,mascara,binaria 0/1
+14,lag23_v4_vecinas,-23,v4,vecinas,adimensional; escala histórica L0
+15,lag23_hora_sin,-23,tiempo,hora_sin,"adimensional [-1,1]"
+16,lag23_hora_cos,-23,tiempo,hora_cos,"adimensional [-1,1]"
+17,lag22_obj_rel,-22,obj,rel,adimensional; escala histórica L0
+18,lag22_obj_mascara,-22,obj,mascara,binaria 0/1
+19,lag22_obj_vecinas,-22,obj,vecinas,adimensional; escala histórica L0
+20,lag22_v1_rel,-22,v1,rel,adimensional; escala histórica L0
+21,lag22_v1_mascara,-22,v1,mascara,binaria 0/1
+22,lag22_v1_vecinas,-22,v1,vecinas,adimensional; escala histórica L0
+23,lag22_v2_rel,-22,v2,rel,adimensional; escala histórica L0
+24,lag22_v2_mascara,-22,v2,mascara,binaria 0/1
+25,lag22_v2_vecinas,-22,v2,vecinas,adimensional; escala histórica L0
+26,lag22_v3_rel,-22,v3,rel,adimensional; escala histórica L0
+27,lag22_v3_mascara,-22,v3,mascara,binaria 0/1
+28,lag22_v3_vecinas,-22,v3,vecinas,adimensional; escala histórica L0
+29,lag22_v4_rel,-22,v4,rel,adimensional; escala histórica L0
+30,lag22_v4_mascara,-22,v4,mascara,binaria 0/1
+31,lag22_v4_vecinas,-22,v4,vecinas,adimensional; escala histórica L0
+32,lag22_hora_sin,-22,tiempo,hora_sin,"adimensional [-1,1]"
+33,lag22_hora_cos,-22,tiempo,hora_cos,"adimensional [-1,1]"
+34,lag21_obj_rel,-21,obj,rel,adimensional; escala histórica L0
+35,lag21_obj_mascara,-21,obj,mascara,binaria 0/1
+36,lag21_obj_vecinas,-21,obj,vecinas,adimensional; escala histórica L0
+37,lag21_v1_rel,-21,v1,rel,adimensional; escala histórica L0
+38,lag21_v1_mascara,-21,v1,mascara,binaria 0/1
+39,lag21_v1_vecinas,-21,v1,vecinas,adimensional; escala histórica L0
+40,lag21_v2_rel,-21,v2,rel,adimensional; escala histórica L0
+41,lag21_v2_mascara,-21,v2,mascara,binaria 0/1
+42,lag21_v2_vecinas,-21,v2,vecinas,adimensional; escala histórica L0
+43,lag21_v3_rel,-21,v3,rel,adimensional; escala histórica L0
+44,lag21_v3_mascara,-21,v3,mascara,binaria 0/1
+45,lag21_v3_vecinas,-21,v3,vecinas,adimensional; escala histórica L0
+46,lag21_v4_rel,-21,v4,rel,adimensional; escala histórica L0
+47,lag21_v4_mascara,-21,v4,mascara,binaria 0/1
+48,lag21_v4_vecinas,-21,v4,vecinas,adimensional; escala histórica L0
+49,lag21_hora_sin,-21,tiempo,hora_sin,"adimensional [-1,1]"
+50,lag21_hora_cos,-21,tiempo,hora_cos,"adimensional [-1,1]"
+51,lag20_obj_rel,-20,obj,rel,adimensional; escala histórica L0
+52,lag20_obj_mascara,-20,obj,mascara,binaria 0/1
+53,lag20_obj_vecinas,-20,obj,vecinas,adimensional; escala histórica L0
+54,lag20_v1_rel,-20,v1,rel,adimensional; escala histórica L0
+55,lag20_v1_mascara,-20,v1,mascara,binaria 0/1
+56,lag20_v1_vecinas,-20,v1,vecinas,adimensional; escala histórica L0
+57,lag20_v2_rel,-20,v2,rel,adimensional; escala histórica L0
+58,lag20_v2_mascara,-20,v2,mascara,binaria 0/1
+59,lag20_v2_vecinas,-20,v2,vecinas,adimensional; escala histórica L0
+60,lag20_v3_rel,-20,v3,rel,adimensional; escala histórica L0
+61,lag20_v3_mascara,-20,v3,mascara,binaria 0/1
+62,lag20_v3_vecinas,-20,v3,vecinas,adimensional; escala histórica L0
+63,lag20_v4_rel,-20,v4,rel,adimensional; escala histórica L0
+64,lag20_v4_mascara,-20,v4,mascara,binaria 0/1
+65,lag20_v4_vecinas,-20,v4,vecinas,adimensional; escala histórica L0
+66,lag20_hora_sin,-20,tiempo,hora_sin,"adimensional [-1,1]"
+67,lag20_hora_cos,-20,tiempo,hora_cos,"adimensional [-1,1]"
+68,lag19_obj_rel,-19,obj,rel,adimensional; escala histórica L0
+69,lag19_obj_mascara,-19,obj,mascara,binaria 0/1
+70,lag19_obj_vecinas,-19,obj,vecinas,adimensional; escala histórica L0
+71,lag19_v1_rel,-19,v1,rel,adimensional; escala histórica L0
+72,lag19_v1_mascara,-19,v1,mascara,binaria 0/1
+73,lag19_v1_vecinas,-19,v1,vecinas,adimensional; escala histórica L0
+74,lag19_v2_rel,-19,v2,rel,adimensional; escala histórica L0
+75,lag19_v2_mascara,-19,v2,mascara,binaria 0/1
+76,lag19_v2_vecinas,-19,v2,vecinas,adimensional; escala histórica L0
+77,lag19_v3_rel,-19,v3,rel,adimensional; escala histórica L0
+78,lag19_v3_mascara,-19,v3,mascara,binaria 0/1
+79,lag19_v3_vecinas,-19,v3,vecinas,adimensional; escala histórica L0
+80,lag19_v4_rel,-19,v4,rel,adimensional; escala histórica L0
+81,lag19_v4_mascara,-19,v4,mascara,binaria 0/1
+82,lag19_v4_vecinas,-19,v4,vecinas,adimensional; escala histórica L0
+83,lag19_hora_sin,-19,tiempo,hora_sin,"adimensional [-1,1]"
+84,lag19_hora_cos,-19,tiempo,hora_cos,"adimensional [-1,1]"
+85,lag18_obj_rel,-18,obj,rel,adimensional; escala histórica L0
+86,lag18_obj_mascara,-18,obj,mascara,binaria 0/1
+87,lag18_obj_vecinas,-18,obj,vecinas,adimensional; escala histórica L0
+88,lag18_v1_rel,-18,v1,rel,adimensional; escala histórica L0
+89,lag18_v1_mascara,-18,v1,mascara,binaria 0/1
+90,lag18_v1_vecinas,-18,v1,vecinas,adimensional; escala histórica L0
+91,lag18_v2_rel,-18,v2,rel,adimensional; escala histórica L0
+92,lag18_v2_mascara,-18,v2,mascara,binaria 0/1
+93,lag18_v2_vecinas,-18,v2,vecinas,adimensional; escala histórica L0
+94,lag18_v3_rel,-18,v3,rel,adimensional; escala histórica L0
+95,lag18_v3_mascara,-18,v3,mascara,binaria 0/1
+96,lag18_v3_vecinas,-18,v3,vecinas,adimensional; escala histórica L0
+97,lag18_v4_rel,-18,v4,rel,adimensional; escala histórica L0
+98,lag18_v4_mascara,-18,v4,mascara,binaria 0/1
+99,lag18_v4_vecinas,-18,v4,vecinas,adimensional; escala histórica L0
+100,lag18_hora_sin,-18,tiempo,hora_sin,"adimensional [-1,1]"
+101,lag18_hora_cos,-18,tiempo,hora_cos,"adimensional [-1,1]"
+102,lag17_obj_rel,-17,obj,rel,adimensional; escala histórica L0
+103,lag17_obj_mascara,-17,obj,mascara,binaria 0/1
+104,lag17_obj_vecinas,-17,obj,vecinas,adimensional; escala histórica L0
+105,lag17_v1_rel,-17,v1,rel,adimensional; escala histórica L0
+106,lag17_v1_mascara,-17,v1,mascara,binaria 0/1
+107,lag17_v1_vecinas,-17,v1,vecinas,adimensional; escala histórica L0
+108,lag17_v2_rel,-17,v2,rel,adimensional; escala histórica L0
+109,lag17_v2_mascara,-17,v2,mascara,binaria 0/1
+110,lag17_v2_vecinas,-17,v2,vecinas,adimensional; escala histórica L0
+111,lag17_v3_rel,-17,v3,rel,adimensional; escala histórica L0
+112,lag17_v3_mascara,-17,v3,mascara,binaria 0/1
+113,lag17_v3_vecinas,-17,v3,vecinas,adimensional; escala histórica L0
+114,lag17_v4_rel,-17,v4,rel,adimensional; escala histórica L0
+115,lag17_v4_mascara,-17,v4,mascara,binaria 0/1
+116,lag17_v4_vecinas,-17,v4,vecinas,adimensional; escala histórica L0
+117,lag17_hora_sin,-17,tiempo,hora_sin,"adimensional [-1,1]"
+118,lag17_hora_cos,-17,tiempo,hora_cos,"adimensional [-1,1]"
+119,lag16_obj_rel,-16,obj,rel,adimensional; escala histórica L0
+120,lag16_obj_mascara,-16,obj,mascara,binaria 0/1
+121,lag16_obj_vecinas,-16,obj,vecinas,adimensional; escala histórica L0
+122,lag16_v1_rel,-16,v1,rel,adimensional; escala histórica L0
+123,lag16_v1_mascara,-16,v1,mascara,binaria 0/1
+124,lag16_v1_vecinas,-16,v1,vecinas,adimensional; escala histórica L0
+125,lag16_v2_rel,-16,v2,rel,adimensional; escala histórica L0
+126,lag16_v2_mascara,-16,v2,mascara,binaria 0/1
+127,lag16_v2_vecinas,-16,v2,vecinas,adimensional; escala histórica L0
+128,lag16_v3_rel,-16,v3,rel,adimensional; escala histórica L0
+129,lag16_v3_mascara,-16,v3,mascara,binaria 0/1
+130,lag16_v3_vecinas,-16,v3,vecinas,adimensional; escala histórica L0
+131,lag16_v4_rel,-16,v4,rel,adimensional; escala histórica L0
+132,lag16_v4_mascara,-16,v4,mascara,binaria 0/1
+133,lag16_v4_vecinas,-16,v4,vecinas,adimensional; escala histórica L0
+134,lag16_hora_sin,-16,tiempo,hora_sin,"adimensional [-1,1]"
+135,lag16_hora_cos,-16,tiempo,hora_cos,"adimensional [-1,1]"
+136,lag15_obj_rel,-15,obj,rel,adimensional; escala histórica L0
+137,lag15_obj_mascara,-15,obj,mascara,binaria 0/1
+138,lag15_obj_vecinas,-15,obj,vecinas,adimensional; escala histórica L0
+139,lag15_v1_rel,-15,v1,rel,adimensional; escala histórica L0
+140,lag15_v1_mascara,-15,v1,mascara,binaria 0/1
+141,lag15_v1_vecinas,-15,v1,vecinas,adimensional; escala histórica L0
+142,lag15_v2_rel,-15,v2,rel,adimensional; escala histórica L0
+143,lag15_v2_mascara,-15,v2,mascara,binaria 0/1
+144,lag15_v2_vecinas,-15,v2,vecinas,adimensional; escala histórica L0
+145,lag15_v3_rel,-15,v3,rel,adimensional; escala histórica L0
+146,lag15_v3_mascara,-15,v3,mascara,binaria 0/1
+147,lag15_v3_vecinas,-15,v3,vecinas,adimensional; escala histórica L0
+148,lag15_v4_rel,-15,v4,rel,adimensional; escala histórica L0
+149,lag15_v4_mascara,-15,v4,mascara,binaria 0/1
+150,lag15_v4_vecinas,-15,v4,vecinas,adimensional; escala histórica L0
+151,lag15_hora_sin,-15,tiempo,hora_sin,"adimensional [-1,1]"
+152,lag15_hora_cos,-15,tiempo,hora_cos,"adimensional [-1,1]"
+153,lag14_obj_rel,-14,obj,rel,adimensional; escala histórica L0
+154,lag14_obj_mascara,-14,obj,mascara,binaria 0/1
+155,lag14_obj_vecinas,-14,obj,vecinas,adimensional; escala histórica L0
+156,lag14_v1_rel,-14,v1,rel,adimensional; escala histórica L0
+157,lag14_v1_mascara,-14,v1,mascara,binaria 0/1
+158,lag14_v1_vecinas,-14,v1,vecinas,adimensional; escala histórica L0
+159,lag14_v2_rel,-14,v2,rel,adimensional; escala histórica L0
+160,lag14_v2_mascara,-14,v2,mascara,binaria 0/1
+161,lag14_v2_vecinas,-14,v2,vecinas,adimensional; escala histórica L0
+162,lag14_v3_rel,-14,v3,rel,adimensional; escala histórica L0
+163,lag14_v3_mascara,-14,v3,mascara,binaria 0/1
+164,lag14_v3_vecinas,-14,v3,vecinas,adimensional; escala histórica L0
+165,lag14_v4_rel,-14,v4,rel,adimensional; escala histórica L0
+166,lag14_v4_mascara,-14,v4,mascara,binaria 0/1
+167,lag14_v4_vecinas,-14,v4,vecinas,adimensional; escala histórica L0
+168,lag14_hora_sin,-14,tiempo,hora_sin,"adimensional [-1,1]"
+169,lag14_hora_cos,-14,tiempo,hora_cos,"adimensional [-1,1]"
+170,lag13_obj_rel,-13,obj,rel,adimensional; escala histórica L0
+171,lag13_obj_mascara,-13,obj,mascara,binaria 0/1
+172,lag13_obj_vecinas,-13,obj,vecinas,adimensional; escala histórica L0
+173,lag13_v1_rel,-13,v1,rel,adimensional; escala histórica L0
+174,lag13_v1_mascara,-13,v1,mascara,binaria 0/1
+175,lag13_v1_vecinas,-13,v1,vecinas,adimensional; escala histórica L0
+176,lag13_v2_rel,-13,v2,rel,adimensional; escala histórica L0
+177,lag13_v2_mascara,-13,v2,mascara,binaria 0/1
+178,lag13_v2_vecinas,-13,v2,vecinas,adimensional; escala histórica L0
+179,lag13_v3_rel,-13,v3,rel,adimensional; escala histórica L0
+180,lag13_v3_mascara,-13,v3,mascara,binaria 0/1
+181,lag13_v3_vecinas,-13,v3,vecinas,adimensional; escala histórica L0
+182,lag13_v4_rel,-13,v4,rel,adimensional; escala histórica L0
+183,lag13_v4_mascara,-13,v4,mascara,binaria 0/1
+184,lag13_v4_vecinas,-13,v4,vecinas,adimensional; escala histórica L0
+185,lag13_hora_sin,-13,tiempo,hora_sin,"adimensional [-1,1]"
+186,lag13_hora_cos,-13,tiempo,hora_cos,"adimensional [-1,1]"
+187,lag12_obj_rel,-12,obj,rel,adimensional; escala histórica L0
+188,lag12_obj_mascara,-12,obj,mascara,binaria 0/1
+189,lag12_obj_vecinas,-12,obj,vecinas,adimensional; escala histórica L0
+190,lag12_v1_rel,-12,v1,rel,adimensional; escala histórica L0
+191,lag12_v1_mascara,-12,v1,mascara,binaria 0/1
+192,lag12_v1_vecinas,-12,v1,vecinas,adimensional; escala histórica L0
+193,lag12_v2_rel,-12,v2,rel,adimensional; escala histórica L0
+194,lag12_v2_mascara,-12,v2,mascara,binaria 0/1
+195,lag12_v2_vecinas,-12,v2,vecinas,adimensional; escala histórica L0
+196,lag12_v3_rel,-12,v3,rel,adimensional; escala histórica L0
+197,lag12_v3_mascara,-12,v3,mascara,binaria 0/1
+198,lag12_v3_vecinas,-12,v3,vecinas,adimensional; escala histórica L0
+199,lag12_v4_rel,-12,v4,rel,adimensional; escala histórica L0
+200,lag12_v4_mascara,-12,v4,mascara,binaria 0/1
+201,lag12_v4_vecinas,-12,v4,vecinas,adimensional; escala histórica L0
+202,lag12_hora_sin,-12,tiempo,hora_sin,"adimensional [-1,1]"
+203,lag12_hora_cos,-12,tiempo,hora_cos,"adimensional [-1,1]"
+204,lag11_obj_rel,-11,obj,rel,adimensional; escala histórica L0
+205,lag11_obj_mascara,-11,obj,mascara,binaria 0/1
+206,lag11_obj_vecinas,-11,obj,vecinas,adimensional; escala histórica L0
+207,lag11_v1_rel,-11,v1,rel,adimensional; escala histórica L0
+208,lag11_v1_mascara,-11,v1,mascara,binaria 0/1
+209,lag11_v1_vecinas,-11,v1,vecinas,adimensional; escala histórica L0
+210,lag11_v2_rel,-11,v2,rel,adimensional; escala histórica L0
+211,lag11_v2_mascara,-11,v2,mascara,binaria 0/1
+212,lag11_v2_vecinas,-11,v2,vecinas,adimensional; escala histórica L0
+213,lag11_v3_rel,-11,v3,rel,adimensional; escala histórica L0
+214,lag11_v3_mascara,-11,v3,mascara,binaria 0/1
+215,lag11_v3_vecinas,-11,v3,vecinas,adimensional; escala histórica L0
+216,lag11_v4_rel,-11,v4,rel,adimensional; escala histórica L0
+217,lag11_v4_mascara,-11,v4,mascara,binaria 0/1
+218,lag11_v4_vecinas,-11,v4,vecinas,adimensional; escala histórica L0
+219,lag11_hora_sin,-11,tiempo,hora_sin,"adimensional [-1,1]"
+220,lag11_hora_cos,-11,tiempo,hora_cos,"adimensional [-1,1]"
+221,lag10_obj_rel,-10,obj,rel,adimensional; escala histórica L0
+222,lag10_obj_mascara,-10,obj,mascara,binaria 0/1
+223,lag10_obj_vecinas,-10,obj,vecinas,adimensional; escala histórica L0
+224,lag10_v1_rel,-10,v1,rel,adimensional; escala histórica L0
+225,lag10_v1_mascara,-10,v1,mascara,binaria 0/1
+226,lag10_v1_vecinas,-10,v1,vecinas,adimensional; escala histórica L0
+227,lag10_v2_rel,-10,v2,rel,adimensional; escala histórica L0
+228,lag10_v2_mascara,-10,v2,mascara,binaria 0/1
+229,lag10_v2_vecinas,-10,v2,vecinas,adimensional; escala histórica L0
+230,lag10_v3_rel,-10,v3,rel,adimensional; escala histórica L0
+231,lag10_v3_mascara,-10,v3,mascara,binaria 0/1
+232,lag10_v3_vecinas,-10,v3,vecinas,adimensional; escala histórica L0
+233,lag10_v4_rel,-10,v4,rel,adimensional; escala histórica L0
+234,lag10_v4_mascara,-10,v4,mascara,binaria 0/1
+235,lag10_v4_vecinas,-10,v4,vecinas,adimensional; escala histórica L0
+236,lag10_hora_sin,-10,tiempo,hora_sin,"adimensional [-1,1]"
+237,lag10_hora_cos,-10,tiempo,hora_cos,"adimensional [-1,1]"
+238,lag09_obj_rel,-9,obj,rel,adimensional; escala histórica L0
+239,lag09_obj_mascara,-9,obj,mascara,binaria 0/1
+240,lag09_obj_vecinas,-9,obj,vecinas,adimensional; escala histórica L0
+241,lag09_v1_rel,-9,v1,rel,adimensional; escala histórica L0
+242,lag09_v1_mascara,-9,v1,mascara,binaria 0/1
+243,lag09_v1_vecinas,-9,v1,vecinas,adimensional; escala histórica L0
+244,lag09_v2_rel,-9,v2,rel,adimensional; escala histórica L0
+245,lag09_v2_mascara,-9,v2,mascara,binaria 0/1
+246,lag09_v2_vecinas,-9,v2,vecinas,adimensional; escala histórica L0
+247,lag09_v3_rel,-9,v3,rel,adimensional; escala histórica L0
+248,lag09_v3_mascara,-9,v3,mascara,binaria 0/1
+249,lag09_v3_vecinas,-9,v3,vecinas,adimensional; escala histórica L0
+250,lag09_v4_rel,-9,v4,rel,adimensional; escala histórica L0
+251,lag09_v4_mascara,-9,v4,mascara,binaria 0/1
+252,lag09_v4_vecinas,-9,v4,vecinas,adimensional; escala histórica L0
+253,lag09_hora_sin,-9,tiempo,hora_sin,"adimensional [-1,1]"
+254,lag09_hora_cos,-9,tiempo,hora_cos,"adimensional [-1,1]"
+255,lag08_obj_rel,-8,obj,rel,adimensional; escala histórica L0
+256,lag08_obj_mascara,-8,obj,mascara,binaria 0/1
+257,lag08_obj_vecinas,-8,obj,vecinas,adimensional; escala histórica L0
+258,lag08_v1_rel,-8,v1,rel,adimensional; escala histórica L0
+259,lag08_v1_mascara,-8,v1,mascara,binaria 0/1
+260,lag08_v1_vecinas,-8,v1,vecinas,adimensional; escala histórica L0
+261,lag08_v2_rel,-8,v2,rel,adimensional; escala histórica L0
+262,lag08_v2_mascara,-8,v2,mascara,binaria 0/1
+263,lag08_v2_vecinas,-8,v2,vecinas,adimensional; escala histórica L0
+264,lag08_v3_rel,-8,v3,rel,adimensional; escala histórica L0
+265,lag08_v3_mascara,-8,v3,mascara,binaria 0/1
+266,lag08_v3_vecinas,-8,v3,vecinas,adimensional; escala histórica L0
+267,lag08_v4_rel,-8,v4,rel,adimensional; escala histórica L0
+268,lag08_v4_mascara,-8,v4,mascara,binaria 0/1
+269,lag08_v4_vecinas,-8,v4,vecinas,adimensional; escala histórica L0
+270,lag08_hora_sin,-8,tiempo,hora_sin,"adimensional [-1,1]"
+271,lag08_hora_cos,-8,tiempo,hora_cos,"adimensional [-1,1]"
+272,lag07_obj_rel,-7,obj,rel,adimensional; escala histórica L0
+273,lag07_obj_mascara,-7,obj,mascara,binaria 0/1
+274,lag07_obj_vecinas,-7,obj,vecinas,adimensional; escala histórica L0
+275,lag07_v1_rel,-7,v1,rel,adimensional; escala histórica L0
+276,lag07_v1_mascara,-7,v1,mascara,binaria 0/1
+277,lag07_v1_vecinas,-7,v1,vecinas,adimensional; escala histórica L0
+278,lag07_v2_rel,-7,v2,rel,adimensional; escala histórica L0
+279,lag07_v2_mascara,-7,v2,mascara,binaria 0/1
+280,lag07_v2_vecinas,-7,v2,vecinas,adimensional; escala histórica L0
+281,lag07_v3_rel,-7,v3,rel,adimensional; escala histórica L0
+282,lag07_v3_mascara,-7,v3,mascara,binaria 0/1
+283,lag07_v3_vecinas,-7,v3,vecinas,adimensional; escala histórica L0
+284,lag07_v4_rel,-7,v4,rel,adimensional; escala histórica L0
+285,lag07_v4_mascara,-7,v4,mascara,binaria 0/1
+286,lag07_v4_vecinas,-7,v4,vecinas,adimensional; escala histórica L0
+287,lag07_hora_sin,-7,tiempo,hora_sin,"adimensional [-1,1]"
+288,lag07_hora_cos,-7,tiempo,hora_cos,"adimensional [-1,1]"
+289,lag06_obj_rel,-6,obj,rel,adimensional; escala histórica L0
+290,lag06_obj_mascara,-6,obj,mascara,binaria 0/1
+291,lag06_obj_vecinas,-6,obj,vecinas,adimensional; escala histórica L0
+292,lag06_v1_rel,-6,v1,rel,adimensional; escala histórica L0
+293,lag06_v1_mascara,-6,v1,mascara,binaria 0/1
+294,lag06_v1_vecinas,-6,v1,vecinas,adimensional; escala histórica L0
+295,lag06_v2_rel,-6,v2,rel,adimensional; escala histórica L0
+296,lag06_v2_mascara,-6,v2,mascara,binaria 0/1
+297,lag06_v2_vecinas,-6,v2,vecinas,adimensional; escala histórica L0
+298,lag06_v3_rel,-6,v3,rel,adimensional; escala histórica L0
+299,lag06_v3_mascara,-6,v3,mascara,binaria 0/1
+300,lag06_v3_vecinas,-6,v3,vecinas,adimensional; escala histórica L0
+301,lag06_v4_rel,-6,v4,rel,adimensional; escala histórica L0
+302,lag06_v4_mascara,-6,v4,mascara,binaria 0/1
+303,lag06_v4_vecinas,-6,v4,vecinas,adimensional; escala histórica L0
+304,lag06_hora_sin,-6,tiempo,hora_sin,"adimensional [-1,1]"
+305,lag06_hora_cos,-6,tiempo,hora_cos,"adimensional [-1,1]"
+306,lag05_obj_rel,-5,obj,rel,adimensional; escala histórica L0
+307,lag05_obj_mascara,-5,obj,mascara,binaria 0/1
+308,lag05_obj_vecinas,-5,obj,vecinas,adimensional; escala histórica L0
+309,lag05_v1_rel,-5,v1,rel,adimensional; escala histórica L0
+310,lag05_v1_mascara,-5,v1,mascara,binaria 0/1
+311,lag05_v1_vecinas,-5,v1,vecinas,adimensional; escala histórica L0
+312,lag05_v2_rel,-5,v2,rel,adimensional; escala histórica L0
+313,lag05_v2_mascara,-5,v2,mascara,binaria 0/1
+314,lag05_v2_vecinas,-5,v2,vecinas,adimensional; escala histórica L0
+315,lag05_v3_rel,-5,v3,rel,adimensional; escala histórica L0
+316,lag05_v3_mascara,-5,v3,mascara,binaria 0/1
+317,lag05_v3_vecinas,-5,v3,vecinas,adimensional; escala histórica L0
+318,lag05_v4_rel,-5,v4,rel,adimensional; escala histórica L0
+319,lag05_v4_mascara,-5,v4,mascara,binaria 0/1
+320,lag05_v4_vecinas,-5,v4,vecinas,adimensional; escala histórica L0
+321,lag05_hora_sin,-5,tiempo,hora_sin,"adimensional [-1,1]"
+322,lag05_hora_cos,-5,tiempo,hora_cos,"adimensional [-1,1]"
+323,lag04_obj_rel,-4,obj,rel,adimensional; escala histórica L0
+324,lag04_obj_mascara,-4,obj,mascara,binaria 0/1
+325,lag04_obj_vecinas,-4,obj,vecinas,adimensional; escala histórica L0
+326,lag04_v1_rel,-4,v1,rel,adimensional; escala histórica L0
+327,lag04_v1_mascara,-4,v1,mascara,binaria 0/1
+328,lag04_v1_vecinas,-4,v1,vecinas,adimensional; escala histórica L0
+329,lag04_v2_rel,-4,v2,rel,adimensional; escala histórica L0
+330,lag04_v2_mascara,-4,v2,mascara,binaria 0/1
+331,lag04_v2_vecinas,-4,v2,vecinas,adimensional; escala histórica L0
+332,lag04_v3_rel,-4,v3,rel,adimensional; escala histórica L0
+333,lag04_v3_mascara,-4,v3,mascara,binaria 0/1
+334,lag04_v3_vecinas,-4,v3,vecinas,adimensional; escala histórica L0
+335,lag04_v4_rel,-4,v4,rel,adimensional; escala histórica L0
+336,lag04_v4_mascara,-4,v4,mascara,binaria 0/1
+337,lag04_v4_vecinas,-4,v4,vecinas,adimensional; escala histórica L0
+338,lag04_hora_sin,-4,tiempo,hora_sin,"adimensional [-1,1]"
+339,lag04_hora_cos,-4,tiempo,hora_cos,"adimensional [-1,1]"
+340,lag03_obj_rel,-3,obj,rel,adimensional; escala histórica L0
+341,lag03_obj_mascara,-3,obj,mascara,binaria 0/1
+342,lag03_obj_vecinas,-3,obj,vecinas,adimensional; escala histórica L0
+343,lag03_v1_rel,-3,v1,rel,adimensional; escala histórica L0
+344,lag03_v1_mascara,-3,v1,mascara,binaria 0/1
+345,lag03_v1_vecinas,-3,v1,vecinas,adimensional; escala histórica L0
+346,lag03_v2_rel,-3,v2,rel,adimensional; escala histórica L0
+347,lag03_v2_mascara,-3,v2,mascara,binaria 0/1
+348,lag03_v2_vecinas,-3,v2,vecinas,adimensional; escala histórica L0
+349,lag03_v3_rel,-3,v3,rel,adimensional; escala histórica L0
+350,lag03_v3_mascara,-3,v3,mascara,binaria 0/1
+351,lag03_v3_vecinas,-3,v3,vecinas,adimensional; escala histórica L0
+352,lag03_v4_rel,-3,v4,rel,adimensional; escala histórica L0
+353,lag03_v4_mascara,-3,v4,mascara,binaria 0/1
+354,lag03_v4_vecinas,-3,v4,vecinas,adimensional; escala histórica L0
+355,lag03_hora_sin,-3,tiempo,hora_sin,"adimensional [-1,1]"
+356,lag03_hora_cos,-3,tiempo,hora_cos,"adimensional [-1,1]"
+357,lag02_obj_rel,-2,obj,rel,adimensional; escala histórica L0
+358,lag02_obj_mascara,-2,obj,mascara,binaria 0/1
+359,lag02_obj_vecinas,-2,obj,vecinas,adimensional; escala histórica L0
+360,lag02_v1_rel,-2,v1,rel,adimensional; escala histórica L0
+361,lag02_v1_mascara,-2,v1,mascara,binaria 0/1
+362,lag02_v1_vecinas,-2,v1,vecinas,adimensional; escala histórica L0
+363,lag02_v2_rel,-2,v2,rel,adimensional; escala histórica L0
+364,lag02_v2_mascara,-2,v2,mascara,binaria 0/1
+365,lag02_v2_vecinas,-2,v2,vecinas,adimensional; escala histórica L0
+366,lag02_v3_rel,-2,v3,rel,adimensional; escala histórica L0
+367,lag02_v3_mascara,-2,v3,mascara,binaria 0/1
+368,lag02_v3_vecinas,-2,v3,vecinas,adimensional; escala histórica L0
+369,lag02_v4_rel,-2,v4,rel,adimensional; escala histórica L0
+370,lag02_v4_mascara,-2,v4,mascara,binaria 0/1
+371,lag02_v4_vecinas,-2,v4,vecinas,adimensional; escala histórica L0
+372,lag02_hora_sin,-2,tiempo,hora_sin,"adimensional [-1,1]"
+373,lag02_hora_cos,-2,tiempo,hora_cos,"adimensional [-1,1]"
+374,lag01_obj_rel,-1,obj,rel,adimensional; escala histórica L0
+375,lag01_obj_mascara,-1,obj,mascara,binaria 0/1
+376,lag01_obj_vecinas,-1,obj,vecinas,adimensional; escala histórica L0
+377,lag01_v1_rel,-1,v1,rel,adimensional; escala histórica L0
+378,lag01_v1_mascara,-1,v1,mascara,binaria 0/1
+379,lag01_v1_vecinas,-1,v1,vecinas,adimensional; escala histórica L0
+380,lag01_v2_rel,-1,v2,rel,adimensional; escala histórica L0
+381,lag01_v2_mascara,-1,v2,mascara,binaria 0/1
+382,lag01_v2_vecinas,-1,v2,vecinas,adimensional; escala histórica L0
+383,lag01_v3_rel,-1,v3,rel,adimensional; escala histórica L0
+384,lag01_v3_mascara,-1,v3,mascara,binaria 0/1
+385,lag01_v3_vecinas,-1,v3,vecinas,adimensional; escala histórica L0
+386,lag01_v4_rel,-1,v4,rel,adimensional; escala histórica L0
+387,lag01_v4_mascara,-1,v4,mascara,binaria 0/1
+388,lag01_v4_vecinas,-1,v4,vecinas,adimensional; escala histórica L0
+389,lag01_hora_sin,-1,tiempo,hora_sin,"adimensional [-1,1]"
+390,lag01_hora_cos,-1,tiempo,hora_cos,"adimensional [-1,1]"
+391,lag00_obj_rel,0,obj,rel,adimensional; escala histórica L0
+392,lag00_obj_mascara,0,obj,mascara,binaria 0/1
+393,lag00_obj_vecinas,0,obj,vecinas,adimensional; escala histórica L0
+394,lag00_v1_rel,0,v1,rel,adimensional; escala histórica L0
+395,lag00_v1_mascara,0,v1,mascara,binaria 0/1
+396,lag00_v1_vecinas,0,v1,vecinas,adimensional; escala histórica L0
+397,lag00_v2_rel,0,v2,rel,adimensional; escala histórica L0
+398,lag00_v2_mascara,0,v2,mascara,binaria 0/1
+399,lag00_v2_vecinas,0,v2,vecinas,adimensional; escala histórica L0
+400,lag00_v3_rel,0,v3,rel,adimensional; escala histórica L0
+401,lag00_v3_mascara,0,v3,mascara,binaria 0/1
+402,lag00_v3_vecinas,0,v3,vecinas,adimensional; escala histórica L0
+403,lag00_v4_rel,0,v4,rel,adimensional; escala histórica L0
+404,lag00_v4_mascara,0,v4,mascara,binaria 0/1
+405,lag00_v4_vecinas,0,v4,vecinas,adimensional; escala histórica L0
+406,lag00_hora_sin,0,tiempo,hora_sin,"adimensional [-1,1]"
+407,lag00_hora_cos,0,tiempo,hora_cos,"adimensional [-1,1]"

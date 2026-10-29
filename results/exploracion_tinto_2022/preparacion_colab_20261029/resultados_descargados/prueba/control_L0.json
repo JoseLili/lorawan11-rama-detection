@@ -1,0 +1,14 @@
+[
+  {
+    "matriz": "limpia_2022",
+    "diferencia_maxima_L0_guardado": 3.7228649191201058e-09,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_01_d50",
+    "diferencia_maxima_L0_guardado": 2.9637400658644175e-09,
+    "tolerancia": 1e-06,
+    "cumple": true
+  }
+]

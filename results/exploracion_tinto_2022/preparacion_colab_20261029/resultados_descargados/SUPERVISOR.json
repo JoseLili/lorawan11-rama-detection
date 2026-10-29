@@ -1,0 +1,9 @@
+{
+  "pid": 5217,
+  "inicio_UTC": "2026-10-29T19:11:29Z",
+  "script": "/content/ejecutar_colab_cli.py",
+  "root": "/content/tinto_evaluacion",
+  "salida": "/content/tinto_evaluacion/results/exploracion_tinto_2022/evaluacion_colab_20261029",
+  "intervalo_segundos": 300,
+  "python": "/content/tinto_eval_env/bin/python"
+}

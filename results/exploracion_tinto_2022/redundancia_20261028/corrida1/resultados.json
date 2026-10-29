@@ -1,0 +1,118 @@
+{
+  "ventanas": 19840,
+  "celdas_estacion_hora_por_rol": 476160,
+  "hora": {
+    "columnas_actuales": 48,
+    "columnas_suficientes_propuestas": 2,
+    "max_error_seno": 1.711427111139585e-08,
+    "max_error_coseno": 1.711427111139585e-08,
+    "singulares_hora": [
+      490.2915152086352,
+      485.565874876165,
+      2.7938022584489916e-06,
+      2.7656138109924843e-06,
+      1.6072793475562158e-06,
+      1.5906738787157877e-06,
+      1.4014718845073045e-06,
+      1.3885438254613356e-06,
+      4.867941174330303e-13,
+      3.7717491540510184e-13,
+      1.1866877651728077e-14,
+      7.205805673217806e-15,
+      5.9987295380727935e-15,
+      5.854974187042798e-15,
+      5.7193283111294714e-15,
+      5.498386289668748e-15,
+      5.029650944749893e-15,
+      4.87662131954853e-15,
+      4.561910543550828e-15,
+      4.531385581429328e-15,
+      4.5077265398542566e-15,
+      4.462986733530651e-15,
+      4.4490532177902975e-15,
+      4.4382599385090455e-15,
+      4.419226979060117e-15,
+      3.617072532248596e-15,
+      4.748894767829933e-21,
+      3.642955307492466e-21,
+      2.835569491036573e-21,
+      2.06211070804186e-21,
+      1.7076646132327893e-21,
+      1.406577160604352e-21,
+      6.565476211127164e-28,
+      1.1862215302497742e-28,
+      1.058595286492374e-28,
+      1.5042803002382539e-29,
+      1.435722737287709e-29,
+      1.1837309489004942e-29,
+      9.775822529008487e-30,
+      5.591508480107602e-30,
+      5.138451466701408e-30,
+      4.2351901903525374e-30,
+      3.23660177573795e-30,
+      2.3910524567406625e-30,
+      1.954287856315886e-30,
+      1.1313731101331332e-30,
+      6.823672069394225e-31,
+      2.875818280839009e-31
+    ],
+    "interpretacion": "Reconstruible a precisión float32 desde la hora final y desfases; no demuestra que eliminar toda hora sea inocuo."
+  },
+  "a14_objetivo": {
+    "coincidencias": 476129,
+    "celdas": 476160,
+    "discrepancias": 31,
+    "max_error_abs": 1.3553439518398576,
+    "rmse": 0.00256476278370384,
+    "depende_de": "Relativas y máscaras de las cinco estaciones visibles más escala del objetivo; disponibilidad de perfil puede requerir información adicional.",
+    "es_R3": false
+  },
+  "a14_vecinas": {
+    "roles_evaluados": 124,
+    "roles_con_contexto_externo": 120,
+    "interpretacion": "Una comparación de vecina con contexto externo no es algebraicamente reconstruible solo con estas cinco estaciones."
+  },
+  "mascaras": [
+    {
+      "rol": "obj",
+      "celdas": 476160,
+      "sin_lectura": 113601,
+      "relativa_cero_sin_lectura": 113601,
+      "relativa_cero_con_lectura": 1994
+    },
+    {
+      "rol": "v1",
+      "celdas": 476160,
+      "sin_lectura": 134607,
+      "relativa_cero_sin_lectura": 134607,
+      "relativa_cero_con_lectura": 1708
+    },
+    {
+      "rol": "v2",
+      "celdas": 476160,
+      "sin_lectura": 117267,
+      "relativa_cero_sin_lectura": 117267,
+      "relativa_cero_con_lectura": 1851
+    },
+    {
+      "rol": "v3",
+      "celdas": 476160,
+      "sin_lectura": 88794,
+      "relativa_cero_sin_lectura": 88794,
+      "relativa_cero_con_lectura": 2204
+    },
+    {
+      "rol": "v4",
+      "celdas": 476160,
+      "sin_lectura": 71100,
+      "relativa_cero_sin_lectura": 71100,
+      "relativa_cero_con_lectura": 2092
+    }
+  ],
+  "geografia": {
+    "estaciones_con_coordenadas": 32,
+    "ubicaciones_distintas": 32,
+    "objetivos_con_cinco_ubicaciones_distintas": 31,
+    "advertencia": "Una ubicación por estación no separa las 72 entradas hora/tipo de esa estación. Hace falta otra dimensión o canal; no se ha cambiado la representación."
+  }
+}

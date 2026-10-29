@@ -1,0 +1,13 @@
+{
+  "registro": "T1",
+  "fecha": "2026-10-29",
+  "estado": "Registrado antes de iniciar selección completa",
+  "autorizacion": "El tesista: Perfecto, entonces vamos con la siguiente parte",
+  "sha256": {
+    "experiments/exploracion_tinto/configuracion_entrenamiento_v1.json": "b4fff76c08e5661533bff85abbafe413374c7569a5e5993df9fd810720c1ec5c",
+    "experiments/exploracion_tinto/entrenar_tinto_l0.py": "d136ba42ed53f47d9f185c60a42b5dd567ad2553b423789d14a1f2db4ffd3d70",
+    "results/exploracion_tinto_2022/preparacion_20261029/cache_completa/LISTO.json": "039607fd3a36df46fb1ff0aa0be8824ee338a29839d8eed9f2cfee36ddf63131",
+    "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv": "3bf88df91ac3a120227557e02ad84191327b517568641af81806dcd4ae67f1a1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505"
+  }
+}

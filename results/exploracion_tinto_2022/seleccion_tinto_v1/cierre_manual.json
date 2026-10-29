@@ -1,0 +1,35 @@
+{
+  "fecha": "2026-10-29",
+  "motivo": "El tesista pidió no esperar ocho épocas sin mejora para ahorrar CPU y tokens",
+  "procesos_detenidos": true,
+  "exit_codes": [
+    130,
+    130
+  ],
+  "corridas": [
+    {
+      "corrida": 1,
+      "epocas_completas": 8,
+      "mejor_epoca_observada": 5,
+      "mejor_val_loss": 0.0263966787606477,
+      "sha256_pesos_hdf5_checkpoint": "625532e28eef21ecb5f3f16d7e624337f154256c81ebd0b6ca6a14a27796855d",
+      "parada": "Manual a pedido del tesista; no EarlyStopping completado",
+      "fuente_checkpoint": "results/exploracion_tinto_2022/seleccion_tinto_v1/corrida_cpu1/mejor_hasta_ahora.keras"
+    },
+    {
+      "corrida": 2,
+      "epocas_completas": 9,
+      "mejor_epoca_observada": 5,
+      "mejor_val_loss": 0.0263966787606477,
+      "sha256_pesos_hdf5_checkpoint": "625532e28eef21ecb5f3f16d7e624337f154256c81ebd0b6ca6a14a27796855d",
+      "parada": "Manual a pedido del tesista; no EarlyStopping completado",
+      "fuente_checkpoint": "results/exploracion_tinto_2022/seleccion_tinto_v1/corrida_cpu2/mejor_hasta_ahora.keras"
+    }
+  ],
+  "epocas_completas_comunes": 8,
+  "historias_comunes_identicas": true,
+  "contenido_pesos_checkpoint_identico": true,
+  "verificacion": "Igualdad SHA-256 del miembro model.weights.h5; sin cargar TensorFlow ni ejecutar más inferencia",
+  "regla_original_completada": false,
+  "reanudar_automaticamente": false
+}

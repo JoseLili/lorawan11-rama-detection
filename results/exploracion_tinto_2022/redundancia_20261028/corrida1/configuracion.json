@@ -1,0 +1,21 @@
+{
+  "alcance": "19 840 ventanas 2020–2021; descripción y reconstrucción, no selección de detector",
+  "entradas_modificadas": false,
+  "modelos_entrenados": false,
+  "tolerancia_hora_abs": 1e-07,
+  "tolerancia_a14": {
+    "atol": 1e-05,
+    "rtol": 1e-05
+  },
+  "sha256_fuentes": {
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/X_muestra.npy": "81381688bd28d1accc8a5b7a44f715ea388534650bdc046e37d19700661a7c6b",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/manifiesto_muestra.csv": "4caa9fae70165c21afa12b4eabd8f928086cb9fbf43d4be214a6a0fb025975e1",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/vecinas_y_escalas.json": "ed86d506b2bb541ef6843564c44fbd7fe7eb8a406689d6ef1a45bc0daca5ff0b",
+    "results/inventario_multianual/estaciones_geografia.csv": "f63ff37e546dfdabcf634f22a7aa86265a3fb369e2ee529c9753e691ee41bc37"
+  },
+  "sha256_codigo": "5b0d1539f9fc4ad005a809cea648a810f953995d5df64d047fe55c00603207bd",
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  }
+}

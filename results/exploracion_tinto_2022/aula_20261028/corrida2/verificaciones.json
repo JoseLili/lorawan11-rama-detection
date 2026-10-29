@@ -1,0 +1,33 @@
+{
+  "etiqueta_no_altera_imagen": true,
+  "etiquetas_de_ajuste_no_alteran_imagen": true,
+  "caracteristicas": 8,
+  "pixeles_ocupados_sin_difuminado": 8,
+  "pixeles_modificados_sin_difuminado": 1,
+  "posicion_F3_fila_columna": [
+    19,
+    24
+  ],
+  "pixeles_modificados_con_difuminado": 13,
+  "origen": "Transformación PCA recién ajustada sobre 64 filas inventadas; sin CNN ni detector",
+  "versiones": {
+    "TINTOlib": "1.3.1",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.10.9+dfsg1"
+  },
+  "python": "3.14.7",
+  "huellas_matrices": {
+    "sin_difuminado": [
+      "94f0092b4eb6a5117347f8067c0605529a450b604257b6aaa30dde88cba51491",
+      "3d775c94d1855d901bc347ab68051dc0c7e50e9416962493ba291a0443a4464f",
+      "94f0092b4eb6a5117347f8067c0605529a450b604257b6aaa30dde88cba51491"
+    ],
+    "con_difuminado": [
+      "ab905902647a5ede034bd23f4ff59128dd3e51f7a35c052911b93e0295b33947",
+      "c1bab408a03328dd5a67b2d0f24fea3a1ece16b00ac794d6d10ad75f910c511f",
+      "ab905902647a5ede034bd23f4ff59128dd3e51f7a35c052911b93e0295b33947"
+    ]
+  }
+}

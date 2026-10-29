@@ -1,0 +1,36 @@
+{
+  "etapas": {
+    "sintetica": {
+      "origen": "CNN recién entrenada para diagnóstico, no cargada",
+      "ejemplos": 64,
+      "positivas": 32,
+      "parametros": 34081,
+      "perdida_inicial": 0.6901665925979614,
+      "perdida_final": 0.13995561003684998,
+      "exactitud_sobre_los_mismos_ejemplos": 1.0,
+      "pesos_cambiaron": true,
+      "valores_finitos": true,
+      "cumple_criterio": false,
+      "sha256_pesos": "95163475ad40ae0a202f7d84c056f238bf871a0ec98d3d193ea574884237fd9a"
+    },
+    "real_memorizacion": {
+      "origen": "CNN recién entrenada para diagnóstico, no cargada",
+      "ejemplos": 64,
+      "positivas": 32,
+      "parametros": 34081,
+      "perdida_inicial": 0.6935828328132629,
+      "perdida_final": 0.4465916156768799,
+      "exactitud_sobre_los_mismos_ejemplos": 0.78125,
+      "pesos_cambiaron": true,
+      "valores_finitos": true,
+      "cumple_criterio": true,
+      "sha256_pesos": "5308a02650f5131b42a4f146891780d6b147095e3972744e6d4abca0ab628e46"
+    }
+  },
+  "todos_pasan": false,
+  "advertencia": "Exactitud y pérdida calculadas en entrenamiento; no estiman precisión, recall ni rendimiento en datos nuevos.",
+  "memoria": {
+    "bytes_imagen_float32": 4096,
+    "bytes_tensor_completo_1357800": 5561548800
+  }
+}

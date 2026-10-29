@@ -1,0 +1,47 @@
+{
+  "alcance": "Prueba técnica sin validación ni métricas de detección; no modelo definitivo",
+  "representacion": "408 entradas; mapa PCA de TINTO cargado, asignación única propia 32×32; sin difuminado",
+  "origen_mapa": "Ajustado previamente con 19 840 ventanas 2020–2021; no se considera holdout al subconjunto piloto",
+  "arquitectura": [
+    "Input(32,32,1)",
+    "Conv2D(8,3,same,relu)",
+    "MaxPool2D(2)",
+    "Conv2D(16,3,same,relu)",
+    "MaxPool2D(2)",
+    "Flatten",
+    "Dense(32,relu)",
+    "Dropout(0.2)",
+    "Dense(1,sigmoid)"
+  ],
+  "entrenamiento": {
+    "semilla": 42,
+    "epocas": 60,
+    "batch": 64,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "binary_crossentropy",
+    "pesos_clase": false,
+    "shuffle": true
+  },
+  "etapas": [
+    "64 ejemplos inventados con señal artificial conocida",
+    "64 ventanas reales de 2020: 32 positivas y 32 negativas, prueba de memorización"
+  ],
+  "criterio_sintetica": "Pérdida final < 0.1 y exactitud de entrenamiento >= 0.95; prueba de funcionamiento, no generalización",
+  "criterio_real": "Pérdidas finitas, pesos cambian y pérdida de entrenamiento final < inicial; no umbrales ni prueba independiente",
+  "seleccion": "Muestreo sin reemplazo con [42,29,0], solo 2020; balance exclusivo del diagnóstico, no del entrenamiento principal",
+  "sin_ajustes_posteriores": "No aumentar épocas ni cambiar arquitectura para hacer pasar el piloto; informar cualquier fallo",
+  "fuentes": {
+    "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv": "3bf88df91ac3a120227557e02ad84191327b517568641af81806dcd4ae67f1a1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/X_muestra.npy": "81381688bd28d1accc8a5b7a44f715ea388534650bdc046e37d19700661a7c6b",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/manifiesto_muestra.csv": "4caa9fae70165c21afa12b4eabd8f928086cb9fbf43d4be214a6a0fb025975e1"
+  },
+  "codigo": "790b7f05b7b99828e438dfc458ec365c1519cc458c44ca8e2130e8bd60ec3fe9",
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "tensorflow": "2.22.0rc0",
+    "keras-nightly": "3.16.0.dev2026092204"
+  }
+}

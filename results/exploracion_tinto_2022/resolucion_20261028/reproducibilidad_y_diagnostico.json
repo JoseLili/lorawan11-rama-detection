@@ -1,0 +1,102 @@
+{
+  "corridas": [
+    "corrida1",
+    "corrida2"
+  ],
+  "archivos_numericos_identicos": 41,
+  "tiempos_excluidos": true,
+  "posiciones_continuas_distintas_L0": 400,
+  "grupos_coincidentes_exactos": [
+    [
+      "lag23_hora_sin",
+      "lag05_hora_cos"
+    ],
+    [
+      "lag23_hora_cos",
+      "lag17_hora_sin"
+    ],
+    [
+      "lag20_hora_sin",
+      "lag02_hora_cos"
+    ],
+    [
+      "lag19_hora_cos",
+      "lag13_hora_sin"
+    ],
+    [
+      "lag14_hora_cos",
+      "lag08_hora_sin"
+    ],
+    [
+      "lag13_hora_cos",
+      "lag07_hora_sin"
+    ],
+    [
+      "lag11_hora_cos",
+      "lag05_hora_sin"
+    ],
+    [
+      "lag06_hora_cos",
+      "lag00_hora_sin"
+    ]
+  ],
+  "implicacion": "Las coincidencias continuas exactas permanecen a cualquier resolución con este mapa; aumentar pixels no garantiza separarlas.",
+  "max_diferencia_entrada_por_par_horario": [
+    {
+      "columnas": [
+        "lag23_hora_sin",
+        "lag05_hora_cos"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag23_hora_cos",
+        "lag17_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag20_hora_sin",
+        "lag02_hora_cos"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag19_hora_cos",
+        "lag13_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag14_hora_cos",
+        "lag08_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag13_hora_cos",
+        "lag07_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag11_hora_cos",
+        "lag05_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    },
+    {
+      "columnas": [
+        "lag06_hora_cos",
+        "lag00_hora_sin"
+      ],
+      "max_abs": 1.8369701465288538e-16
+    }
+  ]
+}

@@ -268,6 +268,7 @@ resultados.
 | 17 | 2026-10-25 | **Examen final** de la estación-día con 2025 (enero a diciembre) y 2026 (enero a julio), una sola vez: detectores congelados (L0 por δ, el L0 único de la revisión 16, R3 y V4), umbrales p99 y p99.9 de 2023 limpio, 10 calendarios nuevos por año, con su versión de hora de inicio al azar, e intervalos de confianza. No se elige ni se ajusta nada | El paso 4 del plan del 2026-10-25. Se registró **antes** de generar cualquier calendario o matriz de 2025–2026 para la parte 2. **Aprobada por el tesista el 2026-10-25**, antes de la revisión con el asesor, por decisión suya |
 | 18 | 2026-10-26 | Comparación justa con el V4 tras la junta con el asesor: (a) el V4 calificado en las mismas estación-días que L0 y R3; (b) un **V4 supervisado** (V4S): las entradas y la arquitectura del V4 más la propia estación, entrenado con los calendarios y las etiquetas de L0; (c) una gráfica del V4S contra el L0 único en el mismo escenario de δ, que sustituye a la comparación con el bit flipping. Se evalúa en 2024 y una sola vez en 2025–2026. Las tablas del examen final no se tocan | El asesor (2026-10-26) señaló que comparar L0 (supervisado) contra el V4 (no supervisado) es injusto, y que la gráfica contra el bit flipping compara alteraciones distintas. Se registró **después** de ver el examen final y **antes** de programar o entrenar nada. Borrador de Claude a pedido del tesista, **aprobado por el tesista el 2026-10-27** con la regla «peras con peras» |
 | 18b | 2026-10-27 | Un segundo V4S, **compartido**: un solo modelo para las 31 estaciones, como L0, con las mismas entradas del V4 pero las otras 32 estaciones ordenadas por distancia. Los dos V4S van al examen, sin elegir entre ellos. La comparación principal, fijada por principio y no por resultados, es L0 único contra el V4S compartido; el V4S por estación queda como contraste | La comprobación con 2022 del V4S por estación (`progreso.md`, 2026-10-27): 11 de 31 modelos no aprendieron (ROC-AUC de 0.505), la desventaja declarada en la revisión 18 antes de entrenar. El cambio fortalece al rival de L0. Se registró **después** de ver el V4S por estación en 2022 y **antes** de programar el compartido o de evaluar cualquier V4S en 2023–2026. **Aprobada por el tesista el 2026-10-27** («Va. Hazlo») |
+| T1 | 2026-10-29 | Exploración TINTO-PCA con asignación única propia 32 × 32, 408 entradas idénticas a L0; una CNN de 34 081 parámetros, selección 2020–2021/2022 y dos entrenamientos reproducibles. Sin años de examen | Solicitada por el asesor y desarrollada con el tesista; configuración y código registrados antes del entrenamiento completo. Autorizada por el tesista en este chat el 2026-10-29. Los números 20/21 reservados a otras líneas no se ocupan |
 
 ### Revisión 1 (2026-10-13)
 
@@ -2283,3 +2284,76 @@ correr nada. Corrida el 2026-10-25; resultado al final de esta sección.
     calendarios de entrenamiento (E = 3) en lugar del patrón relativo.
 - **Detalle:** en `results/anomalias_red_v1/revision18/`, `logs_revision18/` y `progreso.md`
   (2026-10-27).
+
+
+### Revisión T1 (2026-10-29): selección TINTO-PCA con asignación única
+
+**Autorización:** el tesista pidió continuar con registro y selección completa
+(«Perfecto, entonces vamos con la siguiente parte»). Registro previo a entrenar
+el conjunto completo; esta etapa NO permite evaluar 2023–2026.
+
+- Un solo candidato: 408 entradas de L0, no hora compacta ni canales. Mapa PCA
+  de TINTO y escalador congelados del ajuste con 19 840 ventanas auditadas de
+  2020–2021; asignación uno a uno propia a píxeles 32 × 32, sin difuminado.
+  Esta variante modifica la rasterización de TINTO, no se presenta como su
+  implementación original. Los valores fuera del rango MinMax no se recortan.
+- Mismas ventanas/etiquetas/muestreo que L0: 1 357 800 de ajuste 2020–2021,
+  veinte calendarios d50, y 339 450 de validación 2022 de calendarios 01–10.
+  Se conserva sigma heredada L0 2020–2022 y escala a14 con 2020–2021 limpio.
+- CNN: Conv2D 8/16 filtros 3 × 3, same, ReLU, cada una seguida de MaxPool 2;
+  Flatten, densa 32 ReLU, dropout 0.2, sigmoide (34 081 parámetros).
+  Adam 0.001, BCE, batch 64, semilla 42, CPU, barajado sin reemplazo por ciclo,
+  sin pesos de clase, sin balanceo y sin aumentación.
+- Máximo 60 épocas, EarlyStopping sobre val_loss, paciencia 8, min_delta 0,
+  mejores pesos. E es la primera época con mínimo val_loss. Dos corridas,
+  mismos datos/configuración, comparar pesos/historias/probabilidades de control.
+- Se conserva el piloto sintético no aprobado bajo su límite de pérdida <0.1.
+  La revisión verificó conversión, etiquetas y aprendizaje; no se cambia ese
+  límite ni se usa su exactitud de entrenamiento para afirmar detección.
+- Comparador futuro: L0 único d50 de SELECCIÓN, cargado de disco, mismas
+  estación-días (promedio diario, mínimo 12 horas), p99/p99.9 exploratorios en
+  2022 limpio. Esta ejecución selecciona E, no prueba superioridad ni decide
+  acceso al examen. 2022 ya fue reutilizado: la comparación será exploratoria.
+- Antes de resultados científicos no se modifica arquitectura, época por gusto,
+  mapa o escalador. Se guardan avances y mejor checkpoint; solo el criterio
+  val_loss registrado decide la parada. No se lanzan otros candidatos.
+- Fuentes congeladas: `experiments/exploracion_tinto/configuracion_entrenamiento_v1.json`,
+  `entrenar_tinto_l0.py` y `runbook_entrenamiento_v1.md` en esa carpeta;
+  hashes previos en `results/exploracion_tinto_2022/seleccion_tinto_v1/registro_previo.json`.
+  Las salidas no sustituyen modelos ni tablas de L0/V4/V4S.
+
+
+**Ajuste técnico T1, antes de la primera época completa (2026-10-29):**
+la prueba local de CPU mostró menor tiempo por lote con oneDNN habilitado;
+dos repeticiones pequeñas con ese entorno dieron pesos y probabilidades
+idénticos. Se interrumpieron las dos corridas originales antes de completar
+una época o calcular resultados de validación completos. Se reinician como
+`corrida_cpu1/2`, con `TF_ENABLE_ONEDNN_OPTS=1`, dos hilos intra-op y uno
+inter-op, solo CPU; operación determinista solicitada. No cambia arquitectura,
+datos ni regla de parada y no se selecciona por métricas. XLA no se adopta:
+la prueba técnica indicó que el modelo no lo admite. Registro adicional
+`registro_runtime_cpu.json`; se conserva el registro anterior y las salidas
+parciales. Comparación final entre las dos corridas del mismo entorno.
+
+**Cierre manual T1, 2026-10-29, por indicación del tesista:** se interrumpen las
+dos corridas para ahorrar CPU y tokens, sin esperar ocho épocas sin mejora.
+La primera completó ocho épocas y estaba validando la novena; la segunda
+completó nueve y comenzó la décima. La mejor observada en ambas fue la 5.
+Se conserva ese checkpoint; ocho épocas comunes tienen historia idéntica y
+el contenido interno HDF5 de ambos checkpoints es idéntico por SHA-256.
+No se carga otro modelo ni se continúa entrenando para esta verificación.
+Se documenta como parada manual posterior a observar el avance, NO como
+cumplimiento de EarlyStopping ni como prueba de que no habría mejoras futuras.
+Constancia y modelos preservados en `seleccion_tinto_v1/cierre_manual/`.
+
+### T1 — cierre documentado el 2026-10-29
+
+La selección terminó manualmente por indicación del tesista; se conservó la
+época5, sin presentar EarlyStopping completado. Evaluación posterior autorizada
+solo2022: dos corridas CPU idénticas con TINTO/L0 cargados, diez calendarios,
+δ100/50/20 y p99/p99.9; L0 supera F1/recall en seis condiciones. F̄ p99
+descriptiva0.3083/0.3550. No se convierte retrospectivamente en adoptada la
+regla propuesta de avance, ni se autoriza usar examen por este cierre.
+Se conservan todos los resultados y límites. Ver
+[cierre integral T1](cierre_exploracion_tinto_t1.md), incluidas fichas de las
+imágenes reales solicitadas por el tesista. No cambia ninguna revisión previa.

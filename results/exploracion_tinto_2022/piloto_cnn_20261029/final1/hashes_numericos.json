@@ -1,0 +1,11 @@
+{
+  "configuracion_previa.json": "d9adfdddfa1d484294c2adc54d30640cd7315c2ca72de287de025963819c39b6",
+  "etiquetas_reales_piloto.npy": "ad14dd5ac19f4a148ce31d0367c3a23fabc1dcc32151a89fa0307e005dd531ca",
+  "imagenes_reales_piloto.npy": "8c860f9fb636b1b879a5fa206f669667d9329539faf40dbe0f373a5769c5ca14",
+  "manifiesto_piloto.csv": "cf92d0af28413a23709b035dc0f93e406a37aebb0e4e4263fb0af1cf1de9a7e9",
+  "real_memorizacion/historia.csv": "a2d048a54684938edaf47988bef21a24ec124e874ced40ec6c7e1c98539cbb84",
+  "real_memorizacion/probabilidades_entrenamiento.npy": "c43b75366b4235d723417f583f2c5140ff9d77a532c66c8b0407cb54881412bd",
+  "resultados.json": "b95ec42e71ab286c755e4605f3fb00fb810a03470e37ebc9eb424732d462a8fa",
+  "sintetica/historia.csv": "17e2f9ab071188d7a122f56e66220de2813ecdcde500d1a1df1a9bc3a96b9ee0",
+  "sintetica/probabilidades_entrenamiento.npy": "4d37522c5d50ff80c0760093f3ed8a8cff0342b6a946541fceb62233254a58b4"
+}

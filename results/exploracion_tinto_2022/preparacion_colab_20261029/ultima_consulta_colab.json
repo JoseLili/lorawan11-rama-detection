@@ -1,0 +1,85 @@
+{
+  "salida": "/content/tinto_evaluacion/results/exploracion_tinto_2022/evaluacion_colab_20261029",
+  "existe": true,
+  "SUPERVISOR.json": {
+    "pid": 5217,
+    "inicio_UTC": "2026-10-29T19:11:29Z",
+    "script": "/content/ejecutar_colab_cli.py",
+    "root": "/content/tinto_evaluacion",
+    "salida": "/content/tinto_evaluacion/results/exploracion_tinto_2022/evaluacion_colab_20261029",
+    "intervalo_segundos": 300,
+    "python": "/content/tinto_eval_env/bin/python"
+  },
+  "ESTADO_EVALUACION.json": {
+    "fase": "evaluacion_paralela",
+    "actualizado_UTC": "2026-10-29T19:11:46Z",
+    "inicio_UTC": "2026-10-29T19:11:29Z",
+    "supervisor_pid": 5217,
+    "corridas": [
+      {
+        "corrida": "corrida1",
+        "pid": 5293,
+        "estado": "en_curso",
+        "codigo_salida": null,
+        "matrices_con_puntajes": 0,
+        "matrices_esperadas": 31
+      },
+      {
+        "corrida": "corrida2",
+        "pid": 5294,
+        "estado": "en_curso",
+        "codigo_salida": null,
+        "matrices_con_puntajes": 0,
+        "matrices_esperadas": 31
+      }
+    ]
+  },
+  "supervisor_proceso": {
+    "pid": 5217,
+    "vivo": true,
+    "estado": "S"
+  },
+  "posible_interrupcion": false,
+  "inspeccion_corridas": [
+    {
+      "corrida": "corrida1",
+      "proceso": {
+        "pid": 5293,
+        "vivo": true,
+        "estado": "S"
+      },
+      "matrices_con_puntajes": 0,
+      "bootstrap_listo": false,
+      "marcador_listo": false,
+      "ultimas_lineas_log": "WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301107.622523    5293 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301107.623795    5293 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\nWARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301110.760291    5293 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301110.761001    5293 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\n"
+    },
+    {
+      "corrida": "corrida2",
+      "proceso": {
+        "pid": 5294,
+        "vivo": true,
+        "estado": "R"
+      },
+      "matrices_con_puntajes": 0,
+      "bootstrap_listo": false,
+      "marcador_listo": false,
+      "ultimas_lineas_log": "WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301107.605853    5294 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301107.607124    5294 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\nWARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301110.899102    5294 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301110.899855    5294 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\n"
+    }
+  ],
+  "zip_disponible": false,
+  "lista_para_descargar": false,
+  "prueba_log_final": "WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301090.385950    5218 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301090.386785    5218 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\nWARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nI0000 00:00:1793301092.130146    5218 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nI0000 00:00:1793301092.130647    5218 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.\nlimpia_2022: puntajes diarios guardados\nentrenamiento_01_d50: puntajes diarios guardados\n",
+  "preparacion_completa": true,
+  "preparacion": {
+    "paquete_sha256": "41b46b9c2adb386e7683c9848d4c5c0cd7974c8c6dca6073f1d5506542121a54",
+    "archivos_verificados": 136,
+    "python": "/content/tinto_eval_env/bin/python",
+    "versiones": {
+      "python": "3.14.7",
+      "tensorflow": "2.22.0-rc0",
+      "keras": "3.16.0.dev2026092204"
+    },
+    "solo_CPU": true,
+    "modelos_entrenados": false
+  }
+}

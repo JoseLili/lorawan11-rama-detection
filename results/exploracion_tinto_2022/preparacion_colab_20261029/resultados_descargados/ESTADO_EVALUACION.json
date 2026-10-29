@@ -1,0 +1,25 @@
+{
+  "fase": "completa",
+  "actualizado_UTC": "2026-10-29T19:46:48Z",
+  "inicio_UTC": "2026-10-29T19:11:29Z",
+  "supervisor_pid": 5217,
+  "corridas": [
+    {
+      "corrida": "corrida1",
+      "pid": 5293,
+      "estado": "completa",
+      "codigo_salida": 0,
+      "matrices_con_puntajes": 31,
+      "matrices_esperadas": 31
+    },
+    {
+      "corrida": "corrida2",
+      "pid": 5294,
+      "estado": "completa",
+      "codigo_salida": 0,
+      "matrices_con_puntajes": 31,
+      "matrices_esperadas": 31
+    }
+  ],
+  "reproducible": true
+}

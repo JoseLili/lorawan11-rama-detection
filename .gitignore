@@ -73,3 +73,13 @@ logs_revision17/
 logs_revision18/
 # Revisión 18: puntajes por estación-día (47 MB), se regeneran con evaluar_revision18.py
 results/anomalias_red_v1/revision18/dias_*.csv.gz
+
+# TINTO T1: entradas/caches grandes y paquetes de transporte regenerables
+results/exploracion_tinto_2022/auditoria_l0_20261028/*/X_muestra.npy
+results/exploracion_tinto_2022/auditoria_l0_20261028/*/tabla_408_muestra.csv
+results/exploracion_tinto_2022/auditoria_l0_20261028/*/manifiesto_entrenamiento.csv.gz
+results/exploracion_tinto_2022/preparacion_20261029/cache_*/X_*.npy
+results/exploracion_tinto_2022/preparacion_20261029/cache_*/y_*.npy
+results/exploracion_tinto_2022/preparacion_20261029/cache_*/manifiesto_*.csv.gz
+results/exploracion_tinto_2022/preparacion_colab_20261029/*.tar.gz
+results/exploracion_tinto_2022/preparacion_colab_20261029/*.zip

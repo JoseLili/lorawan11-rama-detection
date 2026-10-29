@@ -1,0 +1,47 @@
+{
+  "objetivo": "SAC",
+  "vecinas": [
+    "NEZ",
+    "UIZ",
+    "UAX",
+    "TAH"
+  ],
+  "calendario": "entrenamiento_01",
+  "delta_pct": 50,
+  "episodio": 44,
+  "signo": 1,
+  "inicio": "2022-01-16 00:00:00",
+  "fin": "2022-01-16 23:00:00",
+  "seleccion": "Primer episodio 2022 por inicio/estación/id; primera ventana completa con >=12 observaciones objetivo y dato final; sin mirar predicciones",
+  "pixeles_ocupados": 408,
+  "vacios": 616,
+  "pixeles_cambiados": 96,
+  "escala_visual_comun": [
+    0.0,
+    1.0
+  ],
+  "escala_diferencia": [
+    -0.27296212315559387,
+    0.27296212315559387
+  ],
+  "valores_fuera_0_1": [
+    0,
+    0
+  ],
+  "modelos_cargados": false,
+  "entrenamiento": false,
+  "predicciones_nuevas": false,
+  "fuentes_sha256": {
+    "results/anomalias_red_v1/matrices/matriz_limpia_2020_2022.csv.gz": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+    "results/anomalias_red_v1/matrices/matriz_entrenamiento_01_d50.csv.gz": "a3d4cb88257df205cefd5d944389f49da868012a6c515d1805c59abbf614e215",
+    "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv": "3bf88df91ac3a120227557e02ad84191327b517568641af81806dcd4ae67f1a1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/vecinas_y_escalas.json": "ed86d506b2bb541ef6843564c44fbd7fe7eb8a406689d6ef1a45bc0daca5ff0b",
+    "results/anomalias_red_v1/planes/plan_entrenamiento_01.csv": "c7c2991a50ec3a517c82d6cb61ae126badb25c038ea172ffbcf677eadba05ac9"
+  },
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "matplotlib": "3.11.2"
+  }
+}

@@ -1,0 +1,9 @@
+lado,bloque,columnas,ocultas_original,ocultas_compacta,recuperadas,nuevas_ocultas
+32,todas_comunes,362,339,341,8,10
+32,sensores_360,360,339,341,8,10
+64,todas_comunes,362,323,322,13,12
+64,sensores_360,360,323,322,13,12
+128,todas_comunes,362,285,274,34,23
+128,sensores_360,360,285,274,34,23
+256,todas_comunes,362,222,212,58,48
+256,sensores_360,360,222,212,58,48

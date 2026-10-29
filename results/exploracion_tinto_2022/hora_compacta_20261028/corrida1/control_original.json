@@ -1,0 +1,10 @@
+{
+  "resoluciones_408_reproducidas": [
+    32,
+    64,
+    128,
+    256
+  ],
+  "mapas_e_imagenes_identicos": true,
+  "reconstruccion_hora_validada_atol": 1e-07
+}

@@ -1,0 +1,30 @@
+{
+  "forma_sensores_por_ventana": [
+    24,
+    5,
+    3
+  ],
+  "tipos": [
+    "relativa",
+    "mascara",
+    "comparacion_a14"
+  ],
+  "roles": [
+    "objetivo",
+    "vecina1",
+    "vecina2",
+    "vecina3",
+    "vecina4"
+  ],
+  "forma_hora_original": [
+    24,
+    2
+  ],
+  "forma_hora_compacta": [
+    2
+  ],
+  "ventanas_reconstruidas_original": 19840,
+  "error_maximo_original": 0.0,
+  "mapa": "Roles locales, no coordenadas geográficas; posición temporal explícita",
+  "advertencia": "Los canales de sensores no forman una entrada completa sin el bloque horario; aún no hay arquitectura CNN definida."
+}

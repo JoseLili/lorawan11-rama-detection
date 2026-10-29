@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-10-29",
+  "TF_ENABLE_ONEDNN_OPTS": "1",
+  "TF_NUM_INTRAOP_THREADS": "2",
+  "TF_NUM_INTEROP_THREADS": "1",
+  "dispositivo": "CPU",
+  "sha256_codigo": "3c671260e10a92de64bbcfcc3added1ccb48058ef91bf2d23e0dbc1bae9c3386",
+  "motivo": "Rendimiento CPU y repetición técnica, sin mirar épocas completas ni métricas de validación",
+  "tiempos_tecnicos_seg_por_lote_con_carga": {
+    "sin_oneDNN": 0.027179571875001328,
+    "con_oneDNN": 0.01654519784999593
+  },
+  "prueba_repeticion_pesos_identicos": true,
+  "salidas": [
+    "corrida_cpu1",
+    "corrida_cpu2"
+  ]
+}

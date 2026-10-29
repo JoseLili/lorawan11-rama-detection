@@ -1,0 +1,19 @@
+{
+  "dos_ejecuciones_identicas": true,
+  "archivos_identicos": 10,
+  "recuperacion_408_pixeles_comprobada": true,
+  "fuente_numerica_exacta": "NPY float32; CSV solo consulta decimal",
+  "hora_y_mascaras_iguales_en_ejemplo": true,
+  "sha256": {
+    "01_comparacion_real.png": "7c534f42ce2ebf43347217efb9b23bb2b95489423dfe00d690b2c922bab8523d",
+    "02_leyenda_mapa.png": "0a1f8fb5aae459b7ee55c84dfad24e55a082e945db66bd234714af0a2454f84b",
+    "diferencia_32x32.npy": "884f0d9d52b9a99350cf149250a795a494e97f43dcc49efc1ac5765f47344d5d",
+    "entrada_alterada_24x17.npy": "aeadf83e9d5857e3e648d8c00d091fec21514516ca01c0e32b3f87a60b139e4b",
+    "entrada_limpia_24x17.npy": "d375068fc69f8e403f2d1aa04cf90fb39f727138cbd272937d591ab8774cb8d8",
+    "imagen_alterada_32x32.npy": "b89939cda6e93309c6ef2843ea61d2bd3a3eca1fd16dc573e33e5ba70271f9c0",
+    "imagen_limpia_32x32.npy": "bb6ca8339130d21783812a9f6cdddedc2c4eb4ae0a891288305fc53553e67740",
+    "metadatos.json": "96710ed271c09f9e6f9cfb40cd6a1c2f19904501ca942a5a8170bc5e94399dae",
+    "trazabilidad_408.csv": "ffe9e63c482f8716d131b59e2a621d47bbafe71ce3aa0a0858042e4ab7824c2b",
+    "ventana_ozono_ppb.csv": "a09ebc1b623a0116a2156e78505577d5816704b91dc09a434cd73872a723fba8"
+  }
+}

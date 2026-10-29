@@ -1,0 +1,54 @@
+{
+  "actualizado_UTC": "2026-10-29T20:12:30.748401+00:00",
+  "fase": "completa_descargada_verificada_sesion_liberada",
+  "cli": "/home/kali-lab-jelb/.venvs/colab-cli/bin/colab",
+  "sesion": "tinto-eval-20261029",
+  "navegador_autorizado": false,
+  "paquete_local": "/home/kali-lab-jelb/MaestriaPCIC/Tesis/lorawan11-rama-detection/results/exploracion_tinto_2022/preparacion_colab_20261029/tinto_evaluacion_2022_20261029.tar.gz",
+  "paquete_sha256": "41b46b9c2adb386e7683c9848d4c5c0cd7974c8c6dca6073f1d5506542121a54",
+  "objetivo": "Evaluacion exploratoria 2022 TINTO epoca 5 y L0 congelados, dos corridas CPU paralelas",
+  "ultimo_aviso": "Evaluacion terminada: L0 supera F1 TINTO en seis condiciones exploratorias; archivos verificados; sesion liberada y seguimiento eliminado.",
+  "automation_id": "revisar-evaluaci-n-tinto-en-colab",
+  "intervalo_monitor_minutos": 5,
+  "paquete_remoto": "/content/tinto_evaluacion_2022_20261029.tar.gz",
+  "paquete_verificado_remoto": true,
+  "hardware": "CPU",
+  "cpus": 2,
+  "python_kernel": "3.13.18",
+  "sesion_id": "m-s-use4a6-36pvzrrruorus",
+  "log_preparacion_remoto": "/content/preparacion_tinto.log",
+  "marcador_preparacion": "/content/tinto_evaluacion/PREPARACION_COLAB_OK.json",
+  "supervisor_pid": 5217,
+  "supervisor_log_remoto": "/content/tinto_supervisor.log",
+  "salida_remota": "/content/tinto_evaluacion/results/exploracion_tinto_2022/evaluacion_colab_20261029",
+  "consulta_cli": "experiments/exploracion_tinto/consultar_colab_cli.py",
+  "entorno_verificado": {
+    "python": "3.14.7",
+    "tensorflow": "2.22.0-rc0",
+    "keras": "3.16.0.dev2026092204",
+    "solo_CPU": true
+  },
+  "sha256_orquestacion": {
+    "experiments/exploracion_tinto/ejecutar_colab_cli.py": "1c2aeba1af0a2f9311ee682be09979c4e3d75fe240b1569d5ae47f6317b02f16",
+    "experiments/exploracion_tinto/consultar_colab_cli.py": "48b8e1f66c52cf7e4dbd3b5854e1d448519ced8b2f3791b668dd9157e18d0c66",
+    "experiments/exploracion_tinto/preparar_colab_cli.py": "f3e193d9a6c7a9acc8d7368a57f25299e061d4e4ff4912885de5e11c96638367",
+    "experiments/exploracion_tinto/inspeccionar_colab_cli.py": "7f29d8cafa821e43ec2caa53fc76d10993933ef8f667db6161604d90b05c8061"
+  },
+  "prueba_breve_aprobada": true,
+  "corridas": {
+    "corrida1": 5293,
+    "corrida2": 5294
+  },
+  "ultimo_control": {
+    "matrices_guardadas": {
+      "corrida1": 31,
+      "corrida2": 31
+    },
+    "comparacion_exacta_local": true,
+    "fallos": false
+  },
+  "sesion_liberada": true,
+  "automatizacion_eliminada": true,
+  "reproducible": true,
+  "zip_sha256": "4ae17a844981f53ab71735f3bb1464e0e080483329c0ea5984ee188eff9b69bc"
+}

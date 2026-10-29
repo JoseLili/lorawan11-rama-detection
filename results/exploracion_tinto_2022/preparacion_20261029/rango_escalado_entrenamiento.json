@@ -1,0 +1,11 @@
+{
+  "rango_escalado_entrenamiento": [
+    -1.068121317344381,
+    1.8264024312415916
+  ],
+  "valores_fuera_0_1": 36913,
+  "total_valores": 553982400,
+  "fraccion_fuera": 6.663208073036255e-05,
+  "recorte": false,
+  "nota": "Se usa escalador congelado ajustado sobre la muestra, no se reajusta con validación."
+}

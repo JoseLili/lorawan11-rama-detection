@@ -1,0 +1,21 @@
+{
+  "motivo": "Optimización CPU antes de primera época o validación completas",
+  "estados": {
+    "1": {
+      "fase": "entrenamiento",
+      "epoca": 1,
+      "lote": 12800,
+      "lotes_total": 21216,
+      "segundos": 331.1669113150001
+    },
+    "2": {
+      "fase": "entrenamiento",
+      "epoca": 1,
+      "lote": 13824,
+      "lotes_total": 21216,
+      "segundos": 340.98668247600017
+    }
+  },
+  "terminacion": "Ctrl-C por write_stdin; ambos exit_code 130",
+  "sin_cambio_de_modelo_o_datos": true
+}

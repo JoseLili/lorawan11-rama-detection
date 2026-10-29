@@ -1,0 +1,9 @@
+{
+  "corridas": [
+    "corrida1",
+    "corrida2"
+  ],
+  "archivos_comparados": 10,
+  "todos_identicos": true,
+  "metodo": "igualdad de SHA-256 de cada archivo generado"
+}

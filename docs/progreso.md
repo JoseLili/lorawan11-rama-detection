@@ -4556,3 +4556,41 @@ confirmación porque afecta la sección 1.6 ya redactada.
 - **Cruce con datos meteorológicos (REDMET)** para explicar la variación
   mensual de falsos positivos. La causa física es secundaria frente a la
   consecuencia sobre el detector.
+
+
+## 2026-10-29 — TINTO: registro T1 y comienzo de selección completa
+
+El tesista autorizó continuar con el registro y entrenamiento de selección.
+Se fija un solo candidato: TINTO-PCA con asignación única propia 32 × 32,
+408 entradas L0, CNN de 34 081 parámetros. Veinte calendarios d50 con los
+mismos ejemplos L0, ajuste 2020–2021, validación 2022; paciencia 8 y máximo
+60 épocas. Se harán dos corridas para verificar reproducibilidad. No se
+abren años 2023–2026 ni se reentrena L0. Registro previo en revisión T1 del
+protocolo y `results/exploracion_tinto_2022/seleccion_tinto_v1/registro_previo.json`.
+El piloto sintético conserva su resultado no aprobado; esta etapa no altera
+su criterio ni constituye todavía una comparación de detección contra L0.
+
+### 2026-10-29 — TINTO T1: cierre manual solicitado por el tesista
+
+Detenidas ambas corridas antes del EarlyStopping para ahorrar recursos.
+Mejor checkpoint observado: época 5; corrida1 completó ocho épocas y corrida2
+nueve. Ocho épocas comunes idénticas y contenido interno de pesos de los
+checkpoints idéntico por SHA-256. Se preservan modelos e historias en
+`results/exploracion_tinto_2022/seleccion_tinto_v1/cierre_manual/`.
+No se ejecutó aún comparación de detección con L0; la regla original no se
+presenta como completada. No hay reanudación automática.
+
+## 2026-10-29 — TINTO T1: evaluación terminada y cierre documental
+
+Dos evaluaciones Colab CPU con modelos cargados de disco, TINTO época5 y L0
+selección d50; sin entrenamiento nuevo. Ambas completaron 31 matrices y
+coincidieron exactamente en métricas, umbrales, intervalos y62 tablas de
+puntajes diarios. Descarga, SHA256 y reproducibilidad local verificados antes
+de liberar la sesión y eliminar el seguimiento automático.
+
+L0 tiene mayor F1 y recall en las seis condiciones exploratorias2022. Media
+descriptiva de F1 p99: TINTO0.3083 y L00.3550. Validación reutilizada y parada
+manual: no examen independiente ni avance autorizado a otros años.
+Documentación integral, decisiones, fases ejecutadas/propuestas y dos figuras
+de una ventana real en [cierre T1](cierre_exploracion_tinto_t1.md). Las imágenes
+usaron mapa/escala congelados; no se entrenó ni se hizo inferencia adicional.

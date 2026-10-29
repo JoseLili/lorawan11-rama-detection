@@ -1,0 +1,20 @@
+{
+  "fecha": "2026-10-29",
+  "alcance": "Exploración 2022, sin reentrenar, no examen independiente",
+  "prueba": true,
+  "batch": 512,
+  "bootstrap": 2000,
+  "origen_modelos": "Ambos cargados de disco; TINTO de cierre manual época 5",
+  "sha256": {
+    "results/exploracion_tinto_2022/seleccion_tinto_v1/cierre_manual/corrida1/modelo_mejor_observado.keras": "94273c8ce4d46888b77ef891ff3421fe9345eb13371959cbadc7f7637b2a00eb",
+    "results/anomalias_red_v1/lstm_local_examen/c20/d50/seleccion/modelo_seleccion.keras": "e088514ec45c9939cefd66d850435dec4991d61791ea1440eb18bf6c6be1e932",
+    "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv": "3bf88df91ac3a120227557e02ad84191327b517568641af81806dcd4ae67f1a1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505",
+    "experiments/exploracion_tinto/evaluar_2022.py": "e7761744df179288c02daea7063ffdcc50d0b8993f8387807f26557ee65d817f"
+  },
+  "python": "3.14.7",
+  "tensorflow": "2.22.0-rc0",
+  "keras": "3.16.0.dev2026092204",
+  "CPU": "",
+  "gpu_visible": 0
+}

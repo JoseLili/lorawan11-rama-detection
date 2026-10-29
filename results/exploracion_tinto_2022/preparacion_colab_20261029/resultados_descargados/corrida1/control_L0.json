@@ -1,0 +1,68 @@
+[
+  {
+    "matriz": "limpia_2022",
+    "diferencia_maxima_L0_guardado": 2.607703214474455e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_01_d50",
+    "diferencia_maxima_L0_guardado": 3.5478955218160024e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_02_d50",
+    "diferencia_maxima_L0_guardado": 2.607703214474455e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_03_d50",
+    "diferencia_maxima_L0_guardado": 3.264063885843882e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_04_d50",
+    "diferencia_maxima_L0_guardado": 2.1379926939957272e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_05_d50",
+    "diferencia_maxima_L0_guardado": 2.890737960115075e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_06_d50",
+    "diferencia_maxima_L0_guardado": 2.607703214474455e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_07_d50",
+    "diferencia_maxima_L0_guardado": 3.3527612686157227e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_08_d50",
+    "diferencia_maxima_L0_guardado": 2.856055897337839e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_09_d50",
+    "diferencia_maxima_L0_guardado": 2.9802322443206464e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  },
+  {
+    "matriz": "entrenamiento_10_d50",
+    "diferencia_maxima_L0_guardado": 2.607703214474455e-08,
+    "tolerancia": 1e-06,
+    "cumple": true
+  }
+]

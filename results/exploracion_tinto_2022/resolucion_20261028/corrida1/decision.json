@@ -1,0 +1,8 @@
+{
+  "resolucion_elegible_por_tabla": {
+    "sintetica_120": 256,
+    "L0_408": null
+  },
+  "criterio": "Menor resolución sin colisiones de columnas no constantes y sin perturbaciones ocultas",
+  "advertencia": "Conservación en esta muestra y mapa; no mide detección ni garantiza conservación en un futuro mapa definitivo."
+}

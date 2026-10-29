@@ -1,0 +1,27 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793289352.078780       2 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1793289352.079579       2 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793289353.535704       2 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1793289353.536126       2 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+/home/kali-lab-jelb/MaestriaPCIC/Tesis/lorawan11-rama-detection/.venv/lib/python3.14/site-packages/keras/src/trainers/epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/60
+21216/21216 - 266s - 13ms/step - loss: 0.0286 - val_loss: 0.0284
+Epoch 2/60
+21216/21216 - 210s - 10ms/step - loss: 0.0241 - val_loss: 0.0272
+Epoch 3/60
+21216/21216 - 220s - 10ms/step - loss: 0.0232 - val_loss: 0.0289
+Epoch 4/60
+21216/21216 - 216s - 10ms/step - loss: 0.0226 - val_loss: 0.0266
+Epoch 5/60
+21216/21216 - 235s - 11ms/step - loss: 0.0221 - val_loss: 0.0264
+Epoch 6/60
+21216/21216 - 232s - 11ms/step - loss: 0.0219 - val_loss: 0.0266
+Epoch 7/60
+21216/21216 - 241s - 11ms/step - loss: 0.0216 - val_loss: 0.0275
+Epoch 8/60
+21216/21216 - 225s - 11ms/step - loss: 0.0214 - val_loss: 0.0269
+Epoch 9/60
+21216/21216 - 226s - 11ms/step - loss: 0.0213 - val_loss: 0.0266
+Epoch 10/60

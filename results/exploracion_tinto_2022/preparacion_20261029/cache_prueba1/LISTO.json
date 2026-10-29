@@ -1,0 +1,30 @@
+{
+  "prueba": true,
+  "conteos": {
+    "tr": 496,
+    "va": 248
+  },
+  "positivas": {
+    "tr": 0,
+    "va": 0
+  },
+  "sha256_fuentes": {
+    "entrenamiento_01": "a3d4cb88257df205cefd5d944389f49da868012a6c515d1805c59abbf614e215",
+    "entrenamiento_02": "f41a17b03c85060a9536c17696ed7f0bbd9bbaa57b1744c55331284faa6d2189"
+  },
+  "sha256_config": "b4fff76c08e5661533bff85abbafe413374c7569a5e5993df9fd810720c1ec5c",
+  "sha256_X": {
+    "tr": "58c37a2ecb7a4c4efd3cc37251f189fd4c933b53806ba43b05fc1d646760d29e",
+    "va": "b4e846a9bc4eeb2474d40850a064fc7b1057ab785ee658d7de2e8032172ae517"
+  },
+  "sha256_y": {
+    "tr": "5b4a97decc57a48382234b6f23e27a26357ea1855d3c052ff4db94e6f91e37ee",
+    "va": "5f51d9e57c051cc516388346d860976bff3531da9561f6570c19b2ca2da48eab"
+  },
+  "sha256_cache": {
+    "X_tr.npy": "84a6962d3cd3673a84dd6b611990132d2abcf34b4b905e162c8241feb8d5f13d",
+    "X_va.npy": "9cb22b0ccbd7ea335912a6e242cad7307362bb6213c0118909241e6555c6bcbb",
+    "y_tr.npy": "7e3530d0ccb3eb98fba77104453adbcedc3c48bfb5545d969e532e0781014aae",
+    "y_va.npy": "325b55c4d703356d6a3e25f4a931382c7868b7fef2fd9957bca0418b9dec711e"
+  }
+}

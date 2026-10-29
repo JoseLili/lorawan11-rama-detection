@@ -1,0 +1,52 @@
+{
+  "configuracion": {
+    "fecha": "2026-10-29",
+    "alcance": "Preparación del experimento de selección; no autoriza examen",
+    "variante": "TINTO-PCA con asignación única propia, sin difuminado",
+    "columnas": 408,
+    "lado": 32,
+    "delta_pct": 50,
+    "calendarios": 20,
+    "calendarios_validacion": 10,
+    "muestra_L0": "Exacta: lstm_local.muestra cada=8, mismos objetivos, orden y semilla histórica",
+    "normalizacion_L0": "Sigma heredada 2020–2022; a14 con escala 2020–2021 y media causal",
+    "mapa": "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv",
+    "escalador": "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv",
+    "ajuste_mapa_y_escalador": "Congelados del ajuste sobre 19 840 ventanas auditadas 2020–2021; no ajuste sobre validación",
+    "escala_fuera_de_rango": "Se conserva, sin recorte ni normalización por imagen",
+    "ajuste": "2020–2021",
+    "validacion": "2022",
+    "arquitectura": [
+      "Conv2D 8 3x3 same ReLU",
+      "MaxPool 2",
+      "Conv2D 16 3x3 same ReLU",
+      "MaxPool 2",
+      "Flatten",
+      "Dense 32 ReLU",
+      "Dropout 0.2",
+      "Dense 1 sigmoid"
+    ],
+    "parametros": 34081,
+    "semilla": 42,
+    "batch": 64,
+    "max_epocas": 60,
+    "paciencia": 8,
+    "optimizador": "Adam 0.001",
+    "perdida": "binary_crossentropy",
+    "pesos_clase": false,
+    "balanceo": false,
+    "augmentacion": false,
+    "comparador": "results/anomalias_red_v1/lstm_local_examen/c20/d50/seleccion/modelo_seleccion.keras",
+    "nota_piloto": "Se conserva el criterio sintético no cumplido (<0.1); no se cambia ni se usa como rendimiento de detección. El circuito y etiquetado sí fueron verificados."
+  },
+  "prueba": true,
+  "epocas_maximas": 2,
+  "sha256_cache_listo": "689aaa57330836852676bdadafe4281763ad826ec7a89576e340bf2fab3f0a00",
+  "sha256_codigo": "d136ba42ed53f47d9f185c60a42b5dd567ad2553b423789d14a1f2db4ffd3d70",
+  "versiones": {
+    "tensorflow": "2.22.0rc0",
+    "keras-nightly": "3.16.0.dev2026092204",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  }
+}

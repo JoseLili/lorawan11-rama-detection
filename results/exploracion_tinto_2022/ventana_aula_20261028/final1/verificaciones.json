@@ -1,0 +1,40 @@
+{
+  "origen": "PCA recién ajustado con datos inventados; sin detector ni CNN",
+  "semilla": 42,
+  "ajuste_dias": 128,
+  "horas": 24,
+  "sensores": 5,
+  "alteracion": "Objetivo multiplicado por 1.5 en las 24 horas",
+  "celdas_de_entrada_modificadas": 24,
+  "vecinas_identicas": true,
+  "escala": "División fija por 100; sin escalado individual por imagen",
+  "versiones": {
+    "TINTOlib": "1.3.1",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.10.9+dfsg1"
+  },
+  "verificaciones": {
+    "sin_difuminado": {
+      "caracteristicas": 120,
+      "posiciones_distintas": 86,
+      "caracteristicas_que_comparten_posicion": 63,
+      "pixeles_modificados": 14,
+      "sha256": [
+        "2bbf891ac0c2147bca48222ba0fb67318202430a88101125f8bf8c741922d657",
+        "541a866b03db35c25e031f46632e0f12bf35702b8ffcf455e1a9b1e4efe12b07"
+      ]
+    },
+    "con_difuminado": {
+      "caracteristicas": 120,
+      "posiciones_distintas": 86,
+      "caracteristicas_que_comparten_posicion": 63,
+      "pixeles_modificados": 201,
+      "sha256": [
+        "eceb8133cb7705b6aff68ad28df7b3d91b2c75a53c9a2a86483c4c2bab5ac199",
+        "8043d5341c8bed79c70a35ff97876462e180510434aee5205cb62b045fb9b406"
+      ]
+    }
+  }
+}

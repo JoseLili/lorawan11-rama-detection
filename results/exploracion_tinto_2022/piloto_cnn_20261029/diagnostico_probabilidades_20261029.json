@@ -1,0 +1,13 @@
+{
+  "alcance": "Revisión sin nuevos entrenamientos ni modificación de criterios",
+  "senal_sintetica_conservada_y_etiquetas_consistentes": true,
+  "caracteristicas_senal": 24,
+  "aciertos_entrenamiento": 64,
+  "ejemplos": 64,
+  "probabilidad_clase_correcta_min": 0.8361819386482239,
+  "mediana": 0.8704385757446289,
+  "max": 0.9158008694648743,
+  "perdida_recalculada": 0.13995562493801117,
+  "criterio_perdida_0_1_sigue_sin_cumplir": true,
+  "interpretacion": "Los aciertos y la pérdida miden propiedades diferentes. El incumplimiento del criterio de pérdida no demuestra por sí solo un error de conversión. No mide generalización."
+}

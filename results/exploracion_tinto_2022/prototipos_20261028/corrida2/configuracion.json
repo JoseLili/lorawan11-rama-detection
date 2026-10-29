@@ -1,0 +1,36 @@
+{
+  "alcance": "Prototipos numéricos; no CNN ni evaluación de anomalías",
+  "lados": [
+    32,
+    64
+  ],
+  "variantes": [
+    "L0_408",
+    "L0_362"
+  ],
+  "asignacion": "Mínima suma de distancias euclidianas cuadradas del PCA continuo a píxeles únicos; sin difuminado",
+  "orden": "Columnas originales; píxeles por fila y luego columna; solver SciPy fijado por versión",
+  "criterio": "Todas las entradas numéricas se recuperan exactamente desde la imagen y mapa",
+  "canales": "24 horas × 5 roles × 3 tipos; hora en bloque aparte, sin retirar máscaras ni comparaciones",
+  "origen": "PCA y escaladores cargados del ajuste previo 2020–2021; asignación única calculada ahora",
+  "fuentes": {
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/X_muestra.npy": "81381688bd28d1accc8a5b7a44f715ea388534650bdc046e37d19700661a7c6b",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/diccionario_408.csv": "c6d51857174e77adb4221fa45dae3a8b1ff5500a9e5566d13e89e1b525e6a603",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/manifiesto_muestra.csv": "4caa9fae70165c21afa12b4eabd8f928086cb9fbf43d4be214a6a0fb025975e1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/coordenadas_PCA.npy": "148cd7d0763c696e5b6528cda2b6cba7fc503f3996acdbb4b451476ac4d0c19f",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/mapa_32.csv": "b15078581e33d4137de67c130687b50d2e4ddd333d3e5e652c1785cfe7f8df8b",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/mapa_64.csv": "785ef631d785908f02fc90df2f9a81e56170ef2bbbd03ccd944c6998465f8b4d",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_362/coordenadas_PCA.npy": "8a56692f0b1a733f59cc5f623005fc82022a7e4ace0c0c8ff77844460144c6dd",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_362/escalador.csv": "ef5a171244e83c938f86f9561e2a701d983647ae9d3309987a962f086151383d",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_362/mapa_32.csv": "f86eb44141c2a4de56545b3ff8b276657fec668952c312d3758422621ddf2bd5",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_362/mapa_64.csv": "9fecb141eab5b35bfb09fc8821b0a45b992bbd6988841d7cfbceb6dac5458033"
+  },
+  "codigo": "0b999f8c1e502879709138c7adc93728b15c40405699db729704f1bf2bb2e7d3",
+  "versiones": {
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.9+dfsg1"
+  }
+}

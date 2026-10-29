@@ -1,0 +1,5 @@
+{
+  "archivos_numericos_identicos": 9,
+  "pesos_e_historiales_identicos": true,
+  "archivos_keras_no_comparados": "Se comparan pesos por su hash; el contenedor puede tener metadatos distintos."
+}
