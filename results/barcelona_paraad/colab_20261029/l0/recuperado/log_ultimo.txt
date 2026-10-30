@@ -1,0 +1,12 @@
+{'epoca': 5, 'loss': 0.018683169037103653, 'val_loss': 0.023482870310544968}
+{'epoca': 6, 'loss': 0.017215797677636147, 'val_loss': 0.024049310013651848}
+{'epoca': 7, 'loss': 0.016090964898467064, 'val_loss': 0.025091033428907394}
+{'epoca': 8, 'loss': 0.01513045933097601, 'val_loss': 0.026093419641256332}
+{'epoca': 9, 'loss': 0.014400911517441273, 'val_loss': 0.026820693165063858}
+{'epoca': 10, 'loss': 0.013257737271487713, 'val_loss': 0.02812628075480461}
+E0000 00:00:1793293806.389993    4709 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+{'epoca': 1, 'loss': 0.025706592947244644}
+{'epoca': 2, 'loss': 0.02059147134423256}
+E0000 00:00:1793294177.956319    4709 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+{'epoca': 1, 'loss': 0.025706592947244644}
+{'epoca': 2, 'loss': 0.02059147134423256}

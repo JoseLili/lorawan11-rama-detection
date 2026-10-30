@@ -1,0 +1,18 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "l0",
+    "pid": 3172
+  },
+  "ultimo_progreso": {
+    "unidad": "complementaria_2019_10_d5",
+    "repeticion": 2,
+    "detector": "l0"
+  },
+  "sha256_snapshot": "3b412d182ce5b4278bf3e38f1d1388621712083535f8fd8d053b4adb892138cd",
+  "archivos": 310,
+  "actualizado_utc": "2026-10-29T22:19:14.633157+00:00",
+  "sesion": "bcn-eval-l0-cpu-20261029",
+  "sesion_liberada": true,
+  "recuperacion": "Cierre terminal descargado verificado; estado local actualizado tras recuperar conexión y liberar VM"
+}

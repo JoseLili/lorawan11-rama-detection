@@ -1,0 +1,10 @@
+{
+  "tolerancia_rtol": 1e-06,
+  "tolerancia_atol": 1e-06,
+  "maxima_diferencia": 0.0,
+  "cambios_alertas": {
+    "p99": 0,
+    "p99.9": 0
+  },
+  "nota": "No se ajustan los umbrales por diferencias entre VMs"
+}

@@ -1,0 +1,24 @@
+{
+  "candidatos": [
+    {
+      "dropout": 0.1,
+      "epocas": 481,
+      "val_loss": 0.17447622913744953
+    },
+    {
+      "dropout": 0.3,
+      "epocas": 457,
+      "val_loss": 0.18625790260353142
+    },
+    {
+      "dropout": 0.5,
+      "epocas": 481,
+      "val_loss": 0.17550450925017802
+    }
+  ],
+  "elegido": {
+    "dropout": 0.1,
+    "epocas": 481,
+    "val_loss": 0.17447622913744953
+  }
+}

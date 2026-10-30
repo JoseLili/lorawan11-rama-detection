@@ -1,0 +1,25 @@
+{
+  "fecha_sesion": "2026-10-28",
+  "autorizacion": "El tesista eligió continuar con las 13 estaciones",
+  "criterio": "Municipios AMB presentes en catálogo O3; >=2000 horas y >=6 meses observados en 2014–2015",
+  "seleccion_solo_ajuste": true,
+  "uso_de_rendimiento_de_examen": false,
+  "orden_codigos": [
+    "08015021",
+    "08019043",
+    "08019044",
+    "08019050",
+    "08019054",
+    "08019057",
+    "08089005",
+    "08125002",
+    "08169009",
+    "08194008",
+    "08205002",
+    "08263001",
+    "08301004"
+  ],
+  "coordenadas": "Primera fila de ajuste 2014–2015; no elegidas con examen",
+  "sha256_csv": "a57beb6d6062fc839bf9eb1e2821413a1e3f55bb9cf8999efb574469f76ec83b",
+  "identidad": "Conjunto propio de la misma fuente, no ocho estaciones exactas del artículo"
+}

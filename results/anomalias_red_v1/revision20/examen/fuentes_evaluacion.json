@@ -1,0 +1,9 @@
+{
+  "src/detect/anomalias_red.py": "44dbb0866d47da850dea47f837d2791a78a767029a06a7e3b942a2b2fcc56e8c",
+  "src/detect/estacion_dia.py": "297860ca05338ac4b4f83b70b0f239190a2d7520462cd0cbcda0b6de13db3022",
+  "src/detect/evaluacion_red.py": "dd38a416c7f7d5ad410a8646907ea5969c7d8fba0e702bc12a044b2b5ddcc555",
+  "src/detect/paraad.py": "8025cf383d247a2022c1caf60b0a0cd5a7fe2390c548cee8d2c47493133eee1a",
+  "experiments/anomalias_red/metricas_estandar_revision8.py": "4284ceabecbea744c06890aa580cb3bba841021bf2d2a8046b5bcc0d672b4e61",
+  "experiments/anomalias_red/evaluar_paraad_revision20.py": "6253246fd7a2687e6a684d02710e77f76ac54de29dd5f50ba0f5241f3542fb87",
+  "experiments/anomalias_red/resumir_paraad_revision20.py": "4e48c33f007613ff4ccf61c5a215066e70177936d18370f8d4a8c3e129447d40"
+}

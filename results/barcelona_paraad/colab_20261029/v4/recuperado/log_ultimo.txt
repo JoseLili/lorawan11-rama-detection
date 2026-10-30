@@ -1,0 +1,12 @@
+{'epoca': 6, 'loss': 169.7403564453125, 'mae': 10.133683204650879}
+{'epoca': 7, 'loss': 164.1536407470703, 'mae': 9.944319725036621}
+{'epoca': 8, 'loss': 160.0913848876953, 'mae': 9.818012237548828}
+E0000 00:00:1793294276.918962    2132 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+{'epoca': 1, 'loss': 286.3518981933594, 'mae': 13.208024978637695}
+{'epoca': 2, 'loss': 210.11878967285156, 'mae': 11.29755973815918}
+{'epoca': 3, 'loss': 191.98277282714844, 'mae': 10.796478271484375}
+{'epoca': 4, 'loss': 184.15028381347656, 'mae': 10.55800724029541}
+{'epoca': 5, 'loss': 176.25497436523438, 'mae': 10.326089859008789}
+{'epoca': 6, 'loss': 169.7403564453125, 'mae': 10.133683204650879}
+{'epoca': 7, 'loss': 164.1536407470703, 'mae': 9.944319725036621}
+{'epoca': 8, 'loss': 160.0913848876953, 'mae': 9.818012237548828}

@@ -1,0 +1,24 @@
+{
+  "resumen": {
+    "calendario": "prueba_2018_04",
+    "uso": "prueba_2018",
+    "delta": 0.5,
+    "escala": "definitivo",
+    "filas": 8784,
+    "offset_global": 35041,
+    "lecturas_programadas": 1116,
+    "lecturas_cambiadas": 1083,
+    "estacion_dias_comunes": 4549,
+    "estacion_dias_positivos_comunes": 47,
+    "reproducibilidad_exacta": true
+  },
+  "sha256_salidas": {
+    "episodio_hora.parquet": "bab6a9e9a142dbc2f926c6305437d7d5594d50186cb5c4051d67becff589975b",
+    "estacion_dias.parquet": "f727c705df9f05fa528a065e7c18fade088828aae0942f9fcbb96e90ec94a215",
+    "etiquetas_hora.parquet": "84f39f887c278e663c8e0cf01f57290f9cc869a705fc78bf0a4f18544c7ff305",
+    "l0_features.npy": "4d0d45822344262af57e731eea4edb221e9b47e6bf1ad5921daded2ee0db5785",
+    "perfiles_causales.parquet": "482df9918c3a80abe4f05e1feaa530320d186d56347ab5a25bf6bafc06435667",
+    "valores_alterados.parquet": "59002b72ef35c10f9b352624f02f728171b9f438fa97205c6702486643358420",
+    "z.npy": "20adc2f25508e48ca20c4b07b8fb401a342677881be42dc70e844fff05ff51fc"
+  }
+}

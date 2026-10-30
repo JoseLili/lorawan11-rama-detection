@@ -1,0 +1,47 @@
+{
+  "nombre": "prueba_2018_05_d50",
+  "detector": "l0",
+  "ano": 2018,
+  "casos": 4549,
+  "igual": true,
+  "unidad": {
+    "nombre": "prueba_2018_05_d50",
+    "ano": 2018,
+    "plan": "prueba_2018_05",
+    "delta": 50,
+    "arrays": {
+      "v": {
+        "shape": [
+          8784,
+          13
+        ],
+        "dtype": "float64",
+        "sha256": "c336ae14dc8ad2a3ef24f2c76e6be818479f7ed382e77452d437cd0406301017"
+      },
+      "b": {
+        "shape": [
+          8784,
+          13
+        ],
+        "dtype": "float64",
+        "sha256": "eea18d46f88ebe19937ec96937e07bc05bb6f46e362c3d2ebc38594217ae123d"
+      },
+      "z": {
+        "shape": [
+          8784,
+          13
+        ],
+        "dtype": "float32",
+        "sha256": "e2afbaad8260a455cfb5cf52fb43c13f5c092e02bd5eec7267b24fdcd50e8b2d"
+      },
+      "F": {
+        "shape": [
+          8784,
+          41
+        ],
+        "dtype": "float32",
+        "sha256": "fd5b0ec2c1a481a02497e4953e5081fd0663845ffb33d0ad7d3be918cecae8da"
+      }
+    }
+  }
+}

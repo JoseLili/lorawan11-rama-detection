@@ -1,0 +1,13 @@
+{
+  "sha256": {
+    "mascara_comun.csv": "0cec3007d9754fd40716b078a1b0225b01cd1368f3b41e2e328f02e3be286e48",
+    "puntajes_v4.csv": "3ee6e8e81c3a06b473610ef71954382b8354fbe921e29834f37ec0bbd5c3f890",
+    "horas_l0.parquet": "9341e1f1559fea2d61ae60c79ebc9e410bcf341a933a229405fb9e0e2adaca55",
+    "resumen.csv": "fe15461839988d78f8f0b703d40f6ab347a6e56ce007b9855c8902ebdc9bb119",
+    "horas_v4_residuo.parquet": "a872b0254ea323ea0fd20eca99da71df182a7fe245e7130e34608138bb2c2cb7",
+    "congelado.json": "82fd43f49b71d272cdc81da3307fa5d79f0e5d38192fbfc0e75b1a3f06aef076",
+    "p95_v4.csv": "d17d95299a62748b95e438bae026565075d2a0ff8ba455decaa5ffc7c50cc743",
+    "puntajes_l0.csv": "79f8d684a5430b5cb9682476d0600a83761d25881d37a381371cd7095bb5e9ba",
+    "puntajes_paraad.csv": "859ca47b2b717e04b354de0b3989545d77dd22518f3ab7885e342d14a12d3bcc"
+  }
+}

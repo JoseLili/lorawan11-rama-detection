@@ -1,0 +1,24 @@
+{
+  "resumen": {
+    "calendario": "validacion_02",
+    "uso": "validacion",
+    "delta": 0.5,
+    "escala": "seleccion",
+    "filas": 8808,
+    "offset_global": 17497,
+    "lecturas_programadas": 495,
+    "lecturas_cambiadas": 495,
+    "estacion_dias_comunes": 4538,
+    "estacion_dias_positivos_comunes": 21,
+    "reproducibilidad_exacta": true
+  },
+  "sha256_salidas": {
+    "episodio_hora.parquet": "137da77abb749b05824adc66accba81300f200135e1b6000fae039e81f36b6dd",
+    "estacion_dias.parquet": "eb8f5c8c587856867957fdc7568f9b6bf6295b553e565c274e090f466621fce9",
+    "etiquetas_hora.parquet": "1416355fbf503ae42b791e7c56678f02a98688d435f0057560650939de5c8e7d",
+    "l0_features.npy": "fa97db6291e73d2322197a7e49050f4a894daefeb1db5ae476f21dbc0f64217e",
+    "perfiles_causales.parquet": "7a01de1d355f403838993e16659778f7a30ee10bd995ed8b915f9b416e4efb58",
+    "valores_alterados.parquet": "1c05ed71d0167a3f7c7fece8d3a9c32f676ebe2faeabd97b686b1b16805c0a4e",
+    "z.npy": "23f6c7d4c23530ba0fa21520e07c55c450d04d2cecfdcdefa1b6c968b828dae2"
+  }
+}

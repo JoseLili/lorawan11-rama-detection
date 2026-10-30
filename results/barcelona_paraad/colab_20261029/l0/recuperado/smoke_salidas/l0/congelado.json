@@ -1,0 +1,22 @@
+{
+  "detector": "l0",
+  "igual": true,
+  "smoke": true,
+  "entrada": {
+    "sha256_entrada": "7b92deac2d20f0fc261a67290482e508320db731b6fea1888634867cd8d264ad",
+    "sha256_script": "34b5217d33f7911f1a6c6208c9780cb3016d3a943f99b206947ce9fe58c7f4c7",
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "numpy": "2.1.3",
+    "python": "3.13.18",
+    "cpu": "x86_64",
+    "semilla": 42,
+    "threads": 1,
+    "smoke": true,
+    "origen": "modelos nuevos Barcelona"
+  },
+  "verificados": {
+    "seleccion/verificado.json": "aa95395bdf0f19fc620ec7ecbff64011361cca95f85732918003b0ef40897a3c",
+    "definitivo/verificado.json": "aa95395bdf0f19fc620ec7ecbff64011361cca95f85732918003b0ef40897a3c"
+  }
+}

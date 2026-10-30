@@ -1,0 +1,457 @@
+{
+  "url": "https://analisi.transparenciacatalunya.cat/resource/tasf-thgu.json?%24select=codi_eoi%2Cnom_estacio%2Cmunicipi%2Cunitats%2Ccount%28%2A%29+as+dias%2Cmin%28data%29+as+inicio%2Cmax%28data%29+as+fin&%24where=contaminant%3D%27O3%27+AND+data+%3E%3D+%272014-01-01T00%3A00%3A00%27+AND+data+%3C+%272020-01-01T00%3A00%3A00%27&%24group=codi_eoi%2Cnom_estacio%2Cmunicipi%2Cunitats&%24order=municipi%2Ccodi_eoi&%24limit=500",
+  "estaciones": [
+    {
+      "codi_eoi": "17001002",
+      "nom_estacio": "Agullana",
+      "municipi": "Agullana",
+      "unitats": "µg/m3",
+      "dias": "2162",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43005002",
+      "nom_estacio": "Alcover",
+      "municipi": "Alcover",
+      "unitats": "µg/m3",
+      "dias": "2161",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43014001",
+      "nom_estacio": "Amposta",
+      "municipi": "Amposta",
+      "unitats": "µg/m3",
+      "dias": "2183",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08015021",
+      "nom_estacio": "Badalona",
+      "municipi": "Badalona",
+      "unitats": "µg/m3",
+      "dias": "2188",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019043",
+      "nom_estacio": "Barcelona (Eixample)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "2181",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019044",
+      "nom_estacio": "Barcelona (Gràcia - Sant Gervasi)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "2169",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019050",
+      "nom_estacio": "Barcelona (Ciutadella)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "2182",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019054",
+      "nom_estacio": "Barcelona (Parc Vall Hebron)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "2155",
+      "inicio": "2014-01-02T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019057",
+      "nom_estacio": "Barcelona (Palau Reial)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "2120",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08019058",
+      "nom_estacio": "Barcelona (Observatori Fabra)",
+      "municipi": "Barcelona",
+      "unitats": "µg/m3",
+      "dias": "641",
+      "inicio": "2018-03-09T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "17013001",
+      "nom_estacio": "Begur",
+      "municipi": "Begur",
+      "unitats": "µg/m3",
+      "dias": "2157",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25051001",
+      "nom_estacio": "Bellver de Cerdanya",
+      "municipi": "Bellver de Cerdanya",
+      "unitats": "µg/m3",
+      "dias": "2167",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08022006",
+      "nom_estacio": "Berga",
+      "municipi": "Berga",
+      "unitats": "µg/m3",
+      "dias": "2088",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43047001",
+      "nom_estacio": "Constantí",
+      "municipi": "Constantí",
+      "unitats": "µg/m3",
+      "dias": "2187",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43064001",
+      "nom_estacio": "Gandesa",
+      "municipi": "Gandesa",
+      "unitats": "µg/m3",
+      "dias": "2173",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08089005",
+      "nom_estacio": "Gavà",
+      "municipi": "Gavà",
+      "unitats": "µg/m3",
+      "dias": "2169",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08096014",
+      "nom_estacio": "Granollers",
+      "municipi": "Granollers",
+      "unitats": "µg/m3",
+      "dias": "2185",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43070001",
+      "nom_estacio": "Els Guiamets",
+      "municipi": "Guiamets, els",
+      "unitats": "µg/m3",
+      "dias": "2139",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08102005",
+      "nom_estacio": "Igualada",
+      "municipi": "Igualada",
+      "unitats": "µg/m3",
+      "dias": "1926",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25119002",
+      "nom_estacio": "Juneda (Pla del Molí)",
+      "municipi": "Juneda",
+      "unitats": "µg/m3",
+      "dias": "2187",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25120001",
+      "nom_estacio": "Lleida",
+      "municipi": "Lleida",
+      "unitats": "µg/m3",
+      "dias": "2172",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08112003",
+      "nom_estacio": "Manlleu",
+      "municipi": "Manlleu",
+      "unitats": "µg/m3",
+      "dias": "2177",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08113007",
+      "nom_estacio": "Manresa",
+      "municipi": "Manresa",
+      "unitats": "µg/m3",
+      "dias": "2187",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08114006",
+      "nom_estacio": "Martorell",
+      "municipi": "Martorell",
+      "unitats": "µg/m3",
+      "dias": "1",
+      "inicio": "2019-12-31T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08121013",
+      "nom_estacio": "Mataró",
+      "municipi": "Mataró",
+      "unitats": "µg/m3",
+      "dias": "2181",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08125002",
+      "nom_estacio": "Montcada i Reixac",
+      "municipi": "Montcada i Reixac",
+      "unitats": "µg/m3",
+      "dias": "2182",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08137001",
+      "nom_estacio": "Montseny (La Castanya)",
+      "municipi": "Montseny",
+      "unitats": "µg/m3",
+      "dias": "2172",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "17125001",
+      "nom_estacio": "Pardines",
+      "municipi": "Pardines",
+      "unitats": "µg/m3",
+      "dias": "2120",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25172001",
+      "nom_estacio": "Ponts",
+      "municipi": "Ponts",
+      "unitats": "µg/m3",
+      "dias": "2182",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08169009",
+      "nom_estacio": "El Prat de Llobregat (Sagnier)",
+      "municipi": "Prat de Llobregat, el",
+      "unitats": "µg/m3",
+      "dias": "2139",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43123005",
+      "nom_estacio": "Reus",
+      "municipi": "Reus",
+      "unitats": "µg/m3",
+      "dias": "2125",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08184006",
+      "nom_estacio": "Rubí",
+      "municipi": "Rubí",
+      "unitats": "µg/m3",
+      "dias": "2187",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08187012",
+      "nom_estacio": "Sabadell",
+      "municipi": "Sabadell",
+      "unitats": "µg/m3",
+      "dias": "2143",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08194008",
+      "nom_estacio": "Sant Adrià de Besòs",
+      "municipi": "Sant Adrià de Besòs",
+      "unitats": "µg/m3",
+      "dias": "2178",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08259002",
+      "nom_estacio": "Santa Maria de Palautordera",
+      "municipi": "Santa Maria de Palautordera",
+      "unitats": "µg/m3",
+      "dias": "2166",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "17184001",
+      "nom_estacio": "Santa Pau",
+      "municipi": "Santa Pau",
+      "unitats": "µg/m3",
+      "dias": "2163",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08202001",
+      "nom_estacio": "Sant Celoni",
+      "municipi": "Sant Celoni",
+      "unitats": "µg/m3",
+      "dias": "2167",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08205002",
+      "nom_estacio": "Sant Cugat del Vallès",
+      "municipi": "Sant Cugat del Vallès",
+      "unitats": "µg/m3",
+      "dias": "2153",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25196001",
+      "nom_estacio": "Montsec",
+      "municipi": "Sant Esteve de la Sarga",
+      "unitats": "µg/m3",
+      "dias": "2135",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08263001",
+      "nom_estacio": "Sant Vicenç dels Horts (Ribot)",
+      "municipi": "Sant Vicenç dels Horts",
+      "unitats": "µg/m3",
+      "dias": "2164",
+      "inicio": "2014-01-02T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43044003",
+      "nom_estacio": "La Sénia",
+      "municipi": "Sénia, la",
+      "unitats": "µg/m3",
+      "dias": "2175",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "25209001",
+      "nom_estacio": "Sort",
+      "municipi": "Sort",
+      "unitats": "µg/m3",
+      "dias": "1922",
+      "inicio": "2014-09-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43148028",
+      "nom_estacio": "Tarragona (Parc de la Ciutat)",
+      "municipi": "Tarragona",
+      "unitats": "µg/m3",
+      "dias": "2164",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08279011",
+      "nom_estacio": "Terrassa",
+      "municipi": "Terrassa",
+      "unitats": "µg/m3",
+      "dias": "2169",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08283004",
+      "nom_estacio": "Tona (Zona Esportiva)",
+      "municipi": "Tona",
+      "unitats": "µg/m3",
+      "dias": "2176",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08298008",
+      "nom_estacio": "Vic",
+      "municipi": "Vic",
+      "unitats": "µg/m3",
+      "dias": "2186",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08301004",
+      "nom_estacio": "Viladecans - Atrium",
+      "municipi": "Viladecans",
+      "unitats": "µg/m3",
+      "dias": "2131",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08305006",
+      "nom_estacio": "Vilafranca del Penedès",
+      "municipi": "Vilafranca del Penedès",
+      "unitats": "µg/m3",
+      "dias": "2158",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "08307012",
+      "nom_estacio": "Vilanova i la Geltrú",
+      "municipi": "Vilanova i la Geltrú",
+      "unitats": "µg/m3",
+      "dias": "2170",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    },
+    {
+      "codi_eoi": "43171001",
+      "nom_estacio": "Vila-seca",
+      "municipi": "Vila-seca",
+      "unitats": "µg/m3",
+      "dias": "2140",
+      "inicio": "2014-01-01T00:00:00.000",
+      "fin": "2019-12-31T00:00:00.000"
+    }
+  ],
+  "consultado_utc": "2026-10-27T23:23:21.411504+00:00",
+  "alcance": "Catálogo agregado de O3 de Cataluña 2014-2019; no identifica las ocho estaciones del artículo PARAAD."
+}

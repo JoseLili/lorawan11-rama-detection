@@ -1,0 +1,17 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "paraad",
+    "pid": 2736
+  },
+  "ultimo_progreso": {
+    "unidad": "complementaria_2019_10_d5",
+    "repeticion": 2,
+    "detector": "paraad"
+  },
+  "sha256_snapshot": "a546c3c196cf22728978ae47dbbe43f910c9cd4cc8739e22291a80ac846fb4ff",
+  "archivos": 314,
+  "actualizado_utc": "2026-10-29T19:19:57.966482+00:00",
+  "sesion": "bcn-eval-paraad-cpu-20261029",
+  "sesion_liberada": true
+}

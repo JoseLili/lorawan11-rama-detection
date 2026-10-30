@@ -1,0 +1,8 @@
+{
+  "igual": true,
+  "historias": true,
+  "pesos": true,
+  "optimizador": true,
+  "prediccion_control": true,
+  "origen": "dos modelos recién entrenados"
+}

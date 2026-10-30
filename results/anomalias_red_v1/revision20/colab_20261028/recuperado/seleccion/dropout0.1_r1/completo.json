@@ -1,0 +1,9 @@
+{
+  "dropout": 0.1,
+  "epocas": 500,
+  "archivos": {
+    "modelo.keras": "b8b5ff4652457337436ede74af36a975226eb53eec06566ba22bdafab4f4f455",
+    "historia.csv": "db7575292d4902f1a881a52683eb342b3d4e1411098cc56f621ef5409e85a870",
+    "reconstruccion.npy": "4d5197a8ba5cb3d8d07f0355876087df636c3b2d743f3031ff48f8e9ffeac999"
+  }
+}

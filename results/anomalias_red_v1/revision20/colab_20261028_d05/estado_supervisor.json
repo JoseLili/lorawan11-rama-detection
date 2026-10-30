@@ -1,0 +1,26 @@
+{
+  "estado": {
+    "estado": "completo",
+    "dropout": 0.5,
+    "igual": true
+  },
+  "progreso": {
+    "seleccion/dropout0.5_r2/progreso.json": {
+      "epoca": 500,
+      "loss": 0.15633624792099,
+      "val_loss": 0.17496682453103943,
+      "epocas_objetivo": 500
+    },
+    "seleccion/dropout0.5_r1/progreso.json": {
+      "epoca": 500,
+      "loss": 0.15633624792099,
+      "val_loss": 0.17496682453103943,
+      "epocas_objetivo": 500
+    }
+  },
+  "sha256_snapshot": "4039d71ee7a3e234a75d2aa7fc3850cf54f299dc7aac3b8b26ac69cfc71d1a2a",
+  "bytes": 2133033,
+  "actualizado_utc": "2026-10-28T16:36:25.146170+00:00",
+  "sesion": "paraad-r20-d05-cpu",
+  "sesion_liberada": true
+}

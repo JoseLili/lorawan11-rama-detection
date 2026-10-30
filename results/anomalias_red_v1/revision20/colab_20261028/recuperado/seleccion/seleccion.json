@@ -1,0 +1,76 @@
+{
+  "python": "3.13.18",
+  "tensorflow": "2.21.0",
+  "numpy": "2.1.3",
+  "keras": "3.13.2",
+  "maquina": "x86_64",
+  "cpu": "x86_64",
+  "semilla": 42,
+  "batch": 256,
+  "sensores": [
+    "ACO",
+    "AJM",
+    "AJU",
+    "ATI",
+    "BJU",
+    "CAM",
+    "CCA",
+    "CHO",
+    "CUA",
+    "CUT",
+    "FAC",
+    "FAR",
+    "GAM",
+    "HGM",
+    "INN",
+    "IZT",
+    "LLA",
+    "LPR",
+    "MER",
+    "MGH",
+    "MON",
+    "MPA",
+    "NEZ",
+    "PED",
+    "SAC",
+    "SAG",
+    "TAH",
+    "TLA",
+    "TLI",
+    "UAX",
+    "UIZ",
+    "VIF"
+  ],
+  "origen": "recién entrenado",
+  "fuentes": {
+    "experiments/anomalias_red/entrenar_paraad.py": "ff2291376c5b7929b8b746e0ba8fcfcb78e9ddd4058ca5281c3225acbe80ad99",
+    "src/detect/paraad.py": "8025cf383d247a2022c1caf60b0a0cd5a7fe2390c548cee8d2c47493133eee1a",
+    "src/detect/lstm.py": "de62a11b37813acbf59270315794a4538836489b9b9dadf6684029388da3a713"
+  },
+  "sha256_tabla_2020_2022": "4c5c656fe1373e2f06ff89fbd69b81983b57cf3df434732f5e2ee0b060bf1b7d",
+  "igual": true,
+  "elegido": {
+    "dropout": 0.3,
+    "epocas": 499,
+    "val_loss": 0.15061787126400517
+  },
+  "candidatos": [
+    {
+      "dropout": 0.1,
+      "epocas": 494,
+      "val_loss": 0.16425904560459842
+    },
+    {
+      "dropout": 0.3,
+      "epocas": 499,
+      "val_loss": 0.15061787126400517
+    },
+    {
+      "dropout": 0.5,
+      "epocas": 458,
+      "val_loss": 0.16514702625166439
+    }
+  ],
+  "vacios_ajuste": 0,
+  "vacios_validacion": 0
+}

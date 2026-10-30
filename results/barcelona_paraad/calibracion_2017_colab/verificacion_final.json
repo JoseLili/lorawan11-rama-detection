@@ -1,0 +1,11 @@
+{
+  "igual": true,
+  "casos": 4536,
+  "modelos_congelados_intactos": 15,
+  "hashes_correctos": true,
+  "mascara_y_agregaciones_verificadas": true,
+  "umbrales_y_alertas_verificados": true,
+  "vm_liberada": true,
+  "sha256_congelado": "82fd43f49b71d272cdc81da3307fa5d79f0e5d38192fbfc0e75b1a3f06aef076",
+  "sha256_verificador": "fa52606f1a72e72ba4ddb2517d3e0e1d49b6f638809180b5f1371abcfeaf411c"
+}

@@ -1,0 +1,20 @@
+{
+  "completo": true,
+  "pares_verificados": 32,
+  "repeticiones_cientificas": 64,
+  "modelos_definitivos": 15,
+  "vm_liberadas": 3,
+  "historias_iguales": true,
+  "pesos_y_optimizador_iguales": true,
+  "prediccion_control_igual": true,
+  "paquetes_y_respaldos_verificados": true,
+  "origen": "Modelos nuevos entrenados en Colab CPU; no cargados de RAMA",
+  "sha256_congelados": {
+    "l0": "d0bb77379a867ec428664d27503c23e4024a30a186ebbd0493a7021770027045",
+    "v4": "b791e59306ea62b6ad9f3ed0369f9b6edd1286d3aa390d65a16e9fd43c8e2b93",
+    "paraad": "7efa6ed16c4a2950d87d11360c51dce881022068d25920778838797739ce6bae"
+  },
+  "sha256_tabla": "e5b34f8972aa11aba2b363417d1978eebfb049272b22043ed10f8d62a64d27ad",
+  "sha256_verificador": "5d6e6f290332b2d2c65b6ea51ad4395c03bacc95dac44dcdb3ac9d5e889f933c",
+  "alcance": "Sin calibración2017 ni examen2018–2019; no métricas de detección"
+}

@@ -1,0 +1,16 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "l0",
+    "pid": 4119
+  },
+  "ultimo_progreso": {
+    "epoca": 2,
+    "loss": 0.02059147134423256
+  },
+  "sha256_snapshot": "a09532864da67ef31aea48ba323c16b69ee3b6649772ec8464817b353fbd543c",
+  "archivos": 61,
+  "actualizado_utc": "2026-10-29T17:22:56.292728+00:00",
+  "sesion": "bcn-l0-cpu-20261029",
+  "sesion_liberada": true
+}

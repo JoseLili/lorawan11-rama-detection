@@ -1,0 +1,6 @@
+{"fase": "tests", "segundos": 58.61579764800001, "codigo": 0}
+{"fase": "auditar", "segundos": 8.039548224999976, "codigo": 0}
+{"fase": "smoke", "segundos": 33.76642343600008, "codigo": 0}
+{"fase": "benchmark", "segundos": 29.206842925000046, "codigo": 0}
+{"fase": "seleccion", "segundos": 10.322337923000305, "codigo": 0}
+{"fase": "definitivo", "segundos": 1356.2098672500006, "codigo": 0}

@@ -1,0 +1,44 @@
+{
+  "estado": {
+    "estado": "completo",
+    "fases": [
+      "seleccion",
+      "definitivo"
+    ]
+  },
+  "progreso": {
+    "definitivo/repeticion_r2/progreso.json": {
+      "epoca": 499,
+      "loss": 0.12514112889766693,
+      "epocas_objetivo": 499
+    },
+    "definitivo/repeticion_r1/progreso.json": {
+      "epoca": 499,
+      "loss": 0.12514112889766693,
+      "epocas_objetivo": 499
+    },
+    "evidencia_redundante_1793205434873855709/dropout0.3_r1/progreso.json": {
+      "epoca": 425,
+      "loss": 0.12962067127227783,
+      "val_loss": 0.1516301055383106,
+      "epocas_objetivo": 500
+    },
+    "seleccion/dropout0.1_r2/progreso.json": {
+      "epoca": 500,
+      "loss": 0.1382938027381897,
+      "val_loss": 0.16541505681301244,
+      "epocas_objetivo": 500
+    },
+    "seleccion/dropout0.1_r1/progreso.json": {
+      "epoca": 500,
+      "loss": 0.1382938027381897,
+      "val_loss": 0.16541505681301244,
+      "epocas_objetivo": 500
+    }
+  },
+  "sha256_snapshot": "b9acc1be991310e9be5e6688e411cba3900f6695757c28408cd8bbaed139fa68",
+  "bytes": 12631400,
+  "actualizado_utc": "2026-10-28T17:06:46.555253+00:00",
+  "sesion": "paraad-r20-cpu-20261028",
+  "sesion_liberada": true
+}

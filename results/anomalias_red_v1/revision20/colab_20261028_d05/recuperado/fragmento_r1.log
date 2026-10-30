@@ -1,0 +1,28 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793203131.039476    3255 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1793203131.157463    3255 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793203135.532262    3255 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1793203138.862106    3255 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+{'epoca': 1, 'loss': 60.04011535644531, 'val_loss': 6.451703913489371}
+{'epoca': 25, 'loss': 0.23430028557777405, 'val_loss': 0.25711001087245844}
+{'epoca': 50, 'loss': 0.1878965049982071, 'val_loss': 0.22527246506689702}
+{'epoca': 75, 'loss': 0.18197494745254517, 'val_loss': 0.21373202904519223}
+{'epoca': 100, 'loss': 0.16998334228992462, 'val_loss': 0.20024608252624768}
+{'epoca': 125, 'loss': 0.1580987125635147, 'val_loss': 0.18264709875310292}
+{'epoca': 150, 'loss': 0.15467563271522522, 'val_loss': 0.17842353007456588}
+{'epoca': 175, 'loss': 0.15183179080486298, 'val_loss': 0.17575743829782664}
+{'epoca': 200, 'loss': 0.15055379271507263, 'val_loss': 0.17597074217762051}
+{'epoca': 225, 'loss': 0.14797714352607727, 'val_loss': 0.1717960440319103}
+{'epoca': 250, 'loss': 0.1470026820898056, 'val_loss': 0.17092996169523317}
+{'epoca': 275, 'loss': 0.14665678143501282, 'val_loss': 0.17014308025397884}
+{'epoca': 300, 'loss': 0.14564016461372375, 'val_loss': 0.16917579213889283}
+{'epoca': 325, 'loss': 0.14470085501670837, 'val_loss': 0.16906438064294885}
+{'epoca': 350, 'loss': 0.144538015127182, 'val_loss': 0.16827021356457975}
+{'epoca': 375, 'loss': 0.14469513297080994, 'val_loss': 0.16677772574807997}
+{'epoca': 400, 'loss': 0.14355053007602692, 'val_loss': 0.16668216561206986}
+{'epoca': 425, 'loss': 0.1422688513994217, 'val_loss': 0.16683045639907157}
+{'epoca': 450, 'loss': 0.14276298880577087, 'val_loss': 0.16687004878336553}
+{'epoca': 475, 'loss': 0.14245526492595673, 'val_loss': 0.16536667934641253}
+{'epoca': 500, 'loss': 0.15633624792099, 'val_loss': 0.17496682453103943}

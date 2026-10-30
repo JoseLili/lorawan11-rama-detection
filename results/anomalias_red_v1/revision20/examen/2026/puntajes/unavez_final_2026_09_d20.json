@@ -1,0 +1,16 @@
+{
+  "sha256_matriz": "2db719287c4800031057316a4684cc4188d09bf4664b11b2a0ab070e7ea05a7a",
+  "sha256_puntajes": "f83a76bc45ba26ec3505edd73c3daefd03cae14467c1391ddd7748449b7efc39",
+  "entrada": {
+    "anio": 2026,
+    "sha256_modelo": "1e859d91dacde32de794bc7d08aec90d5f30df4449a3ac55af93523b171eba1e",
+    "sha256_escala": "e017c28ae8825873bed1be55d0c227ae188978e880f20539191cbcd657e94412",
+    "sha256_calibracion": "622586f19ca2b8ef4e3174f4343de4cff08090965b5bb1634a8ed11bf88ceaed",
+    "sha256_script": "6253246fd7a2687e6a684d02710e77f76ac54de29dd5f50ba0f5241f3542fb87",
+    "sha256_registro": "529ba949c0e8168a22f8d95e0d6888691eef89dade683cb6b178612c56b1b486",
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "numpy": "2.1.3"
+  },
+  "inferencia_duplicada_identica": true
+}

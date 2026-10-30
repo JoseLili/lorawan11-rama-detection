@@ -1,0 +1,87 @@
+{
+  "estado": "Ventanas indexadas sin ataques ni modelos; no métricas de detección",
+  "orden_estaciones": [
+    "08015021",
+    "08019043",
+    "08019044",
+    "08019050",
+    "08019054",
+    "08019057",
+    "08089005",
+    "08125002",
+    "08169009",
+    "08194008",
+    "08205002",
+    "08263001",
+    "08301004"
+  ],
+  "formatos": [
+    {
+      "fase": "seleccion",
+      "v4": [
+        24,
+        26
+      ],
+      "l0": [
+        24,
+        17
+      ],
+      "paraad": [
+        13,
+        24
+      ]
+    },
+    {
+      "fase": "definitivo",
+      "v4": [
+        24,
+        26
+      ],
+      "l0": [
+        24,
+        17
+      ],
+      "paraad": [
+        13,
+        24
+      ]
+    }
+  ],
+  "ventana_v4": "t−24..t−1",
+  "ventana_l0": "t−23..t",
+  "perfil": "14 fechas locales previas, respaldo histórico hora y global; estrictamente causal",
+  "escala_seleccion": "2014–2015 UTC",
+  "escala_definitiva": "2014–2016 UTC",
+  "faltantes": "Máscara observada; relleno 0 tras normalizar; no exigir vecinas completas",
+  "comun": "Bloque UTC completo sin cambios de reloj; >=12 observadas y >=12 horas válidas por detector",
+  "soporte": "Datos compartidos + índices; funciones ventana_v4, ventana_l0 y bloque_paraad materializan lotes",
+  "advertencia": "Bajo ataque se deben recalcular perfiles y características causales; conservar escalas y máscara común",
+  "reproducibilidad_exacta": true,
+  "elegibilidad_todas_etapas": true,
+  "sha256_entradas": {
+    "results/barcelona_paraad/tiempo_utc_v1/rejilla_utc.parquet": "a8e5ce979617eed197076da1dd25afa72acafe6f5e489a19fae073f0c13e50f5",
+    "data/reference/barcelona_paraad/cohorte13.csv": "a57beb6d6062fc839bf9eb1e2821413a1e3f55bb9cf8999efb574469f76ec83b",
+    "experiments/barcelona/preparar_ventanas.py": "62960b1081eb08eb6c8b331386585215502e503eb398ecf4eafda46c717082a3",
+    "src/detect/lstm_red.py": "48be73261723e8e3608072edccfd1e98cc60f6d6c47c0b1f4cc4bbdf3d405b1e",
+    "src/detect/lstm_local.py": "1bb458e409c21f0a5fb9ab5e61add0bf8bb2f3ad48c0a38eaf8e56cb9f6c2bc5"
+  },
+  "sha256_salidas": {
+    "cobertura_estacion_etapa.csv": "852e6fa2b39a7eb091b0989729d8412c7c9cfe505ea5194001a9fa8a3e0bd348",
+    "elegibilidad_etapas.csv": "9a7f49d7a237db54c57378a36716ed0bfe7388a4beadd7530fb99dc5f924cbe3",
+    "escalas_definitivo.csv": "1a97cdbcdda751d65727898a5ca8a64484864305cbe0a01bd59f548df3673b80",
+    "escalas_seleccion.csv": "27d45cf9870fb52f7637eddd867cbd782302e758bbb7baef0b51a40125e3999d",
+    "estacion_dias.parquet": "b18b0fba93c7f8c30d953526f635bd8fab4455c76142f204009ca309fc0be8fa",
+    "exclusiones.csv": "f4342b1f8cb4af008519398913551e4186e197ed5e94eb84262e1e2509b801dd",
+    "horas_validas_l0.parquet": "c3dca3f6f813fcd0d1c956aad8fcfff1a505fa7d701316fc0a6813511c084ae1",
+    "horas_validas_v4.parquet": "f1ad7a271e7760f4b2c9b1d3c31a8365c1da24202022d879cb8dfff877652af3",
+    "l0_features_definitivo.npy": "c07835175cb766af188974c3b9de39b7b20b0320b1c48ec72166937f8ccb42d5",
+    "l0_features_seleccion.npy": "fbea74f6818687629d8577b8bada05289ff378231d5f35a688438e132d755ad2",
+    "mascara_comun.csv": "eab570d1e0df1b26345e775110ea89025131c9e6d6a08384f2bc6e1a7f3a2fc4",
+    "perfiles_causales.parquet": "9c72537c64a6257a428cfb416a39c199c6af6810426aaf563f72e8ca070a1c8f",
+    "reloj.parquet": "e0d7912d33715bbe2f1646f0d0995d9e3bdde31d536df7fe61fd1101a183f3bd",
+    "valores.parquet": "835bdd5c0d4b0e29483d4ff8143468c16d5b9b3cc06189e8949421fd223a9f87",
+    "vecinas.json": "1b3ee385f884b66aa52065eb97a4d1ab381ded94be3664dcf2150a1b73f69829",
+    "z_definitivo.npy": "0ff1765616c708c4b30abd3e0103b2ab0043e095a6b76ee43d5f476a6acfb56f",
+    "z_seleccion.npy": "651eb00cc79557663623cfb44709ac26d0569317e3004081be168e540e278963"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "estado": "error",
+  "detector": "v4",
+  "pid": 6243,
+  "tipo": "CalledProcessError",
+  "error": "Command '['/content/barcelona_env/bin/python', '-u', '-m', 'experiments.barcelona.evaluar_examen_colab', '--detector', 'v4']' returned non-zero exit status 1.",
+  "traceback": "Traceback (most recent call last):\n  File \"/content/barcelona/worker.py\", line 28, in main\n    subprocess.run([py,'-u','-m','experiments.barcelona.evaluar_examen_colab','--detector',args.detector],cwd=root,check=True,\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                   env={**os.environ,'PYTHONHASHSEED':'42'})\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/content/barcelona_env/bin/python', '-u', '-m', 'experiments.barcelona.evaluar_examen_colab', '--detector', 'v4']' returned non-zero exit status 1.\n"
+}

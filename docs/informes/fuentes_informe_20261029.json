@@ -1,0 +1,13 @@
+{
+  "documento": "informe_comparacion_L0_V4_PARAAD_20261029.docx",
+  "fecha": "2026-10-29",
+  "fuentes": {
+    "results/barcelona_paraad/examen_colab_2018_2019/resumen/metricas.csv": "46d05624b2886b7d0adf577a11f85bfe80f4ff06da0293d2c3af463fc6a399ea",
+    "results/barcelona_paraad/examen_colab_2018_2019/resumen/intervalos.csv": "f5031998e709571296380e41f209ec645c1d9de545da4c31b8055c307f0dc0d4",
+    "results/barcelona_paraad/examen_colab_2018_2019/resumen/diferencias_pareadas.csv": "a0dad21120f0adbedd4b7fff7dfab2f1136b995bb554d8c36559375d8472a2f5",
+    "results/barcelona_paraad/examen_colab_2018_2019/resumen/tasa_limpia.csv": "2aa8434fa368fa7747f182410c101cb54a69c454cea803402af2e8bfab3b92cf",
+    "results/barcelona_paraad/examen_colab_2018_2019/resumen/verificacion_final.json": "bd0b80cd0b8850f1c36ee7710d4ae03a1db12ed99e0ccab0b848a74329fec00f",
+    "docs/resultados_examen_paraad_revision20.md": "8e683dcd2fb9dba33cd43ae8ac8a77a2cf3269abfc3295967df07ff65d3bb155",
+    "data/reference/barcelona_paraad/cohorte13.csv": "a57beb6d6062fc839bf9eb1e2821413a1e3f55bb9cf8999efb574469f76ec83b"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "estado": {
+    "estado": "evaluando",
+    "detector": "l0",
+    "pid": 3172
+  },
+  "ultimo_progreso": {
+    "unidad": "complementaria_2019_10_d5",
+    "repeticion": 1,
+    "detector": "l0"
+  },
+  "sha256_snapshot": "d22128b4da0c5622d2d75f92b02c344f510f73b7445a166275ccf63e047cd4b2",
+  "archivos": 310,
+  "actualizado_utc": "2026-10-29T21:16:36.162624+00:00",
+  "sesion": "bcn-eval-l0-cpu-20261029"
+}

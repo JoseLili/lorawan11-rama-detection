@@ -1,0 +1,24 @@
+{
+  "resumen": {
+    "calendario": "complementaria_2019_02",
+    "uso": "complementaria_2019",
+    "delta": 0.1,
+    "escala": "definitivo",
+    "filas": 8783,
+    "offset_global": 43801,
+    "lecturas_programadas": 889,
+    "lecturas_cambiadas": 791,
+    "estacion_dias_comunes": 4567,
+    "estacion_dias_positivos_comunes": 37,
+    "reproducibilidad_exacta": true
+  },
+  "sha256_salidas": {
+    "episodio_hora.parquet": "d95821a139b54177cde2ad817708aecd59984f0fd255508be0fec327c306fc97",
+    "estacion_dias.parquet": "8da0832ff2597976fa41ec9d908adc2645308020dd005e245818a81adf2ca503",
+    "etiquetas_hora.parquet": "67e4fd62a905baaeaf82a1c8d17efcf99763ccc699a46a85b0b3c54e8ceaf7d8",
+    "l0_features.npy": "a2169b874fc0f8ecef7805bcef6b018824cec4811da0dc0b19670071209d8478",
+    "perfiles_causales.parquet": "f556ca4074fafdcc5bb17bcf60d5662cae920a0b3a43ec9cc3cb005f3e61b466",
+    "valores_alterados.parquet": "5cf4ed631ad23e7384eb0f4ba087bdad7749f80d3b5e0bb6105a1538c3335993",
+    "z.npy": "8e07258b9eaf6700d9f655bf4a0a629d7973e29e312220d9c968c57b3be966d7"
+  }
+}

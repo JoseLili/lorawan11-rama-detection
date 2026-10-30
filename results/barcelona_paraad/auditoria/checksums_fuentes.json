@@ -1,0 +1,20 @@
+{
+  "data/reference/barcelona_paraad/cohorte13_registro.json": "4794164e98a93aa859fcef838d288d0f1ad6b20dc151849b16e650770c2e699c",
+  "data/reference/barcelona_paraad/criterio_geografico.json": "280145fcf5e5f1fb881eb0a43aaf363fc6cae24d3d3631bfbc86dc53d12d3c53",
+  "data/reference/barcelona_paraad/contraste_horario_20200710.json": "b8dc93cf93540e8e19bc8f7eea0c909f76eff962d63ba9f989c6b90b610510c3",
+  "data/reference/barcelona_paraad/metadatos_tasf_thgu.json": "b3e7065034f3e32f55109e7f2859b2046e434bf037fd5fe00f7bf6926de70b02",
+  "data/reference/barcelona_paraad/descarga_2018.json": "090037ee7f7c67345edbb8c6b028d67b0a86f6d260ee053fe387bc8d18ccaab5",
+  "data/reference/barcelona_paraad/descarga_2016.json": "a6614b560c8f8c7befb955599f33b40c3645055d37861d1f049b24ddf45d9aca",
+  "data/reference/barcelona_paraad/descarga_2017.json": "9fe66ab362bae0a1d0ac4acbf799f8ae5ef2743e6b3e511fbed3121618b0a14b",
+  "data/reference/barcelona_paraad/descarga_2015.json": "110a5d5c70fb9232cb721e5451df325b9e35e0ca895266c8bed4146beda5c556",
+  "data/reference/barcelona_paraad/descarga_2014.json": "174cfea430b3e005c8ced3d246d946e9f878b86f0dbc75fdab38618ebe52404c",
+  "data/reference/barcelona_paraad/descarga_2019.json": "c4e812da10e8ce16123dfeb516a2be152cd85d2d4ff444028b473d9fcdb7e050",
+  "data/raw/barcelona_paraad/o3_amb_2014.json.gz": "60c0a34b261f5324e88197de4d934fa1ebabead9b87ea688f97f06974ab032b8",
+  "data/raw/barcelona_paraad/o3_amb_2018.json.gz": "3c5fa490e2a4fca402eb008b5137fdd53cd7fc04593fbe4766d23b4c44776588",
+  "data/raw/barcelona_paraad/o3_amb_2019.json.gz": "c300c583f3d29934dbdca71c036d0440ee2a6ccc5f6694dda5bda1d84b6b6793",
+  "data/raw/barcelona_paraad/o3_amb_2017.json.gz": "052955e3318e8487443dac904e36446b582bc8536f1b9e10fd19d8187fdf51f8",
+  "data/raw/barcelona_paraad/o3_amb_2016.json.gz": "555a8c533d8eeb5e93d77c7b56d6669db298b5d49c40d223e4c3b710e488de0b",
+  "data/raw/barcelona_paraad/o3_amb_2015.json.gz": "2db10e408d5692d68c6505f884449452239576ac2c7436a697abafae04ff835c",
+  "experiments/barcelona/auditar_horas_etapas.py": "e150bfd28d286d98dda8d5a8ad6f64dd2d8cdf5d3aea73e771b65f9a708d5d93",
+  "experiments/barcelona/descargar_auditar.py": "2b69a5a1708df252cf5d50650c6f7c223e066a07a0669618f13510d2b56d8988"
+}

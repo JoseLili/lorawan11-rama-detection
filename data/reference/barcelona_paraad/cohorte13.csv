@@ -1,0 +1,14 @@
+codigo,nombre,municipio,latitud,longitud,unidades,horas_ajuste,meses_ajuste,cobertura_ajuste_pct
+08015021,Badalona,Badalona,41.443985,2.237899,µg/m3,17358,24,99.07534246575342
+08019043,Barcelona (Eixample),Barcelona,41.385315,2.1538,µg/m3,17088,24,97.53424657534246
+08019044,Barcelona (Gràcia - Sant Gervasi),Barcelona,41.398722,2.153399,µg/m3,16965,24,96.83219178082192
+08019050,Barcelona (Ciutadella),Barcelona,41.386403,2.187398,µg/m3,16981,24,96.92351598173516
+08019054,Barcelona (Parc Vall Hebron),Barcelona,41.426109,2.148002,µg/m3,16896,24,96.43835616438356
+08019057,Barcelona (Palau Reial),Barcelona,41.387492,2.1152,µg/m3,16742,24,95.5593607305936
+08089005,Gavà,Gavà,41.303095,1.991498,µg/m3,16679,24,95.19977168949772
+08125002,Montcada i Reixac,Montcada i Reixac,41.481972,2.188298,µg/m3,17281,24,98.63584474885845
+08169009,El Prat de Llobregat (Sagnier),"Prat de Llobregat, el",41.321773,2.0821,µg/m3,16889,24,96.39840182648402
+08194008,Sant Adrià de Besòs,Sant Adrià de Besòs,41.425593,2.2222,µg/m3,16888,24,96.39269406392694
+08205002,Sant Cugat del Vallès,Sant Cugat del Vallès,41.476816,2.088998,µg/m3,17288,24,98.675799086758
+08263001,Sant Vicenç dels Horts (Ribot),Sant Vicenç dels Horts,41.39219,2.009798,µg/m3,17235,24,98.37328767123287
+08301004,Viladecans - Atrium,Viladecans,41.313351,2.013609,µg/m3,16933,24,96.64954337899545

@@ -1,0 +1,12 @@
+  File "/content/barcelona/worker.py", line 37, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/content/barcelona/worker.py", line 28, in main
+    subprocess.run([py,'-u','-m','experiments.barcelona.evaluar_examen_colab','--detector',args.detector],cwd=root,check=True,
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   env={**os.environ,'PYTHONHASHSEED':'42'})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/content/barcelona_env/bin/python', '-u', '-m', 'experiments.barcelona.evaluar_examen_colab', '--detector', 'v4']' returned non-zero exit status 1.

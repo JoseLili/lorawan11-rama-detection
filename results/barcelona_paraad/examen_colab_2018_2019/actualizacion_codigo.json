@@ -1,0 +1,11 @@
+{
+  "motivo": "Comparación de los mismos instantes en distinta resolución temporal us/ns; sin cambiar datos, modelos, umbrales o tolerancia numérica",
+  "antes": {
+    "experiments/barcelona/empaquetar_examen.py": "a7794af140e48266ddb804c7b66e345ee77ec7c32e4d63eebf672ebfb7a78d75",
+    "experiments/barcelona/evaluar_examen_colab.py": "cf5b02f3523cad2d83921b51ad06fd742d5aed1b9bbe881281c5b50f9a256e6f"
+  },
+  "despues": {
+    "experiments/barcelona/empaquetar_examen.py": "4e811441738f0f2109156b507558cc34843d00b956161740e56c9f6e3e4b38a1",
+    "experiments/barcelona/evaluar_examen_colab.py": "70ca814bd7dabd4885df8ace868141a6d96bd249e040e6b3832f823ab570e68c"
+  }
+}

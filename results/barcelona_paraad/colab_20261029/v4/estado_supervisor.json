@@ -1,0 +1,17 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "v4",
+    "pid": 1638
+  },
+  "ultimo_progreso": {
+    "epoca": 8,
+    "loss": 160.0913848876953,
+    "mae": 9.818012237548828
+  },
+  "sha256_snapshot": "8dab31764fe369b24fd4bfc24d91ad911dec0c6e03460c391f51810ad9639913",
+  "archivos": 383,
+  "actualizado_utc": "2026-10-29T17:20:10.109644+00:00",
+  "sesion": "bcn-v4-cpu-20261029",
+  "sesion_liberada": true
+}

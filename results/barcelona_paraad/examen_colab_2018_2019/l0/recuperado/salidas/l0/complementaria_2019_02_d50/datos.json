@@ -1,0 +1,47 @@
+{
+  "nombre": "complementaria_2019_02_d50",
+  "detector": "l0",
+  "ano": 2019,
+  "casos": 4567,
+  "igual": true,
+  "unidad": {
+    "nombre": "complementaria_2019_02_d50",
+    "ano": 2019,
+    "plan": "complementaria_2019_02",
+    "delta": 50,
+    "arrays": {
+      "v": {
+        "shape": [
+          8783,
+          13
+        ],
+        "dtype": "float64",
+        "sha256": "ce100ceafd564bc0f0b937fe0c509fa896230dea7cd5fdb6801d94490000cbbc"
+      },
+      "b": {
+        "shape": [
+          8783,
+          13
+        ],
+        "dtype": "float64",
+        "sha256": "2638351c706beb08815e38d0d3d0721f90cac6bc78249028fb4f4a00b60cc61f"
+      },
+      "z": {
+        "shape": [
+          8783,
+          13
+        ],
+        "dtype": "float32",
+        "sha256": "816e4701b36d8cc0ab0c04ca3e8f67526816243fe95a43e2f388724b8d55a0b8"
+      },
+      "F": {
+        "shape": [
+          8783,
+          41
+        ],
+        "dtype": "float32",
+        "sha256": "45754fc1827a5f19a53bef1b65b4bf2445bfd32a2c93f1f989a7c0a70710a60e"
+      }
+    }
+  }
+}

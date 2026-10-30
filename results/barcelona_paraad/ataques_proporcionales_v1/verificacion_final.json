@@ -1,0 +1,12 @@
+{
+  "unidades_verificadas": 150,
+  "hashes_correctos": true,
+  "faltantes_intactos": true,
+  "cambios_solo_en_episodios": true,
+  "etiquetas_coinciden_con_cambios": true,
+  "mascara_comun_intacta": true,
+  "entradas_finitas": true,
+  "soportes_pareados": true,
+  "sha256_registro": "990a48466981d95f128091aa8225fbb667e5db2a778e83a767efffee10c56a11",
+  "sha256_verificador": "65bcbe3da35bf94ac833733f58713b0e71551d17d607358ce8df66440c16f185"
+}

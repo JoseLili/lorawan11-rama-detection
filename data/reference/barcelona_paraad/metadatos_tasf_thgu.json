@@ -1,0 +1,3236 @@
+{
+  "id" : "tasf-thgu",
+  "name" : "Qualitat de l’aire als punts de mesurament automàtics de la Xarxa de Vigilància i Previsió de la Contaminació Atmosfèrica",
+  "assetType" : "dataset",
+  "attribution" : "Departament de Territori, Habitatge i Transició Ecològica",
+  "attributionLink" : "https://administraciodigital.gencat.cat/ca/dades/dades-obertes/informacio-practica/llicencies/",
+  "averageRating" : 0,
+  "category" : "Medi Ambient",
+  "createdAt" : 1584530120,
+  "description" : "Dades horàries disponibles dels contaminants mesurats als punts de mesurament automàtics de la Xarxa de Vigilància i Previsió de la Contaminació Atmosfèrica  des de l’any 1991 fins al dia anterior a l’actual. Aquesta informació s’actualitza diàriament. A part de la concentració dels diferents contaminants també es podrà consultar les coordenades on està ubicat el punt de mesurament, el nom i tipus d’estació, les unitats i la data.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 7974,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "SEE_TERMS_OF_USE",
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 1689074,
+  "provenance" : "official",
+  "publicationAppendEnabled" : true,
+  "publicationDate" : 1586418953,
+  "publicationGroup" : 1121685,
+  "publicationStage" : "published",
+  "rowsUpdatedAt" : 1793169014,
+  "rowsUpdatedBy" : "a4b5-gx6v",
+  "tableId" : 1135812,
+  "totalTimesRated" : 0,
+  "viewCount" : 41831,
+  "viewLastModified" : 1793169003,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1594023469,
+    "reviewedAutomatically" : true,
+    "state" : "approved",
+    "submissionId" : 666886,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1594023469,
+    "targetAudience" : "public",
+    "workflowId" : 182,
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1594023469,
+      "failureCount" : 0,
+      "startedAt" : 1594023469,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "a4b5-gx6v",
+      "displayName" : "Dades Obertes Catalunya"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 14474878,
+    "name" : "CODI EOI",
+    "dataTypeName" : "text",
+    "description" : "Codi oficial que assigna el Ministeri responsable de la qualitat de l’aire format per: codi província, codi municipi i codi estació",
+    "fieldName" : "codi_eoi",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983579,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "43171002",
+      "null" : "0",
+      "top" : [ {
+        "item" : "43148003",
+        "count" : "83263"
+      }, {
+        "item" : "43047001",
+        "count" : "83140"
+      }, {
+        "item" : "43123005",
+        "count" : "82945"
+      }, {
+        "item" : "08102005",
+        "count" : "81841"
+      }, {
+        "item" : "25120001",
+        "count" : "78977"
+      }, {
+        "item" : "08202001",
+        "count" : "78599"
+      }, {
+        "item" : "43103001",
+        "count" : "76615"
+      }, {
+        "item" : "08113007",
+        "count" : "76434"
+      }, {
+        "item" : "08114006",
+        "count" : "72651"
+      }, {
+        "item" : "43171001",
+        "count" : "70140"
+      }, {
+        "item" : "08279011",
+        "count" : "69406"
+      }, {
+        "item" : "43148001",
+        "count" : "68837"
+      }, {
+        "item" : "08125002",
+        "count" : "67461"
+      }, {
+        "item" : "08307012",
+        "count" : "64446"
+      }, {
+        "item" : "08019044",
+        "count" : "61449"
+      }, {
+        "item" : "08019043",
+        "count" : "61162"
+      }, {
+        "item" : "43148022",
+        "count" : "59082"
+      }, {
+        "item" : "08101001",
+        "count" : "58047"
+      }, {
+        "item" : "08263001",
+        "count" : "57218"
+      }, {
+        "item" : "43148028",
+        "count" : "54863"
+      } ],
+      "smallest" : "00000002",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474879,
+    "name" : "NOM ESTACIO",
+    "dataTypeName" : "text",
+    "description" : "Nom de la cabina. Valor alfanumèric  d’uns 100 caràcters. Per exemple: Perafort (Puigdelfi)",
+    "fieldName" : "nom_estacio",
+    "position" : 3,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983562,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "Vila-seca (IES Vila-seca)",
+      "null" : "269",
+      "top" : [ {
+        "item" : "Igualada",
+        "count" : "87821"
+      }, {
+        "item" : "Tarragona (Bonavista)",
+        "count" : "83263"
+      }, {
+        "item" : "Constantí",
+        "count" : "83140"
+      }, {
+        "item" : "Reus",
+        "count" : "82945"
+      }, {
+        "item" : "Lleida",
+        "count" : "78977"
+      }, {
+        "item" : "Sant Celoni",
+        "count" : "78599"
+      }, {
+        "item" : "Perafort (Puigdelfí)",
+        "count" : "76615"
+      }, {
+        "item" : "Manresa",
+        "count" : "76434"
+      }, {
+        "item" : "Mataró",
+        "count" : "73298"
+      }, {
+        "item" : "Martorell",
+        "count" : "72651"
+      }, {
+        "item" : "Rubí",
+        "count" : "72550"
+      }, {
+        "item" : "Vila-seca",
+        "count" : "70140"
+      }, {
+        "item" : "Terrassa",
+        "count" : "69406"
+      }, {
+        "item" : "Tarragona (Sant Salvador)",
+        "count" : "68837"
+      }, {
+        "item" : "Montcada i Reixac",
+        "count" : "67461"
+      }, {
+        "item" : "Vilanova i la Geltrú",
+        "count" : "64446"
+      }, {
+        "item" : "Barcelona (Gràcia - Sant Gervasi)",
+        "count" : "61449"
+      }, {
+        "item" : "Barcelona (Eixample)",
+        "count" : "61162"
+      }, {
+        "item" : "Badalona",
+        "count" : "59722"
+      }, {
+        "item" : "Tarragona (Universitat Laboral)",
+        "count" : "59082"
+      } ],
+      "smallest" : "Agullana",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474889,
+    "name" : "DATA",
+    "dataTypeName" : "calendar_date",
+    "description" : "Data de la mesura",
+    "fieldName" : "data",
+    "position" : 4,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 8983591,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "2026-10-28T00:00:00.000",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2026-03-24T00:00:00.000",
+        "count" : "421"
+      }, {
+        "item" : "2026-03-25T00:00:00.000",
+        "count" : "420"
+      }, {
+        "item" : "2026-03-23T00:00:00.000",
+        "count" : "420"
+      }, {
+        "item" : "2026-02-23T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-03T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-31T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-03-15T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-21T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-17T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-24T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-09T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-11T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-21T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-22T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-03-09T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-14T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-29T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-04T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-01-02T00:00:00.000",
+        "count" : "413"
+      }, {
+        "item" : "2026-02-13T00:00:00.000",
+        "count" : "413"
+      } ],
+      "smallest" : "1991-01-01T00:00:00.000",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : {
+      "view" : "date_dmy"
+    }
+  }, {
+    "id" : 14474886,
+    "name" : "MAGNITUD",
+    "dataTypeName" : "number",
+    "description" : "Codi numèric que identifica el contaminant",
+    "fieldName" : "magnitud",
+    "position" : 5,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983566,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "331",
+      "null" : "0",
+      "top" : [ {
+        "item" : "8",
+        "count" : "636934"
+      }, {
+        "item" : "7",
+        "count" : "636223"
+      }, {
+        "item" : "14",
+        "count" : "557231"
+      }, {
+        "item" : "1",
+        "count" : "505955"
+      }, {
+        "item" : "12",
+        "count" : "361801"
+      }, {
+        "item" : "6",
+        "count" : "296770"
+      }, {
+        "item" : "10",
+        "count" : "229159"
+      }, {
+        "item" : "65",
+        "count" : "163657"
+      }, {
+        "item" : "42",
+        "count" : "65304"
+      }, {
+        "item" : "3",
+        "count" : "57239"
+      }, {
+        "item" : "44",
+        "count" : "49797"
+      }, {
+        "item" : "9",
+        "count" : "44116"
+      }, {
+        "item" : "30",
+        "count" : "22892"
+      }, {
+        "item" : "11",
+        "count" : "9968"
+      }, {
+        "item" : "331",
+        "count" : "4723"
+      }, {
+        "item" : "53",
+        "count" : "3014"
+      }, {
+        "item" : "58",
+        "count" : "1728"
+      } ],
+      "smallest" : "1",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474887,
+    "name" : "CONTAMINANT",
+    "dataTypeName" : "text",
+    "description" : "Fórmula o mnemotècnic del contaminant",
+    "fieldName" : "contaminant",
+    "position" : 6,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983582,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "SO2",
+      "null" : "269",
+      "top" : [ {
+        "item" : "NO2",
+        "count" : "636891"
+      }, {
+        "item" : "NO",
+        "count" : "636180"
+      }, {
+        "item" : "O3",
+        "count" : "557188"
+      }, {
+        "item" : "SO2",
+        "count" : "505914"
+      }, {
+        "item" : "NOX",
+        "count" : "361758"
+      }, {
+        "item" : "CO",
+        "count" : "296763"
+      }, {
+        "item" : "PM10",
+        "count" : "229116"
+      }, {
+        "item" : "H2S",
+        "count" : "163657"
+      }, {
+        "item" : "HCT",
+        "count" : "65304"
+      }, {
+        "item" : "PS",
+        "count" : "57239"
+      }, {
+        "item" : "HCNM",
+        "count" : "49797"
+      }, {
+        "item" : "PM2.5",
+        "count" : "44110"
+      }, {
+        "item" : "C6H6",
+        "count" : "22892"
+      }, {
+        "item" : "PM1",
+        "count" : "9968"
+      }, {
+        "item" : "Hg",
+        "count" : "4723"
+      }, {
+        "item" : "Cl2",
+        "count" : "3014"
+      }, {
+        "item" : "HCl",
+        "count" : "1728"
+      } ],
+      "smallest" : "C6H6",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474888,
+    "name" : "UNITATS",
+    "dataTypeName" : "text",
+    "description" : "Unitats de mesura del contaminant",
+    "fieldName" : "unitats",
+    "position" : 7,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983590,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "ug/m3",
+      "null" : "269",
+      "top" : [ {
+        "item" : "µg/m3",
+        "count" : "3108514"
+      }, {
+        "item" : "mg/m3",
+        "count" : "296763"
+      }, {
+        "item" : "ug/m3",
+        "count" : "121141"
+      }, {
+        "item" : "ppm",
+        "count" : "115101"
+      }, {
+        "item" : "ng/m3",
+        "count" : "4723"
+      } ],
+      "smallest" : "µg/m3",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474884,
+    "name" : "TIPUS ESTACIO",
+    "dataTypeName" : "text",
+    "description" : "Valors possibles: Traffic, Background, i Industrial (en anglès) Traffic o trànsit: el punt de mesurament està ubicat en un lloc que rep l’impacte directe de les emissions del trànsit. Industrial: el punt de mesurament està ubicat en un lloc que rep l’impacte directe d’emissions industrials. Background o fons: el punt de mesurament està ubicat en un lloc que no rep l’impacte directe de les emissions del trànsit o de la indústria. L’aire que li arriba ha estat barrejat i prové de diferents fonts.",
+    "fieldName" : "tipus_estacio",
+    "position" : 8,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983598,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "traffic",
+      "null" : "269",
+      "top" : [ {
+        "item" : "background",
+        "count" : "1698076"
+      }, {
+        "item" : "traffic",
+        "count" : "1171689"
+      }, {
+        "item" : "industrial",
+        "count" : "776477"
+      } ],
+      "smallest" : "background",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474885,
+    "name" : "AREA URBANA",
+    "dataTypeName" : "text",
+    "description" : "Valors possibles: Urban, Peri-urban, i rural (en anglès) Urban o urbana: el punt de mesurament està ubicat en una àrea urbana (ciutat) caracteritzada per la construcció contínua i l’existència d’infraestructura urbana, que comprèn el conjunt de serveis públics. Peri-urban o suburbana: el punt de mesurament està ubicat en una zona a les afores d’una ciutat, és una àrea adjacent o molt propera a una ciutat altament urbanitzada i poblada. Rural: el punt de mesurament està ubicat en un lloc que no és àrea urbana, ni suburbana.",
+    "fieldName" : "area_urbana",
+    "position" : 9,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983575,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "urban",
+      "null" : "269",
+      "top" : [ {
+        "item" : "urban",
+        "count" : "1382760"
+      }, {
+        "item" : "peri-urban",
+        "count" : "1075903"
+      }, {
+        "item" : "rural",
+        "count" : "716120"
+      }, {
+        "item" : "suburban",
+        "count" : "471459"
+      } ],
+      "smallest" : "peri-urban",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474880,
+    "name" : "CODI INE",
+    "dataTypeName" : "text",
+    "description" : "Codi numèric de 5 dígits corresponent al municipi (els dos primers dígits corresponen a la província, i els tres següents identifiquen el municipi)",
+    "fieldName" : "codi_ine",
+    "position" : 10,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983600,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "43171",
+      "null" : "0",
+      "top" : [ {
+        "item" : "08019",
+        "count" : "391111"
+      }, {
+        "item" : "43148",
+        "count" : "298703"
+      }, {
+        "item" : "43171",
+        "count" : "90957"
+      }, {
+        "item" : "08102",
+        "count" : "87821"
+      }, {
+        "item" : "43047",
+        "count" : "83140"
+      }, {
+        "item" : "43123",
+        "count" : "82945"
+      }, {
+        "item" : "25120",
+        "count" : "78977"
+      }, {
+        "item" : "08096",
+        "count" : "78899"
+      }, {
+        "item" : "08202",
+        "count" : "78599"
+      }, {
+        "item" : "43162",
+        "count" : "78299"
+      }, {
+        "item" : "08263",
+        "count" : "77060"
+      }, {
+        "item" : "43103",
+        "count" : "76615"
+      }, {
+        "item" : "08113",
+        "count" : "76434"
+      }, {
+        "item" : "08169",
+        "count" : "75394"
+      }, {
+        "item" : "08125",
+        "count" : "73443"
+      }, {
+        "item" : "08121",
+        "count" : "73298"
+      }, {
+        "item" : "08114",
+        "count" : "72651"
+      }, {
+        "item" : "08184",
+        "count" : "72550"
+      }, {
+        "item" : "08279",
+        "count" : "69406"
+      }, {
+        "item" : "08187",
+        "count" : "65940"
+      } ],
+      "smallest" : "00000",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474881,
+    "name" : "MUNICIPI",
+    "dataTypeName" : "text",
+    "description" : "Nom del municipi on es troba la cabina. Valor alfanumèric d’uns 100 caràcters. Per exemple: Perafort",
+    "fieldName" : "municipi",
+    "position" : 11,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983586,
+    "cachedContents" : {
+      "non_null" : "3646242",
+      "largest" : "Vila-seca",
+      "null" : "269",
+      "top" : [ {
+        "item" : "Barcelona",
+        "count" : "391063"
+      }, {
+        "item" : "Tarragona",
+        "count" : "298703"
+      }, {
+        "item" : "Vila-seca",
+        "count" : "90957"
+      }, {
+        "item" : "Igualada",
+        "count" : "87821"
+      }, {
+        "item" : "Constantí",
+        "count" : "83140"
+      }, {
+        "item" : "Reus",
+        "count" : "82945"
+      }, {
+        "item" : "Lleida",
+        "count" : "78977"
+      }, {
+        "item" : "Granollers",
+        "count" : "78899"
+      }, {
+        "item" : "Sant Celoni",
+        "count" : "78599"
+      }, {
+        "item" : "Vandellòs i l'Hospitalet de l'",
+        "count" : "78299"
+      }, {
+        "item" : "Sant Vicenç dels Horts",
+        "count" : "77060"
+      }, {
+        "item" : "Perafort",
+        "count" : "76615"
+      }, {
+        "item" : "Manresa",
+        "count" : "76434"
+      }, {
+        "item" : "Prat de Llobregat, el",
+        "count" : "75394"
+      }, {
+        "item" : "Montcada i Reixac",
+        "count" : "73443"
+      }, {
+        "item" : "Mataró",
+        "count" : "73298"
+      }, {
+        "item" : "Martorell",
+        "count" : "72651"
+      }, {
+        "item" : "Rubí",
+        "count" : "72550"
+      }, {
+        "item" : "Terrassa",
+        "count" : "69406"
+      }, {
+        "item" : "Sabadell",
+        "count" : "65940"
+      } ],
+      "smallest" : "Agullana",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474882,
+    "name" : "CODI COMARCA",
+    "dataTypeName" : "text",
+    "description" : "Codi numèric que identifica la comarca on està situada la cabina",
+    "fieldName" : "codi_comarca",
+    "position" : 12,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983596,
+    "cachedContents" : {
+      "non_null" : "3646510",
+      "largest" : "41",
+      "null" : "1",
+      "top" : [ {
+        "item" : "13",
+        "count" : "607982"
+      }, {
+        "item" : "36",
+        "count" : "575713"
+      }, {
+        "item" : "40",
+        "count" : "426813"
+      }, {
+        "item" : "11",
+        "count" : "404539"
+      }, {
+        "item" : "41",
+        "count" : "281817"
+      }, {
+        "item" : "08",
+        "count" : "161244"
+      }, {
+        "item" : "17",
+        "count" : "116877"
+      }, {
+        "item" : "14",
+        "count" : "111230"
+      }, {
+        "item" : "24",
+        "count" : "103687"
+      }, {
+        "item" : "06",
+        "count" : "90048"
+      }, {
+        "item" : "03",
+        "count" : "81533"
+      }, {
+        "item" : "20",
+        "count" : "80254"
+      }, {
+        "item" : "33",
+        "count" : "78977"
+      }, {
+        "item" : "07",
+        "count" : "76434"
+      }, {
+        "item" : "21",
+        "count" : "73298"
+      }, {
+        "item" : "22",
+        "count" : "59934"
+      }, {
+        "item" : "01",
+        "count" : "53580"
+      }, {
+        "item" : "15",
+        "count" : "39846"
+      }, {
+        "item" : "25",
+        "count" : "37122"
+      }, {
+        "item" : "18",
+        "count" : "29629"
+      } ],
+      "smallest" : "01",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474883,
+    "name" : "NOM COMARCA",
+    "dataTypeName" : "text",
+    "description" : "Nom de la comarca on es troba la cabina",
+    "fieldName" : "nom_comarca",
+    "position" : 13,
+    "renderTypeName" : "text",
+    "tableColumnId" : 8983581,
+    "cachedContents" : {
+      "non_null" : "3646510",
+      "largest" : "Vallès Oriental",
+      "null" : "1",
+      "top" : [ {
+        "item" : "Barcelonès",
+        "count" : "607982"
+      }, {
+        "item" : "Tarragonès",
+        "count" : "575713"
+      }, {
+        "item" : "Vallès Occidental",
+        "count" : "426813"
+      }, {
+        "item" : "Baix Llobregat",
+        "count" : "404539"
+      }, {
+        "item" : "Vallès Oriental",
+        "count" : "281817"
+      }, {
+        "item" : "Baix Camp",
+        "count" : "161244"
+      }, {
+        "item" : "Garraf",
+        "count" : "116877"
+      }, {
+        "item" : "Berguedà",
+        "count" : "111230"
+      }, {
+        "item" : "Osona",
+        "count" : "103687"
+      }, {
+        "item" : "Anoia",
+        "count" : "90048"
+      }, {
+        "item" : "Alt Penedès",
+        "count" : "81533"
+      }, {
+        "item" : "Gironès",
+        "count" : "80254"
+      }, {
+        "item" : "Segrià",
+        "count" : "78977"
+      }, {
+        "item" : "Bages",
+        "count" : "76434"
+      }, {
+        "item" : "Maresme",
+        "count" : "73298"
+      }, {
+        "item" : "Montsià",
+        "count" : "59934"
+      }, {
+        "item" : "Alt Camp",
+        "count" : "53580"
+      }, {
+        "item" : "Cerdanya",
+        "count" : "39846"
+      }, {
+        "item" : "Pallars Jussà",
+        "count" : "37122"
+      }, {
+        "item" : "Garrigues",
+        "count" : "29629"
+      } ],
+      "smallest" : "Alt Camp",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474890,
+    "name" : "01h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 01",
+    "fieldName" : "h01",
+    "position" : 14,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983584,
+    "cachedContents" : {
+      "non_null" : "3505667",
+      "largest" : "2922",
+      "null" : "140844",
+      "top" : [ {
+        "item" : "1",
+        "count" : "586289"
+      }, {
+        "item" : "2",
+        "count" : "210342"
+      }, {
+        "item" : "0.2",
+        "count" : "123160"
+      }, {
+        "item" : "3",
+        "count" : "121952"
+      }, {
+        "item" : "10",
+        "count" : "91467"
+      }, {
+        "item" : "4",
+        "count" : "88923"
+      }, {
+        "item" : "6",
+        "count" : "85128"
+      }, {
+        "item" : "5",
+        "count" : "72939"
+      }, {
+        "item" : "11",
+        "count" : "65219"
+      }, {
+        "item" : "7",
+        "count" : "62308"
+      }, {
+        "item" : "8",
+        "count" : "57435"
+      }, {
+        "item" : "9",
+        "count" : "53663"
+      }, {
+        "item" : "0.3",
+        "count" : "52146"
+      }, {
+        "item" : "12",
+        "count" : "51843"
+      }, {
+        "item" : "0.4",
+        "count" : "49433"
+      }, {
+        "item" : "13",
+        "count" : "48705"
+      }, {
+        "item" : "14",
+        "count" : "46226"
+      }, {
+        "item" : "15",
+        "count" : "44767"
+      }, {
+        "item" : "16",
+        "count" : "43213"
+      }, {
+        "item" : "17",
+        "count" : "40500"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474891,
+    "name" : "02h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 02",
+    "fieldName" : "h02",
+    "position" : 15,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983563,
+    "cachedContents" : {
+      "non_null" : "3497412",
+      "largest" : "2922",
+      "null" : "149099",
+      "top" : [ {
+        "item" : "1",
+        "count" : "608574"
+      }, {
+        "item" : "2",
+        "count" : "212372"
+      }, {
+        "item" : "0.2",
+        "count" : "135142"
+      }, {
+        "item" : "3",
+        "count" : "123070"
+      }, {
+        "item" : "10",
+        "count" : "97113"
+      }, {
+        "item" : "4",
+        "count" : "90689"
+      }, {
+        "item" : "6",
+        "count" : "90441"
+      }, {
+        "item" : "5",
+        "count" : "75502"
+      }, {
+        "item" : "11",
+        "count" : "67651"
+      }, {
+        "item" : "7",
+        "count" : "65280"
+      }, {
+        "item" : "8",
+        "count" : "60401"
+      }, {
+        "item" : "9",
+        "count" : "56413"
+      }, {
+        "item" : "12",
+        "count" : "53461"
+      }, {
+        "item" : "0.3",
+        "count" : "52119"
+      }, {
+        "item" : "13",
+        "count" : "50144"
+      }, {
+        "item" : "0.4",
+        "count" : "48366"
+      }, {
+        "item" : "14",
+        "count" : "47689"
+      }, {
+        "item" : "15",
+        "count" : "45483"
+      }, {
+        "item" : "16",
+        "count" : "43387"
+      }, {
+        "item" : "17",
+        "count" : "40970"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474892,
+    "name" : "03h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 03",
+    "fieldName" : "h03",
+    "position" : 16,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983567,
+    "cachedContents" : {
+      "non_null" : "3512697",
+      "largest" : "2922",
+      "null" : "133814",
+      "top" : [ {
+        "item" : "1",
+        "count" : "634386"
+      }, {
+        "item" : "2",
+        "count" : "215352"
+      }, {
+        "item" : "0.2",
+        "count" : "146824"
+      }, {
+        "item" : "3",
+        "count" : "125554"
+      }, {
+        "item" : "10",
+        "count" : "103342"
+      }, {
+        "item" : "6",
+        "count" : "97173"
+      }, {
+        "item" : "4",
+        "count" : "94279"
+      }, {
+        "item" : "5",
+        "count" : "78319"
+      }, {
+        "item" : "11",
+        "count" : "69784"
+      }, {
+        "item" : "7",
+        "count" : "68534"
+      }, {
+        "item" : "8",
+        "count" : "63675"
+      }, {
+        "item" : "9",
+        "count" : "58762"
+      }, {
+        "item" : "12",
+        "count" : "55019"
+      }, {
+        "item" : "0.3",
+        "count" : "52617"
+      }, {
+        "item" : "13",
+        "count" : "51717"
+      }, {
+        "item" : "14",
+        "count" : "49239"
+      }, {
+        "item" : "0.4",
+        "count" : "47959"
+      }, {
+        "item" : "15",
+        "count" : "46172"
+      }, {
+        "item" : "16",
+        "count" : "44409"
+      }, {
+        "item" : "17",
+        "count" : "41587"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474893,
+    "name" : "04h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 04",
+    "fieldName" : "h04",
+    "position" : 17,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983593,
+    "cachedContents" : {
+      "non_null" : "3517640",
+      "largest" : "2922",
+      "null" : "128871",
+      "top" : [ {
+        "item" : "1",
+        "count" : "649201"
+      }, {
+        "item" : "2",
+        "count" : "217762"
+      }, {
+        "item" : "0.2",
+        "count" : "152830"
+      }, {
+        "item" : "3",
+        "count" : "128170"
+      }, {
+        "item" : "10",
+        "count" : "107247"
+      }, {
+        "item" : "6",
+        "count" : "101128"
+      }, {
+        "item" : "4",
+        "count" : "96842"
+      }, {
+        "item" : "5",
+        "count" : "81312"
+      }, {
+        "item" : "11",
+        "count" : "72531"
+      }, {
+        "item" : "7",
+        "count" : "71762"
+      }, {
+        "item" : "8",
+        "count" : "65726"
+      }, {
+        "item" : "9",
+        "count" : "61044"
+      }, {
+        "item" : "12",
+        "count" : "56793"
+      }, {
+        "item" : "13",
+        "count" : "53312"
+      }, {
+        "item" : "0.3",
+        "count" : "52241"
+      }, {
+        "item" : "14",
+        "count" : "49622"
+      }, {
+        "item" : "15",
+        "count" : "47043"
+      }, {
+        "item" : "0.4",
+        "count" : "46771"
+      }, {
+        "item" : "16",
+        "count" : "44628"
+      }, {
+        "item" : "17",
+        "count" : "42044"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474894,
+    "name" : "05h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 05",
+    "fieldName" : "h05",
+    "position" : 18,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983583,
+    "cachedContents" : {
+      "non_null" : "3520528",
+      "largest" : "2922",
+      "null" : "125983",
+      "top" : [ {
+        "item" : "1",
+        "count" : "646273"
+      }, {
+        "item" : "2",
+        "count" : "218409"
+      }, {
+        "item" : "0.2",
+        "count" : "157008"
+      }, {
+        "item" : "3",
+        "count" : "129497"
+      }, {
+        "item" : "10",
+        "count" : "108824"
+      }, {
+        "item" : "6",
+        "count" : "102717"
+      }, {
+        "item" : "4",
+        "count" : "97710"
+      }, {
+        "item" : "5",
+        "count" : "82299"
+      }, {
+        "item" : "11",
+        "count" : "73999"
+      }, {
+        "item" : "7",
+        "count" : "72932"
+      }, {
+        "item" : "8",
+        "count" : "67184"
+      }, {
+        "item" : "9",
+        "count" : "62544"
+      }, {
+        "item" : "12",
+        "count" : "58315"
+      }, {
+        "item" : "13",
+        "count" : "54609"
+      }, {
+        "item" : "0.3",
+        "count" : "52599"
+      }, {
+        "item" : "14",
+        "count" : "50529"
+      }, {
+        "item" : "15",
+        "count" : "47929"
+      }, {
+        "item" : "0.4",
+        "count" : "46873"
+      }, {
+        "item" : "16",
+        "count" : "45828"
+      }, {
+        "item" : "17",
+        "count" : "42805"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474895,
+    "name" : "06h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 06",
+    "fieldName" : "h06",
+    "position" : 19,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983588,
+    "cachedContents" : {
+      "non_null" : "3521605",
+      "largest" : "2922",
+      "null" : "124906",
+      "top" : [ {
+        "item" : "1",
+        "count" : "588581"
+      }, {
+        "item" : "2",
+        "count" : "216443"
+      }, {
+        "item" : "0.2",
+        "count" : "143165"
+      }, {
+        "item" : "3",
+        "count" : "129143"
+      }, {
+        "item" : "10",
+        "count" : "101435"
+      }, {
+        "item" : "4",
+        "count" : "95932"
+      }, {
+        "item" : "6",
+        "count" : "93415"
+      }, {
+        "item" : "5",
+        "count" : "79545"
+      }, {
+        "item" : "11",
+        "count" : "73076"
+      }, {
+        "item" : "7",
+        "count" : "69505"
+      }, {
+        "item" : "8",
+        "count" : "65030"
+      }, {
+        "item" : "9",
+        "count" : "60903"
+      }, {
+        "item" : "12",
+        "count" : "58334"
+      }, {
+        "item" : "0.3",
+        "count" : "55218"
+      }, {
+        "item" : "13",
+        "count" : "54526"
+      }, {
+        "item" : "14",
+        "count" : "52123"
+      }, {
+        "item" : "15",
+        "count" : "50477"
+      }, {
+        "item" : "0.4",
+        "count" : "48674"
+      }, {
+        "item" : "16",
+        "count" : "47944"
+      }, {
+        "item" : "17",
+        "count" : "45289"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474896,
+    "name" : "07h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 07",
+    "fieldName" : "h07",
+    "position" : 20,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983570,
+    "cachedContents" : {
+      "non_null" : "3521162",
+      "largest" : "2922",
+      "null" : "125349",
+      "top" : [ {
+        "item" : "1",
+        "count" : "523851"
+      }, {
+        "item" : "2",
+        "count" : "210960"
+      }, {
+        "item" : "3",
+        "count" : "126913"
+      }, {
+        "item" : "0.2",
+        "count" : "126601"
+      }, {
+        "item" : "4",
+        "count" : "94471"
+      }, {
+        "item" : "10",
+        "count" : "91709"
+      }, {
+        "item" : "6",
+        "count" : "83855"
+      }, {
+        "item" : "5",
+        "count" : "76476"
+      }, {
+        "item" : "11",
+        "count" : "67080"
+      }, {
+        "item" : "7",
+        "count" : "64473"
+      }, {
+        "item" : "8",
+        "count" : "59804"
+      }, {
+        "item" : "9",
+        "count" : "55257"
+      }, {
+        "item" : "0.3",
+        "count" : "54676"
+      }, {
+        "item" : "12",
+        "count" : "54081"
+      }, {
+        "item" : "13",
+        "count" : "51237"
+      }, {
+        "item" : "0.4",
+        "count" : "49401"
+      }, {
+        "item" : "14",
+        "count" : "48590"
+      }, {
+        "item" : "15",
+        "count" : "47393"
+      }, {
+        "item" : "16",
+        "count" : "45788"
+      }, {
+        "item" : "17",
+        "count" : "43582"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474897,
+    "name" : "08h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 08",
+    "fieldName" : "h08",
+    "position" : 21,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983577,
+    "cachedContents" : {
+      "non_null" : "3518333",
+      "largest" : "2922",
+      "null" : "128178",
+      "top" : [ {
+        "item" : "1",
+        "count" : "439786"
+      }, {
+        "item" : "2",
+        "count" : "199314"
+      }, {
+        "item" : "3",
+        "count" : "125672"
+      }, {
+        "item" : "0.2",
+        "count" : "101424"
+      }, {
+        "item" : "4",
+        "count" : "93651"
+      }, {
+        "item" : "10",
+        "count" : "82402"
+      }, {
+        "item" : "6",
+        "count" : "76484"
+      }, {
+        "item" : "5",
+        "count" : "75664"
+      }, {
+        "item" : "11",
+        "count" : "61456"
+      }, {
+        "item" : "7",
+        "count" : "61318"
+      }, {
+        "item" : "8",
+        "count" : "56327"
+      }, {
+        "item" : "9",
+        "count" : "52242"
+      }, {
+        "item" : "12",
+        "count" : "50016"
+      }, {
+        "item" : "0.3",
+        "count" : "49784"
+      }, {
+        "item" : "0.4",
+        "count" : "47705"
+      }, {
+        "item" : "13",
+        "count" : "46553"
+      }, {
+        "item" : "14",
+        "count" : "44909"
+      }, {
+        "item" : "15",
+        "count" : "43468"
+      }, {
+        "item" : "16",
+        "count" : "41857"
+      }, {
+        "item" : "17",
+        "count" : "39882"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474898,
+    "name" : "09h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 09",
+    "fieldName" : "h09",
+    "position" : 22,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983587,
+    "cachedContents" : {
+      "non_null" : "3506788",
+      "largest" : "8777",
+      "null" : "139723",
+      "top" : [ {
+        "item" : "1",
+        "count" : "373064"
+      }, {
+        "item" : "2",
+        "count" : "181611"
+      }, {
+        "item" : "3",
+        "count" : "120949"
+      }, {
+        "item" : "0.2",
+        "count" : "92310"
+      }, {
+        "item" : "4",
+        "count" : "91525"
+      }, {
+        "item" : "10",
+        "count" : "77625"
+      }, {
+        "item" : "5",
+        "count" : "75361"
+      }, {
+        "item" : "6",
+        "count" : "74242"
+      }, {
+        "item" : "7",
+        "count" : "60799"
+      }, {
+        "item" : "11",
+        "count" : "58813"
+      }, {
+        "item" : "8",
+        "count" : "55177"
+      }, {
+        "item" : "9",
+        "count" : "51299"
+      }, {
+        "item" : "12",
+        "count" : "48116"
+      }, {
+        "item" : "0.4",
+        "count" : "46067"
+      }, {
+        "item" : "0.3",
+        "count" : "45992"
+      }, {
+        "item" : "13",
+        "count" : "45242"
+      }, {
+        "item" : "14",
+        "count" : "43106"
+      }, {
+        "item" : "15",
+        "count" : "42123"
+      }, {
+        "item" : "16",
+        "count" : "40790"
+      }, {
+        "item" : "17",
+        "count" : "38635"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474899,
+    "name" : "10h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 10",
+    "fieldName" : "h10",
+    "position" : 23,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983592,
+    "cachedContents" : {
+      "non_null" : "3490235",
+      "largest" : "7777",
+      "null" : "156276",
+      "top" : [ {
+        "item" : "1",
+        "count" : "349641"
+      }, {
+        "item" : "2",
+        "count" : "172758"
+      }, {
+        "item" : "3",
+        "count" : "117736"
+      }, {
+        "item" : "0.2",
+        "count" : "98581"
+      }, {
+        "item" : "4",
+        "count" : "91624"
+      }, {
+        "item" : "10",
+        "count" : "76996"
+      }, {
+        "item" : "6",
+        "count" : "76972"
+      }, {
+        "item" : "5",
+        "count" : "76751"
+      }, {
+        "item" : "7",
+        "count" : "61971"
+      }, {
+        "item" : "11",
+        "count" : "59812"
+      }, {
+        "item" : "8",
+        "count" : "56899"
+      }, {
+        "item" : "9",
+        "count" : "52522"
+      }, {
+        "item" : "12",
+        "count" : "49311"
+      }, {
+        "item" : "0.3",
+        "count" : "48408"
+      }, {
+        "item" : "0.4",
+        "count" : "46879"
+      }, {
+        "item" : "13",
+        "count" : "46558"
+      }, {
+        "item" : "14",
+        "count" : "44640"
+      }, {
+        "item" : "15",
+        "count" : "43202"
+      }, {
+        "item" : "16",
+        "count" : "41799"
+      }, {
+        "item" : "17",
+        "count" : "40178"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474900,
+    "name" : "11h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 11",
+    "fieldName" : "h11",
+    "position" : 24,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983589,
+    "cachedContents" : {
+      "non_null" : "3461570",
+      "largest" : "7777",
+      "null" : "184941",
+      "top" : [ {
+        "item" : "1",
+        "count" : "357977"
+      }, {
+        "item" : "2",
+        "count" : "175553"
+      }, {
+        "item" : "3",
+        "count" : "120796"
+      }, {
+        "item" : "0.2",
+        "count" : "113248"
+      }, {
+        "item" : "4",
+        "count" : "94610"
+      }, {
+        "item" : "6",
+        "count" : "82572"
+      }, {
+        "item" : "5",
+        "count" : "79882"
+      }, {
+        "item" : "10",
+        "count" : "78789"
+      }, {
+        "item" : "7",
+        "count" : "65607"
+      }, {
+        "item" : "11",
+        "count" : "62754"
+      }, {
+        "item" : "8",
+        "count" : "60294"
+      }, {
+        "item" : "9",
+        "count" : "55444"
+      }, {
+        "item" : "0.3",
+        "count" : "51926"
+      }, {
+        "item" : "12",
+        "count" : "51690"
+      }, {
+        "item" : "0.4",
+        "count" : "48734"
+      }, {
+        "item" : "13",
+        "count" : "48503"
+      }, {
+        "item" : "14",
+        "count" : "45955"
+      }, {
+        "item" : "15",
+        "count" : "44586"
+      }, {
+        "item" : "16",
+        "count" : "42643"
+      }, {
+        "item" : "17",
+        "count" : "40437"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474901,
+    "name" : "12h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 12",
+    "fieldName" : "h12",
+    "position" : 25,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983594,
+    "cachedContents" : {
+      "non_null" : "3440653",
+      "largest" : "7777",
+      "null" : "205858",
+      "top" : [ {
+        "item" : "1",
+        "count" : "372222"
+      }, {
+        "item" : "2",
+        "count" : "183805"
+      }, {
+        "item" : "3",
+        "count" : "128027"
+      }, {
+        "item" : "0.2",
+        "count" : "121855"
+      }, {
+        "item" : "4",
+        "count" : "99554"
+      }, {
+        "item" : "6",
+        "count" : "88931"
+      }, {
+        "item" : "5",
+        "count" : "83456"
+      }, {
+        "item" : "10",
+        "count" : "81324"
+      }, {
+        "item" : "7",
+        "count" : "69506"
+      }, {
+        "item" : "11",
+        "count" : "65588"
+      }, {
+        "item" : "8",
+        "count" : "63081"
+      }, {
+        "item" : "9",
+        "count" : "57765"
+      }, {
+        "item" : "12",
+        "count" : "53255"
+      }, {
+        "item" : "0.3",
+        "count" : "53080"
+      }, {
+        "item" : "0.4",
+        "count" : "49860"
+      }, {
+        "item" : "13",
+        "count" : "49817"
+      }, {
+        "item" : "14",
+        "count" : "46974"
+      }, {
+        "item" : "15",
+        "count" : "45157"
+      }, {
+        "item" : "16",
+        "count" : "42969"
+      }, {
+        "item" : "17",
+        "count" : "40621"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474902,
+    "name" : "13h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 13",
+    "fieldName" : "h13",
+    "position" : 26,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983595,
+    "cachedContents" : {
+      "non_null" : "3442159",
+      "largest" : "7777",
+      "null" : "204352",
+      "top" : [ {
+        "item" : "1",
+        "count" : "397496"
+      }, {
+        "item" : "2",
+        "count" : "195410"
+      }, {
+        "item" : "3",
+        "count" : "136175"
+      }, {
+        "item" : "0.2",
+        "count" : "128734"
+      }, {
+        "item" : "4",
+        "count" : "105251"
+      }, {
+        "item" : "6",
+        "count" : "95539"
+      }, {
+        "item" : "5",
+        "count" : "88281"
+      }, {
+        "item" : "10",
+        "count" : "85292"
+      }, {
+        "item" : "7",
+        "count" : "72919"
+      }, {
+        "item" : "11",
+        "count" : "67939"
+      }, {
+        "item" : "8",
+        "count" : "65471"
+      }, {
+        "item" : "9",
+        "count" : "60458"
+      }, {
+        "item" : "12",
+        "count" : "54253"
+      }, {
+        "item" : "0.3",
+        "count" : "53762"
+      }, {
+        "item" : "13",
+        "count" : "50601"
+      }, {
+        "item" : "0.4",
+        "count" : "50456"
+      }, {
+        "item" : "14",
+        "count" : "47040"
+      }, {
+        "item" : "15",
+        "count" : "44856"
+      }, {
+        "item" : "16",
+        "count" : "42690"
+      }, {
+        "item" : "17",
+        "count" : "40458"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474903,
+    "name" : "14h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 14",
+    "fieldName" : "h14",
+    "position" : 27,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983565,
+    "cachedContents" : {
+      "non_null" : "3467139",
+      "largest" : "7777",
+      "null" : "179372",
+      "top" : [ {
+        "item" : "1",
+        "count" : "428912"
+      }, {
+        "item" : "2",
+        "count" : "208279"
+      }, {
+        "item" : "3",
+        "count" : "144210"
+      }, {
+        "item" : "0.2",
+        "count" : "131274"
+      }, {
+        "item" : "4",
+        "count" : "110493"
+      }, {
+        "item" : "6",
+        "count" : "100668"
+      }, {
+        "item" : "5",
+        "count" : "92622"
+      }, {
+        "item" : "10",
+        "count" : "88759"
+      }, {
+        "item" : "7",
+        "count" : "75904"
+      }, {
+        "item" : "11",
+        "count" : "69493"
+      }, {
+        "item" : "8",
+        "count" : "67649"
+      }, {
+        "item" : "9",
+        "count" : "61648"
+      }, {
+        "item" : "12",
+        "count" : "55145"
+      }, {
+        "item" : "0.3",
+        "count" : "54291"
+      }, {
+        "item" : "0.4",
+        "count" : "50878"
+      }, {
+        "item" : "13",
+        "count" : "50595"
+      }, {
+        "item" : "14",
+        "count" : "47118"
+      }, {
+        "item" : "15",
+        "count" : "44577"
+      }, {
+        "item" : "16",
+        "count" : "42675"
+      }, {
+        "item" : "17",
+        "count" : "39666"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474904,
+    "name" : "15h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 15",
+    "fieldName" : "h15",
+    "position" : 28,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983578,
+    "cachedContents" : {
+      "non_null" : "3487963",
+      "largest" : "7777",
+      "null" : "158548",
+      "top" : [ {
+        "item" : "1",
+        "count" : "470424"
+      }, {
+        "item" : "2",
+        "count" : "221021"
+      }, {
+        "item" : "3",
+        "count" : "151976"
+      }, {
+        "item" : "0.2",
+        "count" : "139090"
+      }, {
+        "item" : "4",
+        "count" : "115795"
+      }, {
+        "item" : "6",
+        "count" : "106757"
+      }, {
+        "item" : "5",
+        "count" : "95560"
+      }, {
+        "item" : "10",
+        "count" : "94086"
+      }, {
+        "item" : "7",
+        "count" : "77904"
+      }, {
+        "item" : "11",
+        "count" : "70995"
+      }, {
+        "item" : "8",
+        "count" : "69095"
+      }, {
+        "item" : "9",
+        "count" : "62778"
+      }, {
+        "item" : "12",
+        "count" : "55411"
+      }, {
+        "item" : "0.3",
+        "count" : "54393"
+      }, {
+        "item" : "0.4",
+        "count" : "51916"
+      }, {
+        "item" : "13",
+        "count" : "50855"
+      }, {
+        "item" : "14",
+        "count" : "46722"
+      }, {
+        "item" : "15",
+        "count" : "44448"
+      }, {
+        "item" : "16",
+        "count" : "41660"
+      }, {
+        "item" : "17",
+        "count" : "38786"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474905,
+    "name" : "16h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 16",
+    "fieldName" : "h16",
+    "position" : 29,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983580,
+    "cachedContents" : {
+      "non_null" : "3500915",
+      "largest" : "7777",
+      "null" : "145596",
+      "top" : [ {
+        "item" : "1",
+        "count" : "501648"
+      }, {
+        "item" : "2",
+        "count" : "229503"
+      }, {
+        "item" : "3",
+        "count" : "154304"
+      }, {
+        "item" : "0.2",
+        "count" : "146363"
+      }, {
+        "item" : "4",
+        "count" : "115949"
+      }, {
+        "item" : "6",
+        "count" : "108222"
+      }, {
+        "item" : "10",
+        "count" : "96891"
+      }, {
+        "item" : "5",
+        "count" : "96089"
+      }, {
+        "item" : "7",
+        "count" : "77961"
+      }, {
+        "item" : "11",
+        "count" : "70827"
+      }, {
+        "item" : "8",
+        "count" : "68543"
+      }, {
+        "item" : "9",
+        "count" : "62147"
+      }, {
+        "item" : "0.3",
+        "count" : "54581"
+      }, {
+        "item" : "12",
+        "count" : "54442"
+      }, {
+        "item" : "0.4",
+        "count" : "51149"
+      }, {
+        "item" : "13",
+        "count" : "49909"
+      }, {
+        "item" : "14",
+        "count" : "46560"
+      }, {
+        "item" : "15",
+        "count" : "42913"
+      }, {
+        "item" : "16",
+        "count" : "40502"
+      }, {
+        "item" : "17",
+        "count" : "38107"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474906,
+    "name" : "17h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 17",
+    "fieldName" : "h17",
+    "position" : 30,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983576,
+    "cachedContents" : {
+      "non_null" : "3519859",
+      "largest" : "7777",
+      "null" : "126652",
+      "top" : [ {
+        "item" : "1",
+        "count" : "513412"
+      }, {
+        "item" : "2",
+        "count" : "230596"
+      }, {
+        "item" : "3",
+        "count" : "150950"
+      }, {
+        "item" : "0.2",
+        "count" : "145502"
+      }, {
+        "item" : "4",
+        "count" : "113638"
+      }, {
+        "item" : "6",
+        "count" : "105659"
+      }, {
+        "item" : "10",
+        "count" : "95192"
+      }, {
+        "item" : "5",
+        "count" : "93149"
+      }, {
+        "item" : "7",
+        "count" : "75455"
+      }, {
+        "item" : "11",
+        "count" : "70300"
+      }, {
+        "item" : "8",
+        "count" : "66271"
+      }, {
+        "item" : "9",
+        "count" : "60611"
+      }, {
+        "item" : "0.3",
+        "count" : "54260"
+      }, {
+        "item" : "12",
+        "count" : "53121"
+      }, {
+        "item" : "0.4",
+        "count" : "51087"
+      }, {
+        "item" : "13",
+        "count" : "48710"
+      }, {
+        "item" : "14",
+        "count" : "45572"
+      }, {
+        "item" : "15",
+        "count" : "42882"
+      }, {
+        "item" : "16",
+        "count" : "40242"
+      }, {
+        "item" : "17",
+        "count" : "37522"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474907,
+    "name" : "18h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 18",
+    "fieldName" : "h18",
+    "position" : 31,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983568,
+    "cachedContents" : {
+      "non_null" : "3529618",
+      "largest" : "2789",
+      "null" : "116893",
+      "top" : [ {
+        "item" : "1",
+        "count" : "508843"
+      }, {
+        "item" : "2",
+        "count" : "225776"
+      }, {
+        "item" : "3",
+        "count" : "144114"
+      }, {
+        "item" : "0.2",
+        "count" : "133122"
+      }, {
+        "item" : "4",
+        "count" : "106120"
+      }, {
+        "item" : "6",
+        "count" : "97390"
+      }, {
+        "item" : "10",
+        "count" : "89915"
+      }, {
+        "item" : "5",
+        "count" : "87377"
+      }, {
+        "item" : "7",
+        "count" : "70246"
+      }, {
+        "item" : "11",
+        "count" : "67618"
+      }, {
+        "item" : "8",
+        "count" : "62171"
+      }, {
+        "item" : "9",
+        "count" : "56422"
+      }, {
+        "item" : "0.3",
+        "count" : "53125"
+      }, {
+        "item" : "0.4",
+        "count" : "51189"
+      }, {
+        "item" : "12",
+        "count" : "51126"
+      }, {
+        "item" : "13",
+        "count" : "46999"
+      }, {
+        "item" : "14",
+        "count" : "44188"
+      }, {
+        "item" : "15",
+        "count" : "42115"
+      }, {
+        "item" : "16",
+        "count" : "39543"
+      }, {
+        "item" : "17",
+        "count" : "37559"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474908,
+    "name" : "19h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 19",
+    "fieldName" : "h19",
+    "position" : 32,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983571,
+    "cachedContents" : {
+      "non_null" : "3532947",
+      "largest" : "2802",
+      "null" : "113564",
+      "top" : [ {
+        "item" : "1",
+        "count" : "507998"
+      }, {
+        "item" : "2",
+        "count" : "219071"
+      }, {
+        "item" : "3",
+        "count" : "136208"
+      }, {
+        "item" : "0.2",
+        "count" : "121005"
+      }, {
+        "item" : "4",
+        "count" : "99686"
+      }, {
+        "item" : "6",
+        "count" : "91139"
+      }, {
+        "item" : "10",
+        "count" : "85182"
+      }, {
+        "item" : "5",
+        "count" : "81007"
+      }, {
+        "item" : "7",
+        "count" : "65676"
+      }, {
+        "item" : "11",
+        "count" : "64716"
+      }, {
+        "item" : "8",
+        "count" : "59203"
+      }, {
+        "item" : "9",
+        "count" : "54158"
+      }, {
+        "item" : "0.3",
+        "count" : "50085"
+      }, {
+        "item" : "0.4",
+        "count" : "50005"
+      }, {
+        "item" : "12",
+        "count" : "48892"
+      }, {
+        "item" : "13",
+        "count" : "45564"
+      }, {
+        "item" : "14",
+        "count" : "42957"
+      }, {
+        "item" : "15",
+        "count" : "40577"
+      }, {
+        "item" : "16",
+        "count" : "38933"
+      }, {
+        "item" : "0.6",
+        "count" : "37773"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474909,
+    "name" : "20h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 20",
+    "fieldName" : "h20",
+    "position" : 33,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983564,
+    "cachedContents" : {
+      "non_null" : "3533682",
+      "largest" : "2807",
+      "null" : "112829",
+      "top" : [ {
+        "item" : "1",
+        "count" : "505678"
+      }, {
+        "item" : "2",
+        "count" : "212671"
+      }, {
+        "item" : "3",
+        "count" : "130359"
+      }, {
+        "item" : "0.2",
+        "count" : "110206"
+      }, {
+        "item" : "4",
+        "count" : "93870"
+      }, {
+        "item" : "6",
+        "count" : "84949"
+      }, {
+        "item" : "10",
+        "count" : "80491"
+      }, {
+        "item" : "5",
+        "count" : "75740"
+      }, {
+        "item" : "11",
+        "count" : "62281"
+      }, {
+        "item" : "7",
+        "count" : "62107"
+      }, {
+        "item" : "8",
+        "count" : "55801"
+      }, {
+        "item" : "9",
+        "count" : "51098"
+      }, {
+        "item" : "0.4",
+        "count" : "48526"
+      }, {
+        "item" : "0.3",
+        "count" : "48147"
+      }, {
+        "item" : "12",
+        "count" : "46912"
+      }, {
+        "item" : "13",
+        "count" : "44034"
+      }, {
+        "item" : "14",
+        "count" : "41614"
+      }, {
+        "item" : "15",
+        "count" : "40468"
+      }, {
+        "item" : "16",
+        "count" : "38720"
+      }, {
+        "item" : "0.6",
+        "count" : "37657"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474910,
+    "name" : "21h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 21",
+    "fieldName" : "h21",
+    "position" : 34,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983561,
+    "cachedContents" : {
+      "non_null" : "3532985",
+      "largest" : "2835",
+      "null" : "113526",
+      "top" : [ {
+        "item" : "1",
+        "count" : "510766"
+      }, {
+        "item" : "2",
+        "count" : "207305"
+      }, {
+        "item" : "3",
+        "count" : "124453"
+      }, {
+        "item" : "0.2",
+        "count" : "102025"
+      }, {
+        "item" : "4",
+        "count" : "89362"
+      }, {
+        "item" : "6",
+        "count" : "79543"
+      }, {
+        "item" : "10",
+        "count" : "78416"
+      }, {
+        "item" : "5",
+        "count" : "71639"
+      }, {
+        "item" : "11",
+        "count" : "59870"
+      }, {
+        "item" : "7",
+        "count" : "59080"
+      }, {
+        "item" : "8",
+        "count" : "52832"
+      }, {
+        "item" : "9",
+        "count" : "48929"
+      }, {
+        "item" : "0.4",
+        "count" : "48079"
+      }, {
+        "item" : "0.3",
+        "count" : "47181"
+      }, {
+        "item" : "12",
+        "count" : "45739"
+      }, {
+        "item" : "13",
+        "count" : "43209"
+      }, {
+        "item" : "14",
+        "count" : "40621"
+      }, {
+        "item" : "15",
+        "count" : "39379"
+      }, {
+        "item" : "16",
+        "count" : "37977"
+      }, {
+        "item" : "0.6",
+        "count" : "37792"
+      } ],
+      "smallest" : "-2.85",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474911,
+    "name" : "22h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 22",
+    "fieldName" : "h22",
+    "position" : 35,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983585,
+    "cachedContents" : {
+      "non_null" : "3532458",
+      "largest" : "2869",
+      "null" : "114053",
+      "top" : [ {
+        "item" : "1",
+        "count" : "521184"
+      }, {
+        "item" : "2",
+        "count" : "205490"
+      }, {
+        "item" : "3",
+        "count" : "121709"
+      }, {
+        "item" : "0.2",
+        "count" : "99714"
+      }, {
+        "item" : "4",
+        "count" : "87380"
+      }, {
+        "item" : "10",
+        "count" : "77368"
+      }, {
+        "item" : "6",
+        "count" : "76837"
+      }, {
+        "item" : "5",
+        "count" : "69513"
+      }, {
+        "item" : "11",
+        "count" : "58574"
+      }, {
+        "item" : "7",
+        "count" : "56896"
+      }, {
+        "item" : "8",
+        "count" : "52066"
+      }, {
+        "item" : "0.4",
+        "count" : "48718"
+      }, {
+        "item" : "9",
+        "count" : "48612"
+      }, {
+        "item" : "0.3",
+        "count" : "47663"
+      }, {
+        "item" : "12",
+        "count" : "45238"
+      }, {
+        "item" : "13",
+        "count" : "42905"
+      }, {
+        "item" : "14",
+        "count" : "41115"
+      }, {
+        "item" : "15",
+        "count" : "39538"
+      }, {
+        "item" : "16",
+        "count" : "38265"
+      }, {
+        "item" : "0.6",
+        "count" : "38212"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474912,
+    "name" : "23h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 23",
+    "fieldName" : "h23",
+    "position" : 36,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983573,
+    "cachedContents" : {
+      "non_null" : "3529403",
+      "largest" : "2891",
+      "null" : "117108",
+      "top" : [ {
+        "item" : "1",
+        "count" : "537480"
+      }, {
+        "item" : "2",
+        "count" : "207779"
+      }, {
+        "item" : "3",
+        "count" : "120836"
+      }, {
+        "item" : "0.2",
+        "count" : "104096"
+      }, {
+        "item" : "4",
+        "count" : "87129"
+      }, {
+        "item" : "10",
+        "count" : "80030"
+      }, {
+        "item" : "6",
+        "count" : "76973"
+      }, {
+        "item" : "5",
+        "count" : "69679"
+      }, {
+        "item" : "11",
+        "count" : "60153"
+      }, {
+        "item" : "7",
+        "count" : "57931"
+      }, {
+        "item" : "8",
+        "count" : "53171"
+      }, {
+        "item" : "0.4",
+        "count" : "49425"
+      }, {
+        "item" : "0.3",
+        "count" : "49148"
+      }, {
+        "item" : "9",
+        "count" : "49099"
+      }, {
+        "item" : "12",
+        "count" : "47105"
+      }, {
+        "item" : "13",
+        "count" : "44225"
+      }, {
+        "item" : "14",
+        "count" : "42145"
+      }, {
+        "item" : "15",
+        "count" : "40888"
+      }, {
+        "item" : "16",
+        "count" : "39359"
+      }, {
+        "item" : "17",
+        "count" : "38006"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474913,
+    "name" : "24h",
+    "dataTypeName" : "number",
+    "description" : "Columna amb el valor mesurat per al contaminant de l’estació per a l’hora 24",
+    "fieldName" : "h24",
+    "position" : 37,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983601,
+    "cachedContents" : {
+      "non_null" : "3515253",
+      "largest" : "2897",
+      "null" : "131258",
+      "top" : [ {
+        "item" : "1",
+        "count" : "565617"
+      }, {
+        "item" : "2",
+        "count" : "209329"
+      }, {
+        "item" : "3",
+        "count" : "121042"
+      }, {
+        "item" : "0.2",
+        "count" : "114846"
+      }, {
+        "item" : "4",
+        "count" : "87452"
+      }, {
+        "item" : "10",
+        "count" : "85531"
+      }, {
+        "item" : "6",
+        "count" : "81723"
+      }, {
+        "item" : "5",
+        "count" : "70624"
+      }, {
+        "item" : "11",
+        "count" : "62722"
+      }, {
+        "item" : "7",
+        "count" : "59823"
+      }, {
+        "item" : "8",
+        "count" : "55078"
+      }, {
+        "item" : "0.3",
+        "count" : "51280"
+      }, {
+        "item" : "9",
+        "count" : "50875"
+      }, {
+        "item" : "0.4",
+        "count" : "50299"
+      }, {
+        "item" : "12",
+        "count" : "49505"
+      }, {
+        "item" : "13",
+        "count" : "46413"
+      }, {
+        "item" : "14",
+        "count" : "44581"
+      }, {
+        "item" : "15",
+        "count" : "42909"
+      }, {
+        "item" : "16",
+        "count" : "41501"
+      }, {
+        "item" : "17",
+        "count" : "39764"
+      } ],
+      "smallest" : "-2.8",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474914,
+    "name" : "ALTITUD",
+    "dataTypeName" : "number",
+    "description" : "Valor numèric de l’altitud de l’estació",
+    "fieldName" : "altitud",
+    "position" : 38,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983597,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "1570",
+      "null" : "0",
+      "top" : [ {
+        "item" : "7",
+        "count" : "173038"
+      }, {
+        "item" : "5",
+        "count" : "135582"
+      }, {
+        "item" : "238",
+        "count" : "126131"
+      }, {
+        "item" : "145",
+        "count" : "124351"
+      }, {
+        "item" : "34",
+        "count" : "99159"
+      }, {
+        "item" : "102",
+        "count" : "95047"
+      }, {
+        "item" : "40",
+        "count" : "94402"
+      }, {
+        "item" : "311",
+        "count" : "87821"
+      }, {
+        "item" : "12",
+        "count" : "87099"
+      }, {
+        "item" : "220",
+        "count" : "86416"
+      }, {
+        "item" : "39",
+        "count" : "83263"
+      }, {
+        "item" : "56",
+        "count" : "83140"
+      }, {
+        "item" : "97",
+        "count" : "76615"
+      }, {
+        "item" : "23",
+        "count" : "73847"
+      }, {
+        "item" : "78",
+        "count" : "72651"
+      }, {
+        "item" : "41",
+        "count" : "70140"
+      }, {
+        "item" : "109",
+        "count" : "69406"
+      }, {
+        "item" : "77",
+        "count" : "68837"
+      }, {
+        "item" : "29",
+        "count" : "64029"
+      }, {
+        "item" : "26",
+        "count" : "61162"
+      } ],
+      "smallest" : "0",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474915,
+    "name" : "LATITUD",
+    "dataTypeName" : "number",
+    "description" : "Latitud expressada en graus decimals. Sistema de referència WGS84",
+    "fieldName" : "latitud",
+    "position" : 39,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983574,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "4141591",
+      "null" : "0",
+      "top" : [ {
+        "item" : "41.11591",
+        "count" : "82651"
+      }, {
+        "item" : "41.150803",
+        "count" : "81698"
+      }, {
+        "item" : "41.111956",
+        "count" : "63476"
+      }, {
+        "item" : "41.578401",
+        "count" : "63246"
+      }, {
+        "item" : "41.154928",
+        "count" : "62176"
+      }, {
+        "item" : "41.385315",
+        "count" : "61901"
+      }, {
+        "item" : "41.103706",
+        "count" : "58776"
+      }, {
+        "item" : "41.615815",
+        "count" : "57081"
+      }, {
+        "item" : "41.689097",
+        "count" : "56976"
+      }, {
+        "item" : "41.39219",
+        "count" : "56664"
+      }, {
+        "item" : "41.193603",
+        "count" : "55282"
+      }, {
+        "item" : "41.475383",
+        "count" : "55148"
+      }, {
+        "item" : "41.730292",
+        "count" : "54938"
+      }, {
+        "item" : "41.159512",
+        "count" : "54001"
+      }, {
+        "item" : "41.278687",
+        "count" : "51024"
+      }, {
+        "item" : "41.556113",
+        "count" : "48218"
+      }, {
+        "item" : "41.481972",
+        "count" : "47243"
+      }, {
+        "item" : "41.370475",
+        "count" : "45553"
+      }, {
+        "item" : "41.398722",
+        "count" : "43661"
+      }, {
+        "item" : "41.218985",
+        "count" : "43225"
+      } ],
+      "smallest" : "0",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : {
+      "decimalSeparator" : ",",
+      "groupSeparator" : "."
+    }
+  }, {
+    "id" : 14474916,
+    "name" : "LONGITUD",
+    "dataTypeName" : "number",
+    "description" : "Longitud expressada en graus decimals. Sistema de referència WGS84",
+    "fieldName" : "longitud",
+    "position" : 40,
+    "renderTypeName" : "number",
+    "tableColumnId" : 8983599,
+    "cachedContents" : {
+      "non_null" : "3646511",
+      "largest" : "21870944",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2.495701",
+        "count" : "77656"
+      }, {
+        "item" : "1.151943",
+        "count" : "63476"
+      }, {
+        "item" : "1.623006",
+        "count" : "63246"
+      }, {
+        "item" : "1.217701",
+        "count" : "62176"
+      }, {
+        "item" : "1.120201",
+        "count" : "61199"
+      }, {
+        "item" : "1.191999",
+        "count" : "59779"
+      }, {
+        "item" : "0.6157",
+        "count" : "57081"
+      }, {
+        "item" : "1.236701",
+        "count" : "55282"
+      }, {
+        "item" : "1.921202",
+        "count" : "55148"
+      }, {
+        "item" : "1.8253",
+        "count" : "54938"
+      }, {
+        "item" : "2.204501",
+        "count" : "54580"
+      }, {
+        "item" : "1.239697",
+        "count" : "54001"
+      }, {
+        "item" : "2.007398",
+        "count" : "48218"
+      }, {
+        "item" : "2.188298",
+        "count" : "47243"
+      }, {
+        "item" : "2.114999",
+        "count" : "45553"
+      }, {
+        "item" : "1.200799",
+        "count" : "44481"
+      }, {
+        "item" : "2.153399",
+        "count" : "43661"
+      }, {
+        "item" : "1.7212",
+        "count" : "43225"
+      }, {
+        "item" : "2.1538",
+        "count" : "41682"
+      }, {
+        "item" : "2.088998",
+        "count" : "41627"
+      } ],
+      "smallest" : "0",
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : {
+      "decimalSeparator" : ",",
+      "groupSeparator" : "."
+    }
+  }, {
+    "id" : 14474920,
+    "name" : "Georeferència",
+    "dataTypeName" : "point",
+    "description" : "Georeferència",
+    "fieldName" : "geocoded_column",
+    "position" : 41,
+    "renderTypeName" : "point",
+    "tableColumnId" : 9183206,
+    "cachedContents" : {
+      "non_null" : "3125263",
+      "null" : "521248",
+      "top" : [ {
+        "item" : {
+          "coordinates" : [ 1.151943, 41.111956 ],
+          "type" : "Point"
+        },
+        "count" : "63476"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.623006, 41.57840100000001 ],
+          "type" : "Point"
+        },
+        "count" : "63246"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.217701, 41.154928 ],
+          "type" : "Point"
+        },
+        "count" : "62176"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.1202010000000002, 41.150803 ],
+          "type" : "Point"
+        },
+        "count" : "61199"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.191999, 41.11591 ],
+          "type" : "Point"
+        },
+        "count" : "59779"
+      }, {
+        "item" : {
+          "coordinates" : [ 0.6157, 41.615815 ],
+          "type" : "Point"
+        },
+        "count" : "57081"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.495701, 41.689097 ],
+          "type" : "Point"
+        },
+        "count" : "56976"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.236701, 41.193603 ],
+          "type" : "Point"
+        },
+        "count" : "55282"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.921202, 41.475383 ],
+          "type" : "Point"
+        },
+        "count" : "55148"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.8253000000000001, 41.730292 ],
+          "type" : "Point"
+        },
+        "count" : "54938"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.239697, 41.159512 ],
+          "type" : "Point"
+        },
+        "count" : "54001"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.007398, 41.556113 ],
+          "type" : "Point"
+        },
+        "count" : "48218"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.188298, 41.481972 ],
+          "type" : "Point"
+        },
+        "count" : "47243"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.114999, 41.370475 ],
+          "type" : "Point"
+        },
+        "count" : "45553"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.2007990000000002, 41.103706 ],
+          "type" : "Point"
+        },
+        "count" : "44481"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.1533990000000003, 41.398722 ],
+          "type" : "Point"
+        },
+        "count" : "43661"
+      }, {
+        "item" : {
+          "coordinates" : [ 1.7212, 41.218985 ],
+          "type" : "Point"
+        },
+        "count" : "43225"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.204501, 41.403878 ],
+          "type" : "Point"
+        },
+        "count" : "43144"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.1538, 41.385315 ],
+          "type" : "Point"
+        },
+        "count" : "41682"
+      }, {
+        "item" : {
+          "coordinates" : [ 2.088998, 41.476816 ],
+          "type" : "Point"
+        },
+        "count" : "41627"
+      } ],
+      "count" : "3646511",
+      "cardinality" : "3646511"
+    },
+    "format" : { }
+  }, {
+    "id" : 14474921,
+    "name" : "LIMADM_MUNICIPI",
+    "dataTypeName" : "number",
+    "description" : "",
+    "fieldName" : ":@computed_region_bh64_c7uy",
+    "position" : 42,
+    "renderTypeName" : "number",
+    "tableColumnId" : 9183207,
+    "computationStrategy" : {
+      "source_columns" : [ "geocoded_column" ],
+      "type" : "georegion_match_on_point",
+      "parameters" : {
+        "region" : "_bh64-c7uy",
+        "primary_key" : "_feature_id"
+      }
+    },
+    "format" : { }
+  }, {
+    "id" : 14474922,
+    "name" : "LIMADM COMARCA",
+    "dataTypeName" : "number",
+    "description" : "",
+    "fieldName" : ":@computed_region_wvic_k925",
+    "position" : 43,
+    "renderTypeName" : "number",
+    "tableColumnId" : 9183208,
+    "computationStrategy" : {
+      "source_columns" : [ "geocoded_column" ],
+      "type" : "georegion_match_on_point",
+      "parameters" : {
+        "region" : "_wvic-k925",
+        "primary_key" : "_feature_id"
+      }
+    },
+    "format" : { }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "See Terms of Use"
+  },
+  "metadata" : {
+    "jsonQuery" : {
+      "order" : [ {
+        "columnFieldName" : "data",
+        "ascending" : false
+      } ]
+    },
+    "custom_fields" : {
+      "Freqüència d'actualització" : {
+        "Freqüència d'actualització" : "Diària"
+      },
+      "Idioma" : {
+        "Idioma" : "Català",
+        "Dataset name (EN)" : "Air Quality of the automatic measuring points of the Atmospheric  Pollution Monitoring and Forecasting Network",
+        "Nombre del conjunto de datos (ES)" : "Calidad del aire en los puntos de medida automáticos de la Red de Vigilancia y Previsión de la Contaminació Atmosférica"
+      },
+      "Informació de gènere o sexe" : {
+        "Informació de gènere o sexe" : "No aplicable"
+      },
+      "Dades d'Alt Valor" : {
+        "Categoria" : "Observació de la Terra i medi ambient"
+      },
+      "Actors" : {
+        "Departament" : "Territori, Habitatge i Transició Ecològica",
+        "Tipus actor" : "Generalitat de Catalunya"
+      },
+      "Àmbit geogràfic" : {
+        "Informació geogràfica" : "Coordenades",
+        "Àmbit geogràfic" : "Catalunya"
+      }
+    },
+    "rowIdentifier" : 14474877,
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ]
+  },
+  "owner" : {
+    "id" : "a4b5-gx6v",
+    "displayName" : "Dades Obertes Catalunya",
+    "profileImageUrlLarge" : "/api/users/a4b5-gx6v/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/a4b5-gx6v/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/a4b5-gx6v/profile_images/TINY",
+    "screenName" : "Dades Obertes Catalunya",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula" ]
+  },
+  "query" : {
+    "orderBys" : [ {
+      "ascending" : false,
+      "expression" : {
+        "columnId" : 14474889,
+        "type" : "column"
+      }
+    } ]
+  },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "a4b5-gx6v",
+    "displayName" : "Dades Obertes Catalunya",
+    "profileImageUrlLarge" : "/api/users/a4b5-gx6v/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/a4b5-gx6v/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/a4b5-gx6v/profile_images/TINY",
+    "screenName" : "Dades Obertes Catalunya",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula" ]
+  },
+  "tags" : [ "aire", "qualitat aire", "immissions", "contaminants atmosfèrics", "contaminació", "xvpca", "medi ambient", "ods12_producció i consum responsable", "ods13_acció pel clima" ],
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

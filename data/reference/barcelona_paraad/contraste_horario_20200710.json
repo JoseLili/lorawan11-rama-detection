@@ -1,0 +1,51 @@
+{
+  "url": "https://analisi.transparenciacatalunya.cat/resource/tasf-thgu.json?%24where=codi_eoi%3D%2708019057%27+AND+contaminant%3D%27O3%27+AND+data%3D%272020-07-10T00%3A00%3A00%27&%24limit=10",
+  "informe_oficial": "https://mediambient.gencat.cat/web/.content/home/ambits_dactuacio/atmosfera/qualitat_de_laire/avaluacio/ozo-troposferic/informes_ozo_anys_anteriors/documents/Informe-incidencies-CAMPANYA-O3-2020_definitiu.pdf",
+  "filas": [
+    {
+      "codi_eoi": "08019057",
+      "nom_estacio": "Barcelona (Palau Reial)",
+      "data": "2020-07-10T00:00:00.000",
+      "magnitud": "14",
+      "contaminant": "O3",
+      "unitats": "µg/m3",
+      "tipus_estacio": "background",
+      "area_urbana": "urban",
+      "codi_ine": "08019",
+      "municipi": "Barcelona",
+      "codi_comarca": "13",
+      "nom_comarca": "Barcelonès",
+      "h01": "23",
+      "h02": "21",
+      "h03": "28",
+      "h04": "239",
+      "h05": "141",
+      "h06": "40",
+      "h07": "41",
+      "h08": "15",
+      "h09": "30",
+      "h10": "39",
+      "h11": "51",
+      "h12": "51",
+      "h13": "80",
+      "h14": "81",
+      "h15": "89",
+      "h16": "93",
+      "h17": "102",
+      "h21": "86",
+      "h22": "78",
+      "h23": "63",
+      "h24": "46",
+      "altitud": "81",
+      "latitud": "41.38749",
+      "longitud": "2.1151996",
+      "geocoded_column": {
+        "type": "Point",
+        "coordinates": [
+          2.1151996,
+          41.38749
+        ]
+      }
+    }
+  ]
+}

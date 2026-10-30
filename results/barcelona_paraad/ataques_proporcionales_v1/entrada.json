@@ -1,0 +1,10 @@
+{
+  "sha256_entradas": {
+    "experiments/barcelona/aplicar_ataques_proporcionales.py": "d02bf792d983f9d58ef74f41b4da76f47799c9b6eabb7b063af6ab0b3e34ed7c",
+    "experiments/barcelona/preparar_ventanas.py": "62960b1081eb08eb6c8b331386585215502e503eb398ecf4eafda46c717082a3",
+    "results/barcelona_paraad/ventanas_v1/registro.json": "e535fc509a9466c9a19e785e8147c4cc3b6d519929dfb9f5738f73958e897df0",
+    "results/barcelona_paraad/planes_proporcionales_v1/registro.json": "941e075838685ade40b3ca26c35da8dc4c703938de8490ef44fc64eaa902ffda"
+  },
+  "historia": "Limpia antes del inicio del periodo; alterada dentro del periodo",
+  "calendario": "70 planes: 50 de ajuste/validación a d50, 20 de prueba a cinco deltas"
+}

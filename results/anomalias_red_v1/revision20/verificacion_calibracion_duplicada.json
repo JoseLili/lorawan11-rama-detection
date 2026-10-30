@@ -1,0 +1,12 @@
+{
+  "igual": true,
+  "repeticiones": 2,
+  "archivos_identicos": [
+    "registro.json",
+    "puntajes.csv",
+    "alertas_p99.csv",
+    "alertas_p99.9.csv"
+  ],
+  "sha256_registro": "622586f19ca2b8ef4e3174f4343de4cff08090965b5bb1634a8ed11bf88ceaed",
+  "sha256_script": "176ae650b5b7ac1cf33c7ea4328a58634aa593ca61fc1847c2b7ddbffc1ea119"
+}

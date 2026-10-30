@@ -1,0 +1,92 @@
+{
+  "estado": "Planes generados; NO aplicados a series; sin entrenamiento ni evaluación",
+  "semilla": "[42,230,uso,0/1/2,factor,...]; 0 sensores, 1 días (+índice estación), 2 magnitudes",
+  "distribucion": "scipy.stats.truncnorm(.2,2,loc=0,scale=2); beta en [.4,4]",
+  "frecuencia": "4 de 13 sensores; 30% de días comunes propios, half-up sin reemplazo",
+  "etiqueta": "1 si figura en positivos; 0 sólo para los demás casos comunes del mismo periodo",
+  "calibracion": "2017 limpio: sin planes",
+  "aplicacion": "Sumar desplazamiento sólo en horas observadas del día UTC; conservar máscaras, recalcular contexto causal",
+  "reproducibilidad_exacta": true,
+  "resumen": [
+    {
+      "etapa": "ajuste_inicial",
+      "escala": "seleccion",
+      "uso_semilla": 0,
+      "planes": 20,
+      "positivos_total": 16869,
+      "universo_por_plan": 9149,
+      "prevalencia_min": 0.0911575035523008,
+      "prevalencia_max": 0.09290632856049842,
+      "selecciones_sensores_distintas": 19
+    },
+    {
+      "etapa": "validacion",
+      "escala": "seleccion",
+      "uso_semilla": 1,
+      "planes": 10,
+      "positivos_total": 4197,
+      "universo_por_plan": 4538,
+      "prevalencia_min": 0.09012780960775672,
+      "prevalencia_max": 0.09475539885412076,
+      "selecciones_sensores_distintas": 10
+    },
+    {
+      "etapa": "ajuste_definitivo",
+      "escala": "definitivo",
+      "uso_semilla": 2,
+      "planes": 20,
+      "positivos_total": 25244,
+      "universo_por_plan": 13687,
+      "prevalencia_min": 0.0916197851976328,
+      "prevalencia_max": 0.0929349017315701,
+      "selecciones_sensores_distintas": 20
+    },
+    {
+      "etapa": "prueba_2018",
+      "escala": "definitivo",
+      "uso_semilla": 3,
+      "planes": 125,
+      "positivos_total": 52975,
+      "universo_por_plan": 4549,
+      "prevalencia_min": 0.09188832710485821,
+      "prevalencia_max": 0.094086612442295,
+      "selecciones_sensores_distintas": 5
+    },
+    {
+      "etapa": "complementaria_2019",
+      "escala": "definitivo",
+      "uso_semilla": 4,
+      "planes": 125,
+      "positivos_total": 52675,
+      "universo_por_plan": 4567,
+      "prevalencia_min": 0.09086927961462667,
+      "prevalencia_max": 0.09327786292971316,
+      "selecciones_sensores_distintas": 5
+    }
+  ],
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  },
+  "sha256_entradas": {
+    "results/barcelona_paraad/ventanas_v1/registro.json": "e535fc509a9466c9a19e785e8147c4cc3b6d519929dfb9f5738f73958e897df0",
+    "results/barcelona_paraad/ventanas_v1/estacion_dias.parquet": "b18b0fba93c7f8c30d953526f635bd8fab4455c76142f204009ca309fc0be8fa",
+    "results/barcelona_paraad/ventanas_v1/mascara_comun.csv": "eab570d1e0df1b26345e775110ea89025131c9e6d6a08384f2bc6e1a7f3a2fc4",
+    "results/barcelona_paraad/ventanas_v1/escalas_seleccion.csv": "27d45cf9870fb52f7637eddd867cbd782302e758bbb7baef0b51a40125e3999d",
+    "results/barcelona_paraad/ventanas_v1/escalas_definitivo.csv": "1a97cdbcdda751d65727898a5ca8a64484864305cbe0a01bd59f548df3673b80",
+    "experiments/barcelona/generar_planes.py": "5ab508d1ba7b396090ca26c81ed9dfd2115239de2357b55cc236b29e1a324d9f"
+  },
+  "sha256_salidas": {
+    "ajuste_definitivo_manifiesto.csv": "562b4f92436145e6cfe2eab0d32a036c56dd0ebc0963f2b7c0960f01b58db5ed",
+    "ajuste_definitivo_positivos.csv": "0c835e423ab9ff13eb215e681c0942dca05f7c01f1a972aa2a62888775307dcf",
+    "ajuste_inicial_manifiesto.csv": "6e35e4a20b115034dd79cf6825f9bed00777f6ed79af1f3936227f1b750a8e4d",
+    "ajuste_inicial_positivos.csv": "5a15d99908ca12ef4d0caf46dc538d9fa94555e62dd0effd4b21bf37f3ca9c26",
+    "complementaria_2019_manifiesto.csv": "e1176e6ce224a0473198e06b143f1376b5cd96f1da6e432aa84c49dc70865665",
+    "complementaria_2019_positivos.csv": "9917dd510e332b0a7d6163608ea31e1aab0e0602a5f67b25118ef02f439912de",
+    "prueba_2018_manifiesto.csv": "989cda06b3dfbf32f256d639b9d5586eeea830572d171983843de28b11755948",
+    "prueba_2018_positivos.csv": "5922edcc6c919a372e395b65712126d1c9c0290e752faacdbbc3b45c8c61d115",
+    "resumen.csv": "d8c4000e83cd5ef38d9b32bbb20e391a61067667b224522f09e0aa79a79dea73",
+    "validacion_manifiesto.csv": "eb4476c3a3851667fda076550e6237953e3f7bf97d2d57ceddd94e8f90ad0000",
+    "validacion_positivos.csv": "ea6240db7b51823967e61031edb920a2f2a91f38ad63f7595099911433448b5f"
+  }
+}

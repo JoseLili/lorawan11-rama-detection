@@ -1,0 +1,17 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "v4",
+    "pid": 7636
+  },
+  "ultimo_progreso": {
+    "unidad": "complementaria_2019_10_d5",
+    "repeticion": 2,
+    "detector": "v4"
+  },
+  "sha256_snapshot": "b2071c74d6eef21a48a05d94327e5a8225f2b458c6cf45dab0a597df5d35c0c8",
+  "archivos": 314,
+  "actualizado_utc": "2026-10-29T22:22:28.078947+00:00",
+  "sesion": "bcn-eval-v4-cpu-20261029",
+  "sesion_liberada": true
+}

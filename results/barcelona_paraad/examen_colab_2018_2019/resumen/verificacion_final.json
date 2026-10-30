@@ -1,0 +1,64 @@
+{
+  "igual": true,
+  "origen": "Modelos cargados de disco; sin reentrenamiento/recalibración",
+  "pares_inferencia_examen": 306,
+  "pares_control_2017": 3,
+  "matrices_examen": 102,
+  "controles2017": {
+    "l0": {
+      "tolerancia_rtol": 1e-06,
+      "tolerancia_atol": 1e-06,
+      "maxima_diferencia": 0.0,
+      "cambios_alertas": {
+        "p99": 0,
+        "p99.9": 0
+      },
+      "nota": "No se ajustan los umbrales por diferencias entre VMs"
+    },
+    "v4": {
+      "tolerancia_rtol": 1e-06,
+      "tolerancia_atol": 1e-06,
+      "maxima_diferencia": 0.0,
+      "cambios_alertas": {
+        "p99": 0,
+        "p99.9": 0
+      },
+      "nota": "No se ajustan los umbrales por diferencias entre VMs"
+    },
+    "paraad": {
+      "tolerancia_rtol": 1e-06,
+      "tolerancia_atol": 1e-06,
+      "maxima_diferencia": 0.0,
+      "cambios_alertas": {
+        "p99": 0,
+        "p99.9": 0
+      },
+      "nota": "No se ajustan los umbrales por diferencias entre VMs"
+    }
+  },
+  "sha256_congelados": {
+    "l0": "d06d4934e59bfe081a9c5b57864d9aecf16aa6b7522fd32e8874145aa776626b",
+    "v4": "93f14f6d0e295fc0fffbb5b5a941477f746aa8a5d1c25266e15705193a76646b",
+    "paraad": "6c538b9f0e36fe88853b0c47b997e9241dae8251307ad2d6ffa52fb432bf7062"
+  },
+  "sha256_script": "38b2bacc59bcb03c53a19cf6517e6e3b379feead7f0ef7cb6a334edef025d81f",
+  "bootstrap": {
+    "remuestreos": 2000,
+    "semilla": "[42,238,año]",
+    "bloque": "estación×mes; diez calendarios juntos"
+  },
+  "sha256_salidas": {
+    "diferencias_pareadas.csv": "a0dad21120f0adbedd4b7fff7dfab2f1136b995bb554d8c36559375d8472a2f5",
+    "f1_barcelona_p99.png": "a058f612e06a259ba9cdbc2713ec1496522a8ec1b04547534150aec4bc02f9c3",
+    "ficha_figura.md": "6736b8d1a35fab153d3d99be116c110aba1a5360a2cd3adfd67f866e0250917d",
+    "intervalos.csv": "f5031998e709571296380e41f209ec645c1d9de545da4c31b8055c307f0dc0d4",
+    "metricas.csv": "46d05624b2886b7d0adf577a11f85bfe80f4ff06da0293d2c3af463fc6a399ea",
+    "por_calendario.csv": "d7f6ec1f1b62ddf9d0034f028cdbe582eaf913a678d7925bb6dd9fa52a8af274",
+    "tabla_f1_p99.csv": "719451f38f071488fecf1b34972ae707a663b78e601af1772aea7b0f53dee9cb",
+    "tasa_limpia.csv": "2aa8434fa368fa7747f182410c101cb54a69c454cea803402af2e8bfab3b92cf"
+  },
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  }
+}

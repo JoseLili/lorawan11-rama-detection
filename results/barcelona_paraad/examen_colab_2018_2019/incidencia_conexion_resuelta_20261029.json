@@ -1,0 +1,26 @@
+{
+  "incidencia": "Cinco fallos de conexión detuvieron los supervisores de respaldo; inferencias continuaron en las VMs existentes",
+  "accion": "Se comprobó conectividad, se renovó la consulta de sesiones y se reiniciaron sólo supervisores ya detenidos; no se duplicaron workers ni sesiones",
+  "recuperado": {
+    "l0": {
+      "actualizado_utc": "2026-10-29T20:14:48.483983+00:00",
+      "estado": "evaluando",
+      "progreso": {
+        "unidad": "prueba_2018_10_d20",
+        "repeticion": 2,
+        "detector": "l0"
+      },
+      "sha256_snapshot": "ad96f00f4f408d815973ed4bbfee4bf5c338499f4ef61d6f2ad7425762510e2a"
+    },
+    "v4": {
+      "actualizado_utc": "2026-10-29T20:14:55.077867+00:00",
+      "estado": "evaluando",
+      "progreso": {
+        "unidad": "prueba_2018_07_d100",
+        "repeticion": 1,
+        "detector": "v4"
+      },
+      "sha256_snapshot": "8aece546762c61ae2daca49c9d37481349a5e4b3298f3aaf2ca772a2bf316f06"
+    }
+  }
+}

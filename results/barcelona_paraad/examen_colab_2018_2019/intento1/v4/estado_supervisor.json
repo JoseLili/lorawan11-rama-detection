@@ -1,0 +1,19 @@
+{
+  "estado": {
+    "estado": "error",
+    "detector": "v4",
+    "pid": 6243,
+    "tipo": "CalledProcessError",
+    "error": "Command '['/content/barcelona_env/bin/python', '-u', '-m', 'experiments.barcelona.evaluar_examen_colab', '--detector', 'v4']' returned non-zero exit status 1.",
+    "traceback": "Traceback (most recent call last):\n  File \"/content/barcelona/worker.py\", line 28, in main\n    subprocess.run([py,'-u','-m','experiments.barcelona.evaluar_examen_colab','--detector',args.detector],cwd=root,check=True,\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                   env={**os.environ,'PYTHONHASHSEED':'42'})\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/content/barcelona_env/bin/python', '-u', '-m', 'experiments.barcelona.evaluar_examen_colab', '--detector', 'v4']' returned non-zero exit status 1.\n"
+  },
+  "ultimo_progreso": {
+    "unidad": "control_2017",
+    "repeticion": 2,
+    "detector": "v4"
+  },
+  "sha256_snapshot": "25dcd6b0555b92aae97f349399707ab1286e3453e921cf2e207e0d435915f76d",
+  "archivos": 6,
+  "actualizado_utc": "2026-10-29T19:14:58.787639+00:00",
+  "sesion": "bcn-eval-v4-cpu-20261029"
+}

@@ -1,0 +1,13 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "calibracion",
+    "pid": 1481
+  },
+  "ultimo_progreso": null,
+  "sha256_snapshot": "6b5866a642b900fe2f23815c633d6d0af347735797ad6469d2989a0a5f29e26f",
+  "archivos": 11,
+  "actualizado_utc": "2026-10-29T18:52:53.791393+00:00",
+  "sesion": "bcn-cal2017-cpu-20261029",
+  "sesion_liberada": true
+}

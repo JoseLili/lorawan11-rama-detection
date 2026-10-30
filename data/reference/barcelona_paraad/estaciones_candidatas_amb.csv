@@ -1,0 +1,15 @@
+codi_eoi,nom_estacio,municipi,unitats,dias,inicio,fin
+08015021,Badalona,Badalona,µg/m3,2188,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08019043,Barcelona (Eixample),Barcelona,µg/m3,2181,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08019044,Barcelona (Gràcia - Sant Gervasi),Barcelona,µg/m3,2169,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08019050,Barcelona (Ciutadella),Barcelona,µg/m3,2182,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08019054,Barcelona (Parc Vall Hebron),Barcelona,µg/m3,2155,2014-01-02T00:00:00.000,2019-12-31T00:00:00.000
+08019057,Barcelona (Palau Reial),Barcelona,µg/m3,2120,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08019058,Barcelona (Observatori Fabra),Barcelona,µg/m3,641,2018-03-09T00:00:00.000,2019-12-31T00:00:00.000
+08089005,Gavà,Gavà,µg/m3,2169,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08125002,Montcada i Reixac,Montcada i Reixac,µg/m3,2182,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08169009,El Prat de Llobregat (Sagnier),"Prat de Llobregat, el",µg/m3,2139,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08194008,Sant Adrià de Besòs,Sant Adrià de Besòs,µg/m3,2178,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08205002,Sant Cugat del Vallès,Sant Cugat del Vallès,µg/m3,2153,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000
+08263001,Sant Vicenç dels Horts (Ribot),Sant Vicenç dels Horts,µg/m3,2164,2014-01-02T00:00:00.000,2019-12-31T00:00:00.000
+08301004,Viladecans - Atrium,Viladecans,µg/m3,2131,2014-01-01T00:00:00.000,2019-12-31T00:00:00.000

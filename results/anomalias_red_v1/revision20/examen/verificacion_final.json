@@ -1,0 +1,22 @@
+{
+  "examen_completo": true,
+  "anios": [
+    2024,
+    2025,
+    2026
+  ],
+  "escenarios": [
+    "original",
+    "B",
+    "A"
+  ],
+  "matrices": 768,
+  "matrices_alteradas": 765,
+  "inferencia_duplicada_identica": true,
+  "filas_comparacion": 900,
+  "controles_referencias": 60,
+  "sha256_registro": "529ba949c0e8168a22f8d95e0d6888691eef89dade683cb6b178612c56b1b486",
+  "sha256_modelo": "1e859d91dacde32de794bc7d08aec90d5f30df4449a3ac55af93523b171eba1e",
+  "sha256_tabla": "7ee5a08b52a739b7890d01895e0eccb7c873a0c19ce8fbae9eef53a316dbbe1c",
+  "limitacion": "Intervalos de diferencias pareadas con comparadores disponibles s\u00f3lo para original; A/B agregados hist\u00f3ricos"
+}

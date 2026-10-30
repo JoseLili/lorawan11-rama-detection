@@ -1,0 +1,6 @@
+{
+  "error": "Command '['/home/kali-lab-jelb/.venvs/colab-cli/bin/colab', 'download', '-s', 'paraad-r20-cpu-20261028', '/content/paraad_snapshot.tar.gz', '/home/kali-lab-jelb/MaestriaPCIC/Tesis/lorawan11-rama-detection/results/anomalias_red_v1/revision20/colab_20261028/snapshot_descarga.tar.gz']' timed out after 120 seconds",
+  "fallos_consecutivos": 3,
+  "actualizado_utc": "2026-10-28T17:05:29.715660+00:00",
+  "sesion": "paraad-r20-cpu-20261028"
+}

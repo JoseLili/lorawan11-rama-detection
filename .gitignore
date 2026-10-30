@@ -83,3 +83,12 @@ results/exploracion_tinto_2022/preparacion_20261029/cache_*/y_*.npy
 results/exploracion_tinto_2022/preparacion_20261029/cache_*/manifiesto_*.csv.gz
 results/exploracion_tinto_2022/preparacion_colab_20261029/*.tar.gz
 results/exploracion_tinto_2022/preparacion_colab_20261029/*.zip
+
+# PARAAD y Barcelona: copias de transporte Colab; resultados extraídos se versionan.
+# Los archivos locales se conservan y los paquetes se regeneran con los scripts.
+results/anomalias_red_v1/revision20/**/*.tar.gz
+results/barcelona_paraad/**/*.tar.gz
+results/barcelona_paraad/**/*.bin
+results/barcelona_paraad/**/paquete/
+results/barcelona_paraad/**/partes/
+results/barcelona_paraad/**/partes_*/

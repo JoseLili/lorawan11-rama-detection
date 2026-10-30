@@ -1,0 +1,26 @@
+{
+  "fecha": "2026-10-28",
+  "sesion": "paraad-r20-cpu-20261028",
+  "periodo": [
+    "2020-01-01 00:00:00",
+    "2022-12-31 23:00:00"
+  ],
+  "archivos": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/detect/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ingest/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ingest/rama.py": "9680c8c77145b9759c3f7eee971009520c472d012487cd5844ac770c53241be9",
+    "src/detect/multianual.py": "83ee0c2ac8546be8905cca972c8753ecb8bd8c9cc5eee928315b26aa9bc98055",
+    "src/detect/evaluacion_red.py": "dd38a416c7f7d5ad410a8646907ea5969c7d8fba0e702bc12a044b2b5ddcc555",
+    "src/detect/lstm.py": "de62a11b37813acbf59270315794a4538836489b9b9dadf6684029388da3a713",
+    "src/detect/paraad.py": "8025cf383d247a2022c1caf60b0a0cd5a7fe2390c548cee8d2c47493133eee1a",
+    "experiments/anomalias_red/entrenar_paraad.py": "ff2291376c5b7929b8b746e0ba8fcfcb78e9ddd4058ca5281c3225acbe80ad99",
+    "experiments/anomalias_red/puntuar_paraad.py": "176ae650b5b7ac1cf33c7ea4328a58634aa593ca61fc1847c2b7ddbffc1ea119",
+    "experiments/anomalias_red/correr_paraad_colab.py": "5b6f09690237d12dcfee00a60b9e14a117b4ac5eebd941f2eaac43917b77320c",
+    "tests/test_paraad.py": "c090b2e39353a65b8680b2106d4640c2adb7b0e8b6acf36abe6b3e351236474a"
+  },
+  "sha256_datos": "bc212d84bdf9fe78ea2ee0af6d9806cb71311c9a0d59e2c486314607aa14894d",
+  "sha256_paquete": "3e36371a704b7081ac0da0386aaae5b526574389ea8f7fb7a1c28b8e9c9af5ee",
+  "url_sesion": "https://colab.research.google.com/notebooks/empty.ipynb?dbu=%2Ftun%2Fm%2Fm-s-use4a4-m716xz1ia0x4#datalabBackendUrl=https://colab.research.google.com/tun/m/m-s-use4a4-m716xz1ia0x4",
+  "directorio_remoto": "/content/paraad_r20"
+}

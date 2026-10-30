@@ -1,0 +1,12 @@
+I0000 00:00:1793299735.232216    1810 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793299736.889957    1810 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1793299737.190197    1810 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+detector punto   umbral  casos  alertas     tasa
+      l0   p99 0.079395   4536       45 0.009921
+      l0 p99.9 0.356570   4536        4 0.000882
+      v4   p99 0.826410   4536       45 0.009921
+      v4 p99.9 1.115136   4536        4 0.000882
+  paraad   p99 0.651824   4536       45 0.009921
+  paraad p99.9 0.818481   4536        4 0.000882

@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "modelo.keras": "c9b179a068034229445255cc180e5230e026eb3ded2b6441c6db4186c95f75f4",
+    "historia.csv": "28d39ce48d4adb70c02425c1db6c8cd1db71c5be58021c5ef7d2f4cc6e1e3763",
+    "prediccion_control.npy": "994d14a53cbcfa45b85506a02a206ab6962ecba239c3de4d80dff94e5c148c21",
+    "pesos_control.npz": "20f297350519093a89d6d3b44822ad3138c3930ead6a5a772fb1ede2f8dc92d6"
+  }
+}

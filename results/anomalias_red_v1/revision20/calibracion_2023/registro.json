@@ -1,0 +1,14 @@
+{
+  "origen": "modelo cargado de disco; no entrenado",
+  "igual": true,
+  "sha256_modelo": "1e859d91dacde32de794bc7d08aec90d5f30df4449a3ac55af93523b171eba1e",
+  "sha256_escala": "e017c28ae8825873bed1be55d0c227ae188978e880f20539191cbcd657e94412",
+  "sha256_matriz": "fd49a4cff029e35654f78eedc7e6b562a480b96589e5560c2fdfb11446c0da12",
+  "sha256_comunes": "57160101ac450ed84038a9e1d436a25ca67b23e37242803187265ca8732bccc0",
+  "estacion_dias": 8802,
+  "calibracion": true,
+  "umbrales": {
+    "p99": 0.6405011077101032,
+    "p99.9": 0.8366300233950218
+  }
+}

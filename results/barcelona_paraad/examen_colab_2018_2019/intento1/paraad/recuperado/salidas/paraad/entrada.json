@@ -1,0 +1,11 @@
+{
+  "sha256_paquete": "de0a9564d8afa89b5f4cd303d2d1084a6d250c43b55cccfaa6edc493a5b8b68f",
+  "sha256_script": "cf5b02f3523cad2d83921b51ad06fd742d5aed1b9bbe881281c5b50f9a256e6f",
+  "sha256_calibracion": "82fd43f49b71d272cdc81da3307fa5d79f0e5d38192fbfc0e75b1a3f06aef076",
+  "tensorflow": "2.21.0",
+  "keras": "3.13.2",
+  "numpy": "2.1.3",
+  "python": "3.13.18",
+  "detector": "paraad",
+  "origen": "Modelos congelados cargados; sin entrenamiento"
+}

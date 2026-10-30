@@ -1,0 +1,31 @@
+{
+  "fuente": "https://www.amb.cat/en/web/area-metropolitana/municipis-metropolitans",
+  "municipios_con_o3": [
+    "Badalona",
+    "Barcelona",
+    "Gavà",
+    "Montcada i Reixac",
+    "Prat de Llobregat, el",
+    "Sant Adrià de Besòs",
+    "Sant Cugat del Vallès",
+    "Sant Vicenç dels Horts",
+    "Viladecans"
+  ],
+  "codigos": [
+    "08015021",
+    "08019043",
+    "08019044",
+    "08019050",
+    "08019054",
+    "08019057",
+    "08019058",
+    "08089005",
+    "08125002",
+    "08169009",
+    "08194008",
+    "08205002",
+    "08263001",
+    "08301004"
+  ],
+  "alcance": "Todas las estaciones de municipios AMB presentes en catálogo; no identificación del subconjunto del artículo"
+}

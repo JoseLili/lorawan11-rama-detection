@@ -1,0 +1,12 @@
+{
+  "url": "https://analisi.transparenciacatalunya.cat/resource/tasf-thgu.json?%24select=codi_eoi%2Cnom_estacio%2Cdata%2Ccontaminant%2Cunitats%2Cmunicipi%2Clatitud%2Clongitud%2Ch01%2Ch02%2Ch03%2Ch04%2Ch05%2Ch06%2Ch07%2Ch08%2Ch09%2Ch10%2Ch11%2Ch12%2Ch13%2Ch14%2Ch15%2Ch16%2Ch17%2Ch18%2Ch19%2Ch20%2Ch21%2Ch22%2Ch23%2Ch24&%24where=contaminant%3D%27O3%27+AND+data+%3E%3D+%272018-01-01T00%3A00%3A00%27+AND+data+%3C+%272019-01-01T00%3A00%3A00%27+AND+codi_eoi+in+%28%2708015021%27%2C%2708019043%27%2C%2708019044%27%2C%2708019050%27%2C%2708019054%27%2C%2708019057%27%2C%2708019058%27%2C%2708089005%27%2C%2708125002%27%2C%2708169009%27%2C%2708194008%27%2C%2708205002%27%2C%2708263001%27%2C%2708301004%27%29&%24order=codi_eoi%2Cdata&%24limit=10000",
+  "consulta": {
+    "$select": "codi_eoi,nom_estacio,data,contaminant,unitats,municipi,latitud,longitud,h01,h02,h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24",
+    "$where": "contaminant='O3' AND data >= '2018-01-01T00:00:00' AND data < '2019-01-01T00:00:00' AND codi_eoi in ('08015021','08019043','08019044','08019050','08019054','08019057','08019058','08089005','08125002','08169009','08194008','08205002','08263001','08301004')",
+    "$order": "codi_eoi,data",
+    "$limit": "10000"
+  },
+  "consultado_utc": "2026-10-29T04:22:19.167593+00:00",
+  "filas": 4934,
+  "sha256": "3c5fa490e2a4fca402eb008b5137fdd53cd7fc04593fbe4766d23b4c44776588"
+}

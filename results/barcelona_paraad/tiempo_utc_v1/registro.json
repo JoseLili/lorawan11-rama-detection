@@ -1,0 +1,45 @@
+{
+  "convencion": "h01 intervalo local 00–01; h24 intervalo local 23–24; timestamp al inicio",
+  "estatus": "Supuesto operativo sustentado en contraste oficial; no certificación de toda la fuente",
+  "zona": "Europe/Madrid",
+  "eje": "UTC",
+  "hora_entrada_modelos": "local al inicio del intervalo",
+  "transiciones": "Excluir día local completo, todas las estaciones; conservar fuente aparte",
+  "faltantes": "Sin interpolación; la rejilla conserva cada hora física, incluso las excluidas",
+  "ventanas": "Pendientes: rechazar cualquier ventana que cruce horas excluidas; aplicar además contexto y mínimo diario común",
+  "bloques": "Previstos 00–24 UTC; no mezclar años de etapas dentro de un bloque",
+  "estaciones": 13,
+  "filas_rejilla": 683592,
+  "observaciones_fuente": 660451,
+  "observaciones_retenidas": 656916,
+  "observaciones_excluidas": 3535,
+  "horas_rejilla_por_estacion": 52584,
+  "dias_locales_excluidos": [
+    "2014-03-30",
+    "2014-10-26",
+    "2015-03-29",
+    "2015-10-25",
+    "2016-03-27",
+    "2016-10-30",
+    "2017-03-26",
+    "2017-10-29",
+    "2018-03-25",
+    "2018-10-28",
+    "2019-03-31",
+    "2019-10-27"
+  ],
+  "reproducibilidad_exacta_dos_ejecuciones": true,
+  "versiones": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3"
+  },
+  "sha256_entradas": {
+    "results/barcelona_paraad/auditoria/observaciones_cohorte13_hora_fuente.parquet": "c147660d7c65b3b1a431869b4a6680eabb7f2c898535641cd5aaa977833f0f0c",
+    "data/reference/barcelona_paraad/cohorte13.csv": "a57beb6d6062fc839bf9eb1e2821413a1e3f55bb9cf8999efb574469f76ec83b",
+    "experiments/barcelona/preparar_tiempo.py": "cf9790eb9929a5c94f63dbe09afb95f45c4fd08ef1082d68cd4543f1f6356fd5"
+  },
+  "sha256_salidas": {
+    "rejilla_utc.parquet": "a8e5ce979617eed197076da1dd25afa72acafe6f5e489a19fae073f0c13e50f5",
+    "fuente_excluida_cambio_reloj.parquet": "09075dada5855938bd02f1837e2350748fbb9f5589b742b7344be765288da038"
+  }
+}

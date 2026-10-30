@@ -1,0 +1,15 @@
+codigo,nombre,horas_ajuste,horas_posibles,cobertura_ajuste_pct,meses_ajuste,elegible_provisional_2000h_6meses
+08015021,Badalona,17358,17520,99.07534246575342,24,True
+08019043,Barcelona (Eixample),17088,17520,97.53424657534246,24,True
+08019044,Barcelona (Gràcia - Sant Gervasi),16965,17520,96.83219178082192,24,True
+08019050,Barcelona (Ciutadella),16981,17520,96.92351598173516,24,True
+08019054,Barcelona (Parc Vall Hebron),16896,17520,96.43835616438356,24,True
+08019057,Barcelona (Palau Reial),16742,17520,95.55936073059361,24,True
+08019058,Barcelona (Observatori Fabra),0,17520,0.0,0,False
+08089005,Gavà,16679,17520,95.19977168949772,24,True
+08125002,Montcada i Reixac,17281,17520,98.63584474885845,24,True
+08169009,El Prat de Llobregat (Sagnier),16889,17520,96.39840182648402,24,True
+08194008,Sant Adrià de Besòs,16888,17520,96.39269406392694,24,True
+08205002,Sant Cugat del Vallès,17288,17520,98.67579908675799,24,True
+08263001,Sant Vicenç dels Horts (Ribot),17235,17520,98.37328767123287,24,True
+08301004,Viladecans - Atrium,16933,17520,96.64954337899543,24,True

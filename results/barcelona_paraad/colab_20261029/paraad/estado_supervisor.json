@@ -1,0 +1,16 @@
+{
+  "estado": {
+    "estado": "completo",
+    "detector": "paraad",
+    "pid": 2095
+  },
+  "ultimo_progreso": {
+    "epoca": 481,
+    "loss": 0.17257283627986908
+  },
+  "sha256_snapshot": "3e83a2493430a20c42fce02a12295f499a2d1ac50249f4cc5ec8da4c3fcb80f0",
+  "archivos": 85,
+  "actualizado_utc": "2026-10-29T17:26:58.295426+00:00",
+  "sesion": "bcn-paraad-cpu-20261029",
+  "sesion_liberada": true
+}

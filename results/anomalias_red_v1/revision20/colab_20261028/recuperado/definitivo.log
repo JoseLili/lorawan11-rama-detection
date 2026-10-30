@@ -1,0 +1,49 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793205446.190823   19522 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1793205446.260537   19522 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793205449.764804   19522 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1793205451.916206   19522 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+{'epoca': 1, 'loss': 3530262.5}
+{'epoca': 25, 'loss': 0.1758996993303299}
+{'epoca': 50, 'loss': 0.15634143352508545}
+{'epoca': 75, 'loss': 0.15043751895427704}
+{'epoca': 100, 'loss': 0.14074335992336273}
+{'epoca': 125, 'loss': 0.13771231472492218}
+{'epoca': 150, 'loss': 0.1369643658399582}
+{'epoca': 175, 'loss': 0.13145685195922852}
+{'epoca': 200, 'loss': 0.13060390949249268}
+{'epoca': 225, 'loss': 0.1284075677394867}
+{'epoca': 250, 'loss': 0.1276012659072876}
+{'epoca': 275, 'loss': 0.12691088020801544}
+{'epoca': 300, 'loss': 0.12666967511177063}
+{'epoca': 325, 'loss': 0.12666988372802734}
+{'epoca': 350, 'loss': 0.12615588307380676}
+{'epoca': 375, 'loss': 0.12602922320365906}
+{'epoca': 400, 'loss': 0.12627500295639038}
+{'epoca': 425, 'loss': 0.12476582825183868}
+{'epoca': 450, 'loss': 0.12535634636878967}
+{'epoca': 475, 'loss': 0.12487230449914932}
+{'epoca': 499, 'loss': 0.12514112889766693}
+{'epoca': 1, 'loss': 3530262.5}
+{'epoca': 25, 'loss': 0.1758996993303299}
+{'epoca': 50, 'loss': 0.15634143352508545}
+{'epoca': 75, 'loss': 0.15043751895427704}
+{'epoca': 100, 'loss': 0.14074335992336273}
+{'epoca': 125, 'loss': 0.13771231472492218}
+{'epoca': 150, 'loss': 0.1369643658399582}
+{'epoca': 175, 'loss': 0.13145685195922852}
+{'epoca': 200, 'loss': 0.13060390949249268}
+{'epoca': 225, 'loss': 0.1284075677394867}
+{'epoca': 250, 'loss': 0.1276012659072876}
+{'epoca': 275, 'loss': 0.12691088020801544}
+{'epoca': 300, 'loss': 0.12666967511177063}
+{'epoca': 325, 'loss': 0.12666988372802734}
+{'epoca': 350, 'loss': 0.12615588307380676}
+{'epoca': 375, 'loss': 0.12602922320365906}
+{'epoca': 400, 'loss': 0.12627500295639038}
+{'epoca': 425, 'loss': 0.12476582825183868}
+{'epoca': 450, 'loss': 0.12535634636878967}
+{'epoca': 475, 'loss': 0.12487230449914932}
+{'epoca': 499, 'loss': 0.12514112889766693}
