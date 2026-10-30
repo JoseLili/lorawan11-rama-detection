@@ -145,6 +145,43 @@ def plan_de(corrida: pd.Series | dict, alterables, semilla=SEMILLA) -> pd.DataFr
     return plan_episodios(c['inicio'], c['fin'], c['p'], alterables, c['corrida'], c['numero'], semilla)
 
 
+P_RANGO_NODO = (0.010, 0.020)     # revisión 19 (A): el nodo comprometido ataca más seguido
+NUMERO_NODO = 100                 # revisión 19 (A): calendarios 101…131, que no usa ningún otro
+
+
+def una_a_la_vez(plan: pd.DataFrame) -> pd.DataFrame:
+    """Revisión 19 (B): conserva un episodio si no comparte ningún día con uno ya conservado, en cualquier
+    estación, recorriéndolos por inicio (empates por el orden de la matriz fija). Sin azar."""
+    p = plan.sort_values(['inicio', 'estacion'], key=lambda c: c.map(m.ESTACIONES.index)
+                         if c.name == 'estacion' else c)
+    fin_ocupado, quedan = None, []
+    for i, e in zip(p.index, p.itertuples()):
+        if fin_ocupado is None or e.inicio.normalize() > fin_ocupado:
+            quedan.append(i)
+            fin_ocupado = e.fin.normalize()
+    return plan.loc[sorted(quedan)].reset_index(drop=True)
+
+
+def corridas_nodo(alterables, semilla=SEMILLA) -> pd.DataFrame:
+    """Revisión 19 (A): un calendario por estación y periodo, `nodo_<año>_<estación>`, con p uniforme en
+    `P_RANGO_NODO`. El número es 100 + la posición de la estación entre los 31 objetivos."""
+    filas = []
+    for periodo in ('prueba_2024', 'final_2025', 'final_2026'):
+        ini, fin = PERIODOS[periodo]
+        for j, est in enumerate(alterables):
+            numero = NUMERO_NODO + j + 1
+            rng = np.random.default_rng(clave(semilla, ini, numero, USO_TASA))
+            filas.append(dict(corrida=f'nodo_{pd.Timestamp(ini).year}_{est}', inicio=ini, fin=fin, numero=numero,
+                              estacion=est, p=float(rng.uniform(*P_RANGO_NODO))))
+    return pd.DataFrame(filas)
+
+
+def plan_nodo(corrida: pd.Series | dict, semilla=SEMILLA) -> pd.DataFrame:
+    """Plan de una fila de `corridas_nodo`: sólo su estación tiene episodios."""
+    c = dict(corrida)
+    return plan_episodios(c['inicio'], c['fin'], c['p'], [c['estacion']], c['corrida'], c['numero'], semilla)
+
+
 def validar_plan(plan: pd.DataFrame, dias_completos: bool = True) -> None:
     """Sin traslapes por estación, inicio a las 00 h, fin a las 23 h y signo ±1.
 

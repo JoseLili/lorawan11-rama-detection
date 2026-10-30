@@ -71,6 +71,7 @@ logs_revision14/
 logs_revision16/
 logs_revision17/
 logs_revision18/
+logs_revision19/
 # Revisión 18: puntajes por estación-día (47 MB), se regeneran con evaluar_revision18.py
 results/anomalias_red_v1/revision18/dias_*.csv.gz
 

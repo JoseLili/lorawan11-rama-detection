@@ -4428,6 +4428,49 @@ interpretación se descartó.
   - en 2022, L0 sigue arriba del V4S compartido. Es optimista para los dos, porque 2022 se usó para
     el EarlyStopping, así que no sustituye al examen.
 
+### Revisión 19 registrada y aprobada: escenarios de una sola estación (2026-10-27)
+
+- **La duda del tesista:** ¿«una sola estación» es un solo nodo con anomalías en todo el calendario,
+  o una estación a la vez?
+  - Se verificó que hoy ninguna de las dos se cumple. Cada episodio es de una estación, pero las
+    estaciones sortean por su cuenta: en `final_2025_01` hay 36 episodios en 21 estaciones, con
+    CAM y PED juntas del 12 al 15 de marzo y GAM, LLA y MPA el 22 de octubre.
+- **Decisión del tesista:** hacer las dos lecturas.
+  - **(B) una a la vez:** pareado, quitando de los calendarios de prueba los episodios que se
+    enciman.
+  - **(A) un solo nodo comprometido:** 31 calendarios nuevos por año, con p entre 1 y 2 % por día.
+  - Los episodios siguen sorteándose al azar con semillas fijas («entropía» reproducible).
+- **Lo que se descartó:**
+  - **GPU:** cambia los números entre corridas y no acelera la preparación de datos, que es lo
+    lento;
+  - **A al pie de la letra con la tasa actual:** daría menos de un episodio por nodo al año.
+  - Para ir más rápido, se usan varias sesiones de Colab con CPU.
+- **Registro:** la revisión 19 del protocolo, con 6 predicciones, antes de programar o generar
+  nada.
+
+### Revisión 19: resultado de los escenarios de una sola estación (2026-10-28)
+
+- **Corrida:**
+  - generación en la lap (615 matrices, con todas las comprobaciones);
+  - evaluación en Colab, una sesión por año, dos veces cada una e idéntica;
+  - umbrales y puntajes limpios iguales a la revisión 18.
+- **Lo que no salió a la primera:**
+  - la sesión de 2026 se cerró sola;
+  - al repetirla, tocó una máquina Intel y el control estricto la detuvo (3.5 × 10⁻⁸ de diferencia);
+  - se pidió otra máquina hasta que salió una AMD, la misma de la revisión 18;
+  - los paquetes de 90 MB se subieron en partes.
+- **Escenario B, pareado:** quitar los ataques simultáneos cambia el recall como mucho 0.026. L0
+  único con δ = 50 % y p99: 0.806 → 0.816, 0.845 → 0.845 y 0.862 → 0.882 (2024, 2025 y 2026).
+- **Escenario A, un solo nodo:** recall de L0 único con δ = 50 % y p99 de 0.776, 0.872 y 0.873. El
+  F1 es menor por la menor proporción de días atacados.
+- **L0 único contra V4S compartido:** gana en 34 de 36 combinaciones, con intervalo que excluye
+  el 0 en 32.
+- **Predicciones:** 4 de 6, una a medias y una fallida (la 3).
+- **Conclusión:** el escalón de una sola estación no cambia los resultados. Los detectores ya
+  trabajaban con una estación a la vez en la práctica.
+- **Pendiente:** los ataques coordinados a vecinas.
+- **Cómputo:** unas 2 h por año en Colab.
+
 ---
 
 ## Siguiente

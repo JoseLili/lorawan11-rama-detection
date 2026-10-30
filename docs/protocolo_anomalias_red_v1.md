@@ -268,6 +268,8 @@ resultados.
 | 17 | 2026-10-25 | **Examen final** de la estación-día con 2025 (enero a diciembre) y 2026 (enero a julio), una sola vez: detectores congelados (L0 por δ, el L0 único de la revisión 16, R3 y V4), umbrales p99 y p99.9 de 2023 limpio, 10 calendarios nuevos por año, con su versión de hora de inicio al azar, e intervalos de confianza. No se elige ni se ajusta nada | El paso 4 del plan del 2026-10-25. Se registró **antes** de generar cualquier calendario o matriz de 2025–2026 para la parte 2. **Aprobada por el tesista el 2026-10-25**, antes de la revisión con el asesor, por decisión suya |
 | 18 | 2026-10-26 | Comparación justa con el V4 tras la junta con el asesor: (a) el V4 calificado en las mismas estación-días que L0 y R3; (b) un **V4 supervisado** (V4S): las entradas y la arquitectura del V4 más la propia estación, entrenado con los calendarios y las etiquetas de L0; (c) una gráfica del V4S contra el L0 único en el mismo escenario de δ, que sustituye a la comparación con el bit flipping. Se evalúa en 2024 y una sola vez en 2025–2026. Las tablas del examen final no se tocan | El asesor (2026-10-26) señaló que comparar L0 (supervisado) contra el V4 (no supervisado) es injusto, y que la gráfica contra el bit flipping compara alteraciones distintas. Se registró **después** de ver el examen final y **antes** de programar o entrenar nada. Borrador de Claude a pedido del tesista, **aprobado por el tesista el 2026-10-27** con la regla «peras con peras» |
 | 18b | 2026-10-27 | Un segundo V4S, **compartido**: un solo modelo para las 31 estaciones, como L0, con las mismas entradas del V4 pero las otras 32 estaciones ordenadas por distancia. Los dos V4S van al examen, sin elegir entre ellos. La comparación principal, fijada por principio y no por resultados, es L0 único contra el V4S compartido; el V4S por estación queda como contraste | La comprobación con 2022 del V4S por estación (`progreso.md`, 2026-10-27): 11 de 31 modelos no aprendieron (ROC-AUC de 0.505), la desventaja declarada en la revisión 18 antes de entrenar. El cambio fortalece al rival de L0. Se registró **después** de ver el V4S por estación en 2022 y **antes** de programar el compartido o de evaluar cualquier V4S en 2023–2026. **Aprobada por el tesista el 2026-10-27** («Va. Hazlo») |
+| 19 | 2026-10-27 | Dos escenarios de «una sola estación», con detectores congelados: (B) **una a la vez**, con los mismos calendarios de prueba quitando los episodios que se enciman (comparación pareada); (A) **un solo nodo comprometido**, con calendarios nuevos donde sólo una estación se altera en todo el año, con más episodios. 2024, 2025 y 2026; principal L0 único contra V4S compartido | Pedido del asesor (2026-10-26): primero una sola estación atacada y después escenarios más complejos. La transcripción admite las dos lecturas, así que se hacen las dos. Se registró **antes** de programar o generar nada. **Aprobada por el tesista el 2026-10-27** |
+
 | T1 | 2026-10-29 | Exploración TINTO-PCA con asignación única propia 32 × 32, 408 entradas idénticas a L0; una CNN de 34 081 parámetros, selección 2020–2021/2022 y dos entrenamientos reproducibles. Sin años de examen | Solicitada por el asesor y desarrollada con el tesista; configuración y código registrados antes del entrenamiento completo. Autorizada por el tesista en este chat el 2026-10-29. Los números 20/21 reservados a otras líneas no se ocupan |
 
 ### Revisión 1 (2026-10-13)
@@ -2284,6 +2286,134 @@ correr nada. Corrida el 2026-10-25; resultado al final de esta sección.
     calendarios de entrenamiento (E = 3) en lugar del patrón relativo.
 - **Detalle:** en `results/anomalias_red_v1/revision18/`, `logs_revision18/` y `progreso.md`
   (2026-10-27).
+
+### Revisión 19 (2026-10-27): escenarios de una sola estación
+
+**Estado:**
+- borrador de Claude a pedido del tesista;
+- **aprobada por el tesista el 2026-10-27**, antes de programar o generar nada:
+  - «hacer ambas»: la lectura A y la B;
+  - en A, entre 1 y 2 % por día para el nodo comprometido;
+  - los episodios siguen sorteándose al azar con semillas fijas.
+
+**Por qué:**
+- el asesor pidió un escalón de complejidad: primero una sola estación atacada; luego el escenario
+  actual, con estaciones al azar e independientes; y al final, ataques coordinados;
+- **el escenario actual no es de una sola estación:**
+  - en 2024, el 26 % de las estación-días atacadas tiene otra estación atacada ese día, y el 4.6 %
+    una de sus 4 vecinas;
+  - en 2025–2026, el 25 % y el 5.1 %;
+  - hay hasta 4 estaciones atacadas a la vez;
+- **«una sola estación» admite dos lecturas** y se hacen las dos.
+
+**(B) Una a la vez: pareado con los calendarios de prueba:**
+- **Calendarios:** `prueba_2024_01…10`, `final_2025_01…10` y `final_2026_01…10`.
+- **Regla, sin azar:**
+  - los episodios se recorren por fecha de inicio, con los empates por el orden de la matriz fija;
+  - se conserva un episodio si no comparte ningún día con uno ya conservado, en cualquier estación;
+  - los demás se quitan.
+- **Resultado:** a lo más una estación alterada en toda la red en cada día. Los días de los episodios
+  quitados quedan como días normales.
+- **Plan y matrices:** `plan_unavez_<corrida>.csv` y `matriz_unavez_<corrida>_d<δ>`.
+- **Control:**
+  - en las horas de los episodios conservados, la matriz es idéntica a la del calendario original;
+  - en el resto, idéntica al año limpio.
+- **Medida principal, pareada:** el recall en las estación-días de los episodios conservados, en el
+  escenario original (puntajes de la revisión 18, que ya están calculados) contra este.
+- **También:**
+  - las falsas alarmas en las estación-días normales en los dos escenarios, por grupo;
+  - las métricas completas con su valor sin ataque;
+  - el intervalo de L0 único − V4S compartido.
+- **Cautela:** quitar episodios baja la proporción de días atacados, y con ella la precisión y el F1,
+  aunque el detector sea igual de bueno. Por eso la medida principal es el recall pareado.
+
+**(A) Un solo nodo comprometido: calendarios nuevos:**
+- **Calendarios:** uno por estación objetivo y por periodo (2024, 2025 y enero–julio de 2026), `nodo_<año>_<estación>`.
+  Son 31 por periodo y 93 en total.
+- **En cada uno, sólo esa estación se altera.**
+- **La tasa, mayor que la actual para que haya qué medir:**
+  - p uniforme entre 1.0 y 2.0 % por día, sorteada por calendario;
+  - da unos 4 a 7 episodios por año, unos 150 a 200 en las 31 estaciones;
+  - la actual es de 0.10 a 0.30 %: con ella, un nodo tendría menos de un episodio al año.
+- **Todo lo demás, como hoy (`plan_episodios`):** episodios de 1 a 7 días desde las 00 h, signo +
+  o − al 50 %, cortados al final del periodo, y los cinco δ con el mismo plan.
+- **Semillas:**
+  - la tasa, `clave(42, inicio, 100 + j, USO_TASA)`;
+  - los episodios, `plan_episodios(..., numero = 100 + j)`;
+  - j es la posición de la estación en los 31 objetivos;
+  - los números 101 a 131 no los usa ningún otro calendario.
+- **Matrices:** `matriz_nodo_<año>_<estación>_d<δ>`.
+- **No es pareado** con el escenario actual.
+- **La proporción de días atacados es muy distinta:** muchos en una estación y ninguno en las demás.
+  El recall se compara; la precisión y el F1, sólo dentro de A.
+
+**Lo común:**
+- **Detectores congelados, sin entrenar:**
+  - principal («peras con peras»): **L0 único contra V4S compartido**;
+  - referencias: R3 y V4;
+  - el V4S por estación no entra, porque no aprendió (revisión 18b).
+- **Igual que en la revisión 18:** los umbrales p99 y p99.9 de 2023 limpio, las estación-días válidas
+  para los cuatro, la historia limpia anterior a cada año, los cinco δ y el promedio del día.
+- **2025–2026, con la regla de la revisión 18:** registrado antes y evaluado una sola vez.
+- **Intervalos:** L0 único − V4S compartido por bootstrap de bloques estación × mes, 2 000
+  remuestreos, semilla `[42, 19, año]`. Igual para la diferencia pareada de recall en B.
+- **Controles:**
+  - los planes y las matrices se generan dos veces y deben salir iguales;
+  - la evaluación se corre dos veces;
+  - en B se comprueban las matrices contra las originales.
+
+**Predicciones (Claude), escritas antes de generar nada:**
+1. B conserva entre el 65 y el 85 % de las estación-días atacadas.
+2. B, δ = 50 %, p99: el recall pareado de L0 único y de R3 cambia menos de 0.03.
+3. B: el recall pareado del V4S compartido y del V4 cambia más, en valor absoluto, que el de L0
+   único.
+4. B: bajan las falsas alarmas en las estación-días normales en los dos escenarios, sobre todo las
+   de contagio.
+5. B y A, δ = 50 %, p99, 2025: L0 único le gana en F1 al V4S compartido.
+6. A, δ = 50 %, p99, 2025: el recall de L0 único queda a menos de 0.05 de su recall en B.
+
+**Resultado de la revisión 19** (2026-10-27 y 2026-10-28; 2025–2026 usado una sola vez para estos
+escenarios):
+- **Origen:** todos los detectores cargados de disco (L0 único, V4S compartido y V4) o sin
+  entrenamiento (R3). No se entrenó nada.
+- **Controles:**
+  - en cada año, las dos corridas idénticas;
+  - umbrales y puntajes del año limpio iguales a los de la revisión 18 (diferencia ≤ 8 × 10⁻¹⁶);
+  - todo en Colab con AMD EPYC 7B12. Un intento de 2026 en Intel Xeon se detuvo solo, porque sus
+    puntajes diferían en 3.5 × 10⁻⁸, y se repitió en AMD.
+- **Generación:**
+  - B conserva el 81.2, 80.3 y 79.4 % de las estación-días atacadas (2024, 2025 y 2026);
+  - A tiene 143, 166 y 89 episodios, y en 2026 dos nodos (FAR y VIF) no sacaron ninguno.
+- **(B) Pareado, la medida principal:**
+  - en los mismos episodios, quitar los ataques simultáneos cambia el recall como mucho 0.026, en
+    todos los detectores, δ y umbrales;
+  - con δ = 50 % y p99, L0 único pasa de 0.806 a 0.816, de 0.845 a 0.845 y de 0.862 a 0.882;
+  - R3, de 0.594 a 0.601, de 0.635 a 0.635 y de 0.626 a 0.646;
+  - el V4S compartido y el V4 cambian 0.007 o menos.
+- **(B) Falsas alarmas en las estación-días normales en los dos escenarios:**
+  - bajan poco, sobre todo tras el ataque propio: L0 en 2025 pasa de 14.5 a 12.5 % en esos días;
+  - el total con δ = 50 % y p99 baja de 1.82 / 1.39 / 1.31 % a 1.76 / 1.33 / 1.21 % para L0 único.
+- **(A) Un solo nodo:**
+  - recall de L0 único con δ = 50 % y p99: 0.776, 0.872 y 0.873, contra 0.816, 0.845 y 0.882 en B;
+  - el F1 es menor que en B por la menor proporción de días atacados, como se declaró.
+- **L0 único − V4S compartido (F1, δ = 100, 50 y 20 %, dos umbrales, tres años):**
+  - L0 único va arriba en 34 de 36 combinaciones; el intervalo excluye el 0 en 32;
+  - empates: B 2024 con 100 % y p99 (+0.024), B 2026 con 100 % y p99 (−0.060, el V4S compartido
+    arriba), A 2024 con 20 % y p99.9, y A 2026 con 50 % y p99 (+0.038).
+- **Como en la revisión 17:** con δ = 100 % y p99, R3 tiene más F1 que L0 único en varios años y
+  escenarios.
+- **Predicciones:**
+  - se cumplen la 1, la 2, la 5 y la 6;
+  - falla la 3: el V4S compartido y el V4 cambian todavía menos que L0;
+  - la 4 se cumple a medias: bajan las falsas alarmas, pero sobre todo tras el ataque propio, no
+    por contagio.
+- **Lectura:**
+  - el escenario actual ya era, en la práctica, «una estación a la vez» para los detectores, y los
+    resultados de las revisiones 17 y 18 no cambian;
+  - un solo nodo comprometido se detecta con el mismo recall;
+  - L0 sigue por encima del V4S compartido;
+  - queda para después el escalón difícil: ataques coordinados a estaciones vecinas.
+- **Detalle:** en `results/anomalias_red_v1/revision19/<año>/`, `logs_revision19/` y `progreso.md`.
 
 
 ### Revisión T1 (2026-10-29): selección TINTO-PCA con asignación única
