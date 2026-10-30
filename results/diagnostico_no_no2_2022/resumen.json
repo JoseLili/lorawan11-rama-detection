@@ -1,0 +1,21 @@
+{
+  "fecha": "2026-10-15",
+  "tipo": "diagnóstico exploratorio, fuera de protocolo",
+  "origen_modelos": "V4 cargado de disco: seleccion/modelo_seleccion.keras (ajuste 2020–2021)",
+  "modelos_auxiliares": "HistGradientBoostingRegressor recién ajustado, random_state=42, validación dejando fuera un mes de 2022",
+  "n_principales": 28,
+  "criterio_pct": {
+    "vale_la_pena": 10.0,
+    "marginal": 3.0
+  },
+  "mediana_principales": {
+    "reduccion_p95_pct": -0.26040480516666964,
+    "reduccion_mae_pct": 0.5287504350906302,
+    "reduccion_mae_tarde_pct": -1.723086606832458,
+    "reduccion_p95_con_dato_pct": -1.415411555581958,
+    "p95_v4": 23.939272661174165,
+    "p95_A": 23.300591104806397,
+    "p95_B": 23.378153960457986
+  },
+  "veredicto": "no vale la pena"
+}

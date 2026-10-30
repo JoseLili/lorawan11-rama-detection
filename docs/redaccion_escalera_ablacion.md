@@ -6,26 +6,36 @@ preparar la defensa. Los números salen de las revisiones 18 y 18b (`docs/protoc
 
 ## La idea central
 
-No se cuenta como una "evolución" ("fuimos mejorando el V4"). Se cuenta como **un experimento
-diseñado para aislar causas**: una escalera de detectores que difieren en un solo factor a la vez.
+No se cuenta como una "evolución" ("fuimos mejorando el V4"). Se cuenta como **una comparación
+escalonada**: V4, V4 supervisado y L0, ordenados de menos a más parecido a L0.
+
+**Corrección del 2026-10-30 (revisión externa del deck):** la versión anterior decía que cada peldaño
+«cambia un solo factor». No es cierto. Del V4 al V4S compartido cambian a la vez la supervisión, el
+objetivo (predecir contra clasificar), el acceso a la propia lectura de la estación, la ventana
+(hasta t−1 contra hasta t) y el modelo compartido con estaciones ordenadas por distancia
+(`src/detect/v4_supervisado.py`). Por eso la escalera **no separa** cuánto aportan las etiquetas, el
+perfil o las vecinas. Lo que sí sostiene: dar etiquetas al comparador implementado no elimina la
+ventaja de L0.
 
 ## Párrafo para la tesis
 
-> La comparación directa entre L0 (supervisado) y el V4 (no supervisado) mezcla dos factores: el uso
-> de etiquetas y la representación de las entradas. Para separarlos se construyó una escalera de
-> detectores que difieren en un solo factor a la vez, todos con la misma arquitectura, los mismos
-> calendarios de entrenamiento, el mismo modelo único (δ = 50 %), las mismas estación-días y los
-> mismos umbrales:
+> La comparación directa entre L0 (supervisado) y el V4 (no supervisado) mezcla el uso de etiquetas
+> con otras diferencias de diseño. Para acotar esa objeción se construyó un comparador supervisado a
+> partir del V4 (V4S compartido), entrenado con los mismos calendarios, el mismo modelo único
+> (δ = 50 %), y evaluado en las mismas estación-días y con los mismos umbrales que L0:
 >
-> 1. **V4:** las entradas de la parte 1, sin etiquetas.
-> 2. **V4S:** las mismas entradas, con etiquetas. Aísla el efecto de la supervisión.
-> 3. **L0:** la misma supervisión y el mismo entrenamiento, con entradas relativas al perfil y a
->    las vecinas. Aísla el efecto de la representación.
+> 1. **V4:** las entradas de la parte 1, sin etiquetas; predice la lectura siguiente.
+> 2. **V4S compartido:** las entradas del V4 más la lectura de la propia estación, con etiquetas, un
+>    solo modelo para las 31 estaciones (las demás ordenadas por distancia).
+> 3. **L0:** el mismo entrenamiento supervisado que el V4S, con entradas relativas al perfil de 14
+>    días y a las 4 vecinas.
 >
-> El salto 1 → 2 fue pequeño (PR-AUC 0.39 → 0.36 con δ = 100 %; 0.10 → 0.11 con δ = 50 %) y el
-> salto 2 → 3 fue grande (F1 con δ = 50 % y p99: 0.18 → 0.45). Se concluye que la ventaja de L0
-> proviene principalmente de cómo representa los datos y no del uso de etiquetas. Esto es
-> consistente con que R3, que usa esa misma representación sin entrenamiento, también supera al V4.
+> Del V4 al V4S cambian varias cosas a la vez y el resultado se movió poco (PR-AUC 0.39 → 0.36 con
+> δ = 100 %; 0.10 → 0.11 con δ = 50 %); del V4S a L0 cambian las entradas y la diferencia fue grande
+> (F1 con δ = 50 % y p99: 0.18 → 0.45). Se concluye que la ventaja de L0 no desaparece cuando el
+> comparador también recibe etiquetas. El diseño no permite atribuir esa ventaja a un factor
+> específico (etiquetas, perfil o vecinas); que R3, una regla sin entrenamiento basada en el perfil y
+> las vecinas, también supere al V4 es consistente con que las entradas importen, pero no lo demuestra.
 
 ## El tropiezo del V4S por estación, sin esconderlo
 
@@ -92,8 +102,8 @@ Redacción sugerida:
 
 **Cinco medidas concretas:**
 1. **Afirmar sólo lo demostrado:**
-   - sí: «con este entrenamiento y estas condiciones, la representación de L0 supera a la del V4,
-     también cuando ambos se supervisan igual»;
+   - sí: «con este entrenamiento y estas condiciones, L0 supera al comparador supervisado derivado
+     del V4»; no: «la ventaja se debe a la representación y no a las etiquetas»;
    - no: «L0 es mejor que cualquier V4 supervisado posible».
 2. **El historial de revisiones como anexo,** con la columna «registrada antes o después de ver
    qué». Es la mejor defensa, porque es transparente.
