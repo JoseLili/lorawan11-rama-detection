@@ -4471,6 +4471,28 @@ interpretación se descartó.
 - **Pendiente:** los ataques coordinados a vecinas.
 - **Cómputo:** unas 2 h por año en Colab.
 
+### Revisiones 20 y 20b integradas: PARAAD en la RAMA y en Barcelona (2026-10-29)
+
+- **Origen:** las trabajó otro chat (Codex) a pedido del tesista. El commit `f931246` tiene el
+  código, los documentos, los modelos y los resultados. Aquí sólo se integran al protocolo (§15,
+  filas 20 y 20b, y su sección).
+- **(20) PARAAD en la RAMA:**
+  - L0 único gana en F1 en las 36 combinaciones de δ = 100 y 50 %;
+  - PARAAD contra V4 es mixto: +0.100 en 2025, con intervalo que excluye el 0, y empate en 2024 y
+    2026;
+  - detalle en `docs/resultados_examen_paraad_revision20.md`.
+- **(20b) Barcelona** (13 estaciones del AMB, examen 2018 y 2019, anomalías proporcionales):
+  - L0 le gana a V4 y a PARAAD con δ = 50 y 20 %;
+  - con δ = 100 % en 2018, PARAAD queda arriba en el valor puntual, pero es empate;
+  - PARAAD es mejor que el V4 en el valor puntual, y significativo en 2019;
+  - detalle en `docs/resultados_examen_barcelona_2018_2019.md`.
+- **Lo que hay que declarar en la tesis:**
+  - otro entorno (TensorFlow 2.21 y Keras 3.13);
+  - los registros de la revisión 20 sin commit antes del examen;
+  - no es una reproducción del artículo;
+  - el sesgo sumado no se evaluó.
+- **Pendiente:** el sesgo sumado, junto con la revisión 21 (error fijo).
+
 ---
 
 ## Siguiente

@@ -271,6 +271,8 @@ resultados.
 | 19 | 2026-10-27 | Dos escenarios de «una sola estación», con detectores congelados: (B) **una a la vez**, con los mismos calendarios de prueba quitando los episodios que se enciman (comparación pareada); (A) **un solo nodo comprometido**, con calendarios nuevos donde sólo una estación se altera en todo el año, con más episodios. 2024, 2025 y 2026; principal L0 único contra V4S compartido | Pedido del asesor (2026-10-26): primero una sola estación atacada y después escenarios más complejos. La transcripción admite las dos lecturas, así que se hacen las dos. Se registró **antes** de programar o generar nada. **Aprobada por el tesista el 2026-10-27** |
 
 | T1 | 2026-10-29 | Exploración TINTO-PCA con asignación única propia 32 × 32, 408 entradas idénticas a L0; una CNN de 34 081 parámetros, selección 2020–2021/2022 y dos entrenamientos reproducibles. Sin años de examen | Solicitada por el asesor y desarrollada con el tesista; configuración y código registrados antes del entrenamiento completo. Autorizada por el tesista en este chat el 2026-10-29. Los números 20/21 reservados a otras líneas no se ocupan |
+| 20 | 2026-10-27 | **PARAAD-SA en la RAMA:** el método publicado (Allka et al. 2024), adaptado a las 32 estaciones, entrenado sin etiquetas con 2020–2022, umbrales p99 y p99.9 de 2023 limpio, examinado en 2024–2026 en los escenarios original, B y A con detectores congelados. Comparación principal sin etiquetas: PARAAD contra V4; L0 como referencia supervisada | Pedido del asesor (A7, 2026-10-26). Diseño en `docs/revision20_paraad_diseno.md` y registro previo del examen en `docs/registro_examen_paraad_revision20.md` (2026-10-28). Trabajado en otro chat (Codex) e integrado aquí el 2026-10-29. Los documentos de registro no tuvieron commit antes del examen: su fecha la respalda el propio texto, no git |
+| 20b | 2026-10-29 | **L0, V4 y PARAAD en Barcelona:** modelos nuevos con 13 estaciones del AMB (O₃ de la Generalitat, `tasf-thgu`), ajuste 2014–2016, calibración 2017, examen 2018 (principal) y 2019, con las anomalías proporcionales de este protocolo. El escenario de sesgo sumado del artículo quedó registrado pero no evaluado | Complemento de la revisión 20: los métodos propios con los datos de la otra ciudad. Metodología en `docs/metodologia_barcelona_paraad_v1.md` y registro previo en `docs/registro_examen_barcelona_2018_2019.md`. No es una reproducción del artículo: otras estaciones, otro umbral y otra anomalía |
 
 ### Revisión 1 (2026-10-13)
 
@@ -2487,3 +2489,56 @@ regla propuesta de avance, ni se autoriza usar examen por este cierre.
 Se conservan todos los resultados y límites. Ver
 [cierre integral T1](cierre_exploracion_tinto_t1.md), incluidas fichas de las
 imágenes reales solicitadas por el tesista. No cambia ninguna revisión previa.
+
+### Revisiones 20 y 20b (2026-10-27 a 2026-10-29): PARAAD en la RAMA y los tres detectores en Barcelona
+
+**Estado:**
+- diseñadas, registradas y corridas en otro chat (Codex), a pedido del tesista;
+- documentadas en sus propios archivos;
+- integradas a este protocolo el 2026-10-29, ya con resultados, y su commit es `f931246`.
+
+**Por qué:** el asesor pidió poner al grupo de Barcelona «en la misma tabla, en el mismo
+escenario». Se hicieron las dos direcciones:
+- **(20)** su método con nuestros datos;
+- **(20b)** nuestros métodos con sus datos.
+
+**Desviaciones que hay que declarar:**
+- **Entorno de software distinto:** TensorFlow 2.21 y Keras 3.13 (Python 3.13), por la dependencia
+  de atención de PARAAD, no el `requirements-lock.txt` del repo. Dentro de cada experimento todos
+  los detectores usan el mismo entorno.
+- **Registro previo:** los documentos de registro de la revisión 20 no tuvieron commit antes del
+  examen. Lo que respalda su fecha es el propio texto, no git.
+- **No es una reproducción del artículo:**
+  - no son sus 8 estaciones, sino otras 13;
+  - no es su umbral móvil con etiquetas, sino umbrales fijos de un año limpio;
+  - la 20b sólo evaluó nuestras anomalías proporcionales; su sesgo sumado está pendiente.
+- **PARAAD contra L0 no es «peras con peras»:** supervisado contra no supervisado. La comparación
+  principal es PARAAD contra V4.
+
+**Resultado (20, RAMA)**, detalle en `docs/resultados_examen_paraad_revision20.md`:
+- PARAAD cargado de disco, con dropout 0.3 y 499 épocas, umbrales p99 0.6405 y p99.9 0.8366;
+- L0 único tiene mayor F1 que PARAAD en las 36 combinaciones de δ = 100 y 50 %;
+- con δ = 50 % y p99, PARAAD / V4 / L0: 0.128 / 0.101 / 0.388 en 2024, 0.208 / 0.108 / 0.445 en
+  2025 y 0.140 / 0.193 / 0.502 en 2026;
+- **PARAAD − V4:** +0.100 en 2025, con intervalo que excluye el 0; empate en 2024 y en 2026, con
+  el V4 arriba en el valor puntual de 2026;
+- las alertas de PARAAD en los años limpios se desvían del 1 % fijado: 3.4, 1.7 y 3.0 % con p99.
+
+**Resultado (20b, Barcelona)**, detalle en `docs/resultados_examen_barcelona_2018_2019.md`:
+- F1 con p99, L0 / V4 / PARAAD:
+  - δ = 100 %: 0.484 / 0.412 / 0.500 en 2018 y 0.442 / 0.236 / 0.313 en 2019;
+  - δ = 50 %: 0.500 / 0.252 / 0.304 y 0.435 / 0.106 / 0.191;
+  - δ = 20 %: 0.144 / 0.052 / 0.071 y 0.107 / 0.024 / 0.058;
+- **L0 le gana a los dos** con δ = 50 y 20 % en ambos años, con intervalos positivos;
+- con δ = 100 % en 2018, PARAAD queda arriba en el valor puntual, pero L0 − PARAAD incluye el 0;
+- **PARAAD le gana al V4** en el valor puntual en todos los casos con p99; es significativo en 2019
+  con δ = 100, 50, 20 y 10 %, y en 2018 ningún intervalo excluye el 0;
+- en 2019 suben las alertas limpias de los tres; PARAAD llega a 2.5 % con p99.
+
+**Lectura conjunta:**
+- el orden se repite en las dos ciudades: L0 arriba con los ataques medianos (δ = 50 y 20 %), y
+  PARAAD igual o algo mejor que el V4 entre los no supervisados;
+- con ataques grandes (δ = 100 %) no hay un ganador claro;
+- con δ ≤ 10 % nadie detecta.
+
+**Pendiente:** el sesgo sumado del artículo, que se conecta con la revisión 21 (error fijo en ppb).
