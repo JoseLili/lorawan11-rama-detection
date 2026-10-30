@@ -1,0 +1,77 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793317685.768904   16605 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793317688.440161   16605 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+{"variante": "RH", "ejemplos_ajuste": 350420, "ejemplos_validacion": 87600, "positivas_ajuste": 0.006177195813506842, "gpu": ["/physical_device:GPU:0"]}
+Epoch 1/60
+5476/5476 - 51s - 9ms/step - loss: 0.0414 - val_loss: 0.0422
+Epoch 2/60
+5476/5476 - 46s - 8ms/step - loss: 0.0343 - val_loss: 0.0413
+Epoch 3/60
+5476/5476 - 46s - 8ms/step - loss: 0.0315 - val_loss: 0.0410
+Epoch 4/60
+5476/5476 - 45s - 8ms/step - loss: 0.0296 - val_loss: 0.0410
+Epoch 5/60
+5476/5476 - 45s - 8ms/step - loss: 0.0283 - val_loss: 0.0401
+Epoch 6/60
+5476/5476 - 45s - 8ms/step - loss: 0.0275 - val_loss: 0.0405
+Epoch 7/60
+5476/5476 - 45s - 8ms/step - loss: 0.0268 - val_loss: 0.0408
+Epoch 8/60
+5476/5476 - 45s - 8ms/step - loss: 0.0263 - val_loss: 0.0402
+Epoch 9/60
+5476/5476 - 46s - 8ms/step - loss: 0.0259 - val_loss: 0.0419
+Epoch 10/60
+5476/5476 - 46s - 8ms/step - loss: 0.0256 - val_loss: 0.0403
+Epoch 11/60
+5476/5476 - 46s - 8ms/step - loss: 0.0253 - val_loss: 0.0398
+Epoch 12/60
+5476/5476 - 45s - 8ms/step - loss: 0.0251 - val_loss: 0.0400
+Epoch 13/60
+5476/5476 - 46s - 8ms/step - loss: 0.0249 - val_loss: 0.0407
+Epoch 14/60
+5476/5476 - 46s - 8ms/step - loss: 0.0247 - val_loss: 0.0421
+Epoch 15/60
+5476/5476 - 46s - 8ms/step - loss: 0.0245 - val_loss: 0.0418
+Epoch 16/60
+5476/5476 - 45s - 8ms/step - loss: 0.0244 - val_loss: 0.0419
+Epoch 17/60
+5476/5476 - 46s - 8ms/step - loss: 0.0243 - val_loss: 0.0407
+Epoch 18/60
+5476/5476 - 46s - 8ms/step - loss: 0.0243 - val_loss: 0.0416
+Epoch 19/60
+5476/5476 - 46s - 8ms/step - loss: 0.0241 - val_loss: 0.0419
+/content/t2/t2_colab.py:230: RuntimeWarning: Mean of empty slice
+  D = np.nanmean(Ph, axis=1)
+limpia_2022 puntuada
+entrenamiento_01_d100 puntuada
+entrenamiento_02_d100 puntuada
+entrenamiento_03_d100 puntuada
+entrenamiento_04_d100 puntuada
+entrenamiento_05_d100 puntuada
+entrenamiento_06_d100 puntuada
+entrenamiento_07_d100 puntuada
+entrenamiento_08_d100 puntuada
+entrenamiento_09_d100 puntuada
+entrenamiento_10_d100 puntuada
+entrenamiento_01_d50 puntuada
+entrenamiento_02_d50 puntuada
+entrenamiento_03_d50 puntuada
+entrenamiento_04_d50 puntuada
+entrenamiento_05_d50 puntuada
+entrenamiento_06_d50 puntuada
+entrenamiento_07_d50 puntuada
+entrenamiento_08_d50 puntuada
+entrenamiento_09_d50 puntuada
+entrenamiento_10_d50 puntuada
+entrenamiento_01_d20 puntuada
+entrenamiento_02_d20 puntuada
+entrenamiento_03_d20 puntuada
+entrenamiento_04_d20 puntuada
+entrenamiento_05_d20 puntuada
+entrenamiento_06_d20 puntuada
+entrenamiento_07_d20 puntuada
+entrenamiento_08_d20 puntuada
+entrenamiento_09_d20 puntuada
+entrenamiento_10_d20 puntuada
+LISTO {"variante": "RH", "corrida": 1, "epocas": 19, "epoca_mejor": 11, "val_loss_mejor": 0.03980018198490143, "minutos_total": 14.669759635130564}

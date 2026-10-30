@@ -1,0 +1,15 @@
+{
+ "actualizado": "2026-10-30 00:26:04 UTC",
+ "fase": "terminado",
+ "terminados": {
+  "RH_c1": 0,
+  "RH_c2": 0,
+  "ED_c1": 0,
+  "ED_c2": 0,
+  "RD_c1": 0,
+  "RD_c2": 0,
+  "EH_c1": 0,
+  "EH_c2": 0
+ },
+ "fallidos": []
+}

@@ -88,6 +88,12 @@ results/exploracion_tinto_2022/preparacion_20261029/cache_*/manifiesto_*.csv.gz
 results/exploracion_tinto_2022/preparacion_colab_20261029/*.tar.gz
 results/exploracion_tinto_2022/preparacion_colab_20261029/*.zip
 
+# TINTO T2: entradas precalculadas (620 MB, se regeneran con preparar_t2.py), paquetes de
+# transporte Colab y corridas de prueba. Se conservan mapas, meta.json, modelos y puntajes.
+results/exploracion_tinto_2022/t2_granularidad/paquete/*.npy
+results/exploracion_tinto_2022/t2_granularidad/*.tar.gz
+results/exploracion_tinto_2022/t2_granularidad/salidas/prueba_*
+
 # PARAAD y Barcelona: copias de transporte Colab; resultados extraídos se versionan.
 # Los archivos locales se conservan y los paquetes se regeneran con los scripts.
 results/anomalias_red_v1/revision20/**/*.tar.gz

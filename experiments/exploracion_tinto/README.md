@@ -1,4 +1,25 @@
-# Aula TINTO: primer ejercicio (2026-10-28)
+# Exploración TINTO: índice y ejercicios
+
+## Estado al 2026-10-30
+
+Experimento separado de los detectores principales de RAMA y Barcelona.
+T1 y T2 están cerrados; ninguna variante T2 cumplió el criterio principal
+para pasar a examen independiente.
+
+- [Diseño T2 y criterio previo](diseno_t2_granularidad.md).
+- [Resultados T2 y limitaciones](resultados_t2_granularidad.md).
+- Preparación: `preparar_t2.py` y `mapa_red_t2.py`.
+- Colab: `t2_colab.py`, `t2_supervisor.py` y `t2_consultar.py`.
+- Evaluación y figura: `evaluar_t2.py` y `figura_t2.py`.
+- Resultados: `../../results/exploracion_tinto_2022/t2_granularidad/`.
+- Imágenes explicativas: `../../results/exploracion_tinto_2022/imagenes_reales_20261029/`.
+- [Presentación con imágenes](../../docs/informes/comparaciones_justas_con_imagenes_TINTO.pdf).
+
+Se versionan mapas, configuración, modelos, historias, puntajes y métricas.
+Las entradas precalculadas y archivos de transporte Colab se conservan localmente
+y se excluyen mediante `.gitignore`; no son resultados nuevos.
+
+## Aula TINTO: primer ejercicio (2026-10-28)
 
 > **Estado vigente: piloto T1 cerrado (2026-10-29).** Evaluación Colab terminada,
 > dos corridas idénticas, resultados descargados y sesión liberada. L0 supera

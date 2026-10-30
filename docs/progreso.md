@@ -4702,3 +4702,28 @@ manual: no examen independiente ni avance autorizado a otros años.
 Documentación integral, decisiones, fases ejecutadas/propuestas y dos figuras
 de una ventana real en [cierre T1](cierre_exploracion_tinto_t1.md). Las imágenes
 usaron mapa/escala congelados; no se entrenó ni se hizo inferencia adicional.
+
+## 2026-10-29 — TINTO T2: registro previo de granularidad y reentreno de T1
+
+Pedido del tesista, registrado antes de entrenar: (1) reentrenar T1 sin parada manual y
+(2) comparar cuatro formas de imagen TINTO: estación-hora (EH = T1), estación-día (ED),
+red-hora (RH, 31 salidas) y red-día (RD, 31 salidas). El tesista autorizó Colab con GPU
+para esta exploración: no se exige igualdad exacta entre corridas; se hacen dos corridas
+por variante para medir el ruido. Solo 2022, mismas 9 661 estación-días y mismos puntajes
+de L0 (cargado de disco) que T1. Regla: una variante pasa a protocolo propio solo si
+F̄ (F1 p99, δ 100/50/20) ≥ 0.3750 (L0 + 0.02) en sus dos corridas. Diseño completo en
+[diseno_t2_granularidad.md](../experiments/exploracion_tinto/diseno_t2_granularidad.md).
+
+### 2026-10-29 — TINTO T2: resultados (regla aplicada, TINTO cerrado)
+
+Ocho entrenamientos en Colab GPU L4 (cuatro variantes × dos corridas, `fijar_semilla(42)`); las dos
+corridas de cada variante salieron idénticas. EarlyStopping completo, sin parada manual. Sesión
+detenida después de descargar (SHA-256 verificado).
+
+- Reentreno de T1 (EH): mejor época 7, F̄ 0.315 (antes 0.308). Sigue debajo de L0 (0.355).
+- F̄ (F1 p99, δ 100/50/20): ED 0.322, EH 0.315, RH 0.157, RD 0.035. Ninguna llega a 0.375:
+  **TINTO cerrado como resultado negativo** según la regla registrada.
+- Las imágenes de toda la red (31 salidas) fallan, como el LSTM de 31 salidas de la revisión 13.
+- Observación secundaria, no adoptable: ED supera a L0 con p99.9 en δ 100 y 50 %. El umbral p99.9 es
+  inestable (~10 días limpios), y la observación se notó después de ver los resultados.
+Detalle, ficha y gráfica: [resultados_t2_granularidad.md](../experiments/exploracion_tinto/resultados_t2_granularidad.md).

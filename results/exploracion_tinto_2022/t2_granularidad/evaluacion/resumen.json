@@ -1,0 +1,52 @@
+{
+ "Fbar_L0": 0.3549505348763549,
+ "umbral_regla": 0.37495053487635494,
+ "Fbar": {
+  "ED_c1": 0.3224,
+  "ED_c2": 0.3224,
+  "EH_c1": 0.3152,
+  "EH_c2": 0.3152,
+  "L0": 0.355,
+  "RD_c1": 0.0349,
+  "RD_c2": 0.0349,
+  "RH_c1": 0.1568,
+  "RH_c2": 0.1568,
+  "T1_epoca5": 0.3083
+ },
+ "decision": {
+  "EH": {
+   "Fbar": [
+    0.3151635632882838,
+    0.3151635632882838
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  },
+  "ED": {
+   "Fbar": [
+    0.3223728172093312,
+    0.3223728172093312
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  },
+  "RH": {
+   "Fbar": [
+    0.1568247445440428,
+    0.1568247445440428
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  },
+  "RD": {
+   "Fbar": [
+    0.03486002938666564,
+    0.03486002938666564
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  }
+ },
+ "origen": "L0 y T1 cargados de disco (puntajes guardados); EH/ED/RH/RD recién entrenados en Colab GPU",
+ "limite": "2022 se usó para EarlyStopping y evaluación; comparación exploratoria, no examen"
+}

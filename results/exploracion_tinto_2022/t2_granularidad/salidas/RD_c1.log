@@ -1,0 +1,59 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793319335.973304   29867 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793319339.331759   29867 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+{"variante": "RD", "ejemplos_ajuste": 14620, "ejemplos_validacion": 3650, "positivas_ajuste": 0.008439481258392334, "gpu": ["/physical_device:GPU:0"]}
+Epoch 1/60
+229/229 - 9s - 38ms/step - loss: 0.1196 - val_loss: 0.0495
+Epoch 2/60
+229/229 - 2s - 9ms/step - loss: 0.0572 - val_loss: 0.0487
+Epoch 3/60
+229/229 - 2s - 9ms/step - loss: 0.0541 - val_loss: 0.0475
+Epoch 4/60
+229/229 - 2s - 9ms/step - loss: 0.0522 - val_loss: 0.0513
+Epoch 5/60
+229/229 - 2s - 9ms/step - loss: 0.0505 - val_loss: 0.0481
+Epoch 6/60
+229/229 - 2s - 9ms/step - loss: 0.0495 - val_loss: 0.0488
+Epoch 7/60
+229/229 - 2s - 9ms/step - loss: 0.0488 - val_loss: 0.0495
+Epoch 8/60
+229/229 - 2s - 9ms/step - loss: 0.0475 - val_loss: 0.0495
+Epoch 9/60
+229/229 - 2s - 9ms/step - loss: 0.0465 - val_loss: 0.0498
+Epoch 10/60
+229/229 - 2s - 9ms/step - loss: 0.0460 - val_loss: 0.0503
+Epoch 11/60
+229/229 - 2s - 9ms/step - loss: 0.0450 - val_loss: 0.0502
+limpia_2022 puntuada
+entrenamiento_01_d100 puntuada
+entrenamiento_02_d100 puntuada
+entrenamiento_03_d100 puntuada
+entrenamiento_04_d100 puntuada
+entrenamiento_05_d100 puntuada
+entrenamiento_06_d100 puntuada
+entrenamiento_07_d100 puntuada
+entrenamiento_08_d100 puntuada
+entrenamiento_09_d100 puntuada
+entrenamiento_10_d100 puntuada
+entrenamiento_01_d50 puntuada
+entrenamiento_02_d50 puntuada
+entrenamiento_03_d50 puntuada
+entrenamiento_04_d50 puntuada
+entrenamiento_05_d50 puntuada
+entrenamiento_06_d50 puntuada
+entrenamiento_07_d50 puntuada
+entrenamiento_08_d50 puntuada
+entrenamiento_09_d50 puntuada
+entrenamiento_10_d50 puntuada
+entrenamiento_01_d20 puntuada
+entrenamiento_02_d20 puntuada
+entrenamiento_03_d20 puntuada
+entrenamiento_04_d20 puntuada
+entrenamiento_05_d20 puntuada
+entrenamiento_06_d20 puntuada
+entrenamiento_07_d20 puntuada
+entrenamiento_08_d20 puntuada
+entrenamiento_09_d20 puntuada
+entrenamiento_10_d20 puntuada
+LISTO {"variante": "RD", "corrida": 1, "epocas": 11, "epoca_mejor": 3, "val_loss_mejor": 0.04748982936143875, "minutos_total": 0.6006738146146139}

@@ -1,0 +1,33 @@
+{
+ "variante": "RD",
+ "corrida": 1,
+ "prueba": false,
+ "config": {
+  "batch": 64,
+  "max_epocas": 60,
+  "paciencia": 8,
+  "lr": 0.001,
+  "semilla": 42
+ },
+ "lado": 64,
+ "python": "3.13.16",
+ "tensorflow": "2.21.0",
+ "keras": "3.13.2",
+ "gpu": [
+  "/physical_device:GPU:0"
+ ],
+ "origen": "CNN reci\u00e9n entrenada en Colab; GPU no determinista autorizada por el tesista",
+ "gpu_nombre": "NVIDIA L4",
+ "ejemplos_ajuste": 14620,
+ "ejemplos_validacion": 3650,
+ "positivas_ajuste": 0.008439481258392334,
+ "positivas_validacion": 0.008115101605653763,
+ "parametros": 133375,
+ "epocas": 11,
+ "epoca_mejor": 3,
+ "val_loss_mejor": 0.04748982936143875,
+ "paro_por_paciencia": true,
+ "minutos_entrenamiento": 0.577033253510793,
+ "minutos_total": 0.6006738146146139,
+ "matrices_puntuadas": 31
+}
