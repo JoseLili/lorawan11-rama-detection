@@ -273,6 +273,27 @@ def aplicar(valores: pd.DataFrame, plan: pd.DataFrame, delta: float, dias_comple
     return recibidos, cambiadas
 
 
+TAMANOS_FIJOS = (5, 10, 20, 40)    # revisión 21: error fijo en ppb
+
+
+def aplicar_fijo(valores: pd.DataFrame, plan: pd.DataFrame, a: int):
+    """Revisión 21: como `aplicar`, con el error fijo: x + a con signo + y max(x − a, 0) con signo −.
+
+    El plan es el mismo (estaciones, días y signos); sólo cambia la forma de la alteración. Se redondea
+    como en `aplicar` y las horas sin dato siguen sin dato.
+    """
+    if a not in TAMANOS_FIJOS:
+        raise ValueError(f'tamaño no registrado: {a}')
+    validar_plan(plan)
+    s = pd.DataFrame(0.0, index=valores.index, columns=valores.columns)
+    for e in plan.itertuples():
+        s.loc[e.inicio:e.fin, e.estacion] = float(e.signo)
+    alterado = np.floor(np.maximum(valores + s * a, 0.0) + 0.5)
+    recibidos = valores.where(s.eq(0.0), alterado)
+    cambiadas = valores.notna() & recibidos.ne(valores)
+    return recibidos, cambiadas
+
+
 def etiqueta_red(cambiadas: pd.DataFrame) -> pd.Series:
     """Etiqueta de red por hora (§8): alguna estación con lectura cambiada. Nunca es entrada."""
     return cambiadas.any(axis=1).rename('anomalia_red')

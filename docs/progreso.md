@@ -4493,6 +4493,49 @@ interpretación se descartó.
   - el sesgo sumado no se evaluó.
 - **Pendiente:** el sesgo sumado, junto con la revisión 21 (error fijo).
 
+### Revisiones 21 y 20c registradas y aprobadas: error fijo y sesgo de PARAAD (2026-10-29)
+
+- **Aprobadas por el tesista el 2026-10-29,** antes de programar o generar nada:
+  - tamaños 5, 10, 20 y 40 ppb;
+  - PARAAD incluido, en su entorno registrado;
+  - la 20c sí se hace.
+- **Revisión 21:**
+  - los mismos calendarios de prueba, con la lectura más o menos a ppb (recortada en 0);
+  - detectores congelados: L0 único, V4S compartido, R3, V4 y PARAAD;
+  - 120 matrices generadas en la lap, con las comprobaciones;
+  - por el recorte en 0, el cambio medio real queda por debajo de a: 4.8, 9.3, 17.6 y 32 ppb para
+    5, 10, 20 y 40;
+  - evaluación en Colab con 3 sesiones AMD, una por año;
+  - L0, V4S, R3 y V4 se corren dos veces;
+  - PARAAD se califica en el entorno nativo de Colab, que coincide con el suyo (TensorFlow 2.21.0,
+    Keras 3.13.2), y su año limpio se compara con el de la revisión 20;
+  - un primer lanzamiento se detuvo porque el remoto ya estaba en `f931246`; se ajustó el guion.
+- **Revisión 20c:** el sesgo de PARAAD en Barcelona, con los modelos congelados de la 20b. La corre
+  el chat que construyó esa tubería; instrucciones en `docs/inicio_revision20c.md`.
+
+### Revisión 21: resultado del error fijo en ppb (2026-10-30)
+
+- **Controles:**
+  - dos corridas idénticas por año en Colab con AMD;
+  - umbrales y años limpios iguales a la revisión 18;
+  - PARAAD sin ninguna alarma distinta respecto a su año limpio de la revisión 20.
+- **Dos tropiezos atrapados por los controles:**
+  - 3 hilos en lugar de 4, con diferencias de 2 × 10⁻⁸;
+  - un entorno ya creado al relanzar, y el vigilante no lo vio porque buscaba «Error» con
+    mayúscula: se perdió una hora.
+- **Recall de L0 único con p99, 2025:** 0.04, 0.28, 0.83 y 0.91 para 5, 10, 20 y 40 ppb.
+- **Hallazgo principal:** con error fijo, **R3 iguala o supera a L0** en F1 con 10 y 40 ppb. L0
+  aprendió sólo anomalías proporcionales; su ventaja depende de que la anomalía se parezca a la de
+  su entrenamiento.
+- **L0 contra V4S compartido:** L0 gana con 10 y 20 ppb en los tres años. Con 40 ppb el resultado
+  es mixto.
+- **PARAAD contra V4:** sin orden estable. PARAAD gana en 2025 con 20 y 40 ppb y pierde en todo
+  2026.
+- **Proporcional contra fijo:** con el mismo cambio medio, el proporcional se detecta mucho mejor.
+  δ = 50 % (~14 ppb) da recall de 0.82 y 10 ppb da 0.28. Confirma el argumento del asesor sobre
+  los picos.
+- **Predicciones:** 3 de 4. Falla la 3, que suponía lo contrario.
+
 ---
 
 ## Siguiente

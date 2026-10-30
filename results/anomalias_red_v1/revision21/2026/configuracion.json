@@ -1,0 +1,39 @@
+{
+  "protocolo": "anomalias_red_v1",
+  "revision": 21,
+  "anio": 2026,
+  "prueba": false,
+  "puntos": {
+    "p99": 0.01,
+    "p99.9": 0.001
+  },
+  "tamanos_ppb": [
+    5,
+    10,
+    20,
+    40
+  ],
+  "detectores": [
+    "L0_unico",
+    "V4S_compartido",
+    "R3",
+    "V4"
+  ],
+  "principal": [
+    "L0_unico",
+    "V4S_compartido"
+  ],
+  "origen": {
+    "L0_unico": "modelo definitivo de δ = 50 % de la revisión 14, cargado de disco",
+    "V4S_compartido": "modelo definitivo de la revisión 18b, cargado de disco",
+    "V4": "cargado de disco",
+    "R3": "sin entrenamiento"
+  },
+  "sha256_l0_unico": "cfbdf84f17de4087a2836721dbcc606c849167edc9635446d46e36a182ca35fe",
+  "sha256_v4s_compartido": "45fed923621a3f89077800980198145060d97ec12e88073cc5ce16ee738065dd",
+  "remuestreos": 2000,
+  "sha256_matriz_ajuste": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+  "control_umbrales_revision18": 7.833565537824625e-16,
+  "control_limpio_revision18": 4.440892098500626e-16,
+  "tolerancia": 1e-12
+}

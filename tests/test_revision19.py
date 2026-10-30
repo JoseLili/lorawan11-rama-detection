@@ -46,3 +46,19 @@ def test_calendarios_de_un_nodo_solo_alteran_su_estacion_y_no_chocan():
         ar.validar_plan(plan)
     plan = ar.plan_nodo(c.iloc[0])
     assert 2 <= len(plan) <= 12                                                    # unos 4 a 7 por año
+
+
+def test_error_fijo_suma_o_resta_a_ppb_sin_bajar_de_cero():
+    """Revisión 21."""
+    import pytest
+    idx = pd.date_range('2024-01-01', periods=72, freq='h')
+    v = pd.DataFrame({'PED': 3.0, 'TLA': 50.0, 'MER': 40.0}, index=idx)
+    v.iloc[5, 0] = np.nan
+    plan = _plan([('PED', '2024-01-01', 1, -1), ('TLA', '2024-01-02', 1, 1)])
+    rec, cam = ar.aplicar_fijo(v, plan, 10)
+    assert (rec['PED'].iloc[:24].dropna() == 0.0).all() and np.isnan(rec['PED'].iloc[5])   # recorte en 0
+    assert (rec['TLA'].iloc[24:48] == 60.0).all() and (rec['TLA'].iloc[:24] == 50.0).all()
+    assert rec['MER'].equals(v['MER']) and not cam['MER'].any()
+    assert cam['PED'].sum() == 23 and cam['TLA'].sum() == 24
+    with pytest.raises(ValueError):
+        ar.aplicar_fijo(v, plan, 15)

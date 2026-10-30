@@ -273,6 +273,8 @@ resultados.
 | T1 | 2026-10-29 | Exploración TINTO-PCA con asignación única propia 32 × 32, 408 entradas idénticas a L0; una CNN de 34 081 parámetros, selección 2020–2021/2022 y dos entrenamientos reproducibles. Sin años de examen | Solicitada por el asesor y desarrollada con el tesista; configuración y código registrados antes del entrenamiento completo. Autorizada por el tesista en este chat el 2026-10-29. Los números 20/21 reservados a otras líneas no se ocupan |
 | 20 | 2026-10-27 | **PARAAD-SA en la RAMA:** el método publicado (Allka et al. 2024), adaptado a las 32 estaciones, entrenado sin etiquetas con 2020–2022, umbrales p99 y p99.9 de 2023 limpio, examinado en 2024–2026 en los escenarios original, B y A con detectores congelados. Comparación principal sin etiquetas: PARAAD contra V4; L0 como referencia supervisada | Pedido del asesor (A7, 2026-10-26). Diseño en `docs/revision20_paraad_diseno.md` y registro previo del examen en `docs/registro_examen_paraad_revision20.md` (2026-10-28). Trabajado en otro chat (Codex) e integrado aquí el 2026-10-29. Los documentos de registro no tuvieron commit antes del examen: su fecha la respalda el propio texto, no git |
 | 20b | 2026-10-29 | **L0, V4 y PARAAD en Barcelona:** modelos nuevos con 13 estaciones del AMB (O₃ de la Generalitat, `tasf-thgu`), ajuste 2014–2016, calibración 2017, examen 2018 (principal) y 2019, con las anomalías proporcionales de este protocolo. El escenario de sesgo sumado del artículo quedó registrado pero no evaluado | Complemento de la revisión 20: los métodos propios con los datos de la otra ciudad. Metodología en `docs/metodologia_barcelona_paraad_v1.md` y registro previo en `docs/registro_examen_barcelona_2018_2019.md`. No es una reproducción del artículo: otras estaciones, otro umbral y otra anomalía |
+| 20c | 2026-10-29 | **El sesgo de PARAAD en Barcelona:** los modelos congelados de la 20b (L0, V4 y PARAAD), con los planes de sesgo diario ya registrados (`planes_sesgo_v1`: 125 calendarios en 2018 y 125 en 2019; desplazamiento β·σ, β de una normal truncada en 0.4–4). Sin entrenar ni recalibrar | Completa «su anomalía en su ciudad», pendiente de la 20b. Se registró **antes** de aplicar el sesgo a los datos de examen. **Aprobada por el tesista el 2026-10-29** |
+| 21 | 2026-10-29 | **Error fijo en ppb:** los mismos calendarios de prueba (2024 y 2025–2026), con la lectura más o menos a ppb (a ∈ {5, 10, 20, 40}) en lugar de un porcentaje; detectores congelados L0 único, V4S compartido, R3, V4 y PARAAD (revisión 20) | Pedido del asesor (2026-10-26): «un sensor se equivoca por una cantidad, no por un porcentaje». También es el tipo de anomalía de PARAAD. Se registró **antes** de programar o generar nada. **Aprobada por el tesista el 2026-10-29** (tamaños 5, 10, 20 y 40; PARAAD incluido) |
 
 ### Revisión 1 (2026-10-13)
 
@@ -2542,3 +2544,115 @@ escenario». Se hicieron las dos direcciones:
 - con δ ≤ 10 % nadie detecta.
 
 **Pendiente:** el sesgo sumado del artículo, que se conecta con la revisión 21 (error fijo en ppb).
+
+### Revisión 21 (2026-10-29): error fijo en ppb
+
+**Estado:**
+- aprobada por el tesista el 2026-10-29, antes de programar o generar nada;
+- tamaños 5, 10, 20 y 40 ppb, con PARAAD incluido.
+
+**Anomalía:**
+- con los planes de `prueba_2024_01…10`, `final_2025_01…10` y `final_2026_01…10`, sin cambiar
+  episodios, estaciones, días ni signos;
+- en las horas con dato de un episodio, signo + da x + a y signo − da max(x − a, 0);
+- se redondea a entero, como siempre, y las horas sin dato siguen sin dato;
+- a ∈ {5, 10, 20, 40} ppb;
+- matrices `matriz_fijo_<corrida>_a<a>`;
+- control: fuera de los episodios, la matriz es igual al año limpio; dentro, el cambio es
+  exactamente ±a, salvo el recorte en 0.
+
+**Detectores congelados, sin entrenar:**
+- L0 único, V4S compartido, R3 y V4, como en la revisión 19;
+- PARAAD-SA de la revisión 20, con sus umbrales congelados y calificado en su entorno registrado
+  (TensorFlow 2.21) con `puntuar_paraad.py`.
+
+**Comparaciones:**
+- **principal «peras con peras»:** L0 único − V4S compartido (supervisados) y PARAAD − V4 (sin
+  etiquetas);
+- F1, recall y precisión con intervalo del 95 %, por bootstrap de bloques estación × mes, 2 000
+  remuestreos, semilla `[42, 21, año]`;
+- **pareada contra el escenario proporcional:** el recall de cada detector en los mismos
+  episodios con error fijo y con δ, usando los puntajes de la revisión 18 y, para PARAAD, los de la
+  revisión 20;
+- también se reporta el cambio medio en ppb de cada escenario.
+
+**Lo demás:**
+- los umbrales p99 y p99.9 de 2023 limpio, las estación-días comunes y la historia limpia
+  anterior a cada año;
+- 2025–2026 se evalúa una sola vez, con la regla de la revisión 18;
+- la evaluación se corre dos veces y debe salir igual.
+
+**Predicciones (Claude), escritas antes de generar nada:**
+1. con 20 y 40 ppb y p99, el recall de L0 único es de al menos 0.5 en 2025;
+2. con 5 ppb, ningún detector supera claramente su valor sin ataque (F1 menor de 0.05 con p99);
+3. con 10 ppb, el recall de L0 único es mayor o igual que con δ = 50 % (unos 14 ppb de cambio
+   medio) en los mismos episodios, en 2025 y con p99. El error fijo también mueve las horas de
+   ozono bajo; el proporcional casi no;
+4. L0 único le gana en F1 al V4S compartido con 10, 20 y 40 ppb y p99 en 2025.
+
+**Resultado de la revisión 21** (2026-10-30; 2025–2026 usado una sola vez para este escenario):
+- **Origen:** todos los detectores cargados de disco (L0 único, V4S compartido, V4 y PARAAD) o sin
+  entrenamiento (R3).
+- **Controles:**
+  - en Colab con AMD EPYC, las dos corridas idénticas;
+  - umbrales y años limpios iguales a la revisión 18 (diferencia ≤ 8 × 10⁻¹⁶);
+  - PARAAD, en su entorno registrado (TensorFlow 2.21.0 y Keras 3.13.2), difiere de su año limpio de
+    la revisión 20 en ≤ 1.8 × 10⁻⁶, sin ninguna alarma distinta;
+  - dos intentos previos se detuvieron solos: uno con 3 hilos en lugar de 4, que dio diferencias de
+    2 × 10⁻⁸, y otro por un entorno ya creado.
+- **Cambio medio real:** 4.8, 9.3, 17.6 y 32 ppb para a = 5, 10, 20 y 40, por el recorte en 0.
+- **F1 con p99, 2025** (L0 único / R3 / V4S compartido / V4 / PARAAD):
+  - 5 ppb: 0.033 / 0.044 / 0.014 / 0.022 / 0.013;
+  - 10 ppb: 0.203 / 0.286 / 0.035 / 0.058 / 0.048;
+  - 20 ppb: 0.443 / 0.479 / 0.119 / 0.137 / 0.303;
+  - 40 ppb: 0.389 / 0.479 / 0.296 / 0.219 / 0.443.
+- **Recall con p99, 2025:** L0 único 0.04 / 0.28 / 0.83 / 0.91 y R3 0.05 / 0.39 / 0.84 / 0.95.
+- **Con error fijo, R3 queda arriba de L0 en F1 en casi todos los casos** con 10 y 40 ppb, en los
+  dos umbrales (por ejemplo, 0.767 contra 0.572 con 40 ppb y p99.9 en 2025). Con 20 ppb y p99.9,
+  L0 queda arriba (0.571 contra 0.531 en 2025). L0 aprendió con anomalías proporcionales y R3 no
+  aprende nada: la regla generaliza mejor a una forma de anomalía nueva.
+- **L0 único − V4S compartido:** L0 arriba con 10 y 20 ppb en los tres años y los dos umbrales,
+  con intervalo que excluye el 0. Con 40 ppb y p99 empata en 2024, gana en 2025 y pierde en 2026
+  (−0.078).
+- **PARAAD − V4:**
+  - en 2025 PARAAD gana con 20 y 40 ppb (+0.17 y +0.22 con p99);
+  - en 2024 gana poco con 20 y 40 ppb y p99;
+  - en 2026 pierde en todos los tamaños, con intervalo que excluye el 0;
+  - no hay una ventaja estable.
+- **Contra el proporcional, en los mismos episodios** (recall de L0 único, p99, 2025): δ = 50 %
+  (~14 ppb de cambio medio) da 0.823, y 10 ppb da 0.279. El cambio proporcional, con el mismo
+  promedio, se detecta mucho mejor, porque altera más las horas altas. Es lo que dijo el asesor
+  sobre los picos.
+- **Predicciones:**
+  - se cumplen la 1 (recall de L0 de 0.83 y 0.91 con 20 y 40 ppb), la 2 (F1 máximo con 5 ppb de
+    0.047) y la 4;
+  - **falla la 3:** con 10 ppb el recall de L0 es 0.279, contra 0.823 con δ = 50 %.
+- **Lectura:**
+  - un error fijo de 10 ppb ya se detecta en parte, y uno de 20 ppb se detecta bien (recall de
+    ~0.83 con p99);
+  - 5 ppb no se distingue;
+  - con este tipo de anomalía, la regla R3 iguala o supera a L0. La ventaja de L0 depende de que
+    la anomalía se parezca a la de su entrenamiento;
+  - entre los no supervisados, PARAAD y el V4 no tienen un orden estable.
+- **Detalle:** en `results/anomalias_red_v1/revision21/<año>/` y `logs_revision21/`.
+
+### Revisión 20c (2026-10-29): el sesgo de PARAAD en Barcelona
+
+**Estado:** aprobada por el tesista el 2026-10-29, antes de aplicar el sesgo a los años de examen.
+
+**Diseño:**
+- **modelos congelados de la 20b:** L0 único (entrenado con δ = 50 % proporcional), los 13 V4 y
+  PARAAD-SA, sin entrenar ni recalibrar;
+- **umbrales:** p99 y p99.9 de 2017;
+- **planes:** los de `results/barcelona_paraad/planes_sesgo_v1/`, ya generados y registrados en
+  `docs/planes_sesgo_barcelona_v1.md`:
+  - 125 calendarios para la prueba 2018 y 125 para 2019;
+  - en cada uno, 4 de las 13 estaciones y el 30 % de sus días;
+  - desplazamiento β·σ de ajuste constante en el día, con β de `truncnorm(0.2, 2, scale=2)`, es
+    decir, entre 0.4 y 4;
+- **métricas, intervalos y control sin inyección:** como en la 20b;
+- **comparación principal:** PARAAD − V4 (sin etiquetas); L0 como referencia supervisada que nunca
+  vio esta anomalía.
+
+**Cautela:** la prevalencia del sesgo es de ~9 %, contra menos del 1 % en el escenario
+proporcional. La precisión y el F1 no se comparan entre escenarios.

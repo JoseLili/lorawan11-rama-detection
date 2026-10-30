@@ -72,8 +72,11 @@ logs_revision16/
 logs_revision17/
 logs_revision18/
 logs_revision19/
+logs_revision21/
 # Revisión 18: puntajes por estación-día (47 MB), se regeneran con evaluar_revision18.py
 results/anomalias_red_v1/revision18/dias_*.csv.gz
+# Revisión 21: puntajes por estación-día (29 MB), se regeneran con evaluar_revision21.py
+results/anomalias_red_v1/revision21/*/dias_*.csv.gz
 
 # TINTO T1: entradas/caches grandes y paquetes de transporte regenerables
 results/exploracion_tinto_2022/auditoria_l0_20261028/*/X_muestra.npy
