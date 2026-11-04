@@ -1,0 +1,46 @@
+{
+  "sesion": "tinto-s1-r1-20261031",
+  "fase": "incompleto_sesion_ausente",
+  "sha256_adicional": "e36af0f5b1ac935e310e8311bfba407ae30cc51d77325f1b5845bac951cc4da9",
+  "configuracion": "sin cambios, protocolo \u00a714",
+  "autorizacion": "usuario solicita continuar tras interrupci\u00f3n",
+  "supervisor_pid": 4531,
+  "control_codificador_exacto": true,
+  "paquetes_remotos_verificados": true,
+  "recolector_exec_session": 82713,
+  "automatizacion": "revisar-tinto-s1-horario-y-respaldos",
+  "runtime": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "gpu": "NVIDIA L4"
+  },
+  "ultima_consulta_utc": "2026-11-04T01:47:13.954Z",
+  "pruebas_breves_superadas": true,
+  "supervisor_activo": false,
+  "recolector_activo_confirmado": false,
+  "corrida1": {
+    "estado": "completada",
+    "epocas_completas_observadas": 9,
+    "epoca_en_curso": null,
+    "segundos_primera_epoca": 262,
+    "epoca_mejor": 1,
+    "val_loss_mejor": 0.04715469479560852,
+    "minutos_total": 39.00084559122721
+  },
+  "respaldos_verificados": [
+    "corrida1_verificado.json"
+  ],
+  "corrida2": {
+    "estado": "resultado_no_recuperado",
+    "epocas_completas_observadas": 5,
+    "epoca_en_curso": null,
+    "segundos_primera_epoca": 267,
+    "ultima_epoca_observada": 6
+  },
+  "inventario_colab": "sin sesiones activas",
+  "descarga_puntual": "sin respaldos nuevos",
+  "evaluacion": "no ejecutada: falta segunda corrida para comprobar reproducibilidad",
+  "recuperacion_parcial": "recuperacion_parcial_20261104",
+  "integridad_corrida1_verificada": true,
+  "automatizacion_eliminada": true
+}

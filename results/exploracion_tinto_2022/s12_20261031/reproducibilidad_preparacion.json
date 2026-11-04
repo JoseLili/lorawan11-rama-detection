@@ -1,0 +1,9 @@
+{
+  "auditoria.json": "88e8bb1ea0b603bf2e4f0ade259eb62bc06138cef0b6d7ca4eeaafe2819dcf62",
+  "etiquetas_va.npy": "0c932d638e101e6301b769484d24b8ff429dec96deecd44c5551d14fb3631867",
+  "ejemplo_alterada.npy": "08d7164ed08bcf762265a57397bc19b8c6f4c2fd5470d9ea6a5ddea1e9b2c31e",
+  "etiquetas_tr.npy": "0b9b46b71f49d499ba548c915d441c514b34e1f8a8655b1da9330f25b6e3c39d",
+  "indices_va.npy": "df8b2e92d842cbd3e33f570e8cf6fc7a954f56c705afb6d2068d961591f720f6",
+  "indices_tr.npy": "e21cbc4a250525045a6309fe2f4b5ee83b40ef5d33ab67d12c2c14826e43f3fe",
+  "ejemplo_limpia.npy": "d2b3c28251ca930a48985a2b268d4e815927649aec46822815c313c348adc2f9"
+}

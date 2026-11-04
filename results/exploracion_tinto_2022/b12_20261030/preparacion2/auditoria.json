@@ -1,0 +1,118 @@
+{
+  "etiquetas": [
+    {
+      "calendario": "entrenamiento_01",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 35
+    },
+    {
+      "calendario": "entrenamiento_02",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 26
+    },
+    {
+      "calendario": "entrenamiento_03",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 50
+    },
+    {
+      "calendario": "entrenamiento_04",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 32
+    },
+    {
+      "calendario": "entrenamiento_05",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 74
+    },
+    {
+      "calendario": "entrenamiento_06",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 40
+    },
+    {
+      "calendario": "entrenamiento_07",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 89
+    },
+    {
+      "calendario": "entrenamiento_08",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 54
+    },
+    {
+      "calendario": "entrenamiento_09",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 65
+    },
+    {
+      "calendario": "entrenamiento_10",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 20
+    },
+    {
+      "calendario": "entrenamiento_11",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 37
+    },
+    {
+      "calendario": "entrenamiento_12",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 105
+    },
+    {
+      "calendario": "entrenamiento_13",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 64
+    },
+    {
+      "calendario": "entrenamiento_14",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 61
+    },
+    {
+      "calendario": "entrenamiento_15",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 44
+    },
+    {
+      "calendario": "entrenamiento_16",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 46
+    },
+    {
+      "calendario": "entrenamiento_17",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 29
+    },
+    {
+      "calendario": "entrenamiento_18",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 82
+    },
+    {
+      "calendario": "entrenamiento_19",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 39
+    },
+    {
+      "calendario": "entrenamiento_20",
+      "etiquetas_hora_verificadas": 815424,
+      "discrepancias_episodio_vs_lectura": 35
+    }
+  ],
+  "muestras": {
+    "tr": {
+      "ejemplos": 711760,
+      "positivos": 6001,
+      "negativos": 705759
+    },
+    "va": {
+      "ejemplos": 192910,
+      "positivos": 1566,
+      "negativos": 191344
+    }
+  },
+  "soporte_comun": 9661,
+  "modelo_entrenado": false
+}

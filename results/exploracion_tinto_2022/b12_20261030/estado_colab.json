@@ -1,0 +1,41 @@
+{
+  "sesion": "tinto-b12-20261030",
+  "fase": "sesion_no_disponible_resultados_no_recuperados",
+  "sha256_paquete": "6f4a66e52a1b9bb59c31dd43cdeb6970a60e28ff430478f53a6ac441607f4ad9",
+  "runtime": {
+    "python": "3.13.16",
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "gpu": "NVIDIA L4"
+  },
+  "entrenamiento_iniciado": true,
+  "supervisor_pid": 3455,
+  "control_codificador_exacto": true,
+  "paquete_remoto_verificado": true,
+  "entrenamiento_completo_iniciado": true,
+  "automatizacion": "revisar-entrenamiento-tinto-b12-en-colab",
+  "ultima_consulta_utc": "2026-10-30T18:55:52.123Z",
+  "pruebas_breves_superadas": true,
+  "corrida1": {
+    "estado": "LISTO",
+    "epocas": 13,
+    "epoca_mejor": 5,
+    "val_loss_mejor": 0.028816280886530876
+  },
+  "corrida2": {
+    "estado": "en_curso",
+    "epoca_observada": 5,
+    "epocas_completas_verificadas": 5,
+    "proceso_pid": 7325,
+    "gpu_utilizacion_pct": 27,
+    "actividad_cpu_pct": 171
+  },
+  "supervisor_activo": null,
+  "resultado_consulta_cli": "Session 'tinto-b12-20261030' not found",
+  "resultado_inventario_cli": "No active sessions found on server.",
+  "artefactos_remotos_descargados": false,
+  "causa": "No determinada; CLI confirma ausencia de sesiones activas.",
+  "relanzamiento": false,
+  "automatizacion_estado": "eliminada_por_sesion_ausente",
+  "continuacion_autorizada": "reintento1/estado_colab.json"
+}

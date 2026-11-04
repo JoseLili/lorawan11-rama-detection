@@ -1,0 +1,12 @@
+{
+  "tr": {
+    "ejemplos": 356420,
+    "positivos": 3008
+  },
+  "va": {
+    "ejemplos": 96610,
+    "positivos": 784
+  },
+  "soporte_comun": 9661,
+  "modelo_entrenado": false
+}

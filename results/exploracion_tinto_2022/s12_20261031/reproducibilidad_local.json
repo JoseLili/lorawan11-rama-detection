@@ -1,0 +1,11 @@
+{
+  "historia_identica": true,
+  "pesos_h5_identicos": true,
+  "pesos_sha256": "9ca0d1625e537d28e3b2ad07d271f7b68e3d98a7bdbb90754ae234365ae9268c",
+  "scores_diarios_identicos": 31,
+  "descarga": {
+    "ruta": "/content/s12/resultados.tar.gz",
+    "bytes": 4335704,
+    "sha256": "0403880eddd361d7e6cfb74be1d02afe4a6fda94f6618d60515df35dd646d289"
+  }
+}

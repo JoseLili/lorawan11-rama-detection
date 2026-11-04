@@ -269,3 +269,10 @@ para Colab; su gzip/tar puede cambiar de hash por metadatos temporales, por lo
 que el manifiesto interno de contenido es la referencia al recomponerlo.
 Las 62 tablas diarias de cada evaluación están extraídas y versionadas;
 no hace falta el ZIP para consultar o verificar los resultados.
+
+
+## Registro temporal del 2026-10-30 (sin ejecución)
+
+[Protocolo de imagen diaria, dos bloques de 12 h y secuencias CNN–LSTM](protocolo_temporal_20261030.md).
+Nueva exploración posterior a T2; no modifica su cierre. Incluye comprobaciones
+numéricas, orden de experimentos y criterios previos; manifiesto técnico pendiente.

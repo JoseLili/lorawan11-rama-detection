@@ -102,3 +102,12 @@ results/barcelona_paraad/**/*.bin
 results/barcelona_paraad/**/paquete/
 results/barcelona_paraad/**/partes/
 results/barcelona_paraad/**/partes_*/
+
+# TINTO temporal (B12, S1, S12, mapas y auditorías del 2026-10-30/31): entradas .npy regenerables
+# con preparar_*.py, paquetes y trozos de transporte Colab, corridas de prueba y PID de respaldo.
+# Se conservan código, informes, CSV/JSON, modelos .keras y puntajes .npz.
+results/exploracion_tinto_2022/**/*.npy
+results/exploracion_tinto_2022/**/*.tar.gz
+results/exploracion_tinto_2022/**/transporte/
+results/exploracion_tinto_2022/**/salidas/prueba*/
+results/exploracion_tinto_2022/**/PID_*

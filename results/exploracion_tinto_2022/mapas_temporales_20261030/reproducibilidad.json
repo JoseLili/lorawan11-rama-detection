@@ -1,0 +1,25 @@
+{
+  "identicos": true,
+  "archivos": 19,
+  "sha256": {
+    "B12/coordenadas_PCA.npy": "0fe187a96331f96b49e9760d7436613cab565d349b2de4888e5b1cb27b277522",
+    "B12/ejemplo_alterada.npy": "7c58a8c6d8de9a971d15f8af1b52590e472b88e3aba8a201f5bb421b0c526047",
+    "B12/ejemplo_diferencia.npy": "14c93c35f606244d671416ff401f719cdfdd0eed9b2eb46a42abcd144b032df7",
+    "B12/ejemplo_limpia.npy": "6c483abebfd0b7986d63537e57caaa0f7985cc19caed226db836be95ed586f28",
+    "B12/escalador.csv": "ea40eae523fbfe6278741bc1cd076236260d9cdfc34f8f9fcd49f5ebfd69df15",
+    "B12/indices_ajuste_PCA.npy": "1be4b31fedc1021fd8830d195c09bb391544229fb2d51acff62e5b76fcbe6db3",
+    "B12/mapa_unico_32.csv": "6d88f2ef15aea54d850fd08b3e42ba23cf55780271cdc92ce7a33f767273a7b1",
+    "B12/procedencia_PCA.csv": "c3969a863f0b05275de3420b61c490d70ef1345e2a0164ec3a6374778aef2124",
+    "S1/coordenadas_PCA.npy": "ece9b514dd7641581cfac74377d0f7bf4fedb07cbf3404fdd799dcf812419deb",
+    "S1/ejemplo_alterada.npy": "9af5bd60a561a6764542356dd7820a33fdea8bebd8640771a723d8f695bea995",
+    "S1/ejemplo_diferencia.npy": "48d96ce1ba268a3ad4367824089e00eecd6fa53a6a4c01a53f73f4c2c9596e06",
+    "S1/ejemplo_limpia.npy": "d109892b343c5763b10a0905d0c8eac7249c7ec67a902d9c216515dcd796f86a",
+    "S1/escalador.csv": "2f0ea4965ada5b89dcc6fbe7bbea0895f7c754535cd259b1a59c943552994fe8",
+    "S1/indices_ajuste_PCA.npy": "542354962cec7bf9703290fc0eaaf86a8631fad443cb13f4bc46524813107e2f",
+    "S1/mapa_unico_32.csv": "9ef56d0e7946352856577ca2432bdd18f17a492e69ee056ea37ab4ad94414826",
+    "S1/procedencia_PCA.csv": "4ad074a09b45cfca8b740750a6db8be923f204f2780cdefd11a630e9b0d63c1e",
+    "bloques_12h.png": "601a97cec2a58da4b4b3574b83b7237880c86d5913b22324b9894c17c0f2b358",
+    "configuracion.json": "5e7a2503b41a5a4aa6c0c3f92e857c88bffb44121271c29139534b2de7a5b084",
+    "resultados.json": "2992b78637045e27ff20e40817980aa0ec3752f63dcf2fafef7c4367b7efa635"
+  }
+}

@@ -1,0 +1,12 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793411774.390837    7182 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793411776.725912    7182 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+{"variante": "B12", "ejemplos_ajuste": 3000, "ejemplos_validacion": 3000, "positivas_ajuste": 0.006000000052154064, "gpu": ["/physical_device:GPU:0"]}
+Epoch 1/2
+47/47 - 4s - 94ms/step - loss: 0.1071 - val_loss: 0.0533
+Epoch 2/2
+47/47 - 0s - 7ms/step - loss: 0.0408 - val_loss: 0.0495
+limpia_2022 puntuada
+entrenamiento_01_d100 puntuada
+LISTO {"variante": "B12", "corrida": 2, "epocas": 2, "epoca_mejor": 2, "val_loss_mejor": 0.04947386309504509, "minutos_total": 0.14777713219324748}

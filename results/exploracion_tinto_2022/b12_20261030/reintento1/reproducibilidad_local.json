@@ -1,0 +1,8 @@
+{
+  "historia_identica": true,
+  "pesos_h5_identicos": true,
+  "pesos_sha256": "184714ba9b140a589c3cadc2d6efb040dbebd43cd73fd11a24db254663888261",
+  "scores_diarios_identicos": 31,
+  "scores_bloque_identicos": 31,
+  "modelos": "reci\u00e9n entrenados en Colab; verificados de disco sin entrenamiento local"
+}

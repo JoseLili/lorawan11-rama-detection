@@ -1,0 +1,33 @@
+{
+  "estado": "SUPERADA_EN_ALCANCE_AUDITADO",
+  "ventanas_diarias": 11315,
+  "valores_recuperados": 4616520,
+  "fuera_0_1": 225,
+  "pares_precision": 16227504,
+  "colapsos": 0,
+  "delta_min_50_51": 0.0045417845249176025,
+  "error_max_imagen_float32": 5.952963277877643e-08,
+  "transiciones_medianoche": 1095,
+  "horas_2022": 8760,
+  "modelos_cargados": false,
+  "entrenamiento": false,
+  "alcance": "Escalador y mapa D24 congelados T1; todas las estaciones objetivo y días 2022; bloques y secuencia comprobados como tensores, mapas B12/S1 pendientes de etapa 2.",
+  "limites": [
+    "Perfil causal fijo: se audita característica relativa objetivo, no se simulan cambios completos de a14 ni ataques nuevos.",
+    "Normalización heredada de L0; no se ajusta un escalador nuevo.",
+    "Precisión numérica no demuestra detectabilidad ni percepción visual.",
+    "Secuencias diarias no cruzan medianoche."
+  ],
+  "fuentes_sha256": {
+    "results/anomalias_red_v1/matrices/matriz_limpia_2020_2022.csv.gz": "e88a02864ef21a5f7e33f42312cb2138993dd16995a4f9b310c4dab1036a9d4f",
+    "results/exploracion_tinto_2022/prototipos_20261028/corrida1/L0_408/mapa_unico_32.csv": "3bf88df91ac3a120227557e02ad84191327b517568641af81806dcd4ae67f1a1",
+    "results/exploracion_tinto_2022/hora_compacta_20261028/corrida1/L0_408/escalador.csv": "038eb066781d345f9181847609ccbd92d4bda81910cfd63c1d5e27c3a378f505",
+    "results/exploracion_tinto_2022/auditoria_l0_20261028/corrida1/vecinas_y_escalas.json": "ed86d506b2bb541ef6843564c44fbd7fe7eb8a406689d6ef1a45bc0daca5ff0b",
+    "results/inventario_multianual/estaciones_geografia.csv": "f63ff37e546dfdabcf634f22a7aa86265a3fb369e2ee529c9753e691ee41bc37"
+  },
+  "codigo_sha256": "89ddbc362b6d82ab1c913f1a4d680e74ab8bf95d35e655c11f0d10d49272fe59",
+  "versiones": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "identicos": true,
+  "archivos_sha256": {
+    "ejemplo_24x17.npy": "b548fb145e9a8a16637b769d599118bcdebea0c3314b4c4978cad6aab2e237f2",
+    "precision_por_estacion_y_desfase.csv": "6947a9ac520d39f7528b41affb1b31ffc3d8d8350adb509cda7f43c5ed2fd5a9",
+    "ejemplo_2x12x17.npy": "08b852400c2039f26d47f5e0c37d59d77e729480775ad1ce1b7874279c1aae47",
+    "informe.json": "08cbe75d3695eeb4bec947898c9361cdb27ff0d3e031c1fbd0a6db2cab478441",
+    "ejemplo_imagen_D24.npy": "9fc5f3381a06ce8181e70aa214d1703459d22d5d01dcf1f832a6ab6b695a14f3",
+    "trazabilidad_temporal_2022.csv": "efab9f8030c2dc283510983b11ce40c1c4f9998be876b3120c852015bc1e6a7b"
+  }
+}

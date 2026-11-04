@@ -1,0 +1,53 @@
+{
+  "sesion": "tinto-s12-20261031",
+  "fase": "completado_evaluado_vm_liberada",
+  "sha256_adicional": "fedc4d5cebc87ecd4db09575cefe3ce861e1c2fe945de6281195c49580623b0b",
+  "configuracion": "protocolo temporal \u00a713",
+  "datos_y_mapas": "paquete B12 original sin cambios; etiquetas diarias T2 verificadas",
+  "supervisor_pid": 7537,
+  "control_codificador_exacto": true,
+  "paquete_remoto_verificado": true,
+  "recolector_exec_session": 7516,
+  "automatizacion": "revisar-tinto-s12-cnn-lstm-y-respaldos",
+  "runtime": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "gpu": "NVIDIA L4"
+  },
+  "ultima_consulta_utc": "2026-10-31T23:57:46.186Z",
+  "pruebas_breves_superadas": true,
+  "supervisor_activo": false,
+  "recolector_activo_confirmado": false,
+  "corrida1": {
+    "estado": "LISTO_RESPALDADO",
+    "epocas": 16,
+    "epoca_mejor": 8,
+    "val_loss_mejor": 0.023421496152877808,
+    "minutos_total": 10.889589230219523
+  },
+  "respaldos_verificados": [
+    "corrida1",
+    "corrida2",
+    "final"
+  ],
+  "respaldo_corrida1": {
+    "ruta": "/content/s12/corrida1.tar.gz",
+    "bytes": 2563002,
+    "sha256": "e114b3cbc0d11646127fda1d09c95677521cf8d3005e0ad7c6a157a1e21c1cc3"
+  },
+  "corrida2": {
+    "estado": "LISTO_RESPALDADO",
+    "epocas": 16,
+    "epoca_mejor": 8,
+    "val_loss_mejor": 0.023421496152877808
+  },
+  "reproducibilidad_local": true,
+  "evaluacion_repetida_identica": true,
+  "sesion_liberada": true,
+  "automatizacion_estado": "eliminada",
+  "Fbar_S12": 0.3299487829633542,
+  "Fbar_B12": 0.30955819663537115,
+  "Fbar_ED": 0.3223728172093312,
+  "Fbar_L0": 0.3549505348763549,
+  "pasa_criterio": false
+}

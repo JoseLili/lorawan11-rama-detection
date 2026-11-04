@@ -1,0 +1,26 @@
+{
+  "tipo": "Prueba tecnica API con datos inventados 64x8; no entrenamiento ni datos RAMA",
+  "TINTOlib": "1.3.1",
+  "wheel_sha256": "fa390d87c07b7665000039204e61a820d070a5323d96c62af12074806b82894b",
+  "versiones": {
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1"
+  },
+  "etiqueta_excluida_del_mapa_y_pixeles": true,
+  "MinMax_externo_transformer_None_equivale_interno_en_control": true,
+  "ultima_caracteristica_sobrescribe_sin_blur": true,
+  "perturbacion_oculta_comprobada": true,
+  "npy_sin_colormap_ni_zoom_numerico": {
+    "forma": [
+      2,
+      2
+    ],
+    "dtype": "float64",
+    "valor_base": 0.25
+  },
+  "tolerancia_coordenadas_al_cambiar_etiquetas": 1e-12,
+  "diferencia_maxima_coordenadas": 2.6645352591003757e-15,
+  "mapa_pixeles_etiquetas_igual_exacto": true,
+  "limitacion": "Control sintetico pequeno; no repite PCA completo ni evalua deteccion ni certifica la variante propia"
+}

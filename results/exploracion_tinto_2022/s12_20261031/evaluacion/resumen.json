@@ -1,0 +1,42 @@
+{
+ "Fbar_L0": 0.3549505348763549,
+ "umbral_regla": 0.37495053487635494,
+ "Fbar": {
+  "B12_c1": 0.3096,
+  "B12_c2": 0.3096,
+  "ED_c1": 0.3224,
+  "ED_c2": 0.3224,
+  "L0": 0.355,
+  "S12_c1": 0.3299,
+  "S12_c2": 0.3299,
+  "T1_epoca5": 0.3083
+ },
+ "decision": {
+  "S12": {
+   "Fbar": [
+    0.3299487829633542,
+    0.3299487829633542
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  },
+  "B12": {
+   "Fbar": [
+    0.30955819663537115,
+    0.30955819663537115
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  },
+  "ED": {
+   "Fbar": [
+    0.3223728172093312,
+    0.3223728172093312
+   ],
+   "pasa": false,
+   "diferencia_entre_corridas": 0.0
+  }
+ },
+ "origen": "L0 y T1 cargados de disco (puntajes guardados); S12 recién entrenado; B12 y ED históricos cargados de disco",
+ "limite": "2022 se usó para EarlyStopping y evaluación; comparación exploratoria, no examen"
+}

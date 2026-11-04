@@ -1,0 +1,55 @@
+{
+  "sesion": "tinto-b12-r1-20261030",
+  "fase": "completado_evaluado_vm_liberada",
+  "reintento_autorizado": true,
+  "configuracion_cientifica": "sin cambios",
+  "sha256_paquete": "6f4a66e52a1b9bb59c31dd43cdeb6970a60e28ff430478f53a6ac441607f4ad9",
+  "supervisor_sha256": "21453c448e16e0a2e44b7973b61ec19ff8af046074921a43d5bec103c5869bc1",
+  "supervisor_pid": 6643,
+  "recolector_local_pid": 16554,
+  "paquete_remoto_verificado": true,
+  "control_codificador_exacto": true,
+  "automatizacion": "revisar-reintento-tinto-b12-y-respaldos",
+  "runtime": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "gpu": "NVIDIA L4"
+  },
+  "recolector_exec_session": 95324,
+  "nota_recolector": "Verificar con write_stdin session 95324; el PID puede estar aislado y no ser visible con ps desde otro comando.",
+  "ultima_consulta_utc": "2026-10-31T02:16:15.062Z",
+  "pruebas_breves_superadas": true,
+  "supervisor_activo": false,
+  "recolector_activo_confirmado": false,
+  "corrida1": {
+    "estado": "LISTO_RESPALDADO",
+    "epocas": 13,
+    "epoca_mejor": 5,
+    "val_loss_mejor": 0.028816280886530876
+  },
+  "respaldos_verificados": [
+    "corrida1",
+    "corrida2",
+    "final"
+  ],
+  "corrida2": {
+    "estado": "LISTO_RESPALDADO",
+    "epocas": 13,
+    "epoca_mejor": 5,
+    "val_loss_mejor": 0.028816280886530876
+  },
+  "respaldo_corrida1": {
+    "ruta": "/content/b12/corrida1.tar.gz",
+    "bytes": 5498273,
+    "sha256": "998aa23762ec255069604ab0187413bd96bd4e56a5f5d7fe3803dd9664a78abd"
+  },
+  "incidencia_consulta": "Conexi\u00f3n perdida en primera consulta; inventario confirm\u00f3 sesi\u00f3n activa y segunda consulta exitosa.",
+  "reproducibilidad_local": true,
+  "evaluacion_repetida_identica": true,
+  "sesion_liberada": true,
+  "automatizacion_estado": "eliminada",
+  "Fbar_B12": 0.30955819663537115,
+  "Fbar_ED": 0.3223728172093312,
+  "Fbar_L0": 0.3549505348763549,
+  "pasa_criterio": false
+}

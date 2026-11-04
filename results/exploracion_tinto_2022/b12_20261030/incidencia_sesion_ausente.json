@@ -1,0 +1,20 @@
+{
+  "ultimo_estado_conocido": {
+    "estado": "en_curso",
+    "epoca_observada": 5,
+    "epocas_completas_verificadas": 5,
+    "proceso_pid": 7325,
+    "gpu_utilizacion_pct": 27,
+    "actividad_cpu_pct": 171
+  },
+  "primera_corrida": {
+    "estado": "LISTO",
+    "epocas": 13,
+    "epoca_mejor": 5,
+    "val_loss_mejor": 0.028816280886530876
+  },
+  "consulta_sesion": "not found",
+  "inventario_servidor": "sin sesiones activas",
+  "limite": "No se puede verificar segunda corrida, reproducibilidad ni recuperar archivos de VM mediante el CLI. No se ejecuta evaluaci\u00f3n ni se infieren m\u00e9tricas.",
+  "revision_permisos": "Primer intento expir\u00f3 en revisi\u00f3n autom\u00e1tica; reintento \u00fanico autorizado pudo ejecutar consulta. No es la causa demostrada de la ausencia de sesi\u00f3n."
+}

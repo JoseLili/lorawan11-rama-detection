@@ -1,0 +1,8 @@
+{
+  "exacto": true,
+  "tensorflow": "2.21.0",
+  "keras": "3.13.2",
+  "gpu": [
+    "NVIDIA L4"
+  ]
+}

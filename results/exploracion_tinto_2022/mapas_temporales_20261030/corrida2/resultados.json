@@ -1,0 +1,30 @@
+[
+  {
+    "variante": "B12",
+    "horas_por_imagen": 12,
+    "caracteristicas": 204,
+    "filas_recuperadas": 39680,
+    "valores_recuperados": 8094720,
+    "pca_filas": 20000,
+    "pixeles_unicos": 204,
+    "pixeles_unicos_nativos": 22,
+    "cambios_ocultos": 0,
+    "fuera_rango_ajuste": 0,
+    "imagenes_por_dia": 2,
+    "pixeles_cambiados_ejemplo": 96
+  },
+  {
+    "variante": "S1",
+    "horas_por_imagen": 1,
+    "caracteristicas": 17,
+    "filas_recuperadas": 476160,
+    "valores_recuperados": 8094720,
+    "pca_filas": 20000,
+    "pixeles_unicos": 17,
+    "pixeles_unicos_nativos": 10,
+    "cambios_ocultos": 0,
+    "fuera_rango_ajuste": 0,
+    "imagenes_por_dia": 24,
+    "pixeles_cambiados_ejemplo": 96
+  }
+]

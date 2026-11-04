@@ -4727,3 +4727,128 @@ detenida después de descargar (SHA-256 verificado).
 - Observación secundaria, no adoptable: ED supera a L0 con p99.9 en δ 100 y 50 %. El umbral p99.9 es
   inestable (~10 días limpios), y la observación se notó después de ver los resultados.
 Detalle, ficha y gráfica: [resultados_t2_granularidad.md](../experiments/exploracion_tinto/resultados_t2_granularidad.md).
+
+
+### 2026-10-30 — Registro TINTO temporal: día, dos bloques y secuencia horaria
+
+Por solicitud del tesista se registra una nueva exploración posterior al cierre
+negativo T2, que permanece sin cambios. Incluye D24, dos imágenes de 12 horas
+con CNN compartida (B12), los mismos bloques con CNN–LSTM (S12), y 24 imágenes
+horarias con CNN–LSTM (S1), más L0 histórico. Orden: auditoría → conservación
+numérica/temporal → B12 → S12 → S1 → informe conjunto; no se descartan brazos
+por el desempeño de uno anterior. Se explicitan etiquetas, soporte diario común,
+comparaciones confundidas por arquitectura/supervisión y límites de medianoche.
+Solo documentación: no se entrenó, no se abrieron sesiones ni años de examen.
+Falta congelar el manifiesto técnico antes de entrenar.
+[Protocolo completo](../experiments/exploracion_tinto/protocolo_temporal_20261030.md).
+
+### 2026-10-30 — Auditoría inicial TINTO temporal completada
+
+Dos ejecuciones CPU idénticas, sin entrenamiento: 11 315 ventanas diarias y
+4 616 520 valores recuperados exactamente del mapa D24; 16 227 504 pares
+numéricos con cero colapsos (50/51 y lecturas reales ±1, perfil causal fijo).
+Bloques de 12 horas y secuencias de 24 pasos recomponen exactamente los datos.
+225 valores fuera de [0,1] conservados sin clipping. Nuevos mapas B12/S1 aún
+pendientes. El tesista autoriza Colab GPU para acelerar esta línea separada.
+[Informe y límites](../experiments/exploracion_tinto/informe_precision_tiempo_20261030.md).
+
+### 2026-10-30 — TINTO temporal: cierre paso 1 y representaciones paso 2
+
+Paso 1 marcado completo por solicitud del tesista. Paso 2: mapas B12/S12 (204
+características) y S1 (17), TINTOlib 1.3.1 PCA real más asignación única propia,
+32×32; ajuste nuevo solo 2020–2021, D24 sin cambio. Recuperación exacta de
+8 094 720 valores por variante; 19 archivos idénticos en dos ejecuciones CPU.
+Figura real SAC en dos mitades del día. Sin entrenamiento, métricas ni examen.
+[Informe y alcance](../experiments/exploracion_tinto/informe_mapas_temporales_20261030.md).
+
+### 2026-10-30 — Paso 3 B12: configuración y etiquetas verificadas
+
+Cierre paso 2 confirmado con 204/17 píxeles únicos, recuperación exacta y dos
+corridas idénticas. Se prepara CNN compartida de dos bloques de 12 horas:
+711 760 ejemplos de ajuste, 192 910 de validación; etiquetas contrastadas
+contra 20 matrices fuente, preparación repetida idéntica, soporte común cubierto.
+Colab L4 autorizado, sesión exclusiva tinto-b12-20261030; lanzamiento con prueba
+previa y dos entrenamientos, sin relanzamiento automático ni años de examen.
+[Runbook y estado](../experiments/exploracion_tinto/runbook_b12_20261030.md).
+
+B12: paquete transferido por fragmentos y SHA-256 verificado en Colab. Supervisor
+PID3455 iniciado, codificador TF idéntico a NumPy; prueba técnica 1 en curso
+en L4. Las corridas completas dependen de superar ambas pruebas; todavía
+no hay resultados predictivos aceptados.
+
+### 2026-10-30 — B12: sesión Colab ausente antes de recuperar resultados
+
+El CLI devuelve sesión tinto-b12-20261030 no encontrada y ninguna sesión activa
+en servidor. Causa no determinada. Último estado: corrida1 terminada (13 épocas,
+mejor5), corrida2 con5 épocas completadas; no se recuperaron checkpoints ni
+scores. No se verifica finalización/reproducibilidad ni se publican métricas.
+Se conservan preparación y registro local; sin relanzar. Seguimiento eliminado
+porque ya no existe una sesión activa que consultar. Paso3 queda incompleto.
+
+### 2026-10-30 — B12 reintento autorizado
+
+El tesista pide retomar tras ausencia de la sesión anterior. Se repite B12
+desde cero, mismas pruebas/configuración/datos, sin modificar mapas ni criterios.
+Sesión L4 tinto-b12-r1-20261030; respaldos por corrida con hash y descarga local.
+La pérdida previa se conserva; no se reutilizan pesos no recuperados.
+
+### 2026-10-30 — B12 completado, respaldado y evaluado
+
+Reintento: dos corridas L4 idénticas, 13 épocas, mejor5; archivos descargados
+y hash confirmado, pesos/historias/scores cotejados. Evaluación local repetida
+idéntica: Fbar p99 B12 0.3096 frente ED0.3224 y L00.3550. No pasa regla
+L0+0.02; resultado exploratorio2022. Sesión liberada y monitor eliminado.
+Paso3 completo; S12/S1 no iniciados.
+[Informe](../experiments/exploracion_tinto/resultados_b12_20261030.md).
+
+### 2026-10-31 — S12 registrado y preparado
+
+El tesista pide siguiente paso; se registra S12 CNN compartida+LSTM32 sobre dos
+imágenes de12h, etiqueta diaria, pesos nuevos, mismo mapaB12. Dos preparaciones
+idénticas:356420 días deajuste/96610 validación; etiquetas cotejadas conplanes,
+ejemploSAC recuperado exactamente. GPU L4 autorizada, dos corridas y respaldos.
+S1 sigue pendiente. Preferencia del tesista: mostrar ejemplos periódicos de
+imágenes para interpretar representaciones, sin escoger por predicciones.
+[Runbook](../experiments/exploracion_tinto/runbook_s12_20261031.md).
+
+S12: paquete verificado y supervisor7537 iniciado. ConversiónTF/NumPy de la
+secuencia de dos imágenes exacta; prueba1 en curso. Recolector local activo
+y monitor cada5min; no resultados predictivos aceptados todavía.
+
+### 2026-10-31 — Marcador de comparaciones (sin entrenar nada)
+
+A pedido del tesista, para la reunión con el tutor: se juntaron todos los intervalos bootstrap de
+F1 ya calculados (revisiones 17 a 21 y 20b; sólo años de examen 2025–2026 y 2018–2019) y cada
+diferencia se clasificó como gana, pierde o sin diferencia clara según si el intervalo excluye el 0.
+212 comparaciones. Script `experiments/anomalias_red/marcador_comparaciones.py`; salida en
+`results/anomalias_red_v1/marcador/`. Dos corridas, CSV idénticos (md5). Con δ ≥ 20 %: L0 − V4S
+43/3/2 (gana/sin dif./pierde, 4 escenarios), L0 − PARAAD 18/6/0 (RAMA y Barcelona), PARAAD − V4
+4/6/2 en la RAMA y 8/4/0 en Barcelona; con error fijo PARAAD − V4 3/2/7. Faltan intervalos de
+PARAAD en los escenarios A y B y de L0 − PARAAD con error fijo (sólo hay valores puntuales).
+
+### 2026-10-31 — S12 completado, respaldado y evaluado
+
+Dos corridasL4 idénticas16épocas/mejor8; verificación local de pesos/historias/
+scores y evaluación repetida iguales. Fbarp99 S12 0.3299, B12 0.3096, ED0.3224,
+L00.3550. No pasa margen+0.02; mejora descriptiva no aislable causalmente a
+LSTM/orden por cambio de supervisión. Solo2022 exploratorio. VM liberada tras
+asegurar descargas; monitor eliminado. S1 no iniciado.
+[Informe e imágenes](../experiments/exploracion_tinto/resultados_s12_20261031.md).
+
+### 2026-10-31 — S1 registrado y preparado
+
+Autorizado el siguiente brazo:24imágenes por estación-día, CNN compartida+
+LSTM32, mapaS1 congelado, misma supervisión diaria/particiones queS12.
+Dos preparaciones idénticas, etiquetas cotejadas, ejemploSAC porhora generado
+para inspección. SesiónL4 autorizada con controles, pruebas y dos corridas,
+respaldos porcorrida y final. No se abren años de examen ni se cambian criterios.
+[Runbook](../experiments/exploracion_tinto/runbook_s1_20261031.md).
+
+S1: tras interrupción del chat, CLI devuelve sesión ausente y sin sesiones
+activas; sin resultados descargados. El usuario solicita continuar: reintento1
+en sesión tinto-s1-r1-20261031, mismos paquetes y configuración, incidente
+previo conservado. No se infiere causa ni desempeño del intento perdido.
+
+S1 reintento: supervisor4531 activo; control de24imágenes TF/NumPy exacto,
+prueba1 en curso. Descargador exec82713 y seguimiento5min activos. Sin
+resultados predictivos aceptados aún.

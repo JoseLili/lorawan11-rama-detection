@@ -1,0 +1,10 @@
+{
+  "sesion": "tinto-s1-20261031",
+  "fase": "sesion_ausente_tras_interrupcion",
+  "sha256_adicional": "e36af0f5b1ac935e310e8311bfba407ae30cc51d77325f1b5845bac951cc4da9",
+  "configuracion": "protocolo temporal \u00a714",
+  "supervisor_pid": 19060,
+  "causa": "No determinada; CLI sin sesiones activas",
+  "resultados_recuperados": false,
+  "continuacion": "reintento1/estado_colab.json"
+}
