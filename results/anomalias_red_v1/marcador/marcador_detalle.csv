@@ -1,0 +1,213 @@
+origen,ciudad,escenario,anio,tamano,punto,detector_a,detector_b,tipo,diferencia,ic_bajo,ic_alto,veredicto,grupo_tamano,par
+rev20b,Barcelona,original,2018,δ10,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0045019601796091,-0.0261255414144607,0.0331637046545225,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ10,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0104081632653061,-0.0419312912357223,0.020763125799044,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ100,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0155904736053724,-0.1215902191447002,0.074576944776565,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ100,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0532082751799907,-0.0526718852699757,0.1593959380831985,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ20,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0730967010642264,0.025971119694879,0.1241725312788094,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ20,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0229377599874421,-0.0262645931275466,0.0745456001519497,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ5,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0067995953846417,-0.0293012505049598,0.0120071768323606,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ5,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0113473868720881,-0.0387860739974781,0.0104453769475252,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ50,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.1957446808510638,0.1044846637662002,0.2798490428342214,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2018,δ50,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.3278304995386845,0.2340551838983975,0.4119948568471055,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ10,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.010481008412756,-0.0321317515772795,0.0105768844220837,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ10,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0161116964105183,-0.040322579100376,0.0042699619476685,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ100,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.1296257505934925,0.0388363765208068,0.2111600552108891,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ100,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.2255626701938765,0.1265103157539053,0.3205237295031273,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ20,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.048917063448805,0.0061382458805762,0.0961086533171484,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ20,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0073673957318693,-0.0514606745142238,0.0342943526074918,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ5,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0063791940133717,-0.0230014723360563,0.0087484794790479,sin diferencia clara,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ5,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0203303684879288,-0.0408680777848911,-0.0030096332853279,pierde,pequeña,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ50,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.2441639676515588,0.1540077209451644,0.3294462919388422,gana,moderada o grande,L0 − PARAAD
+rev20b,Barcelona,original,2019,δ50,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.3538944051965429,0.2739168222309874,0.4363026657301922,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ10,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0170388972267213,0.0015798811359721,0.0342611214291197,gana,pequeña,L0 − PARAAD
+rev20,RAMA,original,2025,δ10,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0034584544893823,-0.0043340647891003,0.0170233678150425,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2025,δ100,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.055677384508203,-0.0368100273540055,0.1252834796633334,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ100,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0646595667343078,-0.0343156573550126,0.1617440566985128,sin diferencia clara,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ20,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.1423819194329453,0.0989146944340925,0.1933758965013301,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ20,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0573643043749358,0.0229984204437785,0.0979617048314272,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ5,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0085246477327597,-0.0034051400612319,0.0218508106154135,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2025,δ5,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0038227699934588,-0.0116986934354102,0.001130524769502,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2025,δ50,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.2372770206659842,0.1645346000805845,0.3073921365271654,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2025,δ50,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.3515609278364345,0.2669518363625852,0.4281786484489014,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ10,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0304581236789347,0.0069183704746631,0.0580093880958903,gana,pequeña,L0 − PARAAD
+rev20,RAMA,original,2026,δ10,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0018552875695732,-0.0068499034976227,-0.0,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2026,δ100,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.2037592210732126,0.0735174902216064,0.2960764406267134,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ100,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.3105229591836735,0.1182288865800238,0.4459957554118127,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ20,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.198051031648496,0.1314022327917878,0.2726474694363207,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ20,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0687618220720022,0.0255185217127195,0.1179686655226846,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ5,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.0007893484392956,-0.0097848683316662,0.0113375455244539,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2026,δ5,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),-0.0018570102135561,-0.006857683331286,-0.0,sin diferencia clara,pequeña,L0 − PARAAD
+rev20,RAMA,original,2026,δ50,p99,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.3625832459331961,0.2575234381158657,0.4562430592846188,gana,moderada o grande,L0 − PARAAD
+rev20,RAMA,original,2026,δ50,p99.9,L0,PARAAD,informativa (supervisado contra sin etiquetas),0.4360840225921774,0.3186392074898925,0.5291322937857715,gana,moderada o grande,L0 − PARAAD
+rev17,RAMA,original,2025,δ10,p99,L0,R3,referencia (regla sin entrenamiento),0.0038525625193497,-0.0133322836636267,0.0210010386412666,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2025,δ10,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0077319587628865,0.0,0.0204081632653061,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2025,δ100,p99,L0,R3,referencia (regla sin entrenamiento),-0.0707914277701462,-0.1276962245736612,-0.0183847790172202,pierde,moderada o grande,L0 − R3
+rev17,RAMA,original,2025,δ100,p99.9,L0,R3,referencia (regla sin entrenamiento),-0.0436944833077217,-0.1033362337980774,0.0234980965675622,sin diferencia clara,moderada o grande,L0 − R3
+rev17,RAMA,original,2025,δ20,p99,L0,R3,referencia (regla sin entrenamiento),0.0559383140101451,0.0128115729235551,0.1011575990427461,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2025,δ20,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0549319666510268,0.0205871530325345,0.0926138791375525,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2025,δ5,p99,L0,R3,referencia (regla sin entrenamiento),0.0044831880448318,-0.0084814094905361,0.0185109106727822,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2025,δ5,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0025806451612903,0.0,0.0082884438305708,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2025,δ50,p99,L0,R3,referencia (regla sin entrenamiento),0.0538879167227531,-0.0082151973779105,0.1178372225048874,sin diferencia clara,moderada o grande,L0 − R3
+rev17,RAMA,original,2025,δ50,p99.9,L0,R3,referencia (regla sin entrenamiento),0.2090931657283568,0.1418091968220854,0.2762177625977793,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ10,p99,L0,R3,referencia (regla sin entrenamiento),0.0218994174040859,0.0031850288121055,0.0465917719528246,gana,pequeña,L0 − R3
+rev17,RAMA,original,2026,δ10,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2026,δ100,p99,L0,R3,referencia (regla sin entrenamiento),-0.0240963055375019,-0.0929420743492983,0.0481806866830165,sin diferencia clara,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ100,p99.9,L0,R3,referencia (regla sin entrenamiento),-0.0266277205746345,-0.1037416921418869,0.0523049763721205,sin diferencia clara,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ20,p99,L0,R3,referencia (regla sin entrenamiento),0.1370722949670318,0.0839432465896164,0.2008605341223434,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ20,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0751480920236947,0.033167843158126,0.1271901537918079,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ5,p99,L0,R3,referencia (regla sin entrenamiento),-0.0029942879900288,-0.0119548196037349,0.005473101290586,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2026,δ5,p99.9,L0,R3,referencia (regla sin entrenamiento),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − R3
+rev17,RAMA,original,2026,δ50,p99,L0,R3,referencia (regla sin entrenamiento),0.1118823705030601,0.0348723337655151,0.195097736468824,gana,moderada o grande,L0 − R3
+rev17,RAMA,original,2026,δ50,p99.9,L0,R3,referencia (regla sin entrenamiento),0.2611728484148747,0.1732674424601104,0.3480394455586848,gana,moderada o grande,L0 − R3
+rev20b,Barcelona,original,2018,δ10,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0084279158120889,-0.0173319623911018,0.0344683574139109,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2018,δ10,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0045799457994579,-0.0148157315731573,0.0294871807264118,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2018,δ100,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0721753369441995,-0.0226624255392916,0.1674903019474007,sin diferencia clara,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2018,δ100,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.1765942149217411,0.0806004742937301,0.2866451490474839,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2018,δ20,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0921489320494233,0.0404632815671976,0.1504927921632661,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2018,δ20,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0524786694735737,0.0125706734264413,0.0984516619109588,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2018,δ5,p99,L0,V4,informativa (supervisado contra sin etiquetas),-0.0041455823505748,-0.0200941277150986,0.011562223017185,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2018,δ5,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0050125313283208,0.0,0.0166216528162511,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2018,δ50,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.248051948051948,0.1501852325804991,0.3458702157544644,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2018,δ50,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.3898036590807675,0.3005329777365292,0.4727709878421253,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ10,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0099125194434583,-0.0040355897645915,0.026448313902061,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2019,δ10,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0041928721174004,0.0,0.0137299771167048,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2019,δ100,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.2060326770004189,0.136896160252485,0.2780158391925417,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ100,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.382084580191015,0.2947313305024501,0.4676935785858433,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ20,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0828165838159175,0.0431670930250396,0.1292777623852348,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ20,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0379336650779319,0.0060809732330834,0.0730780130844284,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ5,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.0004690224516374,-0.0173253632512902,0.0156391855509131,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2019,δ5,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4
+rev20b,Barcelona,original,2019,δ50,p99,L0,V4,informativa (supervisado contra sin etiquetas),0.3296823897808042,0.2583244305723079,0.4121485803077089,gana,moderada o grande,L0 − V4
+rev20b,Barcelona,original,2019,δ50,p99.9,L0,V4,informativa (supervisado contra sin etiquetas),0.4920547684285921,0.4261914151857454,0.5605615492870206,gana,moderada o grande,L0 − V4
+rev19,RAMA,A,2025,δ10,p99,L0,V4S,justa (supervisados),0.0030258979551381,-0.0081553331954226,0.0135658698135231,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2025,δ10,p99.9,L0,V4S,justa (supervisados),-0.002110317811335,-0.0180984910646681,0.0082929104477611,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2025,δ100,p99,L0,V4S,justa (supervisados),0.1120805382615433,0.0905690342975331,0.1335652042539789,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2025,δ100,p99.9,L0,V4S,justa (supervisados),0.2701324527147407,0.2276467166460735,0.3145885007539556,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2025,δ20,p99,L0,V4S,justa (supervisados),0.0646756193563325,0.0423303339441182,0.0880023857724429,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2025,δ20,p99.9,L0,V4S,justa (supervisados),0.0441981316732807,0.0082645038202062,0.0793371883704397,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2025,δ5,p99,L0,V4S,justa (supervisados),-0.0015070039395559,-0.0102252338656233,0.0056589912693978,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2025,δ5,p99.9,L0,V4S,justa (supervisados),-0.0026124268070075,-0.014377571884984,0.005618904150208,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2025,δ50,p99,L0,V4S,justa (supervisados),0.1674368506306077,0.1394513424223446,0.1962874457503743,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2025,δ50,p99.9,L0,V4S,justa (supervisados),0.3689531568603932,0.3139098920337043,0.4170262452064675,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ10,p99,L0,V4S,justa (supervisados),0.0052140841614525,-0.0059413896115402,0.0166672974651605,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2026,δ10,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2026,δ100,p99,L0,V4S,justa (supervisados),-0.0683330110652435,-0.107178953606911,-0.026863160741638,pierde,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ100,p99.9,L0,V4S,justa (supervisados),0.0934034338289657,0.0018379227301076,0.1809236095313955,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ20,p99,L0,V4S,justa (supervisados),0.0630481684723981,0.0254558113549295,0.1000364939890078,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ20,p99.9,L0,V4S,justa (supervisados),0.0610677250032006,0.0204462763337756,0.105002260091213,gana,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ5,p99,L0,V4S,justa (supervisados),-0.0036761192771422,-0.0123164705193509,0.0036099106265716,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2026,δ5,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,A,2026,δ50,p99,L0,V4S,justa (supervisados),0.0376502976399188,-0.0022173356092144,0.0772893309204135,sin diferencia clara,moderada o grande,L0 − V4S
+rev19,RAMA,A,2026,δ50,p99.9,L0,V4S,justa (supervisados),0.3175741508621666,0.2360632466593969,0.3926316202701898,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ10,p99,L0,V4S,justa (supervisados),0.0096712276918207,-0.0024378390107514,0.0237449292828054,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2025,δ10,p99.9,L0,V4S,justa (supervisados),-0.0050001908469788,-0.0165329486545822,0.0064236816773958,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2025,δ100,p99,L0,V4S,justa (supervisados),0.104686675304318,0.0692059470582059,0.14111712290504,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ100,p99.9,L0,V4S,justa (supervisados),0.2794084811844116,0.2209858372265626,0.3329758730859853,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ20,p99,L0,V4S,justa (supervisados),0.1320371738797574,0.0922412499381369,0.1709756182828539,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ20,p99.9,L0,V4S,justa (supervisados),0.0619194044343744,0.0226502296425465,0.1025091073148584,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ5,p99,L0,V4S,justa (supervisados),0.0019800502289409,-0.0087281772168835,0.0145322089983677,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2025,δ5,p99.9,L0,V4S,justa (supervisados),-0.002277923653501,-0.0124031936880692,0.0072257891367837,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2025,δ50,p99,L0,V4S,justa (supervisados),0.249789005016838,0.2105101827203364,0.2898422114913071,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2025,δ50,p99.9,L0,V4S,justa (supervisados),0.475317620497383,0.4214661312419496,0.529527960610528,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ10,p99,L0,V4S,justa (supervisados),0.0323447238340855,-0.001033904394685,0.0658590156987481,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2026,δ10,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2026,δ100,p99,L0,V4S,justa (supervisados),-0.0596367920399171,-0.1201696911476106,0.0058351297848784,sin diferencia clara,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ100,p99.9,L0,V4S,justa (supervisados),0.2176467274527004,0.1413868124854446,0.2990413170588041,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ20,p99,L0,V4S,justa (supervisados),0.1594323380169081,0.1004024067539096,0.2177211703296645,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ20,p99.9,L0,V4S,justa (supervisados),0.0808625336927223,0.0338983050847457,0.1333333333333333,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ5,p99,L0,V4S,justa (supervisados),0.0004409440452631,-0.0152998874271476,0.0146341463414634,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2026,δ5,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev19,RAMA,B,2026,δ50,p99,L0,V4S,justa (supervisados),0.1152836127395246,0.0392201496262851,0.1913701135727627,gana,moderada o grande,L0 − V4S
+rev19,RAMA,B,2026,δ50,p99.9,L0,V4S,justa (supervisados),0.4839981284360744,0.3979497205477882,0.5635710179416997,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,10 ppb,p99,L0,V4S,justa (supervisados),0.1674586309483006,0.1267953274289502,0.2074265322253609,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,10 ppb,p99.9,L0,V4S,justa (supervisados),0.0704777628727685,0.029756446262916,0.1107126847096935,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,20 ppb,p99,L0,V4S,justa (supervisados),0.3242365752411568,0.2826548097025309,0.3629127794466677,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,20 ppb,p99.9,L0,V4S,justa (supervisados),0.478762946754194,0.422338402006767,0.5325788229320645,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,40 ppb,p99,L0,V4S,justa (supervisados),0.0921307830584376,0.0590516099967558,0.1257071408991104,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,40 ppb,p99.9,L0,V4S,justa (supervisados),0.2395452411465404,0.1893640616043628,0.2855831124058006,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2025,5 ppb,p99,L0,V4S,justa (supervisados),0.0196947556421497,0.0030436280149458,0.0375612155846068,gana,pequeña,L0 − V4S
+rev21,RAMA,error fijo,2025,5 ppb,p99.9,L0,V4S,justa (supervisados),0.0034521354933726,-0.0113906636825622,0.0178571428571428,sin diferencia clara,pequeña,L0 − V4S
+rev21,RAMA,error fijo,2026,10 ppb,p99,L0,V4S,justa (supervisados),0.1634240604129669,0.1093877137057902,0.2186280728491829,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,10 ppb,p99.9,L0,V4S,justa (supervisados),0.1037344398340249,0.0586639639639639,0.1576581249299091,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,20 ppb,p99,L0,V4S,justa (supervisados),0.2847167478666166,0.209845746728159,0.3570120153729612,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,20 ppb,p99.9,L0,V4S,justa (supervisados),0.4526692718006626,0.36886498700094,0.5322261463005459,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,40 ppb,p99,L0,V4S,justa (supervisados),-0.0783938766515952,-0.1320740944693487,-0.0229875903731069,pierde,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,40 ppb,p99.9,L0,V4S,justa (supervisados),0.1734661606578115,0.1044700749674221,0.2404462118471433,gana,moderada o grande,L0 − V4S
+rev21,RAMA,error fijo,2026,5 ppb,p99,L0,V4S,justa (supervisados),0.0242941240802965,-0.0079182802847223,0.0570921021864873,sin diferencia clara,pequeña,L0 − V4S
+rev21,RAMA,error fijo,2026,5 ppb,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2025,δ10,p99,L0,V4S,justa (supervisados),0.0149430989642057,6.96094002690347e-05,0.0320074990701997,gana,pequeña,L0 − V4S
+rev18,RAMA,original,2025,δ10,p99.9,L0,V4S,justa (supervisados),0.0008748159057437,-0.012245979546452,0.0168205054858711,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2025,δ100,p99,L0,V4S,justa (supervisados),0.1086338695586902,0.0363505166763054,0.1770757902801923,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2025,δ100,p99.9,L0,V4S,justa (supervisados),0.2627135099290397,0.1879095379794916,0.3344737307303162,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2025,δ20,p99,L0,V4S,justa (supervisados),0.1400380648784244,0.0952287582431057,0.1912730551720904,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2025,δ20,p99.9,L0,V4S,justa (supervisados),0.0538483034270181,0.0175958675334508,0.0954119565320773,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2025,δ5,p99,L0,V4S,justa (supervisados),0.0074291300097751,-0.0051477707287118,0.0211672326292896,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2025,δ5,p99.9,L0,V4S,justa (supervisados),-0.0019855648843717,-0.0106666666666666,0.0057569228512109,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2025,δ50,p99,L0,V4S,justa (supervisados),0.2663788122421739,0.1983622256516094,0.338636550175084,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2025,δ50,p99.9,L0,V4S,justa (supervisados),0.4618238625268502,0.3887437310766847,0.5321993298029517,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ10,p99,L0,V4S,justa (supervisados),0.0163975343191014,-0.0149063955346873,0.050251494234475,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2026,δ10,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2026,δ100,p99,L0,V4S,justa (supervisados),-0.0497711720733303,-0.1326701740516873,0.0404528532581308,sin diferencia clara,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ100,p99.9,L0,V4S,justa (supervisados),0.2099362733599187,0.122052211644062,0.2953316952269054,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ20,p99,L0,V4S,justa (supervisados),0.1686586331136094,0.0952509161171551,0.2531975879100788,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ20,p99.9,L0,V4S,justa (supervisados),0.0798319327731092,0.0360982988872699,0.1287391984198831,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ5,p99,L0,V4S,justa (supervisados),-0.005724767212272,-0.0243975091031449,0.0100908321778212,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2026,δ5,p99.9,L0,V4S,justa (supervisados),0.0,0.0,0.0,sin diferencia clara,pequeña,L0 − V4S
+rev18,RAMA,original,2026,δ50,p99,L0,V4S,justa (supervisados),0.1413397598964609,0.037432992009788,0.2490181610290532,gana,moderada o grande,L0 − V4S
+rev18,RAMA,original,2026,δ50,p99.9,L0,V4S,justa (supervisados),0.4390794472278809,0.3406247679740536,0.5319798380263934,gana,moderada o grande,L0 − V4S
+rev20b,Barcelona,original,2018,δ10,p99,PARAAD,V4,justa (sin etiquetas),0.0039259556324798,-0.0174244070015262,0.0268931103172793,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2018,δ10,p99.9,PARAAD,V4,justa (sin etiquetas),0.0149881090647641,-0.0,0.0309709263253313,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2018,δ100,p99,PARAAD,V4,justa (sin etiquetas),0.0877658105495719,-0.0091256260096322,0.202651473385742,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2018,δ100,p99.9,PARAAD,V4,justa (sin etiquetas),0.1233859397417503,0.0253171705058373,0.2261340667870874,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2018,δ20,p99,PARAAD,V4,justa (sin etiquetas),0.0190522309851969,-0.0180277017959975,0.0635668469775321,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2018,δ20,p99.9,PARAAD,V4,justa (sin etiquetas),0.0295409094861316,0.0080599550056243,0.0554209374204153,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2018,δ5,p99,PARAAD,V4,justa (sin etiquetas),0.0026540130340669,-0.0141128079496553,0.0209432367149758,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2018,δ5,p99.9,PARAAD,V4,justa (sin etiquetas),0.0163599182004089,-0.0,0.0411522633744855,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2018,δ50,p99,PARAAD,V4,justa (sin etiquetas),0.0523072672008842,-0.02313869964047,0.1372819561060975,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2018,δ50,p99.9,PARAAD,V4,justa (sin etiquetas),0.0619731595420829,-0.0087306029276462,0.1341720499544162,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ10,p99,PARAAD,V4,justa (sin etiquetas),0.0203935278562144,0.0030207167322373,0.0406846475007636,gana,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2019,δ10,p99.9,PARAAD,V4,justa (sin etiquetas),0.0203045685279187,-0.0,0.0424512168009166,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2019,δ100,p99,PARAAD,V4,justa (sin etiquetas),0.0764069264069263,0.0154701431333248,0.1524397015250566,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ100,p99.9,PARAAD,V4,justa (sin etiquetas),0.1565219099971385,0.0763166865589145,0.2443352992507312,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ20,p99,PARAAD,V4,justa (sin etiquetas),0.0338995203671124,0.0110115070941126,0.0617992382034646,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ20,p99.9,PARAAD,V4,justa (sin etiquetas),0.0453010608098012,0.0089093950023764,0.0835862047746194,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ5,p99,PARAAD,V4,justa (sin etiquetas),0.0068482164650092,-0.0126645595905736,0.0246160105090556,sin diferencia clara,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2019,δ5,p99.9,PARAAD,V4,justa (sin etiquetas),0.0203303684879288,0.0030096332853279,0.0408680777848911,gana,pequeña,PARAAD − V4
+rev20b,Barcelona,original,2019,δ50,p99,PARAAD,V4,justa (sin etiquetas),0.0855184221292454,0.0399041689069108,0.1437268593179623,gana,moderada o grande,PARAAD − V4
+rev20b,Barcelona,original,2019,δ50,p99.9,PARAAD,V4,justa (sin etiquetas),0.1381603632320492,0.0816746631593434,0.1989496162542825,gana,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,10 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.0096564490801618,-0.0285703809311466,0.009292977647082,sin diferencia clara,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,10 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0280198493475793,-0.0512878238905105,-0.0071734042778713,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,20 ppb,p99,PARAAD,V4,justa (sin etiquetas),0.1660590214910171,0.1325233857214968,0.2004227973381339,gana,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,20 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),0.0594830108372757,-0.0019493158660337,0.118549815565092,sin diferencia clara,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,40 ppb,p99,PARAAD,V4,justa (sin etiquetas),0.2237155312366372,0.1917726167729395,0.2562237946334938,gana,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,40 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),0.2569541461937445,0.2189673489335618,0.3003463460164672,gana,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2025,5 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.0090228765475468,-0.0204967728222144,0.0023827708419015,sin diferencia clara,pequeña,PARAAD − V4
+rev21,RAMA,error fijo,2025,5 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0047762694821518,-0.015286497573481,0.0047872255868038,sin diferencia clara,pequeña,PARAAD − V4
+rev21,RAMA,error fijo,2026,10 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.0642762259350034,-0.0982825258203284,-0.0319732132281852,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,10 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0606778203704367,-0.1045009464871287,-0.0215965995319686,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,20 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.056055796055796,-0.1011460190306089,-0.0022126068411322,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,20 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.1693934724751365,-0.2450618022331124,-0.0852472563066728,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,40 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.0606884735202492,-0.1052659784608808,-0.0069544649532583,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,40 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.1976638041205507,-0.2845790452578717,-0.1014206378385756,pierde,moderada o grande,PARAAD − V4
+rev21,RAMA,error fijo,2026,5 ppb,p99,PARAAD,V4,justa (sin etiquetas),-0.031089655367112,-0.0547699439700797,-0.0094577667279552,pierde,pequeña,PARAAD − V4
+rev21,RAMA,error fijo,2026,5 ppb,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0181447124304267,-0.0358884383084004,-0.0042191872085276,pierde,pequeña,PARAAD − V4
+rev20,RAMA,original,2025,δ10,p99,PARAAD,V4,justa (sin etiquetas),-0.003587026332691,-0.0149209831294283,0.0088778940393955,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2025,δ10,p99.9,PARAAD,V4,justa (sin etiquetas),-0.004769449758146,-0.0151464954457832,0.004750561580797,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2025,δ100,p99,PARAAD,V4,justa (sin etiquetas),0.1726447253771955,0.1089205367557331,0.2572015739207453,gana,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2025,δ100,p99.9,PARAAD,V4,justa (sin etiquetas),0.184677090256159,0.0972584023428614,0.2708159972362031,gana,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2025,δ20,p99,PARAAD,V4,justa (sin etiquetas),0.0003255251740775,-0.0146892104807957,0.0158263698125014,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2025,δ20,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0069490429979975,-0.027517106888995,0.0123975993923506,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2025,δ5,p99,PARAAD,V4,justa (sin etiquetas),-0.0020419938963454,-0.0114393698413029,0.0091047719217939,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2025,δ5,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0011494549358852,-0.0123517997182119,0.0101586694137027,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2025,δ50,p99,PARAAD,V4,justa (sin etiquetas),0.0995151635198196,0.0541239847481804,0.1574040221142477,gana,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2025,δ50,p99.9,PARAAD,V4,justa (sin etiquetas),0.0642410340854688,0.0087856843997759,0.1203193006108882,gana,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ10,p99,PARAAD,V4,justa (sin etiquetas),-0.0181544699728436,-0.0370761561592541,-0.0002319124327304,pierde,pequeña,PARAAD − V4
+rev20,RAMA,original,2026,δ10,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0102171470380725,-0.0226411435893525,0.0,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2026,δ100,p99,PARAAD,V4,justa (sin etiquetas),-0.0628695983183049,-0.1555423425583568,0.0616442968483472,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ100,p99.9,PARAAD,V4,justa (sin etiquetas),-0.1631524725274725,-0.2925453364047116,0.0311924885953981,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ20,p99,PARAAD,V4,justa (sin etiquetas),-0.0268320673260833,-0.0499567339983613,-0.0014356841352792,pierde,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ20,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0167628912869645,-0.0383455779821824,0.0030291505878156,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ5,p99,PARAAD,V4,justa (sin etiquetas),-0.0118872001092337,-0.0252022440565422,-0.0001590684839146,pierde,pequeña,PARAAD − V4
+rev20,RAMA,original,2026,δ5,p99.9,PARAAD,V4,justa (sin etiquetas),-0.0021752478509599,-0.0077906866874742,0.0,sin diferencia clara,pequeña,PARAAD − V4
+rev20,RAMA,original,2026,δ50,p99,PARAAD,V4,justa (sin etiquetas),-0.0533880780992848,-0.119283008491208,0.0339119999845331,sin diferencia clara,moderada o grande,PARAAD − V4
+rev20,RAMA,original,2026,δ50,p99.9,PARAAD,V4,justa (sin etiquetas),-0.1268566645843315,-0.20196043885662,-0.0293031923171704,pierde,moderada o grande,PARAAD − V4

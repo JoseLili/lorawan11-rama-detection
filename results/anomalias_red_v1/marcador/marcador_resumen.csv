@@ -1,0 +1,23 @@
+par,tipo,ciudad,escenario,grupo_tamano,gana,sin diferencia clara,pierde,total
+L0 − PARAAD,informativa (supervisado contra sin etiquetas),Barcelona,original,moderada o grande,8,4,0,12
+L0 − PARAAD,informativa (supervisado contra sin etiquetas),Barcelona,original,pequeña,0,7,1,8
+L0 − PARAAD,informativa (supervisado contra sin etiquetas),RAMA,original,moderada o grande,10,2,0,12
+L0 − PARAAD,informativa (supervisado contra sin etiquetas),RAMA,original,pequeña,2,6,0,8
+L0 − R3,referencia (regla sin entrenamiento),RAMA,original,moderada o grande,7,4,1,12
+L0 − R3,referencia (regla sin entrenamiento),RAMA,original,pequeña,1,7,0,8
+L0 − V4,informativa (supervisado contra sin etiquetas),Barcelona,original,moderada o grande,11,1,0,12
+L0 − V4,informativa (supervisado contra sin etiquetas),Barcelona,original,pequeña,0,8,0,8
+L0 − V4S,justa (supervisados),RAMA,A,moderada o grande,10,1,1,12
+L0 − V4S,justa (supervisados),RAMA,A,pequeña,0,8,0,8
+L0 − V4S,justa (supervisados),RAMA,B,moderada o grande,11,1,0,12
+L0 − V4S,justa (supervisados),RAMA,B,pequeña,0,8,0,8
+L0 − V4S,justa (supervisados),RAMA,error fijo,moderada o grande,11,0,1,12
+L0 − V4S,justa (supervisados),RAMA,error fijo,pequeña,1,3,0,4
+L0 − V4S,justa (supervisados),RAMA,original,moderada o grande,11,1,0,12
+L0 − V4S,justa (supervisados),RAMA,original,pequeña,1,7,0,8
+PARAAD − V4,justa (sin etiquetas),Barcelona,original,moderada o grande,8,4,0,12
+PARAAD − V4,justa (sin etiquetas),Barcelona,original,pequeña,2,6,0,8
+PARAAD − V4,justa (sin etiquetas),RAMA,error fijo,moderada o grande,3,2,7,12
+PARAAD − V4,justa (sin etiquetas),RAMA,error fijo,pequeña,0,2,2,4
+PARAAD − V4,justa (sin etiquetas),RAMA,original,moderada o grande,4,6,2,12
+PARAAD − V4,justa (sin etiquetas),RAMA,original,pequeña,0,6,2,8
