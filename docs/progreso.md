@@ -4916,3 +4916,15 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
 - **R2 (ensamble) no pasa:** Ens-Vbr − Ens-V0r con p99 da +0.039, IC [−0.016, +0.111]. Con p99.9 da +0.188, IC [+0.152, +0.229].
 - **Ens-Vbr con p99.9:** F1 de 0.752 con δ = 100 % (recall 0.681, precisión 0.840) y 0.541 con δ = 50 %.
 - **Lectura:** el IC ancho viene de los bloques estación-mes de 2022, no de las semillas. Siguiente: el examen final.
+
+
+## 2026-11-06 — Examen final de uso único sobre RAMA 2017–2019
+- [Registro](registro_previo_examen_final_2017_2019.md) aprobado y [resultados](resultados_examen_final_2017_2019.md).
+- 30 planes sellados antes de los datos, 10 modelos definitivos (2020–2022), umbrales de 2023 y dos corridas idénticas (diferencia de 0.0).
+- **Ens-Vbr no se adopta.** ΔF̄ frente a Ens-V0r: +0.004, IC 97.5 % [−0.042, +0.057], con p99; −0.029 [−0.082, +0.025] con p99.9.
+- **Con p99.9, en 2017–2019:**
+  - F1 con δ = 100 %: Ens-Vbr 0.646, Ens-V0r 0.654 y L0 rev. 14 0.619;
+  - F1 con δ = 50 %: 0.477, 0.552 y 0.559;
+  - FA limpia lograda: 0.31 %, 0.16 % y 0.19 %, para un nivel nominal de 0.1 %.
+- **La ventaja de Vb en 2022 no generalizó:** gana en 2018 y pierde en 2017 y 2019, y calibra peor fuera de 2023.
+- Se corrigió `comun.bases`, que usaba el índice de 2020–2022 para la mediana de 60 días; LB1, LB2 y EP1 no cambian.

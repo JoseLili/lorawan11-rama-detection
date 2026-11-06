@@ -1,0 +1,11 @@
+{
+  "modelo": "Vbr",
+  "semilla": 42,
+  "epocas": 1,
+  "loss": [
+    0.018138116225600243
+  ],
+  "ventanas": 2036700,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1"
+}

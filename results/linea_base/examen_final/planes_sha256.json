@@ -1,0 +1,152 @@
+{
+  "plan_final_2017_01.csv": {
+    "sha256": "b0281a29fbd8284c5b515825f596920479088fde8e54f5fef782f5e341232a52",
+    "p": 0.002434893992468069,
+    "episodios": 27
+  },
+  "plan_final_2017_02.csv": {
+    "sha256": "c3200044e6a33302006ceb17624efeb111b025344a0404bb2024aaa9947a4cc5",
+    "p": 0.00102655416124155,
+    "episodios": 5
+  },
+  "plan_final_2017_03.csv": {
+    "sha256": "1daf545f116485b0394406f8de41eb6280fe883e9f25a959ec97e3d73503e3f7",
+    "p": 0.002721799743532801,
+    "episodios": 28
+  },
+  "plan_final_2017_04.csv": {
+    "sha256": "45481dd6dae9cad228130d7eb33508c9ea60a8a41159f95b7071a74822417e1d",
+    "p": 0.0028596183075474896,
+    "episodios": 33
+  },
+  "plan_final_2017_05.csv": {
+    "sha256": "7a8cf8f1de57d7b64d6ab57bbc6574c7824ca132bcf60c1c9d9528fc18c4d6ae",
+    "p": 0.0019709238880642917,
+    "episodios": 20
+  },
+  "plan_final_2017_06.csv": {
+    "sha256": "f1e9a8e89d262f2789d630a56de110dcfc08f19bafb6dbc7131c141ab57e3d49",
+    "p": 0.0022923793610820312,
+    "episodios": 29
+  },
+  "plan_final_2017_07.csv": {
+    "sha256": "454b77e151d38184e8b52297903df3b74dc339f8dc27aeb84f3eeebb0fecda1d",
+    "p": 0.0024178317083144666,
+    "episodios": 25
+  },
+  "plan_final_2017_08.csv": {
+    "sha256": "6c2aac599627854f25dfee6e1528a04e52db91d340c6192a290080cc3e4d9f56",
+    "p": 0.0012211436084594537,
+    "episodios": 8
+  },
+  "plan_final_2017_09.csv": {
+    "sha256": "a3a501bc21c1271cec73bfe967021739ca2d3cc9a39f8f3f9c1946368d59e94c",
+    "p": 0.0025974133968064608,
+    "episodios": 24
+  },
+  "plan_final_2017_10.csv": {
+    "sha256": "6bb444c2a09193ad283067df2c75e8c20e27411aec72daab56e60a0de8c41ae3",
+    "p": 0.0015548851344482448,
+    "episodios": 17
+  },
+  "plan_final_2018_01.csv": {
+    "sha256": "8593668b05b944da6c1369197fdd836b9f46b657692a91bcded7fded770d37a9",
+    "p": 0.002241308685631877,
+    "episodios": 27
+  },
+  "plan_final_2018_02.csv": {
+    "sha256": "c71c3cb4f7da2bcf3bd6ce990224fd95b0502852eb5e73d2bbf31b2861b51d58",
+    "p": 0.0010802271383178119,
+    "episodios": 9
+  },
+  "plan_final_2018_03.csv": {
+    "sha256": "3e6f358b92a621c49b94b13dfab3e1cd8329471362aa93b694a086d6b1bb0100",
+    "p": 0.0016286810453991108,
+    "episodios": 19
+  },
+  "plan_final_2018_04.csv": {
+    "sha256": "65a2da749b8e6b148c831359b7fa1da421b1c543c897afb41e3df1dfa6c0bc38",
+    "p": 0.0026897085795427374,
+    "episodios": 23
+  },
+  "plan_final_2018_05.csv": {
+    "sha256": "6a18020960c80f672a82674310073b8e0e9e44fc74ff741d25fb046d30abb196",
+    "p": 0.002184218020243609,
+    "episodios": 25
+  },
+  "plan_final_2018_06.csv": {
+    "sha256": "52130504e92f309d19a661937f6ce4268fc12b7cb7fe93eb0b6a42cce8202883",
+    "p": 0.0023768385775082314,
+    "episodios": 26
+  },
+  "plan_final_2018_07.csv": {
+    "sha256": "92f6fff63bd4af73c41b2b627fb5ba49ad0debfd20920316eddfd9a6295a80b9",
+    "p": 0.0026701546129131153,
+    "episodios": 29
+  },
+  "plan_final_2018_08.csv": {
+    "sha256": "8db13b7a6d5fc54dc4fc38945993dafd713d2c9f3c7bfe4f2de4f33b8f887bc7",
+    "p": 0.0027422919179480275,
+    "episodios": 28
+  },
+  "plan_final_2018_09.csv": {
+    "sha256": "a66112c15b9e14db085ee4e0f7b76623f6436bbebd1f0c9a21b76bb2ad7c3e82",
+    "p": 0.0011978479383728858,
+    "episodios": 15
+  },
+  "plan_final_2018_10.csv": {
+    "sha256": "f0d90f4df06c41dc9cf2123e60110ae0422df5dde9fae39940b9c938a55c588c",
+    "p": 0.0028657525416973264,
+    "episodios": 39
+  },
+  "plan_final_2019_01.csv": {
+    "sha256": "1ae7ca08fc082c64af89c179e7b29e2b2ac51aa930175c417a0581b6f0846071",
+    "p": 0.002032413907277913,
+    "episodios": 18
+  },
+  "plan_final_2019_02.csv": {
+    "sha256": "50d198c691d6c317b87eec34683cdd97b319d97eae4759f1e91e16ce5d6314a2",
+    "p": 0.0021688036760808983,
+    "episodios": 23
+  },
+  "plan_final_2019_03.csv": {
+    "sha256": "2b55881777f7ee3c2df8bd2d93c16c8e1cbc3bcdf094f07f6342da15046b6953",
+    "p": 0.001037828153038953,
+    "episodios": 12
+  },
+  "plan_final_2019_04.csv": {
+    "sha256": "193db8cb37a75f83fe8be7620b8110296f4621bb45b29c138683829c2aa41cfc",
+    "p": 0.001251562451276984,
+    "episodios": 8
+  },
+  "plan_final_2019_05.csv": {
+    "sha256": "64bebc71e53d5f8bdcf90e0854eb38b424d831774a603942d5778f9ebac43c8f",
+    "p": 0.0023871677580062462,
+    "episodios": 30
+  },
+  "plan_final_2019_06.csv": {
+    "sha256": "5978a5f055dd0c9ddc8080d89b4f09e02e1c9827dd80a516808bba33435de336",
+    "p": 0.0026872434259293705,
+    "episodios": 30
+  },
+  "plan_final_2019_07.csv": {
+    "sha256": "5959d4d099af5ef2b47a76b8a19a2caeef106ec595553a13b32e39ec0a6eb95e",
+    "p": 0.0029271244481685423,
+    "episodios": 36
+  },
+  "plan_final_2019_08.csv": {
+    "sha256": "323d12f73467702f843b022af486ff2ea7c2b878a3ef929ca52256b9c649fc38",
+    "p": 0.0011158869814512987,
+    "episodios": 15
+  },
+  "plan_final_2019_09.csv": {
+    "sha256": "05040d25b596ab80627a6040f093a5b5b0a0b4507737a477daba9a49bd366aed",
+    "p": 0.0013932306325732675,
+    "episodios": 16
+  },
+  "plan_final_2019_10.csv": {
+    "sha256": "ef02b96113bf749ed6dbf167baa740c55c38c7c1ff30f64fbec8a43e2c2c9fd2",
+    "p": 0.0021720910429265687,
+    "episodios": 32
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "modelo": "V0r",
+  "semilla": 3,
+  "epocas": 1,
+  "loss": [
+    0.020879670977592468
+  ],
+  "ventanas": 2036700,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1"
+}

@@ -134,3 +134,7 @@ EP1 no pasó su regla. Además, mostró que los puntajes diarios de L0 están au
 
 ## 2026-11-04 — LB2: la ventaja de Vb es estable entre semillas; queda pendiente del examen final
 Vbr le gana a V0r con p99 en las 5 semillas (+0.036 a +0.046), así que la ventaja no es azar del entrenamiento. El ensamble no pasó R2 porque su IC con p99 incluye valores menores de 0, y ese ancho viene de la muestra de 2022. **Ens-Vbr pasa a ser el candidato para el examen final**, con Ens-V0r como comparador. Sigue sin adoptarse hasta ese examen, que debe registrarse con su holdout antes de abrirlo.
+
+
+## 2026-11-06 — Examen final: Vb no se adopta; el detector principal sigue siendo L0 con la base de 14 días
+Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r en 2017–2019, y el examen no se repite sobre estos años. Vb queda en la tesis como resultado negativo de generalización. Ens-V0r y el L0 de la rev. 14 obtienen, con p99.9 y δ = 100 %, F1 de 0.654 y 0.619 sobre un holdout de uso único. Esa es la cifra creíble para el paper, junto con la curva de operación completa.

@@ -97,9 +97,9 @@ def contexto() -> dict:
 def bases(ctx: dict, x: pd.DataFrame, tau: np.ndarray | None = None) -> dict[str, np.ndarray]:
     V = lb.valores(x, ctx['estaciones'])
     b0 = lb.base_v0(x, ctx['estaciones'])
-    out = {'V0': b0, 'Vb': lb.base_vb(V, b0, ctx['vec'], ctx['index'])}
+    out = {'V0': b0, 'Vb': lb.base_vb(V, b0, ctx['vec'], x.index)}
     if tau is not None:
-        out['Vc'] = lb.base_vc(V, b0, tau, ctx['index'])
+        out['Vc'] = lb.base_vc(V, b0, tau, x.index)
     return out
 
 
