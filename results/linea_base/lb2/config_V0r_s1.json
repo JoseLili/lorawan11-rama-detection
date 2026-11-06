@@ -1,0 +1,12 @@
+{
+  "revision": "LB2",
+  "modelo": "V0r",
+  "base": "V0",
+  "semilla": 1,
+  "E": 1,
+  "epocas": 9,
+  "val_loss_min": 0.022472642362117767,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "origen": "reci\u00e9n entrenado"
+}

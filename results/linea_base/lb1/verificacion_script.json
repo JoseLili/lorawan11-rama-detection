@@ -1,0 +1,6 @@
+{
+  "columnas_comparadas": 23,
+  "dif_max_metricas": 0.0,
+  "dif_max_bootstrap": 0.0,
+  "modo": "runpy en sesión Python reiniciada (procesos de consola nuevos caen por OpenBLAS en el sandbox)"
+}

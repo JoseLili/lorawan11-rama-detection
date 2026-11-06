@@ -102,3 +102,35 @@ compromiso recall–falsas alarmas sin ajustar sobre el test.
 Datos completos: [falsos_positivos_lstm_tasa0.csv](../results/falsos_positivos_lstm_tasa0.csv).
 Referencia: [nota de semilla 42](referencia_lstm_cca_semilla42.md).
 No se regeneraron las figuras para esta decisión.
+
+
+## 2026-11-04 — Línea base anclada en vecinas (Vb): candidata, no adoptada
+
+Se exploraron tres líneas base alternativas para L0 con el modelo congelado, y después se reentrenó L0 con Vb (revisión LB1). Las dos fases tuvieron registro previo aprobado y se evaluaron solo en 2022.
+
+- **No se adopta Vb todavía.** Con p99, ΔF̄ = +0.036 tiene un IC del 95 % que incluye valores menores de 0.
+- **Se mantiene como candidata.** Reduce a menos de la mitad las falsas alarmas tras un episodio, mejora el PR-AUC con δ = 100 y 50 %, y su ventaja con p99.9 es grande. Pasa a la revisión LB2 (semillas y ensamble).
+- **Se descartan** la compuerta Va (bloqueo) y el CUSUM con k común (heterogeneidad entre estaciones).
+- **El umbral por estación (P4)** queda como mejora menor opcional.
+- **El holdout del examen final** debe decidirse y registrarse antes de LB2.
+
+
+## 2026-11-04 — Vb pasa a ser el detector candidato principal
+
+**Decisión del tesista**, tomada después de ver los resultados de LB1 y declarada como tal. A partir de ahora, **L0 con la línea base anclada en vecinas (Vbr)** es el detector sobre el que se construyen LB2, D1 y el examen final. V0r (L0 con la base de 14 días) queda como comparador principal.
+
+- **Motivo.** El asesor fijó como meta un F1 de aproximadamente 0.70–0.80. Con p99.9 y δ = 100 %, Vbr obtuvo F1 de 0.683 (recall 0.592, precisión 0.808), contra 0.530 de V0r. Con δ = 50 %: 0.488 contra 0.320.
+- **Lo que no cambia.** Vbr **no está adoptado**: no pasó la regla registrada de LB1 con p99 (ΔF̄ = +0.036, IC [−0.018, +0.117]). Su adopción depende de LB2 (semillas) y del examen final sobre un holdout de un solo uso. Esta designación no reinterpreta la regla de LB1.
+- **Cautelas a declarar.**
+  - Los números son de 2022, que también fue validación del EarlyStopping, así que son optimistas para todos los modelos.
+  - Hay una sola semilla, con E = 1.
+  - Con δ = 20 % no hay mejora (F1 de 0.040 con p99.9).
+- **Pendiente con el asesor:** definir la métrica de la meta (qué δ, estación-día o episodio, prevalencia y umbral) antes del examen final.
+
+
+## 2026-11-04 — No se adopta la acumulación entre días (EP1)
+EP1 no pasó su regla. Además, mostró que los puntajes diarios de L0 están autocorrelacionados en días limpios, así que acumular días también acumula la persistencia del clima. No se reabre sin un registro nuevo (EP1b), que calibre con días limpios fuera de la muestra y trate la autocorrelación. La prioridad pasa a LB2.
+
+
+## 2026-11-04 — LB2: la ventaja de Vb es estable entre semillas; queda pendiente del examen final
+Vbr le gana a V0r con p99 en las 5 semillas (+0.036 a +0.046), así que la ventaja no es azar del entrenamiento. El ensamble no pasó R2 porque su IC con p99 incluye valores menores de 0, y ese ancho viene de la muestra de 2022. **Ens-Vbr pasa a ser el candidato para el examen final**, con Ens-V0r como comparador. Sigue sin adoptarse hasta ese examen, que debe registrarse con su holdout antes de abrirlo.

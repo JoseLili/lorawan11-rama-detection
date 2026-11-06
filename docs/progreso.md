@@ -4852,3 +4852,67 @@ previo conservado. No se infiere causa ni desempeño del intento perdido.
 S1 reintento: supervisor4531 activo; control de24imágenes TF/NumPy exacto,
 prueba1 en curso. Descargador exec82713 y seguimiento5min activos. Sin
 resultados predictivos aceptados aún.
+
+
+## 2026-11-04 — Línea base protegida: diagnóstico, exploración y revisión LB1
+
+**Origen:** revisión externa del repositorio ([propuestas](propuestas_mejora_L0.md)). Todo es sobre 2020–2022: no se abrió 2023–2026. Los zips 20–26 coinciden con `checksums_2020_2026.txt`, pero solo se leyeron 20, 21 y 22.
+
+### Diagnóstico (puntajes guardados de L0, 2022)
+- Las falsas alarmas de L0 son 40.9 % el día 1 tras un episodio propio, quedan entre 5 y 13 % hasta el día 14 y vuelven a ~1 % el día 15. Es la longitud del perfil causal.
+- Esos días son el 2.7 % de los normales, pero concentran el 23.1 % de las falsas alarmas.
+- Con un umbral común, la tasa de falsas alarmas por estación va de 0 % a 3.9 %, y 10 de 31 estaciones no tienen ninguna alarma.
+- Figura: `img/linea_base/diagnostico_L0_2022.png`.
+
+### Exploración con L0 congelado ([registro](registro_previo_linea_base_2022.md), [resultados](resultados_linea_base_2022.md))
+- **Controles:**
+  - las 31 matrices regeneradas son idénticas por SHA-256;
+  - V0 reproduce `dias_2022.csv.gz` con una diferencia de 3.7 × 10⁻⁸;
+  - el constructor de entradas nuevo da 0.0 de diferencia frente a `ev.entradas_de`.
+- **P1:** ninguna variante (Va, Vb, Vc) pasa; todas bajan el F̄.
+  - Va falla por bloqueo: el umbral sube a 0.429 y el tope se activa 529 veces.
+  - Vb conserva el PR-AUC (0.477 contra 0.474 con δ = 50 %) y baja M1 de 10.7 a 3.2 %. Su F̄ cae por calibración: el p99 limpio pasa de 0.058 a 0.133.
+- **P4:** la DE de las falsas alarmas entre estaciones baja 21 %, con un F̄ de −0.005.
+- **P5:** CUSUM con k común falla (F̄ 0.043). CAM, SAG y NEZ concentran el 66 % de las alarmas limpias.
+
+### Revisión LB1 ([registro](registro_previo_LB1_reentrenamiento_Vb.md), [resultados](resultados_LB1_2022.md))
+- **Entrenamiento:** V0r y Vbr se reentrenaron en el PC del tesista (Windows, TensorFlow 2.21, Keras 3.15, CPU AMD Ryzen 7 7700X), con el protocolo de selección de la revisión 14. Los dos dan E = 1 de 9.
+- **Control de V0r:** queda a medias. La val_loss es 0.02498 contra 0.02245 del original (+11 %, fuera de ±10 %), pero el F̄ es 0.3525 contra 0.355.
+- **Resultado con p99:** F̄ de 0.389 contra 0.353, ΔF̄ = +0.036 con IC [−0.018, +0.117]. **No pasa la regla**, porque el IC incluye valores menores de 0.
+  - M1 con δ = 50 %: 4.9 % contra 11.2 %.
+  - PR-AUC con δ = 50 %: 0.602 contra 0.480.
+- **p99.9 (secundario, no adoptable):** ΔF̄ = +0.118, con IC [+0.089, +0.148].
+- **δ = 20 %:** Vb no ayuda.
+- **Predicciones:** 4 de 6, más 2 a medias.
+
+### Código y reproducción
+- `src/detect/linea_base.py`, con las pruebas de `tests/test_linea_base.py` (4 de 4).
+- `experiments/linea_base/explorar_2022.py` reproduce la exploración y `experiments/linea_base/lb1.py` reproduce LB1 (`--entrenar` para reentrenar).
+- Resultados en `results/linea_base/`.
+- **Verificación de `lb1.py`:** reproduce exactamente las métricas y el bootstrap reportados (diferencia de 0.0 en 23 columnas). Ver `results/linea_base/lb1/verificacion_script.json`; los puntajes quedan en `puntajes_2022.npz`.
+- **Verificación de `explorar_2022.py`:** reproduce exactamente P1 (96 valores) y P4/P5, con diferencia de 0.0. V0 contra `dias_2022.csv.gz` da 3.7 × 10⁻⁸; la compuerta, 529 topes y 285 días excluidos. Ver `results/linea_base/exploracion_2022/verificacion_script.json`.
+- **Limitación del sandbox de Windows:** cualquier multiplicación de matrices con OpenBLAS en un proceso de consola nuevo termina con `0xC06D007F` (falta un procedimiento en una DLL de carga diferida), aun sin TensorFlow y con un solo hilo. Por eso los scripts se corrieron con `runpy` en una sesión de Python recién reiniciada.
+  - Eso también explica las caídas de `test_contemporaneo`, `test_paraad` y `test_paraad_examen` en este entorno.
+  - `test_barcelona_tiempo` tiene 1 falla aparte, por revisar en la laptop Linux.
+- **Colab:** se configuró el CLI oficial en Windows, pero cada sesión necesita aprobar un host de runtime nuevo y no se llegó a correr nada allí. Las dos sesiones se liberaron.
+- **Dónde se corrió:** el tesista autorizó el 2026-11-04 entrenar y evaluar en su PC.
+
+### Siguiente
+Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y sesgo aditivo) → mejoras de entrenamiento → examen final único → redacción.
+
+
+## 2026-11-04 — EP1: decisión por episodio sobre Vb (resultado negativo)
+- [Registro](registro_previo_EP1_decision_episodio_Vb.md) aprobado y [resultados](resultados_EP1_2022.md). Sin entrenar: se usaron los puntajes de LB1.
+- **C (CUSUM estandarizado) sobre Vbr no pasa:** ΔF̄ frente a la regla diaria es −0.296 con 0.1 % y −0.235 con 1 %. La regla 2 de 3 también pierde.
+- **Problemas del diseño registrado:**
+  - la calibración del umbral quedó dentro de la muestra, y las falsas alarmas logradas fueron de 1.9–3.3 % en lugar de 0.1–1 %;
+  - los puntajes limpios están autocorrelacionados: el CUSUM llega a S = 87 en 2022 limpio.
+- **Siguiente:** LB2 (semillas y ensamble).
+
+
+## 2026-11-04 — LB2: semillas y ensamble de Vbr y V0r
+- [Registro](registro_previo_LB2_semillas_ensamble.md) aprobado y [resultados](resultados_LB2_2022.md). 8 modelos nuevos en el PC del tesista, en 108 minutos.
+- **R1 (robustez) pasa:** ΔF̄ con p99 > 0 en las 5 semillas, con una media de +0.040 (de +0.036 a +0.046).
+- **R2 (ensamble) no pasa:** Ens-Vbr − Ens-V0r con p99 da +0.039, IC [−0.016, +0.111]. Con p99.9 da +0.188, IC [+0.152, +0.229].
+- **Ens-Vbr con p99.9:** F1 de 0.752 con δ = 100 % (recall 0.681, precisión 0.840) y 0.541 con δ = 50 %.
+- **Lectura:** el IC ancho viene de los bloques estación-mes de 2022, no de las semillas. Siguiente: el examen final.
