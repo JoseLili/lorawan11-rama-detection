@@ -1,0 +1,17 @@
+{
+  "revision": "22",
+  "fase": "definitivo",
+  "modelo": "V0_R_s42",
+  "hilos": 4,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "ventanas": 2036700,
+  "epocas": 3,
+  "loss": [
+    0.021071283146739006,
+    0.017288899049162865,
+    0.015505105257034302
+  ],
+  "sha256": "14bf5cf908c1c04bb2f365f77d17dece307bb61bbdda7f66f1a765be5bd5196c",
+  "segundos": 461.9
+}

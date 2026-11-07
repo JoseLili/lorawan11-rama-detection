@@ -1,0 +1,17 @@
+{
+  "revision": "22",
+  "modelo": "V0_M1_s42",
+  "base": "V0",
+  "celda": "M1",
+  "semilla": 42,
+  "hilos": 4,
+  "paciencia": 3,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "limite": 0,
+  "ventanas": 2322045,
+  "E": 4,
+  "epocas": 7,
+  "val_loss_min": 0.021383842453360558,
+  "segundos": 1231.6
+}

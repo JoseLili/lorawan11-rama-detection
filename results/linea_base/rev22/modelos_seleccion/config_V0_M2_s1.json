@@ -1,0 +1,21 @@
+{
+  "revision": "22",
+  "modelo": "V0_M2_s1",
+  "base": "V0",
+  "celda": "M2",
+  "semilla": 1,
+  "hilos": 4,
+  "paciencia": 3,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "limite": 0,
+  "ventanas_A": 964245,
+  "ventanas_B": 1357800,
+  "E_A": 2,
+  "epocas_A": 5,
+  "E_B": 2,
+  "epocas_B": 5,
+  "val_loss_min_A": 0.022487225010991096,
+  "val_loss_min": 0.02195378951728344,
+  "segundos": 858.0
+}

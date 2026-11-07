@@ -144,3 +144,9 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Contexto:** el tesista pidió revisar si el trabajo de línea base se había alejado de la metodología del repo.
 - **Resultado:** LB1, EP1 y LB2 la respetan (elección en 2022, umbrales de 2023). El examen de 2017–2019 es adicional al protocolo, cuyo examen final ya era 2025–2026 (revisión 17). Se declararon cuatro desvíos y se agregó la comparación con la revisión 17, que se reproduce.
 - **Decisión:** el resultado principal de la tesis es la revisión 17. La revisión 22 vuelve a las etapas del protocolo, con examen prospectivo en agosto–diciembre de 2026. Los años extra sólo entran como fondo de entrenamiento o, en el caso de 2017–2019, como desarrollo.
+
+## 2026-11-07 — Revisión 22: elección en 2022
+
+- **Decisión, por la regla registrada:** van al examen de despliegue **Vb-R y Vb-M1**, las dos con mayor ΔF̄ en p99. Avanzan también V0-M1 y Vb-M2. V0-M2 no avanza.
+- **Antecedente que se reporta junto:** Vb-R es la receta de Ens-Vbr, no adoptado en 2017–2019.
+- **Hallazgo:** más años de fondo mejoran a V0 en todas las semillas y suben la mejor época de 1 a 2–4.

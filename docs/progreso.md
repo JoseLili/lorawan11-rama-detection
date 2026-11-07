@@ -4928,3 +4928,23 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - FA limpia lograda: 0.31 %, 0.16 % y 0.19 %, para un nivel nominal de 0.1 %.
 - **La ventaja de Vb en 2022 no generalizó:** gana en 2018 y pierde en 2017 y 2019, y calibra peor fuera de 2023.
 - Se corrigió `comun.bases`, que usaba el índice de 2020–2022 para la mediana de 60 días; LB1, LB2 y EP1 no cambian.
+
+## 2026-11-07 — Revisión 22: más años de fondo (M1, M2) y Vb, elección en 2022
+
+- **Registro:** [registro_previo_rev22_mas_anios.md](registro_previo_rev22_mas_anios.md), aprobado antes de entrenar. Vuelve a las etapas del protocolo:
+  - ajuste 2020–2021 + años extra;
+  - elección en 2022;
+  - calibración en 2023;
+  - examen de despliegue desde agosto de 2026.
+- **Auditoría:**
+  - 2012–2019 elegibles como fondo;
+  - 2000–2011 no, porque tienen 9–12 objetivos con cobertura ≥ 0.75;
+  - SHA-256 en `checksums_2000_2015.txt`.
+- **Cómputo:** 30 modelos de selección en 133 min (4 procesos, paciencia 3) y 15 definitivos en 29 min, en el PC del tesista.
+- **Resultado (2022):**
+  - V0-M1 gana a V0-R en 5/5 semillas: ΔF̄ +0.019 con p99 y +0.062 con p99.9;
+  - Vb-R vuelve a ganar con claridad: +0.043 y +0.248;
+  - al agregar años, la ventaja de Vb en p99.9 baja;
+  - M2 no supera a M1.
+  - Detalle: [resultados_rev22_seleccion_2022.md](resultados_rev22_seleccion_2022.md).
+- **Al examen:** Vb-R y Vb-M1, contra Ens-V0-R. El control contra LB2 pasa (+0.0003 y +0.016 de F̄).

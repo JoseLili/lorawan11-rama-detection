@@ -1,0 +1,17 @@
+{
+  "revision": "22",
+  "modelo": "Vb_M1_s4",
+  "base": "Vb",
+  "celda": "M1",
+  "semilla": 4,
+  "hilos": 4,
+  "paciencia": 3,
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "limite": 0,
+  "ventanas": 2322045,
+  "E": 3,
+  "epocas": 6,
+  "val_loss_min": 0.019550351426005363,
+  "segundos": 1012.2
+}

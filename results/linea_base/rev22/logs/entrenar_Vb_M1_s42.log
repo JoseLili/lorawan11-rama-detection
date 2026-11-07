@@ -1,0 +1,22 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794018293.583492    3896 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794018296.327977    3896 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\jose_\.claude-science\conda\envs\tf-l0\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+I0000 00:00:1794018299.332125    3896 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+Epoch 1/60
+36282/36282 - 180s - 5ms/step - loss: 0.0174 - val_loss: 0.0208
+Epoch 2/60
+36282/36282 - 168s - 5ms/step - loss: 0.0141 - val_loss: 0.0233
+Epoch 3/60
+36282/36282 - 167s - 5ms/step - loss: 0.0128 - val_loss: 0.0204
+Epoch 4/60
+36282/36282 - 169s - 5ms/step - loss: 0.0117 - val_loss: 0.0219
+Epoch 5/60
+36282/36282 - 173s - 5ms/step - loss: 0.0110 - val_loss: 0.0215
+Epoch 6/60
+36282/36282 - 181s - 5ms/step - loss: 0.0105 - val_loss: 0.0237
+{"revision": "22", "modelo": "Vb_M1_s42", "base": "Vb", "celda": "M1", "semilla": 42, "hilos": 4, "paciencia": 3, "tensorflow": "2.21.0", "keras": "3.15.1", "limite": 0, "ventanas": 2322045, "E": 3, "epocas": 6, "val_loss_min": 0.020448341965675354, "segundos": 1039.5}

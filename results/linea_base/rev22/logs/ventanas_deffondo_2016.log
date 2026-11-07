@@ -1,0 +1,35 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794026379.553896   37136 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794026382.052891   37136 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:50: RuntimeWarning: Mean of empty slice
+  perfil_vecinas = np.nanmean(b0[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:51: RuntimeWarning: Mean of empty slice
+  x_vecinas = np.nanmean(V[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:75: RuntimeWarning: Mean of empty slice
+  prom = np.nanmean(nb, axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:50: RuntimeWarning: Mean of empty slice
+  perfil_vecinas = np.nanmean(b0[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:51: RuntimeWarning: Mean of empty slice
+  x_vecinas = np.nanmean(V[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:75: RuntimeWarning: Mean of empty slice
+  prom = np.nanmean(nb, axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:50: RuntimeWarning: Mean of empty slice
+  perfil_vecinas = np.nanmean(b0[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:51: RuntimeWarning: Mean of empty slice
+  x_vecinas = np.nanmean(V[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:75: RuntimeWarning: Mean of empty slice
+  prom = np.nanmean(nb, axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:50: RuntimeWarning: Mean of empty slice
+  perfil_vecinas = np.nanmean(b0[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:51: RuntimeWarning: Mean of empty slice
+  x_vecinas = np.nanmean(V[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:75: RuntimeWarning: Mean of empty slice
+  prom = np.nanmean(nb, axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:50: RuntimeWarning: Mean of empty slice
+  perfil_vecinas = np.nanmean(b0[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:51: RuntimeWarning: Mean of empty slice
+  x_vecinas = np.nanmean(V[:, vec], axis=2)
+C:\Users\jose_\.claude-science\orgs\2a019964-1a9a-4189-8fb0-8aabb305a6be\workspaces\35b522cc-b101-4845-86bc-231fae846143\repo\src\detect\linea_base.py:75: RuntimeWarning: Mean of empty slice
+  prom = np.nanmean(nb, axis=2)
+deffondo_2016 {"V0": {"ventanas": 137250, "positivas_pct": 0.4444444477558136}, "Vb": {"ventanas": 137250, "positivas_pct": 0.4444444477558136}, "segundos": 10.7}

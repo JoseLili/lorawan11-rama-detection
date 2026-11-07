@@ -1,0 +1,26 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794021283.894279   12348 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794021286.923592   12348 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\jose_\.claude-science\conda\envs\tf-l0\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+I0000 00:00:1794021290.174692   12348 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+Epoch 1/60
+15067/15067 - 73s - 5ms/step - loss: 0.0198 - val_loss: 0.0221
+Epoch 2/60
+15067/15067 - 72s - 5ms/step - loss: 0.0163 - val_loss: 0.0222
+Epoch 3/60
+15067/15067 - 72s - 5ms/step - loss: 0.0148 - val_loss: 0.0248
+Epoch 4/60
+15067/15067 - 72s - 5ms/step - loss: 0.0136 - val_loss: 0.0237
+Epoch 1/60
+21216/21216 - 101s - 5ms/step - loss: 0.0178 - val_loss: 0.0214
+Epoch 2/60
+21216/21216 - 100s - 5ms/step - loss: 0.0167 - val_loss: 0.0220
+Epoch 3/60
+21216/21216 - 99s - 5ms/step - loss: 0.0159 - val_loss: 0.0230
+Epoch 4/60
+21216/21216 - 101s - 5ms/step - loss: 0.0154 - val_loss: 0.0236
+{"revision": "22", "modelo": "V0_M2_s2", "base": "V0", "celda": "M2", "semilla": 2, "hilos": 4, "paciencia": 3, "tensorflow": "2.21.0", "keras": "3.15.1", "limite": 0, "ventanas_A": 964245, "ventanas_B": 1357800, "E_A": 1, "epocas_A": 4, "E_B": 1, "epocas_B": 4, "val_loss_min_A": 0.022056395187973976, "val_loss_min": 0.02143574319779873, "segundos": 691.7}

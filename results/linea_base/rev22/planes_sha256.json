@@ -1,0 +1,202 @@
+{
+  "plan_fondo_2012_01.csv": {
+    "sha256": "ded1ce8fdd060429edffe23c59e87f60ef679361c4a024dac20a80889638d35e",
+    "p": 0.0015,
+    "episodios": 17
+  },
+  "plan_fondo_2012_02.csv": {
+    "sha256": "5aef8811294f17a54b8af6ad004d22149c2689477abb4f6df1e6e28c74aedd13",
+    "p": 0.0015,
+    "episodios": 11
+  },
+  "plan_fondo_2012_03.csv": {
+    "sha256": "f15a256c20b6fcceba5aebf916a1dd442ec06d5f2dde0dc493033c7f56b1314f",
+    "p": 0.0015,
+    "episodios": 11
+  },
+  "plan_fondo_2012_04.csv": {
+    "sha256": "08c4667e840c897b0202231b9a1c85aeaeceff6662d47f360e275a381deca484",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2012_05.csv": {
+    "sha256": "0d40d49891face4e0471a76e13188cdf012c293870c5c3cb4a8f8655edd59ccb",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2013_01.csv": {
+    "sha256": "848a8e2044caa33de03b5e12730ef4d6c4fd95a59d1c508033eb6dd455c17b93",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2013_02.csv": {
+    "sha256": "d7ded6ace3c2053b6ad3900a91c6bde491e35be0e9473463026f12f8f1684f72",
+    "p": 0.0015,
+    "episodios": 19
+  },
+  "plan_fondo_2013_03.csv": {
+    "sha256": "3a797948bca7cba289a63435e1ab67d8cf5f7cfc6c5303c5142942539a6bb134",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2013_04.csv": {
+    "sha256": "41b198542be28dfa9923b0cb1fb928c415e82566b07205e3d69763c1f03378af",
+    "p": 0.0015,
+    "episodios": 24
+  },
+  "plan_fondo_2013_05.csv": {
+    "sha256": "bf4fe5cbc48eef4fa722b41facb77219d9d676cd9a72cf2dac42428b7c8b1e49",
+    "p": 0.0015,
+    "episodios": 23
+  },
+  "plan_fondo_2014_01.csv": {
+    "sha256": "e5069bb18b8286a1805a6baafb9ce6ca58eac1fd1393d51d58ac01bd4dad3157",
+    "p": 0.0015,
+    "episodios": 17
+  },
+  "plan_fondo_2014_02.csv": {
+    "sha256": "86f4db868200231e81c05f0c1695974007310aa36cb921ecb2e8bc26d36d8be1",
+    "p": 0.0015,
+    "episodios": 12
+  },
+  "plan_fondo_2014_03.csv": {
+    "sha256": "abd4c06d617b8680a4bb2801d4e5e6f11fb7f9871b5bf65bed3101e723f0ad8d",
+    "p": 0.0015,
+    "episodios": 22
+  },
+  "plan_fondo_2014_04.csv": {
+    "sha256": "8f8d3d7a174cecd9f265e37acc3ff1ab97af6bde852a8a978e2e0eb87a9809de",
+    "p": 0.0015,
+    "episodios": 16
+  },
+  "plan_fondo_2014_05.csv": {
+    "sha256": "f4bb7d5e1da6b810ed80279c28257d9a2dddf2648a7c23d29b17cb5b690572c0",
+    "p": 0.0015,
+    "episodios": 16
+  },
+  "plan_fondo_2015_01.csv": {
+    "sha256": "e654e589043d88b9aec3d6a1489bcc76cb160fca695c58a26edc9afaeb849f5a",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2015_02.csv": {
+    "sha256": "c752d601c261eaaac224398d289a79a82697966b3757ad5c23e444fbe072b591",
+    "p": 0.0015,
+    "episodios": 20
+  },
+  "plan_fondo_2015_03.csv": {
+    "sha256": "fed6144580a25e632a0a79f338d3c2cc83affd667e23de53f198b4950b914771",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2015_04.csv": {
+    "sha256": "5b5f09906f391b14fbfdd7e2670c2ad090a28c7c9b523ae325db8f5c4f6653d2",
+    "p": 0.0015,
+    "episodios": 23
+  },
+  "plan_fondo_2015_05.csv": {
+    "sha256": "a7a8ec51d53c813ef1650b42bceb9d2f8f24edf17022f9bd68434868316b658b",
+    "p": 0.0015,
+    "episodios": 14
+  },
+  "plan_fondo_2016_01.csv": {
+    "sha256": "8009eb976d8e79b29c499f509d54bdeaddd793d1f1b3171a9f3963ea8fd3f336",
+    "p": 0.0015,
+    "episodios": 11
+  },
+  "plan_fondo_2016_02.csv": {
+    "sha256": "13ec3e6eeac578d9982adac5d36580cc631bddaf08f176b8797997bd8231b385",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2016_03.csv": {
+    "sha256": "afcadd3ef2c6e77ce457e76e8284580bad63618e37cb64122b8a33bbc1a470fe",
+    "p": 0.0015,
+    "episodios": 11
+  },
+  "plan_fondo_2016_04.csv": {
+    "sha256": "9efca505bebb43776965d523d15cf89eb5c1fd034cacd18b012eb8469cebcc35",
+    "p": 0.0015,
+    "episodios": 17
+  },
+  "plan_fondo_2016_05.csv": {
+    "sha256": "ab720982d352971a28aae3b16208759c9dfa8d646aff1611eb3b4eaa0e47c8e8",
+    "p": 0.0015,
+    "episodios": 19
+  },
+  "plan_fondo_2017_01.csv": {
+    "sha256": "a46a448a7149f5786838dd539d61881f956ee2724480d7c21d8d8a0a63a57d8e",
+    "p": 0.0015,
+    "episodios": 20
+  },
+  "plan_fondo_2017_02.csv": {
+    "sha256": "19cfa56ba95b015c019e0519f17b87764c4f3b5b974385058653f2afafbd78b1",
+    "p": 0.0015,
+    "episodios": 15
+  },
+  "plan_fondo_2017_03.csv": {
+    "sha256": "3f4a497d71a9c3028de30c978e271fb9158f9960bcc2acc329b753b20003c5a6",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2017_04.csv": {
+    "sha256": "28a11b5e4023b56be3884909185bc9fdb6916169ed2339a1c510bc92bfaa7e6d",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2017_05.csv": {
+    "sha256": "07ab5ac54ac8e87c683af4deb6ea2bb3d6234db6f7da131187dfe1ed4b09a593",
+    "p": 0.0015,
+    "episodios": 17
+  },
+  "plan_fondo_2018_01.csv": {
+    "sha256": "649b7931031167a5105efa6ac6b2dc0265914df61139f4db58c0127ea0ee85e7",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2018_02.csv": {
+    "sha256": "caf419dd96ca966078ca6ef8d1aa9377557c7f18ab2422a1e0cd5dbdbeca601d",
+    "p": 0.0015,
+    "episodios": 12
+  },
+  "plan_fondo_2018_03.csv": {
+    "sha256": "0acccd474a987e498e0248c6bec69ae717dab700fe1e0d4bdf12ec0fa00c6dda",
+    "p": 0.0015,
+    "episodios": 15
+  },
+  "plan_fondo_2018_04.csv": {
+    "sha256": "0bd5dfa89f42eeb270b1253549d4f1da1d1fd6fca4674d0e9dd556162f8c08c9",
+    "p": 0.0015,
+    "episodios": 12
+  },
+  "plan_fondo_2018_05.csv": {
+    "sha256": "5c7aecafe78034f55759dc05dd88a35678850afda9ceb2d5426c4205b8ba3956",
+    "p": 0.0015,
+    "episodios": 12
+  },
+  "plan_fondo_2019_01.csv": {
+    "sha256": "558c2f890bd6656642d6cf5dee4594a37e370d4787ecbcc5fa663f9bde4189c3",
+    "p": 0.0015,
+    "episodios": 13
+  },
+  "plan_fondo_2019_02.csv": {
+    "sha256": "fa976ad373b16289537afc73431d995ec995ff310b7bbe892eefa0d7d624b5a9",
+    "p": 0.0015,
+    "episodios": 17
+  },
+  "plan_fondo_2019_03.csv": {
+    "sha256": "fb958b24bead0d37cb77fae8cb699f9b59130d545c1a68c71c593a386849a746",
+    "p": 0.0015,
+    "episodios": 15
+  },
+  "plan_fondo_2019_04.csv": {
+    "sha256": "5c67aa423bc8be592b1fa47555a7a9cbce623cc2451926d46ab19dd6e011eb1f",
+    "p": 0.0015,
+    "episodios": 18
+  },
+  "plan_fondo_2019_05.csv": {
+    "sha256": "7caf946baebcee5be505b3aa5fef1d836faa4c1d5d9065b3a15a6b2524fc053d",
+    "p": 0.0015,
+    "episodios": 9
+  }
+}
