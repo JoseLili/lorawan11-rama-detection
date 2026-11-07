@@ -4959,3 +4959,8 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - con p99.9, sin diferencia.
 - **Ens-Vb-R con p99:** F1 de 0.803 (δ100) y 0.796 (δ50), con 0.2 % de falsas alarmas en limpio.
 - **Detalle:** [resultados_rev22_examen_despliegue_2026.md](resultados_rev22_examen_despliegue_2026.md).
+
+## 2026-11-07 — Detector principal: Ens-Vb-R
+
+- El tesista adopta **Ens-Vb-R** (revisión 22) como detector principal, con el desempate declarado.
+- Ver [resultados_rev22_examen_despliegue_2026.md](resultados_rev22_examen_despliegue_2026.md) y la bitácora.

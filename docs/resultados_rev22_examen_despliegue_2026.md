@@ -82,3 +82,14 @@ Salidas en `results/linea_base/rev22/examen_despliegue/`:
 - `curva_operacion.csv`, `pruebas.csv`, `decision.json`;
 - `vista_mensual.csv`, `primera_alerta.csv`, `horas_primera_alerta.csv`;
 - `planes/` y `corrida_a/`; `corrida_b/` es idéntica y no se versiona.
+
+## Decisión del tesista (2026-11-07, después del examen)
+- **Se adopta Ens-Vb-R como detector principal.** Es la media de 5 modelos L0 con la base anclada en vecinas (Vb), entrenados con 2020–2021 y, en su versión definitiva, con 2020–2022.
+- **Desempate:** los dos candidatos cumplieron la regla registrada, que no fijaba cuál adoptar en ese caso. Se usó el mismo criterio de la elección: el mayor ΔF̄ en p99. Este desempate **no estaba registrado de antemano** y así se declara.
+- **Alcance de la adopción:**
+  - la ventaja está en el punto p99;
+  - con p99.9 los detectores empatan;
+  - en 2017–2019 la misma receta no ganó, y eso se reporta junto como dependencia del periodo.
+- **Comprobaciones posteriores (sin nuevas decisiones):**
+  - el examen recalculado con el zip validado de SIMAT cuando se publique;
+  - las siguientes ventanas de despliegue, de octubre de 2026 en adelante, cada una con su registro.

@@ -157,3 +157,11 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Pendiente del tesista:** el registro no fija cuál adoptar si pasan los dos. La propuesta es Ens-Vb-R (mayor ΔF̄ en p99, igual que en la elección), anotada como no registrada de antemano.
 - **Antecedente que acompaña el resultado:** en 2017–2019 la misma receta no se adoptó. La ventaja de Vb depende del periodo.
 - **Límites:** datos crudos (SINAICA), dos meses y muestra chica.
+
+## 2026-11-07 — Ens-Vb-R pasa a ser el detector principal
+
+- **Decisión del tesista:** se adopta **Ens-Vb-R** tras el examen de despliegue de la revisión 22 (agosto–septiembre de 2026).
+  - Con p99: ΔF̄ +0.188 [+0.059, +0.322] contra Ens-V0-R; F1 de 0.803 (δ100) y 0.796 (δ50), con 0.2 % de falsas alarmas en limpio.
+- **El desempate entre Ens-Vb-R y Ens-Vb-M1** (los dos cumplieron) usa el criterio de la elección, mayor ΔF̄ en p99. No estaba registrado y se declara.
+- **Sustituye** a L0 / Ens-V0r como detector principal. Ens-V0-R queda como comparador.
+- **Se reportan junto:** el empate con p99.9, el resultado de 2017–2019 (dependencia del periodo), los datos crudos de SINAICA y la muestra de dos meses.
