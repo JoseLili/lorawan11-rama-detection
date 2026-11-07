@@ -139,3 +139,44 @@ Para responder cómo se comporta el detector día a día, en orden cronológico 
 6. En el examen, ningún candidato cumple la regla de adopción: el efecto esperado (+0.02 a +0.04) es del tamaño de la incertidumbre de tres meses.
 7. Las falsas alarmas logradas de Ens-V0r con p99 quedan entre 0.5 y 1.5 % en la ventana.
 8. En la vista hora a hora, la mediana de horas hasta la primera alerta con δ = 100 % es ≤ 24 h.
+
+## 8. Addendum (2026-11-07, antes de puntuar): fuente de datos del examen
+
+**Por qué:**
+- SIMAT no ha actualizado `26RAMA.zip` (llega al 2026-07-31);
+- su consulta de concentraciones horarias responde con error 500 por mantenimiento.
+
+**Fuente:**
+- **SINAICA (INECC)**, que recibe los datos de las mismas estaciones de la RAMA;
+- **datos crudos** (sin validar), ozono horario, red «Valle de México»;
+- descargados el 2026-11-07 con `pags/datGrafs.php`;
+- 435 archivos, con sus SHA-256 en `docs/checksums_sinaica_2026.txt`.
+
+**Correspondencia, comprobada sólo con datos ya vistos (junio–julio de 2026 contra el zip validado), sin modelos:**
+- **Estaciones:** 29 de las 33 están en SINAICA. AJU, INN, MON y MPA no; quedan como huecos (máscara = 0), y sus estación-días no se evalúan.
+- **Unidades:** ppm × 1000, redondeado a ppb entero, como en la RAMA.
+- **Hora:** el mejor ajuste es la marca de SINAICA (fecha + hora) desplazada −1 h, con correlación de 0.9997 (0.9165 sin desplazar).
+- **Coincidencia con el validado:**
+  - el 73.9 % de las lecturas es idéntico;
+  - |diferencia| > 5 ppb en el 0.003 %, con un máximo de 7 ppb;
+  - la validación agrega el 4.7 % de lecturas que SINAICA no tiene y quita el 1.2 % de las suyas.
+
+**Ventana del examen:**
+- **del 2026-08-01 al 2026-09-30**, el último mes completo;
+- SINAICA no tiene datos del 23 de octubre al 2 de noviembre, así que octubre queda para la siguiente ventana de despliegue.
+
+**Historia:** enero–julio de 2026, del zip validado. La matriz del examen une la historia validada con agosto–septiembre crudos.
+
+**Calendarios:** como el §5, con un ajuste para evitar choques de semilla:
+- `plan_episodios` del 2026-08-01 al 2026-09-30, con los números **801–810**;
+- los números 1–10 con el año 2026 ya los usan los planes `final_2026_*`;
+- p se sortea con la clave [42, 2026, 800 + k, USO_TASA].
+
+**Qué significa:**
+- el examen usa datos **sin validar**, como los vería un IDS en operación;
+- los umbrales (2023) y el entrenamiento usan datos validados, así que una diferencia en falsas alarmas puede venir de ahí, y se reporta.
+- Cuando SIMAT publique el zip validado, el examen se recalcula como **comprobación** del mismo examen, sin nuevas decisiones.
+
+**Detectores de referencia:**
+- L0 único va en la misma corrida;
+- L0 por δ, R3 y V4 se agregan después como tabla descriptiva, sin cambiar la prueba.

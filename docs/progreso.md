@@ -4948,3 +4948,14 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - M2 no supera a M1.
   - Detalle: [resultados_rev22_seleccion_2022.md](resultados_rev22_seleccion_2022.md).
 - **Al examen:** Vb-R y Vb-M1, contra Ens-V0-R. El control contra LB2 pasa (+0.0003 y +0.016 de F̄).
+
+## 2026-11-07 — Revisión 22: examen de despliegue (agosto–septiembre de 2026)
+
+- **Fuente:** SIMAT en mantenimiento y sin zip actualizado, así que se usaron datos **crudos de SINAICA** (INECC) para la ventana. La correspondencia se comprobó con junio–julio contra el zip validado: correlación de 0.9997 con −1 h. Addendum §8 del registro.
+- **Calibración:** 2023 limpio (`umbrales_2023.csv`), con 15 definitivos + L0 único.
+- **Examen:** 10 calendarios, 39 episodios evaluables y 1 367 estación-días limpias; dos corridas idénticas.
+- **Prueba con p99:**
+  - Ens-Vb-R +0.188 [+0.059, +0.322] y Ens-Vb-M1 +0.153 [+0.013, +0.296] contra Ens-V0-R, así que **los dos cumplen la regla**;
+  - con p99.9, sin diferencia.
+- **Ens-Vb-R con p99:** F1 de 0.803 (δ100) y 0.796 (δ50), con 0.2 % de falsas alarmas en limpio.
+- **Detalle:** [resultados_rev22_examen_despliegue_2026.md](resultados_rev22_examen_despliegue_2026.md).

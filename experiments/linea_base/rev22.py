@@ -1,6 +1,6 @@
 """Revisión 22 (elección en 2022): Vb y más años de fondo (M1, M2). Coordinador por etapas.
 
-    python rev22.py auditoria | planes | ventanas | entrenar | puntuar | seleccion | definitivos | todo
+    python rev22.py auditoria | planes | ventanas | entrenar | puntuar | seleccion | definitivos | calibracion | todo
     [--paralelo 4] [--hilos 4]
 
 Los entrenamientos y el puntaje corren como procesos separados, hasta `--paralelo` a la vez.
@@ -195,6 +195,44 @@ def etapa_definitivos(a):
     return lanzar(trab, a.paralelo)
 
 
+def etapa_calibracion():
+    """Puntaje de 2023 limpio (historia desde 2020) de los definitivos y de L0 único; umbrales p99 y p99.9."""
+    import keras
+    from src.detect import estacion_dia as ed
+    from src.detect import evaluacion_red as ev
+    from src.detect import linea_base as lb
+    ctx = cm.contexto()
+    esc = rc.escalas(ctx, 'definitivo')
+    dec = json.loads((rc.SAL / 'decision_seleccion.json').read_text())
+    celdas = [('V0', 'R')] + [tuple(c.split('-')) for c in dec['elegidas']]
+    mods = {rc.nombre_modelo(v, c, s): (v, keras.models.load_model(rc.DEF / f'{rc.nombre_modelo(v, c, s)}.keras', compile=False))
+            for v, c in celdas for s in rc.SEMILLAS}
+    mods['L0unico'] = ('V0', keras.models.load_model(cm.SAL_RED / 'lstm_local_examen/c20/d50/modelo.keras', compile=False))
+    x = ar.matriz_red(rc.valores('2020-01-01', '2023-12-31 23:00'), rc.columnas())
+    pos = np.flatnonzero(x.index.year == 2023)
+    b = cm.bases(ctx, x)
+    F = {v: lb.entradas(x, b[v], ctx['estaciones'], ctx['sigma'], esc[v], ctx['vec']) for v in rc.BASES}
+    obj = ctx['objetivos']
+    ix = x.index[pos]
+    con = x.loc[ix, [f'{s}_mascara' for s in obj]].to_numpy() == 1
+    Xw = {v: np.concatenate([cm.ventanas(ctx, F[v], s, pos) for s in obj]) for v in rc.BASES}
+    S = {}
+    for nm, (v, mdl) in mods.items():
+        p = mdl.predict(Xw[v], batch_size=8192, verbose=0).astype(np.float64).reshape(len(obj), len(pos)).T
+        dia = ed.juntar_dia(pd.DataFrame(p, index=ix, columns=obj).where(con), 'promedio_dia')
+        S[nm], dias = dia.to_numpy(), dia.index
+    for v, c in celdas:
+        S[f'Ens-{v}-{c}'] = np.mean([S[rc.nombre_modelo(v, c, s)] for s in rc.SEMILLAS], axis=0)
+    det = [f'Ens-{v}-{c}' for v, c in celdas] + ['L0unico']
+    comun = np.logical_and.reduce([~np.isnan(S[d]) for d in det])
+    filas = [dict(detector=d, nivel=nv, umbral=float(ev.umbral_falsas_alarmas(S[d][comun], nv)),
+                  estacion_dias=int(comun.sum())) for d in det for nv in NIVELES]
+    np.savez_compressed(rc.SAL / 'calibracion_2023.npz', dias=dias.values.astype('datetime64[ns]'), comun=comun, **S)
+    U = pd.DataFrame(filas)
+    U.to_csv(rc.SAL / 'umbrales_2023.csv', index=False, lineterminator='\n')
+    print(U.to_string(index=False), flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('etapa')
@@ -204,7 +242,8 @@ def main():
     etapas = ['auditoria', 'planes', 'ventanas', 'entrenar', 'puntuar', 'seleccion', 'definitivos'] if a.etapa == 'todo' else [a.etapa]
     for e in etapas:
         print(f'== {e} ({time.strftime("%H:%M:%S")})', flush=True)
-        f = {'auditoria': etapa_auditoria, 'planes': etapa_planes, 'seleccion': etapa_seleccion}.get(e)
+        f = {'auditoria': etapa_auditoria, 'planes': etapa_planes, 'seleccion': etapa_seleccion,
+             'calibracion': etapa_calibracion}.get(e)
         fallos = f() if f else globals()[f'etapa_{e}'](a)
         if fallos:
             raise SystemExit(f'{e}: fallaron {fallos}')

@@ -150,3 +150,10 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Decisión, por la regla registrada:** van al examen de despliegue **Vb-R y Vb-M1**, las dos con mayor ΔF̄ en p99. Avanzan también V0-M1 y Vb-M2. V0-M2 no avanza.
 - **Antecedente que se reporta junto:** Vb-R es la receta de Ens-Vbr, no adoptado en 2017–2019.
 - **Hallazgo:** más años de fondo mejoran a V0 en todas las semillas y suben la mejor época de 1 a 2–4.
+
+## 2026-11-07 — Revisión 22: examen de despliegue
+
+- **Resultado:** con la regla registrada (p99), Ens-Vb-R y Ens-Vb-M1 superan a Ens-V0-R en agosto–septiembre de 2026.
+- **Pendiente del tesista:** el registro no fija cuál adoptar si pasan los dos. La propuesta es Ens-Vb-R (mayor ΔF̄ en p99, igual que en la elección), anotada como no registrada de antemano.
+- **Antecedente que acompaña el resultado:** en 2017–2019 la misma receta no se adoptó. La ventaja de Vb depende del periodo.
+- **Límites:** datos crudos (SINAICA), dos meses y muestra chica.

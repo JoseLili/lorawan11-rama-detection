@@ -1,0 +1,12 @@
+{
+  "corridas_identicas": true,
+  "diferencia_max": 0.0,
+  "ventana": [
+    "2026-08-01",
+    "2026-09-30"
+  ],
+  "adopciones": {
+    "Ens-Vb-R": true,
+    "Ens-Vb-M1": true
+  }
+}

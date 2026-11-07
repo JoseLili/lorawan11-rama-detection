@@ -1,0 +1,52 @@
+{
+  "plan_despliegue_2026_01.csv": {
+    "sha256": "93b0b6384c5980dbeece518e6d9e08401f4f6ad8cfc9008260cdc1a6a014da70",
+    "p": 0.002778241071021985,
+    "episodios": 4
+  },
+  "plan_despliegue_2026_02.csv": {
+    "sha256": "af8b33e8f992891e32e994b01b5d5643e87dff6dbb5299096985f0a1c71cd83c",
+    "p": 0.0023199141660110926,
+    "episodios": 8
+  },
+  "plan_despliegue_2026_03.csv": {
+    "sha256": "e9894b2c290262b8e25254b25d5319848f4e523fa6a447ee18eb5390c0448d28",
+    "p": 0.0018242835282131355,
+    "episodios": 4
+  },
+  "plan_despliegue_2026_04.csv": {
+    "sha256": "7f27612f7fe688725eade5496c04ca84c3b07333d9fd693abd21b55e3857c2fd",
+    "p": 0.002201413023568791,
+    "episodios": 3
+  },
+  "plan_despliegue_2026_05.csv": {
+    "sha256": "402e07b7a87084ccc35c7132031d9ca2682e0614567103832c3ded600cfbb091",
+    "p": 0.0016566588505653123,
+    "episodios": 4
+  },
+  "plan_despliegue_2026_06.csv": {
+    "sha256": "c5602eca42cf4b22d96b6ca948250ae290ab768b98e82fb7c382b9b5496da6da",
+    "p": 0.0021085055277754194,
+    "episodios": 1
+  },
+  "plan_despliegue_2026_07.csv": {
+    "sha256": "744d118a4906adbb99925ff40bdcce14f05e830c1684a8c94547d67529cf603c",
+    "p": 0.0017978614350110896,
+    "episodios": 4
+  },
+  "plan_despliegue_2026_08.csv": {
+    "sha256": "f025ef59a6b2a4d93cfa15e4da450a0861bc3d990cb23210b1fd8338161fee42",
+    "p": 0.0023436216973241205,
+    "episodios": 7
+  },
+  "plan_despliegue_2026_09.csv": {
+    "sha256": "964fda9f959ccf7fbd981a2d563951e9ecf81702de589b9119b64981a4fdd314",
+    "p": 0.002179468099918527,
+    "episodios": 7
+  },
+  "plan_despliegue_2026_10.csv": {
+    "sha256": "fe86511d93dbf8b052a947088d0f828d5d8c8f857fe0066cf18cfe22a434b231",
+    "p": 0.0024277839025551103,
+    "episodios": 4
+  }
+}
