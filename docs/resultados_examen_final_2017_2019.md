@@ -62,3 +62,30 @@ Detalle completo, por δ y por año, en `curva_operacion_2017_2019.csv` y `metri
 - **Detector principal:** sigue siendo L0 con la base de 14 días (Ens-V0r o el L0 de la rev. 14), con su curva de operación sobre un holdout limpio.
 - **Vb:** se reporta como resultado negativo de generalización. Reduce las falsas alarmas tras un episodio en el año de desarrollo, pero no mejora en años no vistos y calibra peor.
 - **Ensamble:** Ens-V0r con p99.9 obtiene F̄ de 0.416 contra 0.413 del L0 de la rev. 14 (sin prueba registrada).
+
+## Desvíos respecto al protocolo y comparación con la revisión 17 (añadido el 2026-11-07)
+
+**Qué dice el protocolo** (`protocolo_anomalias_red_v1.md`, §4): ajuste 2020–2021, validación 2022, ajuste definitivo 2020–2022, calibración 2023 limpio, prueba principal 2024 y examen final 2025–2026 (enero a julio). Ese examen final ya se hizo en la **revisión 17** (2026-10-25).
+
+**Desvíos de este examen:**
+1. **No forma parte del protocolo.** 2017–2019 es un examen adicional: va hacia atrás en el tiempo, usa 2016 como calentamiento y la red de estaciones era distinta (FAR y SAC no existen en 2017–2018). Se presenta como **prueba complementaria de robustez**, no como el examen final de la tesis.
+2. **El holdout se eligió después de las fases 1–3.** La hoja de ruta pedía elegirlo antes de la fase 1. Ningún modelo ni decisión había abierto esos años, así que el riesgo es bajo, pero queda declarado.
+3. **Faltaron comparadores.** La hoja de ruta prometía R3, V4, PARAAD y Barcelona. Sólo se compararon Ens-Vbr, Ens-V0r y L0 rev.14.
+4. **Tres δ en vez de cinco.** El protocolo usa 100, 50, 20, 10 y 5 %. Aquí sólo 100, 50 y 20 %, y F̄ usa el **L0 único** (el modelo de δ = 50 % para todos los δ), no un modelo por δ.
+
+Lo que sí sigue el protocolo: modelos definitivos con 2020–2022, umbrales de 2023 limpio, 10 calendarios por año con p entre 0.10 y 0.30 %, episodios de 1 a 7 días, diseño pareado, p99 y p99.9 por estación-día, bootstrap por estación-mes y dos corridas idénticas.
+
+**Comparación con la revisión 17, mismo modelo (L0 único, el `modelo.keras` de δ = 50 %):**
+
+| F1 | 2025 (rev. 17) | 2026 ene–jul (rev. 17) | 2017–2019 (L0 rev.14) | 2017–2019 (Ens-V0r) |
+|---|---:|---:|---:|---:|
+| p99.9, δ = 100 % | 0.588 | 0.620 | 0.619 | 0.654 |
+| p99.9, δ = 50 % | 0.573 | 0.561 | 0.559 | 0.552 |
+| p99.9, δ = 20 % | 0.074 | 0.080 | 0.061 | 0.042 |
+| p99, δ = 100 % | 0.404 | 0.452 | 0.428 | 0.457 |
+| p99, δ = 50 % | 0.445 | 0.502 | 0.472 | 0.500 |
+| p99, δ = 20 % | 0.176 | 0.229 | 0.191 | 0.181 |
+
+- Las unidades no son idénticas: en la revisión 17, estación-días comunes a L0 y R3; aquí, comunes a los tres detectores. Las cifras son comparables en orden de magnitud, no punto por punto.
+- **Lectura:** el resultado de L0 se reproduce en cinco años distintos, hacia adelante y hacia atrás de su entrenamiento. Esto refuerza el examen final del protocolo.
+- El 0.756 (2025) y 0.821 (2026) de la revisión 17 con p99.9 y δ = 100 % son de **L0 por δ**: un modelo entrenado para cada δ, que supone conocer de antemano el tamaño del ataque.

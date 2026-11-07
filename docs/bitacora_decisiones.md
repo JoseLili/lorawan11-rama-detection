@@ -138,3 +138,9 @@ Vbr le gana a V0r con p99 en las 5 semillas (+0.036 a +0.046), así que la venta
 
 ## 2026-11-06 — Examen final: Vb no se adopta; el detector principal sigue siendo L0 con la base de 14 días
 Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r en 2017–2019, y el examen no se repite sobre estos años. Vb queda en la tesis como resultado negativo de generalización. Ens-V0r y el L0 de la rev. 14 obtienen, con p99.9 y δ = 100 %, F1 de 0.654 y 0.619 sobre un holdout de uso único. Esa es la cifra creíble para el paper, junto con la curva de operación completa.
+
+## 2026-11-07 — Revisión del apego al protocolo
+
+- **Contexto:** el tesista pidió revisar si el trabajo de línea base se había alejado de la metodología del repo.
+- **Resultado:** LB1, EP1 y LB2 la respetan (elección en 2022, umbrales de 2023). El examen de 2017–2019 es adicional al protocolo, cuyo examen final ya era 2025–2026 (revisión 17). Se declararon cuatro desvíos y se agregó la comparación con la revisión 17, que se reproduce.
+- **Decisión:** el resultado principal de la tesis es la revisión 17. La revisión 22 vuelve a las etapas del protocolo, con examen prospectivo en agosto–diciembre de 2026. Los años extra sólo entran como fondo de entrenamiento o, en el caso de 2017–2019, como desarrollo.

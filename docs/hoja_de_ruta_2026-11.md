@@ -36,3 +36,13 @@ Punto de partida: la exploración de líneas base y la revisión LB1
 
 ## Qué no reabrir
 NO/NO₂ (diagnóstico negativo), TINTO (T1 y T2 cerrados), modelos de red de 31 salidas (rev. 13 y T2), la compuerta Va (bloqueo medido) y el CUSUM con k común (heterogeneidad medida).
+
+## Actualización 2026-11-07: vuelta al protocolo
+
+- **El examen final de la tesis es el de la revisión 17** (2025–2026), como fija el protocolo. El examen de 2017–2019 queda como prueba complementaria de robustez, con sus desvíos declarados en `resultados_examen_final_2017_2019.md`.
+- **2017–2019 reproduce la revisión 17** con el L0 único (p99.9, δ = 100 %: 0.619 frente a 0.588 y 0.620).
+- **Siguiente revisión (22): más años de fondo y recalibración mensual del umbral.** Respeta las etapas del protocolo:
+  - elección en 2022;
+  - calibración en 2023;
+  - examen de uso único en **agosto–diciembre de 2026** (prospectivo), la opción que esta hoja ya traía;
+  - los años extra (2000–2019) entran sólo como fondo de entrenamiento, y 2017–2019, ya examinados, como desarrollo de la recalibración.
