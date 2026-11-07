@@ -93,3 +93,35 @@ Salidas en `results/linea_base/rev22/examen_despliegue/`:
 - **Comprobaciones posteriores (sin nuevas decisiones):**
   - el examen recalculado con el zip validado de SIMAT cuando se publique;
   - las siguientes ventanas de despliegue, de octubre de 2026 en adelante, cada una con su registro.
+
+## Referencia: PARAAD-SA en la misma ventana (descriptivo, 2026-11-07)
+
+**Cómo:**
+- Es el modelo congelado de la revisión 20 (`modelo_r1.keras`, SHA-256 `1e859d91…`), con su escala 2020–2022 y sus umbrales de 2023 (p99 = 0.6405, p99.9 = 0.8366, comparación estricta `>`). No se entrenó ni se recalibró nada.
+- **Desvío:** el puntuador oficial (`puntuar_paraad.py`) exige Keras 3.13.2 y aquí hay 3.15.1. Se usaron las mismas funciones de `src/detect/paraad.py` (`bloques`, `reconstruir`, `puntajes`). El SHA-256 del modelo, de la escala y del código coincide con lo congelado; la escala y el código, comparados con finales de línea LF.
+- **Control:** la calibración de 2023 se reproduce. Son 8 802 estación-días, con diferencia máxima de 1.4e-6 y **decisiones idénticas** con p99 y p99.9 (88 alertas con p99, como en la revisión 20).
+- **Mismas condiciones que los demás detectores:** los 10 calendarios, las mismas 1 367 estación-días limpias (PARAAD las cubre todas) y dos corridas idénticas.
+
+| Detector | Umbral | FA limpia (alarmas) | F̄ | F1 δ100 (R / P) | F1 δ50 | F1 δ20 | PR-AUC δ100 / δ50 / δ20 |
+|---|---|---|---:|---|---:|---:|---|
+| Ens-Vb-R | p99 | 0.2 % (3) | 0.636 | 0.803 (0.98 / 0.68) | 0.796 | 0.307 | 0.979 / 0.930 / 0.291 |
+| Ens-V0-R | p99 | 0.7 % (10) | 0.448 | 0.558 (0.97 / 0.39) | 0.577 | 0.208 | 0.864 / 0.820 / 0.169 |
+| L0 único | p99 | 1.0 % (13) | 0.415 | 0.519 (0.96 / 0.36) | 0.531 | 0.195 | 0.795 / 0.761 / 0.161 |
+| **PARAAD-SA** | p99 | 0.1 % (1) | 0.408 | 0.710 (0.60 / 0.88) | 0.476 | 0.038 | 0.726 / 0.444 / 0.044 |
+| Ens-Vb-R | p99.9 | 0 % | 0.508 | 0.815 | 0.670 | 0.040 | — |
+| **PARAAD-SA** | p99.9 | 0 % | 0.289 | 0.654 | 0.198 | 0.014 | — |
+
+**ΔF̄ contra PARAAD** (IC 95 % descriptivo, bootstrap estación × mes, semilla [42, 22, 2]):
+
+| Detector | p99 | p99.9 |
+|---|---|---|
+| Ens-Vb-R | **+0.228 [+0.062, +0.381]** | **+0.220 [+0.135, +0.303]** |
+| Ens-V0-R | +0.040 [−0.121, +0.201] | +0.196 [+0.113, +0.285] |
+| L0 único | +0.007 [−0.147, +0.174] | +0.202 [+0.125, +0.284] |
+
+**Lectura:**
+- **Ens-Vb-R supera a PARAAD con los dos umbrales,** y también sin umbral (PR-AUC).
+- **PARAAD es muy preciso con ataques grandes:** con p99 y δ100, precisión de 0.88 y una sola falsa alarma en limpio. Pero detecta poco (recall de 0.60), y cae mucho con δ50 y δ20.
+- **Con p99 y δ100, PARAAD supera a V0 y a L0 único** (0.710 contra 0.558 y 0.519). Es un matiz frente a la revisión 20, donde L0 le ganaba en todas las combinaciones de δ100 y δ50.
+- **Advertencia de justicia:** Ens-Vb-R se entrenó con ataques del mismo tipo que el examen (error proporcional), y PARAAD no ve etiquetas, porque está pensado para sesgo y deriva. La comparación mide desempeño práctico en este escenario; no demuestra que una arquitectura sea superior. El escenario D1 (sesgo y deriva) sería la prueba en el terreno de PARAAD.
+- **Salidas:** `paraad_diario.npz`, `paraad_comparacion.csv` y `paraad_intervalos.csv`.
