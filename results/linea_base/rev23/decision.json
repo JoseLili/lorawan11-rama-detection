@@ -1,0 +1,22 @@
+{
+  "corridas_identicas": true,
+  "diferencia_max": 0.0,
+  "decisiones_fragiles": {
+    "Ens-Vb-R_0.01": 20,
+    "Ens-Vb-R_0.001": 1,
+    "Ens-V0-R_0.01": 17,
+    "Ens-V0-R_0.001": 3,
+    "L0unico_0.01": 10,
+    "L0unico_0.001": 0,
+    "PARAAD_0.01": 135,
+    "PARAAD_0.001": 0,
+    "R3_0.01": 1,
+    "R3_0.001": 0
+  },
+  "celdas_nan_distinto_del_limpio": 0,
+  "estacion_dias_evaluables": {
+    "2024": 8977,
+    "2025": 8633,
+    "2026": 4858
+  }
+}

@@ -1,0 +1,782 @@
+{
+  "plan_prueba_2024_01.csv": {
+    "sha256": "3377e7bd3f5c2bfeaad68598b556cd9497ba5b157928eced739bbf4ef948ad2f",
+    "episodios": 10,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_01_E1.csv": {
+    "sha256": "85a2d7da4d6334e27026064c0d4df7892a2d55165a1581d143f4b824199cf229",
+    "filas": 10,
+    "k": 1,
+    "anadidas": 0,
+    "estacion_dias": 39
+  },
+  "plan_prueba_2024_01_E2.csv": {
+    "sha256": "63740ff2d12e12ed9020f82f222486d7af411df23f54fe5a9f7449062c95c17d",
+    "filas": 48,
+    "k": 1,
+    "anadidas": 38,
+    "estacion_dias": 187
+  },
+  "plan_prueba_2024_01_E3.csv": {
+    "sha256": "48e9b442447a8ab48a157401c442b6051936920f8756d172337ea52bf70666a8",
+    "filas": 45,
+    "k": 1,
+    "anadidas": 35,
+    "estacion_dias": 181
+  },
+  "plan_prueba_2024_02.csv": {
+    "sha256": "7cb7469e3c01321c4d96f8561c6711d89df94fa3c289dba3251fc8f7b4248238",
+    "episodios": 21,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_02_E1.csv": {
+    "sha256": "c262e0498820dd7302095769f8c9b34992d2f85e11d90505d381ab49137a362b",
+    "filas": 21,
+    "k": 2,
+    "anadidas": 0,
+    "estacion_dias": 74
+  },
+  "plan_prueba_2024_02_E2.csv": {
+    "sha256": "4d15a3b10770f97c9a41bd18e58e157fe338f5b978dff806109e0a6471aa72e3",
+    "filas": 100,
+    "k": 2,
+    "anadidas": 79,
+    "estacion_dias": 352
+  },
+  "plan_prueba_2024_02_E3.csv": {
+    "sha256": "7393512acbcd6bd805e5248cbecac97654fb7c874ff54f0bf67daac90091113a",
+    "filas": 100,
+    "k": 2,
+    "anadidas": 79,
+    "estacion_dias": 345
+  },
+  "plan_prueba_2024_03.csv": {
+    "sha256": "b82bd795dcb10473ff29ee01fe4a06c931e6e49951d6b320fd4c45f56d48a6b4",
+    "episodios": 24,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_03_E1.csv": {
+    "sha256": "db1933fe5fad3da98d7c2946f7f1e86ffff7845382d0d0e770ba38878aeacdb4",
+    "filas": 24,
+    "k": 3,
+    "anadidas": 0,
+    "estacion_dias": 90
+  },
+  "plan_prueba_2024_03_E2.csv": {
+    "sha256": "568d6a184fd5e023683c413a6d50160e1e8488107bbce4845512c3e10d6134bd",
+    "filas": 112,
+    "k": 3,
+    "anadidas": 88,
+    "estacion_dias": 422
+  },
+  "plan_prueba_2024_03_E3.csv": {
+    "sha256": "33366f4e57e103e961c9bbb43d7dd896e89683583bfbdd4409884fb7d19b111b",
+    "filas": 113,
+    "k": 3,
+    "anadidas": 89,
+    "estacion_dias": 424
+  },
+  "plan_prueba_2024_04.csv": {
+    "sha256": "d90c19e43a640d724b64e4860f40bf516008db198f29ebfe1aa6e000a80b4fbb",
+    "episodios": 22,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_04_E1.csv": {
+    "sha256": "83a6e089692f47cb9fa551f793ce67069d6e3d90314e55ab7ba0ad671f0489c5",
+    "filas": 22,
+    "k": 4,
+    "anadidas": 0,
+    "estacion_dias": 88
+  },
+  "plan_prueba_2024_04_E2.csv": {
+    "sha256": "b5a47594328071cae383990b55e4a891751b049ffbb4c914007adb8e5f19ed7d",
+    "filas": 107,
+    "k": 4,
+    "anadidas": 85,
+    "estacion_dias": 419
+  },
+  "plan_prueba_2024_04_E3.csv": {
+    "sha256": "e0b23d1e7929407fbe369ec26d67644b73b7f531b3332fffbcc27bfb0907a481",
+    "filas": 107,
+    "k": 4,
+    "anadidas": 85,
+    "estacion_dias": 427
+  },
+  "plan_prueba_2024_05.csv": {
+    "sha256": "d565f0cbdf988287bfb56b67438c419248ca19b97b80e58b5f68b21db0fe560a",
+    "episodios": 19,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_05_E1.csv": {
+    "sha256": "24bae30f1f10e35fe7703f6a34593b94c96eec710f1b10b2e7e755865a3e8cf9",
+    "filas": 19,
+    "k": 5,
+    "anadidas": 0,
+    "estacion_dias": 85
+  },
+  "plan_prueba_2024_05_E2.csv": {
+    "sha256": "e428b99f11e8af312344df9b37a965ce8ce6fa2d7ddb8f08810ed6fc73d9ef3b",
+    "filas": 89,
+    "k": 5,
+    "anadidas": 70,
+    "estacion_dias": 373
+  },
+  "plan_prueba_2024_05_E3.csv": {
+    "sha256": "8aaf60d361b1a4c791971d99e20e0af9d314716d4f948bff9662bb92c61724a1",
+    "filas": 90,
+    "k": 5,
+    "anadidas": 71,
+    "estacion_dias": 385
+  },
+  "plan_prueba_2024_06.csv": {
+    "sha256": "085f5b89a68e0c82b279fb3f65ede9f1f27f7a3130dc31446a50f0ed05c04197",
+    "episodios": 31,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_06_E1.csv": {
+    "sha256": "5b292c9160d6d5cab15d20711938fa5b9f51c61c11814238437685eeba3a20e9",
+    "filas": 31,
+    "k": 6,
+    "anadidas": 0,
+    "estacion_dias": 120
+  },
+  "plan_prueba_2024_06_E2.csv": {
+    "sha256": "d00e550e4f0b6e5a40e54d47b0eecbfa7bbfb66a33aa113b1029a950c1d62fbc",
+    "filas": 149,
+    "k": 6,
+    "anadidas": 118,
+    "estacion_dias": 560
+  },
+  "plan_prueba_2024_06_E3.csv": {
+    "sha256": "70d32aebb73fbbae2fe2bddcef1049e110a44d25f4a43a3fde6fcf4486fd289a",
+    "filas": 151,
+    "k": 6,
+    "anadidas": 120,
+    "estacion_dias": 569
+  },
+  "plan_prueba_2024_07.csv": {
+    "sha256": "1aa772a18b130bb6b417ccbf2f2ee67c3f48809139e4138cc77cf568c23f2c30",
+    "episodios": 17,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_07_E1.csv": {
+    "sha256": "33e100e76a81142f1c121972f897cfa5d5071db248f16c4bea1bc9f82001c074",
+    "filas": 17,
+    "k": 7,
+    "anadidas": 0,
+    "estacion_dias": 58
+  },
+  "plan_prueba_2024_07_E2.csv": {
+    "sha256": "2d771cf381fdec9ebac56ff311bb80a70e459864e854bb05d0e0bf0f8f356a59",
+    "filas": 82,
+    "k": 7,
+    "anadidas": 65,
+    "estacion_dias": 275
+  },
+  "plan_prueba_2024_07_E3.csv": {
+    "sha256": "e032a148901a11d0cbb15b4b974db73f0c10db7cca17590d73555c7a13525666",
+    "filas": 81,
+    "k": 7,
+    "anadidas": 64,
+    "estacion_dias": 271
+  },
+  "plan_prueba_2024_08.csv": {
+    "sha256": "1cfafa28cdbed34e5cf231109ba6e121d186b6243d111e9b9167e79ebf12a37a",
+    "episodios": 24,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_08_E1.csv": {
+    "sha256": "699557105ef5950b41f8ca129073103edf5b6bd43f958c108e4b21ef3a9d8a50",
+    "filas": 24,
+    "k": 8,
+    "anadidas": 0,
+    "estacion_dias": 106
+  },
+  "plan_prueba_2024_08_E2.csv": {
+    "sha256": "e740c7feb8a5471ab2535d2d374ada79d371177d30cc777a0d2d91b5f2a27594",
+    "filas": 117,
+    "k": 8,
+    "anadidas": 93,
+    "estacion_dias": 514
+  },
+  "plan_prueba_2024_08_E3.csv": {
+    "sha256": "ff12f27e5b668c44bd62a8c6dd4627ea481c9ffa26df247ddae79c39fffaaa6a",
+    "filas": 117,
+    "k": 8,
+    "anadidas": 93,
+    "estacion_dias": 514
+  },
+  "plan_prueba_2024_09.csv": {
+    "sha256": "b9655db507774bb2179e60ef6e7d4703bbf548f35464ce4ef946dac8939fe688",
+    "episodios": 28,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_09_E1.csv": {
+    "sha256": "56b2a4bceeb03a1b36c5e300e50b5eab9ab9bc815aaee34885baf9e6a03ea97a",
+    "filas": 28,
+    "k": 9,
+    "anadidas": 0,
+    "estacion_dias": 109
+  },
+  "plan_prueba_2024_09_E2.csv": {
+    "sha256": "b0406ff2488362c44832988aec2bdd154a1a84d85231f3233f98e61c04a51fc8",
+    "filas": 137,
+    "k": 9,
+    "anadidas": 109,
+    "estacion_dias": 528
+  },
+  "plan_prueba_2024_09_E3.csv": {
+    "sha256": "b6c5e1357864208972f02995908ea13f1bf64d082359caedff3e78ca9e18ca92",
+    "filas": 137,
+    "k": 9,
+    "anadidas": 109,
+    "estacion_dias": 524
+  },
+  "plan_prueba_2024_10.csv": {
+    "sha256": "1adff09ae9088f35288989403c5e7ab1efd4f199158615624da7e8a1cf0d4133",
+    "episodios": 27,
+    "papel": "original del banco"
+  },
+  "plan_prueba_2024_10_E1.csv": {
+    "sha256": "f68fefa154ddb77ea5408c630bd00a2f9f78e3335294b02c4f5071a10481c254",
+    "filas": 27,
+    "k": 10,
+    "anadidas": 0,
+    "estacion_dias": 104
+  },
+  "plan_prueba_2024_10_E2.csv": {
+    "sha256": "722c09ce4c38fc1178f86ae1196c8f70cbb60e04b0a2a635512f297a00ea5159",
+    "filas": 126,
+    "k": 10,
+    "anadidas": 99,
+    "estacion_dias": 470
+  },
+  "plan_prueba_2024_10_E3.csv": {
+    "sha256": "359072b33b8fc9b3836a5f71669181e5c672dde0dcbd8bab3e2c9946182cc379",
+    "filas": 126,
+    "k": 10,
+    "anadidas": 99,
+    "estacion_dias": 485
+  },
+  "plan_final_2025_01.csv": {
+    "sha256": "900b1dad2c9b5d19017b227dcd9c0989a5cc2e7b9f9dd5f82277b32448320b4a",
+    "episodios": 36,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_01_E1.csv": {
+    "sha256": "a9889b2062c84cfd543929c43256a65ea3e112e3e8f64d24e8128bd8f41c37f3",
+    "filas": 36,
+    "k": 11,
+    "anadidas": 0,
+    "estacion_dias": 129
+  },
+  "plan_final_2025_01_E2.csv": {
+    "sha256": "20006bd6e6b5fd52f12a33888ee44190ca213e0402f6f654766179f61b4440d8",
+    "filas": 175,
+    "k": 11,
+    "anadidas": 139,
+    "estacion_dias": 633
+  },
+  "plan_final_2025_01_E3.csv": {
+    "sha256": "ad43e8b82472a567f162a5f6c88b5e2b4559d148644a044b13b66709a9e82fe8",
+    "filas": 174,
+    "k": 11,
+    "anadidas": 138,
+    "estacion_dias": 630
+  },
+  "plan_final_2025_02.csv": {
+    "sha256": "beac0fa153eae532730245eef48026376041a7e43e37880a316748e88090f459",
+    "episodios": 15,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_02_E1.csv": {
+    "sha256": "f06c22d76a81faf9a05610827a8d5316f6afa9348c2ff9e923c9daec3d9a23be",
+    "filas": 15,
+    "k": 12,
+    "anadidas": 0,
+    "estacion_dias": 53
+  },
+  "plan_final_2025_02_E2.csv": {
+    "sha256": "cca5bed58a7ce3a8199adbf7f634373668c235cd1b03e927b96ae9af81779433",
+    "filas": 73,
+    "k": 12,
+    "anadidas": 58,
+    "estacion_dias": 262
+  },
+  "plan_final_2025_02_E3.csv": {
+    "sha256": "af0a09d01796d1a50b10b5b4dba80b3b75a9c150a1189fddd7dc7133ed411cc5",
+    "filas": 73,
+    "k": 12,
+    "anadidas": 58,
+    "estacion_dias": 261
+  },
+  "plan_final_2025_03.csv": {
+    "sha256": "cef777c4b674dc8e4ea16d5d530842e6ef3abab9e5142ef05545db8e7fc15964",
+    "episodios": 19,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_03_E1.csv": {
+    "sha256": "851a71e804ac0a889708cb09a27ec9a29ade538319e7bc16edb0a74142a57c8d",
+    "filas": 19,
+    "k": 13,
+    "anadidas": 0,
+    "estacion_dias": 85
+  },
+  "plan_final_2025_03_E2.csv": {
+    "sha256": "40d538a4d0991c7221ee6e9b74c2babfe0987b96a91e535aacfa6ffc9f6cb6bb",
+    "filas": 88,
+    "k": 13,
+    "anadidas": 69,
+    "estacion_dias": 391
+  },
+  "plan_final_2025_03_E3.csv": {
+    "sha256": "c1dddec313c897ebb5373f2f3444c07426ef221e4fc7fd93a1bce9f41e04dd3d",
+    "filas": 88,
+    "k": 13,
+    "anadidas": 69,
+    "estacion_dias": 403
+  },
+  "plan_final_2025_04.csv": {
+    "sha256": "18dbfe003a06c42f703c2a71a95517ed124c4873107f28baea40b3bc573e6953",
+    "episodios": 18,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_04_E1.csv": {
+    "sha256": "80966d3e85f9b715340a5472642b2de7a4cc95d9d45aa25a9e77f191db602b72",
+    "filas": 18,
+    "k": 14,
+    "anadidas": 0,
+    "estacion_dias": 64
+  },
+  "plan_final_2025_04_E2.csv": {
+    "sha256": "ed9e53bee445e9f14ba0602c9777c51930bf57cc88a69908cef9a99371865da7",
+    "filas": 85,
+    "k": 14,
+    "anadidas": 67,
+    "estacion_dias": 294
+  },
+  "plan_final_2025_04_E3.csv": {
+    "sha256": "65b1d871a0a56968e576e280d06794ee24cf2cdfca390fd96425b279fe251dcc",
+    "filas": 85,
+    "k": 14,
+    "anadidas": 67,
+    "estacion_dias": 290
+  },
+  "plan_final_2025_05.csv": {
+    "sha256": "24f5b781de241586b8754fbbc01eed58b71786f6e8726baac2c62b4363cfba32",
+    "episodios": 33,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_05_E1.csv": {
+    "sha256": "102b70a66271352ee231a5696d03ad871e9b53dea746c5126ff72eafb30fd3f3",
+    "filas": 33,
+    "k": 15,
+    "anadidas": 0,
+    "estacion_dias": 131
+  },
+  "plan_final_2025_05_E2.csv": {
+    "sha256": "29603b3909cc13bd29d6ed9b80e21b80e4c30bf543bb4effe601194c559265c9",
+    "filas": 157,
+    "k": 15,
+    "anadidas": 124,
+    "estacion_dias": 619
+  },
+  "plan_final_2025_05_E3.csv": {
+    "sha256": "c38c51a99ccbadc9ad4fc4470c7f51a9e9e4331476600aacc751d254ba1fe5be",
+    "filas": 157,
+    "k": 15,
+    "anadidas": 124,
+    "estacion_dias": 614
+  },
+  "plan_final_2025_06.csv": {
+    "sha256": "330f5a62386ef1c82e8c18dd6d5037f547b20c8f608d7d09b43ff335d343c9c2",
+    "episodios": 10,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_06_E1.csv": {
+    "sha256": "baeb3dec63b61f4588178931d1c34f3e5d56ea280d78e888960a0e4f87771966",
+    "filas": 10,
+    "k": 16,
+    "anadidas": 0,
+    "estacion_dias": 49
+  },
+  "plan_final_2025_06_E2.csv": {
+    "sha256": "af314cf3403ade757252822b620569d9e7fc8a7973031ab994d6e6306ebae4c2",
+    "filas": 47,
+    "k": 16,
+    "anadidas": 37,
+    "estacion_dias": 229
+  },
+  "plan_final_2025_06_E3.csv": {
+    "sha256": "dc4384dbc227608eae4bc7d4bc7497927f021912238555d9664f9819474d1d3c",
+    "filas": 47,
+    "k": 16,
+    "anadidas": 37,
+    "estacion_dias": 229
+  },
+  "plan_final_2025_07.csv": {
+    "sha256": "f72c235bcdaceabb3685c38504d4f3f0b4aadef1d102097b8d5a52e8b1900ba9",
+    "episodios": 14,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_07_E1.csv": {
+    "sha256": "498886f1c7e93dcbb43903495cf88e14d56a9fb85e4de674d26380eee93d5dad",
+    "filas": 14,
+    "k": 17,
+    "anadidas": 0,
+    "estacion_dias": 53
+  },
+  "plan_final_2025_07_E2.csv": {
+    "sha256": "b3a3b1f2cddbf108a43be54d776af1eeff6b4d2e9505f8d99d998154149ea405",
+    "filas": 66,
+    "k": 17,
+    "anadidas": 52,
+    "estacion_dias": 249
+  },
+  "plan_final_2025_07_E3.csv": {
+    "sha256": "c7e075bb1a7fd8a08382fef549d094eb3eacb7217d1def4e402a55577b7e672f",
+    "filas": 66,
+    "k": 17,
+    "anadidas": 52,
+    "estacion_dias": 249
+  },
+  "plan_final_2025_08.csv": {
+    "sha256": "02f2136db3c27b2b54903dd6e868b739812a531ca4d86cda298e2bbcfb870d07",
+    "episodios": 34,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_08_E1.csv": {
+    "sha256": "d734ad85a03e2972c3c1e36df83f93db1efeb4f7fb3aed09ced8a6174b72245b",
+    "filas": 34,
+    "k": 18,
+    "anadidas": 0,
+    "estacion_dias": 134
+  },
+  "plan_final_2025_08_E2.csv": {
+    "sha256": "801f082cb7214bdf5e38087089c075db3115a4031106e0590783e2efd5528384",
+    "filas": 159,
+    "k": 18,
+    "anadidas": 125,
+    "estacion_dias": 618
+  },
+  "plan_final_2025_08_E3.csv": {
+    "sha256": "db4f35919e85cf7b5f4a1d09667ee1a0340c58f28d57253fee332438df1f675d",
+    "filas": 159,
+    "k": 18,
+    "anadidas": 125,
+    "estacion_dias": 627
+  },
+  "plan_final_2025_09.csv": {
+    "sha256": "b41f2aa8e3fab59fb9df2626fa3fc40c84ae667e23ac977e989bd3099b4fd0a0",
+    "episodios": 9,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_09_E1.csv": {
+    "sha256": "7fa37e80cfcffb1209f1c27c0ab712550b391d584c7a75f90f78fcf425b539f9",
+    "filas": 9,
+    "k": 19,
+    "anadidas": 0,
+    "estacion_dias": 36
+  },
+  "plan_final_2025_09_E2.csv": {
+    "sha256": "18b5170e450604502647ea722eb929b752b2623447be5bdd8b25ff9b010d8c4e",
+    "filas": 42,
+    "k": 19,
+    "anadidas": 33,
+    "estacion_dias": 171
+  },
+  "plan_final_2025_09_E3.csv": {
+    "sha256": "b33ac87ba96b3b5dfb1776de14ef9ce8a34e2e2ae9e28429c676f89789e81178",
+    "filas": 42,
+    "k": 19,
+    "anadidas": 33,
+    "estacion_dias": 171
+  },
+  "plan_final_2025_10.csv": {
+    "sha256": "3edfdb5261d69fe58823599259e22f04e22d2574747c3049f40ea3fdb63e29c7",
+    "episodios": 35,
+    "papel": "original del banco"
+  },
+  "plan_final_2025_10_E1.csv": {
+    "sha256": "d83466a353bc9200a8f9807829eab4affe85b40e68ec28c6bb95f1ef789cff40",
+    "filas": 35,
+    "k": 20,
+    "anadidas": 0,
+    "estacion_dias": 144
+  },
+  "plan_final_2025_10_E2.csv": {
+    "sha256": "5833b8183470951587983f729e11c898be07e1c7d055e86594b0e791e789ee28",
+    "filas": 170,
+    "k": 20,
+    "anadidas": 135,
+    "estacion_dias": 663
+  },
+  "plan_final_2025_10_E3.csv": {
+    "sha256": "5b4b6146cf186f75658d7aa58f369c124f779ee77b6191d9164e25bf1dfc257d",
+    "filas": 168,
+    "k": 20,
+    "anadidas": 133,
+    "estacion_dias": 675
+  },
+  "plan_final_2026_01.csv": {
+    "sha256": "f9ba7c857aad39847136b233e36d406c47f6ef123158722d638cdea2e46eda6c",
+    "episodios": 12,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_01_E1.csv": {
+    "sha256": "e24d5fec365d5478537121f9517db86a2c33a9f510ad07079c9d6d4c4974cf32",
+    "filas": 12,
+    "k": 21,
+    "anadidas": 0,
+    "estacion_dias": 51
+  },
+  "plan_final_2026_01_E2.csv": {
+    "sha256": "e94135b3680f5f4767ab1c96ed534f35856d0b749f90a4cc23da8fbffe9e57c1",
+    "filas": 58,
+    "k": 21,
+    "anadidas": 46,
+    "estacion_dias": 240
+  },
+  "plan_final_2026_01_E3.csv": {
+    "sha256": "bd30e7bd38b13adf4a18f9ab35e3f798ba56c87950e5dde51423584e93bf29e2",
+    "filas": 58,
+    "k": 21,
+    "anadidas": 46,
+    "estacion_dias": 245
+  },
+  "plan_final_2026_02.csv": {
+    "sha256": "fd6cdc7e15d9456ad58d8d25b757e2476472c7d57c01199610da24412e6514a5",
+    "episodios": 23,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_02_E1.csv": {
+    "sha256": "f8f128bad35356855cd836135f801ef9b0ccf25741822fc33dddd0773d109ce5",
+    "filas": 23,
+    "k": 22,
+    "anadidas": 0,
+    "estacion_dias": 102
+  },
+  "plan_final_2026_02_E2.csv": {
+    "sha256": "2f101c61510518c324cb81ff015c07a95d8e9ba0e24301484b54cd7eb2e16c84",
+    "filas": 110,
+    "k": 22,
+    "anadidas": 87,
+    "estacion_dias": 478
+  },
+  "plan_final_2026_02_E3.csv": {
+    "sha256": "267fbcbe34a73a807bcfd26e879a9f997aabb619303d95037ac79648b65a99b0",
+    "filas": 109,
+    "k": 22,
+    "anadidas": 86,
+    "estacion_dias": 471
+  },
+  "plan_final_2026_03.csv": {
+    "sha256": "2265553e4f89dfa7e33a98e61c4936d84f2b8e5d989afec54a0cd15a31d97841",
+    "episodios": 7,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_03_E1.csv": {
+    "sha256": "f0e30b5635097b4aa4bb597bb05300d3bf6d89f0cda0615a5b8c68fcb22ef826",
+    "filas": 7,
+    "k": 23,
+    "anadidas": 0,
+    "estacion_dias": 35
+  },
+  "plan_final_2026_03_E2.csv": {
+    "sha256": "03d5384619e8944d4221a4fb9b3fa94044057be4a06b39de53a136e09c9d45c4",
+    "filas": 34,
+    "k": 23,
+    "anadidas": 27,
+    "estacion_dias": 169
+  },
+  "plan_final_2026_03_E3.csv": {
+    "sha256": "791f35fe96e58e3f6ae49a79b93a3546e23651612b29ea56127423d1c15f694c",
+    "filas": 34,
+    "k": 23,
+    "anadidas": 27,
+    "estacion_dias": 171
+  },
+  "plan_final_2026_04.csv": {
+    "sha256": "8068315bf40fc9f621704695b49a78419b1d0d34d0a6c0ddb413d65767790f94",
+    "episodios": 10,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_04_E1.csv": {
+    "sha256": "3769ed205ab326de14185f7a2a42054f272eea7be098ecca53a3aee9ea75242d",
+    "filas": 10,
+    "k": 24,
+    "anadidas": 0,
+    "estacion_dias": 46
+  },
+  "plan_final_2026_04_E2.csv": {
+    "sha256": "ace15840b9fbb7fa8b49963d20f6e27267cafe96a624c0edca45622446002af1",
+    "filas": 48,
+    "k": 24,
+    "anadidas": 38,
+    "estacion_dias": 226
+  },
+  "plan_final_2026_04_E3.csv": {
+    "sha256": "08af8b8527a3d1124d1a1c7c4c8489c603cca2fca22f18b4f2a087d81cc5fd38",
+    "filas": 47,
+    "k": 24,
+    "anadidas": 37,
+    "estacion_dias": 222
+  },
+  "plan_final_2026_05.csv": {
+    "sha256": "bf51eb26a7d95ab7dc341955459f4d222d650f2ea23fb2d1dd60a04cf1092fc4",
+    "episodios": 14,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_05_E1.csv": {
+    "sha256": "a5a19aff4f163dec19f7b92c891bee379fe726f12b4af7f240804d661f7c7bd6",
+    "filas": 14,
+    "k": 25,
+    "anadidas": 0,
+    "estacion_dias": 58
+  },
+  "plan_final_2026_05_E2.csv": {
+    "sha256": "da4df25903ad7b28602fa49b4e3096207cfad4afa999692884d17ff3a086f482",
+    "filas": 66,
+    "k": 25,
+    "anadidas": 52,
+    "estacion_dias": 271
+  },
+  "plan_final_2026_05_E3.csv": {
+    "sha256": "a102bc160e275634c5c28bc5898f9aa30a2a919b88f668f837987e6c2b21b2af",
+    "filas": 66,
+    "k": 25,
+    "anadidas": 52,
+    "estacion_dias": 269
+  },
+  "plan_final_2026_06.csv": {
+    "sha256": "9e7aff71010b1fc26947df8295421ba4ceda4bf9b1556ddb32e14f91a025c3d9",
+    "episodios": 21,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_06_E1.csv": {
+    "sha256": "09176c2ed6b7a4b576456837bfcfdc6cc3fc8a78caec0c8878bff2e41811c9b6",
+    "filas": 21,
+    "k": 26,
+    "anadidas": 0,
+    "estacion_dias": 59
+  },
+  "plan_final_2026_06_E2.csv": {
+    "sha256": "287c1f534c202b64df2fa138c9a0ac11f2275291ad1aa7cb7c08113c95107cbf",
+    "filas": 101,
+    "k": 26,
+    "anadidas": 80,
+    "estacion_dias": 275
+  },
+  "plan_final_2026_06_E3.csv": {
+    "sha256": "6a98bd732f5c66d0bca55a6184559fe680ad6821f90e35e76bd0707fb1036818",
+    "filas": 99,
+    "k": 26,
+    "anadidas": 78,
+    "estacion_dias": 281
+  },
+  "plan_final_2026_07.csv": {
+    "sha256": "819943f4dba7f40bb1af85fdd46b98ba978b89fab486812dce1dafeeeffb60fa",
+    "episodios": 16,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_07_E1.csv": {
+    "sha256": "02a47108d4ecc846804607e460f89f5f139382d1b0ba6f68bab8c386b2c6b4cd",
+    "filas": 16,
+    "k": 27,
+    "anadidas": 0,
+    "estacion_dias": 67
+  },
+  "plan_final_2026_07_E2.csv": {
+    "sha256": "d8536795b56ceed33311256a78bdbc4437218a0f6bc78a4a4d973c52474ff078",
+    "filas": 77,
+    "k": 27,
+    "anadidas": 61,
+    "estacion_dias": 319
+  },
+  "plan_final_2026_07_E3.csv": {
+    "sha256": "df5158641f5a73ae95bcda8789b6f728fe77675b0b66499b4f7e87f05cde3e23",
+    "filas": 76,
+    "k": 27,
+    "anadidas": 60,
+    "estacion_dias": 318
+  },
+  "plan_final_2026_08.csv": {
+    "sha256": "515b492729bff3d0893a0f913ea64cdab16e72e71e24454e2ea607c69c6aa31f",
+    "episodios": 4,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_08_E1.csv": {
+    "sha256": "9ae155fc10a83b411046f2ac360f7ca889c45a7715586030aeb82085c2ea1d72",
+    "filas": 4,
+    "k": 28,
+    "anadidas": 0,
+    "estacion_dias": 17
+  },
+  "plan_final_2026_08_E2.csv": {
+    "sha256": "101ee987ffddf107ec5b656c0f457947ca8ff5239534ce4e1b4168bd334fa97f",
+    "filas": 20,
+    "k": 28,
+    "anadidas": 16,
+    "estacion_dias": 85
+  },
+  "plan_final_2026_08_E3.csv": {
+    "sha256": "871c0851290173fcb78b4744700d5a375aabafb18fd7010b954242aa3f1cc4a8",
+    "filas": 20,
+    "k": 28,
+    "anadidas": 16,
+    "estacion_dias": 85
+  },
+  "plan_final_2026_09.csv": {
+    "sha256": "e15f83c47597c65fe678e2778bd48a1ca92f2fadf1b170d96c7e9ae517a6fc85",
+    "episodios": 21,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_09_E1.csv": {
+    "sha256": "4f31400492d15c46e294f6413b00b6104ceb99cb0031f09056a18c33c25df6f5",
+    "filas": 21,
+    "k": 29,
+    "anadidas": 0,
+    "estacion_dias": 78
+  },
+  "plan_final_2026_09_E2.csv": {
+    "sha256": "d92c6d6442d118561960ea07d7735de7fd5ae3e2c022fc1bf492fd694b36a26c",
+    "filas": 97,
+    "k": 29,
+    "anadidas": 76,
+    "estacion_dias": 351
+  },
+  "plan_final_2026_09_E3.csv": {
+    "sha256": "a146b80e5474a32b3657ff563d34d98d1f46a092d84dd9f2d5c886bf1c2d7ec9",
+    "filas": 95,
+    "k": 29,
+    "anadidas": 74,
+    "estacion_dias": 363
+  },
+  "plan_final_2026_10.csv": {
+    "sha256": "3c3de77860b6d625860d880aa7bbe0928b856ef776e6eb63227147843af961a2",
+    "episodios": 18,
+    "papel": "original del banco"
+  },
+  "plan_final_2026_10_E1.csv": {
+    "sha256": "8b5d5b9af7ddc6255b92a7ced718ac078f768c9c6c8e98f4537fbcf57c7b0653",
+    "filas": 18,
+    "k": 30,
+    "anadidas": 0,
+    "estacion_dias": 74
+  },
+  "plan_final_2026_10_E2.csv": {
+    "sha256": "0c9ca7b2ed5d5fba453e66d295de4487a65b5bd10505a01c2ab4575ba0000306",
+    "filas": 89,
+    "k": 30,
+    "anadidas": 71,
+    "estacion_dias": 353
+  },
+  "plan_final_2026_10_E3.csv": {
+    "sha256": "9a11014f2da0854d04eb61d3f04bb38031041646ae73d4bbc205e3ef0f9bfe83",
+    "filas": 89,
+    "k": 30,
+    "anadidas": 71,
+    "estacion_dias": 363
+  }
+}

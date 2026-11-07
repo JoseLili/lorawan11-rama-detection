@@ -4973,3 +4973,10 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - la tabla de PR-AUC está en `prauc_descriptivo.csv`;
   - PARAAD-SA quedó como referencia descriptiva (commit anterior).
 - **Borradores sustituidos:** los dos de la revisión 22 se conservan marcados como tales.
+
+## 2026-11-07 — Revisión 23: ataque coordinado y error fijo en ppb
+
+- **Qué es:** prueba de estrés de los detectores congelados en el banco 2024–jul 2026: Ens-Vb-R, Ens-V0-R, L0 único, R3 y PARAAD. Escenarios: E1, una estación; E2, la estación y sus vecinas de Vb; E3, otras estaciones al azar. Familias: proporcional (δ) y fija (5–40 ppb). Dos corridas idénticas de 573 matrices.
+- **Resultado:** con las vecinas atacadas (E2), la estación original queda casi invisible para todos los detectores de vecinas, con recall de 0.02–0.07. Ens-Vb-R cae 0.59 con δ50 y queda por debajo de Ens-V0-R (Q1: −0.026 [−0.040, −0.012]). PARAAD casi no cambia. En E3 la caída es de 0.15–0.17.
+- **También:** en E1, Vb empata con V0 (+0.019 [−0.024, +0.071] con p99). Con error fijo, Vb empata con R3 y con V0.
+- **Detalle:** [resultados_rev23_ataque_coordinado.md](resultados_rev23_ataque_coordinado.md).

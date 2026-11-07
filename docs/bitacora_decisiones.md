@@ -165,3 +165,10 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **El desempate entre Ens-Vb-R y Ens-Vb-M1** (los dos cumplieron) usa el criterio de la elección, mayor ΔF̄ en p99. No estaba registrado y se declara.
 - **Sustituye** a L0 / Ens-V0r como detector principal. Ens-V0-R queda como comparador.
 - **Se reportan junto:** el empate con p99.9, el resultado de 2017–2019 (dependencia del periodo), los datos crudos de SINAICA y la muestra de dos meses.
+
+## 2026-11-07 — Revisión 23: alcance de Ens-Vb-R ante ataques coordinados
+
+- **No se cambia ningún modelo:** Ens-Vb-R sigue siendo el detector principal. La revisión define el **alcance** de lo que se afirma sobre él: alteraciones de una estación a la vez. El ataque coordinado sobre las vecinas es un punto ciego declarado, compartido con V0, L0 y R3.
+- **Optimización:** XLA se descartó porque no cumplió el criterio declarado (91 alarmas en vez de 90 en 2023, por un empate exacto con el umbral). La inferencia usada es idéntica bit a bit a la de la calibración.
+- **Precisión del registro:** la historia empieza en 2020 en lugar de «el año anterior». Se decidió antes de generar planes.
+- **Pendiente sugerido (no registrado):** combinar un detector de vecinas con uno de red sin vecinas, tipo PARAAD, contra el ataque coordinado.
