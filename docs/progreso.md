@@ -4964,3 +4964,12 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
 
 - El tesista adopta **Ens-Vb-R** (revisión 22) como detector principal, con el desempate declarado.
 - Ver [resultados_rev22_examen_despliegue_2026.md](resultados_rev22_examen_despliegue_2026.md) y la bitácora.
+
+## 2026-11-07 — Cierre de la sesión: referencias y archivos complementarios
+
+- **Referencias:** `referencias_literatura.md` §9 trae los comparadores verificados en CrossRef: STC-RAAD, GDN y los trabajos de bit flipping en LPWAN.
+- **Examen de despliegue:**
+  - la figura del examen está en `docs/img/rev22/`;
+  - la tabla de PR-AUC está en `prauc_descriptivo.csv`;
+  - PARAAD-SA quedó como referencia descriptiva (commit anterior).
+- **Borradores sustituidos:** los dos de la revisión 22 se conservan marcados como tales.

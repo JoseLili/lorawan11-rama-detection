@@ -1,0 +1,14 @@
+clave,doi,ok,anio,citas,autores,titulo,venue
+USAD,10.1145/3394486.3403392,True,2020,1152,"Audibert, Michiardi, Guyard, Marti et al.",USAD,Proceedings of the 26th ACM SIGKDD International Conference 
+TranAD,10.14778/3514061.3514067,True,2022,1179,"Tuli, Casale, Jennings",TranAD,Proceedings of the VLDB Endowment
+OmniAnomaly,10.1145/3292500.3330672,True,2019,1705,"Su, Zhao, Niu, Liu et al.",Robust Anomaly Detection for Multivariate Time Series through Stochastic Recurrent Neural Network,Proceedings of the 25th ACM SIGKDD International Conference 
+LSTM-NDT (Hundman),10.1145/3219819.3219845,True,2018,1616,"Hundman, Constantinou, Laporte, Colwell et al.",Detecting Spacecraft Anomalies Using LSTMs and Nonparametric Dynamic Thresholding,Proceedings of the 24th ACM SIGKDD International Conference 
+MTAD-GAT,10.1109/ICDM50108.2020.00093,True,2020,759,"Zhao, Wang, Duan, Huang et al.",Multivariate Time-Series Anomaly Detection via Graph Attention Network,2020 IEEE International Conference on Data Mining (ICDM)
+GDN,10.1609/aaai.v35i5.16523,True,2021,1263,"Deng, Hooi",Graph Neural Network-Based Anomaly Detection in Multivariate Time Series,Proceedings of the AAAI Conference on Artificial Intelligenc
+STC-RAAD,10.1109/JIOT.2024.3416525,True,2024,7,"Allka, Ferrer-Cid, Barcelo-Ordinas, Garcia-Vidal",Leveraging Spatiotemporal Correlations With Recurrent Autoencoders for Sensor Anomaly Detection,IEEE Internet of Things Journal
+PARAAD,10.1109/TNSE.2024.3454459,True,2024,7,"Allka, Ferrer-Cid, Barcelo-Ordinas, Garcia-Vidal",Pattern-Based Attention Recurrent Autoencoder for Anomaly Detection in Air Quality Sensor Networks,IEEE Transactions on Network Science and Engineering
+Alizadeh LPWAN bit flipping,10.1007/s12083-023-01511-y,True,2023,8,"Alizadeh, Bidgoly",Bit flipping attack detection in low power wide area networks using a deep learning approach,Peer-to-Peer Networking and Applications
+Masmoudi EUSIPCO,10.23919/eusipco63174.2024.10715088,True,2024,1,"Masmoudi, Garnier, Savard, Itier et al.",Enhanced Sensor Environment Graph Based Deep Learning Approach for Air Quality Anomaly Detection,2024 32nd European Signal Processing Conference (EUSIPCO)
+Rollo Sensors,10.3390/s23020640,True,2023,40,"Rollo, Bachechi, Po",Anomaly Detection and Repairing for Improving Air Quality Monitoring,Sensors
+Dave SIN LoRaWAN,10.1109/sin63213.2024.10871846,True,2024,2,"Dave, Choudhury, Havishteja, Revanth",Enhancing LoRaWAN Security: Protection Against Bit Flipping Attacks in IoT Networks,2024 17th International Conference on Security of Informatio
+Miao IEEE Sensors,10.1109/jsen.2024.3383665,True,2024,15,"Miao, Wang, Xu, Zhan et al.",An Unsupervised Long- and Short-Term Sparse Graph Neural Network for Multisensor Anomaly Detection,IEEE Sensors Journal

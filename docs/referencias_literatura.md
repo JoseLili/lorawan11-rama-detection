@@ -64,3 +64,35 @@ qué leer primero.
 |---|---|---|
 | **Turiel y Kaufmann** (PLOS ONE). Comparan el PM2.5 reportado por gobiernos locales chinos con el de la embajada de EE. UU. [Nota de prensa](https://airqualitynews.com/fuels/air-pollution-in-china-might-be-under-reported-study-suggests) | Según el resumen, lo local se reportaba **más bajo** justo con contaminación alta. El ataque realista sería bajar la lectura en días altos, la dirección que peor detectamos | Título exacto, año y volumen por verificar: buscar el artículo original |
 | **Stoerk (2016).** *Statistical corruption in Beijing's air quality data has likely ended in 2012*. Atmospheric Environment. [Working paper LSE](https://www.lse.ac.uk/GranthamInstitute/wp-content/uploads/2015/05/Working-Paper-194-Stoerk.pdf) | Otro análisis estadístico de posible manipulación de datos de Pekín | Título y revista por verificar |
+
+## 9. Actualización 2026-11-07: comparadores para Ens-Vb-R
+
+Registros verificados en CrossRef el 2026-11-07, con las citas a esa fecha (`docs/crossref_verificados_2026-11-07.csv`). En los trabajos nuevos sólo se verificó el registro; lo que hace cada uno se confirma leyendo el texto antes de citarlo.
+
+**Mismo problema: redes de sensores de calidad del aire**
+
+| Trabajo | Por qué importa | Estado |
+|---|---|---|
+| **PARAAD.** Allka et al. (2024), IEEE TNSE. doi:10.1109/TNSE.2024.3454459 | Ya reproducido (rev. 20, RAMA; rev. 20b/20c, Barcelona). Falta medirlo en la ventana de despliegue de la rev. 22 | Verificado (texto) |
+| **Tesis doctoral de Allka** (UPC). doi:10.5821/dissertation-2117-457522 | Contiene PARAAD y STC-RAAD; ver `auditoria_barcelona_paraad_2014_2019.md` | Verificado (registro) |
+| **STC-RAAD.** Allka, Ferrer-Cid, Barceló-Ordinas y García-Vidal (2024), IEEE IoT Journal. doi:10.1109/JIOT.2024.3416525 | **Usa las estaciones vecinas**, como Vb. Es el comparador conceptual más cercano a nuestro detector principal | Registro verificado; texto por leer |
+| **Masmoudi, Garnier, Savard, Itier et al. (2024).** *Enhanced Sensor Environment Graph Based Deep Learning Approach for Air Quality Anomaly Detection*. EUSIPCO 2024. doi:10.23919/eusipco63174.2024.10715088 | Grafo de sensores para anomalías de calidad del aire | Registro verificado; texto por leer |
+| **Rollo, Bachechi y Po (2023).** *Anomaly Detection and Repairing for Improving Air Quality Monitoring*. Sensors 23(2). doi:10.3390/s23020640 | Detección y reparación en monitoreo de calidad del aire (40 citas) | Registro verificado; texto por leer |
+
+**Ángulo de seguridad: bit flipping en LPWAN/LoRaWAN**
+
+| Trabajo | Por qué importa | Estado |
+|---|---|---|
+| **Alizadeh y Bidgoly (2023).** *Bit flipping attack detection in low power wide area networks using a deep learning approach*. Peer-to-Peer Networking and Applications. doi:10.1007/s12083-023-01511-y | El trabajo de seguridad más cercano: detecta bit flipping con aprendizaje profundo. Hay que confirmar si opera sobre mensajes o sobre las lecturas | Registro verificado; texto por leer |
+| **Dave, Choudhury, Havishteja y Revanth (2024).** *Enhancing LoRaWAN Security: Protection Against Bit Flipping Attacks in IoT Networks*. SIN 2024. doi:10.1109/sin63213.2024.10871846 | Defensa contra bit flipping en LoRaWAN | Registro verificado; texto por leer |
+
+**Detectores multivariados de referencia general (los que un revisor espera ver)**
+
+| Trabajo | Citas (CrossRef) | Por qué |
+|---|---:|---|
+| LSTM-NDT: Hundman et al. (2018), KDD. doi:10.1145/3219819.3219845 | 1616 | LSTM de predicción con umbral dinámico; pariente directo de V4 |
+| OmniAnomaly: Su et al. (2019), KDD. doi:10.1145/3292500.3330672 | 1705 | Recurrente estocástico, no supervisado |
+| USAD: Audibert et al. (2020), KDD. doi:10.1145/3394486.3403392 | 1152 | Autoencoder adversarial, rápido y con código público |
+| MTAD-GAT: Zhao et al. (2020), ICDM. doi:10.1109/ICDM50108.2020.00093 | 759 | Atención en grafo entre variables |
+| GDN: Deng y Hooi (2021), AAAI. doi:10.1609/aaai.v35i5.16523 | 1263 | **Aprende las vecinas** en lugar de fijarlas por distancia: el rival natural de Vb |
+| TranAD: Tuli, Casale y Jennings (2022), PVLDB. doi:10.14778/3514061.3514067 | 1179 | Transformer; referencia reciente con código público |

@@ -33,6 +33,10 @@ Con p99.9 (descriptivo) no hay diferencia.
 
 La curva completa de 0.05 a 5 % está en `curva_operacion.csv`.
 
+![Curvas de operación y línea de tiempo en LLA](img/rev22/examen_despliegue_rev22.png)
+
+Comprobación sin umbral (PR-AUC, δ100 / δ50 / δ20): Ens-Vb-R 0.979 / 0.930 / 0.291; Ens-Vb-M1 0.971 / 0.935 / 0.292; Ens-V0-R 0.864 / 0.820 / 0.169; L0 único 0.795 / 0.761 / 0.161 (`prauc_descriptivo.csv`).
+
 **Prueba registrada** (p99, IC 97.5 %, bootstrap de bloques estación × mes):
 
 | Candidato | ΔF̄ p99 [IC 97.5 %] | Adopta | ΔF̄ p99.9 (descriptivo) |
