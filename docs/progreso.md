@@ -4990,3 +4990,14 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - En la ventana de despliegue rinde igual que Ens-Vb-R.
 - **Adopción:** **Ens-Vb-X sustituye a Ens-Vb-R como detector principal**, según la regla registrada.
 - **Detalle:** [resultados_rev24_exclusion_vecinas.md](resultados_rev24_exclusion_vecinas.md).
+
+## 2026-11-08 — Revisión 23b (D1): sesgo sostenido y deriva lenta
+
+- **Qué es:** 240 episodios de 8 semanas aislados de sus vecinas, con escalón, rampa de 28 días y deriva de 56 días, de +20 y +40 ppb. Seis detectores congelados; dos corridas idénticas.
+- **Resultado:**
+  - Ens-Vb-X/Vb detecta un sesgo constante unas 4 semanas (20 ppb: 0.86 → 0.61) y queda ciego desde la semana 6, cuando su mediana de 60 días absorbe el sesgo.
+  - V0, L0 y R3 se ciegan en 2 semanas. PARAAD queda plano (0.55 con 20 ppb, 0.93 con 40).
+  - Rampa: Vb − V0 = +0.225 [+0.196, +0.255].
+  - Rebote de Vb tras el fin: ~60× su tasa limpia, durante ~7 semanas (V0: 2).
+  - Ens-Vb-X ≈ Ens-Vb-R.
+- **Detalle:** [resultados_rev23b_ataque_lento.md](resultados_rev23b_ataque_lento.md).

@@ -1,0 +1,122 @@
+{
+  "plan_prueba_2024_01_largo.csv": {
+    "sha256": "a78bb6639437f9b7f1e340918387ddd772fc319f5565acacac7561969e8fd3ab",
+    "episodios": 6
+  },
+  "plan_prueba_2024_02_largo.csv": {
+    "sha256": "406efe3856957713c08836ecf3cd4efae92bee80634040e1394ef50a4895a461",
+    "episodios": 11
+  },
+  "plan_prueba_2024_03_largo.csv": {
+    "sha256": "6f8856e85c460d65be64efed98acee15a8cd32a8ce90bdaefb6495adcfc9677c",
+    "episodios": 12
+  },
+  "plan_prueba_2024_04_largo.csv": {
+    "sha256": "f540c8fac8a0f5e3bbf6814f41f9dea3ab2d36f1090a46bd1df149d6982f95ed",
+    "episodios": 9
+  },
+  "plan_prueba_2024_05_largo.csv": {
+    "sha256": "0f2fbd38f85360436d212da5d9fe55185a086d7cf0e0cb46198f676ac5c15f28",
+    "episodios": 8
+  },
+  "plan_prueba_2024_06_largo.csv": {
+    "sha256": "cf14908d1ab419fc79bb335c2d4994c16567801ebdf6f5936f6218599f6e4cb9",
+    "episodios": 11
+  },
+  "plan_prueba_2024_07_largo.csv": {
+    "sha256": "8e848069b8326b8f8996ed3c8806a4e64c1069552ad06bbb70de2799bdd9a8ce",
+    "episodios": 9
+  },
+  "plan_prueba_2024_08_largo.csv": {
+    "sha256": "94ada2d9a15b53252aeb38296d94c15f17012ddc5befc2a463e4b81b49ef0165",
+    "episodios": 9
+  },
+  "plan_prueba_2024_09_largo.csv": {
+    "sha256": "e6b4d08fb38cc446254d1e4ee9805fa74004dab89e8aa4d2c7d67da3226fbcea",
+    "episodios": 14
+  },
+  "plan_prueba_2024_10_largo.csv": {
+    "sha256": "9952a5435723f408d442e46d0704ab0c12f1d9550074fcfa4717df57fa49adde",
+    "episodios": 10
+  },
+  "plan_final_2025_01_largo.csv": {
+    "sha256": "878debeb4f6d16512827233722762c3b7083597666310ef78688b52280040408",
+    "episodios": 12
+  },
+  "plan_final_2025_02_largo.csv": {
+    "sha256": "64a60e8360a7074919b5b43df11ecc13cc7eab9502b280ec4338baeb2e44970e",
+    "episodios": 7
+  },
+  "plan_final_2025_03_largo.csv": {
+    "sha256": "736cc24c04066a1e0a217029b08a5f7541743ca8b5d18198a21bf64948c7b10a",
+    "episodios": 9
+  },
+  "plan_final_2025_04_largo.csv": {
+    "sha256": "61531fef1baadfce60e14f586366032f9872c53dd5eea592b4a76f6be4f1b2f1",
+    "episodios": 8
+  },
+  "plan_final_2025_05_largo.csv": {
+    "sha256": "f56ef652d02972a50841b44d9934a9c12db8bb32ee98112f36cdc2cccb73173b",
+    "episodios": 11
+  },
+  "plan_final_2025_06_largo.csv": {
+    "sha256": "45f4ef8f3f3c403198cd84dcb846c8ef4f74058adc6a7a796bc759bb74235cf0",
+    "episodios": 7
+  },
+  "plan_final_2025_07_largo.csv": {
+    "sha256": "1498121b6c9da8e4847d42aa0a863b622b04973d3e7c6e471e275314ac80b92c",
+    "episodios": 9
+  },
+  "plan_final_2025_08_largo.csv": {
+    "sha256": "880395e774d1d505a19e8e522b6a3a07f2417647b438fb54d2c9005ff7e5ed11",
+    "episodios": 11
+  },
+  "plan_final_2025_09_largo.csv": {
+    "sha256": "6ef604f13dc559c7c80c3b15d0b61683c931c1c3f45f586cb73a56f88a2d811c",
+    "episodios": 6
+  },
+  "plan_final_2025_10_largo.csv": {
+    "sha256": "7894cdc597ccc059dfed71d9f90e9b789ce2ad56452b2130435d582a2f4c4d6f",
+    "episodios": 10
+  },
+  "plan_final_2026_01_largo.csv": {
+    "sha256": "7cadb0eb4281cad4e38e555cbef0728e60846a3cb7133e7bf06f04dbf06ae90a",
+    "episodios": 5
+  },
+  "plan_final_2026_02_largo.csv": {
+    "sha256": "5c3fc612aab844180fdfab4f78ef52ef8c6cad51609bcdb0f8716c53995f2df2",
+    "episodios": 5
+  },
+  "plan_final_2026_03_largo.csv": {
+    "sha256": "aabf399d7611dc46721d6618d886495ed7b1aa8e90477d7c7c14452a97cf1245",
+    "episodios": 4
+  },
+  "plan_final_2026_04_largo.csv": {
+    "sha256": "4d383d4e0925860ed0c90a7a83c8e6752504a9ebf520df2095bc0679b4d7b5b1",
+    "episodios": 4
+  },
+  "plan_final_2026_05_largo.csv": {
+    "sha256": "122565191283c9e958035751e3a12c3c69806a2ea29fe8f60a899a25f9cdc596",
+    "episodios": 6
+  },
+  "plan_final_2026_06_largo.csv": {
+    "sha256": "6cccd7bf0b3d8ffd0dfb40dbe974f61c2724e564946e5a46b003feff75501bf6",
+    "episodios": 7
+  },
+  "plan_final_2026_07_largo.csv": {
+    "sha256": "82cbe5794120e3a4acea35f761dc632a3236a5dcbff46501c49a4e91a16d77e5",
+    "episodios": 5
+  },
+  "plan_final_2026_08_largo.csv": {
+    "sha256": "f0098ebcac502eaedf6298c154eb3a6f845800b9a3742cf63074316c812cf476",
+    "episodios": 2
+  },
+  "plan_final_2026_09_largo.csv": {
+    "sha256": "d549f9f6ef1b0454ca082cda7497403d8fad29d550f17f1a97bc3679b0636bf4",
+    "episodios": 6
+  },
+  "plan_final_2026_10_largo.csv": {
+    "sha256": "43fb4bab42d8b4833b1bf630b6b2cf3d37a79cea4de583e3f4dc89fadf00864e",
+    "episodios": 7
+  }
+}

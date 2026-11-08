@@ -1,0 +1,17 @@
+{
+  "corridas_identicas": true,
+  "diferencia_max": 0.0,
+  "detectores": [
+    "Ens-Vb-R",
+    "Ens-V0-R",
+    "L0unico",
+    "R3",
+    "PARAAD",
+    "Ens-Vb-X0.2596"
+  ],
+  "estacion_dias_evaluables": {
+    "2024": 8977,
+    "2025": 8633,
+    "2026": 4858
+  }
+}

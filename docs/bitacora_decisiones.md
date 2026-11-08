@@ -179,3 +179,10 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Enmienda 1 declarada:** la grilla de τ en σ globales nunca se activaba. Se cambió por cuantiles de 2020–2021 limpio antes de puntuar ataques.
 - **Alcance:** la regla sube el costo del ataque coordinado a ≥ 3 vecinas comprometidas, pero no lo elimina. Contra el vecindario completo sólo ayuda un detector sin vecinas (PARAAD).
 - **El orden de las revisiones lo decidió el tesista:** la revisión 24 va antes que la 23b (D1), para que D1 evalúe a Ens-Vb-X.
+
+## 2026-11-08 — D1 (revisión 23b): alcance temporal del detector principal
+
+- **No se cambia ningún modelo.** Se declara el **tiempo máximo de detección** de Ens-Vb-X ante un sesgo sostenido: ≈ 4 semanas. Después la base de 60 días lo absorbe.
+- **Riesgo operativo declarado:** el rebote de ~7 semanas de alarmas al terminar un sesgo largo, que también aparecería tras una recalibración legítima. Procedimiento sugerido: reiniciar la base tras mantenimiento.
+- **Complementariedad con PARAAD** (sin historia y sin vecinas), ya vista en la revisión 23. Combinarlos queda como trabajo futuro, sin registrar.
+- **Con esto se cierra la batería de estrés:** un nodo (revisiones 21–22), coordinado (23 y 24) y lento (23b).
