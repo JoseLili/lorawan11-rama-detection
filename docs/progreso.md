@@ -5001,3 +5001,14 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
   - Rebote de Vb tras el fin: ~60× su tasa limpia, durante ~7 semanas (V0: 2).
   - Ens-Vb-X ≈ Ens-Vb-R.
 - **Detalle:** [resultados_rev23b_ataque_lento.md](resultados_rev23b_ataque_lento.md).
+
+## 2026-11-08 — Revisión 25: fusión Ens-Vb-X + PARAAD (retador)
+
+- **Qué es:** alarma si Ens-Vb-X **o** PARAAD disparan, con el mismo presupuesto total de falsas alarmas fijado en 2023 (la misma tasa individual para los dos). Sólo combina puntajes ya calculados.
+- **Veredicto registrado: «compromiso».**
+  - T1 falla: E1, −0.110 [−0.157, −0.071].
+  - T2 pasa: E2-4, recall de *s* +0.217.
+  - T3 pasa: D1, semanas 5–8 +0.397.
+- **Por qué:** la fusión cubre el coordinado y el lento, pero en el banco duplica las falsas alarmas reales (2.6 % frente a 1.3 %), porque los umbrales de PARAAD se trasladan mal. En el despliegue empata o gana un poco (+0.010).
+- **Ens-Vb-X sigue como detector principal.** La fusión queda como modo de alta cobertura.
+- **Detalle:** [resultados_rev25_fusion_paraad.md](resultados_rev25_fusion_paraad.md).

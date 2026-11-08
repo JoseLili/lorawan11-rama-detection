@@ -186,3 +186,8 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Riesgo operativo declarado:** el rebote de ~7 semanas de alarmas al terminar un sesgo largo, que también aparecería tras una recalibración legítima. Procedimiento sugerido: reiniciar la base tras mantenimiento.
 - **Complementariedad con PARAAD** (sin historia y sin vecinas), ya vista en la revisión 23. Combinarlos queda como trabajo futuro, sin registrar.
 - **Con esto se cierra la batería de estrés:** un nodo (revisiones 21–22), coordinado (23 y 24) y lento (23b).
+
+## 2026-11-08 — La fusión no reemplaza a Ens-Vb-X (revisión 25)
+
+- **El tesista planteó la fusión como retador,** no como adopción automática. Resultado «compromiso»: Ens-Vb-X es el mejor con un solo nodo y la fusión es un modo de alta cobertura contra ataques coordinados y persistentes.
+- **Cuello de botella identificado:** la calibración de PARAAD (2.6 % real con 1 % nominal en 2024–2026). Recalibrarlo periódicamente queda como trabajo futuro; necesitaría un examen nuevo.

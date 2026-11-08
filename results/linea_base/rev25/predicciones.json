@@ -1,0 +1,38 @@
+{
+  "1_T1_falla_por_poco(-0.04<dF<-0.01, inf<-0.02)": {
+    "valor": [
+      -0.10988316752342928,
+      -0.15720763273407104
+    ],
+    "se_cumple": false
+  },
+  "2_T2_y_recall_E2-4_d50>=0.20": {
+    "valor": [
+      0.04501969611705121,
+      0.26167698368036013
+    ],
+    "se_cumple": true
+  },
+  "3_T3_y_recall_sem5-8>=0.40": {
+    "valor": [
+      0.10883404674342873,
+      0.5055259459402947
+    ],
+    "se_cumple": true
+  },
+  "4_FA_banco_fusion_1.6-2.2%": {
+    "valor": [
+      0.012953705716148664,
+      0.025820473810041294
+    ],
+    "se_cumple": false
+  },
+  "5_despliegue_dFbar<0": {
+    "valor": 0.009997169396357752,
+    "se_cumple": false
+  },
+  "6_veredicto_compromiso": {
+    "valor": "compromiso: Ens-Vb-X es el mejor con un solo nodo; la fusión es un modo de alta cobertura",
+    "se_cumple": true
+  }
+}
