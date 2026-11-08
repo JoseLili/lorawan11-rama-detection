@@ -85,3 +85,10 @@ En `results/linea_base/rev25/`:
 - **Pruebas y veredicto:** `pruebas.csv`, `predicciones.json` y `veredicto.json`.
 
 Código: `experiments/linea_base/rev25.py`.
+
+## Decisión posterior del tesista (2026-11-08)
+- **La fusión queda fuera del sistema propuesto.** Ens-Vb-X es el detector final de la tesis.
+- **En la tesis se mantiene:**
+  - este experimento como retador;
+  - los dos huecos de Ens-Vb-X como límites declarados;
+  - la fusión con PARAAD recalibrado como trabajo futuro.

@@ -191,3 +191,16 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 
 - **El tesista planteó la fusión como retador,** no como adopción automática. Resultado «compromiso»: Ens-Vb-X es el mejor con un solo nodo y la fusión es un modo de alta cobertura contra ataques coordinados y persistentes.
 - **Cuello de botella identificado:** la calibración de PARAAD (2.6 % real con 1 % nominal en 2024–2026). Recalibrarlo periódicamente queda como trabajo futuro; necesitaría un examen nuevo.
+
+## 2026-11-08 — Ens-Vb-X es el detector final; la fusión queda fuera
+
+- **Decisión del tesista,** tomada después de ver la revisión 25 y coherente con su clasificación registrada («compromiso»): **Ens-Vb-X es el detector final de la tesis.** La fusión con PARAAD no forma parte del sistema propuesto.
+- **Por qué:**
+  - en la amenaza principal (un nodo) la fusión pierde en F̄ por falsas alarmas (−0.110);
+  - con 1 % nominal produce 2.6 % real en el banco;
+  - sólo gana cuando hay 3 o más vecinas comprometidas o un sesgo de más de 4 semanas.
+- **Qué se reporta igual en la tesis:**
+  - la revisión 25 como experimento retador, con su resultado completo;
+  - los dos huecos de Ens-Vb-X como límites declarados del modelo de amenaza: vecindario comprometido y sesgo sostenido de más de ≈ 4 semanas;
+  - la fusión con PARAAD recalibrado periódicamente como trabajo futuro.
+- **Ningún modelo ni umbral cambia.** Ens-Vb-X conserva τ = 0.2596 σ y los umbrales de 2023 limpio: p99 0.15079 y p99.9 0.63097.

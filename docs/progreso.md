@@ -5012,3 +5012,4 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
 - **Por qué:** la fusión cubre el coordinado y el lento, pero en el banco duplica las falsas alarmas reales (2.6 % frente a 1.3 %), porque los umbrales de PARAAD se trasladan mal. En el despliegue empata o gana un poco (+0.010).
 - **Ens-Vb-X sigue como detector principal.** La fusión queda como modo de alta cobertura.
 - **Detalle:** [resultados_rev25_fusion_paraad.md](resultados_rev25_fusion_paraad.md).
+- **Decisión posterior del tesista:** la fusión queda **fuera del sistema**. **Ens-Vb-X es el detector final de la tesis.** La revisión 25 se reporta como experimento retador.
