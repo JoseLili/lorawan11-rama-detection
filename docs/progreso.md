@@ -4980,3 +4980,13 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
 - **Resultado:** con las vecinas atacadas (E2), la estación original queda casi invisible para todos los detectores de vecinas, con recall de 0.02–0.07. Ens-Vb-R cae 0.59 con δ50 y queda por debajo de Ens-V0-R (Q1: −0.026 [−0.040, −0.012]). PARAAD casi no cambia. En E3 la caída es de 0.15–0.17.
 - **También:** en E1, Vb empata con V0 (+0.019 [−0.024, +0.071] con p99). Con error fijo, Vb empata con R3 y con V0.
 - **Detalle:** [resultados_rev23_ataque_coordinado.md](resultados_rev23_ataque_coordinado.md).
+
+## 2026-11-08 — Revisión 24: exclusión de vecinas sospechosas (Ens-Vb-X)
+
+- **Qué es:** la idea del tesista. Si una vecina se desvía igual que la estación evaluada y distinto de las demás vecinas, se trata como faltante. Es Ens-Vb-R congelado más esa regla, sin reentrenar. τ se eligió en 2022 (cuantil 95 de 2020–2021 limpio, enmienda 1) y los umbrales salen de 2023.
+- **Resultado** (banco 2024–jul 2026, dos corridas idénticas):
+  - T1 pasa (E1: −0.006 [−0.015, +0.002]) y T2 pasa (E2-1, δ50: +0.109 [+0.082, +0.136]).
+  - Con 1–2 vecinas comprometidas recupera entre el 21 y el 58 % del recall perdido; con todas, nada.
+  - En la ventana de despliegue rinde igual que Ens-Vb-R.
+- **Adopción:** **Ens-Vb-X sustituye a Ens-Vb-R como detector principal**, según la regla registrada.
+- **Detalle:** [resultados_rev24_exclusion_vecinas.md](resultados_rev24_exclusion_vecinas.md).

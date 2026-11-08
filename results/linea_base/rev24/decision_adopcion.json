@@ -1,0 +1,15 @@
+{
+  "tau": 0.259588868885851,
+  "detector": "Ens-Vb-X0.2596",
+  "T1": true,
+  "T2": true,
+  "adopcion": "sustituye a Ens-Vb-R",
+  "corridas_identicas": true,
+  "diferencia_max": 0.0,
+  "Vb_y_PARAAD_igual_rev23": 0.0,
+  "estacion_dias_evaluables": {
+    "2024": 9151,
+    "2025": 8822,
+    "2026": 5032
+  }
+}

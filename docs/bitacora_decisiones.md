@@ -172,3 +172,10 @@ Según la regla registrada (dos pruebas, IC 97.5 %), Ens-Vbr no supera a Ens-V0r
 - **Optimización:** XLA se descartó porque no cumplió el criterio declarado (91 alarmas en vez de 90 en 2023, por un empate exacto con el umbral). La inferencia usada es idéntica bit a bit a la de la calibración.
 - **Precisión del registro:** la historia empieza en 2020 en lugar de «el año anterior». Se decidió antes de generar planes.
 - **Pendiente sugerido (no registrado):** combinar un detector de vecinas con uno de red sin vecinas, tipo PARAAD, contra el ataque coordinado.
+
+## 2026-11-08 — Ens-Vb-X pasa a ser el detector principal (revisión 24)
+
+- **Decisión** por la regla registrada: T1 (no inferioridad en E1) y T2 (recall con 1 vecina comprometida) pasan. Ens-Vb-X = Ens-Vb-R (los mismos 5 modelos) + exclusión de vecinas sospechosas con τ = 0.2596 σ. Umbrales de 2023: p99 0.1508 y p99.9 0.6310.
+- **Enmienda 1 declarada:** la grilla de τ en σ globales nunca se activaba. Se cambió por cuantiles de 2020–2021 limpio antes de puntuar ataques.
+- **Alcance:** la regla sube el costo del ataque coordinado a ≥ 3 vecinas comprometidas, pero no lo elimina. Contra el vecindario completo sólo ayuda un detector sin vecinas (PARAAD).
+- **El orden de las revisiones lo decidió el tesista:** la revisión 24 va antes que la 23b (D1), para que D1 evalúe a Ens-Vb-X.
