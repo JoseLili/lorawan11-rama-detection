@@ -248,6 +248,7 @@ resultados.
 
 | Revisión | Fecha | Cambio | Motivo |
 |---|---|---|---|
+| T-RAW | 2026-11-09 | Reinicio exploratorio TINTO con O3 raw, sin características ni máscaras de entrada; auditoría 2020–2022 antes de representación y entrenamiento. Diseño: experiments/tinto_raw/protocolo.md | Solicitud del tesista y tutor; preservar resultados anteriores |
 | 0 | 2026-10-12 | Versión inicial | — |
 | 1 | 2026-10-13 | Aclaraciones de implementación del §5, §6 y §8 (abajo). No cambian el diseño | Surgieron al programar el generador, antes de entrenar o evaluar cualquier detector |
 | 2 | 2026-10-13 | Nivel de azar para la detección por episodio y detección por hora como métrica principal (§9) | Con falsas alarmas por hora, un episodio largo casi siempre recibe alguna alerta por azar. Se registró antes de evaluar cualquier detector |

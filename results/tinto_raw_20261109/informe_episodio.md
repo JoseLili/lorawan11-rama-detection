@@ -1,0 +1,9 @@
+# Episodio controlado sobre O3 — 2026-11-09
+
+SAC, primera semana de enero de 2022 (01 00:00–07 23:00). La búsqueda prefijada de siete días completos consecutivos no encontró casos en SAC2022. Se registró antes de visualizar la alternativa de primera semana calendario con relleno0 autorizado. Tres faltantes, iguales en las dos versiones; curvas físicas los conservan como huecos. Selección por fecha, no por apariencia ni por scores.
+
+Ataque demostrativo +50% entre 03 00:00 y 05 23:00: 69 mediciones observadas modificadas, 69 píxeles modificados entre imágenes pareadas. No se perdió ningún cambio efectivo. Días fuera del episodio idénticos. Recuperación desde imagen a ppb: error máximo 1.4210854715202004e-14, redondeo flotante. Sin valores fuera de [0,1] en este ejemplo ni recorte. Mapa nativo TINTO32 y escalador por hora cargados de la fase anterior, ajustados solo en 2020–2021; rasterización reproduce la asignación nativa previamente auditada. No nuevo fit, no CNN.
+
+La curva en ppb permite leer el ciclo diario y la alteración. Las imágenes conservan las intensidades alteradas en posiciones fijas; no deben formar una línea temporal dentro de cada imagen. La persistencia se ve en tres imágenes consecutivas. La fila diferencia usa el original conocido: sirve como diagnóstico controlado, no como entrada disponible en un ataque real. El mismo color entre horas distintas no implica los mismos ppb por el escalado por columna. Una sola estación, una semana y una intensidad no demuestran detectabilidad ni generalización. No F1.
+
+Dos ejecuciones idénticas incluidos gráficos, verificadas por hashes en reproducibilidad_episodio.json. Figuras y tablas en episodio_primera_semana1; secuencia.png muestra días en columnas y versiones en filas; curva_y_mapa.png muestra ppb/tiempo y leyenda hora/píxel. Sin acceso a años de examen.

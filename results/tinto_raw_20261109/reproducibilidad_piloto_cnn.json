@@ -1,0 +1,13 @@
+{
+  "pesos_identicos": true,
+  "archivos_identicos": {
+    "configuracion.json": "197c6068dd8e4680dd7624f2765355c65c96062c89abbe161f99a554b63dfd97",
+    "historia.csv": "657983a6a04358d92e67aef420c324254023fda62a722812837bc2f916b16dff",
+    "ajuste_manifiesto.csv": "e5a9100c7ad18739b37e79e5c354c6e72fd996cef5e906788ee291fe44c978f8",
+    "validacion_manifiesto.csv": "6c524e8140f41d7facdf4412587e4231e5b50b26d1a7875192672ffd1c5a6715",
+    "ajuste_y.npy": "4325fefc1299c3490aeac8713e98c23e67188c4826e2de06046afbb193f352a2",
+    "validacion_y.npy": "85a130886621881d04129b5ac62d5264b2c84a86af5969320203f69c6cb801d2",
+    "probabilidades.npy": "2560e4e65774bd5651068258175f06c550ed0b4b96b0fa743e0feea078004fe2"
+  },
+  "nota": "Tiempos/RSS y contenedor keras no se exigen id\u00e9nticos; se cotejan arrays de pesos."
+}

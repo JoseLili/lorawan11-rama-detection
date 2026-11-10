@@ -1,0 +1,7 @@
+brazo,lado,filas_ajuste,columnas,pixeles_ocupados,cambios_1ppb_ocultos
+completos,32,12146,24,24,0
+completos,64,12146,24,23,1
+relleno0,32,22661,24,24,0
+relleno0,64,22661,24,24,0
+relleno99,32,22661,24,20,4
+relleno99,64,22661,24,23,1

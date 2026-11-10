@@ -1,0 +1,21 @@
+{
+  "estacion": "SAC",
+  "inicio": "2022-01-01 00:00:00",
+  "fin": "2022-01-07 00:00:00",
+  "ataque_inicio": "2022-01-03 00:00:00",
+  "ataque_fin": "2022-01-05 23:00:00",
+  "factor": 1.5,
+  "faltantes_rellenados": 3,
+  "cambios_ppb": 69,
+  "cambios_tensor": 69,
+  "error_maximo_reconstruccion_ppb": 1.4210854715202004e-14,
+  "valores_fuera_0_1_original": 0,
+  "valores_fuera_0_1_alterada": 0,
+  "fuentes": {
+    "results/tinto_raw_20261109/auditoria1/o3_raw_ppb.csv": "a538847a4b553f451dcc4f0fa7ad43614fe83a6f47e337eea2e5ffb2ada448be",
+    "results/tinto_raw_20261109/representacion1/completos_32_mapa.csv": "e0e3571fbccf0b428b196bdba030e16a18c74b9481e59d37b89fd63b833f673b",
+    "results/tinto_raw_20261109/representacion1/completos_escala.csv": "8decdaab928e8b5b268ba67f4ce88abe95da3b19f0701e529dcf28de630ff4dc",
+    "experiments/tinto_raw/episodio_visual.py": "607f0a2ae1553f1185f86a27adbd1a818ec4b9861b33e8e7dd67e0ca2c9812bd"
+  },
+  "detector": "ninguno; mapa TINTO nativo cargado de disco, no reajustado"
+}

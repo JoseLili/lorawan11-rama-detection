@@ -5013,3 +5013,39 @@ Ver la [hoja de ruta](hoja_de_ruta_2026-11.md): LB2 (semillas) → D1 (deriva y 
 - **Ens-Vb-X sigue como detector principal.** La fusión queda como modo de alta cobertura.
 - **Detalle:** [resultados_rev25_fusion_paraad.md](resultados_rev25_fusion_paraad.md).
 - **Decisión posterior del tesista:** la fusión queda **fuera del sistema**. **Ens-Vb-X es el detector final de la tesis.** La revisión 25 se reporta como experimento retador.
+
+## 2026-11-09 — Reinicio TINTO raw
+
+Autorizado solo O3 original RAMA. Diseño previo en experiments/tinto_raw/protocolo.md.
+Primero auditoría 2020–2022 sin imputación ni características de L0; no entrenamiento
+ni apertura de examen. Representación y tratamiento de faltantes por concretar tras
+auditoría de cobertura.
+
+### TINTO raw: estación-día y rellenos autorizados
+
+TINTO 1.3.1 nativo ejecutado dos veces con resultados idénticos. En 32×32,
+control completo y relleno0: 24/24 posiciones; relleno99: 20/24. No demuestra
+separación de faltantes ni detección. Informe: results/tinto_raw_20261109/informe_representacion.md.
+
+### TINTO raw — episodio visual en ppb
+
+Primera semana SAC2022, +50% días3–5: 69 cambios físicos y 69 cambios de píxel;
+controles fuera del episodio idénticos. Dos ejecuciones idénticas. Mapa/escala
+congelados, sin CNN. Tres faltantes rellenados0 en imágenes, huecos en curva.
+Informe: results/tinto_raw_20261109/informe_episodio.md.
+
+### TINTO raw red-día
+
+768 características crudas; comparación SAC+50% el03 enero2022. En64×64 se
+conservan16 de21 cambios;5 se pierden por colisión nativa. Dos ejecuciones
+idénticas. Informe: results/tinto_raw_20261109/informe_red_dia.md. Sin CNN.
+
+### Piloto CNN TINTO raw estación-día (2026-11-09)
+
+Autorizado entrenamiento limitado:2048 imágenes ajuste2020–2021,512 validación2022,
+cincoépocasCPU,d50±,muestra50/50. Dos corridas con pesos/historias/scores idénticos.
+Entrenamiento2.2–2.3s,tensores10MiB,RSS~945MiB. AUC0.674,F10.441,recall0.328
+alumbral0.5:viabilidadcomputacional, no detector validado. Informe detallado:
+results/tinto_raw_20261109/informe_piloto_cnn.md.
+
+Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md).

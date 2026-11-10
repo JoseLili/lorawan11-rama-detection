@@ -1,0 +1,86 @@
+{
+  "fuentes": [
+    {
+      "zip": "20RAMA.zip",
+      "archivo": "2020O3.xls",
+      "sha256": "5b0175714c61a83bc679cc366da34a0dbe824369f778448dc1840b70eb378722"
+    },
+    {
+      "zip": "21RAMA.zip",
+      "archivo": "2021O3.xls",
+      "sha256": "63fecdd1f74d7a3bfc4e2cc17a168e26b504ba60c0f649fb9bf3a64b6ba87f0c"
+    },
+    {
+      "zip": "22RAMA.zip",
+      "archivo": "2022O3.xls",
+      "sha256": "994657201f8ffb46ba49e5d77a3a283f01d5441ad0022754fde36c24c0eb273a"
+    }
+  ],
+  "periodo": [
+    "2020",
+    "2021",
+    "2022"
+  ],
+  "entrada": "Solo mediciones O3 ppb; NaN preservados",
+  "resumen": [
+    {
+      "anio": 2020,
+      "horas": 8784,
+      "horas_completas_red32": 0,
+      "dias_completos_red32": 0
+    },
+    {
+      "anio": 2021,
+      "horas": 8760,
+      "horas_completas_red32": 0,
+      "dias_completos_red32": 0
+    },
+    {
+      "anio": 2022,
+      "horas": 8760,
+      "horas_completas_red32": 0,
+      "dias_completos_red32": 0
+    }
+  ],
+  "estaciones": [
+    "ACO",
+    "AJM",
+    "AJU",
+    "ATI",
+    "BJU",
+    "CAM",
+    "CCA",
+    "CHO",
+    "COY",
+    "CUA",
+    "CUT",
+    "FAC",
+    "FAR",
+    "GAM",
+    "HGM",
+    "INN",
+    "IZT",
+    "LLA",
+    "LPR",
+    "MER",
+    "MGH",
+    "MON",
+    "MPA",
+    "NEZ",
+    "PED",
+    "SAC",
+    "SAG",
+    "SFE",
+    "SJA",
+    "TAH",
+    "TLA",
+    "TLI",
+    "UAX",
+    "UIZ",
+    "VIF",
+    "XAL"
+  ],
+  "hash_matriz": "a538847a4b553f451dcc4f0fa7ad43614fe83a6f47e337eea2e5ffb2ada448be",
+  "relectura_exacta": true,
+  "modelo": "ninguno; auditoría sin entrenamiento"
+}

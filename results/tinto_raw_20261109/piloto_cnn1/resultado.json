@@ -1,0 +1,26 @@
+{
+  "modelo": "CNN recién entrenada; checkpoint final época5",
+  "parametros": 34081,
+  "ajuste_imagenes": 2048,
+  "validacion_imagenes": 512,
+  "memoria_tensores_MiB": 10.0,
+  "preparacion_segundos": 0.07251647600060096,
+  "entrenamiento_segundos": 2.291961721000007,
+  "inferencia_512_segundos": 0.07025253600022552,
+  "rss_max_MiB": 940.0625,
+  "pesos_cambiaron": true,
+  "tensorflow": "2.22.0-rc0",
+  "keras": "3.16.0.dev2026092204",
+  "metricas": {
+    "f1": 0.4409448818897638,
+    "precision": 0.672,
+    "recall": 0.328125,
+    "exactitud": 0.583984375,
+    "roc_auc": 0.674224853515625,
+    "average_precision": 0.6919424879536555,
+    "positivos_predichos": 125,
+    "f1_siempre_positivo": 0.6666666666666666,
+    "ap_prior": 0.5,
+    "roc_auc_constante": 0.5
+  }
+}

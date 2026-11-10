@@ -1,0 +1,1 @@
+Imágenes de entrada reconstruidas con datos sin inyección, mapas y escaladores congelados. Ejemplo fijo SAC 2022-01-16. EH/RH: ventana móvil de 24 horas terminada a las 12:00. ED/RD: día 00–23. S1: una sola hora, 12:00. Colores para visualización; el modelo recibe matrices numéricas. No son predicciones ni mapas geográficos.

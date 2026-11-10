@@ -1,0 +1,8 @@
+{
+  "identicos": true,
+  "sha256": {
+    "cobertura.csv": "d9d8e5cadcac2f1f33f441297f67d1539315b65512e616ff686869c20d00e961",
+    "informe.json": "bceb5cce5d8218ee4961b3ed285d416905d615a106b3f99a1341e739c14369a3",
+    "o3_raw_ppb.csv": "a538847a4b553f451dcc4f0fa7ad43614fe83a6f47e337eea2e5ffb2ada448be"
+  }
+}

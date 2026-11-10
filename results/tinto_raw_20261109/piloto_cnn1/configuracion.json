@@ -1,0 +1,13 @@
+{
+  "epocas": 5,
+  "semilla": 42,
+  "batch": 64,
+  "umbral": 0.5,
+  "delta": 0.5,
+  "fuentes": {
+    "results/tinto_raw_20261109/auditoria1/o3_raw_ppb.csv": "a538847a4b553f451dcc4f0fa7ad43614fe83a6f47e337eea2e5ffb2ada448be",
+    "results/tinto_raw_20261109/representacion1/completos_32_mapa.csv": "e0e3571fbccf0b428b196bdba030e16a18c74b9481e59d37b89fd63b833f673b",
+    "results/tinto_raw_20261109/representacion1/completos_escala.csv": "8decdaab928e8b5b268ba67f4ce88abe95da3b19f0701e529dcf28de630ff4dc",
+    "experiments/tinto_raw/piloto_cnn.py": "43624a0dc3bf0749baa8249dcc0125150e044bf841d889184ffd900b52fe7c41"
+  }
+}
