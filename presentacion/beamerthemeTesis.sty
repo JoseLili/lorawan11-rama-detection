@@ -1,0 +1,136 @@
+% beamerthemeTesis.sty -- tema propio de la presentacion de tesis.
+% Reproduce el estilo de la version en Google Slides: fondo crema, etiqueta
+% naranja arriba, titular con serif y portada azul noche. Los colores salen de
+% colores-tesis.sty; aqui no se define ningun color nuevo.
+% Requiere LuaLaTeX o XeLaTeX (usa fontspec). latexmkrc ya elige LuaLaTeX.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTesis}[2026/11/18 Tema de la presentacion de tesis]
+
+\RequirePackage{colores-tesis}
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{appendixnumberbeamer} % el respaldo no cuenta en "n / total"
+
+% --- Tipografia ---
+% Texto: Quattrocento Sans (la original); si no esta instalada, Lato.
+% Titulares: Caladea (mismas medidas que Cambria, la original).
+\IfFontExistsTF{Quattrocento Sans}
+  {\setsansfont{Quattrocento Sans}}
+  {\setsansfont{Lato}}
+\newfontfamily\fuentetitular{Caladea}
+\usefonttheme{professionalfonts} % las formulas conservan su fuente matematica
+
+% --- Medidas ---
+\setbeamersize{text margin left=1.1cm, text margin right=1.1cm}
+\setbeamertemplate{navigation symbols}{}
+
+% --- Colores de beamer ---
+\setbeamercolor{background canvas}{bg=fondo}
+\setbeamercolor{normal text}{fg=texto}
+\setbeamercolor{structure}{fg=noche}
+\setbeamercolor{alerted text}{fg=acento}
+\setbeamercolor{frametitle}{fg=acento}
+\setbeamercolor{framesubtitle}{fg=noche}
+\setbeamercolor{page number in head/foot}{fg=tenue}
+\setbeamercolor{caption name}{fg=tenue}
+\setbeamercolor{caption}{fg=tenue}
+\setbeamercolor{footnote}{fg=tenue}
+\setbeamercolor{footnote mark}{fg=acento}
+\setbeamercolor{bibliography entry author}{fg=texto}
+\setbeamercolor{bibliography entry title}{fg=noche}
+\setbeamercolor{bibliography entry location}{fg=tenue}
+\setbeamercolor{bibliography entry note}{fg=tenue}
+
+% --- Fuentes de beamer ---
+\setbeamerfont{frametitle}{family=\sffamily, size=\footnotesize, series=\bfseries}
+\setbeamerfont{framesubtitle}{family=\fuentetitular, size=\Large, series=\mdseries}
+\setbeamerfont{block title}{family=\sffamily, size=\footnotesize, series=\bfseries}
+\setbeamerfont{page number in head/foot}{size=\tiny}
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamerfont{footnote}{size=\tiny}
+
+% --- Titulo de cada lamina ---
+% \begin{frame}{ETIQUETA}{Titular}: la etiqueta va en naranja y el titular en
+% serif azul noche. Si no hay titular, solo aparece la etiqueta.
+\makeatletter
+\setbeamertemplate{frametitle}{%
+  \vskip0.55cm
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \ifx\insertframesubtitle\@empty\else
+    \vskip0.1cm
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+  \fi
+  \vskip0.25cm}
+\setbeamertemplate{frametitle continuation}{} % sin "I, II" al partir laminas largas
+
+% --- Bloques ---
+% block: etiqueta naranja encima y caja azul noche con texto blanco (hipotesis).
+% exampleblock: tarjeta blanca con borde azul. alertblock: borde naranja.
+\setbeamertemplate{block begin}{%
+  \par\vskip\medskipamount
+  \ifx\insertblocktitle\@empty\else
+    {\usebeamerfont{block title}\color{acento}\insertblocktitle\par}\vskip3pt
+  \fi
+  \begin{tcolorbox}[colback=noche, colframe=noche, coltext=white, arc=4pt,
+    boxrule=0pt, left=8pt, right=8pt, top=6pt, bottom=6pt, halign=flush left]}
+\setbeamertemplate{block end}{\end{tcolorbox}\par\vskip\smallskipamount}
+
+\setbeamertemplate{block example begin}{%
+  \par\vskip\medskipamount
+  \begin{tcolorbox}[colback=white, colframe=ensX, coltext=texto, arc=4pt,
+    boxrule=1pt, left=8pt, right=8pt, top=6pt, bottom=6pt, halign=flush left]
+  \ifx\insertblocktitle\@empty\else
+    {\usebeamerfont{block title}\color{ensX}\insertblocktitle\par}\vskip3pt
+  \fi}
+\setbeamertemplate{block example end}{\end{tcolorbox}\par\vskip\smallskipamount}
+
+\setbeamertemplate{block alerted begin}{%
+  \par\vskip\medskipamount
+  \begin{tcolorbox}[colback=white, colframe=acento, coltext=texto, arc=4pt,
+    boxrule=1pt, left=8pt, right=8pt, top=6pt, bottom=6pt, halign=flush left]
+  \ifx\insertblocktitle\@empty\else
+    {\usebeamerfont{block title}\color{acento}\insertblocktitle\par}\vskip3pt
+  \fi}
+\setbeamertemplate{block alerted end}{\end{tcolorbox}\par\vskip\smallskipamount}
+\makeatother
+
+% --- Listas ---
+\setbeamertemplate{itemize item}{\color{acento}\raisebox{.1ex}{\small$\bullet$}}
+\setbeamertemplate{itemize subitem}{\color{tenue}\raisebox{.1ex}{\footnotesize--}}
+\setbeamertemplate{itemize subsubitem}{\color{tenue}\raisebox{.1ex}{\scriptsize$\cdot$}}
+\setbeamertemplate{enumerate item}{\color{acento}\insertenumlabel.}
+\setbeamertemplate{enumerate subitem}{\color{tenue}\insertenumlabel.\insertsubenumlabel}
+
+% --- Pie: numero de lamina "n / total" abajo a la derecha ---
+\setbeamertemplate{footline}{%
+  \hfill{\usebeamerfont{page number in head/foot}\usebeamercolor[fg]{page number in head/foot}%
+    \insertframenumber\,/\,\inserttotalframenumber}\hspace{0.6cm}\vspace{0.35cm}}
+
+% --- Fondo azul noche (portada y cierre) ---
+\newcommand{\fondooscuro}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[noche] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}}
+
+% --- Portada ---
+% Campos: \title, \subtitle, \author, \institute, \date y \tutor (propio del tema).
+\newcommand{\tutor}[1]{\def\insertutor{#1}}
+\tutor{}
+\setbeamertemplate{title page}{%
+  \fondooscuro
+  \vskip0.2cm
+  {\sffamily\scriptsize\color{acento}\insertinstitute\par}
+  \vskip0.35cm
+  {\fuentetitular\huge\color{white}\inserttitle\par}
+  \vskip0.4cm
+  {\sffamily\normalsize\color{white!88!noche}\insertsubtitle\par}
+  \vfill
+  {\sffamily\footnotesize\bfseries\color{white}Presenta: \insertauthor\par}
+  \vskip2pt
+  {\sffamily\scriptsize\color{white!72!noche}Tutor: \insertutor\quad·\quad\insertdate\par}
+  \vskip0.3cm
+  \hfill{\usebeamerfont{page number in head/foot}\color{white!72!noche}%
+    \insertframenumber\,/\,\inserttotalframenumber}}
+
+\endinput

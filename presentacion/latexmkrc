@@ -1,0 +1,4 @@
+# La presentacion usa fontspec: se compila con LuaLaTeX aunque se pida -pdf
+# (asi funciona igual desde la terminal y desde LaTeX Workshop).
+$pdf_mode = 1;
+$pdflatex = 'lualatex %O %S';

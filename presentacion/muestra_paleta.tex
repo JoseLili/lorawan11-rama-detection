@@ -1,0 +1,61 @@
+% Muestra de la paleta (colores-tesis.sty). Las graficas usan datos de ejemplo, no resultados.
+\documentclass[aspectratio=169]{beamer}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{colores-tesis,booktabs}
+\setbeamercolor{background canvas}{bg=fondo}
+\setbeamercolor{frametitle}{fg=noche,bg=}
+\setbeamercolor{normal text}{fg=texto}
+\setbeamertemplate{navigation symbols}{}
+\newcommand{\muestra}[2]{\raisebox{-.15\height}{\tikz\fill[#1] (0,0) rectangle (.9,.36);}\hspace{.5em}\parbox[t]{.8\linewidth}{\footnotesize #2}\par\vspace{3pt}}
+\begin{document}
+\begin{frame}{Paleta propuesta}
+\begin{columns}[T]
+\column{.55\textwidth}
+{\color{acento}\scriptsize\bfseries DETECTORES (un color fijo cada uno)}\par\smallskip
+\muestra{ensX}{\textbf{Ensamble vecinal con filtro} (Ens-Vb-X)\\[-1pt]{\tiny\color{tenue}detector final · 0F4C81}}
+\muestra{ensR}{Ensamble vecinal sin filtro (Ens-Vb-R)\\[-1pt]{\tiny\color{tenue}ablación · 4A90C8 · línea punteada}}
+\muestra{ensP}{Ensamble con referencia propia (Ens-V0-R)\\[-1pt]{\tiny\color{tenue}ablación sin vecinas · E69F00}}
+\muestra{paraad}{PARAAD-SA\\[-1pt]{\tiny\color{tenue}comparador externo · 1B9E77}}
+\muestra{tintoA}{TINTO 1 día (autoencoder)\\[-1pt]{\tiny\color{tenue}exploración · C77CB0}}
+\muestra{tintoB}{TINTO 7 días (CNN temporal)\\[-1pt]{\tiny\color{tenue}exploración · 6A3D9A}}
+\column{.42\textwidth}
+{\color{acento}\scriptsize\bfseries VARIANTES DE UN MISMO DETECTOR (tono)}\par\smallskip
+\muestra{ensX}{p99 · Recall}
+\muestra{ensX!70!white}{Precisión}
+\muestra{ensX!45!white}{p99.9 · F1}\par\medskip
+{\color{acento}\scriptsize\bfseries NEUTROS Y MARCA}\par\smallskip
+\muestra{sinataque}{Sin ataque / azar (línea gris punteada)}
+\muestra{resalte}{Zona resaltada (despliegue)}
+\muestra{noche}{Títulos y portada}
+\muestra{acento}{Etiquetas de sección}
+\end{columns}
+\end{frame}
+\begin{frame}{Así se vería una gráfica \quad{\normalsize\color{tenue}(datos de ejemplo, no resultados)}}
+\centering
+\begin{tikzpicture}
+\begin{axis}[ejes tesis, width=12cm, height=6.3cm, ymin=0, ymax=1, xtick={1,...,8},
+  xlabel={Semana}, ylabel={Recall}, legend pos=outer north east, legend cell align=left]
+\addplot[det ensX] coordinates {(1,.85)(2,.84)(3,.75)(4,.62)(5,.30)(6,.10)(7,.04)(8,.04)}; \addlegendentry{Con filtro}
+\addplot[det ensR] coordinates {(1,.83)(2,.80)(3,.66)(4,.50)(5,.22)(6,.07)(7,.03)(8,.03)}; \addlegendentry{Sin filtro}
+\addplot[det ensP] coordinates {(1,.80)(2,.22)(3,.02)(4,.01)(5,.01)(6,.01)(7,.01)(8,.01)}; \addlegendentry{Ref. propia}
+\addplot[det paraad] coordinates {(1,.55)(2,.56)(3,.55)(4,.54)(5,.57)(6,.56)(7,.57)(8,.58)}; \addlegendentry{PARAAD-SA}
+\addplot[det tintoA] coordinates {(1,.30)(2,.28)(3,.27)(4,.25)(5,.25)(6,.24)(7,.24)(8,.23)}; \addlegendentry{TINTO 1 d}
+\addplot[det tintoB] coordinates {(1,.70)(2,.64)(3,.55)(4,.45)(5,.40)(6,.36)(7,.33)(8,.30)}; \addlegendentry{TINTO 7 d}
+\addplot[ref sinataque] coordinates {(1,.01)(8,.01)}; \addlegendentry{Sin ataque}
+\end{axis}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Barras: color = detector, tono = variante \quad{\normalsize\color{tenue}(datos de ejemplo)}}
+\centering
+\begin{tikzpicture}
+\begin{axis}[ejes tesis, ybar, bar width=9pt, width=10.5cm, height=6.3cm, ymin=0, ymax=1,
+  symbolic x coords={d20,d50,d100}, xtick=data, xticklabels={$\delta$ 20\,\%, $\delta$ 50\,\%, $\delta$ 100\,\%},
+  ylabel={Valor de la métrica}, legend pos=outer north east, legend cell align=left, enlarge x limits=.25]
+\addplot[barra=ensX] coordinates {(d20,.21)(d50,.81)(d100,.94)}; \addlegendentry{Con filtro · Recall}
+\addplot[barra=ensX!70!white] coordinates {(d20,.12)(d50,.31)(d100,.32)}; \addlegendentry{Con filtro · Precisión}
+\addplot[barra=ensX!45!white] coordinates {(d20,.14)(d50,.45)(d100,.48)}; \addlegendentry{Con filtro · F1}
+\addplot[barra=paraad] coordinates {(d20,.08)(d50,.36)(d100,.68)}; \addlegendentry{PARAAD-SA · Recall}
+\end{axis}
+\end{tikzpicture}
+\end{frame}
+\end{document}

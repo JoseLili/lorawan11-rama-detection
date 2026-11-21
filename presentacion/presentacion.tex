@@ -1,0 +1,201 @@
+% Presentacion de tesis en Beamer. Estructura tomada de una plantilla de Overleaf;
+% estilo propio en beamerthemeTesis.sty y colores en colores-tesis.sty.
+% Compilar: latexmk presentacion.tex  (latexmkrc elige LuaLaTeX).
+\documentclass[
+  aspectratio=169,
+]{beamer}
+
+\usepackage[spanish, es-nodecimaldot, es-noshorthands, es-tabla]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{../docs/referencias.bib}
+\usepackage{booktabs}
+\usepackage{tabularx}  % tablas con columnas X que se reparten el ancho
+\usepackage{colortbl}  % \columncolor para sombrear una columna
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+% Celda de encabezado en tablas con fondo oscuro: texto blanco en negritas
+% (\leavevmode evita que el color baje la celda una linea).
+\newcommand{\encabezado}[1]{\leavevmode\color{white}\bfseries #1}
+\usetheme{Tesis}
+\usepackage{iconos-tesis}
+\usetikzlibrary{calc}
+
+% Marca temporal de cada lamina sin revisar. Se borra cuando ya no se use.
+\newcommand{\pendiente}[1]{%
+  \begin{tcolorbox}[colback=white, colframe=tenue, coltext=tenue, arc=4pt,
+    boxrule=0.6pt, borderline={0.6pt}{0pt}{tenue, dashed}]
+    \footnotesize\textbf{Pendiente de revisar.} #1
+  \end{tcolorbox}}
+
+\title[Detección de anomalías en redes de monitoreo]{Detección de anomalías en\\redes de monitoreo atmosférico}
+\subtitle{Aprendizaje profundo con contraste espacio-temporal y exploración con imágenes sintéticas \textbf{TINTO}}
+\author[J. E. Lili Beltrán]{Ing. José Emiliano Lili Beltrán}
+\tutor{Dr. José Jaime Camacho Escoto}
+\institute[PCIC · UNAM]{POSGRADO EN CIENCIA E INGENIERÍA DE LA COMPUTACIÓN · UNAM}
+\date{Noviembre de 2026}
+\subject{Tesis de maestría}
+\keywords{detección de anomalías, redes de sensores, ozono, RAMA, LSTM}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% =====================================================================
+\section{Introducción}
+
+\begin{frame}{CONTEXTO DEL PROBLEMA}
+\vfill
+\centering
+\input{figuras/contexto_problema}
+\vfill
+\note{%
+\begin{itemize}
+  \item En una red como la RAMA (32 estaciones en la CDMX; VERIFICAR: 31 evaluadas,
+    33 en la matriz, y la red cubre también el Estado de México), el ozono varía mucho
+    entre horas del día y entre zonas de la ciudad.
+  \item Cuando hay una falla de sensor, una descalibración o un ataque de integridad en la
+    transmisión, los datos llegan al servidor central dentro de rangos físicamente
+    posibles, por lo que un umbral fijo no los detecta.
+  \item El objetivo práctico es un aviso temprano en el servidor central, sin aumentar el
+    costo de la red ni instalar nodos redundantes, que indique al cierre del día si una
+    estación requiere revisión.
+\end{itemize}}
+\end{frame}
+
+\begin{frame}
+\begin{block}{HIPÓTESIS}
+Es posible detectar, con un alto grado de confiabilidad, anomalías en la
+información reportada en redes de sensores utilizando el historial reciente de
+cada estación y el de sus estaciones vecinas sin incurrir en un exceso de
+falsos positivos.
+\end{block}
+\begin{block}{OBJETIVO}
+Diseñar un detector de anomalías basado en redes LSTM que combine la historia 
+temporal de cada estación con la de sus estaciones vecinas, con alta capacidad 
+de detección y una tasa de falsas alarmas acotada, en una red de sensores de ozono.
+\end{block}
+\end{frame}
+
+\begin{frame}{TRABAJOS RELACIONADOS}
+% Tabla comparativa: columnas = trabajos, filas = caracteristicas.
+% Y = columna X de tabularx con texto alineado a la izquierda (definida en el preambulo).
+% La ultima columna (este trabajo) va sombreada con \columncolor.
+\centering
+\footnotesize                          % letra mas chica solo en esta lamina
+\renewcommand{\arraystretch}{1.12}     % aire entre filas
+\setlength{\tabcolsep}{4pt}            % menos espacio entre columnas (normal: 6pt)
+% Primera columna: 1.8 cm, en negritas y azul noche (\leavevmode evita que el
+% color empuje la celda una linea hacia abajo).
+\begin{tabularx}{\textwidth}{>{\leavevmode\bfseries\color{noche}}p{1.8cm} Y Y Y >{\columncolor{panel}}Y}
+  \toprule
+  % Encabezado: nombre, salto de linea dentro de la celda (\newline) y revista
+  & PARAAD-SA
+  & STC-RAAD
+  & FedWLA
+  & \textcolor{ensX}{\textbf{Este trabajo}}\\
+  \midrule
+  Modelo      & Autoencoder recurrente con atención; no supervisado
+              & Autoencoder recurrente espacio-temporal; no supervisado
+              & IDS federado; supervisado % VERIFICAR con el articulo
+              & Ensamble de 5 LSTM; supervisado \\
+  Usa vecinas & No & Sí & No aplica & Sí, con filtro de sospechosas \\
+  Amenaza     & Datos: sesgo y deriva
+              & Datos: anomalías de sensor % VERIFICAR
+              & Red: tráfico malicioso
+              & Datos: proporcional, escalón y sesgo \\
+  Evaluación  & O\textsubscript{3}, 8 estaciones de Barcelona
+              & Calidad del aire % VERIFICAR
+              & X-IIoTID y Edge-IIoTset
+              & O\textsubscript{3} horario, 31 estaciones RAMA \\
+  \bottomrule
+\end{tabularx}
+\end{frame}
+
+% =====================================================================
+\section{Método}
+
+\begin{frame}{MODELO DE AMENAZA Y EXPERIMENTOS}
+% Datos tomados del protocolo (duracion: entero de 1 a 7 dias desde las 00 h) y de
+% los registros previos de las revisiones 23, 23b y 24 (docs/registro_previo_rev2*.md).
+% Encabezado con fondo azul noche (\rowcolor); filas blancas. Los \midrule de
+% booktabs dejan una franja del color de fondo entre filas, como en la original.
+\vfill
+\centering
+\small
+\renewcommand{\arraystretch}{1.5}
+\arrayrulecolor{fondo}  % las lineas entre filas, del color del fondo
+\begin{tabularx}{\textwidth}{>{\leavevmode\raggedright\bfseries\color{noche}}p{4.2cm} Y >{\raggedright\arraybackslash}p{3.3cm}}
+  \rowcolor{noche}
+  \encabezado{Escenario} & \encabezado{Magnitudes evaluadas} & \encabezado{Duración} \\
+  \rowcolor{white}
+  1. Anomalía proporcional & $\pm\delta$, con $\delta$ = 20, 50 y 100\,\% & 1 a 7 días \\ \midrule
+  \rowcolor{white}
+  2. Escalón aditivo fijo  & $\pm$10, $\pm$20 y $\pm$40 ppb & 1 a 7 días \\ \midrule
+  \rowcolor{white}
+  3. Ataque coordinado a vecinas & 0, 1, 2 y 4 vecinas alteradas & 1 a 7 días \\ \midrule
+  \rowcolor{white}
+  4. Sesgo lento o sostenido & +20 y +40 ppb: escalón, rampa de 28 días y deriva de 56 días & 8 semanas (56 días) \\
+\end{tabularx}
+\vfill
+\end{frame}
+
+\begin{frame}{ARQUITECTURA DEL DETECTOR PROPUESTO}{Ensamble vecinal con filtro: ventana de 48\,h y decisión diaria}
+\pendiente{Lámina 6: diagrama de la arquitectura (rehacer en TikZ o como imagen).}
+\end{frame}
+
+\begin{frame}{PROTOCOLO EXPERIMENTAL (2017–2026)}{Separación estricta de bloques anuales sin fuga de información}
+\pendiente{Lámina 7: línea de tiempo; revisar la afirmación \enquote{sin fuga de información}.}
+\end{frame}
+
+% =====================================================================
+\section{Resultados}
+
+\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA}{Sensibilidad (Recall) en anomalías proporcionales (\%), fijas (ppb) y despliegue}
+\pendiente{Lámina 8: gráfica incompleta; las notas no coinciden con la gráfica.}
+\end{frame}
+
+\begin{frame}{ELECCIÓN DEL PUNTO DE OPERACIÓN}{Sensibilidad (Recall) frente a días con falsas alarmas al año}
+\pendiente{Lámina 9: la gráfica no coincide con el título; decidir si va antes de los resultados.}
+\end{frame}
+
+\begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Sensibilidad según el número de estaciones vecinas comprometidas (0 a 4)}
+\pendiente{Lámina 10: el eje X salta de 2 a 4 con el mismo espacio.}
+\end{frame}
+
+\begin{frame}{RESULTADOS · SESGO SOSTENIDO DE LARGO PLAZO (UMBRAL p99)}{Horizonte de detección durante 8 semanas continuas}
+\pendiente{Lámina 11: aclarar perfil de 14 días contra normalización de 30 días.}
+\end{frame}
+
+% =====================================================================
+\section{Exploración con TINTO}
+
+\begin{frame}{EXPLORACIÓN CON IMÁGENES SINTÉTICAS TINTO}{De una imagen diaria aislada a contexto temporal de 7 días}
+\pendiente{Lámina 12: falta la tasa de falsas alarmas junto al recall.}
+\end{frame}
+
+% =====================================================================
+\section{Referencias}
+
+\begin{frame}[t, allowframebreaks]{REFERENCIAS}
+\printbibliography[heading=none]
+\end{frame}
+
+\begin{frame}[plain]
+\fondooscuro
+\vfill
+\centerline{\fuentetitular\LARGE\color{white}¡Gracias por su atención!}
+\vfill\vfill
+\end{frame}
+
+% =====================================================================
+% Respaldo: no cuenta en la numeracion "n / total".
+\appendix
+\section{Respaldo}
+
+\begin{frame}{RESPALDO · TINTO}{Imagen TINTO de una estación-día}
+\pendiente{Lámina 13: imagen sin título; decidir si se queda como respaldo.}
+\end{frame}
+
+\end{document}
