@@ -1,0 +1,40 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794278009.735203   25920 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+# Autoencoder estaci�n-d�a: primer experimento
+
+Entrenado solo con originales sin ataques inyectados. CPU; dos corridas desde cero.
+
+19300 im�genes originales float32, 75.39 MiB. Ajuste: 10334; selecci�n interna: 1812; evaluaci�n 2022: 7154.
+�pocas ejecutadas: 30; mejor �poca: 27. P�rdida de selecci�n inicial: 0.00942121; m�nima: 0.000946153.
+
+## Evaluaci�n exploratoria, umbral p99
+
+| Factor aplicado al d�a | Recall | Precisi�n | F1 | ROC-AUC | Falsa alarma original |
+|---|---:|---:|---:|---:|---:|
+| 1.2 | 0.0361 | 0.7842 | 0.0690 | 0.6342 | 0.0099 |
+| 0.8333 | 0.0021 | 0.1744 | 0.0041 | 0.3679 | 0.0099 |
+| 1.5 | 0.1209 | 0.9241 | 0.2138 | 0.7793 | 0.0099 |
+| 0.6667 | 0.0001 | 0.0139 | 0.0003 | 0.2294 | 0.0099 |
+| 2 | 0.3550 | 0.9728 | 0.5202 | 0.9081 | 0.0099 |
+| 0.5 | 0.0000 | 0.0000 | 0.0000 | 0.1063 | 0.0099 |
+
+## Interpretaci�n
+
+La reconstrucci�n mejora, pero no demuestra detecci�n suficiente: a p99 se detecta aproximadamente 12.09% de aumentos x1.5 y solo 0.014% de reducciones /1.5. Las reducciones producen scores menores y ROC-AUC inferior a 0.5 con la direcci�n predefinida. No se invierte el score ni se cambia el umbral despu�s de ver ataques. Este autoencoder no resuelve la detecci�n bidireccional; cualquier alternativa debe registrarse como nuevo experimento.
+
+## Alcance y verificaci�n
+
+Umbral calibrado en los mismos originales 2022: falsa alarma descriptiva, no validaci�n independiente. Pares 50/50 por factor; precisi�n/F1 no extrapolables a prevalencia operativa. Originales pueden contener anomal�as reales. Sin a�os 2023�2026 ni calendarios L0.
+Mapa/escala congelados ajustados previamente en todo 2020�2021, incluido el periodo de selecci�n interna. La p�rdida y el score usan los 24 p�xeles ocupados, no el fondo. No se entrega m�scara de ataque.
+Modelos guardados recargados y scores contrastados. Scores originales y todos los ataques id�nticos entre r�plicas; ver reproducibilidad.json para pesos e historias.
+
+## Reproducci�n
+
+Desde ra�z, usar el entorno registrado en entorno.txt y ejecutar experiments/tinto_raw/autoencoder.py. La salida debe no existir: el script rechaza sobrescribirla. Para otra ejecuci�n, cambiar expl�citamente OUT a una carpeta nueva. Los tensores son regenerables; no requieren ZIP raw ni reajustar TINTO.
+{
+  "pesos_identicos": true,
+  "historias_identicas": true,
+  "scores_identicos": true
+}

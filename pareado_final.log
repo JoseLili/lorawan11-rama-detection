@@ -1,0 +1,17 @@
+ZIP verificados y leidos
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+WARNING:tensorflow:5 out of the last 5 calls to <function Detector.__init__.<locals>.<lambda> at 0x0000018E9ACDF560> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+Original 2023 comunes 3446 segundos 22.478499099997862 0.9914812999995775
+Original 2025 comunes 3109 segundos 22.811934700002894 0.9054706000024453
+d100_aumento completado
+d100_reduccion completado
+d50_aumento completado
+d50_reduccion completado
+d20_aumento completado
+d20_reduccion completado
+d5_aumento completado
+d5_reduccion completado
+ppb_5 completado
+ppb_10 completado
+ppb_20 completado
+ppb_40 completado

@@ -1,0 +1,16 @@
+{
+  "ejecucion.log": "ac44602f23dc6c5e72928a225f852519652785e961d663296ff5a0fdf0fcac61",
+  "entorno.txt": "b69ab1eb2236babbe70d0dbe7aaa52a7ea34dea48bb148cf1b5141dfd62dcbab",
+  "fuentes.json": "500936a8fa68d90adcdd545856c2b5e07f0e6259ffacac75677605b80d325156",
+  "informe.md": "a664c3e871bc8868c556c278becffb516fbc2f64d892248aae22743cc3a6d9eb",
+  "manifiesto.csv": "5ec8a04a5984379e1e682370a3a3348eaf81a05b8ae51337b14cbeb9750405f1",
+  "metricas.csv": "52f2b9e868da033e9be7c1525963d7f17b09df55132d181a18f55f22d328d3a9",
+  "originales.npy": "8c1300e68ad7b41049ef5f4122e55c466e49229b05e637e4932af6a89a42a875",
+  "reproducibilidad.json": "e497ca7609133b4dd39041ae4b434236d6ae5fb728173b422cc275ae880f1329",
+  "corrida1\\historia.csv": "aaf5c58f9221f6bb6618400ac07219e63e05adcbc2f730de34873d216b2be287",
+  "corrida1\\modelo.keras": "4484fd9d0dfd96181c23b7687fe0fe5bd08e8d680e3590113bcbb07654b5e856",
+  "corrida1\\scores.csv": "145765f0fa935683954be597db8dc0a9f87deb62db119546b2087af41c847226",
+  "corrida2\\historia.csv": "aaf5c58f9221f6bb6618400ac07219e63e05adcbc2f730de34873d216b2be287",
+  "corrida2\\modelo.keras": "01a4e8e1558ec7ef075ca1e392059a17c2fa2612a12b21a75bf016eda4d4b11c",
+  "corrida2\\scores.csv": "145765f0fa935683954be597db8dc0a9f87deb62db119546b2087af41c847226"
+}

@@ -1,0 +1,32 @@
+{
+  "nombre": "TINTO-CNN-GRU-D2 provisional",
+  "fecha": "2026-11-11",
+  "parametros": 11104,
+  "entrada": [
+    2,
+    32,
+    32,
+    1
+  ],
+  "salida": 24,
+  "semilla": 42,
+  "replica": 1,
+  "mejor_epoca": 16,
+  "ajuste": "objetivos hasta 2021-09-30",
+  "seleccion": "2021-10-01 a 2021-12-31",
+  "datos_ajuste": 4625,
+  "datos_seleccion": 884,
+  "umbral": "NO congelado global: calibrar por protocolo, sin actualizar pesos/mapa/escala",
+  "estado": "congelado provisional; no detector final adoptado",
+  "fuentes": {
+    "modelo.keras": "results\\tinto_orden_temporal_20261111\\cnn_gru_diaria_1\\modelo.keras",
+    "configuracion_entrenamiento.json": "results\\tinto_orden_temporal_20261111\\cnn_gru_diaria_1\\configuracion.json",
+    "historia.csv": "results\\tinto_orden_temporal_20261111\\cnn_gru_diaria_1\\historia.csv",
+    "entorno.txt": "results\\tinto_orden_temporal_20261111\\entorno.txt",
+    "manifiesto_entrenamiento.csv": "results\\tinto_orden_temporal_20261111\\manifiesto.csv",
+    "mapa.csv": "results\\tinto_raw_20261109\\representacion1\\completos_32_mapa.csv",
+    "escala.csv": "results\\tinto_raw_20261109\\representacion1\\completos_escala.csv",
+    "protocolo.md": "experiments\\tinto_raw\\protocolo_orden_temporal.md",
+    "implementacion.py": "experiments\\tinto_raw\\orden_temporal.py"
+  }
+}

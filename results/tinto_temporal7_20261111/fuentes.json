@@ -1,0 +1,10 @@
+{
+  "results\\tinto_autoencoder_20261109\\originales.npy": "8c1300e68ad7b41049ef5f4122e55c466e49229b05e637e4932af6a89a42a875",
+  "results\\tinto_autoencoder_20261109\\manifiesto.csv": "5ec8a04a5984379e1e682370a3a3348eaf81a05b8ae51337b14cbeb9750405f1",
+  "results\\tinto_ae_12_escenarios\\scores.csv": "a89d3276116499469939c181dc7ebac2ea5ccb0f8d0b29dab3cba6e8f416aac3",
+  "results\\tinto_ae_12_escenarios\\lecturas_y_reconstrucciones.npz": "dc3a8dda09face9534c8f9911ba4b4b965d78523d8a98f4608a4a5cac3629b69",
+  "results\\tinto_raw_20261109\\representacion1\\completos_32_mapa.csv": "810da93b4b13171ea4cc356eedef043da8bc1749097845a4b151b0cc392cbb5b",
+  "results\\tinto_raw_20261109\\representacion1\\completos_escala.csv": "d907be288ae4df3a28474fbb2f076d1c3690033e9a1547b8e8724a8f8c056378",
+  "experiments\\tinto_raw\\temporal7.py": "a17e458bebec423f4b0bb25ef2a746a689c5f104b20d99015488e364acaa3cb7",
+  "experiments\\tinto_raw\\protocolo_temporal7.md": "0c89ea8d30d5fc907078d422f8cf257f02b8657e78315d5741921fab0c42afe7"
+}

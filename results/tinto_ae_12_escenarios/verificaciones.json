@@ -1,0 +1,71 @@
+{
+  "escenarios": {
+    "original": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 0,
+      "dias_sin_cambio": 7154
+    },
+    "d100_aumento": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d100_reduccion": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d50_aumento": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d50_reduccion": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d20_aumento": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d20_reduccion": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d5_aumento": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "d5_reduccion": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 170894,
+      "dias_sin_cambio": 0
+    },
+    "ppb_5": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 171696,
+      "dias_sin_cambio": 0
+    },
+    "ppb_10": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 171696,
+      "dias_sin_cambio": 0
+    },
+    "ppb_20": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 171696,
+      "dias_sin_cambio": 0
+    },
+    "ppb_40": {
+      "replicas_identicas": true,
+      "mediciones_cambiadas": 171696,
+      "dias_sin_cambio": 0
+    }
+  },
+  "originales_y_metricas_previas_coinciden": true,
+  "fuentes_intactas": true
+}

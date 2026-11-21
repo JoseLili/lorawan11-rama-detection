@@ -1,0 +1,44 @@
+{
+  "tinto": {
+    "parametros": 11104,
+    "bytes_keras": 185331
+  },
+  "ens_vb_x": {
+    "parametros": 115525,
+    "bytes_keras": 1543275,
+    "modelos": [
+      {
+        "modelo": "Vb_R_s42",
+        "parametros": 23105,
+        "bytes_keras": 308655,
+        "sha256": "cb05cd14d9def869366af401446c156d1e6a2e21f32135fa61d52eae06162eb1"
+      },
+      {
+        "modelo": "Vb_R_s1",
+        "parametros": 23105,
+        "bytes_keras": 308655,
+        "sha256": "dbd66e24804d673bbd59f464eb1e0ab5c850006e25cf3495ef552bfe4a84cd17"
+      },
+      {
+        "modelo": "Vb_R_s2",
+        "parametros": 23105,
+        "bytes_keras": 308655,
+        "sha256": "34d9a064deb0efa66b4d5b01d723222d5abc8b28b16cbb62d6c4a6ea86b09813"
+      },
+      {
+        "modelo": "Vb_R_s3",
+        "parametros": 23105,
+        "bytes_keras": 308655,
+        "sha256": "75aca83773122d077e59f9d15650edcd53c9abd2e9bc96c0397a185636d8240b"
+      },
+      {
+        "modelo": "Vb_R_s4",
+        "parametros": 23105,
+        "bytes_keras": 308655,
+        "sha256": "912ebf3d24f0ab4d678d9f212549bd2bae1534753471aede1ea529e21f2dfaf5"
+      }
+    ],
+    "tau": 0.259588868885851
+  },
+  "nota": "Bytes .keras incluyen metadatos/optimizador; no equivalen a RAM ni latencia. Ens-Vb-X adem\u00e1s usa preprocesamiento y exclusi\u00f3n."
+}

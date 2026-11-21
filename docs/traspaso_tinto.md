@@ -1,5 +1,129 @@
 # TINTO — documento general y traspaso a la PC principal
 
+## Modelo provisional congelado y piloto pareado terminado — 2026-11-11
+
+Paquete congelado: `results/tinto_congelado_20261111/`, CNN+GRU diaria D2,
+réplica1, mejor época16,11104 parámetros; mapa,escala,protocolo y hashes incluidos.
+No reentrenar ni sustituir este paquete para mejorar la comparación.
+
+Se recibieron ZIP2020–2026 en la carpeta externa
+`../drive-download-20261104T005948Z-1-001/` relativa a BDRAMA (no al repo).
+Se verificaron y usaron O3 de2020–2025. Comparador: Ens-Vb-X definitivo, cinco
+modelos Vb_R (115525 parámetros totales) y tau0.259588868885851, sin cambios.
+
+Protocolo: `experiments/tinto_raw/protocolo_pareado_final.md`. Ejecución:
+`comparar_final.py`; verificación independiente e informe: `resumir_pareado.py`.
+Resultados completos válidos: `results/tinto_pareado_final_20261111_v2/`.
+La carpeta sin v2 corresponde a preparación interrumpida por dependencia y
+cambio del código de verificación; no es otra corrida científica.
+
+Calibración2023 sobre3446 casos comunes, evaluación2025 sobre3109; primer
+calendario histórico final_2025_01 (36 episodios antes de elegibilidad), doce
+escenarios separados.42 estación-días positivos y3067 negativos por escenario.
+Ataques sostenidos entran en historia de ambos; no balance50/50.96 métricas
+recalculadas desde scores, fuentes/modelos verificados y umbrales históricos
+Ens-Vb-X reproducidos con discrepancia menor que1e-5. No reentrenamiento.
+
+P99, recall/precisión TINTO frente a Ens-Vb-X: x2=71.43/28.30% frente a
+100/58.33%;x1.5=40.48/19.10% frente a90.48/59.38%;+20ppb=33.33/15.73%
+frente a97.62/61.19%;+40ppb=59.52/23.81% frente a100/60.00%.
+FA en originales2025 (TINTO/Ens-Vb-X):p95=222/130,p98=102/44,p99=73/21,
+p99.9=7/0; teóricas sobre3109=155.45/62.18/31.09/3.109. No confundir con
+FP dentro de calendarios alterados, que incluyen efectos posteriores.
+
+Conclusión limitada: en este piloto no supera al detector final. TINTO usa menos
+parámetros y no necesita vecinas, pero tiene menor cobertura (3109 frente a8822
+días elegibles propios de Ens-Vb-X), más falsas alarmas y peor detección general.
+Un calendario, pocos positivos, ventanas dependientes y año ya usado: no examen
+independiente ni veredicto universal. No cambiar umbrales con resultados2025.
+
+## Orden temporal explícito — 11 de noviembre de 2026
+
+Se completó `experiments/tinto_raw/orden_temporal.py`, registrado en
+`protocolo_orden_temporal.md` en la misma carpeta. Resultados:
+`results/tinto_orden_temporal_20261111/`. Dos días previos elegidos por cobertura,
+antes de resultados:4625 ajuste,884 selección,3449 evaluación. CNN compartida por
+día + GRU diaria y GRU horaria de48 pasos; salida24 lecturas futuras en ambos.
+El comparador horario recupera valores por el mapa: no demuestra aporte de TINTO.
+
+Todas las secuencias se contrastaron con la tabla auditada: misma estación,
+48 horas consecutivas,23→00 separado1h, sin objetivo/futuro de entrada. Esto no
+valida la convención SIMAT heredada HORA1→00. Dos réplicas idénticas por modelo,
+recarga verificada. Invertir48 horas eleva MSE horario0.01356→0.02155; sensibilidad
+al orden/recencia, no demostración aislada de aprendizaje de medianoche.
+
+En soporte común, recall p99 (AE/CNN-GRU diaria/GRU horaria):
+x2=37.92/85.50/84.17%;x1.5=12.73/43.81/41.17%;
++20ppb=2.06/70.08/64.19%;+40ppb=1.88/100/100%. Reducciones aún débiles.
+FA por modelo sobre3449: p95=172,p98=68,p99=34,p99.9=3; teóricas
+172.45/68.98/34.49/3.449. Calibración reutiliza2022; historia sin ataque.
+No atribuir ganancia únicamente a temporalidad: cambian tarea y arquitectura.
+Se guardaron144 evaluaciones y checksums verificados. La consola falló únicamente
+al imprimir el resumen final (flecha Unicode); archivos completos ya guardados.
+Para reproducir usar `python -X utf8 ...` y una salida nueva.
+
+## Continuación temporal — 11 de noviembre de 2026
+
+Experimento autorizado y terminado: siete imágenes estación-día anteriores como
+canales cronológicos para predecir el día objetivo, sin ataques de entrenamiento.
+Protocolo: `experiments/tinto_raw/protocolo_temporal7.md`; código: `temporal7.py`
+en esa carpeta. Resultados válidos: `results/tinto_temporal7_20261111_final/`.
+La carpeta sin sufijo `_final` conserva un intento fallido al clonar/guardar el
+modelo por la pérdida personalizada; se corrigió solo el guardado antes de repetir.
+
+La exigencia de ocho días completos consecutivos dejó139 ajuste,38 selección y175
+evaluación; ninguna secuencia2020. Evaluación:11 estaciones,91/175 bases deLLA.
+Dos corridas idénticas, early stopping tras10 épocas, mejor época5; modelos
+recargados y predicciones verificadas. Comparador autoencoder congelado sobre los
+mismos175 objetivos y umbrales recalibrados en ese soporte para cada detector.
+
+A p99, recall temporal/autoencoder: x2=51.43/65.14%, x1.5=17.14/32.00%,
++20ppb=15.43/9.14%, +40ppb=100/6.86%; reducciones fuertes siguen en0%.
+No es superioridad general ni ablación pura: cambian objetivo, canales y número
+de ejemplos de ajuste. Historia sin ataque: solo inicio aislado, no persistencia.
+Falsas alarmas originales para ambos: p95=8,p98=3,p99=1,p99.9=0 sobre175.
+La muestra pequeña y solapada impide interpretación operativa de p99.9.
+
+## Criterio para próximos experimentos
+
+Evaluación congelada de los 12 escenarios completada: protocolo
+`experiments/tinto_raw/protocolo_evaluacion_12.md`, código
+`experiments/tinto_raw/evaluar_12.py`, informe
+`results/tinto_ae_12_escenarios/informe.md`. Se evaluaron 7154 originales de 2022
+con p95/p98/p99/p99.9, sin entrenamiento; ambos modelos dieron reconstrucciones
+idénticas y las métricas anteriores se reprodujeron. A p99, recall x2=35.505%,
+x1.5=12.091%, +40ppb=1.663%, /2=0%. A p95, x2=60.092% y +40ppb=9.128%.
+Las reducciones bajan el error respecto al original en más del 99.95% de las bases
+para cada delta. Los desplazamientos aditivos tampoco generan alerta suficiente.
+Se conservan diagnósticos por hora/estación y puntuaciones pareadas; estos resultados
+no prueban que falte contexto. Falsa alarma medida sobre la misma calibración 2022.
+
+El tesista fijó dos esquemas: delta porcentual 100/50/20/5% y error aditivo
+positivo +5/+10/+20/+40 ppb. Aumentos y reducciones proporcionales confirmados:
+x*(1+delta) y x/(1+delta), respectivamente. Fórmulas y cambios efectivos en
+`experiments/tinto_raw/anomalias_futuras.md`. Esa nota registra también la dirección
+de mejoras graduales: mantener estación-día y explorar ideas de contexto temporal
+y espacial sin copiar las matrices del detector final. La falta de contexto sigue
+siendo una hipótesis; no se ha demostrado como causa del bajo recall.
+
+## Continuación en PC principal — autoencoder autorizado (2026-11-09)
+
+El tesista autorizó continuar con un autoencoder convolucional entrenado solo con
+originales estación-día, sin ataques inyectados. Esta decisión sustituye la
+restricción histórica a supervisado descrita más abajo; el resto del documento
+preserva el estado del traspaso anterior. No se modifican sus resultados.
+Protocolo nuevo: `experiments/tinto_raw/protocolo_autoencoder.md`.
+Implementación: `experiments/tinto_raw/autoencoder.py`.
+Resultados de esta continuación: `results/tinto_autoencoder_20261109/`.
+Estado: dos corridas completadas, 30 épocas, mejor época 27; pesos, historias y
+scores idénticos. Modelos recargados y verificados. Informe:
+`results/tinto_autoencoder_20261109/informe.md`. A p99, recall x1.5 ≈12.09%,
+/1.5 ≈0.014%; la reconstrucción mejora pero la detección es insuficiente,
+especialmente ante reducciones. No se cambió la regla tras observar ataques.
+Se preparan 19300 originales completos: 5574 de 2020, 6572 de 2021 y 7154 de 2022.
+El último trimestre de 2021 se reserva para selección interna; 2022 se usa para
+calibración y evaluación exploratorias, sin abrir 2023–2026.
+
 Actualización: 9 de noviembre de 2026. Este documento permite continuar sin el chat.
 **Entrada recomendada para el siguiente asistente: leer este archivo completo y
 `experiments/tinto_raw/protocolo.md` antes de ejecutar.**

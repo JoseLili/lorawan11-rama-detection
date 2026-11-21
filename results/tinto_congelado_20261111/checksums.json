@@ -1,0 +1,13 @@
+{
+  "complejidad_estatica.json": "73ab20663279c0fad7b98dd75db7659508821366c7b75a32358e104ae958c64f",
+  "configuracion_entrenamiento.json": "f5a6cebf570ba027d096caca6cbf46cec361f7571a19a95b355c45b9c701dd52",
+  "congelado.json": "423de8e66fbe6e151eadb50b87ec1be82031c62d1d0973aa766dfd818330ce9b",
+  "entorno.txt": "b69ab1eb2236babbe70d0dbe7aaa52a7ea34dea48bb148cf1b5141dfd62dcbab",
+  "escala.csv": "d907be288ae4df3a28474fbb2f076d1c3690033e9a1547b8e8724a8f8c056378",
+  "historia.csv": "0d31c1c8bfe75c74edaed686ff9689880c887d07b5200e7de993e3cf91434405",
+  "implementacion.py": "c5f0bc07466a1b4a8f75253b9ba1e1534c869e54583f98c2537ea29ae5d4faa1",
+  "manifiesto_entrenamiento.csv": "9e3d1c0e9135282746f9195f83527e56afc15b4f061c32f5a0ecdff0560cf6f0",
+  "mapa.csv": "810da93b4b13171ea4cc356eedef043da8bc1749097845a4b151b0cc392cbb5b",
+  "modelo.keras": "a65ef67dab88a652a21a18dbc8946b6069d496d654b9718d34b1bf5c7d0108df",
+  "protocolo.md": "d40346082dca8d81805f1179bd8221928d1cd74617774728aaab476088cd0a58"
+}

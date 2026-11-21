@@ -1,0 +1,7 @@
+{
+  "results\\tinto_raw_20261109\\auditoria1\\o3_raw_ppb.csv": "92998345b44a92747a083016a6ac7345109bae62d1a1f82554b80a297407d42c",
+  "results\\tinto_raw_20261109\\representacion1\\completos_32_mapa.csv": "810da93b4b13171ea4cc356eedef043da8bc1749097845a4b151b0cc392cbb5b",
+  "results\\tinto_raw_20261109\\representacion1\\completos_escala.csv": "d907be288ae4df3a28474fbb2f076d1c3690033e9a1547b8e8724a8f8c056378",
+  "experiments\\tinto_raw\\autoencoder.py": "b296ad9d8cfb620c4557b7122174a1702d679fa5ea461b0f440c68840d589936",
+  "experiments\\tinto_raw\\protocolo_autoencoder.md": "6b56a1c5896c7df7a69f5d390d32b6710ae609ad462143851bd43d2232783863"
+}

@@ -1,0 +1,8 @@
+{
+  "pesos_identicos": true,
+  "historias_identicas": true,
+  "predicciones_identicas": true,
+  "modelos_recargados_verificados": true,
+  "historial_estrictamente_pasado": true,
+  "fuentes_intactas": true
+}

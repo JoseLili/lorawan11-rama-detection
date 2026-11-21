@@ -1,0 +1,16 @@
+{
+  "cnn_gru_diaria": {
+    "pesos_identicos": true,
+    "historias_identicas": true,
+    "predicciones_identicas": true,
+    "recarga_verificada": true
+  },
+  "gru_horaria": {
+    "pesos_identicos": true,
+    "historias_identicas": true,
+    "predicciones_identicas": true,
+    "recarga_verificada": true
+  },
+  "continuidad_48h_todas_secuencias": true,
+  "fuentes_intactas": true
+}

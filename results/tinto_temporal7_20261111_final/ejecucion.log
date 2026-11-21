@@ -1,0 +1,86 @@
+WARNING:tensorflow:From C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+5/5 - 1s - 208ms/step - loss: 0.0881 - val_loss: 0.0336
+Epoch 2/30
+5/5 - 0s - 15ms/step - loss: 0.0454 - val_loss: 0.0239
+Epoch 3/30
+5/5 - 0s - 15ms/step - loss: 0.0326 - val_loss: 0.0203
+Epoch 4/30
+5/5 - 0s - 15ms/step - loss: 0.0210 - val_loss: 0.0116
+Epoch 5/30
+5/5 - 0s - 15ms/step - loss: 0.0213 - val_loss: 0.0105
+Epoch 6/30
+5/5 - 0s - 15ms/step - loss: 0.0192 - val_loss: 0.0129
+Epoch 7/30
+5/5 - 0s - 15ms/step - loss: 0.0191 - val_loss: 0.0123
+Epoch 8/30
+5/5 - 0s - 16ms/step - loss: 0.0176 - val_loss: 0.0113
+Epoch 9/30
+5/5 - 0s - 17ms/step - loss: 0.0176 - val_loss: 0.0115
+Epoch 10/30
+5/5 - 0s - 16ms/step - loss: 0.0173 - val_loss: 0.0121
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+5/5 - 1s - 182ms/step - loss: 0.0881 - val_loss: 0.0336
+Epoch 2/30
+5/5 - 0s - 16ms/step - loss: 0.0454 - val_loss: 0.0239
+Epoch 3/30
+5/5 - 0s - 17ms/step - loss: 0.0326 - val_loss: 0.0203
+Epoch 4/30
+5/5 - 0s - 15ms/step - loss: 0.0210 - val_loss: 0.0116
+Epoch 5/30
+5/5 - 0s - 15ms/step - loss: 0.0213 - val_loss: 0.0105
+Epoch 6/30
+5/5 - 0s - 16ms/step - loss: 0.0192 - val_loss: 0.0129
+Epoch 7/30
+5/5 - 0s - 15ms/step - loss: 0.0191 - val_loss: 0.0123
+Epoch 8/30
+5/5 - 0s - 15ms/step - loss: 0.0176 - val_loss: 0.0113
+Epoch 9/30
+5/5 - 0s - 16ms/step - loss: 0.0176 - val_loss: 0.0115
+Epoch 10/30
+5/5 - 0s - 15ms/step - loss: 0.0173 - val_loss: 0.0121
+# Predicci�n temporal de siete d�as
+
+Diagn�stico exploratorio: 139 ajuste, 38 selecci�n, 175 evaluaci�n. Ninguna secuencia elegible en 2020. Dos corridas id�nticas; modelos recargados y verificados. Historia original, ataque solo al objetivo.
+
+## Recall (%) en soporte com�n
+
+| Escenario | AE p95 | Temporal p95 | AE p99 | Temporal p99 |
+|---|---:|---:|---:|---:|
+| d100_aumento | 81.71 | 72.00 | 65.14 | 51.43 |
+| d100_reduccion | 0.00 | 0.57 | 0.00 | 0.00 |
+| d50_aumento | 50.29 | 33.71 | 32.00 | 17.14 |
+| d50_reduccion | 0.00 | 0.00 | 0.00 | 0.00 |
+| d20_aumento | 18.29 | 10.86 | 7.43 | 6.29 |
+| d20_reduccion | 0.00 | 0.57 | 0.00 | 0.00 |
+| d5_aumento | 6.29 | 6.29 | 1.14 | 2.29 |
+| d5_reduccion | 2.29 | 4.00 | 0.00 | 0.57 |
+| ppb_5 | 9.71 | 7.43 | 1.71 | 3.43 |
+| ppb_10 | 20.00 | 10.86 | 8.57 | 5.71 |
+| ppb_20 | 20.00 | 41.71 | 9.14 | 15.43 |
+| ppb_40 | 20.57 | 100.00 | 6.86 | 100.00 |
+
+## Falsas alarmas
+
+| Detector | Percentil | N | Te�ricas | Observadas |
+|---|---:|---:|---:|---:|
+| temporal7 | 95.0 | 175 | 8.750 | 8 |
+| temporal7 | 98.0 | 175 | 3.500 | 3 |
+| temporal7 | 99.0 | 175 | 1.750 | 1 |
+| temporal7 | 99.9 | 175 | 0.175 | 0 |
+| autoencoder | 95.0 | 175 | 8.750 | 8 |
+| autoencoder | 98.0 | 175 | 3.500 | 3 |
+| autoencoder | 99.0 | 175 | 1.750 | 1 |
+| autoencoder | 99.9 | 175 | 0.175 | 0 |
+
+## L�mites
+
+Calibraci�n y evaluaci�n originales reutilizan2022. p99.9 permite cero alertas en175 casos y se apoya en el m�ximo; no garantiza cero falsas alarmas futuras. Ventanas solapadas, pocas estaciones, sin intervalos de confianza. Pares artificiales50/50. No prueba independiente ni evidencia causal de temporalidad: cambian objetivo, canales y muestra de entrenamiento. Modelo temporal ve139 bases, autoencoder previo10334. Predicci�n no usa el objetivo; ataques sostenidos que contaminan historia quedan pendientes. No abrir2023�2026.
+
+Precisi�n, recall, F1 y conteos completos en metricas.csv (96 filas). Manifiesto registra �ndices de los siete antecedentes. Archivos originales preservados.

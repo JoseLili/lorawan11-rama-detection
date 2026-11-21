@@ -1,0 +1,9 @@
+{
+  "modelo_tinto_intacto": true,
+  "modelos_ens_vb_x_hashes_verificados": true,
+  "fuentes_raw_verificadas": true,
+  "matriz_historica_exacta": true,
+  "comparaciones": 96,
+  "positivos_comunes": 42,
+  "negativos_comunes": 3067
+}

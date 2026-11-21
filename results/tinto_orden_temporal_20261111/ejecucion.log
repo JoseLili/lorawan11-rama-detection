@@ -1,0 +1,190 @@
+WARNING:tensorflow:From C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+73/73 - 2s - 32ms/step - loss: 0.0465 - val_loss: 0.0152
+Epoch 2/30
+73/73 - 1s - 16ms/step - loss: 0.0152 - val_loss: 0.0132
+Epoch 3/30
+73/73 - 1s - 16ms/step - loss: 0.0138 - val_loss: 0.0127
+Epoch 4/30
+73/73 - 1s - 16ms/step - loss: 0.0131 - val_loss: 0.0119
+Epoch 5/30
+73/73 - 1s - 16ms/step - loss: 0.0127 - val_loss: 0.0118
+Epoch 6/30
+73/73 - 1s - 17ms/step - loss: 0.0123 - val_loss: 0.0116
+Epoch 7/30
+73/73 - 1s - 17ms/step - loss: 0.0122 - val_loss: 0.0113
+Epoch 8/30
+73/73 - 1s - 16ms/step - loss: 0.0120 - val_loss: 0.0113
+Epoch 9/30
+73/73 - 1s - 16ms/step - loss: 0.0119 - val_loss: 0.0116
+Epoch 10/30
+73/73 - 1s - 16ms/step - loss: 0.0119 - val_loss: 0.0113
+Epoch 11/30
+73/73 - 1s - 16ms/step - loss: 0.0118 - val_loss: 0.0112
+Epoch 12/30
+73/73 - 1s - 16ms/step - loss: 0.0118 - val_loss: 0.0111
+Epoch 13/30
+73/73 - 1s - 16ms/step - loss: 0.0116 - val_loss: 0.0110
+Epoch 14/30
+73/73 - 1s - 16ms/step - loss: 0.0116 - val_loss: 0.0115
+Epoch 15/30
+73/73 - 1s - 16ms/step - loss: 0.0117 - val_loss: 0.0115
+Epoch 16/30
+73/73 - 1s - 16ms/step - loss: 0.0116 - val_loss: 0.0109
+Epoch 17/30
+73/73 - 1s - 16ms/step - loss: 0.0115 - val_loss: 0.0113
+Epoch 18/30
+73/73 - 1s - 16ms/step - loss: 0.0115 - val_loss: 0.0109
+Epoch 19/30
+73/73 - 1s - 16ms/step - loss: 0.0114 - val_loss: 0.0110
+Epoch 20/30
+73/73 - 1s - 16ms/step - loss: 0.0114 - val_loss: 0.0113
+Epoch 21/30
+73/73 - 1s - 15ms/step - loss: 0.0115 - val_loss: 0.0109
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+73/73 - 2s - 31ms/step - loss: 0.0465 - val_loss: 0.0152
+Epoch 2/30
+73/73 - 1s - 16ms/step - loss: 0.0152 - val_loss: 0.0132
+Epoch 3/30
+73/73 - 1s - 16ms/step - loss: 0.0138 - val_loss: 0.0127
+Epoch 4/30
+73/73 - 1s - 16ms/step - loss: 0.0131 - val_loss: 0.0119
+Epoch 5/30
+73/73 - 1s - 16ms/step - loss: 0.0127 - val_loss: 0.0118
+Epoch 6/30
+73/73 - 1s - 16ms/step - loss: 0.0123 - val_loss: 0.0116
+Epoch 7/30
+73/73 - 1s - 16ms/step - loss: 0.0122 - val_loss: 0.0113
+Epoch 8/30
+73/73 - 1s - 17ms/step - loss: 0.0120 - val_loss: 0.0113
+Epoch 9/30
+73/73 - 1s - 16ms/step - loss: 0.0119 - val_loss: 0.0116
+Epoch 10/30
+73/73 - 1s - 16ms/step - loss: 0.0119 - val_loss: 0.0113
+Epoch 11/30
+73/73 - 1s - 16ms/step - loss: 0.0118 - val_loss: 0.0112
+Epoch 12/30
+73/73 - 1s - 16ms/step - loss: 0.0118 - val_loss: 0.0111
+Epoch 13/30
+73/73 - 1s - 17ms/step - loss: 0.0116 - val_loss: 0.0110
+Epoch 14/30
+73/73 - 1s - 16ms/step - loss: 0.0116 - val_loss: 0.0115
+Epoch 15/30
+73/73 - 1s - 16ms/step - loss: 0.0117 - val_loss: 0.0115
+Epoch 16/30
+73/73 - 1s - 16ms/step - loss: 0.0116 - val_loss: 0.0109
+Epoch 17/30
+73/73 - 1s - 16ms/step - loss: 0.0115 - val_loss: 0.0113
+Epoch 18/30
+73/73 - 1s - 16ms/step - loss: 0.0115 - val_loss: 0.0109
+Epoch 19/30
+73/73 - 1s - 16ms/step - loss: 0.0114 - val_loss: 0.0110
+Epoch 20/30
+73/73 - 1s - 16ms/step - loss: 0.0114 - val_loss: 0.0113
+Epoch 21/30
+73/73 - 1s - 16ms/step - loss: 0.0115 - val_loss: 0.0109
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+73/73 - 1s - 16ms/step - loss: 0.0636 - val_loss: 0.0175
+Epoch 2/30
+73/73 - 0s - 6ms/step - loss: 0.0174 - val_loss: 0.0155
+Epoch 3/30
+73/73 - 0s - 6ms/step - loss: 0.0155 - val_loss: 0.0149
+Epoch 4/30
+73/73 - 0s - 6ms/step - loss: 0.0150 - val_loss: 0.0140
+Epoch 5/30
+73/73 - 0s - 6ms/step - loss: 0.0147 - val_loss: 0.0135
+Epoch 6/30
+73/73 - 0s - 6ms/step - loss: 0.0144 - val_loss: 0.0131
+Epoch 7/30
+73/73 - 0s - 6ms/step - loss: 0.0142 - val_loss: 0.0127
+Epoch 8/30
+73/73 - 0s - 6ms/step - loss: 0.0140 - val_loss: 0.0125
+Epoch 9/30
+73/73 - 0s - 6ms/step - loss: 0.0138 - val_loss: 0.0124
+Epoch 10/30
+73/73 - 0s - 6ms/step - loss: 0.0137 - val_loss: 0.0121
+Epoch 11/30
+73/73 - 0s - 6ms/step - loss: 0.0135 - val_loss: 0.0119
+Epoch 12/30
+73/73 - 0s - 6ms/step - loss: 0.0134 - val_loss: 0.0117
+Epoch 13/30
+73/73 - 0s - 6ms/step - loss: 0.0133 - val_loss: 0.0118
+Epoch 14/30
+73/73 - 0s - 6ms/step - loss: 0.0132 - val_loss: 0.0118
+Epoch 15/30
+73/73 - 0s - 6ms/step - loss: 0.0132 - val_loss: 0.0118
+Epoch 16/30
+73/73 - 0s - 6ms/step - loss: 0.0130 - val_loss: 0.0116
+Epoch 17/30
+73/73 - 0s - 6ms/step - loss: 0.0130 - val_loss: 0.0119
+Epoch 18/30
+73/73 - 0s - 6ms/step - loss: 0.0130 - val_loss: 0.0117
+Epoch 19/30
+73/73 - 0s - 6ms/step - loss: 0.0129 - val_loss: 0.0117
+Epoch 20/30
+73/73 - 0s - 6ms/step - loss: 0.0128 - val_loss: 0.0118
+Epoch 21/30
+73/73 - 0s - 6ms/step - loss: 0.0128 - val_loss: 0.0119
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+73/73 - 1s - 14ms/step - loss: 0.0636 - val_loss: 0.0175
+Epoch 2/30
+73/73 - 0s - 5ms/step - loss: 0.0174 - val_loss: 0.0155
+Epoch 3/30
+73/73 - 0s - 5ms/step - loss: 0.0155 - val_loss: 0.0149
+Epoch 4/30
+73/73 - 0s - 5ms/step - loss: 0.0150 - val_loss: 0.0140
+Epoch 5/30
+73/73 - 0s - 5ms/step - loss: 0.0147 - val_loss: 0.0135
+Epoch 6/30
+73/73 - 0s - 6ms/step - loss: 0.0144 - val_loss: 0.0131
+Epoch 7/30
+73/73 - 0s - 6ms/step - loss: 0.0142 - val_loss: 0.0127
+Epoch 8/30
+73/73 - 0s - 6ms/step - loss: 0.0140 - val_loss: 0.0125
+Epoch 9/30
+73/73 - 0s - 6ms/step - loss: 0.0138 - val_loss: 0.0124
+Epoch 10/30
+73/73 - 0s - 6ms/step - loss: 0.0137 - val_loss: 0.0121
+Epoch 11/30
+73/73 - 0s - 6ms/step - loss: 0.0135 - val_loss: 0.0119
+Epoch 12/30
+73/73 - 0s - 5ms/step - loss: 0.0134 - val_loss: 0.0117
+Epoch 13/30
+73/73 - 0s - 5ms/step - loss: 0.0133 - val_loss: 0.0118
+Epoch 14/30
+73/73 - 0s - 5ms/step - loss: 0.0132 - val_loss: 0.0118
+Epoch 15/30
+73/73 - 0s - 5ms/step - loss: 0.0132 - val_loss: 0.0118
+Epoch 16/30
+73/73 - 0s - 5ms/step - loss: 0.0130 - val_loss: 0.0116
+Epoch 17/30
+73/73 - 0s - 5ms/step - loss: 0.0130 - val_loss: 0.0119
+Epoch 18/30
+73/73 - 0s - 5ms/step - loss: 0.0130 - val_loss: 0.0117
+Epoch 19/30
+73/73 - 0s - 5ms/step - loss: 0.0129 - val_loss: 0.0117
+Epoch 20/30
+73/73 - 0s - 6ms/step - loss: 0.0128 - val_loss: 0.0118
+Epoch 21/30
+73/73 - 0s - 5ms/step - loss: 0.0128 - val_loss: 0.0119
+Traceback (most recent call last):
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\experiments\tinto_raw\orden_temporal.py", line 110, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--salida',required=True,type=Path);main(p.parse_args().salida)
+                                                                                   ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\experiments\tinto_raw\orden_temporal.py", line 108, in main
+    (out/'checksums.json').write_text(json.dumps({str(p.relative_to(out)):sha(p) for p in out.rglob('*') if p.is_file() and p.name!='checksums.json'},indent=2));print('\n'.join(lines),flush=True)
+                                                                                                                                                                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jose_\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 201: character maps to <undefined>

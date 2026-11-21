@@ -1,0 +1,60 @@
+WARNING:tensorflow:From C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/30
+5/5 - 1s - 236ms/step - loss: 0.0881 - val_loss: 0.0336
+Epoch 2/30
+5/5 - 0s - 15ms/step - loss: 0.0454 - val_loss: 0.0239
+Epoch 3/30
+5/5 - 0s - 16ms/step - loss: 0.0326 - val_loss: 0.0203
+Epoch 4/30
+5/5 - 0s - 15ms/step - loss: 0.0210 - val_loss: 0.0116
+Epoch 5/30
+5/5 - 0s - 15ms/step - loss: 0.0213 - val_loss: 0.0105
+Epoch 6/30
+5/5 - 0s - 16ms/step - loss: 0.0192 - val_loss: 0.0129
+Epoch 7/30
+5/5 - 0s - 15ms/step - loss: 0.0191 - val_loss: 0.0123
+Epoch 8/30
+5/5 - 0s - 15ms/step - loss: 0.0176 - val_loss: 0.0113
+Epoch 9/30
+5/5 - 0s - 15ms/step - loss: 0.0176 - val_loss: 0.0115
+Epoch 10/30
+5/5 - 0s - 15ms/step - loss: 0.0173 - val_loss: 0.0121
+Traceback (most recent call last):
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\experiments\tinto_raw\temporal7.py", line 108, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--salida',required=True,type=Path);main(p.parse_args().salida)
+                                                                                   ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\experiments\tinto_raw\temporal7.py", line 62, in main
+    saved=keras.models.clone_model(model);saved.set_weights(model.get_weights());saved.save(folder/'modelo.keras')
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\models\cloning.py", line 159, in clone_model
+    return _clone_sequential_model(
+        model,
+        clone_function=clone_function,
+        input_tensors=input_tensors,
+    )
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\models\cloning.py", line 339, in _clone_sequential_model
+    cloned_model.compile_from_config(compiled_config)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\trainers\trainer.py", line 1016, in compile_from_config
+    config = serialization_lib.deserialize_keras_object(config)
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\saving\serialization_lib.py", line 633, in deserialize_keras_object
+    key: deserialize_keras_object(
+         ~~~~~~~~~~~~~~~~~~~~~~~~^
+        value, custom_objects=custom_objects, safe_mode=safe_mode
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\saving\serialization_lib.py", line 730, in deserialize_keras_object
+    return _retrieve_class_or_fn(
+        fn_name,
+    ...<4 lines>...
+        custom_objects=custom_objects,
+    )
+  File "C:\Users\jose_\OneDrive\Documentos\MestriaPCIC\Tesis\BDRAMA\lorawan11-rama-detection\.venv-tinto-ae\Lib\site-packages\keras\src\saving\serialization_lib.py", line 899, in _retrieve_class_or_fn
+    raise TypeError(
+    ...<5 lines>...
+    )
+TypeError: Could not locate function 'loss'. Make sure custom classes and functions are decorated with `@keras.saving.register_keras_serializable()`. If they are already decorated, make sure they are all imported so that the decorator is run before trying to load them. Full object config: {'module': 'builtins', 'class_name': 'function', 'config': 'loss', 'registered_name': 'function'}

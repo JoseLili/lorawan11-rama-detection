@@ -1,0 +1,16 @@
+{
+  "comparacion_pareada.csv": "09b20ed7c860739047f60c2652b3be14040079d99d6224cd6800fe493162714d",
+  "configuracion.json": "cc5ca113bf41c0dd9c13e791aa4e94c00fb513316ccfedd61cfa90493b9febc7",
+  "diagnostico_hora_estacion.csv": "939b614fa1c8a5a0a8f602c01f0108c5eead46d164e15822bbcae8e4167d251e",
+  "entorno.txt": "b69ab1eb2236babbe70d0dbe7aaa52a7ea34dea48bb148cf1b5141dfd62dcbab",
+  "fuentes.json": "94791bbdc71667c36507a043826836e07850d709f5207f7c2e8151e47e67f08e",
+  "informe.md": "bf26ae8ea584289984d1bb55e91ca49ef0840e2fb8949973f351b805218d1f26",
+  "lecturas_y_reconstrucciones.npz": "dc3a8dda09face9534c8f9911ba4b4b965d78523d8a98f4608a4a5cac3629b69",
+  "manifiesto.csv": "86f763ebaf42b17db647fc8c6ec7106467b6c91b10dd00c91a1271167c7b4b15",
+  "metricas.csv": "f30aa0fdc413a37da68119fa370dd1b6325f729a817ccd4d2a4ea47210839988",
+  "metricas_estacion.csv": "4f6e9f97f8befca61c31a419524e0cca39cf0b5134d097317baffed2027f5e39",
+  "scores.csv": "a89d3276116499469939c181dc7ebac2ea5ccb0f8d0b29dab3cba6e8f416aac3",
+  "umbrales.csv": "d1287fe312259cd7096493451647b2f556effbb8fcf00a1f9c7c3ce23c42c961",
+  "verificaciones.json": "610bda78dcd8460174c51ac93826df254d68cf2a1c0ebe9820ee184ce210fbeb",
+  "ejecucion.log": "9c0579b0c25076c0d9dbf8f35169c6920e7e5665a1aa923044d2fdac7ab0473d"
+}
