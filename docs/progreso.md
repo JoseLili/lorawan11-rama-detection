@@ -5068,3 +5068,14 @@ Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md
   Se compila con LuaLaTeX (`latexmkrc`). La portada está completa; las demás láminas son
   marcadores "pendiente de revisar" que se llenan una por una. La bibliografía sale de
   `docs/referencias.bib`, que todavía tiene campos "por verificar".
+
+## 2026-11-21 — Presentación: lámina 6 (arquitectura de Ens-Vb-X) en TikZ
+
+- Diagrama en `presentacion/figuras/arquitectura.tex`, llamado con `\input` desde la lámina 6.
+  Se quitó el subtítulo serif (solo etiqueta, decisión del tesista).
+- Corregido contra el código respecto a la versión anterior: ventana de **24 h × 17 columnas**
+  (no 48 h × 6); la vecina sospechosa sale de la base vecinal y se pone en 0 en la entrada del
+  LSTM; 5 LSTM = semillas 42, 1, 2, 3, 4; **S = promedio del día (≥ 12 h) y luego de los 5
+  modelos** (no el máximo); umbral p99 0.1508 calibrado en 2023; «alarma estación-día» en vez
+  de «alerta temprana».
+- Pendiente aparte: la tabla de la lámina 4 se desborda ~15 pt (Overfull \vbox).

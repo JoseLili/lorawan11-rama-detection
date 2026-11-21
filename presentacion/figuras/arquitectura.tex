@@ -1,0 +1,86 @@
+% Lamina 6 (arquitectura de Ens-Vb-X): cinco columnas de izquierda a derecha.
+% Ancho total: unos 13.6 cm (el ancho de texto de la lamina es 13.8 cm).
+% Contenido verificado contra el repo:
+%   filtro y base vecinal: experiments/linea_base/rev24.py (senal_z, exclusion, base_vb_x)
+%   ventana de 24 h y 17 columnas: src/detect/lstm_local.py y src/detect/lstm_red.py
+%   5 semillas (42, 1, 2, 3, 4): experiments/linea_base/rev22_comun.py (SEMILLAS)
+%   promedio del dia y luego de los 5 modelos: rev24.py (diarios)
+%   umbral p99 = 0.15079, calibrado en 2023 limpio: docs/bitacora_decisiones.md (2026-11-08)
+% Todo se coloca con coordenadas (x, y) en cm: x = numero de columna * \paso, y = altura.
+\begin{tikzpicture}[
+    font=\sffamily,
+    % caja=<color>: recuadro blanco con borde de ese color (por omision, ensX)
+    caja/.style={draw=#1, fill=white, rounded corners=2pt, line width=0.8pt,
+                 minimum width=2.35cm, text width=2.15cm, minimum height=0.55cm,
+                 align=center, font=\sffamily\scriptsize, text=texto, inner sep=2pt},
+    caja/.default=ensX,
+    % marco=<color>: fondo de cada columna
+    marco/.style={draw=#1, fill=#1!6!white, rounded corners=4pt, line width=1pt,
+                  minimum width=2.6cm, minimum height=6.1cm},
+    titulo/.style={font=\sffamily\scriptsize\bfseries, text=acento, anchor=south},
+    flecha/.style={-{Stealth[length=4pt]}, line width=1pt, #1},
+    flecha/.default=ensX,
+  ]
+  \def\paso{2.75}   % distancia entre centros de columna (cm)
+
+  % ---------------- Marcos de fondo y titulos ----------------
+  \foreach \i/\c/\t in {0/tenue/{1. ENTRADAS},
+                        1/acento/{2. FILTRO},
+                        2/ensX/{3. VENTANA},
+                        3/ensX/{4. ENSAMBLE},
+                        4/noche/{5. DECISIÓN}} {
+    \node[marco=\c] (m\i) at (\i*\paso, 0) {};
+    \node[titulo] at (m\i.north) {\t};
+  }
+
+  % ---------------- 1. Entradas ----------------
+  \node[caja=noche] (s) at (0, 1.95) {\textbf{Estación objetivo \textit{s}}\\O\textsubscript{3} horario};
+  \node[caja=tenue, minimum height=1.3cm] (vec) at (0, 0.2) {};
+  \node[font=\sffamily\scriptsize\bfseries, text=texto, anchor=north] at (vec.north) {4 vecinas};
+  \foreach \k [count=\n from 0] in {1,...,4}
+    \node[draw=tenue, fill=white, rounded corners=1pt, minimum size=0.42cm, inner sep=0pt,
+          font=\sffamily\tiny, text=texto] at (-0.81+\n*0.54, -0.05) {\textit{v}\textsubscript{\k}};
+  \node[caja=tenue] (perfil) at (0, -1.8) {\textbf{Perfil propio}\\media por hora,\\14 días};
+
+  % ---------------- 2. Filtro de vecinas ----------------
+  \node[caja=acento] (z) at (\paso, 2.0)
+       {Desvío de 24\,h frente al perfil propio ($z$)};
+  \node[caja=acento] (regla) at (\paso, 0.05)
+       {Vecina \textbf{sospechosa}: se aleja ${>}\,\tau$ de las otras y \textit{s} también, en el mismo sentido};
+  \node[caja=acento, fill=acento!10!white] (tau) at (\paso, -1.8)
+       {$\tau = 0.26\,\sigma$\\máx.\ 2 excluidas};
+  \draw[flecha=acento] (z) -- (regla);
+  \draw[flecha=acento] (regla) -- (tau);
+
+  % ---------------- 3. Ventana del LSTM ----------------
+  \node[caja] (base) at (2*\paso, 1.95)
+       {\textbf{Base vecinal}\\sin sospechosas};
+  \node[font=\sffamily\scriptsize\bfseries, text=ensX] at (2*\paso, 1.2) {24\,h $\times$ 17 columnas};
+  \node[caja] (cs) at (2*\paso, 0.45) {\textit{s}: desvío, máscara, vecinas};
+  \node[caja] (cv) at (2*\paso, -0.45) {\textit{v}\textsubscript{1}–\textit{v}\textsubscript{4}: lo mismo\\{\color{acento}excluida $\rightarrow$ 0}};
+  \node[caja] (ch) at (2*\paso, -1.35) {seno y coseno de la hora};
+
+  % ---------------- 4. Ensamble ----------------
+  \foreach \sem [count=\n from 0] in {42,1,2,3,4}
+    \node[caja, minimum height=0.48cm] at (3*\paso, 2.1-\n*0.62) {LSTM, semilla \sem};
+  \node[caja, fill=ensX!10!white] (ph) at (3*\paso, -1.8) {probabilidad\\por hora};
+
+  % ---------------- 5. Decision diaria ----------------
+  \node[caja=noche] (dia) at (4*\paso, 1.85)
+       {Promedio del día (${\geq}\,12$\,h) y de los 5 modelos: $S$};
+  \node[caja=acento] (umbral) at (4*\paso, 0.2)
+       {\textbf{Umbral p99}\\$S > 0.1508$\\{\tiny calibrado en 2023}};
+  \node[caja=noche, fill=noche, text=white, minimum height=0.95cm, font=\sffamily\small\bfseries]
+       (alarma) at (4*\paso, -1.8) {Alarma\\estación-día};
+  \draw[flecha=noche] (dia) -- (umbral);
+  \draw[flecha=noche] (umbral) -- (alarma);
+
+  % ---------------- Flechas entre columnas ----------------
+  \draw[flecha=noche]  (s.east) -- (z.west);
+  \draw[flecha=tenue]  (vec.east) -- (regla.west);
+  \draw[flecha=tenue]  (perfil.east) -- (tau.west);
+  \draw[flecha=acento] (m1.east |- base) -- (base.west);
+  \draw[flecha=acento] (m1.east |- cv)   -- (cv.west);
+  \draw[flecha] (m2.east) -- (m3.west);
+  \draw[flecha] (m3.east) -- (m4.west);
+\end{tikzpicture}
