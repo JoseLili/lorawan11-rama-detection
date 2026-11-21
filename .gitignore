@@ -111,3 +111,19 @@ results/exploracion_tinto_2022/**/*.tar.gz
 results/exploracion_tinto_2022/**/transporte/
 results/exploracion_tinto_2022/**/salidas/prueba*/
 results/exploracion_tinto_2022/**/PID_*
+
+# Presentación en LaTeX (Beamer): auxiliares de compilación; el PDF ya lo cubre *.pdf
+presentacion/**/*.aux
+presentacion/**/*.log
+presentacion/**/*.nav
+presentacion/**/*.out
+presentacion/**/*.snm
+presentacion/**/*.toc
+presentacion/**/*.vrb
+presentacion/**/*.fls
+presentacion/**/*.fdb_latexmk
+presentacion/**/*.synctex.gz
+presentacion/**/*.bbl
+presentacion/**/*.bcf
+presentacion/**/*.blg
+presentacion/**/*.run.xml

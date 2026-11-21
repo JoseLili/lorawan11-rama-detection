@@ -1,0 +1,52 @@
+% colores-tesis.sty -- paleta unica de la presentacion y de todas las graficas.
+% Regla: el COLOR dice QUIEN es (detector); el TONO o el TIPO DE LINEA dice la
+% variante (umbral p99/p99.9, metrica recall/precision/F1).
+% Aprobada por el tesista el 2026-11-18. Cambiar un color aqui actualiza todas las graficas.
+% El documento que la use debe cargar babel con es-nodecimaldot (punto decimal: 0.8).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{colores-tesis}[2026/11/18 Paleta de la tesis]
+\RequirePackage{xcolor}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Marca (lo que ya usa la presentacion) ---
+\definecolor{fondo}{HTML}{F4F0E8}      % crema de las laminas de contenido
+\definecolor{noche}{HTML}{1B2A4A}      % titulos y fondo de portada
+\definecolor{acento}{HTML}{C8641E}     % etiquetas de seccion
+\definecolor{texto}{HTML}{243040}      % texto normal
+\definecolor{tenue}{HTML}{6B6B6B}      % pies, ejes, notas
+
+% --- Detectores: un color fijo cada uno ---
+\definecolor{ensX}{HTML}{0F4C81}       % Ensamble vecinal con filtro (Ens-Vb-X), detector final
+\definecolor{ensR}{HTML}{4A90C8}       % Ensamble vecinal sin filtro (Ens-Vb-R)
+\definecolor{ensP}{HTML}{E69F00}       % Ensamble con referencia propia (Ens-V0-R)
+\definecolor{paraad}{HTML}{1B9E77}     % PARAAD-SA
+\definecolor{tintoA}{HTML}{C77CB0}     % TINTO 1 dia (autoencoder)
+\definecolor{tintoB}{HTML}{6A3D9A}     % TINTO 7 dias (CNN temporal)
+
+% --- Neutros de las graficas ---
+\definecolor{sinataque}{HTML}{8C8C8C}  % valor sin ataque / azar
+\definecolor{rejilla}{HTML}{DDD8CC}
+\definecolor{resalte}{HTML}{EADCC4}    % zonas sombreadas (p. ej. despliegue)
+
+% --- Estilos de pgfplots: usar estos, nunca un color suelto ---
+% Lineas:  \addplot[det ensX] ...      Barras: \addplot[barra=ensX] ...
+% Variante del mismo detector en barras: \addplot[barra=ensX!45!white] ...
+\pgfplotsset{
+  det ensX/.style={color=ensX, mark options={fill=ensX, solid}, line width=1.6pt, mark=*, solid},
+  det ensR/.style={color=ensR, mark options={fill=ensR, solid}, line width=1.3pt, mark=*, dashed},
+  det ensP/.style={color=ensP, mark options={fill=ensP, solid}, line width=1.3pt, mark=square*, solid},
+  det paraad/.style={color=paraad, mark options={fill=paraad, solid}, line width=1.3pt, mark=diamond*, solid},
+  det tintoA/.style={color=tintoA, mark options={fill=tintoA, solid}, line width=1.3pt, mark=triangle*, solid},
+  det tintoB/.style={color=tintoB, mark options={fill=tintoB, solid}, line width=1.3pt, mark=triangle*, solid},
+  ref sinataque/.style={color=sinataque, line width=1pt, densely dotted, mark=none},
+  barra/.style={fill=#1, draw=none, mark=none},
+  ejes tesis/.style={
+    /pgf/number format/use period, /pgf/number format/1000 sep={},
+    axis line style={tenue}, tick label style={text=tenue, font=\footnotesize},
+    label style={text=texto, font=\small},
+    legend style={draw=none, fill=none, font=\footnotesize, text=texto},
+    major grid style={rejilla}, ymajorgrids,
+  },
+}
+\endinput

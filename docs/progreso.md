@@ -5049,3 +5049,22 @@ alumbral0.5:viabilidadcomputacional, no detector validado. Informe detallado:
 results/tinto_raw_20261109/informe_piloto_cnn.md.
 
 Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md).
+
+## 2026-11-18 — Presentación en LaTeX (Beamer): paleta de colores
+
+- La presentación de tesis (antes en Google Slides/PowerPoint) se pasa a Beamer en
+  `presentacion/`, poco a poco y con el mismo estilo visual. Las gráficas se harán en
+  LaTeX (pgfplots) para poder editarlas por separado y recompilar.
+- **Paleta aprobada por el tesista** en `presentacion/colores-tesis.sty`. Regla: el color
+  dice qué detector es; el tono o el tipo de línea dice la variante (umbral o métrica).
+  Ens-Vb-X azul marino 0F4C81; Ens-Vb-R azul claro 4A90C8 punteado; Ens-V0-R ámbar E69F00;
+  PARAAD-SA verde 1B9E77; TINTO 1 día C77CB0; TINTO 7 días 6A3D9A; sin ataque gris punteado.
+- Motivo: en la versión anterior el mismo color significaba cosas distintas según la
+  lámina (naranja = TINTO 7 días o referencia propia; azul claro = p99.9, precisión o sin filtro).
+- Muestra: `presentacion/muestra_paleta.tex` (datos de ejemplo, no resultados).
+- Esqueleto de la presentación (mismo día): `presentacion/presentacion.tex` con la
+  estructura de una plantilla de Overleaf (sin su tema institucional de Masaryk) y un
+  tema propio, `presentacion/beamerthemeTesis.sty`, que reproduce el estilo anterior.
+  Se compila con LuaLaTeX (`latexmkrc`). La portada está completa; las demás láminas son
+  marcadores "pendiente de revisar" que se llenan una por una. La bibliografía sale de
+  `docs/referencias.bib`, que todavía tiene campos "por verificar".

@@ -1,0 +1,69 @@
+% iconos-tesis.sty -- iconos dibujados con TikZ (sin fuentes de iconos).
+% Uso: \pic[color=ensX, scale=1.2] at (x,y) {antena};
+% Cada icono mide cerca de 0.5 cm a escala 1 y toma el color de la opcion color.
+% Los que tienen huecos se rellenan con el color "panel" (fondo de las cajas).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{iconos-tesis}[2026/11/18 Iconos de la presentacion]
+\RequirePackage{tikz}
+\RequirePackage{colores-tesis}
+\usetikzlibrary{arrows.meta}
+
+\colorlet{panel}{ensX!8!white}
+
+\tikzset{
+  % Antena de una estacion de monitoreo
+  pics/antena/.style={code={
+    \draw[line width=1pt, line join=round] (-0.13,-0.28) -- (0,0.06) -- (0.13,-0.28);
+    \draw[line width=1pt] (-0.085,-0.16) -- (0.085,-0.16);
+    \draw[line width=1pt] (0,0.1) circle (0.045);
+    \foreach \r in {0.12,0.19} {
+      \draw[line width=0.9pt] (0,0.1) ++(-40:\r) arc (-40:40:\r);
+      \draw[line width=0.9pt] (0,0.1) ++(140:\r) arc (140:220:\r);
+    }
+  }},
+  % Servidor central (torre y monitor)
+  pics/servidor/.style={code={
+    \draw[line width=1pt, rounded corners=1.5pt] (-0.26,-0.22) rectangle (0.0,0.25);
+    \draw[line width=1pt] (-0.2,0.16) -- (-0.07,0.16);
+    \draw[line width=1pt] (-0.2,0.09) -- (-0.12,0.09);
+    \filldraw[line width=1pt, fill=panel, rounded corners=1.5pt] (-0.09,-0.12) rectangle (0.28,0.13);
+    \draw[line width=1pt] (0.095,-0.12) -- (0.095,-0.2);
+    \draw[line width=1pt] (0.0,-0.2) -- (0.19,-0.2);
+  }},
+  % Bicho: falla o ataque
+  pics/bicho/.style={code={
+    \draw[line width=1pt] (0,-0.02) ellipse (0.1 and 0.15);
+    \draw[line width=1pt] (0,0.18) circle (0.055);
+    \draw[line width=0.8pt] (0,0.13) -- (0,-0.17);
+    \foreach \s in {-1,1} {
+      \draw[line width=0.9pt] (\s*0.1,0.06) -- (\s*0.2,0.11);
+      \draw[line width=0.9pt] (\s*0.1,-0.03) -- (\s*0.21,-0.03);
+      \draw[line width=0.9pt] (\s*0.09,-0.11) -- (\s*0.19,-0.19);
+      \draw[line width=0.8pt] (\s*0.03,0.23) -- (\s*0.08,0.3);
+    }
+  }},
+  % Luna: cierre del dia
+  pics/luna/.style={code={
+    \fill (0,0) circle (0.2);
+    \fill[panel] (0.1,0.08) circle (0.18);
+  }},
+  % Campana de alarma (blanca, para ir sobre un circulo de color)
+  pics/campana/.style={code={
+    \fill (-0.13,-0.07) .. controls (-0.13,0.2) and (0.13,0.2) .. (0.13,-0.07) -- cycle;
+    \draw[line width=1pt, line cap=round] (-0.17,-0.07) -- (0.17,-0.07);
+    \fill (0,-0.12) circle (0.035);
+    \fill (0,0.16) circle (0.025);
+  }},
+  % Llave: mandar a revisar la estacion
+  pics/llave/.style={code={
+    \begin{scope}[rotate=-45]
+      \draw[line width=1.7pt] (0,0.17) ++(125:0.1) arc (125:415:0.1);
+      \draw[line width=2pt, line cap=round] (0,0.08) -- (0,-0.27);
+    \end{scope}
+  }},
+  % Paloma de "formato valido" (blanca)
+  pics/paloma/.style={code={
+    \draw[line width=1pt, line cap=round, line join=round] (-0.06,0) -- (-0.015,-0.045) -- (0.065,0.045);
+  }},
+}
+\endinput
