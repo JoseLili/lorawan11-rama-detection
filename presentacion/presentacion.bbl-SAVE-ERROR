@@ -1,0 +1,164 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{allka2024paraad}{article}{}
+      \name{author}{4}{}{%
+        {{hash=bb2ff35dd92a1b43de3a873372af8c58}{%
+           family={Allka},
+           familyi={A\bibinitperiod},
+           given={Xhensilda},
+           giveni={X\bibinitperiod}}}%
+        {{hash=aa5f603f8205feff3e6bd0b495a58595}{%
+           family={Ferrer-Cid},
+           familyi={F\bibinithyphendelim C\bibinitperiod},
+           given={Pau},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a88b0ae2b17689b720d0c3a2602f31a0}{%
+           family={Barcelo-Ordinas},
+           familyi={B\bibinithyphendelim O\bibinitperiod},
+           given={Jose\bibnamedelima Maria},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=b7009827e46e07e11bd2eaf7dcb248e9}{%
+           family={Garcia-Vidal},
+           familyi={G\bibinithyphendelim V\bibinitperiod},
+           given={Jorge},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{27aa641c8dd4ab2f44e9687652f00937}
+      \strng{fullhash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{bibnamehash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{authorbibnamehash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{authornamehash}{27aa641c8dd4ab2f44e9687652f00937}
+      \strng{authorfullhash}{d10d469f2bae8f04a62e8cf805375364}
+      \field{extraname}{1}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Network Science and Engineering}
+      \field{number}{6}
+      \field{title}{Pattern-Based Attention Recurrent Autoencoder for Anomaly Detection in Air Quality Sensor Networks}
+      \field{volume}{11}
+      \field{year}{2024}
+      \field{pages}{6372\bibrangedash 6381}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/TNSE.2024.3454459
+      \endverb
+    \endentry
+    \entry{allka2024stcraad}{article}{}
+      \name{author}{4}{}{%
+        {{hash=bb2ff35dd92a1b43de3a873372af8c58}{%
+           family={Allka},
+           familyi={A\bibinitperiod},
+           given={Xhensilda},
+           giveni={X\bibinitperiod}}}%
+        {{hash=aa5f603f8205feff3e6bd0b495a58595}{%
+           family={Ferrer-Cid},
+           familyi={F\bibinithyphendelim C\bibinitperiod},
+           given={Pau},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a88b0ae2b17689b720d0c3a2602f31a0}{%
+           family={Barcelo-Ordinas},
+           familyi={B\bibinithyphendelim O\bibinitperiod},
+           given={Jose\bibnamedelima Maria},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=b7009827e46e07e11bd2eaf7dcb248e9}{%
+           family={Garcia-Vidal},
+           familyi={G\bibinithyphendelim V\bibinitperiod},
+           given={Jorge},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{27aa641c8dd4ab2f44e9687652f00937}
+      \strng{fullhash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{bibnamehash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{authorbibnamehash}{d10d469f2bae8f04a62e8cf805375364}
+      \strng{authornamehash}{27aa641c8dd4ab2f44e9687652f00937}
+      \strng{authorfullhash}{d10d469f2bae8f04a62e8cf805375364}
+      \field{extraname}{2}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Internet of Things Journal}
+      \field{note}{páginas por verificar}
+      \field{number}{19}
+      \field{title}{Leveraging Spatiotemporal Correlations With Recurrent Autoencoders for Sensor Anomaly Detection}
+      \field{volume}{11}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1109/JIOT.2024.3416525
+      \endverb
+    \endentry
+    \entry{garciasaez2025fedwla}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=588954029e48fc338e3b7d5af37a2135}{%
+           family={García-Sáez},
+           familyi={G\bibinithyphendelim S\bibinitperiod},
+           given={Luis\bibnamedelima Miguel},
+           giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=4976d9fc5fd6f0ab076f016b29c71270}{%
+           family={Ruiz-Villafranca},
+           familyi={R\bibinithyphendelim V\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod}}}%
+        {{hash=00c41aca4a507fbf0dee1f72cecd92f7}{%
+           family={Roldán-Gómez},
+           familyi={R\bibinithyphendelim G\bibinitperiod},
+           given={José},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3942fe199849178c39cb84b885706435}{%
+           family={Carrillo-Mondéjar},
+           familyi={C\bibinithyphendelim M\bibinitperiod},
+           given={Javier},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8118464b5da06c5d57daa76abc3d117f}{%
+           family={Martínez},
+           familyi={M\bibinitperiod},
+           given={José\bibnamedelima Luis},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vienna, Austria}%
+      }
+      \strng{namehash}{f81f7f88815e91e41dc40a1a883f510d}
+      \strng{fullhash}{8db9cb935bb0c178f14934eb4e7ac8d7}
+      \strng{bibnamehash}{8db9cb935bb0c178f14934eb4e7ac8d7}
+      \strng{authorbibnamehash}{8db9cb935bb0c178f14934eb4e7ac8d7}
+      \strng{authornamehash}{f81f7f88815e91e41dc40a1a883f510d}
+      \strng{authorfullhash}{8db9cb935bb0c178f14934eb4e7ac8d7}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)}
+      \field{title}{Adaptive Federated Learning-Based Architecture for Intrusion Detection in {IoT/IIoT} Environments}
+      \field{year}{2025}
+      \field{pages}{6810\bibrangedash 6815}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/SMC58881.2025.11342921
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

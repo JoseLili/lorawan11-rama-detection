@@ -1,0 +1,64 @@
+% Lamina 7: linea de tiempo del protocolo (5 etapas, de izquierda a derecha).
+% Contenido verificado contra el repo:
+%   entrenamiento 2020-2021 (celda R): experiments/linea_base/rev22_entrenar.py
+%   seleccion del diseno en 2022 y reentrenamiento definitivo 2020-2022: rev22_comun.py
+%   tau elegido en 2022 con los modelos de seleccion: rev24.py (etapa diseno)
+%   umbral p99 en 2023 sin ataques; banco 2024 a jul 2026, 30 calendarios: rev23.py
+%   despliegue 2026-08-01 a 2026-09-30, SINAICA crudo, historia ene-jul 2026: rev22_examen.py
+% Colores: azul noche = preparacion del detector; naranja = evaluacion.
+% Todo se coloca con coordenadas (x, y) en cm: x = numero de etapa * \paso.
+\begin{tikzpicture}[
+    font=\sffamily,
+    % tarjeta=<color>: recuadro con borde de ese color y fondo muy claro
+    tarjeta/.style={draw=#1, fill=#1!6!white, line width=1pt, rounded corners=4pt,
+                    minimum width=2.5cm, minimum height=3.1cm},
+    % pastilla=<color>: etiqueta de fondo lleno al pie de cada tarjeta
+    pastilla/.style={fill=#1, rounded corners=3pt, text=white, align=center,
+                     font=\sffamily\scriptsize\bfseries, text width=2.1cm,
+                     minimum height=0.75cm, inner sep=2pt},
+    flecha/.style={-{Stealth[length=4pt]}, line width=1pt, tenue},
+  ]
+  \def\paso{2.8}   % distancia entre centros de tarjeta (cm): 2.5 de tarjeta + 0.3 de hueco
+
+  % ---------------- Linea de tiempo ----------------
+  \draw[tenue!40, line width=2.5pt, line cap=round] (-1.1, 3.0) -- (4*\paso+1.1, 3.0);
+
+  % ---------------- Las 5 etapas ----------------
+  % \i = posicion, \c = color, \anio, \etapa = encabezado, \centro = texto grande,
+  % \pie = texto de la pastilla
+  \foreach \i/\c/\anio/\etapa/\centro/\pie in {
+      0/noche/{2020--2021}/{Entrenamiento}/{5 LSTM}/{Ajusta pesos},
+      1/noche/{2022}/{Selección}/{Diseño y $\tau = 0.26\sigma$}/{Congela diseño; reentrena con 2022},
+      2/noche/{2023}/{Calibración}/{Sin ataques}/{Fija umbral p99},
+      3/acento/{2024 -- jul 2026}/{Banco de pruebas}/{30 calendarios}/{Evaluación},
+            4/acento/{ago -- sep 2026}/{Despliegue}/{61 días, datos validados}/{Historia: ene--jul 2026}} {
+      % ano y punto sobre la linea (el circulo crema deja un aro alrededor del punto)
+    \node[font=\sffamily\footnotesize\bfseries, text=\c] at (\i*\paso, 3.45) {\anio};
+    \fill[fondo] (\i*\paso, 3.0) circle (0.2);
+    \fill[\c] (\i*\paso, 3.0) circle (0.13);
+    % tarjeta
+    \node[tarjeta=\c] (t\i) at (\i*\paso, 0.9) {};
+    % franja de encabezado: rectangulo con esquinas redondeadas arriba; el segundo
+    % rectangulo (sin redondear) tapa el redondeo de abajo de la franja
+    \fill[\c, rounded corners=4pt] (t\i.north west) rectangle ($(t\i.north east)+(0,-0.65)$);
+    \fill[\c] ($(t\i.north west)+(0,-0.35)$) rectangle ($(t\i.north east)+(0,-0.65)$);
+    \draw[\c, line width=1pt, rounded corners=4pt] (t\i.south west) rectangle (t\i.north east);
+    \node[font=\sffamily\scriptsize\bfseries, text=white] at ($(t\i.north)+(0,-0.325)$) {\etapa};
+    % texto central y pastilla
+    \node[font=\sffamily\small\bfseries, text=texto, text width=2.3cm, align=center]
+         at ($(t\i.center)+(0,0.2)$) {\centro};
+    \node[pastilla=\c] at ($(t\i.south)+(0,0.55)$) {\pie};
+  }
+
+  % ---------------- Flechas entre tarjetas ----------------
+  \foreach \i [evaluate=\i as \j using int(\i+1)] in {0,...,3}
+    \draw[flecha] (t\i.east) -- (t\j.west);
+
+  % ---------------- Etiquetas de grupo bajo las tarjetas ----------------
+  \draw[noche, line width=0.6pt] ($(t0.south west)+(0,-0.25)$) -- ($(t2.south east)+(0,-0.25)$);
+  \node[font=\sffamily\scriptsize\bfseries, text=noche, below] at ($(t1.south)+(0,-0.25)$)
+       {PREPARACIÓN DEL DETECTOR};
+  \draw[acento, line width=0.6pt] ($(t3.south west)+(0,-0.25)$) -- ($(t4.south east)+(0,-0.25)$);
+  \node[font=\sffamily\scriptsize\bfseries, text=acento, below]
+       at ($(t3.south)!0.5!(t4.south)+(0,-0.25)$) {EVALUACIÓN};
+\end{tikzpicture}

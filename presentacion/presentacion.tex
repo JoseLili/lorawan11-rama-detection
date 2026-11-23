@@ -1,3 +1,4 @@
+\RequirePackage{fix-cm}  % fuente matematica escalable: quita los avisos "size <3> substituted"
 % Presentacion de tesis en Beamer. Estructura tomada de una plantilla de Overleaf;
 % estilo propio en beamerthemeTesis.sty y colores en colores-tesis.sty.
 % Compilar: latexmk presentacion.tex  (latexmkrc elige LuaLaTeX).
@@ -12,13 +13,21 @@
 \usepackage{booktabs}
 \usepackage{tabularx}  % tablas con columnas X que se reparten el ancho
 \usepackage{colortbl}  % \columncolor para sombrear una columna
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}  % columna X alineada a la izquierda
 % Celda de encabezado en tablas con fondo oscuro: texto blanco en negritas
 % (\leavevmode evita que el color baje la celda una linea).
 \newcommand{\encabezado}[1]{\leavevmode\color{white}\bfseries #1}
 \usetheme{Tesis}
 \usepackage{iconos-tesis}
 \usetikzlibrary{calc}
+\usepgfplotslibrary{groupplots}  % varias graficas alineadas con el mismo tamaño
+% Columna X centrada (tabla de trabajos relacionados)
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+% Palomita y tache dibujados con TikZ (van despues del tema, que carga TikZ y la paleta)
+\newcommand{\marcasi}{\tikz[baseline=-0.6ex]\draw[ensX, line width=1.6pt,
+  line cap=round, line join=round] (-0.12,0) -- (-0.03,-0.09) -- (0.13,0.1);}
+\newcommand{\marcano}{\tikz[baseline=-0.6ex]\draw[tenue, line width=1.3pt,
+  line cap=round] (-0.09,-0.09) -- (0.09,0.09) (-0.09,0.09) -- (0.09,-0.09);}
 
 % Marca temporal de cada lamina sin revisar. Se borra cuando ya no se use.
 \newcommand{\pendiente}[1]{%
@@ -72,45 +81,52 @@ cada estación y el de sus estaciones vecinas sin incurrir en un exceso de
 falsos positivos.
 \end{block}
 \begin{block}{OBJETIVO}
-Diseñar un detector de anomalías basado en redes LSTM que combine la historia 
-temporal de cada estación con la de sus estaciones vecinas, con alta capacidad 
-de detección y una tasa de falsas alarmas acotada, en una red de sensores de ozono.
+Diseñar un detector de anomalías basado en modelos de aprendizaje profundo que
+combine la historia temporal de cada estación con la de sus estaciones vecinas,
+con alta capacidad de detección y una tasa de falsas alarmas acotada, en una
+red de sensores de ozono.
 \end{block}
 \end{frame}
 
 \begin{frame}{TRABAJOS RELACIONADOS}
-% Tabla comparativa: columnas = trabajos, filas = caracteristicas.
-% Y = columna X de tabularx con texto alineado a la izquierda (definida en el preambulo).
-% La ultima columna (este trabajo) va sombreada con \columncolor.
+% 4 filas, una caracteristica cada una; los detalles van en las notas.
+% Encabezado: nombre + cita y, abajo, la arquitectura en gris (\newline = salto
+% de linea DENTRO de la celda; \\ terminaria la fila).
+\vfill
 \centering
-\footnotesize                          % letra mas chica solo en esta lamina
-\renewcommand{\arraystretch}{1.12}     % aire entre filas
-\setlength{\tabcolsep}{4pt}            % menos espacio entre columnas (normal: 6pt)
-% Primera columna: 1.8 cm, en negritas y azul noche (\leavevmode evita que el
-% color empuje la celda una linea hacia abajo).
-\begin{tabularx}{\textwidth}{>{\leavevmode\bfseries\color{noche}}p{1.8cm} Y Y Y >{\columncolor{panel}}Y}
+\small
+\renewcommand{\arraystretch}{1.7}      % filas con aire
+\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\textwidth}{>{\leavevmode\bfseries\color{noche}}p{2.4cm} C C C >{\columncolor{panel}}C}
   \toprule
-  % Encabezado: nombre, salto de linea dentro de la celda (\newline) y revista
-  & PARAAD-SA
-  & STC-RAAD
-  & FedWLA
-  & \textcolor{ensX}{\textbf{Este trabajo}}\\
+  & \textbf{PARAAD-SA}~\cite{allka2024paraad}\newline{\scriptsize\color{tenue}Autoencoder recurrente}
+  & \textbf{STC-RAAD}~\cite{allka2024stcraad}\newline{\scriptsize\color{tenue}Autoencoder BiLSTM}
+  & \textbf{FedWLA}~\cite{garciasaez2025fedwla}\newline{\scriptsize\color{tenue}Árboles federados}
+  & \textcolor{ensX}{\textbf{Este trabajo}}\newline{\scriptsize\color{tenue}Ensamble de 5 LSTM} \\
   \midrule
-  Modelo      & Autoencoder recurrente con atención; no supervisado
-              & Autoencoder recurrente espacio-temporal; no supervisado
-              & IDS federado; supervisado % VERIFICAR con el articulo
-              & Ensamble de 5 LSTM; supervisado \\
-  Usa vecinas & No & Sí & No aplica & Sí, con filtro de sospechosas \\
-  Amenaza     & Datos: sesgo y deriva
-              & Datos: anomalías de sensor % VERIFICAR
-              & Red: tráfico malicioso
-              & Datos: proporcional, escalón y sesgo \\
-  Evaluación  & O\textsubscript{3}, 8 estaciones de Barcelona
-              & Calidad del aire % VERIFICAR
-              & X-IIoTID y Edge-IIoTset
-              & O\textsubscript{3} horario, 31 estaciones RAMA \\
+  Datos        & O\textsubscript{3} sensores & O\textsubscript{3} sensores & Tráfico de red & O\textsubscript{3} sensores \\
+  Supervisado  & \marcano & \marcano & \marcasi & \marcasi \\
+  Usa vecinas  & \marcano & \marcasi & {\color{tenue}---} & \marcasi\ {\scriptsize con filtro} \\
+  Resultado    & R 0.81 · P 0.84 & R 0.82--0.96 · P 0.85--0.91 & F1 0.98--0.99 & {\color{tenue}ver resultados} \\
   \bottomrule
 \end{tabularx}
+\par\medskip
+{\scriptsize\color{tenue} R = recall, P = precisión. Cifras de cada artículo; no son comparables entre sí.}
+\vfill
+\note{%
+\begin{itemize}
+  \item PARAAD-SA (UPC Barcelona, IEEE TNSE 2024): O$_3$ de 8 estaciones de
+    Barcelona; anomalías sintéticas de sesgo y deriva. Es nuestro comparador.
+  \item STC-RAAD (mismo grupo, IEEE IoT J 2024): usa sensores vecinos mediante un
+    grafo; O$_3$ y NO$_2$ en Barcelona (8) y 30 sensores de bajo costo en Taiwán.
+    Las cifras son de sesgo sobre O$_3$ en Barcelona.
+  \item FedWLA (UCLM y U. de Zaragoza, IEEE SMC 2025): IDS federado con CatBoost,
+    XGBoost y LightGBM; X-IIoTID y Edge-IIoTset. Ataca la red, no el dato.
+  \item No comparables: FedWLA evalúa con 28--49\,\% de ataques; en nuestro banco
+    sólo 0.77\,\% de los estación-días están atacados.
+  \item Diferencia de este trabajo: supervisado, usa vecinas y filtra las
+    sospechosas; cuatro escenarios de ataque sobre el dato.
+\end{itemize}}
 \end{frame}
 
 % =====================================================================
@@ -134,7 +150,7 @@ de detección y una tasa de falsas alarmas acotada, en una red de sensores de oz
   \rowcolor{white}
   2. Escalón aditivo fijo  & $\pm$10, $\pm$20 y $\pm$40 ppb & 1 a 7 días \\ \midrule
   \rowcolor{white}
-  3. Ataque coordinado a vecinas & 0, 1, 2 y 4 vecinas alteradas & 1 a 7 días \\ \midrule
+    3. Ataque coordinado a vecinas & 0, 1, 2 y 4 vecinas alteradas, con las magnitudes de 1 y 2 & 1 a 7 días \\ \midrule
   \rowcolor{white}
   4. Sesgo lento o sostenido & +20 y +40 ppb: escalón, rampa de 28 días y deriva de 56 días & 8 semanas (56 días) \\
 \end{tabularx}
@@ -142,26 +158,75 @@ de detección y una tasa de falsas alarmas acotada, en una red de sensores de oz
 \end{frame}
 
 \begin{frame}{ARQUITECTURA DEL DETECTOR PROPUESTO}
-% Diagrama en archivo aparte (se edita y recompila sin tocar esta lamina).
+% Diagrama en archivo aparte: figuras/arquitectura.tex
 \centering
 \vspace*{\fill}
 \input{figuras/arquitectura}
 \vspace*{\fill}
 \end{frame}
 
-\begin{frame}{PROTOCOLO EXPERIMENTAL (2017–2026)}{Separación estricta de bloques anuales sin fuga de información}
-\pendiente{Lámina 7: línea de tiempo; revisar la afirmación \enquote{sin fuga de información}.}
+\begin{frame}{PROTOCOLO EXPERIMENTAL (2020–2026)}
+% Linea de tiempo en archivo aparte: figuras/protocolo.tex
+\centering
+\vspace*{\fill}
+\input{figuras/protocolo}
+\vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item Cada etapa usa sólo datos anteriores a ella: nada del banco ni del despliegue
+    entra al entrenamiento, a la selección ni al umbral.
+  \item 2020--2021: se entrenan 5 LSTM por diseño (semillas 42, 1, 2, 3 y 4).
+  \item 2022: se elige entre 6 diseños (referencia propia o vecinal, tres formas de
+    entrenar) y se fija $\tau$; después los 5 modelos se reentrenan con 2020--2022.
+  \item 2023, sin ataques: se fija el umbral p99 = 0.1508.
+  \item Banco: 2024 a julio de 2026, 10 calendarios de ataque por año.
+  \item Despliegue: 1 de agosto a 30 de septiembre de 2026, datos crudos de SINAICA;
+    la historia previa es enero--julio de 2026.
+  \item No se muestra: el examen 2017--2019 fue de la 1.ª versión (entrenada en
+    2020--2021) y no superó a la referencia propia. El detector final nunca se
+    evaluó en esos años.
+  \item Si preguntan: el banco se usó para decidir las revisiones 23--25 y el
+    despliegue fue el examen de uso único del ensamble sin filtro; el filtro se
+    diseñó después.
+\end{itemize}}
 \end{frame}
 
 % =====================================================================
 \section{Resultados}
 
-\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA}{Sensibilidad (Recall) en anomalías proporcionales (\%), fijas (ppb) y despliegue}
-\pendiente{Lámina 8: gráfica incompleta; las notas no coinciden con la gráfica.}
+\begin{frame}{ELECCIÓN DEL PUNTO DE OPERACIÓN}
+% Graficas en archivo aparte: figuras/punto_operacion.tex
+\centering
+\vspace*{\fill}
+\input{figuras/punto_operacion}
+\vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item Cada percentil es un umbral fijado en 2023 sin ataques: p95 deja pasar 5 de
+    cada 100 días normales como alarma; p99.9, 1 de cada 1000.
+  \item De izquierda a derecha el umbral es más estricto: el recall cae y la
+    precisión sube. Ese es el compromiso.
+  \item Se eligió p99: en el banco el recall sigue alto (0.81 con $\delta$ 50\,\%,
+    0.85 con 20 ppb) y las falsas alarmas bajan de 18.2 a 4.8 días al año por
+    estación respecto de p95.
+  \item Una falsa alarma cuesta una revisión extra de la estación; por eso se
+    prioriza el recall sobre la precisión.
+  \item La precisión del banco es menor que la del despliegue porque en el banco hubo
+    más falsas alarmas (4.8 contra 1.1 días al año con p99) y cambia la proporción
+    de días atacados.
+  \item Despliegue: datos validados de SIMAT (revisión 26), las mismas estación-días
+    del examen original. Es descriptivo: la ventana ya se había usado.
+  \item Con p99.9 la precisión cercana a 1 del despliegue sale de pocas detecciones
+    (por ejemplo, $\delta$ 20\,\%: recall 0.03).
+\end{itemize}}
 \end{frame}
 
-\begin{frame}{ELECCIÓN DEL PUNTO DE OPERACIÓN}{Sensibilidad (Recall) frente a días con falsas alarmas al año}
-\pendiente{Lámina 9: la gráfica no coincide con el título; decidir si va antes de los resultados.}
+\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (p99)}
+\pendiente{Lámina 9: barras apiladas en días (VP + FP y VP + FN) con p99, sólo banco; los valores deben coincidir con la lámina 8.}
+\end{frame}
+
+\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (p99)}
+\pendiente{Lámina 9: barras apiladas en días (VP + FP y VP + FN) con p99, sólo banco; los valores deben coincidir con la lámina 8.}
 \end{frame}
 
 \begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Sensibilidad según el número de estaciones vecinas comprometidas (0 a 4)}

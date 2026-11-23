@@ -4,7 +4,7 @@
 % Aprobada por el tesista el 2026-11-18. Cambiar un color aqui actualiza todas las graficas.
 % El documento que la use debe cargar babel con es-nodecimaldot (punto decimal: 0.8).
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{colores-tesis}[2026/11/18 Paleta de la tesis]
+\ProvidesPackage{colores-tesis}[2026/11/22 Paleta de la tesis con rampa de tamanos]
 \RequirePackage{xcolor}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -48,5 +48,23 @@
     legend style={draw=none, fill=none, font=\footnotesize, text=texto},
     major grid style={rejilla}, ymajorgrids,
   },
+}
+
+% --- Tamaño del ataque (solo cuando se muestra un detector): rampa de ensX ---
+% claro = chico (delta 20 % / 10 ppb), medio = delta 50 % / 20 ppb, oscuro = grande
+\colorlet{magChica}{ensX!40!white}
+\colorlet{magMedia}{ensX!70!white}
+\colorlet{magGrande}{ensX}
+% Uso: \addplot[mag media, fam pct, met recall] ...
+%   mag ... = tono por tamaño; fam pct / fam ppb = circulo o cuadro;
+%   met recall / met prec = linea solida o punteada.
+\pgfplotsset{
+  mag chica/.style={color=magChica, mark options={fill=magChica, solid}},
+  mag media/.style={color=magMedia, mark options={fill=magMedia, solid}},
+  mag grande/.style={color=magGrande, mark options={fill=magGrande, solid}},
+  fam pct/.style={mark=*},
+  fam ppb/.style={mark=square*},
+  met recall/.style={solid, line width=1.3pt},
+  met prec/.style={densely dashed, line width=1.3pt},
 }
 \endinput
