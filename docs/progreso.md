@@ -5097,3 +5097,15 @@ Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md
   B registrado (dos corridas + control p99/p99.9). El tesista canceló la corrida de la lap (52 de 183
   tareas, sin usar) y la hará en la PC principal con el mismo script. Aún no se ha visto ningún resultado
   de p98 en el banco.
+
+## 2026-11-23 — STC-RAAD leído: ¿mejor comparador que PARAAD?
+
+- Pregunta del tesista. Se leyó el texto completo de STC-RAAD (IEEE IoT J 2024) y la parte de la tesis de Allka
+  que lo explica. Análisis en [comparador_stc_raad.md](comparador_stc_raad.md).
+- **En una línea:** STC-RAAD es el comparador más directo de la idea central de la tesis, porque también usa a
+  las vecinas, pero sin supervisión. PARAAD se eligió por cronología y por pedido del asesor, no por una
+  comparación técnica. PARAAD sigue siendo útil: es el método de red del mismo grupo y mostró dónde falla el
+  nuestro (vecinas atacadas, sesgo de más de un mes).
+- STC-RAAD se ajustó con 25 % de días anómalos, vecinas siempre limpias y umbral ajustado con etiquetas: sus
+  cifras no se comparan con las nuestras. No hay código público. Queda como comparación pendiente; si se hace,
+  es una revisión nueva con registro previo.
