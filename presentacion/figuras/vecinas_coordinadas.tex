@@ -4,7 +4,9 @@
 % y E2-4. Banco 2024-jul 2026, 30 calendarios.
 % Eje x en su posicion real: 0, 1, 2 y "todas" en 4, para que el salto de 2 a todas se vea
 % mas largo. "Todas" (E2-4) son 4 vecinas, o 3 cuando una de ellas es HGM, que no se altera.
-% Ens-Vb-X = detector final (excluye vecinas sospechosas), Ens-Vb-R = el mismo sin ese filtro.
+% Ens-Vb-X = detector final (excluye vecinas sospechosas).
+% Ens-Vb-R (sin filtro) se quito el 2026-11-23 a pedido del tesista porque estorbaba;
+% sus valores (rev24) eran 0.810, 0.454, 0.178 y 0.034.
 \begin{tikzpicture}[
     valor/.style={font=\sffamily\scriptsize, inner sep=2pt},
   ]
@@ -21,27 +23,23 @@
     ylabel={Recall de la\\estación atacada},
     ylabel style={font=\sffamily\small, align=center},
     xlabel style={font=\sffamily\small},
-    legend style={at={(0.5,1.03)}, anchor=south, legend columns=3,
+    legend style={at={(0.5,1.03)}, anchor=south, legend columns=2,
                   /tikz/every even column/.append style={column sep=0.5cm}},
     every axis plot/.append style={mark size=2pt},
     clip=false,
   ]
   \addplot[det ensX] coordinates {(0,0.802) (1,0.562) (2,0.314) (4,0.045)};
   \addlegendentry{Detector final (con filtro)}
-  \addplot[det ensR] coordinates {(0,0.810) (1,0.454) (2,0.178) (4,0.034)};
-  \addlegendentry{Sin filtro}
   \addplot[det paraad] coordinates {(0,0.365) (1,0.345) (2,0.324) (4,0.305)};
   \addlegendentry{PARAAD-SA}
 
-  % Valores: Ens-Vb-X en negritas; Ens-Vb-R en su color; PARAAD-SA casi plano, solo extremos.
+  % Valores: detector final en negritas; PARAAD-SA en su color (en 2 se encima con el final).
   \node[valor, text=ensX, anchor=south, font=\sffamily\scriptsize\bfseries] at (axis cs:0,0.83) {0.80};
   \node[valor, text=ensX, anchor=south west, font=\sffamily\scriptsize\bfseries] at (axis cs:1,0.57) {0.56};
   \node[valor, text=ensX, anchor=south west, font=\sffamily\scriptsize\bfseries] at (axis cs:2.04,0.33) {0.31};
   \node[valor, text=ensX, anchor=south, font=\sffamily\scriptsize\bfseries] at (axis cs:4,0.07) {0.05};
-  \node[valor, text=ensR, anchor=north east] at (axis cs:0.98,0.44) {0.45};
-  \node[valor, text=ensR, anchor=north east] at (axis cs:2,0.17) {0.18};
-  \node[valor, text=ensR, anchor=west] at (axis cs:4.08,0.03) {0.03};
   \node[valor, text=paraad, anchor=north] at (axis cs:0,0.35) {0.36};
+  \node[valor, text=paraad, anchor=north] at (axis cs:1,0.33) {0.34};
   \node[valor, text=paraad, anchor=south] at (axis cs:4,0.32) {0.31};
 \end{axis}
 \end{tikzpicture}
