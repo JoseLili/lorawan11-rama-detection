@@ -5079,3 +5079,21 @@ Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md
   modelos** (no el máximo); umbral p99 0.1508 calibrado en 2023; «alarma estación-día» en vez
   de «alerta temprana».
 - Pendiente aparte: la tabla de la lámina 4 se desborda ~15 pt (Overfull \vbox).
+
+## 2026-11-23 — Registro 24-p98: p98 en el banco de la revisión 24 (solo E1), antes de puntuar
+
+- **Pedido del tesista:** una lámina como la 9 (barras VP+FP y VP+FN) con p98 para el detector
+  final (Ens-Vb-X) y para PARAAD-SA. El banco de la revisión 24 solo tiene p99 y p99.9.
+- **Umbrales p98 de 2023 limpio, fijados antes de ver el banco:** Ens-Vb-X 0.07329 (ya estaba en
+  `results/linea_base/rev24/umbrales_2023_X.json`); PARAAD-SA 0.58271 (puntajes de la revisión 20,
+  8 802 estación-días, 176 alarmas). La misma función reproduce exactos sus p99 (0.64050) y p99.9 (0.83663).
+- **Puntajes:** los `.npz` diarios del banco nunca se versionaron. Se regeneran en la lap con
+  `rev24.py` sin cambios (wrapper `experiments/linea_base/rev24_p98.py`, solo E1 y años limpios) y se
+  comparan con las huellas de `rev24/puntajes_sha256.json`. Control: p99 y p99.9 deben reproducir las
+  filas E1 de `rev24/metricas_banco.csv`.
+- Es descriptivo: no cambia umbrales, modelos ni decisiones. Fila 24-p98 en la sección 15 del protocolo.
+- **Cambio de máquina (mismo día):** en la lap ninguna variante de huella reprodujo `puntajes_sha256.json`
+  en una prueba de 3 tareas (entorno .venv: TensorFlow 2.22.0-rc0, Keras 3.16 dev), así que valía el plan
+  B registrado (dos corridas + control p99/p99.9). El tesista canceló la corrida de la lap (52 de 183
+  tareas, sin usar) y la hará en la PC principal con el mismo script. Aún no se ha visto ningún resultado
+  de p98 en el banco.

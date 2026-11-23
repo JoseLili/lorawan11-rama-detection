@@ -107,7 +107,7 @@ red de sensores de ozono.
   Datos        & O\textsubscript{3} sensores & O\textsubscript{3} sensores & Tráfico de red & O\textsubscript{3} sensores \\
   Supervisado  & \marcano & \marcano & \marcasi & \marcasi \\
   Usa vecinas  & \marcano & \marcasi & {\color{tenue}---} & \marcasi\ {\scriptsize con filtro} \\
-  Resultado    & R 0.81 · P 0.84 & R 0.82--0.96 · P 0.85--0.91 & F1 0.98--0.99 & {\color{tenue}ver resultados} \\
+  Resultado    & R=0.81 · P=0.84 & R=0.82--0.96 · P=0.85--0.91 & F1=0.98--0.99 & {\color{tenue}ver resultados} \\
   \bottomrule
 \end{tabularx}
 \par\medskip
@@ -231,31 +231,17 @@ red de sensores de ozono.
 
 % Graficas de respaldo para explicar o seleccionar la mejor con Jaime 
 
-\begin{frame}{RESPALDO · UNA ESTACIÓN ATACADA (p99.9)}
-\centering
-\vspace*{\fill}
-\input{figuras/estacion_atacada_p999}
-\vspace*{\fill}
-\end{frame}
-
-\begin{frame}{RESPALDO · PARAAD-SA, UNA ESTACIÓN ATACADA (p99)}
+\begin{frame}{PARAAD-SA, UNA ESTACIÓN ATACADA (p99)}
 \centering
 \vspace*{\fill}
 \input{figuras/paraad_atacada_p99}
 \vspace*{\fill}
 \end{frame}
 
-\begin{frame}{RESPALDO · PARAAD-SA, UNA ESTACIÓN ATACADA (p99.9)}
-\centering
-\vspace*{\fill}
-\input{figuras/paraad_atacada_p999}
-\vspace*{\fill}
-\end{frame}
-
 % Graficas de respaldo para explicar o seleccionar la mejor con Jaime 
 
 
-\begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Recall según cuántas vecinas se alteran a la vez}
+\begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Recall con mas de una estacion vecina con alteracion simultanea}
 \centering
 \vspace*{\fill}
 \input{figuras/vecinas_coordinadas}
@@ -307,10 +293,17 @@ red de sensores de ozono.
 % =====================================================================
 % Respaldo: no cuenta en la numeracion "n / total".
 \appendix
-\section{Respaldo}
+\section{Anexo}
 
-\begin{frame}{RESPALDO · TINTO}{Imagen TINTO de una estación-día}
+\begin{frame}{ANEXO · TINTO}{Imagen TINTO de una estación-día}
 \pendiente{Lámina 13: imagen sin título; decidir si se queda como respaldo.}
+\end{frame}
+
+\begin{frame}{ANEXO · PARAAD-SA, UNA ESTACIÓN ATACADA (p99.9)}
+\centering
+\vspace*{\fill}
+\input{figuras/paraad_atacada_p999}
+\vspace*{\fill}
 \end{frame}
 
 \end{document}

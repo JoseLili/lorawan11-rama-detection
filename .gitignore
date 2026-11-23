@@ -127,3 +127,8 @@ presentacion/**/*.bbl
 presentacion/**/*.bcf
 presentacion/**/*.blg
 presentacion/**/*.run.xml
+
+# Revisión 24: puntajes diarios del banco (.npz), no se versionan; sus huellas están en
+# results/linea_base/rev24/puntajes_sha256.json. Registro 24-p98 los regenera (solo E1).
+results/linea_base/rev24/banco/
+results/linea_base/rev24/logs/
