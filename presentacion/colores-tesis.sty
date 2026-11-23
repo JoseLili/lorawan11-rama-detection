@@ -56,15 +56,17 @@
 \colorlet{magMedia}{ensX!70!white}
 \colorlet{magGrande}{ensX}
 % Uso: \addplot[mag media, fam pct, met recall] ...
-%   mag ... = tono por tamaño; fam pct / fam ppb = circulo o cuadro;
-%   met recall / met prec = linea solida o punteada.
+%   mag ... = tono por tamaño;
+%   fam pct = linea solida con circulo (delta %); fam ppb = linea punteada con cuadro (ppb);
+%   met recall / met prec = solo el grosor (recall y precision van en paneles distintos).
+%   (Cambio del 2026-11-23, pedido por el tesista: antes la linea punteada era la precision.)
 \pgfplotsset{
   mag chica/.style={color=magChica, mark options={fill=magChica, solid}},
   mag media/.style={color=magMedia, mark options={fill=magMedia, solid}},
   mag grande/.style={color=magGrande, mark options={fill=magGrande, solid}},
-  fam pct/.style={mark=*},
-  fam ppb/.style={mark=square*},
-  met recall/.style={solid, line width=1.3pt},
-  met prec/.style={densely dashed, line width=1.3pt},
+  fam pct/.style={mark=*, solid},
+  fam ppb/.style={mark=square*, dash pattern=on 3.5pt off 2pt},
+  met recall/.style={line width=1.3pt},
+  met prec/.style={line width=1.3pt},
 }
 \endinput
