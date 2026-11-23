@@ -1,6 +1,9 @@
 % Lamina 8: eleccion del punto de operacion del detector final (Ens-Vb-X).
 % 2 x 2: columnas = banco | despliegue; filas = recall (arriba) | precision (abajo).
-% Banco: percentiles_resumen.md (results/linea_base/presentacion_parte3/percentiles_banco.csv).
+% Banco, p99 y p99.9: results/linea_base/rev24/metricas_banco.csv y falsas_alarmas_banco.csv
+%   (Ens-Vb-X0.2596, E1; dias al año = fa x 365). Alineado con la lamina 9 el 2026-11-23.
+% Banco, p95 y p98: percentiles_banco.csv (results/linea_base/presentacion_parte3/), que NO
+%   esta en el repo; sin verificar. Ese archivo daba recall 0.01-0.02 mas alto que rev24 en p99.
 % Despliegue: revision 26, datos validados de SIMAT, unidad A (las mismas estacion-dias
 %   del examen original): despliegue_validado_metricas.csv y _falsas_alarmas.csv.
 % Umbrales de 2023 sin ataques para p95, p98, p99 y p99.9.
@@ -27,12 +30,12 @@
                  legend to name=leyendaPO, legend columns=6,
                  legend style={/tikz/every even column/.append style={column sep=0.35cm}}]
   \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(2.65,0) (2.65,1.05) (3.35,1.05) (3.35,0)} \closedcycle;  % franja p99
-  \addplot[mag chica, fam pct, met recall] coordinates {(1,0.45) (2,0.30) (3,0.21) (4,0.04)}; \addlegendentry{$\delta$\,20\,\%}
-  \addplot[mag media, fam pct, met recall] coordinates {(1,0.93) (2,0.86) (3,0.81) (4,0.41)}; \addlegendentry{$\delta$\,50\,\%}
-  \addplot[mag grande, fam pct, met recall] coordinates {(1,0.98) (2,0.96) (3,0.94) (4,0.65)}; \addlegendentry{$\delta$\,100\,\%}
+  \addplot[mag chica, fam pct, met recall] coordinates {(1,0.45) (2,0.30) (3,0.20) (4,0.03)}; \addlegendentry{$\delta$\,20\,\%}
+  \addplot[mag media, fam pct, met recall] coordinates {(1,0.93) (2,0.86) (3,0.80) (4,0.40)}; \addlegendentry{$\delta$\,50\,\%}
+  \addplot[mag grande, fam pct, met recall] coordinates {(1,0.98) (2,0.96) (3,0.93) (4,0.64)}; \addlegendentry{$\delta$\,100\,\%}
   \addplot[mag chica, fam ppb, met recall] coordinates {(1,0.49) (2,0.29) (3,0.23) (4,0.05)}; \addlegendentry{10 ppb}
-  \addplot[mag media, fam ppb, met recall] coordinates {(1,0.96) (2,0.89) (3,0.85) (4,0.45)}; \addlegendentry{20 ppb}
-  \addplot[mag grande, fam ppb, met recall] coordinates {(1,0.99) (2,0.98) (3,0.97) (4,0.79)}; \addlegendentry{40 ppb}
+  \addplot[mag media, fam ppb, met recall] coordinates {(1,0.96) (2,0.89) (3,0.83) (4,0.44)}; \addlegendentry{20 ppb}
+  \addplot[mag grande, fam ppb, met recall] coordinates {(1,0.99) (2,0.98) (3,0.96) (4,0.78)}; \addlegendentry{40 ppb}
   % ---------------- Despliegue · recall ----------------
   \nextgroupplot[title={Despliegue}]
   \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(2.65,0) (2.65,1.05) (3.35,1.05) (3.35,0)} \closedcycle;  % franja p99
@@ -44,7 +47,7 @@
   \addplot[mag grande, fam ppb, met recall] coordinates {(1,1.00) (2,1.00) (3,1.00) (4,0.86)};  % 40 ppb
   % ---------------- Banco · precision ----------------
   \nextgroupplot[ylabel={Precisión}, xlabel={Días con falsa alarma al año por estación},
-                 xticklabels={{p95\\\color{tenue}18.2}, {p98\\\color{tenue}8.3}, {p99\\\color{tenue}4.8}, {p99.9\\\color{tenue}0.7}}]
+                 xticklabels={{p95\\\color{tenue}18.2}, {p98\\\color{tenue}8.3}, {p99\\\color{tenue}4.7}, {p99.9\\\color{tenue}0.7}}]
   \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(2.65,0) (2.65,1.05) (3.35,1.05) (3.35,0)} \closedcycle;  % franja p99
   \node[font=\sffamily\scriptsize\bfseries, text=acento, anchor=north] at (axis cs:3,1.03) {elegido};
   \addplot[mag chica, fam pct, met prec] coordinates {(1,0.06) (2,0.09) (3,0.11) (4,0.13)};  % $\delta$\,20\,\%

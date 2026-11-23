@@ -1,0 +1,80 @@
+% Lamina 9: una estacion atacada (E1), detector final Ens-Vb-X con el umbral p99.
+% Datos: results/linea_base/rev24/metricas_banco.csv, filas Ens-Vb-X0.2596, nivel 0.01, E1.
+% Banco 2024-jul 2026, 30 calendarios (10 por año); los conteos son la suma de los 30.
+% VP = dia atacado con alarma, FP = dia normal con alarma, FN = dia atacado sin alarma.
+% Unidad del eje Y: dias al año por estacion. Las coordenadas se escriben con los conteos
+% del CSV (estacion-dias) y "y filter" las divide entre 630.27 estacion-años:
+% 23 005 estacion-dias con dato / 365 = 63.03 años-estacion, por 10 calendarios por año.
+% Asi el FP de delta 20 % (2 980 / 630.27 = 4.7) es el mismo 4.7 de p99 en la lamina 8.
+% Por cada tamaño de ataque, dos barras apiladas que comparten el trozo VP:
+%   izquierda = alarmas (VP + FP)   -> precision = VP / alto de la barra
+%   derecha   = dias atacados (VP + FN) -> recall = VP / alto de la barra
+% Truco de pgfplots: un solo eje "ybar stacked"; cada barra tiene su propia x
+% (centro -0.24 y centro +0.24) y las tres series usan las mismas 12 x, con 0 donde
+% la pieza no va (FP no va en la barra de atacados ni FN en la de alarmas).
+% Posiciones: delta 20/50/100 % en 1, 2, 3; error fijo 10/20/40 ppb en 4.5, 5.5, 6.5.
+% Los scope no funcionan dentro de este eje; por eso cada tipo de texto tiene un estilo.
+\begin{tikzpicture}[
+    etiqueta/.style={font=\sffamily\scriptsize, anchor=south, inner sep=2pt},
+    tamano/.style={font=\sffamily\small, text=texto, anchor=north},
+    familia/.style={font=\sffamily\scriptsize, text=tenue, anchor=north},
+  ]
+\begin{axis}[
+    ejes tesis,
+    ybar stacked,
+    bar width=0.40,                 % sin unidad = unidades del eje x
+    scale only axis, width=12.3cm, height=3.7cm,
+    xmin=0.45, xmax=7.05,
+    y filter/.expression={y/630.27},  % estacion-dias -> dias al año por estacion
+    ymin=0, ymax=9.5, ytick={0,2,...,8},
+    ylabel={Días al año por estación},
+    ylabel style={font=\sffamily\small},
+    xtick={0.76,1.24, 1.76,2.24, 2.76,3.24, 4.26,4.74, 5.26,5.74, 6.26,6.74},
+    xticklabels={alarmas,atacados, alarmas,atacados, alarmas,atacados,
+                 alarmas,atacados, alarmas,atacados, alarmas,atacados},
+    xtick style={draw=none},
+    xticklabel style={font=\sffamily\tiny, text=tenue},
+    legend style={at={(0.5,1.02)}, anchor=south, legend columns=3,
+                  /tikz/every even column/.append style={column sep=0.5cm}},
+    legend image code/.code={\fill[#1] (0cm,-0.1cm) rectangle (0.3cm,0.1cm);},
+    clip=false,
+  ]
+  % Orden de las series = orden en que se apilan (VP abajo).
+  % x:                      d20-A  d20-D   d50-A  d50-D   d100-A d100-D  a10-A  a10-D   a20-A  a20-D   a40-A  a40-D
+  \addplot[barra=ensX] coordinates {
+    (0.76,359)  (1.24,359)  (1.76,1425) (2.24,1425) (2.76,1656) (3.24,1656)
+    (4.26,405)  (4.74,405)  (5.26,1477) (5.74,1477) (6.26,1703) (6.74,1703)};
+  \addlegendentry{VP: ataque detectado}
+  \addplot[barra=sinataque!70!white] coordinates {
+    (0.76,2980) (1.24,0)    (1.76,3227) (2.24,0)    (2.76,3518) (3.24,0)
+    (4.26,2998) (4.74,0)    (5.26,3198) (5.74,0)    (6.26,3471) (6.74,0)};
+  \addlegendentry{FP: falsa alarma}
+  \addplot[barra=ensX!30!white] coordinates {
+    (0.76,0)    (1.24,1418) (1.76,0)    (2.24,352)  (2.76,0)    (3.24,121)
+    (4.26,0)    (4.74,1372) (5.26,0)    (5.74,300)  (6.26,0)    (6.74,74)};
+  \addlegendentry{FN: ataque no detectado}
+
+  % Precision (sobre la barra de alarmas) y recall (sobre la de atacados); coinciden con el CSV.
+  % "axis cs" no pasa por el y filter: la altura se divide aqui mismo entre 630.27.
+  \node[etiqueta, text=tenue] at (axis cs:0.76,3339/630.27) {P\,0.11}; \node[etiqueta, text=ensX] at (axis cs:1.24,1777/630.27) {R\,0.20};
+  \node[etiqueta, text=tenue] at (axis cs:1.76,4652/630.27) {P\,0.31}; \node[etiqueta, text=ensX] at (axis cs:2.24,1777/630.27) {R\,0.80};
+  \node[etiqueta, text=tenue] at (axis cs:2.76,5174/630.27) {P\,0.32}; \node[etiqueta, text=ensX] at (axis cs:3.24,1777/630.27) {R\,0.93};
+  \node[etiqueta, text=tenue] at (axis cs:4.26,3403/630.27) {P\,0.12}; \node[etiqueta, text=ensX] at (axis cs:4.74,1777/630.27) {R\,0.23};
+  \node[etiqueta, text=tenue] at (axis cs:5.26,4675/630.27) {P\,0.32}; \node[etiqueta, text=ensX] at (axis cs:5.74,1777/630.27) {R\,0.83};
+  \node[etiqueta, text=tenue] at (axis cs:6.26,5174/630.27) {P\,0.33}; \node[etiqueta, text=ensX] at (axis cs:6.74,1777/630.27) {R\,0.96};
+
+  % Separador entre familias de ataque (como en la version anterior).
+  \draw[tenue, densely dashed, line width=0.5pt] (axis cs:3.75,0) -- (axis cs:3.75,9.2);
+
+  % Nombre de cada tamaño bajo sus dos barras y de cada familia debajo.
+  \node[tamano] at ([yshift=-0.45cm]axis cs:1,0)   {$\delta$\,20\,\%};
+  \node[tamano] at ([yshift=-0.45cm]axis cs:2,0)   {$\delta$\,50\,\%};
+  \node[tamano] at ([yshift=-0.45cm]axis cs:3,0)   {$\delta$\,100\,\%};
+  \node[tamano] at ([yshift=-0.45cm]axis cs:4.5,0) {10 ppb};
+  \node[tamano] at ([yshift=-0.45cm]axis cs:5.5,0) {20 ppb};
+  \node[tamano] at ([yshift=-0.45cm]axis cs:6.5,0) {40 ppb};
+  \node[familia] at ([yshift=-0.95cm]axis cs:2,0)   {Anomalía proporcional};
+  \node[familia] at ([yshift=-0.95cm]axis cs:5.5,0) {Escalón aditivo fijo};
+\end{axis}
+\end{tikzpicture}
+
