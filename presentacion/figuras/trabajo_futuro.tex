@@ -1,0 +1,53 @@
+% Lamina de trabajo futuro: linea de tiempo con el mismo estilo que la lamina 7
+% (figuras/protocolo.tex): tarjetas con franja de encabezado, punto sobre la linea y pastilla.
+% 4 etapas: lo hecho (azul noche) y lo que falta (naranja). Sin fechas: arriba de cada
+% tarjeta va Hecho / Ahora / Siguiente / Despues; si se fijan fechas, se cambian ahi.
+% Todo se coloca con coordenadas (x, y) en cm: x = numero de etapa * \paso.
+\begin{tikzpicture}[
+    font=\sffamily,
+    tarjeta/.style={draw=#1, fill=#1!6!white, line width=1pt, rounded corners=4pt,
+                    minimum width=2.9cm, minimum height=3.1cm},
+    pastilla/.style={fill=#1, rounded corners=3pt, text=white, align=center,
+                     font=\sffamily\scriptsize\bfseries, text width=2.5cm,
+                     minimum height=0.75cm, inner sep=2pt},
+    flecha/.style={-{Stealth[length=4pt]}, line width=1pt, tenue},
+  ]
+  \def\paso{3.4}   % distancia entre centros de tarjeta (cm): 2.9 de tarjeta + 0.5 de hueco
+
+  % ---------------- Linea de tiempo ----------------
+  \draw[tenue!40, line width=2.5pt, line cap=round] (-1.3, 3.0) -- (3*\paso+1.3, 3.0);
+
+  % ---------------- Las 4 etapas ----------------
+  % \i = posicion, \c = color, \cuando, \etapa = encabezado, \centro = texto grande,
+  % \pie = texto de la pastilla
+  \foreach \i/\c/\cuando/\etapa/\centro/\pie in {
+      0/noche/{Hecho}/{Detector final}/{Evaluado 2020--2026}/{Esta presentación},
+      1/acento/{Ahora}/{TINTO}/{Continuar los experimentos}/{Trabajo actual},
+      2/acento/{Siguiente}/{Tesis}/{Escritura del documento}/{Redacción},
+      3/acento/{Después}/{Artículo}/{Redacción y envío}/{Publicación}} {
+    \node[font=\sffamily\footnotesize\bfseries, text=\c] at (\i*\paso, 3.45) {\cuando};
+    \fill[fondo] (\i*\paso, 3.0) circle (0.2);
+    \fill[\c] (\i*\paso, 3.0) circle (0.13);
+    \node[tarjeta=\c] (t\i) at (\i*\paso, 0.9) {};
+    \fill[\c, rounded corners=4pt] (t\i.north west) rectangle ($(t\i.north east)+(0,-0.65)$);
+    \fill[\c] ($(t\i.north west)+(0,-0.35)$) rectangle ($(t\i.north east)+(0,-0.65)$);
+    \draw[\c, line width=1pt, rounded corners=4pt] (t\i.south west) rectangle (t\i.north east);
+    \node[font=\sffamily\scriptsize\bfseries, text=white] at ($(t\i.north)+(0,-0.325)$) {\etapa};
+    \node[font=\sffamily\small\bfseries, text=texto, text width=2.6cm, align=center]
+         at ($(t\i.center)+(0,0.2)$) {\centro};
+    \node[pastilla=\c] at ($(t\i.south)+(0,0.55)$) {\pie};
+  }
+
+  % Aro alrededor del punto de "Ahora": marca donde va el trabajo hoy
+  \draw[acento, line width=1pt] (1*\paso, 3.0) circle (0.26);
+
+  % ---------------- Flechas entre tarjetas ----------------
+  \foreach \i [evaluate=\i as \j using int(\i+1)] in {0,...,2}
+    \draw[flecha] (t\i.east) -- (t\j.west);
+
+  % ---------------- Etiquetas de grupo bajo las tarjetas ----------------
+  \draw[noche, line width=0.6pt] ($(t0.south west)+(0,-0.25)$) -- ($(t0.south east)+(0,-0.25)$);
+  \node[font=\sffamily\scriptsize\bfseries, text=noche, below] at ($(t0.south)+(0,-0.25)$) {HECHO};
+  \draw[acento, line width=0.6pt] ($(t1.south west)+(0,-0.25)$) -- ($(t3.south east)+(0,-0.25)$);
+  \node[font=\sffamily\scriptsize\bfseries, text=acento, below] at ($(t2.south)+(0,-0.25)$) {LO QUE FALTA};
+\end{tikzpicture}

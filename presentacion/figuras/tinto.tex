@@ -1,0 +1,80 @@
+% Lamina 12: exploracion con imagenes TINTO, de 1 dia aislado a 7 dias previos.
+% Copia del diseno del tesista; coordenadas en PIXELES de su imagen (unos 1140 x 520 px),
+% con algo mas de alto en las cajas de resultados para la tasa de falsas alarmas.
+% x = 0.0122 cm por pixel, y = 0.015 cm por pixel hacia abajo.
+% Colores de colores-tesis.sty (2026-11-23): tintoA = TINTO 1 dia (autoencoder),
+% tintoB = TINTO 7 dias (CNN temporal), noche = la imagen TINTO, tenue = texto gris.
+% Se quito el titulo interno porque repetia el subtitulo de la lamina.
+% Version con poco texto (pedida por el tesista): el umbral (p99), los 175 estacion-dias,
+% las horas h00-h23 y las 0 colisiones van en las notas, no en la lamina.
+% Cada caja de resultados: tres columnas, etiqueta corta arriba y numero grande abajo.
+% Numeros: results/tinto_temporal7_20261111_final/metricas.csv, p99, los MISMOS 175
+% estacion-dias de evaluacion para los dos modelos (umbral recalibrado en ese soporte para
+% cada uno). Autoencoder: d100_aumento 114/175 = 65.1 %, ppb_40 12/175 = 6.9 %.
+% CNN temporal: d100_aumento 90/175 = 51.4 %, ppb_40 175/175 = 100 %.
+% Falsas alarmas en los originales: 1 de 175 en los dos (0.6 %).
+% Antes la caja A usaba 35.5 % y 1.7 %, medidos en 7154 dias de 2022 (otra muestra);
+% se cambio el 2026-11-23 para comparar los dos modelos sobre los mismos dias.
+\begin{tikzpicture}[x=0.0122cm, y=-0.015cm, font=\sffamily,
+    grande/.style={draw=#1, fill=#1!7!white, line width=1pt, rounded corners=5pt},
+    chica/.style={draw=#1, fill=white, line width=0.8pt, rounded corners=3pt},
+    tbloque/.style={font=\sffamily\small\bfseries, text=#1},       % titulo de cada bloque
+    tcaja/.style={font=\sffamily\footnotesize\bfseries, text=#1},  % texto de caja
+    etiqueta/.style={font=\sffamily\scriptsize, text=tenue},       % encima de cada numero
+    numero/.style={font=\sffamily\normalsize\bfseries, text=#1},   % numero grande
+    flecha/.style={-{Stealth[length=4pt]}, line width=1.1pt, #1},
+  ]
+
+  % ======================= Imagen TINTO =======================
+  \draw[grande=noche] (15, 200) rectangle (317, 510);
+  \node[tbloque=noche, font=\sffamily\footnotesize\bfseries] at (166, 230) {Imagen TINTO 32\,$\times$\,32};
+
+  \draw[chica=noche] (48, 262) rectangle (285, 330);
+  \node[tcaja=texto] at (166, 296) {24 horas de O\textsubscript{3}};
+
+  \draw[flecha=noche] (166, 330) -- (166, 380);
+
+  \draw[chica=noche] (48, 380) rectangle (285, 480);
+  \node[tcaja=noche] at (166, 414) {Mapa PCA};
+  \node[font=\sffamily\scriptsize\bfseries, text=noche] at (166, 446) {24 píxeles fijos};
+
+  % Flechas hacia los dos modelos
+  \draw[flecha=tintoA]  (317, 300) -- (358, 272);
+  \draw[flecha=tintoB] (317, 410) -- (358, 438);
+
+  % ======================= A. Autoencoder (1 dia) =======================
+  \draw[grande=tintoA] (358, 200) rectangle (1139, 345);
+  \node[tbloque=tintoA] at (748, 222) {A. Autoencoder (1 día)};
+
+  \draw[chica=tintoA] (372, 245) rectangle (560, 328);
+  \node[tcaja=tintoA] at (466, 286) {Día $d$};
+
+  \draw[flecha=tintoA] (560, 286) -- (597, 286);
+
+  \draw[chica=tintoA] (597, 245) rectangle (1122, 328);
+  \draw[tintoA!30!white] (772, 255) -- (772, 318) (947, 255) -- (947, 318);
+  \node[etiqueta] at (684, 266) {Recall $\delta$\,100\,\%};
+  \node[etiqueta] at (859, 266) {Recall +40 ppb};
+  \node[etiqueta] at (1035, 266) {Falsas alarmas};
+  \node[numero=tintoA] at (684, 302) {65\,\%};
+  \node[numero=tintoA] at (859, 302) {7\,\%};
+  \node[numero=texto]   at (1035, 302) {0.6\,\%};
+
+  % ======================= B. CNN temporal (7 dias) =======================
+  \draw[grande=tintoB] (358, 365) rectangle (1139, 510);
+  \node[tbloque=tintoB] at (748, 387) {B. CNN temporal (7 días previos)};
+
+  \draw[chica=tintoB] (372, 410) rectangle (560, 493);
+  \node[tcaja=tintoB] at (466, 451) {Días $d{-}7$ a $d{-}1$};
+
+  \draw[flecha=tintoB] (560, 451) -- (597, 451);
+
+  \draw[chica=tintoB] (597, 410) rectangle (1122, 493);
+  \draw[tintoB!30!white] (772, 420) -- (772, 483) (947, 420) -- (947, 483);
+  \node[etiqueta] at (684, 431) {Recall $\delta$\,100\,\%};
+  \node[etiqueta] at (859, 431) {Recall +40 ppb};
+  \node[etiqueta] at (1035, 431) {Falsas alarmas};
+  \node[numero=tintoB] at (684, 467) {51\,\%};
+  \node[numero=tintoB] at (859, 467) {100\,\%};
+  \node[numero=texto]    at (1035, 467) {0.6\,\%};
+\end{tikzpicture}

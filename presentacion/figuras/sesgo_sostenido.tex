@@ -1,0 +1,71 @@
+% Lamina 11: sesgo sostenido de 8 semanas (escenario 4), umbral p99.
+% Datos: results/linea_base/rev23b/por_semana.csv, nivel 0.01, columna recall (fraccion de
+% estacion-dias atacados con alarma en cada semana). 240 episodios aislados de sus vecinas,
+% 30 calendarios del banco 2024-jul 2026. Detectores congelados (no se entreno nada).
+% Detector final = Ens-Vb-X0.2596; ensamble con referencia propia = Ens-V0-R; PARAAD-SA = PARAAD.
+% Izquierda: escalon (sesgo constante desde el dia 1). Derecha: deriva de 56 dias que crece
+% poco a poco hasta A. Tono claro = A +20 ppb, tono oscuro = A +40 ppb.
+% Bajo cada semana de la deriva: sesgo real medio de esa semana en ppb
+% (results/linea_base/rev23b/cambio_por_semana.csv, redondeado a entero).
+% Franja crema: semanas 1-4, lo que aguanta el detector final antes de que su mediana de
+% 60 dias absorba el sesgo (recall medio 0.76 con +20 ppb).
+\ref{leyendaSesgo}\par
+\begin{tikzpicture}[
+    claro/.style={color=#1!70!white, mark options={fill=#1!70!white, solid}},  % tono medio de la paleta (magMedia)
+    sesgo/.style={font=\sffamily\scriptsize, text=tenue, anchor=east},
+  ]
+\begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=1.3cm, yticklabels at=edge left},
+    ejes tesis,
+    scale only axis, width=5.2cm, height=2.35cm,
+    xmin=0.5, xmax=8.5, xtick={1,...,8},
+    ymin=0, ymax=1.2, ytick={0,0.5,1},  % espacio arriba para el rotulo de la franja
+    every axis plot/.append style={mark size=1.6pt},
+    title style={font=\sffamily\small\bfseries, text=noche, yshift=-2pt},
+    xlabel style={font=\sffamily\small},
+    clip=false,
+  ]
+  % ---------------- Escalon ----------------
+  \nextgroupplot[title={Escalón: sesgo constante},
+                 ylabel={Recall semanal}, ylabel style={font=\sffamily\small},
+                 xlabel={Semana},
+                 legend to name=leyendaSesgo, legend columns=3,
+                 legend style={/tikz/every even column/.append style={column sep=0.35cm}}]
+  \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(0.5,0) (0.5,1.2) (4.5,1.2) (4.5,0)} \closedcycle;
+  \node[font=\sffamily\scriptsize, text=ensX, anchor=north] at (axis cs:2.5,1.19) {$\approx$\,4 semanas};
+  % +40 ppb (oscuro, con leyenda)
+  \addplot[det ensX] coordinates {(1,0.977) (2,0.956) (3,0.919) (4,0.866) (5,0.568) (6,0.131) (7,0.052) (8,0.062)};
+  \addlegendentry{Detector final}
+  \addplot[det ensP] coordinates {(1,0.960) (2,0.561) (3,0.034) (4,0.024) (5,0.028) (6,0.016) (7,0.018) (8,0.028)};
+  \addlegendentry{Ensamble con referencia propia}
+  \addplot[det paraad] coordinates {(1,0.930) (2,0.945) (3,0.937) (4,0.928) (5,0.934) (6,0.937) (7,0.947) (8,0.933)};
+  \addlegendentry{PARAAD-SA}
+  % Muestras de tono para la leyenda (no dibujan nada)
+  \addlegendimage{color=tenue!70!white, line width=1.6pt, mark=none}
+  \addlegendentry{+20 ppb}
+  \addlegendimage{color=texto, line width=1.6pt, mark=none}
+  \addlegendentry{+40 ppb}
+  % +20 ppb (claro)
+  \addplot[det ensX, claro=ensX, forget plot] coordinates {(1,0.855) (2,0.845) (3,0.741) (4,0.607) (5,0.294) (6,0.078) (7,0.027) (8,0.037)};
+  \addplot[det ensP, claro=ensP, forget plot] coordinates {(1,0.800) (2,0.212) (3,0.013) (4,0.008) (5,0.013) (6,0.011) (7,0.015) (8,0.016)};
+  \addplot[det paraad, claro=paraad, forget plot] coordinates {(1,0.549) (2,0.562) (3,0.546) (4,0.531) (5,0.568) (6,0.564) (7,0.575) (8,0.577)};
+
+  % ---------------- Deriva ----------------
+  \nextgroupplot[title={Deriva: crece poco a poco},
+                 xticklabels={{1\\1\\2}, {2\\4\\7}, {3\\6\\11}, {4\\8\\16},
+                              {5\\10\\20}, {6\\13\\24}, {7\\15\\28}, {8\\17\\31}},
+                 xticklabel style={align=center, font=\scriptsize},
+                 xlabel={Semana y, debajo, sesgo real en ppb}]
+  % +40 ppb (oscuro)
+  \addplot[det ensX] coordinates {(1,0.024) (2,0.127) (3,0.364) (4,0.625) (5,0.781) (6,0.822) (7,0.874) (8,0.856)};
+  \addplot[det ensP] coordinates {(1,0.024) (2,0.062) (3,0.083) (4,0.088) (5,0.086) (6,0.078) (7,0.106) (8,0.082)};
+  \addplot[det paraad] coordinates {(1,0.038) (2,0.074) (3,0.177) (4,0.404) (5,0.670) (6,0.797) (7,0.895) (8,0.918)};
+  % +20 ppb (claro)
+  \addplot[det ensX, claro=ensX] coordinates {(1,0.017) (2,0.046) (3,0.086) (4,0.152) (5,0.208) (6,0.286) (7,0.379) (8,0.370)};
+  \addplot[det ensP, claro=ensP] coordinates {(1,0.022) (2,0.026) (3,0.022) (4,0.014) (5,0.018) (6,0.017) (7,0.035) (8,0.033)};
+  \addplot[det paraad, claro=paraad] coordinates {(1,0.037) (2,0.038) (3,0.060) (4,0.092) (5,0.139) (6,0.234) (7,0.365) (8,0.524)};
+  % Nombre de los renglones del sesgo real, a la izquierda de la semana 1
+  \node[sesgo] at ([yshift=-0.58cm]axis cs:0.5,0) {+20:};
+  \node[sesgo] at ([yshift=-0.86cm]axis cs:0.5,0) {+40:};
+\end{groupplot}
+\end{tikzpicture}
