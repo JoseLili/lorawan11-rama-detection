@@ -132,3 +132,4 @@ presentacion/**/*.run.xml
 # results/linea_base/rev24/puntajes_sha256.json. Registro 24-p98 los regenera (solo E1).
 results/linea_base/rev24/banco/
 results/linea_base/rev24/logs/
+presentacion/**/*-SAVE-ERROR
