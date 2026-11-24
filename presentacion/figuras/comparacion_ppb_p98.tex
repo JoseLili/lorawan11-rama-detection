@@ -25,7 +25,7 @@
     ylabel={Días al año por estación},
     ylabel style={font=\sffamily\small},
     xtick={0.57,0.83,1.17,1.43,1.77,2.03,2.37,2.63,2.97,3.23,3.57,3.83},
-    xticklabels={{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD}},
+    xticklabels={{\color{ensX}NERAD},{\color{paraad}PARAAD},{\color{ensX}NERAD},{\color{paraad}PARAAD},{\color{ensX}NERAD},{\color{paraad}PARAAD},{\color{ensX}NERAD},{\color{paraad}PARAAD},{\color{ensX}NERAD},{\color{paraad}PARAAD},{\color{ensX}NERAD},{\color{paraad}PARAAD}},
     xtick style={draw=none},
     xticklabel style={font=\sffamily\tiny\bfseries},
     legend style={at={(0.5,1.02)}, anchor=south, legend columns=3,
@@ -34,7 +34,7 @@
     clip=false,
   ]
   \addplot[barra=ensX] coordinates {(0.57,515) (0.83,0) (1.17,515) (1.43,0) (1.77,1570) (2.03,0) (2.37,1570) (2.63,0) (2.97,1726) (3.23,0) (3.57,1726) (3.83,0)};
-  \addlegendentry{VP detector final}
+  \addlegendentry{VP NERAD}
   \addplot[barra=paraad] coordinates {(0.57,0) (0.83,256) (1.17,0) (1.43,256) (1.77,0) (2.03,1171) (2.37,0) (2.63,1171) (2.97,0) (3.23,1705) (3.57,0) (3.83,1705)};
   \addlegendentry{VP PARAAD-SA}
   \addplot[barra=sinataque!70!white] coordinates {(0.57,5261) (0.83,9132) (1.17,0) (1.43,0) (1.77,5568) (2.03,9131) (2.37,0) (2.63,0) (2.97,5836) (3.23,9162) (3.57,0) (3.83,0)};

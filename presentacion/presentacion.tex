@@ -120,7 +120,7 @@ red de sensores de ozono.
   & \textbf{PARAAD-SA}~\cite{allka2024paraad}\newline{\scriptsize\color{tenue}Autoencoder recurrente}
   & \textbf{STC-RAAD}~\cite{allka2024stcraad}\newline{\scriptsize\color{tenue}Autoencoder BiLSTM}
   & \textbf{FedWLA}~\cite{garciasaez2025fedwla}\newline{\scriptsize\color{tenue}Árboles federados}
-  & \textcolor{ensX}{\textbf{Este trabajo}}\newline{\scriptsize\color{tenue}Ensamble de 5 LSTM} \\
+  & \textcolor{ensX}{\textbf{NERAD}}\newline{\scriptsize\color{tenue}Este trabajo: 5 LSTM} \\
   \midrule
   Datos        & O\textsubscript{3} sensores & O\textsubscript{3} sensores & Tráfico de red & O\textsubscript{3} sensores \\
   Supervisado  & \marcano & \marcano & \marcasi & \marcasi \\
@@ -183,7 +183,16 @@ red de sensores de ozono.
 \centering
 \vspace*{\fill}
 \input{figuras/arquitectura}
+\par\medskip
+% Significado del nombre del detector (siglas en ingles, al estilo de PARAAD y STC-RAAD)
+{\small\color{texto}\textcolor{ensX}{\textbf{NERAD}}: \textbf{N}eighbour-filtered
+ \textbf{E}nsemble \textbf{R}ecurrent \textbf{A}nomaly \textbf{D}etection}
 \vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item NERAD: detección de anomalías con un ensamble recurrente (5 LSTM) y filtro de
+    vecinas sospechosas. El nombre sigue el estilo de PARAAD y STC-RAAD.
+\end{itemize}}
 \end{frame}
 
 \begin{frame}{PROTOCOLO EXPERIMENTAL (2020–2026)}
@@ -204,7 +213,7 @@ red de sensores de ozono.
   \item Despliegue: 1 de agosto a 30 de septiembre de 2026, datos validados de SIMAT
     (revisión 26); la historia previa es enero--julio de 2026.
   \item No se muestra: el examen 2017--2019 fue de la 1.ª versión (entrenada en
-    2020--2021) y no superó a la referencia propia. El detector final nunca se
+    2020--2021) y no superó a la referencia propia. NERAD nunca se
     evaluó en esos años.
   \item Si preguntan: el banco se usó para decidir las revisiones 23--25 y el
     despliegue fue el examen de uso único del ensamble sin filtro; el filtro se
@@ -242,7 +251,7 @@ red de sensores de ozono.
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (UMBRAL p99)}{Anomalía proporcional: detector final contra PARAAD-SA}
+\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (UMBRAL p99)}{Anomalía proporcional: NERAD contra PARAAD-SA}
 % Grafica en archivo aparte: figuras/comparacion_pct.tex
 % (antes: estacion_atacada.tex, solo el detector final)
 \centering
@@ -255,13 +264,13 @@ red de sensores de ozono.
     23\,005 limpias en el banco (30 calendarios). Comparación 1:1.
   \item Los dos usan su umbral p99 de 2023 sin ataques. En el banco, el de PARAAD-SA
     deja pasar 2.6\,\% de días normales como alarma (unos 9.6 días al año por
-    estación) y el del detector final 1.3\,\% (4.7 días): por eso su barra de
+    estación) y el de NERAD 1.3\,\% (4.7 días): por eso su barra de
     alarmas es casi el doble de alta.
 \end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
-\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (UMBRAL p99)}{Escalón aditivo fijo: detector final contra PARAAD-SA}
+\begin{frame}{RESULTADOS · UNA ESTACIÓN ATACADA (UMBRAL p99)}{Escalón aditivo fijo: NERAD contra PARAAD-SA}
 % Grafica en archivo aparte: figuras/comparacion_ppb.tex
 % (antes: paraad_atacada_p99.tex, solo PARAAD-SA)
 \centering
@@ -274,7 +283,7 @@ red de sensores de ozono.
     23\,005 limpias en el banco (30 calendarios). Comparación 1:1.
   \item Los dos usan su umbral p99 de 2023 sin ataques. En el banco, el de PARAAD-SA
     deja pasar 2.6\,\% de días normales como alarma (unos 9.6 días al año por
-    estación) y el del detector final 1.3\,\% (4.7 días): por eso su barra de
+    estación) y el de NERAD 1.3\,\% (4.7 días): por eso su barra de
     alarmas es casi el doble de alta.
 \end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
@@ -310,7 +319,7 @@ red de sensores de ozono.
 \begin{itemize}
   \item «+100\,\%» es sólo el sentido de aumento (la lectura sube). Con reducción
     ($\delta$ 100\,\% hacia abajo) los dos modelos TINTO tienen recall 0 con p99.
-  \item El detector final se evaluó con los dos sentidos ($\pm$), así que estas cifras
+  \item NERAD se evaluó con los dos sentidos ($\pm$), así que estas cifras
     no se comparan directo con las suyas.
   \item Los dos modelos se miden sobre los mismos 175 estación-días, con p99.
 \end{itemize}}
@@ -329,6 +338,18 @@ red de sensores de ozono.
 \end{frame}
 
 % =====================================================================
+% Cierre: mismo fondo azul noche que la portada; [plain] = sin titulo ni pie.
+\begin{frame}[plain]
+\fondooscuro
+\vfill
+\centering
+{\fuentetitular\LARGE\color{white}¡Gracias!\par}
+\vskip0.5cm
+{\sffamily\large\color{acento}Preguntas\par}
+\vfill\vfill
+\end{frame}
+
+% =====================================================================
 % Respaldo: no cuenta en la numeracion "n / total".
 \appendix
 \section{Anexo}
@@ -337,7 +358,7 @@ red de sensores de ozono.
 \pendiente{Lámina 13: imagen sin título; decidir si se queda como respaldo.}
 \end{frame}
 
-\begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Anomalía proporcional: detector final contra PARAAD-SA}
+\begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Anomalía proporcional: NERAD contra PARAAD-SA}
 % Grafica en archivo aparte: figuras/comparacion_pct_p98.tex (registro 24-p98, E1, nivel 0.02)
 \centering
 \vspace*{\fill}
@@ -347,13 +368,13 @@ red de sensores de ozono.
 \begin{itemize}
   \item Respaldo con un umbral más laxo (p98 de 2023 sin ataques), misma máscara que
     las láminas 9 y 10.
-  \item En el banco, con p98 el detector final da 2.3\,\% de días normales con alarma
+  \item En el banco, con p98 NERAD da 2.3\,\% de días normales con alarma
     (8.4 días al año por estación) y PARAAD-SA 4.0\,\% (14.6 días).
 \end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
-\begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Escalón aditivo fijo: detector final contra PARAAD-SA}
+\begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Escalón aditivo fijo: NERAD contra PARAAD-SA}
 % Grafica en archivo aparte: figuras/comparacion_ppb_p98.tex (registro 24-p98, E1, nivel 0.02)
 \centering
 \vspace*{\fill}
@@ -363,7 +384,7 @@ red de sensores de ozono.
 \begin{itemize}
   \item Respaldo con un umbral más laxo (p98 de 2023 sin ataques), misma máscara que
     las láminas 9 y 10.
-  \item En el banco, con p98 el detector final da 2.3\,\% de días normales con alarma
+  \item En el banco, con p98 NERAD da 2.3\,\% de días normales con alarma
     (8.4 días al año por estación) y PARAAD-SA 4.0\,\% (14.6 días).
 \end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
