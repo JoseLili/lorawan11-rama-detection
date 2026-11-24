@@ -1,0 +1,80 @@
+% Anexo (respaldo de la lamina 10): escalon aditivo fijo (10/20/40 ppb), detector final y PARAAD-SA juntos, umbral p98 (respaldo, detector mas laxo).
+% Datos: corrida del registro 24-p98 (metricas_e1.csv, 2026-11-24), escenario E1, nivel 0.02; filas
+% Ens-Vb-X0.2596 (detector final) y PARAAD. Banco 2024-jul 2026, suma de 30 calendarios.
+% Por cada tamano, cuatro barras: las dos de alarmas juntas (detector final azul, PARAAD-SA verde)
+% y luego las dos de atacados. Alarmas = VP + FP (precision = VP / alto); atacados = VP + FN (recall).
+% Mismo truco que estacion_atacada.tex: un solo eje "ybar stacked", cada barra con su x y las
+% cinco series con las mismas 12 x (0 donde la pieza no va). Orden de apilado: VP del final,
+% VP de PARAAD, FP (gris, comun), FN del final, FN de PARAAD.
+% Eje Y en dias al año por estacion: "y filter" divide los conteos entre 630.27 estacion-años
+% (23 005 estacion-dias / 365, por 10 calendarios por año); "axis cs" no pasa por el filtro.
+% Generado con un script a partir del CSV; sustituye a estacion_atacada.tex y paraad_atacada_p99.tex.
+\begin{tikzpicture}[
+    etiqueta/.style={font=\sffamily\scriptsize, anchor=south, inner sep=1.5pt},
+    par/.style={font=\sffamily\scriptsize\bfseries, text=texto, anchor=north},
+    tamano/.style={font=\sffamily\small, text=texto, anchor=north},
+  ]
+\begin{axis}[
+    ejes tesis,
+    ybar stacked,
+    bar width=0.2,                  % sin unidad = unidades del eje x
+    scale only axis, width=12.0cm, height=3.6cm,
+    xmin=0.42, xmax=3.98,
+    y filter/.expression={y/630.27},  % estacion-dias -> dias al año por estacion
+    ymin=0, ymax=20, ytick={0,4,...,20},
+    ylabel={Días al año por estación},
+    ylabel style={font=\sffamily\small},
+    xtick={0.57,0.83,1.17,1.43,1.77,2.03,2.37,2.63,2.97,3.23,3.57,3.83},
+    xticklabels={{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD},{\color{ensX}final},{\color{paraad}PARAAD}},
+    xtick style={draw=none},
+    xticklabel style={font=\sffamily\tiny\bfseries},
+    legend style={at={(0.5,1.02)}, anchor=south, legend columns=4,
+                  /tikz/every even column/.append style={column sep=0.45cm}},
+    legend image code/.code={\fill[#1] (0cm,-0.1cm) rectangle (0.3cm,0.1cm);},
+    clip=false,
+  ]
+  \addplot[barra=ensX] coordinates {(0.57,515) (0.83,0) (1.17,515) (1.43,0) (1.77,1570) (2.03,0) (2.37,1570) (2.63,0) (2.97,1726) (3.23,0) (3.57,1726) (3.83,0)};
+  \addlegendentry{VP detector final}
+  \addplot[barra=paraad] coordinates {(0.57,0) (0.83,256) (1.17,0) (1.43,256) (1.77,0) (2.03,1171) (2.37,0) (2.63,1171) (2.97,0) (3.23,1705) (3.57,0) (3.83,1705)};
+  \addlegendentry{VP PARAAD-SA}
+  \addplot[barra=sinataque!70!white] coordinates {(0.57,5261) (0.83,9132) (1.17,0) (1.43,0) (1.77,5568) (2.03,9131) (2.37,0) (2.63,0) (2.97,5836) (3.23,9162) (3.57,0) (3.83,0)};
+  \addlegendentry{FP: falsa alarma}
+  \addplot[barra=ensX!30!white] coordinates {(0.57,0) (0.83,0) (1.17,1262) (1.43,0) (1.77,0) (2.03,0) (2.37,207) (2.63,0) (2.97,0) (3.23,0) (3.57,51) (3.83,0)};
+  \addlegendentry{FN: no detectado}
+  \addplot[barra=paraad!30!white, forget plot] coordinates {(0.57,0) (0.83,0) (1.17,0) (1.43,1521) (1.77,0) (2.03,0) (2.37,0) (2.63,606) (2.97,0) (3.23,0) (3.57,0) (3.83,72)};
+
+  % Precision sobre cada barra de alarmas y recall sobre cada barra de atacados (del CSV).
+  \node[etiqueta, text=tenue] at (axis cs:0.57,5776/630.27) {P\,0.09};
+  \node[etiqueta, text=tenue] at (axis cs:0.83,9388/630.27) {P\,0.03};
+  \node[etiqueta, text=ensX] at (axis cs:1.17,1777/630.27) {R\,0.29};
+  \node[etiqueta, text=paraad] at (axis cs:1.43,1777/630.27) {R\,0.14};
+  \node[etiqueta, text=tenue] at (axis cs:1.77,7138/630.27) {P\,0.22};
+  \node[etiqueta, text=tenue] at (axis cs:2.03,10302/630.27) {P\,0.11};
+  \node[etiqueta, text=ensX] at (axis cs:2.37,1777/630.27) {R\,0.88};
+  \node[etiqueta, text=paraad] at (axis cs:2.63,1777/630.27) {R\,0.66};
+  \node[etiqueta, text=tenue] at (axis cs:2.97,7562/630.27) {P\,0.23};
+  \node[etiqueta, text=tenue] at (axis cs:3.23,10867/630.27) {P\,0.16};
+  \node[etiqueta, text=ensX] at (axis cs:3.57,1777/630.27) {R\,0.97};
+  \node[etiqueta, text=paraad] at (axis cs:3.83,1777/630.27) {R\,0.96};
+
+  % Separadores entre tamaños
+  \draw[tenue!60, densely dashed, line width=0.4pt] (axis cs:1.6,0) -- (axis cs:1.6,19.5);
+  \draw[tenue!60, densely dashed, line width=0.4pt] (axis cs:2.8,0) -- (axis cs:2.8,19.5);
+
+  % Debajo: alarmas / atacados bajo cada par de barras y el tamaño del ataque
+  \node[par] at ([yshift=-0.32cm]axis cs:0.700,0) {alarmas};
+  \node[par] at ([yshift=-0.32cm]axis cs:1.300,0) {atacados};
+  \node[tamano] at ([yshift=-0.72cm]axis cs:1.0,0) {10 ppb};
+  \node[par] at ([yshift=-0.32cm]axis cs:1.900,0) {alarmas};
+  \node[par] at ([yshift=-0.32cm]axis cs:2.500,0) {atacados};
+  \node[tamano] at ([yshift=-0.72cm]axis cs:2.2,0) {20 ppb};
+  \node[par] at ([yshift=-0.32cm]axis cs:3.100,0) {alarmas};
+  \node[par] at ([yshift=-0.32cm]axis cs:3.700,0) {atacados};
+  \node[tamano] at ([yshift=-0.72cm]axis cs:3.4,0) {40 ppb};
+    % Techo: si se detectaran todos los ataques sin falsas alarmas, las dos barras
+  % llegarian aqui (VP + FN = 1777 dias atacados, igual para todos los tamaños).
+  \draw[noche, densely dashed, line width=0.8pt] (axis cs:0.42,1777/630.27) -- (axis cs:3.98,1777/630.27);
+  \addlegendimage{legend image code/.code={\draw[noche, densely dashed, line width=0.8pt] (0cm,0cm) -- (0.5cm,0cm);}}
+  \addlegendentry{Máximo posible (todos los ataques)}
+\end{axis}
+\end{tikzpicture}

@@ -2,8 +2,9 @@
 % 2 x 2: columnas = banco | despliegue; filas = recall (arriba) | precision (abajo).
 % Banco, p99 y p99.9: results/linea_base/rev24/metricas_banco.csv y falsas_alarmas_banco.csv
 %   (Ens-Vb-X0.2596, E1; dias al año = fa x 365). Alineado con la lamina 9 el 2026-11-23.
-% Banco, p95 y p98: percentiles_banco.csv (results/linea_base/presentacion_parte3/), que NO
-%   esta en el repo; sin verificar. Ese archivo daba recall 0.01-0.02 mas alto que rev24 en p99.
+% Banco, p95 y p98: corrida del registro 24-p98 con p95 agregado (metricas_e1.csv y
+%   falsas_alarmas.csv, 2026-11-24), misma mascara que rev24 (23 005 limpias, 1 777 atacadas).
+%   Reemplaza a percentiles_banco.csv (mascara comun, no estaba en el repo).
 % Despliegue: revision 26, datos validados de SIMAT, unidad A (las mismas estacion-dias
 %   del examen original): despliegue_validado_metricas.csv y _falsas_alarmas.csv.
 % Umbrales de 2023 sin ataques para p95, p98, p99 y p99.9.
@@ -37,13 +38,13 @@
                  legend style={/tikz/every even column/.append style={column sep=0.35cm}}]
   \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(2.65,0) (2.65,1.05) (3.35,1.05) (3.35,0)} \closedcycle;  % franja p99
   \addlegendimage{empty legend}\addlegendentry{\textbf{Proporcional} (sólida):}
-  \addplot[mag chica, fam pct, met recall] coordinates {(1,0.45) (2,0.30) (3,0.20) (4,0.03)}; \addlegendentry{$\delta$\,20\,\%}
-  \addplot[mag media, fam pct, met recall] coordinates {(1,0.93) (2,0.86) (3,0.80) (4,0.40)}; \addlegendentry{$\delta$\,50\,\%}
-  \addplot[mag grande, fam pct, met recall] coordinates {(1,0.98) (2,0.96) (3,0.93) (4,0.64)}; \addlegendentry{$\delta$\,100\,\%}
+  \addplot[mag chica, fam pct, met recall] coordinates {(1,0.45) (2,0.29) (3,0.20) (4,0.03)}; \addlegendentry{$\delta$\,20\,\%}
+  \addplot[mag media, fam pct, met recall] coordinates {(1,0.92) (2,0.85) (3,0.80) (4,0.40)}; \addlegendentry{$\delta$\,50\,\%}
+  \addplot[mag grande, fam pct, met recall] coordinates {(1,0.98) (2,0.95) (3,0.93) (4,0.64)}; \addlegendentry{$\delta$\,100\,\%}
   \addlegendimage{empty legend}\addlegendentry{\textbf{Fijo} (punteada):}
   \addplot[mag chica, fam ppb, met recall] coordinates {(1,0.49) (2,0.29) (3,0.23) (4,0.05)}; \addlegendentry{+10 ppb}
-  \addplot[mag media, fam ppb, met recall] coordinates {(1,0.96) (2,0.89) (3,0.83) (4,0.44)}; \addlegendentry{+20 ppb}
-  \addplot[mag grande, fam ppb, met recall] coordinates {(1,0.99) (2,0.98) (3,0.96) (4,0.78)}; \addlegendentry{+40 ppb}
+  \addplot[mag media, fam ppb, met recall] coordinates {(1,0.95) (2,0.88) (3,0.83) (4,0.44)}; \addlegendentry{+20 ppb}
+  \addplot[mag grande, fam ppb, met recall] coordinates {(1,0.99) (2,0.97) (3,0.96) (4,0.78)}; \addlegendentry{+40 ppb}
   % ---------------- Despliegue · recall ----------------
   \nextgroupplot[title={Despliegue}]
   \addplot[forget plot, fill=resalte, draw=none, mark=none] coordinates {(2.65,0) (2.65,1.05) (3.35,1.05) (3.35,0)} \closedcycle;  % franja p99
@@ -58,8 +59,8 @@
                  xticklabels={p95, p98, p99, p99.9}]
   % recuadro aparte (complemento, no parte de la grafica): dias con falsa alarma por percentil
   \draw[recuadroFA] ([yshift=-0.93cm]rel axis cs:0,0) rectangle ([yshift=-1.55cm]rel axis cs:1,0);
-  \node[numFA] at ([yshift=-1.09cm]axis cs:1,0) {18.2};
-  \node[numFA] at ([yshift=-1.09cm]axis cs:2,0) {8.3};
+  \node[numFA] at ([yshift=-1.09cm]axis cs:1,0) {18.5};
+  \node[numFA] at ([yshift=-1.09cm]axis cs:2,0) {8.4};
   \node[numFA] at ([yshift=-1.09cm]axis cs:3,0) {4.7};
   \node[numFA] at ([yshift=-1.09cm]axis cs:4,0) {0.7};
   \node[textoFA] at ([yshift=-1.39cm]rel axis cs:0.5,0) {Días con falsa alarma al año por estación};
@@ -67,7 +68,7 @@
   \node[font=\sffamily\scriptsize\bfseries, text=acento, anchor=north] at (axis cs:3,1.03) {elegido};
   \addplot[mag chica, fam pct, met prec] coordinates {(1,0.06) (2,0.09) (3,0.11) (4,0.13)};  % $\delta$\,20\,\%
   \addplot[mag media, fam pct, met prec] coordinates {(1,0.12) (2,0.22) (3,0.31) (4,0.64)};  % $\delta$\,50\,\%
-  \addplot[mag grande, fam pct, met prec] coordinates {(1,0.12) (2,0.23) (3,0.32) (4,0.73)};  % $\delta$\,100\,\%
+  \addplot[mag grande, fam pct, met prec] coordinates {(1,0.12) (2,0.22) (3,0.32) (4,0.73)};  % $\delta$\,100\,\%
   \addplot[mag chica, fam ppb, met prec] coordinates {(1,0.07) (2,0.09) (3,0.12) (4,0.17)};  % 10 ppb
   \addplot[mag media, fam ppb, met prec] coordinates {(1,0.12) (2,0.22) (3,0.32) (4,0.65)};  % 20 ppb
   \addplot[mag grande, fam ppb, met prec] coordinates {(1,0.12) (2,0.23) (3,0.33) (4,0.77)};  % 40 ppb

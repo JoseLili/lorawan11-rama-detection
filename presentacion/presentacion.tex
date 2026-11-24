@@ -228,7 +228,7 @@ red de sensores de ozono.
   \item De izquierda a derecha el umbral es más estricto: el recall cae y la
     precisión sube. Ese es el compromiso.
   \item Se eligió p99: en el banco el recall sigue alto (0.80 con $\delta$ 50\,\%,
-    0.83 con 20 ppb) y las falsas alarmas bajan de 18.2 a 4.7 días al año por
+    0.83 con 20 ppb) y las falsas alarmas bajan de 18.5 a 4.7 días al año por
     estación respecto de p95.
   \item Una falsa alarma cuesta una revisión extra de la estación; por eso se
     prioriza el recall sobre la precisión.
@@ -338,14 +338,34 @@ red de sensores de ozono.
 \end{frame}
 
 \begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Anomalía proporcional: detector final contra PARAAD-SA}
-% Pendiente: figuras/comparacion_pct_p98.tex (registro 24-p98, E1, nivel 0.02)
-\pendiente{Faltan los conteos de p98 del banco (registro 24-p98).}
+% Grafica en archivo aparte: figuras/comparacion_pct_p98.tex (registro 24-p98, E1, nivel 0.02)
+\centering
+\vspace*{\fill}
+\input{figuras/comparacion_pct_p98}
+\vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item Respaldo con un umbral más laxo (p98 de 2023 sin ataques), misma máscara que
+    las láminas 9 y 10.
+  \item En el banco, con p98 el detector final da 2.3\,\% de días normales con alarma
+    (8.4 días al año por estación) y PARAAD-SA 4.0\,\% (14.6 días).
+\end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
 \begin{frame}{ANEXO · UNA ESTACIÓN ATACADA (UMBRAL p98)}{Escalón aditivo fijo: detector final contra PARAAD-SA}
-% Pendiente: figuras/comparacion_ppb_p98.tex (registro 24-p98, E1, nivel 0.02)
-\pendiente{Faltan los conteos de p98 del banco (registro 24-p98).}
+% Grafica en archivo aparte: figuras/comparacion_ppb_p98.tex (registro 24-p98, E1, nivel 0.02)
+\centering
+\vspace*{\fill}
+\input{figuras/comparacion_ppb_p98}
+\vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item Respaldo con un umbral más laxo (p98 de 2023 sin ataques), misma máscara que
+    las láminas 9 y 10.
+  \item En el banco, con p98 el detector final da 2.3\,\% de días normales con alarma
+    (8.4 días al año por estación) y PARAAD-SA 4.0\,\% (14.6 días).
+\end{itemize}}
 \fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
