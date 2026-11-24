@@ -71,5 +71,10 @@
   \node[par] at ([yshift=-0.32cm]axis cs:3.100,0) {alarmas};
   \node[par] at ([yshift=-0.32cm]axis cs:3.700,0) {atacados};
   \node[tamano] at ([yshift=-0.72cm]axis cs:3.4,0) {40 ppb};
+    % Techo: si se detectaran todos los ataques sin falsas alarmas, las dos barras
+  % llegarian aqui (VP + FN = 1777 dias atacados, igual para todos los tamaños).
+  \draw[noche, densely dashed, line width=0.8pt] (axis cs:0.42,1777/630.27) -- (axis cs:3.98,1777/630.27);
+  \addlegendimage{legend image code/.code={\draw[noche, densely dashed, line width=0.8pt] (0cm,0cm) -- (0.5cm,0cm);}}
+  \addlegendentry{Máximo posible (todos los ataques)}
 \end{axis}
 \end{tikzpicture}
