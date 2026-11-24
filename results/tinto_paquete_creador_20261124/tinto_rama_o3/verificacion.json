@@ -1,0 +1,19 @@
+{
+ "fecha": "2026-11-24",
+ "sha256": {
+  "1_originales_rama/2020O3.xls": "5b0175714c61a83bc679cc366da34a0dbe824369f778448dc1840b70eb378722",
+  "1_originales_rama/2021O3.xls": "63fecdd1f74d7a3bfc4e2cc17a168e26b504ba60c0f649fb9bf3a64b6ba87f0c",
+  "1_originales_rama/2022O3.xls": "994657201f8ffb46ba49e5d77a3a283f01d5441ad0022754fde36c24c0eb273a",
+  "2_tabla_que_recibio_tinto/ajuste_mapa_2020_2021.csv": "5a9c1634074405606a73035e61a479e6c602d4ccc4dec915519e79e3d714a313",
+  "2_tabla_que_recibio_tinto/ajuste_mapa_2020_2021_metadatos.csv": "b6ba9543475559fdc7478d8326711bd2dad3c20fb0a6036ffbb487dd3ccb3b69",
+  "3_piloto_clasificacion/piloto_ajuste.csv": "7ec80953126a6e25612dca40c937a5615c8779f28efc2bce26dc2c1a69bc2e79",
+  "3_piloto_clasificacion/piloto_ajuste_metadatos.csv": "8bf54a20ffc40e744931d14215ff3a636f20c55eb0853713d26d6709e7f9f969",
+  "3_piloto_clasificacion/piloto_validacion.csv": "cda10a20dc487ae6b005ff128f281833b11977952a65f85b4ca8938414f35ee1",
+  "3_piloto_clasificacion/piloto_validacion_metadatos.csv": "132845ef4aa83dfdd1827c20d2c2886002c3b0a8918b22d2b284d908d7953887",
+  "4_nuestro_mapa_y_figura/armar_tabla.py": "aa5c6721fc61204e307a583afdd779d966df7e1670d4ab755399094fd3805479",
+  "4_nuestro_mapa_y_figura/completos_32_mapa.csv": "e0e3571fbccf0b428b196bdba030e16a18c74b9481e59d37b89fd63b833f673b",
+  "4_nuestro_mapa_y_figura/completos_escala.csv": "8decdaab928e8b5b268ba67f4ce88abe95da3b19f0701e529dcf28de630ff4dc",
+  "4_nuestro_mapa_y_figura/que_recibe_tinto.png": "a0d1f1ef9d96933290aeb53b74a9a310c2277aaeaf202e0b5a5b8e30b48177c7",
+  "README.md": "9d83886d614214bde0c9c4bde90c1f03c04904cbc510352baf699293a1c1ae0a"
+ }
+}

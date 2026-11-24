@@ -5136,3 +5136,24 @@ Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md
   un párrafo aparte y dentro de una caja se iría a un lado. (3) LaTeX Workshop de VS Code compila al
   guardar; si coincide con un `latexmk` de la terminal, se daña el `.aux` («File ended while scanning
   use of \@writefile»). Solución: borrar los auxiliares y compilar una sola vez.
+
+## 2026-11-24 — TINTO: paquete de datos para el creador de TINTOlib
+
+A pedido del tesista (el creador de TINTO solicitó el dataset), se exportó con
+`experiments/tinto_raw/exportar_dataset_tinto.py` la tabla exacta que recibió TINTO en la línea de
+noviembre: 12 146 días completos estación-día 2020–2021, columnas h00..h23 en ppb crudos. También
+los conjuntos del piloto CNN (2 048 + 512 filas, clase 0/1) y la tabla 2020–2022 con NaN.
+Verificado: escala MinMax, manifiestos y etiquetas iguales a lo guardado; con TINTOlib 1.3.1, la
+tabla reproduce el mapa 32 × 32 guardado (también con el MinMaxScaler por defecto). Sin
+entrenamiento. Carpeta `results/tinto_dataset_para_tintolib_20261124/` (README) y ZIP de 1.3 MB.
+No se envió nada: el envío lo hace el tesista.
+
+### 2026-11-24 — TINTO: paquete final para el creador (`tinto_rama_o3.zip`)
+
+Estructura acordada con el tesista: 1) `2020O3.xls`, `2021O3.xls` y `2022O3.xls` tal como los publica
+la RAMA (SHA-256 contra `docs/checksums_2020_2026.txt`); 2) la tabla que recibió TINTO; 3) el piloto
+con etiquetas; 4) mapa, escala, figura y `armar_tabla.py` independiente. Se omitió la tabla de todas
+las estación-días: sale de los originales. `armar_tabla.py`, corrido desde el ZIP descomprimido,
+rehace la tabla 2 idéntica desde los XLS. Código en `experiments/tinto_raw/paquete_creador/`;
+resultado en `results/tinto_paquete_creador_20261124/`. Sustituye al ZIP anterior del mismo día.
+No se envió: lo revisa y envía el tesista.

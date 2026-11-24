@@ -1,0 +1,68 @@
+{
+ "fuente": "results/tinto_raw_20261109/auditoria1/o3_raw_ppb.csv",
+ "sha256_fuente": "a538847a4b553f451dcc4f0fa7ad43614fe83a6f47e337eea2e5ffb2ada448be",
+ "estaciones": [
+  "ACO",
+  "AJM",
+  "AJU",
+  "ATI",
+  "BJU",
+  "CAM",
+  "CCA",
+  "CHO",
+  "CUA",
+  "CUT",
+  "FAC",
+  "FAR",
+  "GAM",
+  "INN",
+  "IZT",
+  "LLA",
+  "LPR",
+  "MER",
+  "MGH",
+  "MON",
+  "MPA",
+  "NEZ",
+  "PED",
+  "SAC",
+  "SAG",
+  "TAH",
+  "TLA",
+  "TLI",
+  "UAX",
+  "UIZ",
+  "VIF"
+ ],
+ "ajuste_mapa": {
+  "filas": 12146
+ },
+ "piloto": {
+  "ajuste": {
+   "filas": 2048,
+   "bases": 1024,
+   "positivas": 1024
+  },
+  "validacion": {
+   "filas": 512,
+   "bases": 256,
+   "positivas": 256
+  }
+ },
+ "todas": {
+  "filas": 33976,
+  "completas": 19300
+ },
+ "comprobado": "escala MinMax y manifiestos/etiquetas del piloto idénticos a los guardados",
+ "sha256": {
+  "ajuste_mapa_2020_2021.csv": "5a9c1634074405606a73035e61a479e6c602d4ccc4dec915519e79e3d714a313",
+  "ajuste_mapa_2020_2021_metadatos.csv": "b6ba9543475559fdc7478d8326711bd2dad3c20fb0a6036ffbb487dd3ccb3b69",
+  "completos_32_mapa.csv": "e0e3571fbccf0b428b196bdba030e16a18c74b9481e59d37b89fd63b833f673b",
+  "completos_escala.csv": "8decdaab928e8b5b268ba67f4ce88abe95da3b19f0701e529dcf28de630ff4dc",
+  "o3_estacion_dia_2020_2022.csv": "cd569a7c128ebf53bd226c8e7f3c729a72880f38e1cea687ef155015fcf283dd",
+  "piloto_ajuste.csv": "7ec80953126a6e25612dca40c937a5615c8779f28efc2bce26dc2c1a69bc2e79",
+  "piloto_ajuste_metadatos.csv": "8bf54a20ffc40e744931d14215ff3a636f20c55eb0853713d26d6709e7f9f969",
+  "piloto_validacion.csv": "cda10a20dc487ae6b005ff128f281833b11977952a65f85b4ca8938414f35ee1",
+  "piloto_validacion_metadatos.csv": "132845ef4aa83dfdd1827c20d2c2886002c3b0a8918b22d2b284d908d7953887"
+ }
+}
