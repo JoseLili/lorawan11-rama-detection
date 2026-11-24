@@ -30,14 +30,14 @@
   % ======================= 1. Entradas =======================
   \draw[grande=dAzul] (30, 88) rectangle (208, 160);
   \node[tcaja=dAzul] at (119, 112) {Estación objetivo (\textit{s})};
-  \node[tnota]       at (119, 138) {O\textsubscript{3} horario (ppb)};
+  \node[tnota]       at (119, 138) {O{\fontsize{3.5}{4}\selectfont\raisebox{-0.3ex}{3}} horario (ppb)};
 
   \draw[grande=dNaranja] (30, 183) rectangle (208, 278);
   \node[tcaja=dNaranja] at (119, 206) {4 Estaciones vecinas};
   \foreach \k [count=\n from 0] in {1,...,4} {
     \draw[chica=dNaranja] (46+\n*37, 230) rectangle (75+\n*37, 262);
-    \node[font=\sffamily\fontsize{5.2}{6.2}\selectfont\bfseries, text=dNaranja] at (60.5+\n*37, 246) {v\textsubscript{\k}};
-  }
+    \node[font=\sffamily\fontsize{5.2}{6.2}\selectfont\bfseries, text=dNaranja] at (60.5+\n*37, 246) {v{\fontsize{3.8}{4}\selectfont\raisebox{-0.3ex}{\k}}};
+      }
 
   \draw[grande=dGris] (30, 302) rectangle (208, 375);
   \node[tcaja=dGris] at (119, 326) {Perfil propio};
