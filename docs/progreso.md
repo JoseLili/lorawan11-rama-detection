@@ -5109,3 +5109,30 @@ Documento general para continuar sin el chat: [Traspaso TINTO](traspaso_tinto.md
 - STC-RAAD se ajustó con 25 % de días anómalos, vecinas siempre limpias y umbral ajustado con etiquetas: sus
   cifras no se comparan con las nuestras. No hay código público. Queda como comparación pendiente; si se hace,
   es una revisión nueva con registro previo.
+
+## 2026-11-24 — Reporte de avances para el comité tutor (agosto a noviembre de 2026)
+
+- Pedido del tesista: reporte de avances del periodo completo, en LaTeX, para el comité tutor.
+- Borrador en `reporte_avances/reporte_avances.tex` (8 páginas; `latexmk` con LuaLaTeX, igual que la
+  presentación). Reutiliza las figuras de `presentacion/figuras/` (protocolo, arquitectura y
+  comparación proporcional), así que sus números son los mismos de la presentación.
+- Cifras del banco (tabla NERAD contra PARAAD-SA, p99, E1) verificadas contra
+  `results/linea_base/rev24/metricas_banco.csv`. Las demás vienen de `progreso.md`, la bitácora y los
+  resultados de Barcelona. Ningún modelo se entrenó ni se evaluó para el reporte.
+- Quedan por llenar a mano: número de cuenta, semestre, comité tutor y fechas del plan de trabajo. Los
+  objetivos específicos (OE1–OE5) son una redacción propuesta a partir del trabajo hecho: confirmar
+  con los registrados ante el posgrado.
+- **Versión 2 (mismo día, pedido del tesista: más extensa):** 18 páginas. Se agregaron índice, avance
+  por objetivo, trabajos relacionados (tabla de la presentación), bandas de la NOM-172, detalle de la
+  etapa 1 (mecanismo, medida del daño, tablas de contexto espacial y de detección por bit), protocolo
+  (fórmula de la anomalía, calendarios pareados, unidad de evaluación, métricas explicadas), historia
+  completa de detectores con la tabla del examen final (rev. 17), PARAAD-SA en la RAMA (rev. 20),
+  Barcelona, pruebas de estrés con sus figuras, comparación pareada TINTO contra NERAD
+  (`docs/traspaso_tinto.md`, 2025, p99), trabajo futuro y conclusiones del periodo. Diez figuras
+  tomadas sin cambios de `presentacion/figuras/`.
+- **Detalles técnicos:** (1) en el texto se usa `$_{\text{3}}$` y no `\textsubscript`: con LuaLaTeX,
+  usar `\textsubscript` en el texto antes de una figura TikZ rompe los subíndices dentro de los nodos
+  («Giving up on this path»). (2) `punto_operacion` se incluye sin `\adjustbox`, porque su leyenda es
+  un párrafo aparte y dentro de una caja se iría a un lado. (3) LaTeX Workshop de VS Code compila al
+  guardar; si coincide con un `latexmk` de la terminal, se daña el `.aux` («File ended while scanning
+  use of \@writefile»). Solución: borrar los auxiliares y compilar una sola vez.

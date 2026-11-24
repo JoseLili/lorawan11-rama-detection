@@ -1,0 +1,6 @@
+# Reporte de avances: se compila con LuaLaTeX, como la presentacion.
+# TEXINPUTS agrega ../presentacion para encontrar colores-tesis.sty (paleta y estilos
+# de las graficas) sin copiarlo.
+$pdf_mode = 1;
+$pdflatex = 'lualatex %O %S';
+ensure_path('TEXINPUTS', '../presentacion//');

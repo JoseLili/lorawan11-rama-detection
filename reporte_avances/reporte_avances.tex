@@ -1,0 +1,912 @@
+% Reporte de avances de tesis para el comite tutor (PCIC, UNAM), agosto-noviembre de 2026.
+% Compilar: latexmk reporte_avances.tex  (latexmkrc elige LuaLaTeX y agrega ../presentacion).
+% Las cifras vienen de docs/progreso.md, docs/bitacora_decisiones.md, docs/resultados_*.md,
+% docs/traspaso_tinto.md y los CSV citados en los comentarios de cada figura
+% (presentacion/figuras/). Las graficas se reutilizan tal cual de la presentacion para que
+% los numeros sean los mismos en los dos documentos.
+% Version 2 (2026-11-24): ampliada a pedido del tesista.
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[spanish, es-nodecimaldot, es-noshorthands, es-tabla]{babel}
+\usepackage{fontspec}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{csquotes}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{../docs/referencias.bib}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{adjustbox}   % \adjustbox{max width=\linewidth}: encoge una figura solo si no cabe
+\usepackage{colores-tesis}  % paleta y estilos de las graficas (de ../presentacion)
+\usepackage{iconos-tesis}   % iconos de la figura de contexto (de ../presentacion)
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, calc, positioning}
+\usepgfplotslibrary{groupplots}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\setlist{itemsep=2pt, topsep=4pt}
+% Dato que falta llenar a mano (numero de cuenta, semestre, comite, fechas)
+\newcommand{\porllenar}[1]{\textcolor{acento}{[#1]}}
+% Figura de la presentacion, encogida al ancho del texto si hace falta
+\newcommand{\figurapresentacion}[1]{%
+  \adjustbox{max width=\linewidth}{\input{../presentacion/figuras/#1}}}
+% Palomita y tache (los mismos de la presentacion)
+\newcommand{\marcasi}{\tikz[baseline=-0.6ex]\draw[ensX, line width=1.6pt,
+  line cap=round, line join=round] (-0.12,0) -- (-0.03,-0.09) -- (0.13,0.1);}
+\newcommand{\marcano}{\tikz[baseline=-0.6ex]\draw[tenue, line width=1.3pt,
+  line cap=round] (-0.09,-0.09) -- (0.09,0.09) (-0.09,0.09) -- (0.09,-0.09);}
+
+\begin{document}
+
+% =====================================================================
+\begin{center}
+  {\large\bfseries Posgrado en Ciencia e Ingeniería de la Computación · UNAM}\\[4pt]
+  {\Large\bfseries Reporte de avances de tesis de maestría}\\[2pt]
+  {\large Periodo: agosto a noviembre de 2026}
+\end{center}
+
+\medskip
+\noindent
+\begin{tabularx}{\linewidth}{@{}l Y@{}}
+  \toprule
+  \textbf{Alumno} & Ing. José Emiliano Lili Beltrán \\
+  \textbf{Número de cuenta} & \porllenar{por llenar} \\
+  \textbf{Semestre} & \porllenar{por llenar} \\
+  \textbf{Tutor principal} & Dr. José Jaime Camacho Escoto \\
+  \textbf{Comité tutor} & \porllenar{por llenar} \\
+  \textbf{Título de trabajo} & Detección de anomalías en redes de monitoreo atmosférico:
+    aprendizaje profundo con contraste espacio-temporal y exploración con imágenes
+    sintéticas TINTO \\
+  \textbf{Fecha} & 24 de noviembre de 2026 \\
+  \bottomrule
+\end{tabularx}
+
+\tableofcontents
+
+% =====================================================================
+\section{Resumen del periodo}
+
+Durante el periodo se completaron las dos etapas experimentales de la tesis y se cerró la
+elección del detector final. El trabajo partió de un ataque concreto a la capa de
+comunicación (\emph{bit flipping} en LoRaWAN~1.1) y, por acuerdo con el tutor, se amplió a
+un problema más general: detectar, desde el servidor central, qué estación de una red de
+monitoreo reporta datos anómalos, sin importar si la causa es una falla, una
+descalibración o un ataque. Los avances principales son:
+
+\begin{enumerate}
+  \item \textbf{Etapa 1, cerrada:} caracterización del ataque de \emph{bit flipping} en
+    LoRaWAN~1.1 sobre mediciones reales de ozono de la Red Automática de Monitoreo
+    Atmosférico de la Ciudad de México (RAMA): qué posiciones de bit producen un daño real
+    (cambio de la banda de calidad del aire) y cuáles detecta un modelo LSTM.
+  \item \textbf{Reorientación acordada con el tutor} (octubre de 2026): de un ataque a un
+    solo sensor a la \textbf{detección de estaciones anómalas a nivel de red}.
+  \item \textbf{Etapa 2:} diseño de un protocolo experimental con separación temporal
+    estricta (2020--2026) y desarrollo de un detector propio, \textbf{NERAD}
+    (\emph{Neighbour-filtered Ensemble Recurrent Anomaly Detection}): un ensamble de
+    5~redes LSTM que compara cada estación con su propia historia y con sus 4~vecinas más
+    cercanas, y que descarta a las vecinas sospechosas.
+  \item \textbf{Comparación con el estado del arte:} NERAD supera a PARAAD-SA
+    \cite{allka2024paraad} en el banco de pruebas de la RAMA con menos de la mitad de
+    falsas alarmas; el método base también lo supera en datos de Barcelona (validación
+    externa).
+  \item \textbf{Pruebas de estrés} ante ataques coordinados a las vecinas y sesgos lentos,
+    que delimitan con números dónde funciona el detector y dónde no.
+  \item \textbf{Exploración con imágenes sintéticas TINTO}: pilotos cerrados y una primera
+    comparación pareada con el detector final.
+  \item \textbf{Material de difusión:} presentación de avances en \LaTeX{} (Beamer) con
+    todas las gráficas generadas a partir de los resultados guardados.
+\end{enumerate}
+
+% =====================================================================
+\section{Planteamiento}
+
+\subsection{Contexto y problema}
+
+La RAMA mide ozono (O$_{\text{3}}$) cada hora en decenas de estaciones de la Zona
+Metropolitana del Valle de México. Con esos datos se informa a la población la calidad del
+aire y se activan, cuando corresponde, las fases de contingencia ambiental. La
+concentración de ozono varía mucho a lo largo del día (es baja en la madrugada y alcanza
+su máximo por la tarde) y entre zonas de la ciudad.
+
+Cuando un sensor falla, se descalibra o su mensaje se altera durante la transmisión, el
+dato que llega al servidor central suele tener un formato válido y un valor
+\emph{físicamente posible}. Por eso un umbral fijo o una verificación de rango no lo
+detectan. La pregunta práctica es cómo dar al operador de la red un aviso, al cierre de
+cada día, de qué estaciones requieren revisión, sin instalar sensores redundantes y sin
+saturarlo de falsas alarmas (Figura~\ref{fig:contexto}).
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{contexto_problema}
+  \caption{Contexto del problema: (1) una red de estaciones que reportan ozono cada hora;
+    (2) un sensor o un mensaje alterado que entrega un valor falso con formato válido;
+    (3) el reto operativo de avisar al cierre del día qué estación debe revisarse.}
+  \label{fig:contexto}
+\end{figure}
+
+\subsection{Hipótesis}
+
+Es posible detectar, con un alto grado de confiabilidad, anomalías en la información
+reportada en redes de sensores utilizando el historial reciente de cada estación y el de
+sus estaciones vecinas, sin incurrir en un exceso de falsos positivos.
+
+\subsection{Objetivos}
+
+\paragraph{Objetivo general.} Diseñar un detector de anomalías basado en modelos de
+aprendizaje profundo que combine la historia temporal de cada estación con la de sus
+estaciones vecinas, con alta capacidad de detección y una tasa de falsas alarmas acotada,
+en una red de sensores de ozono.
+
+\paragraph{Objetivos específicos.}
+\begin{enumerate}[label=OE\arabic*.]
+  \item Caracterizar el daño y la detectabilidad del \emph{bit flipping} en LoRaWAN~1.1
+    según la posición de bit atacada.
+  \item Construir un banco de pruebas reproducible con anomalías sintéticas inyectadas
+    sobre datos reales de la RAMA y una separación temporal entrenamiento / selección /
+    calibración / prueba.
+  \item Desarrollar un detector supervisado que use la historia propia y la de las
+    vecinas, y compararlo con detectores del mismo tipo y con un método publicado.
+  \item Delimitar el alcance del detector ante ataques coordinados y sesgos de largo plazo.
+  \item Explorar una representación alternativa de los datos como imágenes (TINTO).
+\end{enumerate}
+
+\subsection{Avance por objetivo}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}l l Y@{}}
+  \toprule
+  \textbf{Objetivo} & \textbf{Estado} & \textbf{Evidencia principal} \\
+  \midrule
+  OE1 & Cumplido & Detección por bit del LSTM V4 en 2024--2026; zona explotable en los
+    bits 3 a 5 (sección~\ref{sec:etapa1}). \\
+  OE2 & Cumplido & Protocolo con más de 25~revisiones fechadas; banco 2024 a julio de 2026
+    con 30~calendarios de ataque (sección~\ref{sec:protocolo}). \\
+  OE3 & Cumplido & NERAD contra PARAAD-SA, V4 supervisado y regla de vecinas
+    (secciones \ref{sec:evolucion} y~\ref{sec:resultados}). \\
+  OE4 & Cumplido & Ataque coordinado, sesgo sostenido y fusión
+    (sección~\ref{sec:estres}). \\
+  OE5 & En curso & Pilotos T1 y T2 cerrados; comparación pareada inicial
+    (sección~\ref{sec:tinto}). \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+% =====================================================================
+\section{Trabajos relacionados}
+
+Se revisó la literatura sobre detección de anomalías en redes de sensores ambientales y
+sobre detección de intrusiones en IoT. Los tres trabajos más cercanos se resumen en la
+Tabla~\ref{tab:relacionados}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Trabajos relacionados y diferencias con este trabajo. Las cifras son las
+  reportadas por cada artículo y no son comparables entre sí.}
+\label{tab:relacionados}
+\renewcommand{\arraystretch}{1.6}
+\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\linewidth}{>{\bfseries}p{2.3cm} C C C >{\columncolor{panel}}C}
+  \toprule
+  & \textbf{PARAAD-SA}~\cite{allka2024paraad}\newline{\footnotesize\color{tenue}Autoencoder recurrente}
+  & \textbf{STC-RAAD}~\cite{allka2024stcraad}\newline{\footnotesize\color{tenue}Autoencoder BiLSTM}
+  & \textbf{FedWLA}~\cite{garciasaez2025fedwla}\newline{\footnotesize\color{tenue}Árboles federados}
+  & \textcolor{ensX}{\textbf{NERAD}}\newline{\footnotesize\color{tenue}Este trabajo: 5 LSTM} \\
+  \midrule
+  Datos        & O$_{\text{3}}$, sensores & O$_{\text{3}}$, sensores & Tráfico de red & O$_{\text{3}}$, sensores \\
+  Supervisado  & \marcano & \marcano & \marcasi & \marcasi \\
+  Usa vecinas  & \marcano & \marcasi & {\color{tenue}---} & \marcasi\ {\footnotesize con filtro} \\
+  Resultado    & R=0.81 · P=0.84 & R=0.82--0.96 · P=0.85--0.91 & F1=0.98--0.99 & Sección~\ref{sec:resultados} \\
+  \bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{itemize}
+  \item \textbf{PARAAD-SA} \cite{allka2024paraad} (UPC Barcelona, IEEE TNSE 2024) detecta
+    anomalías de sesgo y deriva en ozono de 8~estaciones de Barcelona con un autoencoder
+    recurrente sin supervisión. Es nuestro comparador principal, por pedido del tutor y
+    porque es el método de red del mismo grupo.
+  \item \textbf{STC-RAAD} \cite{allka2024stcraad} (mismo grupo, IEEE IoT Journal 2024) usa a
+    los sensores vecinos mediante un grafo. Es el trabajo conceptualmente más cercano al
+    nuestro. Sin embargo, se ajustó con 25\,\% de días anómalos, vecinas siempre limpias y
+    un umbral elegido con etiquetas, y no tiene código público, por lo que su comparación
+    directa queda pendiente.
+  \item \textbf{FedWLA} \cite{garciasaez2025fedwla} (UCLM y U. de Zaragoza, IEEE SMC 2025)
+    es un sistema federado de detección de intrusiones. Ataca la red, no el dato, y evalúa
+    con 28--49\,\% de ataques; en nuestro banco sólo 0.77\,\% de los estación-días están
+    atacados, lo que explica sus métricas tan altas.
+\end{itemize}
+
+\textbf{Diferencia de este trabajo:} es supervisado (aprende con anomalías sintéticas
+etiquetadas), usa a las vecinas \emph{y} filtra a las sospechosas, y se evalúa en cuatro
+escenarios de ataque sobre el dato con una proporción realista de días atacados.
+
+% =====================================================================
+\section{Actividades realizadas}
+
+\subsection{Datos y preparación (agosto de 2026)}
+
+\begin{itemize}
+  \item Inventario y auditoría de las series horarias de ozono de la RAMA de 2020 a
+    julio de 2026. El formato es estable en todos los años; cada archivo tiene su suma de
+    verificación. Se evalúan 31~estaciones: HGM sólo sirve de contexto, XAL está
+    inactiva y COY, SJA y SFE quedan fuera por falta de datos.
+  \item Datos complementarios: series de 2000 a 2019 (sólo como fondo de entrenamiento),
+    datos validados del SIMAT para agosto--septiembre de 2026 y ozono de 13~estaciones de
+    Barcelona (2014--2019) para la validación externa.
+  \item Función de decisión normativa: bandas de calidad del aire de la
+    NOM-172-SEMARNAT-2023 (Tabla~\ref{tab:nom}). Umbral experimental de contingencia:
+    155~ppb, aplicado igual en todos los años.
+  \item Simulación del transporte LoRaWAN~1.1: codificación CayenneLPP y cifrado AES en
+    modo contador, sobre el que se aplican las alteraciones.
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Bandas de calidad del aire para ozono (promedio horario), NOM-172-SEMARNAT-2023.}
+  \label{tab:nom}
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    \textbf{Banda} & \textbf{Concentración (ppb)} \\
+    \midrule
+    Buena & $<58$ \\
+    Aceptable & 58--90 \\
+    Mala & 90--135 \\
+    Muy mala & 135--175 \\
+    Extremadamente mala & $>175$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Etapa 1: \emph{bit flipping} en LoRaWAN 1.1 (agosto a octubre de 2026)}
+\label{sec:etapa1}
+
+\paragraph{El ataque.} En LoRaWAN la confidencialidad y la integridad se protegen con
+mecanismos independientes. La carga útil se cifra con AES en modo contador, que es un XOR
+contra un flujo de clave: invertir un bit del texto cifrado invierte el mismo bit del texto
+claro, sin necesidad de conocer la clave. La integridad la protege el MIC, pero su
+verificación termina en el servidor de red; el tramo entre el servidor de red y el de
+aplicación queda sin protección de extremo a extremo. Es una vulnerabilidad de
+arquitectura que afecta igual a las versiones 1.0.x y~1.1.
+
+\paragraph{Medida del daño.} El daño no se midió como el tamaño del desplazamiento, sino
+como un \emph{cambio de decisión}: hay daño si la banda normativa calculada con el valor
+recibido es distinta de la calculada con el valor real,
+\[
+  D = \mathbf{1}\bigl[f(x_{\text{real}}) \neq f(x_{\text{recibido}})\bigr].
+\]
+Un salto de 32~ppb lejos de un corte no produce daño; uno de 2~ppb junto al corte cambia
+la banda que se comunica a la población.
+
+\paragraph{Resultados.}
+\begin{itemize}
+  \item \textbf{Existe un óptimo interior del atacante.} Las alteraciones pequeñas son
+    indetectables pero casi nunca cruzan un umbral; las grandes producen valores fuera de
+    lo observado y se detectan fácilmente. El máximo daño no detectado está en medio.
+  \item \textbf{El contexto espacial cierra la ventana} (Tabla~\ref{tab:capa1}). Con un
+    LSTM que estima el valor esperado de la estación a partir del resto de la red, la
+    detección mejora y el óptimo del atacante se desplaza a 16~ppb, donde sólo 11.4\,\%
+    de los ataques llega a cambiar la banda.
+  \item \textbf{Deriva estacional:} un perfil horario fijo de enero--octubre subestima en
+    10.6~ppb la concentración de noviembre--diciembre a las 16~h. Se adoptó un perfil
+    causal de 14~días, que empeora un poco el error medio (9.35 contra 8.39~ppb) pero
+    reduce el sesgo de +18.7 a $-$1.7~ppb. Este perfil de 14~días se conservó después en
+    la etapa~2.
+  \item \textbf{Detector multianual (V4):} 31~modelos LSTM, uno por estación, entrenados
+    con 2020--2022, calibrados en 2023 y probados en 2024, 2025 y 2026. Reducen el error
+    frente al perfil en 30 de 31~estaciones (mediana de reducción de 15.9\,\%). La
+    detección depende del bit atacado (Tabla~\ref{tab:bits}).
+  \item \textbf{Daño no detectado:} se concentra en los bits 3 a~5. En 2024, el bit~5
+    permitió cambiar sin alerta la banda del máximo diario de la red en 85~días (23\,\%).
+  \item \textbf{Contramedida probada sin éxito:} una codificación alternativa del campo de
+    valor que reparte el peso de los bits 4 y~5. En 27~estaciones, con 100~campañas por
+    estación, aumentó los cambios de banda no detectados de 255 a 567 en 179\,399~intentos.
+    Se documenta como resultado negativo.
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Detección del \emph{bit flipping} sin y con contexto espacial (estación CCA,
+    2025).}
+  \label{tab:capa1}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    & \textbf{Medición aislada} & \textbf{Con contexto espacial (LSTM)} \\
+    \midrule
+    Detección, desplazamiento de 32~ppb & 41.4\,\% & 84.6\,\% \\
+    Detección, desplazamiento de 64~ppb & 72.9\,\% & 98.7\,\% \\
+    Máximo daño no detectado & 27.1\,\% (64~ppb) & 9.1\,\% (16~ppb) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Detección aproximada del V4 multianual según el bit atacado (grupo principal,
+    probabilidad de ataque de 5\,\% por lectura, 2024--2026). Las falsas alarmas en prueba
+    fueron de 6.6 a 7.3\,\%, frente al 5\,\% calibrado.}
+  \label{tab:bits}
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    \textbf{Bit} & 0--2 & 4 & 5 & 6 & 7 \\
+    \midrule
+    \textbf{Recall} & $\approx$7\,\% & 20--22\,\% & 79--80\,\% & $>$99\,\% & 100\,\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Con el tutor se concluyó que el detector estaba topado para este ataque: más años de
+datos, vecinas de la misma hora o vecinas cercanas apenas movieron el resultado. La etapa
+queda como primera contribución de la tesis: una caracterización formal de qué bits
+producen daño y cuáles detecta un LSTM.
+
+\subsection{Reorientación (octubre de 2026)}
+
+En la junta del 5 de octubre se evaluó un segundo ataque a LoRaWAN, el drenado de energía
+por interferencia en las ventanas de recepción. En la junta del 12 de octubre se descartó
+por el costo de montar un banco físico, y se acordó la línea vigente, sugerida por el
+Dr.~Orozco (UCLM): dejar de ver el ataque a \emph{un} sensor y ver la \emph{red como un
+todo}, suponiendo que un nodo ya está descompuesto o es malicioso y usando a los demás
+para detectarlo. Los acuerdos fueron:
+
+\begin{itemize}
+  \item La anomalía no tiene por qué ser maliciosa: puede ser falla o descalibración.
+  \item Datos: matriz con una fila por hora y una columna por estación de la RAMA.
+  \item Anomalías sintéticas de magnitud variable, de 1 a 7~días, en estaciones al azar.
+  \item División por años completos, del modelo más simple al más complejo, con la meta
+    de una detección del orden de 80--90\,\%.
+\end{itemize}
+
+\subsection{Etapa 2: protocolo experimental (octubre de 2026)}
+\label{sec:protocolo}
+
+Antes de programar se escribió un protocolo con las reglas que no cambian. Cada cambio
+posterior se registró con fecha \emph{antes} de ver resultados; a la fecha hay más de
+25~revisiones documentadas.
+
+\paragraph{Anomalía.} En un episodio, el valor $x$ de la estación atacada se sustituye por
+\[
+  x' = x\,(1+\delta) \quad\text{(aumento)} \qquad\text{o}\qquad
+  x' = \frac{x}{1+\delta} \quad\text{(reducción)},
+\]
+con el sentido sorteado por episodio. Los episodios duran de 1 a 7~días completos y
+empiezan a las 00~h. Sólo se alteran las 31~estaciones objetivo y sólo en horas con dato.
+Más adelante se agregaron otros escenarios (Tabla~\ref{tab:escenarios}).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Escenarios de anomalía evaluados (modelo de amenaza).}
+\label{tab:escenarios}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\bfseries}p{4.3cm} Y >{\raggedright\arraybackslash}p{3cm}@{}}
+  \toprule
+  Escenario & Magnitudes evaluadas & Duración \\
+  \midrule
+  1. Anomalía proporcional & $\pm\delta$, con $\delta$ = 20, 50 y 100\,\% & 1 a 7 días \\
+  2. Escalón aditivo fijo  & $\pm$10, $\pm$20 y $\pm$40~ppb & 1 a 7 días \\
+  3. Ataque coordinado a vecinas & 0, 1, 2 y 4 vecinas alteradas, con las magnitudes de 1 y 2 & 1 a 7 días \\
+  4. Sesgo lento o sostenido & +20 y +40~ppb: escalón, rampa de 28~días y deriva de 56~días & 8 semanas \\
+  \bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Calendarios pareados.} Un \emph{calendario} es un sorteo de qué estaciones se
+atacan, qué días y en qué sentido. El mismo calendario se aplica a todas las magnitudes,
+de modo que las comparaciones entre magnitudes y entre detectores usan exactamente los
+mismos días. Las semillas se derivan de 42 de forma reproducible. La etiqueta nunca entra
+al modelo como dato.
+
+\paragraph{División temporal.} Cada etapa usa sólo datos anteriores a ella
+(Figura~\ref{fig:protocolo}). Nada se ajusta mirando los datos de prueba, y los exámenes
+finales se abren una sola vez.
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{protocolo}
+  \caption{Protocolo temporal del detector final. Los modelos se entrenan con 2020--2021,
+    el diseño se elige en 2022 (y después se reentrena con 2020--2022), el umbral se fija
+    en 2023 sin ataques, el banco de pruebas cubre de 2024 a julio de 2026 (30
+    calendarios de ataque) y el despliegue, agosto y septiembre de 2026.}
+  \label{fig:protocolo}
+\end{figure}
+
+\paragraph{Unidad de evaluación.} Al principio se evaluó la \emph{hora de red} (¿hay
+alguna anomalía en la red en esta hora?). Desde la revisión~11 se usa la
+\emph{estación-día}: ¿esta estación tuvo hoy una anomalía? Es la pregunta que responde el
+operador al cierre del día y permite localizar la estación.
+
+\paragraph{Umbrales y métricas.} El umbral de alarma se fija como un percentil del puntaje
+en 2023 sin ataques: con p99, se espera que 1 de cada 100 días normales dé alarma. Las
+métricas se definen así:
+\begin{itemize}
+  \item \textbf{Recall} (sensibilidad): de los días atacados, qué fracción dio alarma.
+  \item \textbf{Precisión}: de las alarmas, qué fracción correspondía a un día atacado.
+  \item \textbf{F1}: media armónica de recall y precisión; resume las dos en un número.
+  \item \textbf{Falsas alarmas}: días sin ataque con alarma, expresados en días al año por
+    estación para que sean fáciles de interpretar.
+\end{itemize}
+Cada métrica se reporta junto a su valor sin ataque (las mismas horas limpias) para
+distinguir la detección real del azar.
+
+\subsection{Etapa 2: evolución de los detectores (octubre y noviembre de 2026)}
+\label{sec:evolucion}
+
+El trabajo avanzó del detector más simple al más complejo, siempre comparando detectores
+del mismo tipo, en el mismo escenario y sobre los mismos días («peras con peras», regla
+fijada tras la junta del 26 de octubre).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{5.4cm} Y@{}}
+  \toprule
+  \textbf{Paso} & \textbf{Resultado} \\
+  \midrule
+  Random Forest, IsolationForest y V4 por hora de red &
+    Líneas base. La evaluación por hora de toda la red resultó poco informativa. \\
+  LSTM supervisado de red (revisiones 6--8) &
+    Tres intentos: ventana de 24~h, entradas relativas al perfil de 14~días y una columna
+    por estación que la compara con sus 4~vecinas. Mejora parcial. \\
+  Estación-día y regla de vecinas robusta R3 (rev.~11--12) &
+    Cambio de unidad de evaluación. R3 es una línea base sin entrenamiento (mediana de
+    14~días y dominancia en el vecindario), elegida con 2022. \\
+  LSTM por estación (rev.~13) &
+    No pasó la elección en 2022 (F1 promedio 0.203 contra 0.330 de R3). Resultado
+    negativo. \\
+  LSTM local compartido L0 (rev.~14--17) &
+    Un solo modelo para las 31~estaciones con la estación y sus 4~vecinas (17~columnas).
+    Pasó la elección en 2022 (0.391 contra 0.330) y el examen final de uso único en
+    2025--2026 (Tabla~\ref{tab:examen17}). \\
+  V4 supervisado y escenarios de una sola estación (rev.~18--19) &
+    Comparación justa con el V4: L0 le gana al V4 supervisado compartido en 34 de
+    36~combinaciones. Quitar los ataques simultáneos cambia el recall en menos de 0.03. \\
+  PARAAD-SA en la RAMA y en Barcelona (rev.~20) &
+    L0 obtiene mayor F1 que PARAAD-SA en las 36~combinaciones evaluadas en la RAMA
+    (sección~\ref{sec:sota}). \\
+  Error fijo en ppb (rev.~21) &
+    Segundo tipo de anomalía, pedido por el tutor: «un sensor se equivoca por una
+    cantidad, no por un porcentaje». \\
+  Línea base anclada en vecinas, semillas y ensamble (LB1, LB2) &
+    La ventaja de la base vecinal es estable entre 5~semillas (+0.036 a +0.046), pero no
+    se sostuvo en el examen de 2017--2019: resultado negativo de generalización. \\
+  Más años de fondo y ensamble Ens-Vb-R (rev.~22) &
+    En el examen de despliegue (ago--sep 2026, uso único) superó al ensamble con
+    referencia propia: F1 de 0.80 con $\delta$ = 100 y 50\,\%, con 0.2\,\% de falsas
+    alarmas. \\
+  \textbf{NERAD} = Ens-Vb-R + filtro de vecinas sospechosas (rev.~24) &
+    \textbf{Detector final.} No pierde con una sola estación atacada y resiste mejor
+    cuando se atacan vecinas. \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Examen final de uso único (revisión~17), F1 con umbral p99, LSTM local L0
+    contra la regla de vecinas R3. Modelos congelados, cargados de disco; dos corridas
+    idénticas. Con p99.9 y 2025, L0 obtiene 0.756, 0.573 y 0.087 contra 0.632, 0.364 y
+    0.019 de R3.}
+  \label{tab:examen17}
+  \begin{tabular}{@{}l cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{2025}} & \multicolumn{2}{c}{\textbf{2026 (ene--jul)}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    \textbf{Anomalía} & L0 & R3 & L0 & R3 \\
+    \midrule
+    $\pm$100\,\% & 0.457 & 0.475 & 0.540 & 0.476 \\
+    $\pm$50\,\%  & 0.445 & 0.391 & 0.502 & 0.390 \\
+    $\pm$20\,\%  & 0.249 & 0.120 & 0.242 & 0.092 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{El detector final: NERAD}
+
+La Figura~\ref{fig:arquitectura} muestra la arquitectura de NERAD. Sus componentes son:
+
+\begin{enumerate}
+  \item \textbf{Entradas.} Para la estación objetivo $s$ y sus 4~vecinas más cercanas, el
+    ozono de cada hora y el perfil propio de los últimos 14~días.
+  \item \textbf{Filtro vecinal.} Una vecina cuyo desvío respecto a la base vecinal supera
+    $\tau = 0.26\,\sigma$ se considera sospechosa y se excluye (se pone en~0 en la entrada).
+    El valor de $\tau$ se eligió en 2022.
+  \item \textbf{Ventana.} 24~horas $\times$ 17~columnas: el desvío de $s$ contra su base,
+    la hora del día (seno y coseno), una máscara de dato presente y el desvío contra las
+    vecinas, y lo mismo para cada vecina.
+  \item \textbf{Ensamble de 5~LSTM} entrenadas con semillas distintas (42, 1, 2, 3 y 4); su
+    promedio da un puntaje por hora $p_s(t)$.
+  \item \textbf{Decisión diaria.} Al cierre del día se promedia el puntaje (si hay al menos
+    12~horas con dato) y se compara con el umbral p99 calibrado en 2023 sin ataques
+    ($S > 0.1508$): si lo supera, la estación-día da alarma.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{arquitectura}
+  \caption{Arquitectura del detector final NERAD: entradas (estación, perfil propio y 4
+    vecinas), filtro de vecinas sospechosas, ventana de 24~h $\times$ 17~columnas,
+    ensamble de 5~LSTM y decisión diaria por estación.}
+  \label{fig:arquitectura}
+\end{figure}
+
+% =====================================================================
+\section{Resultados principales}
+\label{sec:resultados}
+
+\subsection{Elección del punto de operación}
+
+Cada percentil es un umbral distinto fijado en 2023 sin ataques. De p95 a p99.9 el umbral
+es más estricto: el recall baja y la precisión sube (Figura~\ref{fig:operacion}). Se
+eligió \textbf{p99}: el recall sigue alto (0.80 con $\delta$ = 50\,\% y 0.83 con 20~ppb
+en el banco) y las falsas alarmas bajan de 18.5 a 4.7~días al año por estación respecto
+de p95. Una falsa alarma cuesta una revisión extra de la estación; por eso se prioriza el
+recall sobre la precisión.
+
+\begin{figure}[H]
+  \centering
+  % Sin \adjustbox: la leyenda va en un parrafo aparte debajo de la grafica y dentro de
+  % una caja horizontal se iria a un lado. A su tamano natural (~12.5 cm) ya cabe.
+  \input{../presentacion/figuras/punto_operacion}
+  \caption{Recall (arriba) y precisión (abajo) de NERAD según el umbral, en el banco de
+    pruebas (izquierda) y en el despliegue de agosto--septiembre de 2026 (derecha). Línea
+    sólida: anomalía proporcional; punteada: error fijo en ppb; el tono indica la magnitud.
+    Debajo de cada gráfica, los días con falsa alarma al año por estación. La franja marca
+    p99, el umbral elegido.}
+  \label{fig:operacion}
+\end{figure}
+
+\subsection{NERAD contra PARAAD-SA en el banco de pruebas}
+
+Las Figuras \ref{fig:comparacion} y~\ref{fig:comparacionppb} y la
+Tabla~\ref{tab:banco} comparan a los dos detectores con una sola estación atacada: 1\,777
+estación-días atacados y 23\,005 limpios, los mismos para ambos, cada uno con su umbral
+p99 de 2023. En el banco, el umbral de PARAAD-SA deja pasar 2.6\,\% de días normales como
+alarma (9.6~días al año por estación) y el de NERAD 1.3\,\% (4.7~días).
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{comparacion_pct}
+  \caption{Anomalía proporcional en el banco de pruebas (2024 a julio de 2026, 30
+    calendarios), umbral p99. Eje vertical: días al año por estación. Por cada magnitud,
+    las dos primeras barras son las alarmas (verdaderas en color, falsas en gris; P =
+    precisión) y las dos siguientes, los días atacados (detectados en color, perdidos en
+    claro; R = recall).}
+  \label{fig:comparacion}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{comparacion_ppb}
+  \caption{Escalón aditivo fijo en el banco de pruebas, umbral p99. Se lee igual que la
+    Figura~\ref{fig:comparacion}.}
+  \label{fig:comparacionppb}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Banco de pruebas 2024 a julio de 2026, una estación atacada, umbral p99 de 2023
+    sin ataques. Modelos cargados de disco, sin reentrenar.}
+  \label{tab:banco}
+  \begin{tabular}{@{}l cc cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Recall}} & \multicolumn{2}{c}{\textbf{Precisión}}
+    & \multicolumn{2}{c}{\textbf{F1}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+    \textbf{Anomalía} & NERAD & PARAAD-SA & NERAD & PARAAD-SA & NERAD & PARAAD-SA \\
+    \midrule
+    $\pm$100\,\%  & 0.93 & 0.68 & 0.32 & 0.16 & 0.48 & 0.27 \\
+    $\pm$50\,\%   & 0.80 & 0.36 & 0.31 & 0.10 & 0.44 & 0.15 \\
+    $\pm$20\,\%   & 0.20 & 0.09 & 0.11 & 0.03 & 0.14 & 0.04 \\
+    $\pm$40~ppb   & 0.96 & 0.92 & 0.33 & 0.21 & 0.49 & 0.34 \\
+    $\pm$20~ppb   & 0.83 & 0.57 & 0.32 & 0.14 & 0.46 & 0.23 \\
+    $\pm$10~ppb   & 0.23 & 0.10 & 0.12 & 0.03 & 0.16 & 0.05 \\
+    \midrule
+    \multicolumn{7}{@{}l}{Días con falsa alarma al año por estación: NERAD 4.7;
+      PARAAD-SA 9.6.} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+La precisión del banco es baja para los dos detectores porque los días atacados son muy
+pocos (0.77\,\% de los estación-días): aun con 1\,\% de falsas alarmas, éstas son del
+mismo orden que los ataques.
+
+\subsection{Despliegue (agosto y septiembre de 2026)}
+
+Con los datos validados del SIMAT y el umbral p99, NERAD detecta 99\,\% de los días con
+anomalía de 100\,\%, 94\,\% con 50\,\% y 25\,\% con 20\,\%, con precisión de 0.65, 0.67 y
+0.46, respectivamente, y 1.1~días con falsa alarma al año por estación. La precisión es
+mayor que en el banco porque hubo menos falsas alarmas. Este resultado es descriptivo: la
+ventana ya se había usado para examinar el ensamble sin filtro.
+
+\subsection{Comparación con el estado del arte}
+\label{sec:sota}
+
+\paragraph{PARAAD-SA en la RAMA.} Se reimplementó el método publicado, se adaptó a las
+estaciones de la RAMA, se entrenó sin etiquetas con 2020--2022 y se calibró igual que los
+demás. La Tabla~\ref{tab:paraad} muestra el escenario original con $\delta$ = 50\,\%.
+PARAAD-SA detecta bien los cambios grandes, pero no muestra una mejora estable frente al
+V4 entre años, y el LSTM L0 lo supera en todos los casos.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{F1 en la RAMA, $\delta$ = 50\,\%, umbral p99 (revisión~20). Modelos congelados.}
+  \label{tab:paraad}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Año} & \textbf{PARAAD-SA} & \textbf{V4} & \textbf{L0} \\
+    \midrule
+    2024 & 0.128 & 0.101 & 0.388 \\
+    2025 & 0.208 & 0.108 & 0.445 \\
+    2026 (ene--jul) & 0.140 & 0.193 & 0.502 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Validación externa en Barcelona.} Se entrenaron L0, V4 y PARAAD-SA con
+13~estaciones de Barcelona (ajuste 2014--2016, calibración 2017, examen 2018 y 2019), con
+las mismas anomalías proporcionales. L0 obtiene el mayor F1 con $\delta$ = 50 y 20\,\%
+en los dos años (Tabla~\ref{tab:barcelona}); con 100\,\% en 2018, PARAAD-SA queda
+ligeramente arriba. Todas las inferencias se repitieron dos veces con resultados
+idénticos.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{F1 en Barcelona, umbral p99. No es una reproducción del artículo original:
+    otras estaciones, otro umbral y otra anomalía.}
+  \label{tab:barcelona}
+  \begin{tabular}{@{}l ccc ccc@{}}
+    \toprule
+    & \multicolumn{3}{c}{\textbf{2018}} & \multicolumn{3}{c}{\textbf{2019}} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+    \textbf{Anomalía} & L0 & V4 & PARAAD-SA & L0 & V4 & PARAAD-SA \\
+    \midrule
+    $\pm$100\,\% & 0.484 & 0.412 & 0.500 & 0.442 & 0.236 & 0.313 \\
+    $\pm$50\,\%  & 0.500 & 0.252 & 0.304 & 0.435 & 0.106 & 0.191 \\
+    $\pm$20\,\%  & 0.144 & 0.052 & 0.071 & 0.107 & 0.024 & 0.058 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Pruebas de estrés y alcance del detector}
+\label{sec:estres}
+
+\paragraph{Ataque coordinado a las vecinas.} Un atacante que altera también a las vecinas
+puede engañar a un detector que se apoya en ellas. Con $\delta$ = 50\,\%, el recall de
+NERAD sobre la estación atacada es 0.80 sin vecinas alteradas, 0.56 con una, 0.31 con dos
+y 0.05 con todas (Figura~\ref{fig:vecinas}). PARAAD-SA, que no usa vecinas, se mantiene
+alrededor de 0.31--0.36. El filtro de vecinas obliga al atacante a comprometer 3 o más
+estaciones.
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{vecinas_coordinadas}
+  \caption{Recall sobre la estación atacada según el número de vecinas también alteradas,
+    $\delta$ = 50\,\%, umbral p99, banco de pruebas.}
+  \label{fig:vecinas}
+\end{figure}
+
+\paragraph{Sesgo sostenido de 8~semanas.} Con +20~ppb, NERAD detecta 0.76 de los días en
+las semanas 1--4 contra 0.55 de PARAAD-SA, pero sólo 0.11 en las semanas 5--8, porque su
+línea base absorbe el sesgo poco a poco (Figura~\ref{fig:sesgo}). Con +40~ppb el patrón
+es el mismo (0.93 y luego 0.20). El tiempo máximo de detección es de unas 4~semanas.
+También se identificó un riesgo operativo: al terminar un sesgo largo hay unas 7~semanas
+de alarmas de rebote, que aparecerían igual tras una recalibración legítima del sensor;
+el procedimiento sugerido es reiniciar la línea base después de cada mantenimiento.
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{sesgo_sostenido}
+  \caption{Recall por semana ante un sesgo sostenido de +20~ppb (izquierda) y +40~ppb
+    (derecha), umbral p99; 240~episodios aislados de sus vecinas.}
+  \label{fig:sesgo}
+\end{figure}
+
+\paragraph{Fusión NERAD + PARAAD-SA.} Como los dos detectores fallan en casos distintos,
+se probó combinarlos (revisión~25). Con todas las vecinas comprometidas, la fusión sube el
+recall de 0.05 a 0.26; pero con una sola estación atacada, que es la amenaza principal,
+su precisión cae de 0.31 a 0.18 y pierde en F1 ($-0.110$), porque el umbral de PARAAD-SA
+produce 2.6\,\% de falsas alarmas reales en lugar del 1\,\% nominal. Por eso la fusión no
+forma parte del sistema propuesto y queda como trabajo futuro, con PARAAD-SA recalibrado
+periódicamente.
+
+\subsection{Exploración con imágenes sintéticas TINTO}
+\label{sec:tinto}
+
+TINTO convierte datos tabulares en imágenes: cada estación-día se representa como una
+imagen de $32\times32$ píxeles en la que la posición de cada dato se fija con un mapa de
+componentes principales. Sobre esas imágenes se entrenan redes convolucionales. Se
+cerraron dos pilotos (T1 y T2) y se exploraron dos variantes (Figura~\ref{fig:tinto}):
+un autoencoder que mira un solo día y una CNN temporal que mira los 7~días previos.
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{tinto}
+  \caption{Exploración con imágenes TINTO, umbral p99, sobre los mismos 175~estación-días
+    para los dos modelos. «+100\,\%» se refiere sólo al sentido de aumento.}
+  \label{fig:tinto}
+\end{figure}
+
+\paragraph{Comparación pareada con el detector final (11 de noviembre).} Con un modelo
+TINTO congelado (CNN + GRU diaria, 11\,104~parámetros) y NERAD sin cambios, sobre los
+mismos días de 2025 y un calendario de ataque (Tabla~\ref{tab:tinto}):
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{TINTO contra NERAD, 2025, umbral p99, 42~estación-días atacados por escenario y
+    3\,067 limpios. Falsas alarmas en los días originales: 73 de TINTO y 21 de NERAD en
+    3\,109~estación-días.}
+  \label{tab:tinto}
+  \begin{tabular}{@{}l cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Recall}} & \multicolumn{2}{c}{\textbf{Precisión}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    \textbf{Anomalía} & TINTO & NERAD & TINTO & NERAD \\
+    \midrule
+    $\times 2$   & 0.71 & 1.00 & 0.28 & 0.58 \\
+    $\times 1.5$ & 0.40 & 0.90 & 0.19 & 0.59 \\
+    +20~ppb      & 0.33 & 0.98 & 0.16 & 0.61 \\
+    +40~ppb      & 0.60 & 1.00 & 0.24 & 0.60 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+En este piloto TINTO no supera al detector final: usa muchos menos parámetros y no
+necesita vecinas, pero tiene más falsas alarmas, peor detección y menor cobertura (3\,109
+contra 8\,822~días elegibles). Es una muestra pequeña con un solo calendario y un año ya
+usado, así que no es un veredicto definitivo. La línea sigue en curso.
+
+\subsection{Lectura de los resultados}
+
+\begin{itemize}
+  \item NERAD cumple la meta de detección para anomalías de 50\,\% o más y para escalones
+    de 20~ppb o más, con menos de la mitad de falsas alarmas que PARAAD-SA.
+  \item Las anomalías chicas (20\,\% o 10~ppb) siguen siendo difíciles para todos los
+    detectores probados: están dentro de la variación natural del ozono.
+  \item Ningún detector cubre por sí solo las tres amenazas (un nodo, vecindario
+    comprometido y sesgo lento). NERAD es el mejor en la amenaza principal y sus dos
+    puntos ciegos quedan medidos y declarados.
+  \item Respecto a la hipótesis: los resultados la apoyan para anomalías moderadas y
+    grandes; para anomalías pequeñas la evidencia todavía no es suficiente.
+\end{itemize}
+
+% =====================================================================
+\section{Rigor metodológico}
+
+\begin{itemize}
+  \item \textbf{Registro previo:} cada experimento tiene definiciones, métricas, regla de
+    decisión y predicciones escritas y fechadas antes de ver resultados. Las decisiones
+    tomadas después de ver resultados se declaran como tales.
+  \item \textbf{Separación temporal:} nada se ajusta mirando los datos de prueba; los
+    exámenes finales se usan una sola vez (2025--2026 para L0, agosto--septiembre de 2026
+    para el ensamble).
+  \item \textbf{Reproducibilidad:} semilla fija (42) antes de cada entrenamiento, cada
+    resultado se corre dos veces y se comparan las salidas, y los modelos y puntajes
+    llevan huellas SHA-256. Se indica siempre si un número viene de un modelo recién
+    entrenado o cargado de disco.
+  \item \textbf{Comparaciones justas:} detectores del mismo tipo, en el mismo escenario,
+    con los mismos calendarios y días.
+  \item \textbf{Intervalos de confianza:} las diferencias de F1 entre detectores se
+    reportan con intervalos por \emph{bootstrap} de bloques estación~$\times$~mes.
+  \item \textbf{Resultados negativos documentados:} la codificación alternativa (etapa~1),
+    el LSTM por estación, la acumulación entre días, la mediana en lugar de la media y la
+    generalización de la base vecinal a 2017--2019.
+  \item \textbf{Cómputo:} los entrenamientos largos se ejecutaron en Google Colab Pro sólo
+    con procesador (para mantener el determinismo) y en una PC local.
+\end{itemize}
+
+% =====================================================================
+\section{Limitaciones reconocidas}
+
+\begin{itemize}
+  \item Las anomalías son sintéticas, inyectadas sobre datos reales; no se dispone de
+    anomalías reales etiquetadas.
+  \item El despliegue cubre sólo dos meses. Además, el filtro de vecinas se diseñó después
+    del examen de despliegue del ensamble, así que esa ventana ya no es un examen limpio
+    para NERAD y su resultado se presenta como descriptivo.
+  \item La ventaja de la base anclada en vecinas depende del periodo: no se sostuvo en el
+    examen de 2017--2019.
+  \item Puntos ciegos declarados: vecindario completo comprometido y sesgo sostenido de más
+    de unas 4~semanas.
+  \item Las estaciones de la RAMA están relativamente lejos entre sí, lo que limita el
+    contraste con las vecinas.
+  \item La comparación con PARAAD-SA usa una reimplementación adaptada a la RAMA, no el
+    código original de los autores.
+\end{itemize}
+
+% =====================================================================
+\section{Productos generados}
+
+\begin{itemize}
+  \item Repositorio de la tesis con el código (ingesta, generación de anomalías,
+    detectores y evaluación), pruebas automáticas y resultados versionados.
+  \item Protocolo experimental de la etapa~2 con sus revisiones fechadas, registros
+    previos de cada experimento, bitácora de decisiones y registro de progreso por sesión.
+  \item Cuadernos (\emph{notebooks}) que explican desde cero el entrenamiento y la
+    evaluación del LSTM.
+  \item Base de referencias verificadas y análisis del estado del arte (PARAAD-SA,
+    STC-RAAD y comparadores).
+  \item Presentación de avances en Beamer con gráficas generadas en pgfplots a partir de
+    los resultados, y un informe de la comparación L0, V4 y PARAAD-SA.
+\end{itemize}
+
+\section{Otras actividades académicas}
+
+\porllenar{Cursos, seminarios, estancias, congresos o coloquios del periodo, por llenar.}
+
+% =====================================================================
+\section{Estado de la tesis y plan de trabajo}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}l l Y@{}}
+  \toprule
+  \textbf{Capítulo} & \textbf{Estado} & \textbf{Comentario} \\
+  \midrule
+  1. Introducción & Borrador & Problema, hipótesis y objetivos; actualizar con la etapa~2. \\
+  2. Marco teórico & Por redactar & LoRaWAN y AES-CTR, LSTM, detección de anomalías. \\
+  3. Estado del arte & Material reunido & Análisis de PARAAD-SA, STC-RAAD y FedWLA listo. \\
+  4. Metodología & Material reunido & Protocolo y bitácora completos. \\
+  5. Resultados & Experimentos cerrados & Falta redactar; gráficas ya hechas. \\
+  6. Conclusiones & Por redactar & --- \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \figurapresentacion{trabajo_futuro}
+  \caption{Plan de trabajo: lo hecho y lo que falta.}
+  \label{fig:futuro}
+\end{figure}
+
+\paragraph{Plan propuesto} \porllenar{fechas por confirmar con el tutor}:
+\begin{enumerate}
+  \item Cerrar la exploración con TINTO con una comparación más amplia contra NERAD sobre
+    los mismos días.
+  \item Redactar los capítulos 2 a 6 de la tesis.
+  \item Preparar y enviar un artículo con los resultados de NERAD.
+\end{enumerate}
+
+\paragraph{Trabajo futuro identificado} (fuera del alcance actual):
+\begin{itemize}
+  \item Fusión con un detector sin vecinas (PARAAD-SA recalibrado periódicamente) para
+    cubrir el ataque coordinado y el sesgo de largo plazo.
+  \item Comparación directa con STC-RAAD, que también usa a las vecinas.
+  \item Un atacante que optimiza su ataque contra el detector (\emph{red team}).
+  \item Extensión a otros contaminantes (PM$_{\text{10}}$, PM$_{\text{2.5}}$).
+\end{itemize}
+
+% =====================================================================
+\section{Conclusiones del periodo}
+
+En este periodo la tesis pasó de caracterizar un ataque específico a proponer un detector
+general de estaciones anómalas. La etapa~1 dejó una contribución cerrada: qué posiciones
+de bit de LoRaWAN~1.1 producen daño normativo y cuáles detecta un LSTM. La etapa~2 produjo
+NERAD, que en un banco de 2024 a julio de 2026 detecta 80\,\% de las anomalías de 50\,\% y
+83\,\% de los escalones de 20~ppb con 4.7~días de falsa alarma al año por estación, y que
+supera a un método publicado reciente con la mitad de falsas alarmas. Los límites del
+detector están medidos y declarados. Con los experimentos principales cerrados, el
+siguiente semestre se dedica sobre todo a la redacción de la tesis y de un artículo.
+
+\printbibliography[heading=bibintoc, title={Referencias}]
+
+\end{document}
