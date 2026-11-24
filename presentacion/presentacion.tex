@@ -8,7 +8,7 @@
 
 \usepackage[spanish, es-nodecimaldot, es-noshorthands, es-tabla]{babel}
 \usepackage{csquotes}
-\usepackage[backend=biber, style=ieee]{biblatex}
+\usepackage[backend=biber, style=ieee, mincitenames=1, maxcitenames=1]{biblatex}  % \citeauthor da «Allka et al.» (min y max juntos: el estilo ieee trae otro minimo)
 \addbibresource{../docs/referencias.bib}
 \usepackage{booktabs}
 \usepackage{tabularx}  % tablas con columnas X que se reparten el ancho
@@ -35,6 +35,24 @@
     boxrule=0.6pt, borderline={0.6pt}{0pt}{tenue, dashed}]
     \footnotesize\textbf{Pendiente de revisar.} #1
   \end{tcolorbox}}
+
+% Referencias al pie de cada lamina (pedido del tutor: abajo a la izquierda, en la
+% lamina donde se usan; ya no hay lamina de referencias).
+% \refcorta{clave}{revista}: «[1] Allka et al., IEEE TNSE, 2024». El numero [1] lo pone
+% biblatex (\cite), asi que siempre coincide con el de la tabla.
+\newcommand{\refcorta}[2]{\cite{#1}~\citeauthor{#1}, #2, \citeyear{#1}}
+% \fuente{...}: guarda el texto y el pie de pagina lo escribe abajo a la izquierda, en la
+% misma linea que el numero de lamina. No ocupa espacio dentro de la lamina (asi no
+% empuja el contenido ni provoca "Overfull \vbox"). Despues de usarlo se borra, asi que
+% las laminas sin \fuente quedan con el pie vacio.
+\newcommand{\fuenteactual}{}
+\newcommand{\fuente}[1]{\gdef\fuenteactual{#1}}
+% Pie de pagina: el mismo del tema (numero "n / total" abajo a la derecha) mas la fuente
+% a la izquierda, alineada con el margen del texto (1.1 cm).
+\setbeamertemplate{footline}{%
+  \hspace{1.1cm}{\sffamily\tiny\color{tenue}\fuenteactual}\global\let\fuenteactual\empty
+  \hfill{\usebeamerfont{page number in head/foot}\usebeamercolor[fg]{page number in head/foot}%
+    \insertframenumber\,/\,\inserttotalframenumber}\hspace{0.6cm}\vspace{0.35cm}}
 
 \title[Detección de anomalías en redes de monitoreo]{Detección de anomalías en\\redes de monitoreo atmosférico}
 \subtitle{Aprendizaje profundo con contraste espacio-temporal y exploración con imágenes sintéticas \textbf{TINTO}}
@@ -113,6 +131,9 @@ red de sensores de ozono.
 \par\medskip
 {\scriptsize\color{tenue} R = recall, P = precisión. Cifras de cada artículo; no son comparables entre sí.}
 \vfill
+\fuente{\refcorta{allka2024paraad}{IEEE TNSE} \quad
+        \refcorta{allka2024stcraad}{IEEE IoT J.} \quad
+        \refcorta{garciasaez2025fedwla}{IEEE SMC}}
 \note{%
 \begin{itemize}
   \item PARAAD-SA (UPC Barcelona, IEEE TNSE 2024): O$_3$ de 8 estaciones de
@@ -180,8 +201,8 @@ red de sensores de ozono.
     entrenar) y se fija $\tau$; después los 5 modelos se reentrenan con 2020--2022.
   \item 2023, sin ataques: se fija el umbral p99 = 0.1508.
   \item Banco: 2024 a julio de 2026, 10 calendarios de ataque por año.
-  \item Despliegue: 1 de agosto a 30 de septiembre de 2026, datos crudos de SINAICA;
-    la historia previa es enero--julio de 2026.
+  \item Despliegue: 1 de agosto a 30 de septiembre de 2026, datos validados de SIMAT
+    (revisión 26); la historia previa es enero--julio de 2026.
   \item No se muestra: el examen 2017--2019 fue de la 1.ª versión (entrenada en
     2020--2021) y no superó a la referencia propia. El detector final nunca se
     evaluó en esos años.
@@ -206,13 +227,13 @@ red de sensores de ozono.
     cada 100 días normales como alarma; p99.9, 1 de cada 1000.
   \item De izquierda a derecha el umbral es más estricto: el recall cae y la
     precisión sube. Ese es el compromiso.
-  \item Se eligió p99: en el banco el recall sigue alto (0.81 con $\delta$ 50\,\%,
-    0.85 con 20 ppb) y las falsas alarmas bajan de 18.2 a 4.8 días al año por
+  \item Se eligió p99: en el banco el recall sigue alto (0.80 con $\delta$ 50\,\%,
+    0.83 con 20 ppb) y las falsas alarmas bajan de 18.2 a 4.7 días al año por
     estación respecto de p95.
   \item Una falsa alarma cuesta una revisión extra de la estación; por eso se
     prioriza el recall sobre la precisión.
   \item La precisión del banco es menor que la del despliegue porque en el banco hubo
-    más falsas alarmas (4.8 contra 1.1 días al año con p99) y cambia la proporción
+    más falsas alarmas (4.7 contra 1.1 días al año con p99) y cambia la proporción
     de días atacados.
   \item Despliegue: datos validados de SIMAT (revisión 26), las mismas estación-días
     del examen original. Es descriptivo: la ventana ya se había usado.
@@ -240,17 +261,21 @@ red de sensores de ozono.
 \end{frame}
 
 
-\begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Recall con mas de una estacion vecina con alteracion simultanea}
+
+\begin{frame}{RESULTADOS · ATAQUE COORDINADO A VECINAS (UMBRAL p99)}{Recall con más de una estación vecina con alteración simultánea}
 \centering
 \vspace*{\fill}
 \input{figuras/vecinas_coordinadas}
-\vspace*{\fill}\end{frame}
+\vspace*{\fill}
+\fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
+\end{frame}
 
 \begin{frame}{RESULTADOS · SESGO SOSTENIDO DE LARGO PLAZO (UMBRAL p99)}{Horizonte de detección durante 8 semanas continuas}
 \centering
 \vspace*{\fill}
 \input{figuras/sesgo_sostenido}
 \vspace*{\fill}
+\fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
 % =====================================================================
@@ -261,6 +286,14 @@ red de sensores de ozono.
 \vspace*{\fill}
 \input{figuras/tinto}
 \vspace*{\fill}
+\note{%
+\begin{itemize}
+  \item «+100\,\%» es sólo el sentido de aumento (la lectura sube). Con reducción
+    ($\delta$ 100\,\% hacia abajo) los dos modelos TINTO tienen recall 0 con p99.
+  \item El detector final se evaluó con los dos sentidos ($\pm$), así que estas cifras
+    no se comparan directo con las suyas.
+  \item Los dos modelos se miden sobre los mismos 175 estación-días, con p99.
+\end{itemize}}
 \end{frame}
 
 % =====================================================================
@@ -273,20 +306,6 @@ red de sensores de ozono.
 \vspace*{\fill}
 \input{figuras/trabajo_futuro}
 \vspace*{\fill}
-\end{frame}
-
-% =====================================================================
-\section{Referencias}
-
-\begin{frame}[t, allowframebreaks]{REFERENCIAS}
-\printbibliography[heading=none]
-\end{frame}
-
-\begin{frame}[plain]
-\fondooscuro
-\vfill
-\centerline{\fuentetitular\LARGE\color{white}¡Gracias por su atención!}
-\vfill\vfill
 \end{frame}
 
 % =====================================================================
@@ -303,6 +322,7 @@ red de sensores de ozono.
 \vspace*{\fill}
 \input{figuras/paraad_atacada_p999}
 \vspace*{\fill}
+\fuente{\refcorta{allka2024paraad}{IEEE TNSE}}
 \end{frame}
 
 \end{document}
