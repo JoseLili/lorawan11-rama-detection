@@ -14,6 +14,9 @@
 Trabajo de tesis de maestría · Posgrado en Ciencia e Ingeniería de la Computación, UNAM
 <br>
 José Emiliano Lili Beltrán · Asesor: Dr. José Jaime Camacho Escoto
+<br>
+<sub>Se usaron asistentes de IA para programar y documentar; el diseño, las decisiones y la
+autoría son del tesista. Véase <a href="#uso-de-herramientas-de-ia">Uso de herramientas de IA</a>.</sub>
 
 </div>
 
@@ -357,6 +360,50 @@ daño(87, decode_o3(alterada))    # 1 si el ataque cambió la banda reportada
 - PARAAD-SA y STC-RAAD (Allka et al., 2024): comparadores de la etapa 2.
   Referencias completas en [`docs/referencias.bib`](docs/referencias.bib).
 - SEMARNAT. *NOM-172-SEMARNAT-2023*. Diario Oficial de la Federación, 2024.
+
+---
+
+## Uso de herramientas de IA
+
+En este repositorio se usaron asistentes de programación basados en IA,
+principalmente **Claude Code** (Anthropic) y, en algunas revisiones, **Codex**
+(OpenAI). Por eso aparece «Claude» como coautor en parte de los commits
+(`Co-Authored-By`). Esa línea registra que el asistente escribió o editó los
+archivos de ese commit; **no indica autoría de la tesis**.
+
+**Qué hizo el asistente de IA**, siempre a pedido y bajo la revisión del tesista:
+
+- Escribir y depurar código (ingesta, generación de anomalías, detectores,
+  métricas, pruebas) siguiendo el protocolo acordado.
+- Redactar borradores de documentación: registros previos, entradas de
+  `docs/progreso.md`, este README y el borrador del reporte de avances.
+- Verificar referencias bibliográficas y revisar el texto y el código en busca
+  de errores, como un revisor.
+
+**Qué es del tesista y no se delegó:**
+
+- La pregunta de investigación, la hipótesis y los objetivos, acordados con el
+  asesor.
+- El diseño experimental: el protocolo, sus reglas y cada una de sus
+  revisiones.
+- Las ideas de método y las decisiones de adopción (por ejemplo, el filtro de
+  vecinas sospechosas de NERAD y la regla de comparar sólo detectores del mismo
+  tipo).
+- El análisis de los resultados y su interpretación.
+- La ejecución de los entrenamientos largos y la responsabilidad por todo lo
+  que se reporta.
+- La redacción de la tesis.
+
+**Cómo se controló:**
+
+- Toda cifra se verifica contra los archivos de `results/` antes de reportarse.
+- Cada resultado se reprodujo con dos corridas comparadas.
+- Las decisiones quedan fechadas en `docs/progreso.md` y
+  `docs/bitacora_decisiones.md`, de modo que se puede reconstruir quién decidió
+  qué y cuándo.
+
+El uso de IA en este trabajo sigue los lineamientos del PCIC sobre el uso
+responsable y ético de la IA generativa.
 
 ---
 
