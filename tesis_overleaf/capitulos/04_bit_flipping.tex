@@ -1,0 +1,49 @@
+% =====================================================================
+% Capítulo 4. Etapa 1: bit flipping en LoRaWAN 1.1  Presupuesto: 9 páginas
+% ---------------------------------------------------------------------
+% Este capítulo tiene método Y resultados de la etapa 1 (es una etapa cerrada).
+% Su función en la historia: demostrar que (1) un atacante sin la clave puede
+% causar daño real con valores plausibles, (2) la medición aislada no basta y
+% (3) el contexto temporal-espacial ayuda. Eso motiva la etapa 2.
+% Fuentes en el repo: docs/01_umbrales_normativos.md, docs/02_codificacion.md,
+% docs/protocolo_lstm_v4_multianual.md, results/lstm_v4_multianual_v1/,
+% experiments/cayenne_mod/cierre_distribucion_pesos.md.
+% =====================================================================
+\chapter{Etapa 1: daño y detectabilidad del \textit{bit flipping}}
+\label{cap:bit-flipping}
+
+\section{Modelo de amenaza}
+\label{sec:amenaza}
+% Debe contestar: quién es el atacante, dónde está (tramo NS -> AS), qué sabe
+% (estructura CayenneLPP), qué NO sabe (claves), qué quiere (cambiar la banda
+% comunicada). Figura: figuras/modelo_amenaza.tex.
+
+\section{Generación sistemática de ataques}
+\label{sec:generacion}
+% Debe contestar: cómo se codifica, cifra, modifica y descifra; qué posiciones
+% de bit se recorren; qué se guarda de cada muestra (valor real, recibido, bit,
+% dirección, daño). Debe permitir que otro lo reproduzca.
+
+\section{Definición del daño}
+\label{sec:dano}
+% Ecuación D = 1[f(x_real) != f(x_recibido)] con f = banda NOM-172.
+% Ejemplo: 32 ppb lejos del corte no dañan; 2 ppb junto al corte sí.
+
+\section{Detección: medición aislada contra contexto}
+\label{sec:deteccion-e1}
+% Capa 1 (medición aislada) y LSTM con contexto espacial; detector V4
+% (31 LSTM, ajuste 2020--2022, calibración 2023, prueba 2024--2026).
+
+\section{Resultados}
+\label{sec:resultados-e1}
+% - Tabla: detección con 32 y 64 ppb, aislada contra LSTM (estación CCA, 2025).
+% - Óptimo interior del atacante: máximo daño no detectado en medio.
+% - Bits 3--5 concentran el daño no detectado.
+% - Deriva estacional -> perfil causal de 14 días (se hereda a la etapa 2).
+% - Contramedida en CayenneLPP: resultado negativo (255 -> 567 cambios de
+%   banda no detectados en 179 399 intentos).
+
+\section{De la etapa 1 a la etapa 2}
+\label{sec:puente}
+% Media página: qué se aprendió y por qué el problema se generaliza a
+% «qué estación reporta datos anómalos», sin importar la causa.

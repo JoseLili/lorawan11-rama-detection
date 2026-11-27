@@ -1,0 +1,56 @@
+% =====================================================================
+% Capítulo 5. NERAD: datos, diseño y protocolo     Presupuesto: 14 páginas
+% ---------------------------------------------------------------------
+% La metodología debe permitir que otro investigador REPITA el trabajo.
+% Para cada decisión: qué se hizo, con qué parámetros y POR QUÉ.
+% Debe contestar:
+%  - ¿Con qué datos? (fuente, años, estaciones, limpieza, faltantes)
+%  - ¿Qué anomalías y cómo se inyectan? (4 escenarios, calendarios pareados)
+%  - ¿Cómo se evita la fuga de información? (división temporal, registro previo)
+%  - ¿Cómo funciona el detector? (ecuaciones, no solo prosa)
+%  - ¿Contra qué se compara y por qué es justo? («peras con peras»)
+%  - ¿Cómo se mide el éxito? (métricas, umbral, intervalos)
+% Escribir en pasado («se entrenó»), voz impersonal.
+% =====================================================================
+\chapter{NERAD: datos, diseño y protocolo experimental}
+\label{cap:metodo}
+
+\section{Datos de la RAMA}
+\label{sec:datos}
+% Estaciones, años usados, O3 horario, criterio de >= 12 h con dato por día,
+% vecinas más cercanas (4), datos validados de SIMAT para ago--sep 2026.
+
+\section{Escenarios de anomalía}
+\label{sec:escenarios}
+% Tabla: 1. proporcional (+-delta 20/50/100 %), 2. escalón aditivo (+-10/20/40 ppb),
+% 3. ataque coordinado a 0/1/2/4 vecinas, 4. sesgo sostenido (+20/+40 ppb, 8 semanas).
+% Episodios de 1 a 7 días desde las 00 h; sentido sorteado; calendarios pareados.
+
+\section{Protocolo temporal y registro previo}
+\label{sec:protocolo}
+% Figura: figuras/protocolo.tex (línea de tiempo del coloquio, adaptada).
+% 2020--2021 entrenamiento; 2022 selección; 2023 calibración sin ataques;
+% 2024--jul 2026 banco (30 calendarios); ago--sep 2026 despliegue (descriptivo).
+% Registro previo, doble corrida, huellas SHA-256.
+
+\section{Diseño incremental del detector}
+\label{sec:escalera}
+% La escalera L0 único -> Ens-V0-R -> Ens-Vb-R -> NERAD: qué agrega cada
+% escalón y qué pregunta respondió. Fuente: docs/redaccion_escalera_ablacion.md.
+
+\section{Arquitectura de NERAD}
+\label{sec:arquitectura}
+% Ecuaciones: z diario; regla de vecina sospechosa (mediana de las otras 3,
+% tau = 0.2596, mismo signo; con 3 o 4 sospechosas no se excluye ninguna);
+% base vecinal; ventana 24 h x 17 columnas; ensamble de 5 LSTM; decisión diaria.
+% Figura: figuras/arquitectura.tex.
+
+\section{Comparador: PARAAD-SA}
+\label{sec:comparador}
+% Reimplementación adaptada a la RAMA, entrenada sin etiquetas con 2020--2022
+% y calibrada igual. Declarar que no es el código original.
+
+\section{Métricas y criterios de comparación}
+\label{sec:metricas}
+% Unidad: estación-día. Umbral p99 de 2023 limpio. Recall, precisión, F1,
+% días de falsa alarma al año por estación. Bootstrap por bloques estación x mes.

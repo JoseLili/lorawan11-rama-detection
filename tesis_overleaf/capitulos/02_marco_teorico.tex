@@ -1,0 +1,81 @@
+% =====================================================================
+% Capítulo 2. Sustento teórico                     Presupuesto: 14 páginas
+% ---------------------------------------------------------------------
+% Regla de oro: solo entra la teoría que se USA después. Para cada sección
+% pregúntate «¿en qué capítulo la necesito?». Si no hay respuesta, sobra.
+% Cada concepto: definición precisa + cita + (si aplica) ecuación o figura.
+% No es un libro de texto: no expliques lo que un lector de maestría ya sabe.
+% =====================================================================
+\chapter{\raggedright \parbox{\textwidth}{Sustento teórico}}
+\label{cap:sustento-teorico}
+
+% Breve introducción del capítulo
+DESARROLLAR INTRODUCCION AQUI. 
+
+\section{Internet de las Cosas y redes LPWAN}
+\label{sec:iot-lpwan}
+El Internet de las Cosas (IoT, por sus siglas en inglés, \textit{Internet of Things}) permite la integración de dispositivos como sensores y actuadores~\cite{atzori2010iot}. Los dispositivos se comunican mediante tecnologías de comunicación como Wi-Fi, Bluetooth o las utilizadas en redes celulares. Los sensores recolectan información de variables como temperatura, humedad, concentración de gases u otros parámetros ambientales, la cual puede ser utilizada para monitoreo, automatización y toma de decisiones.
+
+La tecnología de comunicación seleccionada puede no satisfacer los requisitos del despliegue, en términos de costo de infraestructura, consumo energético y autonomía.
+
+Las redes de área amplia y bajo consumo (\textit{LPWAN}, por sus siglas en inglés) están diseñadas para proporcionar comunicación inalámbrica de largo alcance y bajo consumo energético. Estas priorizan la eficiencia energética y la cobertura sobre la tasa de transmisión, por lo que resultan adecuadas para dispositivos que envían pequeños volúmenes de datos de manera periódica. Estas características las hacen relevantes en redes de sensores, donde la información recolectada puede influir en procesos de monitoreo, control o toma de decisiones.
+
+\subsection{Redes de sensores}
+\label{subsec:redes-sensores}
+
+La distribución de sensores en distintas ubicaciones permite medir una o varias variables y transmitir las mediciones obtenidas para su procesamiento. En una red de monitoreo atmosférico, cada punto de medición se denomina estación y puede albergar uno o varios sensores ~\cite{akyildiz2002wsn}.
+
+La información generada por un sensor depende de cómo esté implementado; por lo general incluye el valor de la variable, la unidad de medida, el instante de medición y la ubicación o identificación del sensor. Una vez que se dispone de esa información, se almacena y se organiza.
+
+Las mediciones de una misma variable registradas por un sensor a lo largo del tiempo forman una serie temporal. Su organización según el instante de medición permite analizar cómo cambia la variable durante el periodo observado. Cuando se dispone de registros de varios sensores, también es posible comparar las mediciones obtenidas en distintas ubicaciones.
+
+\section{Mediciones y series temporales}
+\label{subsec:medicioines-serie-temporal}
+
+Una medición es el resultado de observar una variable de un fenómeno mediante un dispositivo o sistema de medición, en un momento y una ubicación determinados. Los valores registrados pueden variar debido a cambios en el fenómeno observado o a errores o fallas del sistema de medición ~\cite{teh2020sensor}. Por ello, un cambio en las mediciones no implica, por sí solo, un problema en los datos.
+
+El análisis de las mediciones en su orden temporal permite caracterizar la evolución del fenómeno observado. Una serie temporal puede presentar tendencias, patrones periódicos y fluctuaciones asociadas con las condiciones del entorno ~\cite{hyndman2021fpp3}. Estas variaciones pueden formar parte del comportamiento habitual del fenómeno y, por tanto, no constituyen necesariamente anomalías.
+
+Las mediciones de distintas estaciones pueden tener relaciones asociadas con el fenómeno observado, incluso cuando sus valores no sean idénticos. Estas relaciones proporcionan un contexto espacial que complementa la información temporal de cada estación y puede ayudar a identificar desviaciones respecto al comportamiento esperado.
+
+\section{Anomalías en los datos de redes de sensores}
+\label{sec:Anomalías-datos-redes-sensores}
+
+Una anomalía en los datos puede describirse como una observación o un conjunto de observaciones que se aparta del comportamiento esperado. Que un valor sea alto o bajo no basta para considerarlo anómalo; es necesario evaluarlo respecto de una referencia que considere el fenómeno observado y su contexto temporal y espacial. Detectar estas desviaciones no demuestra por sí solo que exista una falla o un ataque, por lo que se requiere un análisis adicional para determinar su causa ~\cite{chandola2009anomaly}.
+
+Las anomalías pueden manifestarse tanto en observaciones individuales como en secuencias de mediciones. Algunos valores pueden parecer plausibles cuando se examinan por separado, aunque su comportamiento conjunto se aparte de lo esperado; por ejemplo, cuando presentan una desviación sostenida respecto de una referencia. Por ello, analizar la evolución temporal de las mediciones puede ayudar a identificar alteraciones que pasarían inadvertidas al evaluar cada valor de manera aislada.
+
+% ---------------------------------------------------------------------
+% PENDIENTE (orden sugerido; el texto existente de arriba se reacomoda
+% cuando lleguemos a este capítulo):
+% ---------------------------------------------------------------------
+\section{LoRa y LoRaWAN}                                    % 4 págs.
+% Debe contestar: arquitectura (ED, GW, NS, AS); claves de sesión de la
+% versión 1.1; cómo se cifra el FRMPayload (AES-CTR) y dónde se verifica el
+% MIC. Debe tener: figura de la arquitectura (figuras/arquitectura_lorawan.tex)
+% marcando el tramo NS -> AS. Cita: especificación 1.1.
+
+\section{Maleabilidad del cifrado y ataques de \textit{bit flipping}}  % 1.5 págs.
+% Debe contestar: por qué XOR con un flujo de clave es maleable (ecuación
+% C' = C xor Delta  =>  P' = P xor Delta) y por qué el MIC no lo evita en el
+% tramo NS -> AS.
+
+\section{Codificación CayenneLPP}                           % 0.5 págs.
+% Debe contestar: cómo se codifica una medición (tipo, resolución, bytes) y
+% por qué eso fija el efecto de cada posición de bit.
+
+\section{Ozono, la RAMA y el índice de calidad del aire}    % 1.5 págs.
+% Debe contestar: por qué el O3 varía tanto (ciclo diario, estacionalidad,
+% diferencias entre zonas); qué es la RAMA/SIMAT; bandas de la NOM-172 para
+% O3 (58/90/135/175 ppb), que definen el daño en el capítulo 4.
+
+\section{Redes LSTM y ensambles}                            % 2 págs.
+% Debe contestar: qué es una LSTM (ecuaciones de las compuertas, breve), por
+% qué sirve para series temporales, qué es un ensamble y por qué reduce la
+% varianza entre semillas.
+
+\section{Evaluación de detectores de anomalías}             % 2 págs.
+% Debe contestar: matriz de confusión; precisión, recall y F1; umbral por
+% percentil de datos limpios y su relación con la tasa de falsas alarmas;
+% por qué la precisión cae cuando la prevalencia es baja (0.77 %).
+% Citas: saito2015pr, chicco2020mcc.

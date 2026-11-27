@@ -1,0 +1,25 @@
+% figuras/recall_banco_p99.tex
+% Recall con una estación atacada (escenario E1), umbral p99 de 2023.
+% Fuente: results/linea_base/rev24/metricas_banco.csv, filas E1, nivel 0.01,
+%   detectores Ens-Vb-X0.2596 (NERAD) y PARAAD. Verificado el 2026-11-27.
+\begin{tikzpicture}
+\begin{axis}[
+  ejes tesis,
+  width=0.9\textwidth, height=6cm,
+  ybar, bar width=9pt,
+  ymin=0, ymax=1.05, ytick={0,0.2,...,1},
+  ylabel={Recall},
+  xlabel={Magnitud de la anomalía},
+  symbolic x coords={d20,d50,d100,a10,a20,a40},
+  xtick=data,
+  xticklabels={$\pm$20\,\%, $\pm$50\,\%, $\pm$100\,\%, $\pm$10 ppb, $\pm$20 ppb, $\pm$40 ppb},
+  enlarge x limits=0.1,
+  legend style={at={(0.02,0.98)}, anchor=north west},
+  legend cell align=left,
+]
+\addplot[barra=ensX] coordinates {(d20,0.2020) (d50,0.8019) (d100,0.9319) (a10,0.2279) (a20,0.8312) (a40,0.9584)};
+\addlegendentry{NERAD}
+\addplot[barra=paraad] coordinates {(d20,0.0884) (d50,0.3647) (d100,0.6753) (a10,0.1013) (a20,0.5656) (a40,0.9201)};
+\addlegendentry{PARAAD-SA}
+\end{axis}
+\end{tikzpicture}

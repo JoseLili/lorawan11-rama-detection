@@ -1,0 +1,54 @@
+% =====================================================================
+% Capítulo 6. Resultados y discusión               Presupuesto: 14 páginas
+% ---------------------------------------------------------------------
+% Cada sección sigue el mismo patrón (párrafo por paso):
+%   1. Qué pregunta responde el experimento (una oración).
+%   2. La figura o tabla, citada en el texto ANTES de que aparezca.
+%   3. Qué se ve, con los números clave (no repetir toda la tabla).
+%   4. Qué significa y qué NO se puede afirmar.
+% Los resultados negativos también se reportan.
+% Cada número debe salir de un CSV del repo; anota la fuente en el comentario
+% de la figura.
+% =====================================================================
+\chapter{Resultados y discusión}
+\label{cap:resultados}
+
+\section{Elección del diseño (2022)}
+\label{sec:res-escalera}
+
+\section{Elección del punto de operación}
+\label{sec:res-punto}
+
+\section{Una estación atacada: NERAD contra PARAAD-SA}
+\label{sec:res-una}
+% Figura de prueba de la paleta (borrar o conservar cuando lleguemos aquí):
+\begin{figure}[htbp]
+  \centering
+  \input{figuras/recall_banco_p99}
+  \caption[Recall en el banco de pruebas con umbral p99]{Recall de NERAD y
+  PARAAD-SA con una estación atacada en el banco de pruebas (2024 a julio de
+  2026, 30 calendarios, 1\,777 estación-días atacados), con el umbral p99
+  calibrado en 2023 sin ataques.}
+  \label{fig:recall-banco-p99}
+\end{figure}
+
+\section{Despliegue en agosto y septiembre de 2026}
+\label{sec:res-despliegue}
+
+\section{Ataque coordinado a las vecinas}
+\label{sec:res-coordinado}
+
+\section{Sesgo sostenido}
+\label{sec:res-sesgo}
+
+\section{Resultados negativos}
+\label{sec:res-negativos}
+% Examen 2017--2019, EP1, T0, fusión con PARAAD-SA.
+
+\section{Exploración con imágenes TINTO}
+\label{sec:res-tinto}
+
+\section{Amenazas a la validez}
+\label{sec:validez}
+% Anomalías sintéticas; el banco orientó revisiones; despliegue descriptivo;
+% reimplementación de PARAAD-SA; ventana de despliegue fuera de la temporada alta.

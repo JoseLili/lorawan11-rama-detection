@@ -133,3 +133,32 @@ presentacion/**/*.run.xml
 results/linea_base/rev24/banco/
 results/linea_base/rev24/logs/
 presentacion/**/*-SAVE-ERROR
+
+# LaTeX (reporte de avances y tesis): auxiliares de compilación
+reporte_avances/*.aux
+reporte_avances/*.bbl
+reporte_avances/*.bcf
+reporte_avances/*.blg
+reporte_avances/*.fdb_latexmk
+reporte_avances/*.fls
+reporte_avances/*.log
+reporte_avances/*.out
+reporte_avances/*.run.xml
+reporte_avances/*.synctex.gz
+reporte_avances/*.toc
+tesis_overleaf/**/*.aux
+tesis_overleaf/**/*.bbl
+tesis_overleaf/**/*.bcf
+tesis_overleaf/**/*.blg
+tesis_overleaf/**/*.fdb_latexmk
+tesis_overleaf/**/*.fls
+tesis_overleaf/**/*.log
+tesis_overleaf/**/*.lof
+tesis_overleaf/**/*.lot
+tesis_overleaf/**/*.out
+tesis_overleaf/**/*.run.xml
+tesis_overleaf/**/*.synctex.gz
+tesis_overleaf/**/*.toc
+
+# Archivos de bloqueo de Office
+~$*

@@ -1,0 +1,129 @@
+% =====================================================================
+% Capítulo 1. Introducción                         Presupuesto: 7 páginas
+% ---------------------------------------------------------------------
+% Este capítulo es el «contrato» de la tesis: lo que prometas aquí (problema,
+% hipótesis, objetivos) es exactamente lo que el capítulo 7 debe responder.
+% Debe contestar:
+%  - ¿Qué es lo que está en juego? (decisiones que dependen del dato)
+%  - ¿Qué falla hoy? (valores alterados que siguen siendo plausibles)
+%  - ¿Qué no han resuelto otros? (la brecha, con cita)
+%  - ¿Qué propones y cómo sabrás si funcionó? (hipótesis medible)
+% Texto del borrador de Overleaf conservado tal cual. Las marcas «% REVISAR»
+% señalan lo que ya no coincide con lo que se hizo (dos etapas; NERAD).
+% =====================================================================
+\chapter{Introducción}
+
+La adopción de las tecnologías de \textit{IoT} ha permitido la interconexión de dispositivos, el sensado, el monitoreo, la automatización y la transmisión de datos en entornos reales. Estas tecnologías empezaron a desempeñar un papel crítico en el funcionamiento de las industrias y las ciudades. Esto evidenció la necesidad de evolucionar hacia tecnologías de comunicación eficientes, de gran alcance y de bajo consumo energético.
+
+Para atender esta necesidad, se empezaron a adoptar las redes \textit{LPWAN}. Estas redes encontraron aplicación en diversos sectores industriales, permitiendo el monitoreo de variables como la temperatura, la humedad y el pH, entre otras.
+
+En 2009 se empezó a desarrollar una tecnología de modulación que permite la comunicación inalámbrica de bajo consumo y largo alcance, diseñada específicamente para entornos que requieren tecnologías de IoT en ciudades o industrias, llamada \textit{LoRa}. Sobre esta base se creó \textit{LoRaWAN}, un protocolo de red que permite transmitir pequeños volúmenes de datos con bajo consumo energético para su procesamiento por parte de servicios o aplicaciones, lo que apoya el monitoreo e incluso la toma de decisiones.
+
+A lo largo de su evolución, \textit{LoRaWAN} ha incorporado distintos mecanismos orientados a proteger la comunicación, incluyendo el cifrado del \textit{FRMPayload} y mecanismos de integridad como el \textit{Message Integrity Code} (MIC). La versión 1.1 incorporó mejoras adicionales en materia de seguridad; sin embargo, la confidencialidad y la integridad del mensaje se proporcionan mediante mecanismos distintos. El cifrado del \textit{payload} se basa en operaciones XOR con un flujo de clave derivado de AES, por lo que una modificación realizada sobre un bit del texto cifrado puede reflejarse en la misma posición del texto claro una vez descifrado.
+
+Esta propiedad permite considerar ataques de \textit{bit flipping} bajo un modelo de amenaza en el que un adversario tiene acceso al mensaje cifrado después de la verificación de integridad a nivel de red y antes de su procesamiento por la aplicación. Si además conoce la estructura utilizada para codificar el \textit{payload}, puede modificar posiciones específicas sin necesidad de conocer la clave de cifrado. Como consecuencia, una medición transmitida puede ser alterada y producir un valor distinto al original, cuya repercusión dependerá tanto de la posición modificada como del contexto en el que dicho dato sea utilizado.
+
+A partir de este escenario, resulta relevante analizar no sólo la posibilidad de detectar una modificación, sino también el daño que ésta puede producir sobre la aplicación y las condiciones bajo las cuales una alteración puede permanecer difícil de distinguir del comportamiento legítimo de las mediciones.
+
+% REVISAR: falta el puente hacia la etapa 2: la anomalía puede venir de un ataque,
+% una falla o una descalibración, y el operador necesita saber QUÉ ESTACIÓN revisar.
+\section{Definición del problema}
+
+Con el aumento del despliegue de infraestructuras que utilizan \textit{LoRaWAN} como medio de comunicación, estas infraestructuras permiten transmitir una variedad de mediciones según la aplicación ya sea desde el nivel de humedad, la concentración de un gas o el pH de una ubicación. Estas mediciones pueden ser empleadas por aplicaciones que apoyan la toma de decisiones que pueden afectar procesos productivos o decisiones a escala urbana. 
+
+En \textit{LoRaWAN}, la confidencialidad del \textit{FRM\textit{payload}} y la integridad del mensaje se proporcionan mediante mecanismos distintos. El cifrado del \textit{\textit{payload}} se basa en operaciones XOR con un flujo de clave derivado de AES, por lo que una modificación realizada sobre un bit del texto cifrado se refleja en la posición correspondiente del texto claro después del descifrado, aun cuando el atacante no conozca la clave. Por otra parte, la integridad de la trama se protege mediante el \textit{Message Integrity Code} (MIC). Sin embargo, trabajos previos han señalado que, en el segmento comprendido entre el \textit{Network Server} y el \textit{Application Server}, la comprobación de integridad no se preserva de extremo a extremo, lo que permite considerar un modelo de amenaza en el que un adversario con conocimiento de la estructura del \textit{\textit{payload}} puede modificar posiciones específicas del mensaje cifrado mediante un ataque de \textit{bit flipping}.
+
+A pesar de que los ataques de \textit{bit flipping} han sido documentados y se han propuesto mecanismos para su detección, como el ICM presentado en \cite{alizadeh2023bitflipping}, su evaluación se orienta principalmente a distinguir entre mensajes legítimos y mensajes alterados. Para el caso de \textit{LoRaWAN}, los autores emplean el conjunto de datos \textit{Bike Sharing} de UCI y, adicionalmente, evalúan su propuesta sobre un conjunto de datos real de una red \textit{LoRaWAN}, recopilado mediante nueve \textit{gateways} en un entorno urbano. Las muestras atacadas son generadas mediante la modificación aleatoria de uno o más bits. Sin embargo, este procedimiento no caracteriza de manera sistemática el efecto asociado con la posición específica del bit modificado, ni relaciona dicha posición con el impacto producido sobre la magnitud representada y con su detectabilidad.
+
+Esto conduce a plantear si es posible caracterizar el daño producido por los ataques de \textit{bit flipping} en función de la posición modificada y, al mismo tiempo, cuantificar su detectabilidad cuando los datos presentan variabilidad legítima. El problema no se limita únicamente a determinar si un mensaje fue alterado, sino a analizar si existen posiciones o condiciones en las que una modificación puede producir un impacto relevante sobre la decisión de la aplicación sin resultar fácilmente distinguible del comportamiento legítimo de las mediciones.
+
+% REVISAR: la hipótesis sigue siendo válida. Falta hacerla medible: ¿mejorar respecto a
+% qué (medición aislada, PARAAD-SA)? ¿con qué métrica y con qué tasa de falsas alarmas?
+\section{Hipótesis}
+
+Es posible detectar, con un alto grado de confiabilidad, anomalías en la información reportada en redes de sensores utilizando el historial reciente de cada estación y el de sus estaciones vecinas sin incurrir en un exceso de falsos positivos.
+
+% MAPA OBJETIVO -> DÓNDE SE CUMPLE -> DÓNDE SE RESPONDE
+% Hipótesis ........ prueba: OE3 (con/sin vecinas) y OE4 ......... cap. 7, sec. Respuesta a la hipótesis
+% OE1 bit flipping ...... cap. 4 (método y resultados) ............ cap. 7
+% OE2 diseño ............ cap. 5, sec. Arquitectura ................ cap. 7
+% OE3 aporte vecinas .... cap. 6, sec. Elección del diseño (2022) .. cap. 7
+% OE4 estado del arte ... cap. 6, secs. Una estación y Despliegue .. cap. 7
+% OE5 dónde falla ....... cap. 6, secs. Coordinado y Sesgo ......... cap. 7
+% Términos que se definen en el cap. 2: falsa alarma (= falso positivo en una
+% estación-día), recall, estación vecina (cap. 5: las 4 más cercanas).
+\section{Objetivos}
+
+\subsection{Objetivo general}
+
+Diseñar un detector de anomalías basado en modelos de aprendizaje profundo que combine la historia temporal de cada estación con la de sus estaciones vecinas, con alta capacidad de detección y una tasa de falsas alarmas acotada, en una red de sensores de ozono.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+    \item[$\bullet$] Caracterizar el daño y la detectabilidad de los ataques de \textit{bit flipping} en LoRaWAN 1.1~\cite{loraalliance2017lorawan11} según la posición del bit modificado, a partir del cambio de banda de calidad del aire definido en la NOM-172-SEMARNAT-2023~\cite{nom172_semarnat_2024}.
+
+    \item[$\bullet$] Diseñar un detector de anomalías que combine la historia reciente de la estación evaluada con la de sus estaciones vecinas e incorpore un filtro que excluya a las estaciones vecinas sospechosas de estar alteradas.
+
+    \item[$\bullet$] Determinar cuánto aporta a la detección usar a las estaciones vecinas como referencia, frente a usar sólo la historia propia de la estación, con el mismo umbral de falsas alarmas.
+
+    \item[$\bullet$] Evaluar el detector propuesto frente a un detector del estado del arte, mediante el \textit{recall} y los días de falsa alarma al año por estación, en un banco de pruebas y en un periodo de despliegue.
+
+    \item[$\bullet$] Identificar las condiciones en las que el detector propuesto pierde capacidad de detección, como la alteración simultánea de estaciones vecinas o un sesgo sostenido en el tiempo.
+\end{itemize}
+
+% REVISAR: describe el esquema anterior. Se reescribe como resumen de las dos etapas
+% (media página) y remite a los capítulos 4 y 5.
+\section{Metodología}
+
+Se utilizarán distintas mediciones reales de $O_3$ provenientes de múltiples estaciones de RAMA/SIMAT junto con su temporalidad provenientes de \textit{RAMA/SIMAT}, sobre la cual se tienen establecidos 5 niveles predefinidos. Estos servirán para distinguir entre simple modificación de una medición y daño sobre la aplicación, los efectos pueden verse con la siguiente función donde \textit{f} es la función que asigna una concentración de $O_3$ a uno de los niveles establecidos por la NOM-172 \cite{nom172_semarnat_2024} , Xreal es la medicion original y Xrecibido la medición recuperada después de la modificación y el descifrado.
+
+\[
+D =
+\begin{cases}
+1, & \text{si } f\left(x_{\text{real}}\right) \neq f\left(x_{\text{recibido}}\right),\\
+0, & \text{si } f\left(x_{\text{real}}\right) = f\left(x_{\text{recibido}}\right).
+\end{cases}
+\]
+
+
+Las mediciones obtenidas son codificadas en \textit{payload} usando \textit{CayenneLPP}, posteriormente el \textit{payload} se cifra conforme al mecanismo empleado por LoRaWAN, se modifican posiciones específicas del texto cifrado, las modificaciones son seleccionadas de manera sistemática, lo que nos permite aislar el potencial efecto de la posición atacada después de descifrar el \textit{payload} y revisar la medición recibida. 
+
+Como primera etapa de detección se usarán diversos modelos de aprendizaje supervisado como linea base de detección, con la finalidad de determinar cómo cambia la detectabilidad conforme cambia la posición de bit atacada, identificar falsos positivos, falsos negativos y, especialmente, ataques dañinos no detectados.
+
+En una segunda etapa se incorporará el historial temporal de la estación objetivo y el contexto proporcionado por otras estaciones para estimar el comportamiento esperado de la medición; las desviaciones entre el valor esperado y el observado se utilizarán como señal de anomalía.
+
+Finalmente, se evaluará el funcionamiento complementario de ambos mecanismos mediante un esquema de análisis en dos etapas. La primera estará orientada a identificar alteraciones distinguibles mediante aprendizaje supervisado, mientras que la segunda etapa incorporará información temporal y espacial para complementar la detección en aquellos escenarios en los que la información aislada resulte insuficiente.
+
+% REVISAR: falta la contribución principal: NERAD y su evaluación con protocolo
+% temporal y registro previo.
+\section{Contribución}
+
+\begin{itemize}
+
+    \item Caracterización del daño producido por ataques de \textit{bit flipping} mediante la modificación sistemática de posiciones específicas de bit, relacionando la posición atacada con la magnitud de la alteración, el daño producido y la detectabilidad del ataque.
+    
+    \item Metodología experimental reproducible para la generación controlada de muestras atacadas, conservando la información correspondiente al valor real, valor recibido, bit atacado, dirección del efecto, daño y severidad.
+    
+    \item Evaluación del desempeño de mecanismos de detección basados en \textit{ML}, considerando no sólo métricas generales de clasificación, sino también los ataques dañinos que permanecen sin detectar y las mediciones legítimas señaladas incorrectamente como ataques.
+
+\end{itemize}
+
+% REVISAR: ahora son 7 capítulos (4: bit flipping; 5: NERAD, método; 6: resultados;
+% 7: conclusiones). Actualizar al final.
+\section{Descripción del contenido}
+
+A continuación, se presenta la estructura del presente trabajo de tesis:
+
+\begin{itemize}
+
+    \item[$\bullet$] En el capítulo 2 se establece el sustento teórico necesario para comprender el trabajo, incluyendo conceptos relacionados con \textit{IoT}, \textit{LoRa}, \textit{LoRaWAN}, su arquitectura y mecanismos de seguridad, así como cifrado, maleabilidad, ataques de \textit{bit flipping} y conceptos de aprendizaje automático.
+
+    \item[$\bullet$] En el capítulo 3 se realiza una revisión de trabajos relacionados con vulnerabilidades y ataques de \textit{bit flipping} en \textit{LoRaWAN/LPWAN}, así como de mecanismos de detección basados en \textit{ML}.
+
+    \item[$\bullet$] En el capítulo 4 se presenta la metodología experimental para la detección de ataques sobre datos provenientes de RAMA/SIMAT. Se describen el tratamiento de los datos, la codificación mediante CayenneLPP, el cifrado, el modelo de amenaza y generación de ataques, la definición formal de daño y severidad, la partición temporal, los modelos supervisados, la construcción de series temporales y multiestación, así como los criterios de evaluación.
+
+    \item[$\bullet$] En el capítulo 5 se presentan y analizan los resultados correspondientes a la caracterización daño--detectabilidad, la línea base supervisada, la evaluación temporal-espacial y la comparación del funcionamiento individual y complementario de ambos mecanismos.
+
+    \item[$\bullet$] En el capítulo 6 se responden la hipótesis y los objetivos planteados, se sintetizan las principales contribuciones, se presentan las limitaciones del trabajo y se señalan posibles líneas de trabajo futuro.
+
+\end{itemize}

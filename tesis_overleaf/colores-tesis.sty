@@ -1,0 +1,104 @@
+% colores-tesis.sty -- paleta UNICA de la tesis, la presentacion y todas las graficas.
+% Regla: el COLOR dice QUIEN es (detector); el TONO o el TIPO DE LINEA dice la
+% variante (umbral, magnitud, metrica). Nunca uses un color suelto en una grafica:
+% usa los estilos de abajo.
+% v2026/11/18: paleta aprobada para el coloquio.
+% v2026/11/27: version para la tesis. Conserva TODOS los colores y estilos del
+%   coloquio (la presentacion compila igual) y agrega: detectores que solo salen en
+%   la tesis (L0 unico, V4, R3, medicion aislada), series de tiempo (dato real /
+%   dato alterado / zona atacada) y las bandas de la NOM-172 (solo como fondo).
+% El documento que la use debe cargar babel con es-nodecimaldot (punto decimal: 0.8).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{colores-tesis}[2026/11/27 Paleta de la tesis y del coloquio]
+\RequirePackage{xcolor}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Marca (presentacion y elementos de texto) ---
+\definecolor{fondo}{HTML}{F4F0E8}      % crema de las laminas de contenido (no se usa en la tesis)
+\definecolor{noche}{HTML}{1B2A4A}      % titulos, diagramas, dato real
+\definecolor{acento}{HTML}{C8641E}     % etiquetas de seccion; en graficas: dato alterado
+\definecolor{texto}{HTML}{243040}      % texto normal
+\definecolor{tenue}{HTML}{6B6B6B}      % pies, ejes, notas
+
+% --- Detectores: un color fijo cada uno (no se reasignan entre capitulos) ---
+\definecolor{ensX}{HTML}{0F4C81}       % NERAD: ensamble vecinal con filtro (Ens-Vb-X), detector final
+\definecolor{ensR}{HTML}{4A90C8}       % Ensamble vecinal sin filtro (Ens-Vb-R)
+\definecolor{ensP}{HTML}{E69F00}       % Ensamble con referencia propia (Ens-V0-R)
+\definecolor{paraad}{HTML}{1B9E77}     % PARAAD-SA
+\definecolor{tintoA}{HTML}{C77CB0}     % TINTO 1 dia (autoencoder)
+\definecolor{tintoB}{HTML}{6A3D9A}     % TINTO 7 dias (CNN temporal)
+% Nuevos para la tesis:
+\definecolor{lcero}{HTML}{8C510A}      % LSTM simple (L0 unico), origen de la escalera
+\definecolor{vcuatro}{HTML}{B2182B}    % V4: 31 LSTM, uno por estacion (etapa 1)
+\definecolor{rtres}{HTML}{8F8F2A}      % R3 (regla de referencia sin aprendizaje)
+\definecolor{aislada}{HTML}{4D4D4D}    % Medicion aislada (capa 1 de la etapa 1, sin contexto)
+
+% --- Neutros de las graficas ---
+\definecolor{sinataque}{HTML}{8C8C8C}  % valor sin ataque / azar / maximo posible
+\definecolor{rejilla}{HTML}{DDD8CC}
+\definecolor{resalte}{HTML}{EADCC4}    % zonas sombreadas (punto de operacion, despliegue, ataque)
+
+% --- Series de tiempo (figuras de ejemplo de un ataque) ---
+\colorlet{serieReal}{noche}            % lo que midio la estacion
+\colorlet{serieAlterada}{acento}       % lo que llego al servidor
+\colorlet{zonaAtaque}{resalte}         % dias atacados
+
+% --- Bandas de calidad del aire de la NOM-172 (O3, ppb: 58/90/135/175) ---
+% SOLO como fondo tenue (fill opacity baja), nunca como linea ni como barra:
+% los colores de linea estan reservados para los detectores.
+\definecolor{bandaBuena}{HTML}{D7EFD3}
+\definecolor{bandaAceptable}{HTML}{FFF4C2}
+\definecolor{bandaMala}{HTML}{FFDDB8}
+\definecolor{bandaMuyMala}{HTML}{F6C9C6}
+\definecolor{bandaExtrema}{HTML}{E3D2EA}
+
+% --- Estilos de pgfplots: usar estos, nunca un color suelto ---
+% Lineas:  \addplot[det ensX] ...      Barras: \addplot[barra=ensX] ...
+% Variante del mismo detector en barras: \addplot[barra=ensX!45!white] ...
+% Cada detector tiene ademas su MARCA, para que la grafica se lea impresa en gris.
+\pgfplotsset{
+  det ensX/.style={color=ensX, mark options={fill=ensX, solid}, line width=1.6pt, mark=*, solid},
+  det ensR/.style={color=ensR, mark options={fill=ensR, solid}, line width=1.3pt, mark=*, dashed},
+  det ensP/.style={color=ensP, mark options={fill=ensP, solid}, line width=1.3pt, mark=square*, solid},
+  det paraad/.style={color=paraad, mark options={fill=paraad, solid}, line width=1.3pt, mark=diamond*, solid},
+  det tintoA/.style={color=tintoA, mark options={fill=tintoA, solid}, line width=1.3pt, mark=triangle*, solid},
+  det tintoB/.style={color=tintoB, mark options={fill=tintoB, solid}, line width=1.3pt, mark=triangle*, solid},
+  det lcero/.style={color=lcero, mark options={fill=lcero, solid}, line width=1.3pt, mark=pentagon*, solid},
+  det vcuatro/.style={color=vcuatro, mark options={fill=vcuatro, solid}, line width=1.3pt, mark=*, densely dashed},
+  det rtres/.style={color=rtres, mark options={fill=rtres, solid}, line width=1.3pt, mark=square*, dashdotted},
+  det aislada/.style={color=aislada, mark options={solid}, line width=1.3pt, mark=x, densely dotted},
+  ref sinataque/.style={color=sinataque, line width=1pt, densely dotted, mark=none},
+  barra/.style={fill=#1, draw=none, mark=none},
+  serie real/.style={color=serieReal, line width=1pt, mark=none, solid},
+  serie alterada/.style={color=serieAlterada, line width=1pt, mark=none, solid},
+  zona ataque/.style={fill=zonaAtaque, draw=none, fill opacity=0.8},
+  banda/.style={fill=#1, draw=none, fill opacity=0.7},
+  ejes tesis/.style={
+    /pgf/number format/use period, /pgf/number format/1000 sep={},
+    axis line style={tenue}, tick label style={text=tenue, font=\footnotesize},
+    label style={text=texto, font=\small},
+    legend style={draw=none, fill=none, font=\footnotesize, text=texto},
+    major grid style={rejilla}, ymajorgrids,
+  },
+}
+
+% --- Tamano del ataque (solo cuando se muestra un detector): rampa de ensX ---
+% claro = chico (delta 20 % / 10 ppb), medio = delta 50 % / 20 ppb, oscuro = grande
+\colorlet{magChica}{ensX!40!white}
+\colorlet{magMedia}{ensX!70!white}
+\colorlet{magGrande}{ensX}
+% Uso: \addplot[mag media, fam pct, met recall] ...
+%   mag ... = tono por tamano;
+%   fam pct = linea solida con circulo (delta %); fam ppb = linea punteada con cuadro (ppb);
+%   met recall / met prec = solo el grosor (recall y precision van en paneles distintos).
+\pgfplotsset{
+  mag chica/.style={color=magChica, mark options={fill=magChica, solid}},
+  mag media/.style={color=magMedia, mark options={fill=magMedia, solid}},
+  mag grande/.style={color=magGrande, mark options={fill=magGrande, solid}},
+  fam pct/.style={mark=*, solid},
+  fam ppb/.style={mark=square*, dash pattern=on 3.5pt off 2pt},
+  met recall/.style={line width=1.3pt},
+  met prec/.style={line width=1.3pt},
+}
+\endinput

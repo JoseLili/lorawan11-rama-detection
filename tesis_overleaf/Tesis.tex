@@ -1,0 +1,215 @@
+\documentclass[12pt, oneside]{book}
+\usepackage{lmodern} %fuentes
+\usepackage[T1]{fontenc} %fuentes
+\usepackage[spanish]{babel} %idoma
+\addto\captionsspanish{\renewcommand{\listtablename}{Índice de tablas}}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+\usepackage{caption, subcaption} %figuras
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{textcomp}  % 
+\usepackage[width=155mm,top=25mm,bottom=25mm, headheight=15pt,]{geometry} %Tamaño de la Pagina
+\usepackage{fancyhdr}
+\usepackage{url}
+\pagestyle{fancy} % Configura el estilo de las páginas
+\fancyhf{} % Limpia las cabeceras y pies de página
+\fancyfoot[R]{\thepage} % Número de página en el pie, alineado a la derecha
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{Referencias.bib}
+
+\usepackage{pdflscape}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+
+
+%Abreviaturas
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{tabularx}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\abbrentry}[3]{%
+  \textbf{#1} – #2\nobreak\dotfill\nobreak#3%
+}
+
+
+% Configuración de líneas
+\renewcommand{\headrulewidth}{0.4pt} % Línea en el encabezado
+\renewcommand{\footrulewidth}{0.4pt} % Línea en el pie de página
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage} % Número de página en el pie, alineado a la derecha
+    \renewcommand{\headrulewidth}{0.4pt} % Línea en el encabezado en el estilo plain
+    \renewcommand{\footrulewidth}{0.4pt} % Línea en el pie de página en el estilo plain
+}
+\setlength{\parskip}{1em} % Ajusta el espacio entre párrafos
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+% Paquete para manejar bibliografías
+%\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{siunitx} % Opcional, para formatear unidades
+
+\usepackage{soul} %Opcional, para hacer subrayado
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows}
+\usepackage{colores-tesis} % paleta de las gráficas (carga pgfplots)
+
+%
+\usepackage[
+    colorlinks=true,        % enlaces con color (no recuadros)
+    linkcolor=blue,         % color para enlaces internos
+    urlcolor=cyan,          % color para urls
+    linktoc=all,            % hace clickeables tanto el texto como el número de página
+    hidelinks               % opcional: quita colores y bordes, si prefieres “links invisibles”
+]{hyperref}
+
+\hypersetup{
+    pdftitle={Título de tu Tesis},
+    pdfauthor={Tu Nombre},
+}
+
+\begin{document}
+	\begin{titlepage}
+		\setlength{\parindent}{0pt} \setlength{\parskip}{0pt}
+	
+		\begin{center}
+			\vfill 
+			
+			\begin{minipage}{\textwidth}
+				
+				\newcolumntype{V}{>{\centering\arraybackslash} m{.17\textwidth} }
+				\newcolumntype{C}{>{\centering\arraybackslash} m{.56\textwidth} }
+				
+				\begin{center}
+					\includegraphics[width=4.5cm]{UNAM_LOGO2.png}	
+				\end{center} 	
+				\begin{center}
+					\Huge\textbf{Universidad Nacional Aut\'onoma de M\'exico}
+				\end{center} 
+				
+			\end{minipage}
+				
+			\vfill
+			
+			\begin{minipage}{0.7\textwidth}
+				\begin{center}
+					\large Programa de Maestría en Ciencia e Ingeniería de la Computación
+				\end{center}
+			\end{minipage}
+			% 
+			\begin{center}
+				
+				\vfill
+				%\medskip \rule{.9\textwidth}{2pt}
+				\vfill
+				\large Detección de anomalías en redes de monitoreo atmosférico mediante aprendizaje profundo
+	%{\Large \bfseries  \title   }
+				
+				%\medskip \rule{.9\textwidth}{2pt}
+			\end{center}
+			
+			\begin{center}
+				\vspace*{1cm}
+				{\huge T E S I S}\\
+				\vspace*{1cm}
+				que para optar por el grado de \\ \bigskip
+				{\large {Maestro en Ciencia e Ingenier\'ia de la Computación}} \\ \bigskip
+				
+				%PRESENTA:\\ \medskip
+				\begin{center}
+					PRESENTA: \\
+					\large José Emiliano Lili Beltrán
+				\end{center}
+				
+				\bigskip
+				
+				TUTOR: \\
+				Dr. Jos\'e Jaime Camacho Escoto, Facultad de Ingenier\'ia\\ UNAM
+				%Coadvisors
+				%\emph{Coasesores:}
+				%\coadvisor1 \\ \coadvisor2 \\ \coadvisor3 
+			\end{center}
+			
+			\vfill
+			
+			\begin{center}
+				{Ciudad Universitaria, CD. MX. Junio, 2025}\\
+			\end{center}
+			\cleardoublepage
+		\end{center}
+	\end{titlepage}
+
+
+
+
+% =====================
+% Agradecimientos
+% =====================
+\chapter*{Agradecimientos}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+
+AQUI VAN LOS AGRADECIMIENTOS
+
+% =====================
+% Índices
+% =====================
+\tableofcontents % Índice general
+\listoffigures % Índice de figuras
+\addcontentsline{toc}{chapter}{Índice de figuras}
+\listoftables % Índice de tablas
+\addcontentsline{toc}{chapter}{Índice de tablas}
+
+
+\chapter*{Lista de abreviaturas}
+\begin{tabularx}{\linewidth}{@{}Lr@{}}
+  \abbrentry{NOM}{Norma Oficial Mexicana}{}\\
+  \abbrentry{IoT}{Internet de las Cosas}{}\\
+  \abbrentry{LoRaWAN}{Long Range Wide Area Network}{}\\
+  \abbrentry{LoRa}{Long Range}{}\\
+  \abbrentry{AES CTR}{Advanced Encryption Standard - Counter Mode}{}\\
+  \abbrentry{ED}{End Device}{}\\
+  \abbrentry{GW}{Gateway}{}\\
+  \abbrentry{Plaintext}{Texto Plano}{}\\
+  \abbrentry{Ciphertext}{Texto Cifrado}{}\\
+  \abbrentry{MiTM}{Man-in-the-Middle}{}\\
+  \abbrentry{MIC}{Message Integrity Code}{}\\
+  \abbrentry{ML}{Machine Learning}{}\\
+\end{tabularx}
+
+% =====================
+% Resumen y Abstract
+% =====================
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+
+% =====================
+% Capítulos
+% =====================
+% =====================
+% Capítulo 1
+% =====================
+% =====================
+% Capítulos (cada uno en su archivo)
+% =====================
+\include{capitulos/01_introduccion}
+\include{capitulos/02_marco_teorico}
+\include{capitulos/03_trabajos_relacionados}
+\include{capitulos/04_bit_flipping}
+\include{capitulos/05_nerad_metodo}
+\include{capitulos/06_resultados}
+\include{capitulos/07_conclusiones}
+
+% =====================
+% Referencias
+% =====================
+\printbibliography
+
+\end{document}
