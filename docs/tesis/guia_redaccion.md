@@ -115,13 +115,14 @@ Revisiones con el tutor: al cerrar la fase 0, después de los caps. 4 y 5, despu
 | Tema | Dato (del repo) | Por qué |
 |---|---|---|
 | Fuente | Ozono horario (ppb) de la RAMA, publicado por el SIMAT en archivos anuales | Red real con datos públicos |
-| Periodo | Matriz horaria del 2020-01-01 al 2026-07-31; el despliegue (ago–sep 2026) usa los datos validados del SIMAT | Los periodos de cada etapa van en 5.3 |
+| Periodo | Matriz horaria del 2020-01-01 al 2026-07-31, con los datos validados del SIMAT (`20RAMA.zip` … `26RAMA.zip`, SHA-256 en `docs/checksums_2020_2026.txt`). NERAD (Ens-Vb-R + filtro) se entrenó solo con 2020–2022; los años 2012–2019 solo entran en variantes y exámenes complementarios (`docs/resultados_rev22_seleccion_2022.md`) | Los periodos de cada etapa van en 5.3 |
+| Despliegue | **Corrección del 2026-11-27:** ago–sep 2026 **no** usa datos validados del SIMAT, sino datos **crudos de SINAICA (INECC)**, porque el SIMAT no había publicado el zip. Correspondencia comprobada en jun–jul 2026 contra el zip validado: 29 de 33 estaciones (faltan AJU, INN, MON y MPA), hora desplazada −1 h, correlación 0.9997, 73.9 % de lecturas idénticas, diferencia máxima 7 ppb (`docs/registro_previo_rev22_mas_anios.md`, addendum §8) | Declarar la fuente es parte del rigor; es una amenaza a la validez del despliegue |
 | Columnas | 33 estaciones, de ACO a XAL: la lista de estaciones con ozono de la referencia de 2025 (`docs/protocolo_lstm_v4_multianual.md`, §3.1) | Ver el motivo de las exclusiones abajo |
 | Exclusiones | COY y SJA: el catálogo del SIMAT dice «Finalizó operación en 2017» (`data/reference/cat_estacion_simat.csv`) y no tienen ningún dato en 2020–2026. SFE: deja de reportar en 2023 y no está en la referencia de 2025; incluirla sería otra variante de la matriz (`docs/progreso.md`, verificación del 2026-10-12) | Sin datos en el periodo, o fuera de la referencia |
 | Evaluadas | 31 objetivos: 28 principales y 3 de baja representatividad (TLI, INN, AJM), que se reportan aparte | Mínimo por etapa: 2 000 h y 6 meses con dato |
-| Solo contexto | HGM (sin datos en 2021–2022) y XAL (canal inactivo) | No hay con qué validarlas |
-| Faltantes | `-99` y horas ausentes cuentan como faltantes; no se interpolan; máscara «tiene dato»; solo se alteran horas con dato | No inventar mediciones |
-| Vecina | Las 4 estaciones más cercanas por distancia haversine, con las coordenadas del catálogo del SIMAT; fijas | Definición del término |
+| Solo contexto | HGM (0 h en la etapa de validación, 2022) y XAL (0 h en 2020–2022; canal inactivo, valor 0 y máscara 0) | No hay con qué validarlas |
+| Faltantes | `-99`, columnas ausentes y renglones ausentes cuentan como faltantes; rejilla horaria continua (las 2 horas sin renglón de 2024 no se comprimen); no se interpolan; máscara «tiene dato»; solo se alteran horas con dato. Unidad: ppb entero | No inventar mediciones; una ventana de 24 filas = 24 h consecutivas |
+| Vecina | Las 4 estaciones más cercanas por distancia haversine, con las coordenadas del catálogo del SIMAT; se fijan una vez y no dependen de los datos. XAL no puede ser vecina; HGM sí (`docs/protocolo_anomalias_red_v1.md`, revisión 8) | Definición del término |
 | Unidad | La estación-día, válida si tiene ≥ 12 horas con dato | Pregunta del operador: «¿qué estación reviso hoy?» |
 
 Fuentes en el repo: `docs/protocolo_anomalias_red_v1.md` (§3 y revisión 8) y `docs/protocolo_lstm_v4_multianual.md` (§3.1–3.2).
