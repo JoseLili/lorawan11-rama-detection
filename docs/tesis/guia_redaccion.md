@@ -21,14 +21,24 @@ Se actualiza al cerrar cada sección. Última actualización: 2026-11-27.
    - [cursiva]: término en inglés, en `\textit{}` (*bit flipping*, *recall*, *payload*);
    - [abreviatura]: sigla nueva, que se escribe completa la primera vez y se agrega a la lista;
    - [cita]: dónde hace falta una referencia, con su clave o con el aviso de que falta buscarla.
-6. **Forma de revisar.** Primero, si la sección está bien. Después, solo los errores reales, con el cambio exacto. Lo demás es opcional y se marca así.
+6. **Forma de revisar.** Primero, si la sección está bien. Después, solo los errores reales: en la primera ronda se señalan con su ubicación, la regla y una pista; el cambio exacto se da en la segunda ronda (§2). Lo demás es opcional y se marca así.
 
 ## 2. Cómo trabajamos cada sección
 
-1. Ficha de la sección: qué debe contestar, qué debe tener y el material del repo.
-2. Borrador del tesista, aunque sea en viñetas.
-3. Revisión marcada como **Error** (cambio exacto) o **Estilo** (opcional, con la regla explicada).
-4. Párrafo modelo solo si hay bloqueo; el tesista lo reescribe con sus palabras.
+Se trabaja **párrafo por párrafo** (acordado el 2026-11-27, a pedido del tesista: escribir él mismo y no recibir el texto resuelto).
+
+1. **Ficha del párrafo**, antes de que el tesista escriba. Siempre con estos campos:
+   - **Qué responde:** la pregunta del lector que contesta el párrafo (una sola).
+   - **Qué contiene:** los datos que deben aparecer, cada uno con su fuente en el repo.
+   - **Qué no va:** lo que pertenece a otro párrafo o sección, para no adelantarlo.
+   - **Dónde va:** qué párrafo le precede y cuál le sigue, y con qué se conecta.
+   - **Cómo:** la idea de la primera oración (sin redactarla), el orden de los datos, la extensión (oraciones o líneas) y el tiempo verbal.
+   - **Marcas previstas:** [abreviatura], [cursiva] y [cita] que va a necesitar.
+   - **Trampas:** los errores que es fácil cometer en ese párrafo.
+2. **Borrador del tesista**, aunque sea en viñetas.
+3. **Revisión, ronda 1:** veredicto (si el párrafo contesta su pregunta) y la lista de **Errores**, cada uno con su ubicación (cita literal del borrador), la regla y una pista. **Sin redactar la corrección.** Aparte, **Estilo** (opcional, con la regla explicada).
+4. **Ronda 2:** el tesista corrige. Lo que siga mal se da ahora con el cambio exacto.
+5. **Texto completo** solo si el tesista lo pide o si hay bloqueo después de dos rondas; el tesista lo reescribe con sus palabras.
 
 La redacción es del tesista (véase «Uso de herramientas de IA» en el README); el asistente revisa, verifica cifras contra el repo y señala cursivas, siglas y citas.
 
@@ -128,6 +138,17 @@ Revisiones con el tutor: al cerrar la fase 0, después de los caps. 4 y 5, despu
 Fuentes en el repo: `docs/protocolo_anomalias_red_v1.md` (§3 y revisión 8) y `docs/protocolo_lstm_v4_multianual.md` (§3.1–3.2).
 
 **Nota sobre la verificación de SFE:** la matriz horaria (`data/processed/o3_2020_2026_ancho.parquet`) no está versionada, así que el año en que SFE deja de reportar se tomó de `docs/progreso.md` y no se volvió a calcular el 2026-11-27. Antes de escribir el año en la tesis, confirmarlo con la matriz o con los archivos anuales del SIMAT.
+
+### Avance de 5.1 por párrafo
+
+| Párrafo | Pregunta | Estado |
+|---|---|---|
+| P1 | ¿De dónde vienen los datos? | Revisado (2026-11-27). Pendientes: versión final del tesista; agregar `simat_rama_bd` al `.bib`; confirmar en el portal del SIMAT si `26RAMA.zip` trae datos validados hasta julio de 2026 |
+| P2 | ¿Qué estaciones? | Ficha entregada; falta el borrador |
+| P3 | ¿Qué se hizo con los faltantes? | Pendiente |
+| P4 | ¿Qué es una estación vecina? | Pendiente |
+| P5 | ¿Cuál es la unidad de análisis? | Pendiente |
+| P6 | ¿De dónde vienen los datos del despliegue? (SINAICA) | Pendiente |
 
 ## 7. Pendientes abiertos
 
